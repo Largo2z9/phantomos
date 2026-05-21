@@ -36,7 +36,7 @@ Alias surface opérateur de l'audience canon. Toléré en mode parlé, avec sous
 
 ## Pain point
 
-Problème observable subi par l'audience. Visible dans les verbatims clients.
+Problème observable subi par l'audience. Visible dans les verbatims clients. Propriété de l'audience (owned natif sub-collection `audiences/{slug}/pain_points/PNT-NN.json` canon v2.64 ontologie sémantique pure) · pas dimension orthogonale de composition créative. Référencé par `angle.lineage.pain_ref`. Cf `compositional-cartography.md` v3.1 · le pain vit dans la couche CONTEXTE de la formule de composition créative (via angle).
 
 ## Tension
 
@@ -52,7 +52,7 @@ Job To Be Done. Job que la cible "embauche" le produit pour accomplir (framework
 
 ## Angle
 
-Axe d'attaque marketing. Composé via la formule Observation × Tension × Reframe × Bridge. Origine typée (audience · produit · catégorie · brand · culturel-temporel).
+Axe d'attaque marketing. Composé via la formule Observation × Tension × Reframe × Bridge. Origine typée (audience · produit · catégorie · brand · culturel-temporel). Porte un lineage compositionnel · `audience_ref` + `pain_ref` (pain dominant sub-audience) + `mechanism_ref` (spec produit activée) + `awareness_movement` (entry → exit Schwartz). Cf `compositional-cartography.md` v3.1 · l'angle vit dans la couche CONTEXTE de la formule de composition créative.
 
 ## Axe créatif
 
@@ -72,7 +72,7 @@ Chaîne causale entre une spec produit et un bénéfice (ex. KSM-66 → réducti
 
 ## Awareness stage
 
-Niveau de conscience de l'audience (Eugene Schwartz) · unaware · problem-aware · solution-aware · product-aware · most-aware.
+Niveau de conscience de l'audience (Eugene Schwartz) · unaware · problem-aware · solution-aware · product-aware · most-aware. Vit à deux endroits canon · `audience.psychology.market_position.awareness_level` (snapshot où l'audience est globalement) ET `angle.awareness_movement` (entry_stage → exit_stage · où l'angle prend l'audience et l'amène). Pas une dimension orthogonale de composition créative · corrélée à l'audience (cf `canonical-matrix-reasoning.md` activation sélective).
 
 ## Atome irréductible
 
