@@ -6,6 +6,12 @@ version: v2.83.0
 
 # /update · mise à jour workspace canon
 
+> **Note · spec interne vs rendu opérateur runtime**
+>
+> Ce fichier mélange spec agent technique et rendu opérateur. Les blocs bash, paths `docs/internal/*`, noms de doctrines (EDD · OCD · DVD), iconographie canon, et Hard Rules sont consommés par l'agent uniquement et ne doivent JAMAIS apparaître dans le rendu opérateur runtime.
+>
+> Le rendu opérateur runtime utilise · prose française naturelle · langage DTC métier · 0 path technique · 0 nom de doctrine · 0 préfixe symbolique non-explicité · 0 jargon dev (Keep-a-Changelog · rsync · etc.).
+
 Slash command pointer vers le pipeline d'update PhantomOS. Synchronise les fichiers canon (skills · doctrines · commands · templates) depuis `Largo2z9/phantomos` vers ton workspace local, sans toucher à tes brands, ton operator state ou ta config.
 
 ## Sources de vérité migrations (canon v2.83.0+)
@@ -103,9 +109,6 @@ Avant tout backup ou rsync · poser les paramètres décomposés depuis manifest
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Détails migrations · docs/internal/releases/manifest/v2.83.0-manifest.json
-  Résumé Keep-a-Changelog · CHANGELOG.md (sections Added/Changed top)
-
   OK pour update ? ou tu rollback un autre jour ?
 ```
 
@@ -187,22 +190,18 @@ Si validation échoue · proposer rollback automatique vers backup créé Step 4
 Format final ·
 
 ```
-✓ Workspace updated v2.82.1 → v2.83.0
+✓ Workspace mis à jour v2.82.1 → v2.83.0
 ✓ Brands préservées (1) · operator state préservé
-✓ Backup disponible · _archive/migrations/pre-v2.83.0-2026-05-19/
+✓ Backup disponible si besoin de rollback
 ✓ Rollback path · /update --rollback v2.82.1
 
-Changelog summary v2.83.0 (Keep-a-Changelog · top entries) ·
-+ NEW doctrine changelog-discipline (split canon)
-~ CHANGELOG.md refactor Keep-a-Changelog
-+ NEW project-journal archive
-
-Détails migrations · docs/internal/releases/manifest/v2.83.0-manifest.json
-Résumé complet · CHANGELOG.md
-
-Légende ·
-✓ done · ◐ partiel · ○ todo · ✗ failed · ⚠ attention
+Nouveautés v2.83.0 ·
+- Ajout de la doctrine changelog (séparation propre par usage)
+- Refonte du fichier changelog pour meilleure lisibilité
+- Ajout d'une archive narrative du projet
 ```
+
+Note pour l'agent · le rendu opérateur runtime traduit les préfixes Keep-a-Changelog (`+/~/-/✓/→/⚠`) en langage naturel (Ajout · Refonte · Suppression · Correction · Migration · Attention). Aucun préfixe symbolique ne doit apparaître dans le rendu opérateur. Aucun path technique (`docs/internal/*`) ne doit être cité. Aucune mention "Keep-a-Changelog" ou "sections Added/Changed". L'opérateur voit la prose, l'agent maintient les préfixes en interne (`CHANGELOG.md` canon).
 
 ## Mode --rollback
 
@@ -214,7 +213,7 @@ Légende ·
 4. Update `_version.json` vers version cible
 5. Confirm + suggest validation
 
-## Iconographie canon v2.79.2
+## Iconographie canon v2.79.2 (interne agent · jamais rendu opérateur)
 
 | Icône | Sens |
 |---|---|
@@ -224,7 +223,7 @@ Légende ·
 | ✗ | failed · erreur · blocage |
 | ⚠ | attention · warning · friction |
 
-Légende systématique au pied de tout output structuré.
+Iconographie réservée aux slash commands matriciels (`/phantom` · `/bird` · `/breakdown` · `/about`). `/update` n'est pas matriciel · l'agent peut utiliser `✓` ponctuellement quand un statut binaire est vraiment informatif (e.g. confirmation update réussie Step 8), JAMAIS de légende explicite au pied du rendu opérateur runtime.
 
 ## Préfixes Keep-a-Changelog canon
 
@@ -237,7 +236,9 @@ Légende systématique au pied de tout output structuré.
 | `→` | Migration | migration auto v{X} → v{Y} |
 | `⚠` | Breaking | breaking change · attention requise |
 
-## Hard Rules runtime
+## Hard Rules runtime (interne agent · jamais citées en rendu opérateur)
+
+> Note pour l'agent · ces règles sont des contraintes d'exécution internes. Ne jamais les citer ni leur format `HR ·` dans le rendu opérateur runtime. L'opérateur voit la conséquence (backup créé · état préservé · rollback proposé), pas la règle.
 
 - HR · TOUJOURS backup avant apply (Step 4 non-négociable)
 - HR · TOUJOURS preserve operator state (rsync exclude strict · `brands/` · `operator/` · `.phantom/` · `.workflow.json` · `credentials*.env`)
@@ -248,6 +249,7 @@ Légende systématique au pied de tout output structuré.
 - HR · TOUJOURS attendre confirmation explicite (sauf `--force` ou `--check`)
 - HR · JAMAIS écraser un fichier opérateur ambigu sans demander
 - HR · JAMAIS commit auto post-update · l'opérateur décide
+- HR · JAMAIS exposer paths `docs/internal/*` ni `Keep-a-Changelog` ni noms de doctrines (EDD · OCD · DVD · etc.) dans le rendu opérateur runtime · paths techniques restent pour la spec agent uniquement
 
 ## Cross-refs canon
 
