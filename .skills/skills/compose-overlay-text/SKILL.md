@@ -6,7 +6,9 @@ subagent_safe: true
 operator_facing: false
 isolation_scope: brand_only
 layer: production
-version: 1.0.1
+version: 1.1.0
+patch_notes_v2_87_4:
+  - "1.1.0 (v2.87.4 canonical many-to-many enforcement mirror) · NEW HR-OT-CANON-1 mirror sibling compose-creative v1.8.0 · post-gen fix overlay text DOIT être appliqué sur asset dans `creatives/{CRT-NN}/produced/` (pas hors structure) · maintien entry canonical existing · update creative.json#overlay_fixes[] avec timestamp + fix_type + cross-ref operator validation. Closes audit Fincut v2.87.3 finding · fix overlays appliqués hors structure canonical = orphelins. Backward compat strict additif."
 mode: proposed
 reasoning_pattern: matrix-driven
 triggers_fr:

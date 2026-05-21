@@ -21,11 +21,20 @@ from pathlib import Path
 
 CONFIRM_PATTERNS = [
     r"\boui\b", r"\byes\b", r"\byep\b", r"\bok\b", r"\bgo\b", r"\bconfirm(e|é|ed)?\b",
-    r"\bvalide\b", r"\bparfait\b", r"\bexact\b", r"\bcorrect\b", r"\byup\b",
+    r"\bvalide(z|é|és|ée|ées)?\b", r"\bparfait\b", r"\bexact\b", r"\bcorrect\b", r"\byup\b",
     r"✓", r"👍", r"\bc'est bon\b", r"\bc bon\b",
     # Franglais Largo
     r"\bc good\b", r"\bnickel\b", r"\bdac\b", r"\bd'acc\b", r"\bcrème\b", r"\bclean\b",
     r"\btop\b", r"\bcool\b", r"\bniquel\b", r"\bok c bon\b",
+    # NEW v2.87.4 · AskUserQuestion canon response patterns
+    # Resolves friction audit Fincut v2.87.3 · opérateur sélectionne option AskUserQuestion (e.g. "Validé, encode comme ça")
+    # puis devait retaper "go"/"ok" séparément · hook lit user text seulement · option label suffit désormais
+    r"\bencode\b", r"\blance\b", r"\bjette[zs]?\b",
+    r"\bça\s+(va|me\s+va|m'va|colle)\b", r"\bca\s+(va|me\s+va|m'va|colle)\b",
+    r"\b(comme\s+ça|comme\s+ca|comme\s+ça\s+oui|comme\s+ca\s+oui)\b",
+    r"\b(je\s+valide|j'valide)\b",
+    r"\b(envoie|envoyez)\b",
+    r"\b(roule|on\s+y\s+va|on\s+est\s+bon)\b",
 ]
 REJECT_PATTERNS = [
     r"\bnon\b", r"\bno\b", r"\bnope\b", r"\bskip\b", r"\bpas\b.*\b(bon|ok|ça)\b",

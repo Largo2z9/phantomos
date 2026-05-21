@@ -1,6 +1,8 @@
 ---
 name: compose-creative
-version: 1.7.0
+version: 1.8.0
+patch_notes_v2_87_4:
+  - "1.8.0 (v2.87.4 canonical many-to-many enforcement) · NEW HR-CC-CANON-1 · enforcement entry canonical `brands/{slug}/creatives/{CRT-NN}/` OBLIGATOIRE post-génération. Anti-pattern banned · sauver asset JPG/PNG standalone hors structure canonical (e.g. `visual-identity/creative_ANG-01_*.jpg` orphelin). Toute génération DOIT créer · (1) `creatives/{CRT-NN}/creative.json` conforme creative.schema v1.2+ avec lineage populated (angle_ref + audience_ref + product_ref + mechanism_ref + concept_ref) + tags populated (concept + creative + variant + mécanique narrative typed) + cross-refs many-to-many activés. (2) asset JPG sauvé dans `creatives/{CRT-NN}/produced/` (pas hors structure). (3) brief copy markdown S55 fiche v5 dans `creatives/{CRT-NN}/brief.md`. Closes audit Fincut session v2.87.3 finding · compose-creative générait visuel sans entry canonical · perte traçabilité + pas de tableau composition + pas de base de données imbriquée many-to-many. Backward compat strict additif · cycle runtime Step 0 → Step 4 preserved · seul l'output enforcement change. NOTE Notion bridge auto-wire creatives DEFERRED v2.88.0+ · skill `sync-creatives-to-notion` pas encore shipped (sync-notion-atlas v2.0.1 territoire-only canon respecté · creatives = production layer skill séparé). Backlog mainteneur."
 type: producer
 isolation_scope: brand_only
 layer: production

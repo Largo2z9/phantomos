@@ -2,8 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Audience Profile",
   "description": "v2.0 BREAKING · refactor ontologie pure · pain_points + objections deviennent collections top-level séparées · migration script operations/migrations/v2.63-pain-objection-collections.py. Audience profile — deep psychographic and behavioral context, factual description of who they are. Lives in brands/{slug}/audiences/{audience}/profile.json. v1.2+: persona_archetype + buyer_user_split (migrated from spec.gift_economy). v1.4 (v2.42): meta.entry_door enum strict (pain_driven|goal_driven|identity_driven) REQUIRED — closes spec-vs-schema drift from v2.39 framework. Canon V3 §8.2.",
-  "_schema_version": "profile/2.0",
+  "_schema_version": "profile/2.1",
   "_changelog": {
+    "2.1": "v2.87.4 NEW · deep desire / dream outcome chain enforcement (psychographic depth gate canon). Ajoute psychology.dream_scenario_narrative (object · narrative 2 phrases + target_recipient + context_setting + social_payoff · 3 first required) + psychology.confidence_chain (object · sourcing_method enum + verbatim_count int + blocked_sources[] + confidence_level enum + caveat · 2 first required). Gate obligatoire pre-audience-validation (map-audiences v1.3.0+ refuse profile.json sans ces fields populated). Closes friction systémique audit Fincut session v2.87.3 · audiences restent au pain layer fonctionnel sans descente racine Schwartz/Kern. Backward compat lecture v2.0 préservée (fields optional en read ancien · obligatoire en write v1.3.0+ map-audiences runtime).",
     "2.0": "v2.63 BREAKING · refactor ontologie pure. REMOVE pain_points[] array (move to pain_points.schema top-level collection storage brands/{slug}/pain_points/{PNT-NN}.json). REMOVE objections[] array (move to objections.schema top-level collection storage brands/{slug}/objections/{OBJ-NN}.json). Closes ontologie inconsistance (friction top-level depuis v2.56 mais pain + objection sub-fields legacy) · parité friction · canon Notion stride-up strict 3 collections sub-tensions séparées. Migration · operations/migrations/v2.63-pain-objection-collections.py idempotent · scan profile.pain_points + profile.objections, génère PNT-NN + OBJ-NN ids, crée fichiers canonical, set affected_audiences = [audience_slug], remove arrays du profile. Cross-refs canonical · friction.cross_refs.{pain_point_ids[], objection_ids[]} v1.2 + angle.lineage.{pain_ref, objection_ref} v1.3 + learnings.entries[].cross_refs.{pain_point_ids[], objection_ids[]} v1.1.",
     "1.7": "v2.57 Notion stride-up follow-up · pain_points.items.pain_id (PNT-NN pattern) + objections.items.objection_id (OBJ-NN pattern) ajoutés optional. Closes faille canonical IDs stables identifiée par DataEng audit · friction.cross_refs.{pain_point_ids[], objection_ids[]} peuvent désormais référencer canon. IDs générés auto au mining (mine-voc, profile-audience) post-v1.7 ; profiles pre-v1.7 sans IDs valident toujours en read. Backward compat strict additif.",
     "1.6": "v2.56 Notion stride-up parity · pain_category enum taxonomy (cohérent friction.schema) · objections enrichis (severity_score + response_counter + derived_angle_refs). Backward compat strict additif.",
@@ -121,7 +122,7 @@
 
     "psychology": {
       "type": "object",
-      "description": "Inner drivers of the audience: core desire, values, goals, limiting and facilitating beliefs, dominant emotions, social codes, life moments, and the Job To Be Done they hire the product for.",
+      "description": "Inner drivers of the audience: core desire, values, goals, limiting and facilitating beliefs, dominant emotions, social codes, life moments, the Job To Be Done they hire the product for, AND the deep desire / dream outcome chain (canon v2.87.4 · racine psychographique Schwartz/Kern).",
       "properties": {
         "core_desire": { "type": "string" },
         "values": { "type": "array", "items": { "type": "string" } },
@@ -139,6 +140,62 @@
             "emotional_driver": { "type": ["string", "null"], "enum": ["status", "relief", "belonging", "control", "identity", ""] },
             "_notes": { "type": "object" }
           }
+        },
+        "dream_scenario_narrative": {
+          "type": "object",
+          "description": "NEW v2.87.4 · Deep desire / dream outcome chain · scénario narratif 2 phrases qui décrit le résultat rêvé psychographique racine. Pour qui le résultat est joué (cible relationnelle). Quel contexte spatial+temporel. Quelle récompense sociale anticipée. Field obligatoire pre-audience-validation (gate canon `map-audiences` v1.3.0+ · empêche audience encoding qui reste au pain layer fonctionnel sans descente racine). Anti-pattern · réponses abstraites (every day · all contexts · generic confidence) refuse le gate.",
+          "properties": {
+            "narrative": {
+              "type": "string",
+              "description": "2 phrases concrètes scénarisant le moment dream outcome · setting + qui voit + quelle réaction + quel payoff émotionnel. Exemple Fincut gym-muscle-showcase · 'Lundi matin réunion bureau, je rentre dans la salle, 3 collègues remarquent que je me porte différemment cette semaine. Une nouvelle collègue me regarde 2 secondes de trop. Je n'ai rien eu à dire.' Cas refusé · 'Je me sens bien tout le temps' (abstraction sans contexte ni récompense)."
+            },
+            "target_recipient": {
+              "type": "string",
+              "description": "Pour qui le résultat est joué · cible relationnelle du payoff (partenaires sexuels/romantiques · pairs masculins · collègues professionnels · famille · soi-même au miroir · enfants observateurs · etc.). Champ qui force la sortie du fonctionnel pure vers le social/relationnel."
+            },
+            "context_setting": {
+              "type": "string",
+              "description": "Contexte spatial+temporel du dream scenario · où, quand, occasion concrète (rencontre amoureuse · bureau lundi · vacances en couple · sport club · retrouvailles famille · soirée amis · etc.). Anti-pattern · 'every day' / 'all contexts' / 'au quotidien' refuse le gate (trop abstrait pour générer un angle paid scroll-stop)."
+            },
+            "social_payoff": {
+              "type": "string",
+              "description": "Récompense sociale/identitaire anticipée · validation reçue, status signal, perception modifiée par l'environnement. Distinct de fonctionnel (le produit a marché) et de jtbd (le job est fait). Exemple · 'reconnaissance subtile sans avoir à expliquer' vs 'compliment direct' vs 'changement traitement par les pairs'."
+            },
+            "_notes": { "type": "object" }
+          },
+          "required": ["narrative", "target_recipient", "context_setting"]
+        },
+        "confidence_chain": {
+          "type": "object",
+          "description": "NEW v2.87.4 · Provenance épistémique de la psychographie encodée · sourcing method + verbatim density + caveat. Field obligatoire post-mining pre-validation · explicite si les psychology fields sont sourced (verbatims clients directs · forte) · derived (ads patterns + widget partiel · moyenne) · inferred (pas de verbatim accessible · faible/TRÈS faible). Forçant l'opérateur à être conscient de la solidité épistémique de la base. Surfacé proactivement dans audience drill 360° + `/phantom audiences` cockpit + validation gate `map-audiences`.",
+          "properties": {
+            "sourcing_method": {
+              "type": "string",
+              "enum": ["verbatim_direct", "derived_indirect", "inferred_no_source", "mixed"],
+              "description": "verbatim_direct = Trustpilot/Loox/Reddit/forums scraping réussi avec verbatim clients direct. derived_indirect = ads patterns + widget partiel + WebSearch fragments + reviews paraphrasées indirect. inferred_no_source = aucun verbatim accessible · psychographie pure hypothèse. mixed = combinaison documentée."
+            },
+            "verbatim_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Nombre de verbatims clients directs encodés (voice.key_expressions[] avec sample_size populated + pain_points/objections verbatim_quotes[]). 0 = encoding sans source · <5 = thin (HR4.5 produce-paid-angles bloquant) · 5-15 = moyen · 15+ = solide."
+            },
+            "blocked_sources": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Sources tentées et bloquées (e.g. 'Trustpilot 403 anti-bot' · 'Loox widget absent' · 'Reddit communauté inexistante FR'). Trace honnêteté workflow + LRN-workaround candidate pour mainteneur · push pending-validations.md item."
+            },
+            "confidence_level": {
+              "type": "string",
+              "enum": ["forte", "moyenne", "faible", "TRÈS_faible"],
+              "description": "Niveau confidence chain canon `investigation-posture` v2.79.3+. Doit être surfacé proactivement opérateur dans validation_status._note + audience drill rendu."
+            },
+            "caveat": {
+              "type": "string",
+              "description": "Phrase honnête à l'opérateur · ce qui n'est pas validé · ce qui reste à enrichir · quel risk si décision angles paid prise sur cette base sans verbatims directs. Visible cross-rendus opérateur-facing."
+            },
+            "_notes": { "type": "object" }
+          },
+          "required": ["sourcing_method", "confidence_level"]
         },
         "_notes": { "type": "object" }
       }

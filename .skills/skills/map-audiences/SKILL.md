@@ -1,7 +1,9 @@
 ---
 name: map-audiences
 type: producer
-version: 1.2.0
+version: 1.3.0
+patch_notes_v2_87_4:
+  - "1.3.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill heavy Q1-Q4 staging 3-5 audiences ~8-15 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant scaffold + Q1-Q4. Audit Fincut session v2.87.3 finding · Q1-Q4 proposal staged sans disclosure préalable · 3 audiences encodées sans gate dream_scenario_narrative + confidence_chain (canon Patch A v2.87.4 obligatoire pre-validation · cross-ref profile-audience v1.9.0+ HR-DD-1). Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+. Enforcement runtime hardcoded EDD Step 0 + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet

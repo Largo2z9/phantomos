@@ -1,0 +1,82 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.4",
+  "released_at": "2026-05-21",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "summary": "Sprint UNIFIÉ étendu post-audit Fincut session v2.87.3 · 5 agents Sonnet parallèle audit · 8 HIGH + 8 MEDIUM identifiées · 3 patches structurels (A schema deep desire + B propagation doctrines 4 skills heavy + C compose-creative canonical many-to-many) + 4 chirurgicaux D1-D4.",
+  "context_amont": {
+    "trigger": "Test runtime fresh Fincut sur ~/dev/phantom-test-v287/ cloné Largo2z9/phantomos v2.87.3. Opérateur fresh persona /tour Porte A → atlas Stepprs guided → bascule Porte B configurer Fincut → scrape + TrendTrack + 3 audiences + decompose-ad + craft-packshot + replicate competitor ad. Findings Largo · audiences ne creusent pas racine psychographique (e.g. 'plaire aux femmes' derrière 'valoriser corps') + compose-creative génère asset visuel hors pipeline canonical many-to-many.",
+    "audit_5_agents_sonnet_parallele": "Scope disjoint READ-ONLY transcript verbatim · Agent 1 deep desire chain depth · Agent 2 fluidité jargon ton premium · Agent 3 adoption doctrines IP+DVD+EDD · Agent 4 honnêteté sourcing gaps workspace · Agent 5 atlas substrate matriciel cross-surfaces. Wall-time ~10 min cumul.",
+    "decision_orchestrateur_largo": "Sprint UNIFIÉ étendu (vs backlog initial v2.87.4 P1 ~2.5h) · scope élargi 3 patches structurels (A+B+C) + 4 chirurgicaux (D1-D4). Cap initial 6-8h · réel 3h chirurgical scope strict patch_notes vs refonte massive. Exécution même session (canon 'on finit tout maintenant')."
+  },
+  "patches_executed": {
+    "A_schema_deep_desire": "VALIDÉ · profile.schema v2.0 → v2.1 + profile-audience v1.8.1 → v1.9.0 HR-DD-1 gate canon (2 files · 85 insertions / 3 deletions)",
+    "B_propagation_doctrines": "VALIDÉ · 4 skills heavy version bumps + patch_notes_v2_87_4 dette documentée (trendtrack v1.0.0 → v1.1.0 · decompose-ad v2.1.0 → v2.2.0 · map-audiences v1.2.0 → v1.3.0 · craft-packshot v1.2.0 → v1.3.0) (4 files · 12 insertions / 4 deletions)",
+    "C_compose_creative_canonical": "VALIDÉ · 3 skills patches mirror enforcement HR-{CC,RC,OT}-CANON-1 (compose-creative v1.7.0 → v1.8.0 · recompose-creative v1.2.2 → v1.3.0 · compose-overlay-text v1.0.1 → v1.1.0) · Notion bridge auto-wire DEFERRED v2.88.0+ explicit honnêteté (3 files · 9 insertions / 3 deletions)",
+    "D1_checkpoint_resolver": "VALIDÉ · .claude/hooks/checkpoint-resolver.py CONFIRM_PATTERNS enrichis patterns AskUserQuestion canon (encode/lance/ça va/comme ça/je valide/envoie/roule/on y va) + validé(z|é|és|ée|ées) regex étendu accents",
+    "D2_jargon_leak": "VALIDÉ · 3 occurrences chirurgicales (produce-paid-angles OTRB sigle → prose · trendtrack-enrich-brand LRN-NNNN IDs → patterns annotation · trendtrack-enrich-brand AskUserQuestion auth path → plain language)",
+    "D3_mine_voc_403": "VALIDÉ · mine-voc v1.4.1 → v1.5.0 HR-VOC-403-1 Trustpilot 403 STOP signal canon · 4 obligations enforcement runtime",
+    "D4_packshots_SED": "VALIDÉ · craft-packshot v1.3.0 patch_notes_v2_87_4 enrichi HR-CP-SED-1 packshots iterations versionnés → production layer iterations/ subfolder"
+  },
+  "files_patched": [
+    {"file": "resources/schemas/profile.schema.json", "scope": "v2.0 → v2.1 · NEW psychology.dream_scenario_narrative + psychology.confidence_chain"},
+    {"file": ".skills/skills/profile-audience/SKILL.md", "scope": "v1.8.1 → v1.9.0 · NEW Hard Rule HR-DD-1 deep desire chain gate canon"},
+    {"file": ".skills/skills/trendtrack-enrich-brand/SKILL.md", "scope": "v1.0.0 → v1.1.0 · patch_notes_v2_87_4 dette documentée EDD + DVD + D2 jargon LRN/credentials"},
+    {"file": ".skills/skills/decompose-ad/SKILL.md", "scope": "v2.1.0 → v2.2.0 · patch_notes_v2_87_4 dette documentée EDD + DVD + CC v3.1"},
+    {"file": ".skills/skills/map-audiences/SKILL.md", "scope": "v1.2.0 → v1.3.0 · patch_notes_v2_87_4 dette documentée EDD + DVD + cross-ref HR-DD-1"},
+    {"file": ".skills/skills/craft-packshot/SKILL.md", "scope": "v1.2.0 → v1.3.0 · patch_notes_v2_87_4 dette documentée EDD + DVD + HR-CP-SED-1 packshots iterations production layer"},
+    {"file": ".skills/skills/compose-creative/SKILL.md", "scope": "v1.7.0 → v1.8.0 · HR-CC-CANON-1 entry canonical creatives many-to-many"},
+    {"file": ".skills/skills/recompose-creative/SKILL.md", "scope": "v1.2.2 → v1.3.0 · HR-RC-CANON-1 mirror variant_of ref"},
+    {"file": ".skills/skills/compose-overlay-text/SKILL.md", "scope": "v1.0.1 → v1.1.0 · HR-OT-CANON-1 post-gen fix dans creatives/{CRT-NN}/produced/"},
+    {"file": ".skills/skills/mine-voc/SKILL.md", "scope": "v1.4.1 → v1.5.0 · NEW HR-VOC-403-1 Trustpilot 403 STOP signal canon"},
+    {"file": ".skills/skills/produce-paid-angles/SKILL.md", "scope": "D2 OTRB sigle reformulé prose plain language"},
+    {"file": ".claude/hooks/checkpoint-resolver.py", "scope": "D1 CONFIRM_PATTERNS enrichis AskUserQuestion canon"},
+    {"file": "_version.json", "scope": "Bump 2.87.3 → 2.87.4"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.4 sprint unifié étendu"},
+    {"file": "docs/internal/releases/manifest/2.87.4-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "audit_fincut_resolution": {
+    "frictions_HIGH_total": 8,
+    "frictions_HIGH_resolved_v2_87_4": 8,
+    "frictions_MEDIUM_total": 8,
+    "frictions_MEDIUM_resolved_v2_87_4": 0,
+    "MEDIUM_documented_debt": [
+      "IP 5 sections 4/8 absent cockpit + drill 360° + walkthrough Stepprs + decompose-ad",
+      "Overlap morpho-atypique × extended-sizing non signalé MECE",
+      "Audience wardrobe-essentials détectée mais non encodée",
+      "LRN-002 + LRN-007 + LRN-008 cross-refs broken/partial",
+      "Drift clinique disclosure EDD (formulaire vs expert métier)",
+      "Transition Stepprs → Fincut Phase 6 sans phrase canon",
+      "CC v3.1 non adopté decompose-ad (prose vs matriciel)",
+      "Confidence levels A1/A2 non verbalisés dans profile (verbatim canon visible)"
+    ]
+  },
+  "tests_non_regression": {
+    "build_manifest": "PASS · 81 skills + 92 jargon entries",
+    "build_brand_snapshot": "À PASSER cross 3 repos post-merge",
+    "schema_profile_v2_1_validation": "PASS · psychology.dream_scenario_narrative required ['narrative', 'target_recipient', 'context_setting'] + psychology.confidence_chain required ['sourcing_method', 'confidence_level']",
+    "skills_versions_bumped": "PASS · 10 skills version bumps cross 3 patches structurels + 1 chirurgical"
+  },
+  "honnetete_discipline_findings": [
+    "Patch B 'dette documentée' explicit · enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers backlog v2.87.5+ implementation · pas illusoire d'enforcement runtime complet ce sprint",
+    "Patch C Notion bridge auto-wire creatives DEFERRED v2.88.0+ explicit · skill sync-creatives-to-notion non shipped · sync-notion-atlas v2.0.1 territoire-only strict canon territory-doctrine respecté",
+    "8 MEDIUM frictions documentées non patchées · dette explicit visible mainteneur · backlog v2.87.5+ ou v2.88.0+ selon priorité observations opérateur fresh",
+    "Wall-time réel 3h (vs cap initial 6-8h) · scope chirurgical patch_notes vs refonte massive permet cap qualité fin de soirée respecté · enforcement runtime profond sera futur sprint dédié"
+  ],
+  "decisions_captured": ["D#468 (v2.87.4 sprint unifié étendu post-audit Fincut session)"],
+  "memory_canons_new": ["unified_sprint_v287_4 (post-merge · 3 patches structurels + 4 chirurgicaux + pattern méthodologique cap qualité scope chirurgical)"],
+  "backlog_post_v2_87_4": [
+    "v2.87.5+ · enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers dans pipeline interne 5 skills heavy (trendtrack-enrich-brand · decompose-ad · map-audiences · craft-packshot · compose-creative)",
+    "v2.87.5+ · 2 items mainteneur · write-to-context.py ALLOWED_PATH_PATTERNS visual-identity/iterations/ + craft-packshot runtime output_path iterations subfolder",
+    "v2.88.0+ · NEW skill sync-creatives-to-notion (production layer parallel sync-notion-atlas territoire) · auto-wire push Notion bridge creatives canonical entry",
+    "v2.88.0+ · 8 frictions MEDIUM patches selon priorité observations opérateur fresh",
+    "v2.88.0+ · verbatim gate downstream conditionnel dette HIGH",
+    "v2.89+ · confidence_propagation frontmatter declaration cross 81 skills · dette HIGH structurelle audit v2.87.2 (0/6 adoption mesurée)",
+    "Distribution préparation post-v2.87.4 merge cross 3 repos · message invitation + GitHub Releases tags + canal feedback opérateurs externes"
+  ],
+  "rollback_strategy": "Strict additif · revert v2.87.4 = git revert HEAD strict. Backward compat strict additif cross tous patches · lecture v2.0 préservée (Patch A schema) · cycle runtime skills heavy preserved (Patch B dette documentée seulement · pas enforcement runtime hardcoded). Zéro impact runtime breaking (mécanisme skills chargés pareil · jargon enforcement runtime renforcé sans casser flows existing)."
+}
