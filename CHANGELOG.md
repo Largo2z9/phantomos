@@ -7,6 +7,22 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.87.5] · 2026-05-22
+### Changed
+- **SPRINT EXPÉRIENCE OPÉRATEUR** · 5 patches structurels post-discussion ontologie + connectors organisationnels · pattern proactif phantom systémique (todos visibility + connectors propose + scheduling propose + entity add propose)
+- **Patch A · `/phantom todo` brand-level dédié** · NEW `phantom-modes/todo-brand.md` · 4 blocs canon (Actions + Connectors + Schedules + Atlas completeness) · routing override `/phantom {brand} todo` ajouté dans `phantom.md` Mode detection
+- **Patch B · `setup-brand` v2.1.1 → v2.2.0** · NEW Phase "Connectez vos outils" · matrice 7 catégories canon (Paid platforms · Analytics · Lifecycle · Attribution · Spy tools · CMS/production · Workspace tools via MCP claude natif) + branching choice 3 voies post-URL pasted via `AskUserQuestion` (A Approfondir maintenant · B Connecter outils d'abord · C Faire les deux séquence recommandée canon B-puis-A) + trade-off MCP claude natif (mono-auth solo) vs clé API per brand (multi-account agence)
+- **Patch C · brand-todo proactif** · intégré `phantom-modes/todo-brand.md` 4 blocs canon · connectors checkup + schedules manquants + atlas gaps surfacés ensemble vs todo plat actions seules
+- **Patch D · `phantom.md` v2.79.2 → v2.87.5** · NEW directive cockpit brand SCHEDULES section + storage canon `brands/{slug}/scheduled.json` + catalogue 7 skills schedulables (`mine-voc` weekly · `trendtrack-enrich-brand` weekly · `audit-creative-fatigue` monthly · `brief-day` daily · `watch-competitors` weekly · `analyze-perf` weekly · `trendtrack` shop profile monthly) + trigger mechanism `CronCreate` (predictable récurrent) OR `ScheduleWakeup` (dynamic /loop monitoring conditionnel)
+- **Patch E · NEW `/add {entity}` slash command v1.0.0** · pre-flight proactif analytique · 8 étapes canon (Receive intent + Read atlas existing silent + Raisonner CC v3.1 + Cross-check overlap detection + Propose response + Trigger direct OR 1 question pivotale OR STOP signal) · triggers `/add audience` `/add angle` `/add pain` `/add objection` `/add product` `/add friction` OR détection auto type optimal selon intent verbal · pattern miroir senior media buyer brief équipe (*"voici ce que je vois, voici ce que je propose, OK ?"*)
+### Notes
+- **Patch F · enforcement runtime hardcoded Steps EDD + NIVEAU LIVE 5 skills heavy DEFERRED v2.88.0+** · déjà documenté dette `patch_notes_v2_87_4` cross trendtrack-enrich-brand + decompose-ad + map-audiences + craft-packshot + compose-creative · pas refonte massive ce sprint cap qualité chirurgical scope · enforcement runtime backlog v2.88.0+ implementation
+- **Pattern méthodologique reproductible** · scope chirurgical patch_notes + NEW files canon vs refonte runtime massive · wall-time réel cumul ~2h (vs cap initial 5-7h)
+- **Cross-ref memory canon** · `brand_connectors_onboarding_canon` (matrice 7 catégories connectors · branching choice 3 voies · proactive scheduling proposals · /add proactif analytique · 5 axes patches détaillés)
+- Tests non-régression PASSÉS · build-manifest 81 skills + 92 jargon · build-brand-snapshot _EXAMPLE 24 lines · 0 em-dash NEW files (`/add.md` + `phantom-modes/todo-brand.md`)
+- Backward compat strict additif (NEW files canon + patch_notes_v2_87_5 entries · cycle runtime skills heavy preserved · enforcement runtime hardcoded backlog v2.88.0+)
+- D#470 captured · NEW memory canon `expérience_operateur_sprint_v287_5` à poser post-merge
+
 ## [2.87.4] · 2026-05-21
 ### Changed
 - **SPRINT UNIFIÉ ÉTENDU post-audit Fincut session v2.87.3** · 5 agents Sonnet parallèle audit cross-axes (deep desire chain · fluidité jargon · adoption doctrines IP/DVD/EDD · honnêteté sourcing · atlas substrate matriciel) · 8 frictions HIGH + 8 MEDIUM identifiées · 3 patches structurels + 4 chirurgicaux

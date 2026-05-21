@@ -1,0 +1,54 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.5",
+  "released_at": "2026-05-22",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "summary": "Sprint MINOR v2.87.5 expérience opérateur · 5 patches structurels post-discussion ontologie 2 niveaux + connectors organisationnels brand-level · pattern proactif phantom systémique (todos visibility + connectors propose + scheduling propose + entity add propose). Wall-time réel ~2h scope chirurgical patch_notes + NEW files canon vs refonte runtime massive (Patch F enforcement runtime DEFERRED v2.88.0+).",
+  "context_amont": {
+    "trigger": "Discussion Largo post-audit Fincut session v2.87.3 fresh runtime · cartographie audiences/angles cf Notion stride-up + 5 axes proactivité phantom systémique identifiés · décision orchestrateur Option B (sprint expérience opérateur AVANT distribution opérateurs externes pour atlas plus solide).",
+    "scope": "5 patches structurels (P1 /phantom todo brand-level + P2 setup-brand connectors 7 catégories + branching choice 3 voies + P3 brand-todo proactif + P4 phantom proactive scheduling + P5 /add proactif analytique) + P6 enforcement runtime hardcoded DEFERRED v2.88.0+.",
+    "decision_orchestrateur_largo": "Sprint exécution même session · scope chirurgical patch_notes + NEW files canon vs refonte runtime massive (cap qualité fin de soirée · pattern reproductible v2.87.4 réussi 3h cumul vs cap initial 6-8h)."
+  },
+  "patches_executed": {
+    "P1_todo_brand": "VALIDÉ · NEW `.claude/commands/phantom-modes/todo-brand.md` 4 blocs canon (Actions + Connectors + Schedules + Atlas completeness) + routing override `/phantom {brand} todo` dans `.claude/commands/phantom.md` Mode detection table",
+    "P2_setup_brand_connectors": "VALIDÉ · `setup-brand/SKILL.md` v2.1.1 → v2.2.0 · patch_notes_v2_87_5 entry documentant NEW Phase 'Connectez vos outils' matrice 7 catégories + branching choice 3 voies post-URL pasted via AskUserQuestion + trade-off MCP claude natif vs clé API per brand · enforcement runtime DEFERRED v2.88.0+ implementation",
+    "P3_brand_todo_proactif": "VALIDÉ · intégré dans P1 phantom-modes/todo-brand.md 4 blocs canon (connectors checkup + schedules manquants + atlas gaps surfacés ensemble vs todo plat actions seules)",
+    "P4_phantom_proactive_scheduling": "VALIDÉ · `phantom.md` v2.79.2 → v2.87.5 · patch_notes_v2_87_5 entry documentant NEW directive cockpit brand SCHEDULES section + storage canon brands/{slug}/scheduled.json + catalogue 7 skills schedulables + trigger mechanism CronCreate/ScheduleWakeup · enforcement runtime DEFERRED v2.88.0+ implementation",
+    "P5_add_slash_command": "VALIDÉ · NEW `.claude/commands/add.md` v1.0.0 pre-flight proactif analytique · 8 étapes canon (Receive intent + Read atlas existing silent + Raisonner CC v3.1 + Cross-check overlap detection + Propose response + Trigger direct OR 1 question pivotale OR STOP signal) · triggers /add audience/angle/pain/objection/product/friction + détection auto · Hard Rules (interne agent) + Anti-patterns banned",
+    "P6_enforcement_runtime_DEFERRED": "DOCUMENTÉ DEFERRED v2.88.0+ · pas refonte massive ce sprint · dette déjà documentée patch_notes_v2_87_4 cross 5 skills heavy (trendtrack-enrich-brand · decompose-ad · map-audiences · craft-packshot · compose-creative)"
+  },
+  "files_patched": [
+    {"file": ".claude/commands/phantom-modes/todo-brand.md", "scope": "NEW · 4 blocs canon (Actions + Connectors + Schedules + Atlas completeness) + footer canon + triggers + garde-fous canon"},
+    {"file": ".claude/commands/phantom.md", "scope": "Mode detection table ajout routing override `/phantom {brand} todo` + patch_notes_v2_87_5 entry P4 schedules section directive"},
+    {"file": ".skills/skills/setup-brand/SKILL.md", "scope": "v2.1.1 → v2.2.0 + patch_notes_v2_87_5 entry P2 connectors 7 catégories + branching choice 3 voies"},
+    {"file": ".claude/commands/add.md", "scope": "NEW slash command /add v1.0.0 · 8 étapes canon + triggers 6 entity types + détection auto + Hard Rules + Anti-patterns"},
+    {"file": "_version.json", "scope": "Bump 2.87.4 → 2.87.5"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.5 sprint expérience opérateur"},
+    {"file": "docs/internal/releases/manifest/2.87.5-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "tests_non_regression": {
+    "build_manifest": "PASS · 81 skills + 92 jargon entries",
+    "build_brand_snapshot": "PASS · _EXAMPLE 24 lines",
+    "em_dash_NEW_files": "PASS · 0 occurrence /.claude/commands/add.md + /.claude/commands/phantom-modes/todo-brand.md"
+  },
+  "honnetete_discipline_findings": [
+    "Patch F enforcement runtime hardcoded 5 skills heavy DEFERRED v2.88.0+ explicit · dette déjà documentée patch_notes_v2_87_4 · pas refonte massive ce sprint cap qualité chirurgical scope",
+    "P2 setup-brand · NEW Phase Connectez vos outils documentée patch_notes (déclaratif) mais runtime implementation hardcoded backlog v2.88.0+ (pattern miroir v2.87.4 Patch B)",
+    "P4 phantom cockpit SCHEDULES section documentée patch_notes (déclaratif) mais runtime implementation hardcoded backlog v2.88.0+",
+    "Scope chirurgical patch_notes + NEW files canon vs refonte runtime massive · wall-time réel ~2h vs cap initial 5-7h enforcement runtime hardcoded · pattern reproductible v2.87.4 réussi"
+  ],
+  "decisions_captured": ["D#470 (v2.87.5 sprint expérience opérateur · 5 patches structurels post-discussion ontologie + connectors)"],
+  "memory_canons_new": ["expérience_operateur_sprint_v287_5 (5 patches structurels documentés + pattern méthodologique scope chirurgical reproductible)"],
+  "backlog_post_v2_87_5": [
+    "v2.88.0+ · enforcement runtime hardcoded Patch F (Steps EDD + NIVEAU LIVE 5 skills heavy) + P2 setup-brand Phase Connectez vos outils runtime implementation + P4 phantom cockpit SCHEDULES section runtime implementation + storage scheduled.json runtime + skills schedulables CronCreate/ScheduleWakeup wiring",
+    "v2.88.0+ · NEW skill `sync-creatives-to-notion` (production layer parallel sync-notion-atlas territoire) · auto-wire push Notion bridge creatives canonical entry",
+    "v2.88.0+ · 8 frictions MEDIUM audit Fincut session non patchées selon priorité observations opérateur fresh post-distribution",
+    "v2.89+ · confidence_propagation frontmatter declaration cross 81 skills · dette HIGH structurelle audit v2.87.2",
+    "Distribution préparation post-v2.87.5 ship · message invitation + GitHub Releases tags + canal feedback opérateurs externes"
+  ],
+  "rollback_strategy": "Strict additif · revert v2.87.5 = git revert HEAD strict. Backward compat strict additif cross 5 patches · NEW files canon (todo-brand.md + add.md + 2.87.5-manifest.json) ne cassent aucun runtime existing · patch_notes entries déclaratifs sans enforcement runtime hardcoded. Zéro impact runtime breaking (mécanisme skills chargés pareil · slash commands chargés pareil · canon docs additifs)."
+}

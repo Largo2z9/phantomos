@@ -1,7 +1,9 @@
 ---
 name: phantom
 description: Cockpit PhantomOS. Sans arg, vue workspace (tous brands + état global). Avec un brand slug, vue détaillée du brand. Read-only.
-version: v2.79.2
+version: v2.87.5
+patch_notes_v2_87_5:
+  - "v2.87.5 (P1 todo-brand + P4 schedules section) · NEW mode todo-brand `/phantom {brand} todo` brand-level proactif (cf `phantom-modes/todo-brand.md`) · 4 blocs canon · Actions + Connectors + Schedules + Atlas completeness. NEW directive cockpit brand `/phantom {brand}` · ajouter section SCHEDULES (à côté de ALERTES + ÉTAT + ACTIONS) listant schedules actifs `brands/{slug}/scheduled.json` + suggestions schedules manquants relevants (mine-voc weekly · trendtrack-enrich-brand weekly · audit-creative-fatigue monthly · brief-day daily · watch-competitors weekly · analyze-perf weekly · trendtrack shop profile monthly). Storage canon · `brands/{slug}/scheduled.json` brand-level avec skill + frequency + next_run_at + trigger_mechanism (CronCreate predictable récurrent OR ScheduleWakeup dynamic /loop monitoring conditionnel) + last_run_at + last_status + rationale. Canon `scheduled-routines.md` R&D level à promouvoir runtime workspace-template (backlog v2.88.0+). Cross-ref memory canon `brand_connectors_onboarding_canon` matrice 7 skills schedulables + 3 triggers proactivité (post-setup brand + cockpit /phantom + brand-todo entry). Enforcement runtime hardcoded backlog v2.88.0+ implementation. Backward compat strict additif (cycle cockpit preserved · seul NEW section schedules additive)."
 ---
 
 # /phantom, cockpit
@@ -24,7 +26,8 @@ Check the user's argument :
 | brand slug + entity + item (e.g. `/phantom glowco audiences chute-active`) | **item** : preview d'un item unique (audience, angle, product) |
 | `search {keyword}` (e.g. `/phantom search chute`) | **search** : grep cross-brand sur slugs, names, voc, learnings |
 | `recent` ou `recent {N}` | **recent** : timeline des N dernières mutations (default 10) |
-| `todo` | **todo** : vue agrégée des next-suggested cross-brand priorisés |
+| `todo` | **todo** : vue agrégée des next-suggested cross-brand priorisés (workspace-level) |
+| brand slug + `todo` (e.g. `/phantom vitatone todo`) | **todo-brand** : vue brand-level proactive (actions + connectors + schedules + atlas gaps · canon v2.87.5+ P1 · cf `phantom-modes/todo-brand.md`) |
 | `?` ou `help` | **help** : cheatsheet auto-générée de tous les modes |
 | `canon` | **canon-index** : liste des atlas du métier disponibles (workspace-level, transversal aux brands) |
 | `canon {atlas}` | **canon-layers** : liste des couches d'un atlas (ex: `/phantom canon copy`) |

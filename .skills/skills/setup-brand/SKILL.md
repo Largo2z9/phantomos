@@ -1,7 +1,9 @@
 ---
 name: setup-brand
 type: orchestrator
-version: "2.1.1"
+version: "2.2.0"
+patch_notes_v2_87_5:
+  - "2.2.0 (v2.87.5 connectors onboarding + branching choice 3 voies post-URL) · NEW Phase 'Connectez vos outils' obligatoire post-URL pasted ou post-snapshot-brand · matrice 7 catégories canon ranked ROI/effort (Paid platforms · Analytics · Lifecycle · Attribution · Spy tools · CMS/production · Workspace tools via MCP claude natif privilégié) + chain `connect-source` par sélection + trade-off MCP natif (mono-auth solo) vs clé API per brand (multi-account agence). NEW branching choice canon 3 voies via AskUserQuestion post-scrape URL réussi · A 'Approfondir l'analyse maintenant' → chain build-atlas-complete · B 'Connecter mes outils d'abord' → NEW Phase Connectez vos outils · C 'Faire les deux en séquence' (recommandé canon B-puis-A pour atlas sourced) default. Cross-ref memory canon `brand_connectors_onboarding_canon` matrice 7 catégories complète. Enforcement runtime hardcoded backlog v2.88.0+. Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
