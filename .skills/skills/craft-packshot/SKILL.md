@@ -6,7 +6,9 @@ subagent_safe: true
 operator_facing: true
 isolation_scope: brand_only
 layer: production
-version: 1.2.0
+version: 1.3.0
+patch_notes_v2_87_4:
+  - "1.3.0 (v2.87.4 doctrines propagation canon + SED packshots territory/production split · double dette documentée) · Patch B doctrines · Skill orchestrator heavy ~3-5 min runtime + ~$0.04 fal.ai call DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ + thinking aloud NIVEAU LIVE DVD v2.81.1+. Step 0bis prereq check ≠ EDD complète (pas ETA pas confirmation binaire). Patch D4 SED packshots · NEW HR-CP-SED-1 · les assets versionnés `packshot_gen_v*.jpg` (gen iterations) DOIVENT être sauvés dans `brands/{slug}/products/{slug}/visual-identity/iterations/` (production layer canon SED Reference vs Production · encode temporelle). Seul l'asset canonical validé final (1 fichier non versionné · e.g. `packshot_canonical.jpg`) reste en territory layer `brands/{slug}/products/{slug}/visual-identity/`. Audit Fincut session v2.87.3 finding · `packshot_gen_v1.jpg` + `packshot_gen_v2.jpg` versionnés sauvés en territory = production infiltrée. Backlog v2.87.5+ · 2 items pending-validations.md mainteneur · (1) write-to-context.py ALLOWED_PATH_PATTERNS ajouter `brands/[^/]+/products/[^/]+/visual-identity/iterations/.*\\.(jpg|png)$` + (2) craft-packshot output_path runtime move iterations subfolder. Cross-ref `docs/system/territory-doctrine.md` + `docs/system/schema-encoding-doctrine.md`. Backward compat strict additif."
 mode: proposed
 triggers_fr:
   - "crée packshot canon"

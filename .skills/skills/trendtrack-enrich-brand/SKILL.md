@@ -1,7 +1,9 @@
 ---
 name: trendtrack-enrich-brand
 type: producer
-version: "1.0.0"
+version: "1.1.0"
+patch_notes_v2_87_4:
+  - "1.1.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill orchestrator heavy 3 steps (lookup + shop profile + 3 ads queries) ~5-8 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ (Plan + ETA + Démarche + Paramètres décomposés NIVEAU 0 + Confirmation binaire) AVANT exécution + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant Steps lookup et ads queries. Audit Fincut session v2.87.3 finding · lancé direct sans disclosure préalable · pattern systémique cross-skills heavy non-propagation doctrines. Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11. Enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -77,11 +79,11 @@ Si NON · refuse cleanly · "Il me manque {ce_qui_manque} pour démarrer. Brand 
 Si NON · AskUserQuestion ·
 
 ```
-Le skill TrendTrack enrichment a besoin d'un accès API configuré.
+L'enrichissement TrendTrack a besoin d'un accès API configuré.
 
-(a) Setup API direct · ajouter TRENDTRACK_API_KEY=sk_tt_* dans credentials_shared.env
-(b) Setup MCP TrendTrack · `claude mcp add trendtrack` 30s OAuth
-(c) Abort · on reprend quand auth configurée
+(a) Tu as une clé API TrendTrack · colle-la, je la pose dans le workspace (gitignored, jamais commit)
+(b) Tu préfères connecter le serveur officiel via OAuth (~30s)
+(c) On laisse pour plus tard · je reprends quand l'accès est configuré
 ```
 
 **L3 quota check** · `GET /v1/usage` · verify `data.credits.totalRemaining` >= 50 (safe budget pour chain lookup + shop + ads + sample). Si < 50 · flag explicit · "Quota TrendTrack faible (X credits remaining) · enrichment partiel possible · continuer ?".
@@ -220,7 +222,7 @@ python3 .skills/write-to-context.py \
   --mode proposed
 ```
 
-Mutations stagées · `brand.json` (identity/financials/social_media/proofs/market) + `learnings.json` NEW entries (LRN-NNNN) capturant patterns observed (scaling strategy · top winners verbatims · CTA dominants · geo distribution · creative format split).
+Mutations stagées · `brand.json` (identity/financials/social_media/proofs/market) + `learnings.json` NEW entries capturant patterns observed (scaling strategy · top winners verbatims · CTA dominants · geo distribution · creative format split). En output opérateur · annonce "N patterns d'intelligence capturés" · jamais exposer IDs internes LRN-NNNN dans la prose rendu.
 
 **Source canon** · `--source import` est la valeur enum existing (workspace v2.69 ne bump pas write-to-context.py VALID_SOURCES · path additif strict). Meta tag `trendtrack` dans `_meta.lineage` post-write pour traçabilité spécifique source externe. Anti-pattern · tagger `--source agent` (perd traçabilité origine data externe).
 

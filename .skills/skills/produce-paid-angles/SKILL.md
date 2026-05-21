@@ -149,10 +149,10 @@ Paramètres posés · ce sur quoi je pars
      OR "audience problem-aware, functional ouvre puis bascule
      identity en bridge"}
 
-  3. Formula angles
-     OTRB · Observation × Tension × Reframe × Bridge
-     POURQUOI · structure canon paid-angle qui force ancrage observable
-     (Observation) → naming tension (Tension) → renversement framing
+  3. Structure angles · 4 temps
+     Observation × Tension × Reframe × Bridge (acronyme interne · jamais exposé opérateur)
+     POURQUOI · 4 temps canon paid-angle qui force · ancrage observable
+     (Observation) → naming tension client (Tension) → renversement framing
      (Reframe) → connexion offre (Bridge). Pas freestyle prose.
 
   4. Couches pain-benefit-chain variants

@@ -1,7 +1,8 @@
 ---
 name: profile-audience
-version: 1.8.1
+version: 1.9.0
 patch_notes:
+  - "1.9.0 (v2.87.4 deep desire chain gate canon) · NEW Hard Rule HR-DD-1 · gate obligatoire pre-validation audience · psychology.dream_scenario_narrative (object · narrative 2 phrases + target_recipient + context_setting + social_payoff) + psychology.confidence_chain (object · sourcing_method enum + verbatim_count + blocked_sources + confidence_level + caveat) DOIVENT être populated AVANT write profile.json validation_status='validated'. Refuse anti-pattern systémique audit Fincut v2.87.3 · audience encoding reste au pain layer fonctionnel sans descente racine Schwartz/Kern (e.g. 'valoriser corps' sans target_recipient='plaire partenaires/pairs/etc.'). Profile schema v2.0 → v2.1 (psychology.dream_scenario_narrative + psychology.confidence_chain NEW). Backward compat strict additif lecture v2.0 préservée. Cross-ref `docs/system/investigation-posture.md` v2.79.3+ (confidence chain canon) + `docs/system/territory-doctrine.md` (substrate stable psychographique). Anti-pattern · rendre profile.json sans dream_scenario_narrative.target_recipient explicite = refuse gate."
   - "1.8.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section `Niveau LIVE · raisonnement thinking aloud pendant exécution` insérée APRÈS HR0ter disclosure NIVEAU 0 v2.79.5 et AVANT Step 0bis prerequisite check. Action LOURDE classification (synthèse audience 8 dimensions canon V3 · cross-validation Schwartz double-stage · staging pain_points + objections sub-audience canonical · ~8 min selon densité mining). NIVEAU LIVE narratif étendu obligatoire pendant exécution · 2 niveaux abstraction obligatoires (macro contexte audience sub-cluster + micro pain-benefit-chain phrasé en prose narrative sobre). Pose pair senior expert thinking aloud · audit temps réel par l'opérateur entre dimensions encodées + pédagogie posture experte indissociables. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 (NIVEAU LIVE obligatoire actions lourdes) + AP-DVD-11 (opacité pendant action lourde = bug invalid). Backward compat strict additif · cycle runtime préservé (HR0ter NIVEAU 0 + Step 0bis-0ter + 8 dimensions encoding + Audience Visibility Matriciel post-exec preserved)."
   - "1.8.0 (v2.79.5 decomposition visibility NIVEAU 0) · NEW section `Engagement disclosure pré-runtime v2.79.5+` AVANT Step 0bis prerequisite check · 6 paramètres décomposés contextualisés (Audience source · Dimensions cartographier · Sources data · Granularité output · Hypothèses figées · Biais à éviter · POURQUOI explicit chacun · raisonnement métier expert visible AVANT synthèse). Exemple concret canonisé in-line. ATTENDS confirmation explicite paramètres AVANT lancement profile synthesis. HR0ter canon ajouté. Court-circuit autorisé UNIQUEMENT si `operator/profile.json#preferences.disclosure_preference: silent` OR `--no-disclosure` explicit. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.79.5+ NIVEAU 0 + `docs/system/engagement-disclosure-doctrine.md` v2.79.5 Paramètres décomposés. Backward compat strict additif · cycle runtime préservé."
   - "1.7.0 (v2.78.2 decomposition visibility) · NEW Output section `Audience Visibility Matriciel` après encoding 8 dimensions canon V3 · matrice ASCII audience × pain × angle obligatoire si ≥2 pains owned sub-audience · stage business filter (early / growth / scale) si signal détectable · méthode pédagogique verbale explicit (8 dimensions résumées + many-to-many audience-pain-angle). HR10-HR14 + AP10-AP13 ajoutés. Backward compat strict additif · existing 8 dimensions + 5 sections IP preserved · operator output template v2.54 preserved (template legacy reste valide, NEW section l'enrichit). Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.78.2 (canon racine sister Sprint A)."
@@ -108,6 +109,30 @@ prerequisites:
 Synthétise un sub-cluster d'audience en profil 8 dimensions canon V3. Consume les outputs de mining et produit `profile.json` conforme `profile.schema v1.3`. Operator-facing avec validation gate avant write.
 
 ## Hard Rules
+
+### HR-DD-1 · Deep desire chain gate canon v2.87.4 (obligatoire pre-validation)
+
+Avant tout write profile.json avec `meta.validation_status: "validated"`, l'agent DOIT avoir populé deux objets canon v2.87.4 dans psychology ·
+
+**psychology.dream_scenario_narrative** · object 3 fields required ·
+- `narrative` · 2 phrases concrètes scénarisant le moment dream outcome (setting + qui voit + réaction + payoff). Exemple Fincut gym-muscle-showcase canon · *"Lundi matin réunion bureau, je rentre dans la salle, 3 collègues remarquent que je me porte différemment cette semaine. Une nouvelle collègue me regarde 2 secondes de trop. Je n'ai rien eu à dire."* Anti-pattern refusé · *"Je me sens bien tout le temps"* (abstraction sans contexte ni récompense).
+- `target_recipient` · pour qui le résultat est joué · cible relationnelle du payoff (partenaires sexuels/romantiques · pairs masculins · collègues professionnels · famille · soi-même au miroir · enfants observateurs · etc.). Champ qui force la sortie du fonctionnel pure vers le social/relationnel. **Sans target_recipient explicite, le gate refuse.**
+- `context_setting` · contexte spatial+temporel concret (rencontre amoureuse · bureau lundi · vacances en couple · sport club · etc.). Anti-pattern · `every day` / `all contexts` / `au quotidien` refuse le gate (trop abstrait pour générer un angle paid scroll-stop).
+
+**psychology.confidence_chain** · object 2 fields required ·
+- `sourcing_method` enum · verbatim_direct | derived_indirect | inferred_no_source | mixed. Tracer honnêtement la provenance épistémique.
+- `confidence_level` enum · forte | moyenne | faible | TRÈS_faible (canon investigation-posture v2.79.3+). Surfaçage obligatoire opérateur dans validation_status._note + audience drill rendu.
+
+**Pourquoi ce gate (rationale canon)** · audit Fincut session v2.87.3 a confirmé pattern systémique · les 3 audiences encodées (gym-muscle-showcase · morpho-atypique-fit · extended-sizing-xl-4xl) sont restées au pain layer fonctionnel ("valoriser corps", "fit morphologique") SANS descendre au pourquoi racine (plaire aux femmes · dominance sociale subtile · réassurance anti-régression · permission soigner sans féminiser · récompense mérite physique). Impact opérationnel · angles paid générés downstream restent product-centric (même registre que paid actuel qui chute -37%) plutôt que persona-centric scroll-stop. Le gate force la descente AVANT validation pour empêcher cette dérive.
+
+**Anti-patterns explicites refusés** ·
+- Rendre profile.json sans `dream_scenario_narrative.target_recipient` explicite
+- `target_recipient: "soi-même"` seul (acceptable seulement combiné avec autre cible relationnelle)
+- `context_setting` abstrait ("every day", "au quotidien", "in life")
+- `confidence_chain.sourcing_method: "verbatim_direct"` sans `verbatim_count` ≥ 5
+- Skip gate avec `_skip_gate: true` (interdit canon)
+
+**Cross-ref doctrines** · `investigation-posture.md` v2.79.3+ (confidence chain canon) · `territory-doctrine.md` (substrate stable psychographique) · `compositional-cartography.md` (NOYAU × CONTEXTE × MODIFIEURS · dream_scenario_narrative alimente le NOYAU narrative copy downstream).
 
 ### HR0ter · Engagement disclosure pré-runtime · canon v2.79.5+ (NIVEAU 0 paramètres décomposés)
 

@@ -1,7 +1,9 @@
 ---
 name: mine-voc
 type: producer
-version: "1.4.1"
+version: "1.5.0"
+patch_notes_v2_87_4:
+  - "1.5.0 (v2.87.4 Trustpilot 403 STOP signal canon) · NEW HR-VOC-403-1 · si scrape Trustpilot bloqué (403 anti-bot OR widget absent OR account closed), l'agent DOIT (1) STOP signal proactif surface session opérateur · phrase honnête type 'Trustpilot bloque le scrape direct (403 anti-bot) · je ne peux pas accéder aux verbatims clients directs. Voici les leviers alternatifs · Reddit r/{community} · Loox widget PDP · Meta Ads comments · Amazon reviews concurrent proche · YouTube comments UGC.' (2) Logger LRN-type:workaround dans learnings.json avec entry trustpilot_403_observed + tags [api_rule, workaround, mining_constraint]. (3) Set audience.confidence_chain.blocked_sources[] = ['Trustpilot 403 anti-bot'] + confidence_chain.confidence_level = 'faible' OR 'TRÈS_faible' selon fallback obtenu (canon profile schema v2.1 + profile-audience v1.9.0+ HR-DD-1). (4) Push item pending-validations.md mainteneur · 'Trustpilot scrape direct 403 bloqué · investigation API officielle Trustpilot Business OR scraping proxy résolution'. Closes audit Fincut session v2.87.3 finding · 403 mentionné UNIQUEMENT dans audience A3 voice._note · pas STOP signal proactif · pas LRN workaround. Cross-ref `docs/system/investigation-posture.md` v2.79.3+ confidence chain canon. Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet

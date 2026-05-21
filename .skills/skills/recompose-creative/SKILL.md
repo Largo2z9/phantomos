@@ -1,6 +1,8 @@
 ---
 name: recompose-creative
-version: 1.2.2
+version: 1.3.0
+patch_notes_v2_87_4:
+  - "1.3.0 (v2.87.4 canonical many-to-many enforcement mirror) · NEW HR-RC-CANON-1 mirror sibling compose-creative v1.8.0 · enforcement entry canonical `brands/{slug}/creatives/{CRT-NN}/` OBLIGATOIRE post-recomposition. Toute variante DOIT être NEW entry canonical (pas surcharge entry parent · variant_of ref dans lineage) · lineage populated avec `variant_of: CRT-{parent}` + tags variant typed (concept stable · creative new · variant true) + cross-refs many-to-many activés. Asset JPG sauvé dans `creatives/{CRT-NN}/produced/` (pas hors structure). Closes audit Fincut v2.87.3 finding · variantes générées sans entry canonical = perte traçabilité parent/enfant + tableau composition cassé. Backward compat strict additif. NOTE Notion bridge auto-wire DEFERRED v2.88.0+ (sync-creatives-to-notion pas shipped)."
 type: producer
 isolation_scope: brand_only
 layer: production
