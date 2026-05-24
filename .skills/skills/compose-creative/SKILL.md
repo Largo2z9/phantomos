@@ -92,6 +92,8 @@ consumes:
   - path: docs/doctrine/hooks-method-doctrine.md
   - path: docs/doctrine/pain-benefit-chain-doctrine.md
   - path: docs/doctrine/breakthrough-advertising-5-stages.md
+  - path: docs/system/output-clarity-doctrine.md
+  - path: docs/system/operator-vocabulary-translation.md
 produces_validations_for:
   - resources/canon/copy/hooks/*.json
   - resources/canon/copy/mecaniques/*.json

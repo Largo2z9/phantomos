@@ -84,6 +84,8 @@ consumes:
     note: container/content/label/distinctive_features/wordmark_pattern → prompt composition
   - path: resources/schemas/skill-prerequisites.schema.json
     min_version: 1.0.0
+  - path: docs/system/output-clarity-doctrine.md
+  - path: docs/system/operator-vocabulary-translation.md
 produces_proposals_for:
   - brands/{slug}/products/{slug}/assets/packshot-canonical-{angle}-{date}-gen-v{N}.png
   - brands/{slug}/products/{slug}/visual_identity.json#assets_canonical

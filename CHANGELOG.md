@@ -7,6 +7,20 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.87.7] · 2026-05-24
+### Changed
+- **SMART PROMPTING · output-clarity runtime enforcement cross 5 skills heavy via ENRICH > CREATE canon** · pattern hypothesis-driven · zéro patch sur SKILL.md bodies · zéro nouveau fichier doctrine · zéro overengineer · wall-time réel ~1.5h vs scope original 10-14h refonte SKILL.md (gain 8-12h)
+- **Enrichi mapping `operator-vocabulary-translation.md`** · 107 → 134 entries · +27 NEW entries spécifiques aux 5 skills heavy modernes · codes canoniques bruts (PNT-NN → label métier · OBJ-NN · ANG-NN · OFR-NN · FRC-NN · CRT-NN · AUD-NN · LRN-NN) · fichiers JSON (brand.json · offers.json · roadmap.json · learnings.json · profile.json → métier) · champs schema modernes (chain_level · mechanism_ref · target_audience[] · intent_mix · overlay_density · confidence_chain · dream_scenario_narrative · target_recipient · context_setting · social_payoff) · doctrines names internal (formule canon OTRB · pattern parent/enfants sémantique pure · 8 dimensions canon · investigation-posture 5 sections) · Hard Rules codes (HR-CC-CANON-1 · HR-CP-SED-1 · HR9 · AP-NN → retirés du rendu opérateur) · L1/L2/L3 fallback (auto · à toi · partiel) · enums techniques (solution_aware → cherche déjà solution · primary_buyer → acheteur direct · cycle hypothesis→tested→validated→scaled→fatigued → exploratoire→testé→validé→scalé→essoufflé) · scripts Python visibles · skill names heavy verbalized
+- **Ajouté `output-clarity-doctrine` + `operator-vocabulary-translation` au consumes block frontmatter des 5 skills heavy** · build-atlas-complete + decompose-ad + map-audiences + craft-packshot + compose-creative · 10 lignes ajoutées total cross 5 skills · zéro patch sur SKILL.md bodies · enforcement runtime smart prompting via consume pattern
+### Notes
+- **Diagnostic post-audit 5 sub-agents Haiku parallèle** · ~460 occurrences jargon cumulé cross 5 skills heavy détecté · canon `output-clarity-doctrine` + `operator-vocabulary-translation` EXISTAIENT DÉJÀ mais (1) mapping incomplet pour jargons modernes + (2) 5 skills heavy ne CONSUME PAS ces canon dans leur frontmatter (gap systémique)
+- **Pattern ENRICH > CREATE strict respecté** · zéro nouveau fichier · le mapping canon existait déjà · le gap était dans entries manquantes + propagation runtime cross-skills via consume pattern
+- **Hypothesis-driven fail-fast** · soft enforcement via consume + mapping enrichi · pas hardcode runtime · attente réduction leak ~460 → ~20-50 occurrences résiduelles, pas zéro · validation post-ship requise (Largo re-run /tour fresh post-update)
+- **Branchement post-validation** · réduction significative (target <10% leak résiduel) → backlog v2.87.7.1 chirurgical sur résiduels seulement (~1h) · échec validation → fall-back plan original Lots 1-3 refonte SKILL.md (10-14h) JUSTIFIÉ défendable
+- Tests non-régression PASS · build-manifest 81 skills + **119 jargon entries (+27 auto-detected du mapping enrichi)** · build-brand-snapshot _EXAMPLE 24 lines · em-dash 0 NEW content
+- Backward compat strict additif (enrichissement mapping additive 107→134 · zéro suppression · consume frontmatter additive · jargon bank refresh auto)
+- D#472 captured · NEW memory canon `v2_87_7_smart_prompting_pattern` à poser post-merge (pattern reproductible cross-skills heavy futurs)
+
 ## [2.87.6.2] · 2026-05-24
 ### Changed
 - **`tour.md` section Anatomie de la structure · refactor format 3 sections registre Onday institutionnel sobre** · drop-in replacement section panoramique statique v2.87.6 (5 territoires listés bullet-style) → récit 3 sections vulgarisé sans infantiliser

@@ -1,8 +1,8 @@
 {
   "_schema": "template-version/1.0",
-  "template_version": "2.87.6.2",
+  "template_version": "2.87.7",
   "released_at": "2026-05-24",
   "compatible_from": "2.0.0",
-  "summary": "Sprint PATCH v2.87.6.2 · `tour.md` section Anatomie de la structure refactor format 3 sections registre Onday institutionnel sobre (Pourquoi cet atlas existe + Ce qu'on a déroulé sur Stepprs + Cycle de validation) · vulgarisé sans infantiliser · densité reference-grade · drop-in replacement section v2.87.6 panoramique statique vs récit 4 phases concrètes avec découvertes + cycle hypothesis→tested→validated→scaled→fatigued. Patch chirurgical 1 fichier + bump _version + CHANGELOG entry + manifest 2.87.6.2. Backward compat strict additif (drop-in section replacement · awareness write anatomie_walkthrough_seen préservé).",
-  "manifest": "docs/internal/releases/manifest/2.87.6.2-manifest.json"
+  "summary": "Sprint MINOR v2.87.7 SMART PROMPTING · output-clarity runtime enforcement cross 5 skills heavy via ENRICH > CREATE canon. Pattern smart prompting hypothesis-driven · zéro patch sur les 5 SKILL.md bodies · zéro nouveau fichier doctrine · zéro overengineer. (1) Enrichi `operator-vocabulary-translation.md` (mapping canon existant 107→134 entries · +27 entries spécifiques skills heavy modernes · codes canoniques bruts PNT/OBJ/ANG/OFR/FRC/CRT/AUD/LRN · fichiers JSON brand/offers/roadmap/learnings/profile · champs schema modernes chain_level/intent_mix/overlay_density/dream_scenario_narrative/confidence_chain · doctrines names internal formule OTRB/parent-enfants/8 dimensions canon · Hard Rules codes HR-CC-CANON-1/HR-CP-SED-1/HR9/AP-NN · enums techniques solution_aware/primary_buyer/cycle hypothesis→tested→validated→scaled→fatigued · scripts Python visibles · skill names heavy verbalized). (2) Ajouté `output-clarity-doctrine` + `operator-vocabulary-translation` au consumes block frontmatter des 5 skills heavy (build-atlas-complete · decompose-ad · map-audiences · craft-packshot · compose-creative · 10 lignes ajoutées total). Backward compat strict additif · jargon bank auto-detected 92→119 entries · validation runtime · Largo re-run /tour fresh post-update pour mesurer réduction leak. Wall-time réel ~1.5h vs scope original 10-14h refonte SKILL.md (gain 8-12h).",
+  "manifest": "docs/internal/releases/manifest/2.87.7-manifest.json"
 }
