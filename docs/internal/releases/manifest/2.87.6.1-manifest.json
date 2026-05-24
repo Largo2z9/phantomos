@@ -1,0 +1,41 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.6.1",
+  "released_at": "2026-05-24",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "summary": "Sprint PATCH v2.87.6.1 chirurgical · 1 fichier patché (`.claude/commands/update.md` Step 1 detect versions cascade canon) · fix friction distribution v2.87.6 (`/update` autre session avait check `gh api releases/latest` gh CLI absent + fallback `git ls-remote --tags` raté v2.87.6 sans tag publié post-squash-merge → faussement claim 'à jour, voire en avance sur le tag public' alors que v2.87.6 main shipped). Wall-time réel ~20 min.",
+  "context_amont": {
+    "trigger": "Friction live distribution v2.87.6 · autre session Claude Code Largo a lancé `/update` post-shipping v2.87.6 · skill canon a check via `gh api releases/latest` (gh CLI absent · 'command not found') puis fallback `git ls-remote --tags` qui ne retourne que les tags publiés · v2.87.6 squash merged dans main sans tag publié donc rate · faussement claim 'à jour, voire en avance sur le tag public'. Largo a corrigé manuellement 'non la dernière version est v2.87.6' · l'autre session a re-check via clone shallow main + cat _version.json (trouvé v2.87.6). Largo explicit demande patch · 'je veux juste que tu sois conscient qu'il ne pas la détecté au premier abord, donc patch ça'.",
+    "scope": "1 patch chirurgical `.claude/commands/update.md` Step 1 detect versions · réécrire cascade pour PRIMARY = clone shallow main + cat _version.json (source canonique distribution toujours synced post-merge) · SECONDARY = gh CLI tags (signal complémentaire si disponible) · TERTIARY = git ls-remote --tags fallback legacy. Documenter pourquoi dans le bloc bash (audit friction v2.87.6 distribution explicit + pattern reproductible).",
+    "decision_orchestrateur_largo": "Patch immédiat même session · scope chirurgical 1 fichier + ceremony release (bump version + CHANGELOG + manifest + tests + PR + sync 3 repos) · pattern miroir sprints chirurgicaux v2.87.4 + v2.87.5 + v2.87.6."
+  },
+  "patches_executed": {
+    "step1_cascade_canon": "VALIDÉ · `.claude/commands/update.md` Step 1 detect versions réécrit · PRIMARY canon clone shallow main + cat _version.json (source canonique distribution) · SECONDARY gh CLI tags (validation complémentaire) · TERTIARY fallback legacy git ls-remote --tags (si PRIMARY ET SECONDARY échouent) · ajout explication audit friction v2.87.6 distribution + pattern reproductible 'tags peuvent être absents post-squash-merge alors que main contient déjà la dernière version shipped'"
+  },
+  "files_patched": [
+    {"file": ".claude/commands/update.md", "scope": "Step 1 detect versions cascade canon réécrit · main branch `_version.json` PRIMARY vs tags SECONDARY"},
+    {"file": "_version.json", "scope": "Bump 2.87.6 → 2.87.6.1"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.6.1 patch chirurgical Step 1 cascade canon"},
+    {"file": "docs/internal/releases/manifest/2.87.6.1-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "tests_non_regression": {
+    "build_manifest": "TBD POST-EXEC",
+    "build_brand_snapshot": "TBD POST-EXEC",
+    "em_dash_NEW_files": "TBD POST-EXEC"
+  },
+  "honnetete_discipline_findings": [
+    "Patch chirurgical 1 fichier 1 Step Section · pas refonte massive `/update` skill · pattern miroir v2.87.6 scope chirurgical",
+    "Cascade additive · tags secondary preserved · backward compat strict (workspaces déjà à jour via tags continuent fonctionner · workspaces sur main sans tag détectés correctement maintenant)"
+  ],
+  "decisions_captured": ["D#472 (v2.87.6.1 PATCH · /update Step 1 cascade canon main branch _version.json PRIMARY vs tags SECONDARY · fix friction distribution v2.87.6)"],
+  "backlog_post_v2_87_6_1": [
+    "v2.88.0+ · enforcement runtime hardcoded EDD Steps + NIVEAU LIVE 5 skills heavy + Q5 axes découpage trigger automatique map-audiences + consume substrate dream_scenario_narrative compose-creative runtime",
+    "v2.88.0+ ouverture · documenter pattern canon · post-shipping sprint structurel · auto-créer tag git vers commit squash merge pour cohérence detection tags-based downstream (closes friction structurelle distribution)",
+    "Memory canon `update_pipeline` enrichissement post-v2.87.6.1 · cascade canon documentée"
+  ],
+  "rollback_strategy": "Strict additif · revert v2.87.6.1 = git revert HEAD strict. Cascade additive · workspaces continuent fonctionner avec tags secondary si main check échoue. Zéro impact runtime breaking."
+}

@@ -7,6 +7,15 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.87.6.1] · 2026-05-24
+### Fixed
+- **`/update` Step 1 detect versions · cascade canon réécrit · PRIMARY = main branch `_version.json`** · fix friction distribution v2.87.6 live · autre session Claude Code avait check via `gh api releases/latest` (gh CLI absent · 'command not found') puis fallback `git ls-remote --tags` qui ne retourne que les tags publiés · v2.87.6 squash merged dans main sans tag publié donc raté · faussement claim 'à jour, voire en avance sur le tag public' alors que v2.87.6 main shipped
+- **Cascade canon v2.87.6.1+** · PRIMARY clone shallow main + cat `_version.json` (source canonique distribution toujours synced post-merge · les tags peuvent être absents post-squash-merge alors que main contient déjà la dernière version) · SECONDARY gh CLI tags (validation complémentaire si gh installed) · TERTIARY fallback legacy `git ls-remote --tags` (si PRIMARY ET SECONDARY échouent)
+### Notes
+- Pattern reproductible documenté inline bash bloc Step 1 · explication audit friction v2.87.6 distribution + pourquoi cascade refactor (tags = signal incomplet pour version canonique distribution post-squash-merge)
+- Backward compat strict additif (cascade additive · tags secondary preserved · workspaces déjà à jour via tags continuent fonctionner · workspaces sur main sans tag détectés correctement maintenant)
+- D#472 captured · memory canon `update_pipeline` enrichissable post-merge
+
 ## [2.87.6] · 2026-05-24
 ### Changed
 - **SPRINT SUBSTRATE** · 5 patches structurels canon substrate orchestrés post-discussion Largo posture orchestrateur · refresh atlas Stepprs deep desire chain canon v2.87.4 + NEW section walkthrough Porte A many-to-many tour.md + Q5 axes découpage gate map-audiences + patch_notes_v2_87_6 cross 5 skills heavy
