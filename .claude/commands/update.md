@@ -37,14 +37,30 @@ Slash command pointer vers le pipeline d'update PhantomOS. Synchronise les fichi
 
 ### Step 1 · Detect versions
 
-Lire version locale + fetch latest tag depuis remote canon.
+Lire version locale + fetch version canonique depuis main branch remote.
+
+**Source de vérité canonique = `_version.json` du main branch remote** (pas les tags publiés · les tags peuvent être absents post-squash-merge alors que main contient déjà la dernière version shipped). Cascade canon v2.87.6.1+ ·
 
 ```bash
 LOCAL_VERSION=$(python3 -c "import json; print(json.load(open('_version.json'))['template_version'])")
+
+# PRIMARY canon · clone shallow main + cat _version.json (source canonique distribution)
+TMP_REMOTE=$(mktemp -d)
+git clone --depth 1 --branch main https://github.com/Largo2z9/phantomos.git "$TMP_REMOTE" 2>/dev/null
+LATEST_VERSION=$(python3 -c "import json; print(json.load(open('$TMP_REMOTE/_version.json'))['template_version'])" 2>/dev/null || echo "")
+rm -rf "$TMP_REMOTE"
+
+# SECONDARY · gh CLI tag latest (validation complémentaire si gh installed)
 LATEST_TAG=$(gh api repos/Largo2z9/phantomos/releases/latest --jq '.tag_name' 2>/dev/null || echo "")
+
+# TERTIARY fallback legacy · git ls-remote --tags si gh absent ET clone échoue
+if [[ -z "$LATEST_VERSION" && -z "$LATEST_TAG" ]]; then
+  LATEST_TAG=$(git ls-remote --tags https://github.com/Largo2z9/phantomos.git 2>/dev/null | awk '{print $2}' | sed 's|refs/tags/||' | grep -v '\^{}$' | sort -V | tail -1)
+  LATEST_VERSION="${LATEST_TAG#v}"
+fi
 ```
 
-Si `gh` indisponible · fallback `git ls-remote --tags https://github.com/Largo2z9/phantomos.git | tail -1`.
+**Pourquoi cette cascade.** Audit friction v2.87.6 distribution · `/update` autre session avait check `gh api releases/latest` (gh CLI absent) puis fallback `git ls-remote --tags` qui n'a retourné que les tags publiés (v2.87.6 n'avait pas de tag publié juste squash merge dans main) · résultat faussement claim "à jour, voire en avance sur le tag public" alors que v2.87.6 disponible sur main. Patch v2.87.6.1 · main branch `_version.json` devient PRIMARY (toujours synced post-merge) · tags = SECONDARY signal complémentaire.
 
 ### Step 2 · Construire plan migration depuis manifests JSON
 
