@@ -1,8 +1,8 @@
 {
   "_schema": "template-version/1.0",
-  "template_version": "2.87.6.1",
+  "template_version": "2.87.6.2",
   "released_at": "2026-05-24",
   "compatible_from": "2.0.0",
-  "summary": "Sprint PATCH v2.87.6.1 · `/update` Step 1 detect versions cascade canon · main branch `_version.json` PRIMARY source de vérité (vs tags publiés SECONDARY) · fix friction distribution v2.87.6 (gh CLI absent + tags absent post-squash-merge → faussement claim 'à jour'). Patch chirurgical 1 fichier (`.claude/commands/update.md` Step 1 réécrit) + bump _version + CHANGELOG entry + manifest 2.87.6.1. Backward compat strict additif (cascade additive · cloner main shallow + cat _version.json en première position · tags restent fallback secondary).",
-  "manifest": "docs/internal/releases/manifest/2.87.6.1-manifest.json"
+  "summary": "Sprint PATCH v2.87.6.2 · `tour.md` section Anatomie de la structure refactor format 3 sections registre Onday institutionnel sobre (Pourquoi cet atlas existe + Ce qu'on a déroulé sur Stepprs + Cycle de validation) · vulgarisé sans infantiliser · densité reference-grade · drop-in replacement section v2.87.6 panoramique statique vs récit 4 phases concrètes avec découvertes + cycle hypothesis→tested→validated→scaled→fatigued. Patch chirurgical 1 fichier + bump _version + CHANGELOG entry + manifest 2.87.6.2. Backward compat strict additif (drop-in section replacement · awareness write anatomie_walkthrough_seen préservé).",
+  "manifest": "docs/internal/releases/manifest/2.87.6.2-manifest.json"
 }

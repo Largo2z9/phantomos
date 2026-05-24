@@ -1,0 +1,43 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.6.2",
+  "released_at": "2026-05-24",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "summary": "Sprint PATCH v2.87.6.2 chirurgical · `tour.md` section Anatomie de la structure refactor format 3 sections registre Onday institutionnel sobre · drop-in replacement section panoramique statique v2.87.6 vs récit 4 phases concrètes Stepprs avec découvertes + cycle validation. Wall-time réel ~30 min.",
+  "context_amont": {
+    "trigger": "Largo demande check format vs Notion Onday référence pédagogique · audit comparatif révèle 5 gaps critiques · douleur opérateur d'ouverture (cimetière de briefs) · récit phase-par-phase avec découvertes concrètes · métaphore brique (Lego) cognitive frame · 5 scénarios opérateur-driven (Et si je veux ajouter X) · cycle de validation explicite (hypothesis → tested → validated → scaled → fatigued). Stepprs actuel = vue panoramique statique des 5 territoires sans promesse claire ni récit.",
+    "scope": "1 patch chirurgical `.claude/commands/tour.md` section Anatomie de la structure (M2 sub-section post-Gate Porte A) · drop-in replacement format 3 sections registre Onday · Pourquoi cet atlas existe (douleur cimetière de briefs + atlas stocke briques typées) + Ce qu'on a déroulé sur Stepprs (4 phases · produit · audiences · angles · matrice · brief avec découvertes concrètes) + Cycle de validation (hypothesis → tested → validated → scaled → fatigued aucun saut autorisé). Ton vulgarisé sans infantiliser · pas de métaphore expliquée · pas d'accroche sales-bro · pas de Acte 1/2/3 dramatique · densité reference-grade Notion Onday.",
+    "decision_orchestrateur_largo": "Patch immédiat même session · ok go post-iteration v1 trop ludique infantilisante (caps screaming + Acte 1/2/3 + métaphore Lego littérale expliquée) · v2 institutionnel sobre validé."
+  },
+  "patches_executed": {
+    "anatomie_3_sections_refactor": "VALIDÉ · `.claude/commands/tour.md` section Anatomie de la structure refactor · 3 sections institutionnelles sobres registre Notion Onday reference-grade · (1) Pourquoi cet atlas existe · douleur cimetière de briefs (50 angles écrits épuisés 3 mois) + atlas stocke briques typées (changes une brique reconstruis dix briefs · ajoutes audience système dit angles compatibles · fatigues angle retires sans casser le reste) · (2) Ce qu'on a déroulé sur Stepprs · 4 phases avec découvertes concrètes (Produit 4 mécanismes × 5 bénéfices + mécanisme alignement pivot · Audiences 2 poches + 5 profils + workers shift sous-exploités vs sportifs default · Angles 5 sources + 7 angles formule OTRB · Matrice 5×5=25 territoires + scoring sur 60 + top 3 workers/grand-mères/nurses · Brief généalogie spec→mécanisme→bénéfice→profil→angle si CPL rate on sait quelle brique tester) · (3) Cycle de validation · hypothesis → tested → validated → scaled → fatigued aucun saut autorisé · 2 tests confirmatoires pour validated · fatigued retiré matrice active · sépare atlas vivant du dossier mort"
+  },
+  "files_patched": [
+    {"file": ".claude/commands/tour.md", "scope": "Section Anatomie de la structure M2 sub-section drop-in replacement · format 3 sections registre Onday institutionnel sobre · v2.87.6 vue panoramique statique → v2.87.6.2 récit 4 phases avec découvertes + cycle validation"},
+    {"file": "_version.json", "scope": "Bump 2.87.6.1 → 2.87.6.2"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.6.2 patch chirurgical Anatomie 3 sections"},
+    {"file": "docs/internal/releases/manifest/2.87.6.2-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "tests_non_regression": {
+    "build_manifest": "TBD POST-EXEC",
+    "build_brand_snapshot": "TBD POST-EXEC",
+    "em_dash_NEW_files": "TBD POST-EXEC sur tour.md NEW section"
+  },
+  "honnetete_discipline_findings": [
+    "Patch chirurgical 1 fichier 1 section · pas refonte tour.md complet · pattern miroir v2.87.6 + v2.87.6.1 scope chirurgical",
+    "Drop-in replacement section · backward compat strict (awareness write anatomie_walkthrough_seen préservé · structure M2 sub-section position inchangée · M3 close cross-ref préservé)",
+    "Source pédagogique référence Notion Onday Mode d'emploi page (page id 3574b296-99b6-8197-897d-f7803c7a6ee8) · pattern 'Sans système, le testing créa devient un cimetière de briefs' + 'On stocke les variables typées qui produisent les briefs, pas les briefs eux-mêmes' + cycle hypothesis→tested→validated→scaled→fatigued · adaptation registre PhantomOS reference-grade sans copier littéralement",
+    "v1 itération trop ludique infantilisante (caps screaming + Acte 1/2/3 + métaphore Lego littérale expliquée) recadrée par Largo · v2 institutionnel sobre validé · pattern itératif validation correction validée"
+  ],
+  "decisions_captured": ["D#473 (v2.87.6.2 PATCH · tour.md Anatomie 3 sections refactor registre Onday institutionnel sobre · fix gap pédagogique panoramique statique vs récit phase-par-phase avec découvertes + cycle validation)"],
+  "backlog_post_v2_87_6_2": [
+    "v2.87.6.3 (optionnel) · enrichir `_EXAMPLE/README.md` introduction avec 3 sections symétrie cross-surfaces (cohérence registre Notion Onday cross brands/_EXAMPLE/README.md + tour.md Porte A)",
+    "v2.87.6.4 (optionnel) · audit `/breakdown stepprs` index page intro · refactor même registre 3 sections (Pourquoi PhantomOS existe + 5 couches + 3 dimensions transverses + Cycle de promotion entre couches) · cohérence cross-surfaces pédagogiques",
+    "v2.88.0+ · enforcement runtime hardcoded EDD Steps + NIVEAU LIVE + Q5 axes découpage trigger automatique + consume substrate dream_scenario_narrative compose-creative runtime"
+  ],
+  "rollback_strategy": "Strict additif drop-in section replacement · revert v2.87.6.2 = git revert HEAD strict · section v2.87.6 panoramique statique restaurée · awareness write anatomie_walkthrough_seen préservé inchangé · zéro impact runtime breaking."
+}

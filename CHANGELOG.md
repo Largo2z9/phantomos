@@ -7,6 +7,19 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.87.6.2] · 2026-05-24
+### Changed
+- **`tour.md` section Anatomie de la structure · refactor format 3 sections registre Onday institutionnel sobre** · drop-in replacement section panoramique statique v2.87.6 (5 territoires listés bullet-style) → récit 3 sections vulgarisé sans infantiliser
+- **Section 1 · Pourquoi cet atlas existe** · douleur opérateur cimetière de briefs (50 angles écrits épuisés 3 mois) + atlas stocke briques typées qui produisent les briefs pas les briefs eux-mêmes (changes une brique reconstruis dix · ajoutes audience système dit angles compatibles · fatigues angle retires sans casser le reste)
+- **Section 2 · Ce qu'on a déroulé sur Stepprs** · 5 phases avec découvertes concrètes (Produit 4 mécanismes × 5 bénéfices + alignement pivot · Audiences 2 poches + 5 profils workers shift sous-exploités · Angles 5 sources + 7 angles formule OTRB · Matrice 5×5=25 territoires + scoring sur 60 + top 3 · Brief généalogie spec→mécanisme→bénéfice→profil→angle)
+- **Section 3 · Cycle de validation** · `hypothesis → tested → validated → scaled → fatigued` aucun saut autorisé · 2 tests confirmatoires pour validated · fatigued retiré matrice active · sépare atlas vivant du dossier mort
+### Notes
+- Source pédagogique référence Notion Onday Mode d'emploi (cartographie raisonnée Onday) · adaptation registre PhantomOS reference-grade sans copier littéralement
+- Ton institutionnel sobre · pas de métaphore expliquée · pas d'accroche sales-bro · pas de Acte 1/2/3 dramatique · densité Notion Onday
+- Pattern itératif validation correction v1 → v2 · première itération trop ludique infantilisante (caps screaming + Acte 1/2/3 + métaphore Lego littérale) recadrée Largo · v2 institutionnel sobre validé
+- Backward compat strict additif (drop-in section replacement · awareness write `anatomie_walkthrough_seen` préservé · structure M2 sub-section position inchangée · M3 close cross-ref préservé)
+- D#473 captured · memory canon `voice_doctrine_canon` revalidé (registre reference-grade tenu pour surface pédagogique opérateur-facing)
+
 ## [2.87.6.1] · 2026-05-24
 ### Fixed
 - **`/update` Step 1 detect versions · cascade canon réécrit · PRIMARY = main branch `_version.json`** · fix friction distribution v2.87.6 live · autre session Claude Code avait check via `gh api releases/latest` (gh CLI absent · 'command not found') puis fallback `git ls-remote --tags` qui ne retourne que les tags publiés · v2.87.6 squash merged dans main sans tag publié donc raté · faussement claim 'à jour, voire en avance sur le tag public' alors que v2.87.6 main shipped
