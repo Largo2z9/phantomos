@@ -52,6 +52,8 @@ consumes:
   - docs/doctrine/audience-cartography-framework.md (4 questions canon)
   - path: docs/doctrine/audiences-cartography-doctrine.md
   - path: docs/doctrine/breakthrough-advertising-5-stages.md
+  - path: docs/system/output-clarity-doctrine.md
+  - path: docs/system/operator-vocabulary-translation.md
 produces_proposals_for:
   - brands/{slug}/audiences/{audience_slug}/profile.json (light pass scaffold · meta + identity light)
 permissions:

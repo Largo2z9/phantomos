@@ -105,6 +105,35 @@ Cette règle s'étend aux concepts canon : atlas, canon, validations, fiches, co
 | Strategy / Learnings / Matrix (headers EN dans output FR) | Stratégie / Apprentissages / Matrice | Strategy / Learnings / Matrix |
 | fog | flou (sauf canon `/bird` signature avec définition pied) | fog (kept canon `/bird` signature with footer definition) |
 | drill 360° (verbose) | drill (cap verbose · canon command name) | drill (cap verbose · canon command name) |
+| PNT-NN (pain canonical ID) | label métier du pain (e.g. "douleur fin de shift") | metier label of the pain (e.g. "end-of-shift fatigue") |
+| OBJ-NN (objection canonical ID) | label métier de l'objection (e.g. "scepticisme efficacité produit") | metier label of the objection (e.g. "product efficacy skepticism") |
+| ANG-NN (angle canonical ID) | nom de l'angle (e.g. "Walk on Clouds") | angle name (e.g. "Walk on Clouds") |
+| OFR-NN (offer canonical ID) | nom de l'offre (e.g. "Kit Plantar Fasciitis") | offer name (e.g. "Plantar Fasciitis Kit") |
+| FRC-NN (friction canonical ID) | label métier de la friction (e.g. "fit dans steel-toe") | metier label of the friction (e.g. "fit in steel-toe") |
+| CRT-NN (creative canonical ID) | référence creative (e.g. "cette creative") | creative reference (e.g. "this creative") |
+| AUD-NN (audience canonical ID) | nom de l'audience (e.g. "workers shift 8-12h") | audience name (e.g. "workers shift 8-12h") |
+| LRN-NN (learning canonical ID) | apprentissage (e.g. "apprentissage scale géo") | learning (e.g. "geo scale learning") |
+| brand.json / offers.json / roadmap.json / learnings.json / profile.json | racine identité / offres actives / stratégie / apprentissages capturés / fiche audience | brand root identity / active offers / strategy / captured learnings / audience profile |
+| chain_level (functional / emotional / identity) | niveau fonctionnel / émotionnel / identitaire | functional / emotional / identity level |
+| latency_min / latency_max | délai d'effet (mini / maxi en jours) | effect latency (min / max in days) |
+| mechanism_ref · benefit_ref · pain_point_ref · angle_ref · audience_ref · product_ref · concept_ref | mécanique source · bénéfice ciblé · douleur activée · angle activé · audience servie · produit ciblé · concept narratif | source mechanism · target benefit · activated pain · activated angle · served audience · target product · narrative concept |
+| target_audience[] · affected_audiences[] · applies_to_audiences[] | audiences servies · audiences impactées · audiences applicables | served audiences · affected audiences · applicable audiences |
+| intent_mix · craft_mode · overlay_density · brand_mark_present | type de campagne · mode de composition · densité visuelle · marque visible | campaign intent · craft mode · visual density · brand mark visible |
+| confidence_chain · sourcing_method · confidence_level (forte/moyenne/faible/TRÈS faible) | parcours de certitude · méthode source · degré de certitude (très solide / solide / à tester / très hypothétique) | confidence trail · sourcing method · confidence level (very solid / solid / to test / highly hypothetical) |
+| dream_scenario_narrative · target_recipient · context_setting · social_payoff | scénario rêvé · destinataire visé · contexte · récompense sociale | dream scenario · target recipient · setting · social payoff |
+| formule canon OTRB · Observation × Tension × Reframe × Bridge | structure Observation + Tension + Reframe + Bridge | Observation + Tension + Reframe + Bridge structure |
+| pattern parent/enfants sémantique pure · sub-audience hiérarchique | mère + sous-poches qui héritent | mother + sub-audiences that inherit |
+| 8 dimensions canon (Purchase Driver · Problem Map · Benefit Stack · Mechanism · Market Context · Alternative Map · Identity Signals · Decision Process) | 8 dimensions psycho-comportementales (driver d'achat · carte des problèmes · stack bénéfices · mécanique · contexte marché · alternatives · signaux identité · process décision) | 8 psycho-behavioral dimensions (purchase driver · problem map · benefit stack · mechanism · market context · alternative map · identity signals · decision process) |
+| investigation-posture · 5 sections canon (Observé / Déduit / Inconnu / Leviers / Close ouvert) | rendu structuré · 5 sections (Observé / Déduit / Inconnu / Leviers / Question ouverte) | structured output · 5 sections (Observed / Inferred / Unknown / Levers / Open question) |
+| Hard Rules codes (HR-CC-CANON-1 · HR-CP-SED-1 · HR-OCD-NN · HR9 · HR5 · HR2 · HR1 BLOCKER · AP-NN) | [retiré du rendu opérateur · jamais nommé runtime] | [removed from operator render · never named runtime] |
+| L1 silent · L2 gate · L3 degraded · L1/L2/L3 fallback | automatique · à toi · partiel · auto · ton choix · partiel | auto · your call · partial · auto · your call · partial |
+| solution_aware · product_aware · problem_aware · most_aware · unaware | cherche déjà solution · connaît les options du marché · sait qu'elle a le problème · prête à acheter · pas consciente du problème | aware of solution · aware of products · aware of problem · most aware · unaware |
+| primary_buyer · user_self · gift_giver · decision_maker | acheteur direct · utilisatrice elle-même · acheteur cadeau · décideur | primary buyer · self user · gift giver · decision maker |
+| broad · segment · micro (scope) | mère · poche · niche | broad · segment · niche |
+| validation_status · hypothesis → tested → validated → scaled → fatigued | statut · exploratoire → testé → validé → scalé → essoufflé | status · exploratory → tested → validated → scaled → fatigued |
+| python3 .skills/write-to-context.py --path X --source Y --confidence Z | [mécanique interne agent · jamais visible opérateur] | [agent internal mechanism · never operator visible] |
+| field_path · source · confidence · mode (mutation gate fields) | [mécanique interne agent · jamais visible opérateur] | [agent internal mechanism · never operator visible] |
+| build-atlas-complete · decompose-ad · map-audiences · craft-packshot · compose-creative · audit-meta-account · mine-voc · produce-paid-angles · produce-copy-brief · trendtrack-enrich-brand · setup-brand · snapshot-brand · sync-notion-atlas (skill names heavy) | action verbalisée (e.g. "construire l'atlas complet" · "décomposer cette pub" · "cartographier les audiences" · "générer le visuel produit" · "composer la creative" · "auditer le compte Meta" · "miner la voix client" · "produire les angles paid" · "générer le brief copy" · "enrichir depuis TrendTrack" · "démarrer une nouvelle brand" · "scanner la marque" · "synchroniser vers Notion") | verbalized action (skill name never exposed) |
 
 ## Output policy
 

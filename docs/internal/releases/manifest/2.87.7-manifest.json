@@ -1,0 +1,55 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.7",
+  "released_at": "2026-05-24",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "jargon_entries_before": 92,
+  "jargon_entries_after": 119,
+  "summary": "Sprint MINOR v2.87.7 SMART PROMPTING · output-clarity runtime enforcement cross 5 skills heavy via ENRICH > CREATE canon. Pattern smart prompting hypothesis-driven · zéro patch sur SKILL.md bodies · zéro nouveau fichier doctrine · zéro overengineer · wall-time réel ~1.5h vs scope original 10-14h refonte SKILL.md (gain 8-12h).",
+  "context_amont": {
+    "trigger": "Largo re-tests `/tour` post-shipping v2.87.6.2 cosmetic Anatomie 3 sections · constate jargon massif leaked à l'opérateur dans 5 étapes upstream produites par build-atlas-complete + map-audiences + sub-skills. Audit 5 sub-agents Haiku parallèle révèle ~460 occurrences jargon cumulé cross 5 skills heavy (build-atlas-complete 60+ · decompose-ad 60+ · map-audiences 135 · craft-packshot 120 · compose-creative 85+). Pattern systémique 6 catégories · codes canoniques bruts (PNT/OBJ/ANG/OFR/FRC/CRT/AUD/LRN) · field paths schema · doctrines names internal · enums techniques anglais · scripts Python visibles · cross-skill names. Demande Largo · pas de bidouillage / pansement, pas d'overengineer, smart prompting · ultrathink pour résoudre.",
+    "diagnostic": "Le canon `output-clarity-doctrine` DÉJÀ existe + cross-ref `operator-vocabulary-translation.md` mapping 107 entries existe + Output policy + Enforcement déjà spec'd. Le vrai gap n'est PAS l'absence de canon mais (1) le mapping incomplet pour les jargons spécifiques aux 5 skills heavy modernes (codes canoniques bruts + champs schema modernes + doctrines names internal absents) + (2) les 5 skills heavy ne CONSUME PAS `output-clarity-doctrine` NI `operator-vocabulary-translation` dans leur frontmatter (pré-flight Haiku confirme · gap systémique cross 5).",
+    "solution_smart_prompting": "Pattern ENRICH > CREATE strict · zéro nouveau fichier · enrichir le mapping existant + ajouter 2 consumes aux 5 skills heavy frontmatter. Au runtime l'agent charge `output-clarity-doctrine` + `operator-vocabulary-translation` automatiquement via consume pattern · applique le mapping enrichi pour traduire à la volée tous les jargons banies dans le rendu opérateur. Zéro patch sur SKILL.md bodies (les templates restent source de vérité STRUCTURELLE · la doctrine définit la couche translation RUNTIME)."
+  },
+  "patches_executed": {
+    "enrich_mapping": "VALIDÉ · `docs/system/operator-vocabulary-translation.md` enrichi avec ~27 NEW entries spécifiques skills heavy modernes · codes canoniques bruts (PNT-NN → label métier · OBJ-NN · ANG-NN · OFR-NN · FRC-NN · CRT-NN · AUD-NN · LRN-NN) · fichiers JSON (brand.json · offers.json · roadmap.json · learnings.json · profile.json → métier) · champs schema (chain_level · latency_min/max · mechanism_ref · target_audience[] · intent_mix · overlay_density · confidence_chain · dream_scenario_narrative · target_recipient · context_setting · social_payoff) · doctrines names internal (formule canon OTRB · pattern parent/enfants sémantique pure · 8 dimensions canon · investigation-posture 5 sections canon) · Hard Rules codes (HR-CC-CANON-1 · HR-CP-SED-1 · HR-OCD-NN · AP-NN → retiré du rendu opérateur) · L1/L2/L3 fallback (auto · à toi · partiel) · enums techniques (solution_aware → cherche déjà solution · primary_buyer → acheteur direct · cycle hypothesis→tested→validated→scaled→fatigued → exploratoire→testé→validé→scalé→essoufflé) · scripts Python visibles (write-to-context.py → mécanique interne agent · jamais visible) · skill names heavy (build-atlas-complete → 'construire l'atlas complet' · decompose-ad → 'décomposer cette pub' · map-audiences → 'cartographier les audiences' · craft-packshot → 'générer le visuel produit' · compose-creative → 'composer la creative' · etc.)",
+    "frontmatter_consumes_5_skills_heavy": "VALIDÉ · ajout `output-clarity-doctrine` + `operator-vocabulary-translation` au consumes block frontmatter des 5 skills heavy · build-atlas-complete (lines 74-75) · decompose-ad (lines 85-86) · map-audiences (lines 55-56) · craft-packshot (lines 87-88) · compose-creative (lines 95-96). 10 lignes ajoutées total cross 5 skills · zéro patch sur SKILL.md bodies · enforcement runtime smart prompting via consume pattern."
+  },
+  "files_patched": [
+    {"file": "docs/system/operator-vocabulary-translation.md", "scope": "Enrichi mapping canon 107→134 entries · +27 NEW entries spécifiques skills heavy modernes (codes canoniques bruts + fichiers JSON + champs schema modernes + doctrines names internal + Hard Rules codes + enums techniques + scripts Python + skill names heavy verbalized)"},
+    {"file": ".skills/skills/build-atlas-complete/SKILL.md", "scope": "Frontmatter consumes block · ajout output-clarity-doctrine + operator-vocabulary-translation (2 lignes)"},
+    {"file": ".skills/skills/decompose-ad/SKILL.md", "scope": "Frontmatter consumes block · ajout output-clarity-doctrine + operator-vocabulary-translation (2 lignes)"},
+    {"file": ".skills/skills/map-audiences/SKILL.md", "scope": "Frontmatter consumes block · ajout output-clarity-doctrine + operator-vocabulary-translation (2 lignes)"},
+    {"file": ".skills/skills/craft-packshot/SKILL.md", "scope": "Frontmatter consumes block · ajout output-clarity-doctrine + operator-vocabulary-translation (2 lignes)"},
+    {"file": ".skills/skills/compose-creative/SKILL.md", "scope": "Frontmatter consumes block · ajout output-clarity-doctrine + operator-vocabulary-translation (2 lignes)"},
+    {"file": "_version.json", "scope": "Bump 2.87.6.2 → 2.87.7"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.7 smart prompting output-clarity runtime enforcement"},
+    {"file": "docs/internal/releases/manifest/2.87.7-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "tests_non_regression": {
+    "build_manifest": "PASS · 81 skills + 119 jargon entries (vs 92 avant · +27 nouvelles entries auto-detected du mapping enrichi)",
+    "build_brand_snapshot": "PASS · _EXAMPLE 24 lines",
+    "em_dash_NEW_files": "PASS · 0 occurrence operator-vocabulary-translation.md enrichi",
+    "frontmatter_yaml_parse": "PASS · build-manifest charge tous skills · 0 erreur frontmatter parse"
+  },
+  "honnetete_discipline_findings": [
+    "Pattern smart prompting hypothesis-driven · soft enforcement via consume pattern + mapping enrichi · pas hardcode runtime (pas de hook Python filter output mécanique). Attente · réduction leak de ~460 à ~20-50 occurrences résiduelles, pas zéro. Validation post-ship requise · Largo re-run /tour fresh post-update pour mesurer réduction réelle.",
+    "Si validation live confirme réduction significative (target <10% leak résiduel) → backlog v2.87.7.1+ chirurgical sur les résiduels seulement (~1h). Si échoue → fall-back plan original Lots 1-3 refonte SKILL.md (10-14h) JUSTIFIÉ défendable (preuve épistémique faite que soft enforcement ne suffit pas).",
+    "ENRICH > CREATE strict respecté · zéro nouveau fichier · le mapping canon existait déjà · le gap était dans (a) entries manquantes pour jargons modernes + (b) skills heavy ne consume pas le canon dans leur frontmatter. Pattern miroir v2.85.0 chantier rename · canon existait, gap était propagation runtime cross-skills.",
+    "Wall-time réel ~1.5h vs scope original 10-14h refonte SKILL.md · gain 8-12h via smart prompting · 6-9x meilleur ROI. Pattern reproductible canon pour skills heavy futurs."
+  ],
+  "decisions_captured": ["D#472 (v2.87.7 SMART PROMPTING output-clarity runtime enforcement cross 5 skills heavy via ENRICH mapping + consume frontmatter · zéro patch SKILL.md bodies)"],
+  "memory_canons_new": ["v2.87.7 smart prompting pattern canon · soft enforcement via consume + mapping enrichi vs refonte massive SKILL.md · pattern reproductible cross-skills heavy futurs · hypothesis-driven fail-fast"],
+  "backlog_post_v2_87_7": [
+    "Validation live (Largo) · re-run /update + /tour fresh sur autre session · mesurer réduction leak jargon vs ~460 baseline",
+    "v2.87.7.1 (conditionnel) · si validation live révèle ~10% leak résiduel · patches chirurgicaux ciblés ~1h sur les occurrences spécifiques restantes",
+    "v2.87.7.2 (conditionnel) · si validation live échoue · fall-back plan original Lots 1-3 refonte SKILL.md (10-14h) JUSTIFIÉ par preuve épistémique",
+    "v2.88.0+ · si pattern smart prompting validé · réplication cross autres skills heavy non-couverts (audit-meta-account · mine-voc · produce-paid-angles · produce-copy-brief · trendtrack-enrich-brand · setup-brand · snapshot-brand · sync-notion-atlas) via ajout 2 consumes frontmatter chacun (15 min cumul)",
+    "v2.88.0+ · enforcement runtime hardcoded EDD Steps + NIVEAU LIVE 5 skills heavy + Q5 axes découpage trigger automatique map-audiences + consume substrate dream_scenario_narrative compose-creative runtime (chantiers complémentaires)"
+  ],
+  "rollback_strategy": "Strict additif · revert v2.87.7 = git revert HEAD strict. Backward compat strict additif cross 6 patches · enrichissement mapping additive (107→134 entries · zéro suppression) · consume frontmatter additive (zéro consume retiré) · jargon bank auto-detected refresh build-manifest. Zéro impact runtime breaking · cycle runtime skills heavy preserved · canon docs additifs."
+}

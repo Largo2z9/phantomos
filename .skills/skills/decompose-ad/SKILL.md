@@ -82,6 +82,8 @@ consumes:
     note: visual identity assets (packshots, color_palette, container, content, label, distinctive_features) consumed for product fidelity in regen pipelines
   - path: docs/doctrine/angle-anatomy-doctrine.md
   - path: docs/doctrine/hooks-method-doctrine.md
+  - path: docs/system/output-clarity-doctrine.md
+  - path: docs/system/operator-vocabulary-translation.md
 produces_validations_for:
   - resources/canon/copy/hooks/*.json
   - resources/canon/copy/angles/*.json

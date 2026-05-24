@@ -2,7 +2,7 @@
   "_schema": "jargon-bank/1.0",
   "_generated_at": "2026-05-24",
   "_source": "docs/system/operator-vocabulary-translation.md",
-  "_total_entries": 92,
+  "_total_entries": 119,
   "entries": [
     {
       "internal": [
@@ -866,6 +866,307 @@
       ],
       "operator_fr": "drill (cap verbose · canon command name)",
       "operator_en": "drill (cap verbose · canon command name)",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "PNT-NN (pain canonical ID)"
+      ],
+      "operator_fr": "label métier du pain (e.g. \"douleur fin de shift\")",
+      "operator_en": "metier label of the pain (e.g. \"end-of-shift fatigue\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "OBJ-NN (objection canonical ID)"
+      ],
+      "operator_fr": "label métier de l'objection (e.g. \"scepticisme efficacité produit\")",
+      "operator_en": "metier label of the objection (e.g. \"product efficacy skepticism\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "ANG-NN (angle canonical ID)"
+      ],
+      "operator_fr": "nom de l'angle (e.g. \"Walk on Clouds\")",
+      "operator_en": "angle name (e.g. \"Walk on Clouds\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "OFR-NN (offer canonical ID)"
+      ],
+      "operator_fr": "nom de l'offre (e.g. \"Kit Plantar Fasciitis\")",
+      "operator_en": "offer name (e.g. \"Plantar Fasciitis Kit\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "FRC-NN (friction canonical ID)"
+      ],
+      "operator_fr": "label métier de la friction (e.g. \"fit dans steel-toe\")",
+      "operator_en": "metier label of the friction (e.g. \"fit in steel-toe\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "CRT-NN (creative canonical ID)"
+      ],
+      "operator_fr": "référence creative (e.g. \"cette creative\")",
+      "operator_en": "creative reference (e.g. \"this creative\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "AUD-NN (audience canonical ID)"
+      ],
+      "operator_fr": "nom de l'audience (e.g. \"workers shift 8-12h\")",
+      "operator_en": "audience name (e.g. \"workers shift 8-12h\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "LRN-NN (learning canonical ID)"
+      ],
+      "operator_fr": "apprentissage (e.g. \"apprentissage scale géo\")",
+      "operator_en": "learning (e.g. \"geo scale learning\")",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "brand.json / offers.json / roadmap.json / learnings.json / profile.json"
+      ],
+      "operator_fr": "racine identité / offres actives / stratégie / apprentissages capturés / fiche audience",
+      "operator_en": "brand root identity / active offers / strategy / captured learnings / audience profile",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "chain_level (functional / emotional / identity)"
+      ],
+      "operator_fr": "niveau fonctionnel / émotionnel / identitaire",
+      "operator_en": "functional / emotional / identity level",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "latency_min / latency_max"
+      ],
+      "operator_fr": "délai d'effet (mini / maxi en jours)",
+      "operator_en": "effect latency (min / max in days)",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "mechanism_ref",
+        "benefit_ref",
+        "pain_point_ref",
+        "angle_ref",
+        "audience_ref",
+        "product_ref",
+        "concept_ref"
+      ],
+      "operator_fr": "mécanique source · bénéfice ciblé · douleur activée · angle activé · audience servie · produit ciblé · concept narratif",
+      "operator_en": "source mechanism · target benefit · activated pain · activated angle · served audience · target product · narrative concept",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "target_audience[]",
+        "affected_audiences[]",
+        "applies_to_audiences[]"
+      ],
+      "operator_fr": "audiences servies · audiences impactées · audiences applicables",
+      "operator_en": "served audiences · affected audiences · applicable audiences",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "intent_mix",
+        "craft_mode",
+        "overlay_density",
+        "brand_mark_present"
+      ],
+      "operator_fr": "type de campagne · mode de composition · densité visuelle · marque visible",
+      "operator_en": "campaign intent · craft mode · visual density · brand mark visible",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "confidence_chain",
+        "sourcing_method",
+        "confidence_level (forte/moyenne/faible/TRÈS faible)"
+      ],
+      "operator_fr": "parcours de certitude · méthode source · degré de certitude (très solide / solide / à tester / très hypothétique)",
+      "operator_en": "confidence trail · sourcing method · confidence level (very solid / solid / to test / highly hypothetical)",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "dream_scenario_narrative",
+        "target_recipient",
+        "context_setting",
+        "social_payoff"
+      ],
+      "operator_fr": "scénario rêvé · destinataire visé · contexte · récompense sociale",
+      "operator_en": "dream scenario · target recipient · setting · social payoff",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "formule canon OTRB",
+        "Observation × Tension × Reframe × Bridge"
+      ],
+      "operator_fr": "structure Observation + Tension + Reframe + Bridge",
+      "operator_en": "Observation + Tension + Reframe + Bridge structure",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "pattern parent/enfants sémantique pure",
+        "sub-audience hiérarchique"
+      ],
+      "operator_fr": "mère + sous-poches qui héritent",
+      "operator_en": "mother + sub-audiences that inherit",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "8 dimensions canon (Purchase Driver",
+        "Problem Map",
+        "Benefit Stack",
+        "Mechanism",
+        "Market Context",
+        "Alternative Map",
+        "Identity Signals",
+        "Decision Process)"
+      ],
+      "operator_fr": "8 dimensions psycho-comportementales (driver d'achat · carte des problèmes · stack bénéfices · mécanique · contexte marché · alternatives · signaux identité · process décision)",
+      "operator_en": "8 psycho-behavioral dimensions (purchase driver · problem map · benefit stack · mechanism · market context · alternative map · identity signals · decision process)",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "investigation-posture",
+        "5 sections canon (Observé / Déduit / Inconnu / Leviers / Close ouvert)"
+      ],
+      "operator_fr": "rendu structuré · 5 sections (Observé / Déduit / Inconnu / Leviers / Question ouverte)",
+      "operator_en": "structured output · 5 sections (Observed / Inferred / Unknown / Levers / Open question)",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "Hard Rules codes (HR-CC-CANON-1",
+        "HR-CP-SED-1",
+        "HR-OCD-NN",
+        "HR9",
+        "HR5",
+        "HR2",
+        "HR1 BLOCKER",
+        "AP-NN)"
+      ],
+      "operator_fr": "[retiré du rendu opérateur · jamais nommé runtime]",
+      "operator_en": "[removed from operator render · never named runtime]",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "L1 silent",
+        "L2 gate",
+        "L3 degraded",
+        "L1/L2/L3 fallback"
+      ],
+      "operator_fr": "automatique · à toi · partiel · auto · ton choix · partiel",
+      "operator_en": "auto · your call · partial · auto · your call · partial",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "solution_aware",
+        "product_aware",
+        "problem_aware",
+        "most_aware",
+        "unaware"
+      ],
+      "operator_fr": "cherche déjà solution · connaît les options du marché · sait qu'elle a le problème · prête à acheter · pas consciente du problème",
+      "operator_en": "aware of solution · aware of products · aware of problem · most aware · unaware",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "primary_buyer",
+        "user_self",
+        "gift_giver",
+        "decision_maker"
+      ],
+      "operator_fr": "acheteur direct · utilisatrice elle-même · acheteur cadeau · décideur",
+      "operator_en": "primary buyer · self user · gift giver · decision maker",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "broad",
+        "segment",
+        "micro (scope)"
+      ],
+      "operator_fr": "mère · poche · niche",
+      "operator_en": "broad · segment · niche",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "validation_status",
+        "hypothesis → tested → validated → scaled → fatigued"
+      ],
+      "operator_fr": "statut · exploratoire → testé → validé → scalé → essoufflé",
+      "operator_en": "status · exploratory → tested → validated → scaled → fatigued",
+      "case_sensitive": false,
+      "context": "phantom-modes"
+    },
+    {
+      "internal": [
+        "build-atlas-complete",
+        "decompose-ad",
+        "map-audiences",
+        "craft-packshot",
+        "compose-creative",
+        "audit-meta-account",
+        "mine-voc",
+        "produce-paid-angles",
+        "produce-copy-brief",
+        "trendtrack-enrich-brand",
+        "setup-brand",
+        "snapshot-brand",
+        "sync-notion-atlas (skill names heavy)"
+      ],
+      "operator_fr": "action verbalisée (e.g. \"construire l'atlas complet\" · \"décomposer cette pub\" · \"cartographier les audiences\" · \"générer le visuel produit\" · \"composer la creative\" · \"auditer le compte Meta\" · \"miner la voix client\" · \"produire les angles paid\" · \"générer le brief copy\" · \"enrichir depuis TrendTrack\" · \"démarrer une nouvelle brand\" · \"scanner la marque\" · \"synchroniser vers Notion\")",
+      "operator_en": "verbalized action (skill name never exposed)",
       "case_sensitive": false,
       "context": "phantom-modes"
     }
