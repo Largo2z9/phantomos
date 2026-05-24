@@ -4,6 +4,8 @@ type: producer
 version: "1.1.0"
 patch_notes_v2_87_4:
   - "1.1.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill orchestrator heavy 3 steps (lookup + shop profile + 3 ads queries) ~5-8 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ (Plan + ETA + Démarche + Paramètres décomposés NIVEAU 0 + Confirmation binaire) AVANT exécution + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant Steps lookup et ads queries. Audit Fincut session v2.87.3 finding · lancé direct sans disclosure préalable · pattern systémique cross-skills heavy non-propagation doctrines. Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11. Enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
+patch_notes_v2_87_6:
+  - "1.1.0 (v2.87.6 SUBSTRATE sprint · enforcement runtime maintien dette) · Sprint substrate canon · refresh atlas Stepprs deep desire chain v2.87.4 (chronic-pain-45 grand-parent narrative canon · workers-shifts conjoint Friday evening narrative canon) + NEW section walkthrough Porte A many-to-many `tour.md` Anatomie de la structure (rendu post-build-atlas-complete Stepprs). Impact ce skill · consume atlas Stepprs refreshed si invoqué démo pédagogique (rare · skill cible brand opérateur real). Enforcement runtime hardcoded EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
