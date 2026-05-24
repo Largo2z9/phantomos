@@ -148,6 +148,19 @@
       "fears": ["chronic decline avec age", "burden famille (perte autonomie marche)", "devenir sedentaire et se plaindre"],
       "status_signals": ["smart aging consumer", "I take care of myself proactively"],
       "self_perception": "Active adult who refuses to be defined by ageing physical issues."
+    },
+    "dream_scenario_narrative": {
+      "narrative": "Dimanche après-midi · mes petits-enfants arrivent · ils veulent aller au parc tirer des pénalties. Je dis oui sans hésiter. Je marche les 800m aller-retour · ils ne devinent pas que j'avais peur de devoir refuser. Mon fils me regarde différemment quand on rentre.",
+      "target_recipient": "petits-enfants + fils/fille (validation parentale par génération suivante)",
+      "context_setting": "dimanche après-midi famille élargie · sortie spontanée au parc · transmission générationnelle",
+      "social_payoff": "rester la grand-mère active présente · pas la grand-mère qui se plaint des pieds · transmission générationnelle préservée · validation parentale silencieuse"
+    },
+    "confidence_chain": {
+      "sourcing_method": "derived_indirect",
+      "verbatim_count": 0,
+      "blocked_sources": ["pas de mining direct lance sur Stepprs · cas pédagogique canon"],
+      "confidence_level": "moyenne",
+      "caveat": "Dream scenario inféré canon DR Schwartz · target_recipient relationnel (petits-enfants + fils/fille) cohérent avec life_moments encodés (garde-enfants grands-parents) + drives (preserved mobility) + fears (burden famille). À valider via mine-voc verbatims réels si brand opérateur."
     }
   },
 

@@ -3,6 +3,8 @@ name: decompose-ad
 version: 2.2.0
 patch_notes_v2_87_4:
   - "2.2.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill heavy reverse-engineering ads concurrent ~5-10 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant analysis. Audit Fincut session v2.87.3 finding · 4 templates cartographiés en prose descriptive (vs matrice CMR canon NOYAU × CONTEXTE × MODIFIEURS) sans disclosure préalable. Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ + `docs/system/compositional-cartography.md` v3.1 (CC v3.1 enforcement matriciel post-décompose). Enforcement runtime hardcoded · backlog v2.87.5+ implementation. Backward compat strict additif."
+patch_notes_v2_87_6:
+  - "2.2.0 (v2.87.6 SUBSTRATE sprint · enforcement runtime maintien dette) · Sprint substrate canon · refresh atlas Stepprs deep desire chain v2.87.4 (chronic-pain-45 grand-parent narrative · workers-shifts conjoint Friday evening narrative) + NEW section walkthrough Porte A many-to-many `tour.md` Anatomie de la structure. Impact ce skill · consume substrate enrichi quand décompose ad concurrent référence audience cible (dream_scenario_narrative aligne reverse-engineering matriciel avec deep desire chain canon DR Schwartz). Enforcement runtime hardcoded EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 type: producer
 isolation_scope: brand_only
 layer: production

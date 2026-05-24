@@ -95,7 +95,21 @@
       "Smart consumer who invests in self-care strategically (pas le cheap qui souffre)",
       "I understand body mechanics (proxy intelligence pratique vs hippie wellness vague)"
     ],
-    "self_perception": "Practical worker · treats body as tool · realizes neglect = career-limiting · skeptical of marketing fluff mais opens up à evidence pragmatique (podiatrist endorsement + 800k customers + money-back)"
+    "self_perception": "Practical worker · treats body as tool · realizes neglect = career-limiting · skeptical of marketing fluff mais opens up à evidence pragmatique (podiatrist endorsement + 800k customers + money-back)",
+    "dream_scenario_narrative": {
+      "narrative": "Vendredi 19h fin de shift · je rentre · mon mari propose une sortie spontanée au resto. Je dis oui sans devoir négocier mes pieds. On marche les 15 min jusqu'au resto. Je suis présente · pas écroulée sur le canapé.",
+      "target_recipient": "conjoint (validation conjugale par disponibilité énergie post-shift)",
+      "context_setting": "vendredi soir post-shift 8-12h · sortie spontanée non-planifiée · transition travail → vie perso",
+      "social_payoff": "rester la conjointe disponible énergie présente · pas celle écroulée qui fait dépendre l'autre · couple préservé qualité weekend"
+    },
+    "$comment_dream_scenario_narrative": "Dream scenario v2.87.4 canon DR Schwartz · target_recipient relationnel (conjoint) cohérent avec drives (daily-life functionality · rentrer le soir sans gémir) + fears (conjoint qui flag dégradation visible · refus activités weekend). Distinct chronic-pain-45 (grand-parent transgénérationnel) · ici disponibilité conjugale post-shift hebdo. Drive copy angle 'tu rentres présente vendredi soir' vs flat pain-relief generic.",
+    "confidence_chain": {
+      "sourcing_method": "derived_indirect",
+      "verbatim_count": 0,
+      "blocked_sources": ["pas de mining direct lance sur Stepprs · cas pédagogique canon"],
+      "confidence_level": "moyenne",
+      "caveat": "Dream scenario inféré canon DR Schwartz · target_recipient relationnel (conjoint) cohérent avec drives + fears encodés. À valider via mine-voc verbatims réels si brand opérateur · cas pédagogique canon ne nécessite pas activation paid producer."
+    }
   },
   "pain_benefit_chain": [],
   "$comment_pain_benefit_chain": "LEGACY field empty array · canon v2.64 Phase 4 migre vers sub-collection brands/{slug}/audiences/{audience}/pain_points/*.json + benefits/*.json (cross-ref mechanisms spec.json par ID). Mère définit le scope partagé · sous-poches override avec pain spécifiques (steel-toe vibration warehouse, miles walked unit nurse, customer-facing smile hospitality).",

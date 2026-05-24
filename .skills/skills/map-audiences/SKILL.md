@@ -4,6 +4,8 @@ type: producer
 version: 1.3.0
 patch_notes_v2_87_4:
   - "1.3.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill heavy Q1-Q4 staging 3-5 audiences ~8-15 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant scaffold + Q1-Q4. Audit Fincut session v2.87.3 finding · Q1-Q4 proposal staged sans disclosure préalable · 3 audiences encodées sans gate dream_scenario_narrative + confidence_chain (canon Patch A v2.87.4 obligatoire pre-validation · cross-ref profile-audience v1.9.0+ HR-DD-1). Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+. Enforcement runtime hardcoded EDD Step 0 + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
+patch_notes_v2_87_6:
+  - "1.3.0 (v2.87.6 SUBSTRATE sprint · Q5 NEW axes découpage + refresh atlas Stepprs deep desire chain) · Sprint substrate canon · (1) NEW Q5 axes primaires de découpage MECE explicit (variable dominante vs horizontales partagées) · test runtime cas concret obligatoire avant scaffold sub-audiences · résout audit Fincut friction sur clarification axe primaire de splitting AVANT Q1-Q4 generation. (2) Refresh atlas Stepprs canon · chronic-pain-45 grand-parent narrative + workers-shifts conjoint Friday evening narrative + chronic-pain-45 (cohérence canon v2.87.4 deep desire chain + dream_scenario_narrative target_recipient relationnel + confidence_chain). (3) Cross-ref tour.md NEW section walkthrough Porte A many-to-many Anatomie de la structure (cas pédagogique Stepprs rendu post-build-atlas-complete · sub-audiences pattern parent/enfants illustré opérateur). Impact runtime · Q5 nouveau gate AVANT Q1-Q4 si scaffold sub-audiences détecté (2+ sub-poches mère même produit) · question pivotale opérateur axe primaire (use_case · démographie · canal · awareness_stage · sophistication · trigger temporel) AVANT Q1-Q4 generation. Enforcement runtime EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -180,6 +182,31 @@ Surface 1-3 paires cousines détectées par audience candidate, avec liste des p
 Persister `meta.overlap_with[]` array slugs sur chaque audience scaffold.
 
 Note pédagogique canon · les chevauchements ne disqualifient pas l'audience · ils révèlent les angles porteurs cousinés (cross-pollinisation copy). Pattern v2.64 · chaque audience encode son matériel propre, le chevauchement est observé via similarity, pas via partage d'entité. Operator-facing · dire "audiences cousines", jamais "overlap_with" brut.
+
+#### Q5 · Axes primaires de découpage MECE explicit (v2.87.6 NEW gate)
+
+**Gate canon obligatoire si Q2 niveau granularité = 2 ou 3 (sub-audiences scaffold détecté · 2+ sous-poches mère même produit).** Skip si Q2 = 1 (audience plate sans sub-poches).
+
+**Pourquoi cette gate.** Audit Fincut session v2.87.3 finding · Q1-Q4 scaffolde des sub-audiences sans avoir clarifié AVEC l'opérateur l'axe primaire de splitting. Résultat · 3 sous-poches `audience_mère_A` peuvent être splittées implicitement par démographie alors que la vraie variable dominante en paid est use_case OR canal OR trigger temporel. La sub-audience structurée sur le mauvais axe primaire produit des angles plats même si le scaffold passe les tests semantic Q1-Q4.
+
+**Question pivotale opérateur (rendre via `AskUserQuestion` 6 options canon MECE)** ·
+
+| Axe primaire | Définition opérateur-facing |
+|---|---|
+| `use_case` | Quelle situation déclenche l'achat ? (e.g. workers shift 8h vs grand-parents marche jardin pour Stepprs) |
+| `demographie` | Quel segment socio-démographique ? (e.g. femmes 45-60 vs hommes 25-35 · âge dominant · CSP · genre) |
+| `canal` | Sur quelle plateforme se trouvent-ils ? (e.g. Meta vs TikTok vs Search · pas pareil intent) |
+| `awareness_stage` | Quel niveau de conscience du problème ? (unaware · problem_aware · solution_aware · product_aware · most_aware · Schwartz 5 stades) |
+| `sophistication` | Quel niveau de saturation du marché vu par l'audience ? (Stage 1-5 Schwartz · de "première offre" à "tous les angles éculés") |
+| `trigger_temporel` | Quel moment déclenche le besoin ? (matin · fin de shift · post-grossesse · saison · cycle de vie) |
+
+**Pattern de raisonnement agent** · proposer en priorité l'axe primaire qui maximise la variance copy entre sub-audiences (cf brand cas pédagogique Stepprs · `use_case` est l'axe primaire dominant cf `workers-shifts` vs `chronic-pain-45` · variance copy énorme entre "tiens ton shift sans douleur" et "garde tes petits-enfants au parc"). Les autres axes restent valid mais comme horizontales partagées (e.g. `chronic-pain-45` peut avoir sub-poches par `awareness_stage` plantar_fasciitis_diagnosed vs heel_pain_general · axe secondaire).
+
+**Test runtime cas concret obligatoire AVANT scaffold sub-audiences** · l'agent doit articuler pour 2 sub-audiences pressenties · "si je split sur axe X, voici les 2 hooks copy distincts qui en sortent · si je split sur axe Y, voici les 2 hooks distincts qui en sortent." Comparer side-by-side. L'axe qui produit la plus grande divergence copy = l'axe primaire canonique pour cette brand × produit.
+
+**Persister `meta.primary_splitting_axis = "use_case" | "demographie" | "canal" | "awareness_stage" | "sophistication" | "trigger_temporel"`** sur la mère audience scaffold (Step 2) · permet aux skills aval (compose-creative · produce-paid-matrix) de respecter l'axe primaire pour la composition many-to-many.
+
+**Anti-pattern banned** · scaffolder 2+ sub-poches sans Q5 explicit · canon v2.87.6 refuse write_to_context si `primary_splitting_axis` absent dans `meta` sub-audience (enforcement runtime backlog v2.88.0+ · v2.87.6 patch_notes déclaratif).
 
 ### Step 2 · Scaffold audience folders + profile.json light pass
 

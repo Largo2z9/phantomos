@@ -1,0 +1,56 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.87.6",
+  "released_at": "2026-05-24",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "summary": "Sprint MINOR v2.87.6 SUBSTRATE · 5 patches structurels canon substrate (refresh atlas Stepprs deep desire chain + NEW section walkthrough Porte A many-to-many tour.md + Q5 axes découpage gate map-audiences + patch_notes_v2_87_6 cross 5 skills heavy). Wall-time réel cumul ~3h scope chirurgical patch_notes + NEW files canon vs refonte massive runtime (cap qualité fin de soirée · pattern reproductible v2.87.4 + v2.87.5 réussi). Sprint orchestré post-discussion Largo posture orchestrateur (input Stepprs deep desire chain Q grand-parent · refresh atlas + many-to-many walkthrough + Q5 axes découpage englobés dans une séquence orchestrée vs silo).",
+  "context_amont": {
+    "trigger": "Discussion Largo post-shipping v2.87.5 · 3 inputs orchestrés (1) deep desire chain canon v2.87.4 absent atlas Stepprs (chronic-pain-45 + workers-shifts) · refresh substrate canon needed (2) walkthrough Porte A many-to-many tour.md absent · opérateur Porte A voit atlas plat sans comprendre composition many-to-many (3) Q5 axes découpage map-audiences absent · scaffold sub-audiences sans clarifier axe primaire de splitting AVEC opérateur AVANT Q1-Q4 generation.",
+    "scope": "5 patches structurels (Patch A chronic-pain-45 grand-parent narrative + Patch B workers-shifts conjoint narrative + Patch C tour.md NEW Anatomie de la structure + Patch D 5 skills heavy patch_notes_v2_87_6 + Patch E map-audiences Q5 axes découpage NEW gate). Enforcement runtime EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation.",
+    "decision_orchestrateur_largo": "Sprint exécution même session · scope chirurgical patch_notes + NEW files canon vs refonte runtime massive (cap qualité · pattern reproductible v2.87.4 réussi 3h cumul + v2.87.5 réussi ~2h cumul). Largo a explicitement demandé posture orchestrateur (englober inputs Stepprs refresh + many-to-many + Q5 dans séquence orchestrée vs silo)."
+  },
+  "patches_executed": {
+    "A_chronic_pain_45_grand_parent": "VALIDÉ · `audiences/chronic-pain-45/profile.json` ajout psychology.dream_scenario_narrative (narrative grand-parent transgénérationnel · target_recipient petits-enfants + fils/fille validation parentale · context_setting dimanche après-midi famille élargie sortie spontanée parc · social_payoff grand-mère active présente transmission préservée) + psychology.confidence_chain (sourcing_method derived_indirect · verbatim_count 0 · confidence_level moyenne · caveat cas pédagogique canon ne nécessite pas activation paid producer)",
+    "B_workers_shifts_conjoint": "VALIDÉ · `audiences/workers-shifts/profile.json` ajout psychology.dream_scenario_narrative (narrative conjoint Friday evening · target_recipient conjoint validation conjugale disponibilité énergie post-shift · context_setting vendredi 19h fin de shift 8-12h sortie spontanée non-planifiée · social_payoff conjointe disponible présente couple préservé qualité weekend) + $comment_dream_scenario_narrative pédagogique + psychology.confidence_chain (cohérence schema canon v2.87.4)",
+    "C_tour_anatomie_structure": "VALIDÉ · `.claude/commands/tour.md` NEW section Anatomie de la structure (M2 sub-section post-Gate Porte A · 5 territoires Stepprs encoded explicit en langue métier · pattern rendu prose conversationnelle native · awareness write anatomie_walkthrough_seen post-rendu Porte A · permet M3 close option drill un territoire avec contexte)",
+    "D_patch_notes_5_skills_heavy": "VALIDÉ · 5 skills heavy patch_notes_v2_87_6 entries chirurgicaux · trendtrack-enrich-brand (enforcement runtime maintien dette + cross-ref atlas Stepprs refreshed démo pédagogique) · decompose-ad (enforcement runtime maintien dette + consume substrate dream_scenario_narrative reverse-engineering matriciel) · map-audiences (enforcement runtime maintien dette + Q5 NEW axes découpage gate documenté) · craft-packshot (enforcement runtime maintien dette + SED packshots backlog inchangé) · compose-creative (enforcement many-to-many préservé v2.87.4 + consume substrate dream_scenario_narrative déclaratif backlog runtime v2.88.0+)",
+    "E_map_audiences_Q5_axes": "VALIDÉ · `map-audiences/SKILL.md` v1.3.0 NEW Q5 axes primaires de découpage MECE explicit (6 options canon AskUserQuestion · use_case · démographie · canal · awareness_stage · sophistication · trigger_temporel) · gate obligatoire si Q2 niveau granularité = 2 ou 3 sub-audiences scaffold détecté · pattern de raisonnement agent proposer axe primaire maximise variance copy entre sub-audiences · test runtime cas concret obligatoire AVANT Step 2 scaffold (articuler 2 hooks copy distincts par axe candidat · comparer side-by-side · axe primaire = axe qui produit la plus grande divergence copy) · persiste meta.primary_splitting_axis sur mère audience · anti-pattern banned scaffolder 2+ sub-poches sans Q5 explicit · enforcement runtime backlog v2.88.0+"
+  },
+  "files_patched": [
+    {"file": "brands/_EXAMPLE/audiences/chronic-pain-45/profile.json", "scope": "Ajout psychology.dream_scenario_narrative grand-parent + psychology.confidence_chain canon v2.87.4 deep desire chain"},
+    {"file": "brands/_EXAMPLE/audiences/workers-shifts/profile.json", "scope": "Ajout psychology.dream_scenario_narrative conjoint Friday evening + $comment + psychology.confidence_chain canon v2.87.4 deep desire chain"},
+    {"file": ".claude/commands/tour.md", "scope": "NEW M2 sub-section Anatomie de la structure post-Gate Porte A · walkthrough many-to-many plain language Stepprs"},
+    {"file": ".skills/skills/trendtrack-enrich-brand/SKILL.md", "scope": "Ajout patch_notes_v2_87_6 entry · enforcement runtime maintien dette + cross-ref refresh atlas Stepprs"},
+    {"file": ".skills/skills/decompose-ad/SKILL.md", "scope": "Ajout patch_notes_v2_87_6 entry · enforcement runtime maintien dette + consume substrate dream_scenario_narrative"},
+    {"file": ".skills/skills/map-audiences/SKILL.md", "scope": "Ajout patch_notes_v2_87_6 entry + NEW Q5 axes primaires de découpage MECE explicit gate canon"},
+    {"file": ".skills/skills/craft-packshot/SKILL.md", "scope": "Ajout patch_notes_v2_87_6 entry · enforcement runtime maintien dette + SED packshots backlog inchangé"},
+    {"file": ".skills/skills/compose-creative/SKILL.md", "scope": "Ajout patch_notes_v2_87_6 entry · enforcement many-to-many préservé + consume substrate dream_scenario_narrative déclaratif"},
+    {"file": "_version.json", "scope": "Bump 2.87.5 → 2.87.6"},
+    {"file": "CHANGELOG.md", "scope": "Entry v2.87.6 SUBSTRATE sprint"},
+    {"file": "docs/internal/releases/manifest/2.87.6-manifest.json", "scope": "NEW · this manifest"}
+  ],
+  "tests_non_regression": {
+    "build_manifest": "TBD POST-EXEC",
+    "build_brand_snapshot": "TBD POST-EXEC",
+    "em_dash_NEW_files": "TBD POST-EXEC sur tour.md NEW section + SKILL.md patch_notes_v2_87_6 entries"
+  },
+  "honnetete_discipline_findings": [
+    "Enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers cross 5 skills heavy · statut dette inchangé v2.87.4 + v2.87.5 documentée · v2.87.6 maintien backlog v2.88.0+ implementation (pattern miroir v2.87.5 · pas refonte massive ce sprint)",
+    "Q5 axes découpage map-audiences enforcement runtime backlog v2.88.0+ (déclaratif patch_notes + runtime body documenté · pas hardcoded AskUserQuestion trigger automatique cycle map-audiences)",
+    "Consume substrate dream_scenario_narrative dans compose-creative déclaratif patch_notes · runtime implementation backlog v2.88.0+ (skill consume actuellement reste fonctionnel pain-relief flat · doctrine canon v2.87.4 spec'd mais consume runtime backlog)",
+    "Scope chirurgical patch_notes + NEW files canon vs refonte runtime massive · wall-time réel cumul ~3h vs cap initial 7.5-9.5h · pattern reproductible v2.87.4 réussi 3h cumul + v2.87.5 réussi ~2h cumul"
+  ],
+  "decisions_captured": ["D#471 (v2.87.6 SUBSTRATE sprint · 5 patches structurels orchestrés post-discussion Stepprs deep desire chain refresh + walkthrough Porte A many-to-many + Q5 axes découpage)"],
+  "memory_canons_new": ["v2.87.6 substrate sprint pattern reproductible documenté · orchestrator posture validée Largo (englober inputs dans séquence orchestrée vs silo)"],
+  "backlog_post_v2_87_6": [
+    "v2.88.0+ · enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers 5 skills heavy + Q5 axes découpage runtime trigger automatique map-audiences cycle + consume substrate dream_scenario_narrative compose-creative runtime",
+    "v2.87.7 LITE · post-distribution observation 30 jours opérateurs externes · feedback frictions runtime fresh",
+    "v2.88.0+ COPY STRUCTUREL · 3 options (chirurgical 10h · XL 48-58h · PARK) décision orchestrateur post-distribution observation signal réel",
+    "v2.89+ · confidence_propagation frontmatter declaration cross 81 skills · dette HIGH structurelle audit v2.87.2"
+  ],
+  "rollback_strategy": "Strict additif · revert v2.87.6 = git revert HEAD strict. Backward compat strict additif cross 5 patches · NEW fields psychology.dream_scenario_narrative + confidence_chain déjà spec'd canon v2.87.4 schema (additive) · NEW tour.md section additive · patch_notes entries déclaratifs sans enforcement runtime hardcoded · Q5 NEW gate map-audiences additive (runtime trigger automatique backlog v2.88.0+). Zéro impact runtime breaking (mécanisme skills chargés pareil · slash commands chargés pareil · canon docs additifs · _EXAMPLE pédagogique cas illustratif refreshed)."
+}

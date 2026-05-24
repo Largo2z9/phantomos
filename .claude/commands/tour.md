@@ -109,6 +109,28 @@ Puis poser **immédiatement** `AskUserQuestion` 4 options explicit · les 4 port
 
 **Gate Porte A · option "explorer d'abord" préservée.** Pour Porte A, l'agent propose le default deliverable + une option *"Explorer un volet d'abord (pourquoi · comment · singularité · cycle · territoires)"* qui déclenche un slug `volet:{nom}` via M3 close réflexif. L'opérateur Porte A qui veut comprendre AVANT de produire pioche sans subir le livrable forcé.
 
+**Anatomie de la structure · walkthrough Porte A canon (rendu pendant build-atlas-complete Stepprs).** Une fois l'atlas Stepprs construit, l'agent rend une **vue anatomique narrative** qui explique en langue métier comment la marque est encodée. Pas un dump JSON. Pas une légende de champs techniques. Une explication conversationnelle plain language qui rend tangible la structure many-to-many.
+
+Pattern de rendu canon (FR · à adapter EN selon langue détectée) ·
+
+```
+Voilà ce que j'ai encodé sur Stepprs. Cinq territoires, c'est-à-dire cinq zones de la marque qu'on peut adresser séparément avec des angles différents.
+
+• Le produit (massage insoles). Une mécanique principale (massage), trois bénéfices ressentis (relief douleur, énergie cumulée, posture), un prix de référence ($27).
+
+• Deux audiences mères. Les grand-mères 45+ qui veulent garder leur autonomie de mobilité. Les travailleurs en shift 8-12h qui tiennent leur métier physique. Chaque mère a deux ou trois sous-poches avec leurs spécificités (plantar fasciitis vs douleur talon générale chez les 45+ · warehouse vs hôpital vs hospitality chez les workers).
+
+• Cinq angles canon. Chaque angle relie une douleur précise à un bénéfice ressenti via une mécanique (le massage, l'endorsement podiatre, la garantie 90 jours, etc.). Un angle peut servir plusieurs audiences. Une audience peut être touchée par plusieurs angles. C'est ce qu'on appelle du many-to-many · une grand-mère 45+ avec plantar fasciitis peut être adressée par l'angle "garder mes petits-enfants au parc" OU par l'angle "endorsement podiatre crédible" selon la sophistication du marché à ce moment-là.
+
+• Une bibliothèque d'objections. Trois objections partagées au niveau mère (déjà essayé Dr. Scholl déçue · prix $27 vs $5 drugstore · fit dans steel-toe), et des objections plus spécifiques par sous-poche.
+
+• Une bibliothèque de creatives. Chaque creative compose une audience cible × un angle × une mécanique de hook (pain reveal, social proof, demo visuelle, etc.). C'est le niveau où tu plug Meta, TikTok, ce que tu veux · l'atlas en amont reste stable.
+```
+
+**Pourquoi cette anatomie est centrale.** L'opérateur Porte A voit pour la première fois ce que veut dire "encoder une marque". Le many-to-many n'est pas une feature technique · c'est la raison pour laquelle un atlas bien fait te permet de produire 20 angles testables d'un même produit sans recommencer la recherche. Sans ce walkthrough, l'opérateur voit un atlas plat et passe à côté du levier composition.
+
+**Awareness writes anatomie** · `anatomie_walkthrough_seen = true` (post-rendu Porte A) · permet à M3 close de proposer l'option *"creuser un territoire en particulier"* avec contexte (l'opérateur sait ce qu'il drill).
+
 **Free-text override TOUJOURS disponible** · l'opérateur peut dire *"je préfère commencer par X"* à n'importe quel moment. L'agent route via `.skills/_manifest.json` scan vers le skill match. Jamais ne force le default.
 
 **Validation point par point canon** · le skill consumer rend ses 4 niveaux matriciels canon (cf `decomposition-visibility-doctrine.md` v2.79.5+) AVANT que l'opérateur valide. L'opérateur corrige · l'agent retient · `first_deliverable_validated_corrections += 1` per correction.
