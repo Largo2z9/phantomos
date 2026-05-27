@@ -18,6 +18,9 @@
 - **Curseur:** [min, max]
 - **Mode:** CONCEPT | TEMPLATE | ASSET
 - **Stop scroller:** hook_dominant | visual_dominant | co_dominant
+- **Typology_st:** spatial | temporel                    ← NEW v2.88.0
+- **Temporal_subtype:** dialogique | démonstratif |       ← NEW v2.88.0 (optionnel · si temporel)
+                        narratif | pédagogique
 - **Angles:** [array — ref angle-registry.md]
 - **Proofs:** [array — ref proof-registry.md]
 - **Awareness:** [array — awareness levels compatibles]
@@ -28,6 +31,18 @@
 - **Piège:** [prose, 1 phrase — erreur courante]
 - **Batches:** [array]
 ```
+
+**Typology_st canon v2.88.0** · classe la composition narrative en 2 modes primaires ·
+- **spatial** · composition fixe · 1 idée 1 frame · pas de déroulement temporel (la composition statique porte le message)
+- **temporel** · déroulement narratif temporel · la composition se construit sur la durée
+
+**Temporal_subtype** · optionnel · obligatoire si typology_st = temporel · 4 sous-types canon ·
+- **dialogique** · 2+ voix qui s'échangent (cross-examination, founder-customer DM, podcast)
+- **démonstratif** · montre une chaîne logique cause→effet ou avant→après séquencée
+- **narratif** · 1 voix raconte un arc narratif (testimonial monologue, founder origin, story-led)
+- **pédagogique** · vulgarise/explique un mécanisme (educational diagram, recipe, listicle pédagogique)
+
+**Note canon** · certaines mécaniques sont **support-dépendantes** (versus en static = spatial, versus en vidéo = temporel-démonstratif). Le champ typology_st de la fiche capture la **typologie dominante observée**, avec note "variable selon mise en scène concrète" si applicable. Cf doctrine `creative-axis-canonicalization-doctrine.md` NEW v2.88.0 pour mapping workflow A v3 Creative Strategy.
 
 ---
 
@@ -673,3 +688,71 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 ---
 
 *Comptage final canon : 29 mécaniques actives (23 claim + 9 visual − 3 dupes résolues + 4 ajouts S55 + 2 graduations PROPOSED). Plus aucune entrée PROPOSED ambiguë.*
+
+---
+
+## Typology mapping initial v2.88.0
+
+> Mapping consolidé des mécaniques canon vers typology_st + temporal_subtype. Pose la SSOT pour la consommation par le sous-workflow A Creative Strategy étape A6 (typologie par axe créatif) et A4 (cross-support viable vs support-natif). Le mapping individuel sera back-filled progressivement dans chaque fiche en cycle de maintenance future · cette table consolidée sert d'index lookup canonique en attendant.
+
+### Mapping par mécanique
+
+| Mécanique ID | Typology_st | Temporal_subtype | Note |
+|---|---|---|---|
+| versus | **variable** | démonstratif (si temporel) | spatial en static (split-screen comparison), temporel-démonstratif en vidéo (chaîne argumentation) |
+| diagnostic | temporel | dialogique | quiz / symptom check interactif · 2 voix (système qui demande, audience qui répond) |
+| ugc | temporel | narratif | testimonial first-person récit · le déroulement IS le device |
+| celebrity | **variable** | narratif (si temporel) | spatial en static (endorsement card), temporel-narratif en vidéo (récit célébrité) |
+| launch-narrative | temporel | narratif | annonce avec narration "pourquoi maintenant" · arc temporel obligatoire |
+| offer-breakdown | spatial | — | déballage structuré · layout statique souvent · composition fixe |
+| before-after | **variable** | démonstratif (si temporel) | spatial en static (juxtaposition 2 photos), temporel-démonstratif en vidéo 3+ étapes |
+| testimonial-quote | spatial | — | verbatim encadré dans design brand · composition fixe |
+| cost-calculator | spatial | — | démonstration mathématique chiffres · composition figée |
+| analogie | temporel | pédagogique | bridge externe expliqué · vulgarise via analogie |
+| trending-fake-natif | spatial | — | mime format organique statique (Notes, story screenshot, search) |
+| direct-benefit | spatial | — | le bénéfice EST le concept · 2-5 mots fixes |
+| press-quote | spatial | — | citation presse verbatim encadrée |
+| format-menu | spatial | — | présentation des options layout statique |
+| price-primary | spatial | — | le prix EST la créa · composition figée |
+| diagnostic-service | temporel | dialogique | produit = test/screening · process conversationnel |
+| founder-chat | temporel | dialogique | conversation simulée fondateur-client · 2 voix échange |
+| recipe-instructions | temporel | pédagogique | mode d'emploi steps · vulgarisation séquentielle |
+| bundle-duo | spatial | — | regroupement structuré his/her ou jour/nuit · composition fixe |
+| curiosity_teaser | spatial | — | hook accusateur + visuel-preuve · payoff externalisé (swipe) |
+| emotional_reframe | temporel | narratif | ladder de futurs possibles · arc temporel projection identitaire |
+| meme_cultural | spatial | — | référence culturelle visuelle fixe |
+| educational_diagram | temporel | pédagogique | vulgarise mécanisme complexe via schéma déroulé |
+| product_focus | spatial | — | hero shot produit fixe · composition figée |
+| education_pain_loop | temporel | pédagogique | éducation problème sans CTA · vulgarisation séquentielle |
+| category-showcase | spatial | — | template navigation produit · layout statique |
+| collection | spatial | — | univers thématique fixe |
+| season-campaign | spatial | — | photo contexte saisonnier + slogan · composition figée |
+| loyalty-campaign | spatial | — | template prix club · layout statique |
+| guide-listicle | temporel | pédagogique | checklist explicative · vulgarisation séquentielle |
+| packshot-solo | spatial | — | photo modèle studio fixe |
+| packshot-contextuel | spatial | — | photo modèle en contexte usage fixe |
+| squad-group | spatial | — | 3-5 modèles ensemble · composition statique |
+| ugc-selfie | spatial | — | selfie miroir fixe · format brut |
+
+### Statistiques v2.88.0
+
+- **Spatial pur** · 22 mécaniques (~65%) · composition fixe dominante en factory mode DTC
+- **Temporel pur** · 9 mécaniques (~26%) · déroulement narratif obligatoire
+  - Pédagogique · 5 mécaniques (analogie, recipe, educational_diagram, education_pain_loop, guide-listicle)
+  - Narratif · 3 mécaniques (ugc, launch-narrative, emotional_reframe)
+  - Dialogique · 3 mécaniques (diagnostic, diagnostic-service, founder-chat)
+  - Démonstratif · 0 mécanique pure (toutes les "démonstratif" sont variables selon support)
+- **Variable selon support** · 3 mécaniques (versus, celebrity, before-after) · typology_st dépend de la mise en scène concrète (static fixe vs vidéo déroulée)
+
+### Implications pour sous-workflow A Creative Strategy
+
+**Étape A4 · scoring cross-support viable vs support-natif** · 
+- Mécaniques **spatial** sont cross-support viables par essence (peuvent être déclinées en static, carousel ou vidéo sans casser la composition fondamentale)
+- Mécaniques **temporel** sont support-natifs (vidéo native dominante · carousel possible si découpe en frames séquencés · static incompatible structurellement)
+- Mécaniques **variable** demandent décision support-spécifique avant typology_st locked
+
+**Étape A6 · choix typologie par axe créatif** · l'axe créatif lock une typology_st (et temporal_subtype si applicable) qui contraint les supports compatibles en A7. Si l'axe est "temporel-dialogique" (founder-chat), les incarnations en static seront refusées par le check 4 evaluator-optimizer (cohérence character × angle × perspective).
+
+---
+
+*Patch v2.88.0 · ajout champ typology_st + temporal_subtype + mapping initial 34 mécaniques. Format fiche mis à jour. Cross-ref doctrine `creative-axis-canonicalization-doctrine.md` NEW v2.88.0 pour intégration workflow Creative Strategy.*

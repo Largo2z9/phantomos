@@ -2,8 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Audience Profile",
   "description": "v2.0 BREAKING · refactor ontologie pure · pain_points + objections deviennent collections top-level séparées · migration script operations/migrations/v2.63-pain-objection-collections.py. Audience profile — deep psychographic and behavioral context, factual description of who they are. Lives in brands/{slug}/audiences/{audience}/profile.json. v1.2+: persona_archetype + buyer_user_split (migrated from spec.gift_economy). v1.4 (v2.42): meta.entry_door enum strict (pain_driven|goal_driven|identity_driven) REQUIRED — closes spec-vs-schema drift from v2.39 framework. Canon V3 §8.2.",
-  "_schema_version": "profile/2.1",
+  "_schema_version": "profile/2.2",
   "_changelog": {
+    "2.2": "v2.88.0 NEW · creative axis foundation (sprint v2.88+ Creative Strategy workflow). Ajoute psychology.big_idea (string audience-scoped · 1-2 phrases · pitch stratégique consommé par sous-workflow A étape A3 plan de cadrage et A6 conception axes créatifs). Ajoute psychology.fears (array of objects typés · fear_text + source_verbatim_ref + intensity_score 1-5 + confidence_chain v2.87.4 héritée · racines psychographiques blocantes distinctes de emotions état observable). Gate evaluator-optimizer A6 check 1 mobilisation atlas profond consomme · dream_scenario_narrative + jtbd + beliefs_limiting∪facilitating + fears + voice.key_expressions (5 dimensions canon). Backward compat strict additif · fields optional en read · obligatoire en write si workflow Creative Strategy invoqué post-v2.88.0. Cross-ref doctrine creative-axis-canonicalization-doctrine.md NEW v2.88.0.",
     "2.1": "v2.87.4 NEW · deep desire / dream outcome chain enforcement (psychographic depth gate canon). Ajoute psychology.dream_scenario_narrative (object · narrative 2 phrases + target_recipient + context_setting + social_payoff · 3 first required) + psychology.confidence_chain (object · sourcing_method enum + verbatim_count int + blocked_sources[] + confidence_level enum + caveat · 2 first required). Gate obligatoire pre-audience-validation (map-audiences v1.3.0+ refuse profile.json sans ces fields populated). Closes friction systémique audit Fincut session v2.87.3 · audiences restent au pain layer fonctionnel sans descente racine Schwartz/Kern. Backward compat lecture v2.0 préservée (fields optional en read ancien · obligatoire en write v1.3.0+ map-audiences runtime).",
     "2.0": "v2.63 BREAKING · refactor ontologie pure. REMOVE pain_points[] array (move to pain_points.schema top-level collection storage brands/{slug}/pain_points/{PNT-NN}.json). REMOVE objections[] array (move to objections.schema top-level collection storage brands/{slug}/objections/{OBJ-NN}.json). Closes ontologie inconsistance (friction top-level depuis v2.56 mais pain + objection sub-fields legacy) · parité friction · canon Notion stride-up strict 3 collections sub-tensions séparées. Migration · operations/migrations/v2.63-pain-objection-collections.py idempotent · scan profile.pain_points + profile.objections, génère PNT-NN + OBJ-NN ids, crée fichiers canonical, set affected_audiences = [audience_slug], remove arrays du profile. Cross-refs canonical · friction.cross_refs.{pain_point_ids[], objection_ids[]} v1.2 + angle.lineage.{pain_ref, objection_ref} v1.3 + learnings.entries[].cross_refs.{pain_point_ids[], objection_ids[]} v1.1.",
     "1.7": "v2.57 Notion stride-up follow-up · pain_points.items.pain_id (PNT-NN pattern) + objections.items.objection_id (OBJ-NN pattern) ajoutés optional. Closes faille canonical IDs stables identifiée par DataEng audit · friction.cross_refs.{pain_point_ids[], objection_ids[]} peuvent désormais référencer canon. IDs générés auto au mining (mine-voc, profile-audience) post-v1.7 ; profiles pre-v1.7 sans IDs valident toujours en read. Backward compat strict additif.",
@@ -130,6 +131,32 @@
         "beliefs_limiting": { "type": "array", "items": { "type": "string" } },
         "beliefs_facilitating": { "type": "array", "items": { "type": "string" } },
         "emotions": { "type": "array", "items": { "type": "string" } },
+        "fears": {
+          "type": "array",
+          "description": "NEW v2.88.0 · Peurs structurantes blocantes de l'audience · racines profondes psychographiques distinctes de emotions (état affectif observable) et de pain_points (problèmes fonctionnels subis). Distinct car les fears sont identitaires/existentielles · ce que l'audience craint de devenir, perdre, ne pas accomplir. Consommé en gate canon evaluator-optimizer A6 check 1 (mobilisation atlas profond) cf doctrine creative-axis-canonicalization-doctrine.md. Sourcing requis · verbatim_count >= 5 minimum pour solid · sinon flag confidence_level thin. Field optional en write · obligatoire si workflow Creative Strategy v2.88+ invoqué.",
+          "items": {
+            "type": "object",
+            "required": ["fear_text"],
+            "properties": {
+              "fear_text": { "type": "string", "description": "Formulation concise de la peur · ex 'devenir comme mes parents sacrifiés au travail' · 'perdre le respect de mes pairs' · 'ne plus avoir d'énergie pour mes enfants'." },
+              "source_verbatim_ref": { "type": ["string", "null"], "description": "Reference vers verbatim source dans voice.key_expressions[] ou pain_points/{PNT-NN}.json verbatim_quotes[] · null si fear inferred sans verbatim direct (flag confidence_chain thin)." },
+              "intensity_score": { "type": "integer", "minimum": 1, "maximum": 5, "description": "Intensité de la fear sur l'audience · 1 latent · 3 ressenti régulièrement · 5 dominant et structurant." },
+              "confidence_chain": {
+                "type": "object",
+                "description": "Provenance épistémique de la fear · héritée pattern v2.87.4 cohérence canon psychographique avec dream_scenario_narrative.confidence_chain.",
+                "properties": {
+                  "sourcing_method": { "type": "string", "enum": ["verbatim_direct", "derived_indirect", "inferred_no_source", "mixed"] },
+                  "verbatim_count": { "type": "integer", "minimum": 0 },
+                  "blocked_sources": { "type": "array", "items": { "type": "string" } },
+                  "confidence_level": { "type": "string", "enum": ["forte", "moyenne", "faible", "TRÈS_faible"] },
+                  "caveat": { "type": "string" }
+                },
+                "required": ["sourcing_method", "confidence_level"]
+              },
+              "_notes": { "type": "object" }
+            }
+          }
+        },
         "social_codes": { "type": "array", "items": { "type": "string" } },
         "life_moments": { "type": "array", "items": { "type": "string" } },
         "jtbd": {
@@ -196,6 +223,11 @@
             "_notes": { "type": "object" }
           },
           "required": ["sourcing_method", "confidence_level"]
+        },
+        "big_idea": {
+          "type": ["string", "null"],
+          "description": "NEW v2.88.0 · Big idea audience-scoped · pitch stratégique 1-2 phrases qui condense la promesse centrale activable pour cette audience. Niveau au-dessus de l'angle (qui est compositionnel) et au-dessous de la brand promise (qui est marque-global). Source de vérité consommée par sous-workflow A Creative Strategy en A3 (plan de cadrage) et A6 (conception axes créatifs) · cf doctrine creative-axis-canonicalization-doctrine.md NEW v2.88.0. Hiérarchie canon · 1 brand promise (optionnelle marque-globale) → N big_idea (1 par audience encodée) → M axes créatifs par big_idea → K créas par axe. Exemple Sereno audience cadres tech 30-40 · 'Décrocher du travail sans culpabiliser de ralentir'. Anti-pattern · big_idea générique cross-audience (perte distinctivité) · big_idea = description produit (perte angle psychographique) · big_idea > 2 phrases (perte densité actionnable). Field optional en write standalone · obligatoire si workflow Creative Strategy v2.88+ invoqué sur cette audience.",
+          "default": null
         },
         "_notes": { "type": "object" }
       }
