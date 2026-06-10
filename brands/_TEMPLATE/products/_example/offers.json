@@ -1,7 +1,7 @@
 {
   "$comment": "Commercial offers for this product. v2.0 introduces offer_groups[] with shared{} inheritance. One entry per purchasable option. Facts only — what is available, at what price, under what conditions. Pre-cart scope only (post-cart = future funnel.json).",
-  "_schema": "offers",
-  "_version": "2.0",
+  "_schema": "offer/2.2",
+  "_version": "2.2",
   "_changelog": {
     "2.0": "MAJOR. Hard-break from flat offers[] (v1.x) to offer_groups[] + shared{} + offers[]. Merge rules: objects deep-merge, arrays replace, scalars override explicitly. Merge MUST be resolved BEFORE JSON Schema validation. Added meta.scope='pre_cart' const to codify offer/funnel frontier. Type enum reduced 12→10 (removed hardware_bundle → bundle+tags[hardware]+requires_offer_id; removed personalized → any type + personalization{} block pointer). subscription.intro_discount scalar → subscription.intro_phases[] array. Added membership{} block distinct from subscription (Amazon Prime / Thrive Market pattern). Removed zombie fields: commitment_duration, recurring_discount, skip_window, qty_per_variant, matrix_dimensions, supply_guarantee. 9th semantic check on requires_offer_id cycle detection runs post-merge in validate-all.py.",
     "1.8": "Batch 5 stress test final flat-schema version. See _ARCHIVE for legacy."

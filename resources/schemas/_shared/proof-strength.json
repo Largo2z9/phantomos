@@ -1,0 +1,11 @@
+{
+  "$id": "proof-strength.json",
+  "title": "Proof strength (canon shared, hiérarchie C1)",
+  "type": "string",
+  "enum": ["demonstration", "quantified-result", "review-volume", "isolated-testimonial", "bare-claim"],
+  "_meta": {
+    "ordering": "force décroissante : demonstration > quantified-result > review-volume > isolated-testimonial > bare-claim",
+    "crosswalk_registry": "proof-registry.md : demonstration≈maximale · quantified-result≈forte · review-volume≈moyenne · isolated-testimonial≈moyenne-faible · bare-claim≈faible",
+    "crosswalk_proof_type": "decomposition.proof_elements_used.proof_type : before-after-visual→demonstration · scientific-percentage-claim, timeline-specific-result→quantified-result · review-count-aggregate-claim, rating-numeric-claim→review-volume · testimonial-*→isolated-testimonial · authority-medical-claim, ingredient-count-claim→bare-claim"
+  }
+}

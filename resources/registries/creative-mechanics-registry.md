@@ -7,6 +7,8 @@
 > **FORMAT:** 1 fiche taggée par mécanique. Champs parsables par agent.
 
 > **Cross-ref :** `creative.schema.json#mecanique` et `angle.schema.json` v1.2 pointent vers ce registry par ID (free string). Ne pas hardcoder d'enum dans les schemas. Ce registry est la SSOT.
+>
+> **Evidence corpus :** `creative-mechanics-evidence.md` (compagnon auto-dérivé · 342 ads `_reference` taguées par concept · 28/34 concepts attestés · D#489). Registre **cross-validé 2026-06-07** : 95% du corpus ET les 30 mécaniques statiques Stride-Up mappent sur ces fiches (seuls 3 vrais trous gradués ci-dessous).
 
 ---
 
@@ -756,3 +758,59 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 ---
 
 *Patch v2.88.0 · ajout champ typology_st + temporal_subtype + mapping initial 34 mécaniques. Format fiche mis à jour. Cross-ref doctrine `creative-axis-canonicalization-doctrine.md` NEW v2.88.0 pour intégration workflow Creative Strategy.*
+
+---
+
+## Ajouts 2026-06-07 · graduation corpus `_reference` (D#489)
+
+> 3 mécaniques **statiques** graduées depuis le corpus de référence (342 ads · 95% mappaient déjà sur les fiches existantes · ces 3 étaient les seuls vrais `other`). Validées par Largo (call expert). Chaque agent a confirmé l'absence de doublon avec les fiches existantes. Cross-réf `creative-mechanics-evidence.md`.
+
+### point-out — Callout / Point-Out
+
+- **Définition:** Features, bénéfices, ingrédients ou réassurances reliés visuellement à un packshot par des lignes, flèches, puces ou cartouches qui pointent des zones précises du produit. Le device EST le pointage spatial : annoter le produit pour valoriser ses attributs sans narration.
+- **Curseur:** [3, 6]
+- **Mode:** TEMPLATE
+- **Stop scroller:** visual_dominant
+- **Typology_st:** spatial
+- **Angles:** [expertise, innovation, efficiency, price-value]
+- **Proofs:** [badge-tech, claim-science, best-seller-badge, regulatory-disclaimer]
+- **Awareness:** [solution_aware, product_aware, most_aware]
+- **Conditions:** [features_visuellement_localisables, produit_a_attributs_multiples, packshot_lisible, audience_valorise_specs]
+- **Anti-conditions:** [produit_sans_attributs_distinctifs, audience_unaware, benefice_abstrait_non_localisable, packshot_surchargé_>5_callouts]
+- **Variantes:** [lignes_vers_zones_produit, pills_benefices_verbe_action, ingredients_notes_reliees_flacon, cartouches_features_pointant_produit, cases_reassurance_au_dessus_packshot, catchphrase_plus_callouts]
+- **Template signals:** [lignes_a_tirets_ou_pointillees, puces_rondes, cartouches_noirs_texte_blanc, icones_par_attribut, separateurs_verticaux_cases, label_certification_rond]
+- **Piège:** Au-delà de 4-5 callouts le packshot devient illisible et le scroll tue l'attention avant la lecture des labels.
+- **Batches:** [_reference-strideup] · RCV-276 (Tediber linge), RCV-277 (Patyka gommage), RCV-278 (Maison Matine parfum), RCV-282 (Cabaia sac), RCV-284 (Saye sneakers), RCV-285 (Kosbiotic complément) · marques observées : Tediber, Patyka, Maison Matine, Cabaia, Saye, Kosbiotic
+
+### stat-claim — Statistique-Choc
+- **Définition:** Un pourcentage ou une statistique frappante posé comme accroche-concept dominante ("91% des femmes…"). Le chiffre seul, monumentalisé en jauge/numéral géant, EST le device. Distinct de `cost-calculator` (math d'un deal, prix), `educational_diagram` (schéma d'un mécanisme), `education_pain_loop` (stat révélatrice de pain, audience à éveiller, sans produit) : ici la stat est une preuve d'efficacité positive ancrée sur audience aware, résolue en frame vers un produit.
+- **Curseur:** [5, 8]
+- **Mode:** CONCEPT
+- **Stop scroller:** hook_dominant
+- **Typology_st:** spatial
+- **Angles:** [efficiency, transformation, expertise, emotional-identity]
+- **Proofs:** [claim-science, social-proof-number, clinical-trial, regulatory-disclaimer]
+- **Awareness:** [solution_aware, product_aware, most_aware]
+- **Conditions:** [stat_forte_frappante, chiffre_credible_supportable, benefice_resume_par_le_chiffre, produit_resolu_en_frame]
+- **Anti-conditions:** [stat_invraisemblable_non_sourcee, audience_unaware, chiffre_fade_sans_surprise, claim_non_compliant_categorie_reglementee]
+- **Variantes:** [pct_efficacite_dominant, stat_en_jauge_arc, stat_conditionnelle_after_X, stat_audience_majoritaire]
+- **Template signals:** [numeral_geant, jauge_arc_pourcentage, fleche_annotee_vers_produit, disclaimer_compliance_footer, frame_conditionnel_after_X]
+- **Piège:** Une stat trop ronde ou non sourcée déclenche le réflexe sceptique au lieu de la confiance — et en catégorie réglementée (santé), le claim non couvert par un disclaimer est une bombe compliance.
+- **Batches:** [_reference-strideup, RCV-182 (hers), RCV-192 (hers)] · marques observées : hers (telehealth femmes US · mental health / Balance Blend Rx)
+
+### question-reponse — Question-Réponse
+
+- **Définition:** Format Q&A natif (sticker "question" Instagram) qui fait surgir une objection consommateur et y répond en frame avec un bénéfice/preuve. L'objection-répondue EST le device — pas une vraie question ouverte, mais une objection levée immédiatement.
+- **Curseur:** [5, 8]
+- **Mode:** TEMPLATE
+- **Stop scroller:** co_dominant
+- **Typology_st:** spatial
+- **Angles:** [barrier-removal, security, efficiency, expertise]
+- **Proofs:** [clinical-trial, claim-science, customer-review, badge-tech]
+- **Awareness:** [solution_aware, product_aware, most_aware]
+- **Conditions:** [objection_recurrente_connue, reponse_credible_en_une_phrase, audience_consideration_ou_retention, produit_a_friction_pre_achat]
+- **Anti-conditions:** [audience_unaware_sans_objection_formee, reponse_floue_non_demontrable, objection_inventee_artificielle, produit_zero_friction]
+- **Variantes:** [objection_efficacite_preuve_clinique, objection_compatibilite_mecanisme, objection_logistique_abonnement, sticker_vos_questions_multi]
+- **Template signals:** [sticker_question_natif_IG, bandeau_question_couleur_accent, encart_reponse_blanc, label_vos_questions, photo_lifestyle_ou_packshot_fond]
+- **Piège:** Une objection inventée ou répondue de façon vague sonne comme du faux-natif marketing — il faut une vraie objection récurrente et une réponse démontrable en une phrase.
+- **Batches:** [_reference-strideup] (RCV-456 Pomponne · RCV-457 Bloon · RCV-458 Tidoo · marques observées : Pomponne mascara, Bloon Paris, Tidoo)

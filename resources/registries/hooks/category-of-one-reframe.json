@@ -1,0 +1,105 @@
+{
+  "pattern_id": "HOK-category-of-one-reframe",
+  "pattern_type": "hook-mechanic",
+  "name": "Category-of-One Reframe",
+  "one_liner": "Nommer le produit comme une categorie a part (format proprietaire '3-in-1' / 'sex chews', ou reframe par ingredient-hero 'la tomate du sommeil') pour sortir du jeu de comparaison feature-vs-feature et devenir incomparable.",
+  "skeleton": "[ancre_familiere = ingredient-hero OU format-combo] reframee en [nom_proprietaire / claim-categorie] -> [le marche ne peut plus comparer 1:1, le produit EST sa propre categorie].  Realisations : (A) format-nom proprietaire = '[n]-in-1 [format] for [outcome]' ou '[nom_invente] for [life_domain]' ; (B) ingredient-hero reframe = '[ingredient_familier], comme vous ne l'avez jamais vu -> [mecanisme_actif issu de cet ingredient]'.",
+  "slots": [
+    {
+      "name": "ancre_familiere",
+      "description": "Le point de depart connu du prospect : soit un ingredient banal (tomate, safran), soit un duo/combo de produits, soit une molecule Rx. Choisir une ancre que l'audience reconnait instantanement, c'est ce qui rend le reframe surprenant.",
+      "examples": [
+        "La tomate (naali DREAM)",
+        "Finasteride + Minoxidil + Biotin (hims hair)",
+        "HAIR BOOST + CELLULE BOOST (karacare duo)"
+      ]
+    },
+    {
+      "name": "nom_proprietaire_ou_format",
+      "description": "Le label-categorie invente qui colle au produit et le rend non-comparable : un format chiffre ('3-in-1', '2-en-1'), un nom de format invente ('sex chews', 'supergummies'), ou un nom de combo brande ('LE DUO CHEVEUX PARFAIT', 'Sex Rx').",
+      "examples": [
+        "3-in-1 for fuller hair (hims RCV-125)",
+        "Sex chews (hims RCV-130)",
+        "La gummy 2-en-1 (naali RCV-42)",
+        "LE DUO CHEVEUX PARFAIT (karacare RCV-05)"
+      ]
+    },
+    {
+      "name": "reframe_mecanisme",
+      "description": "Pour la variante ingredient-hero : la phrase qui transforme l'ingredient banal en mecanisme actif proprietaire ('issue de la tomate' = melatonine vegetale, source naturelle vs synthetique). Pose le produit comme une espece a part, pas un me-too.",
+      "examples": [
+        "Melatonine vegetale issue de la tomate (naali RCV-17)",
+        "Real hair regrowth needs Rx (hers RCV-180)",
+        "ED meds for a new era (hims RCV-153)"
+      ]
+    },
+    {
+      "name": "outcome_ou_life_domain",
+      "description": "Le benefice ou le domaine de vie attache au nom-categorie, qui justifie pourquoi cette categorie existe ('for fuller hair', 'for a better sex life', 'endormissement + sommeil profond').",
+      "examples": [
+        "for a better sex life (hims RCV-130)",
+        "for fuller hair (hims RCV-125)",
+        "endormissement + sommeil profond (naali RCV-17)"
+      ]
+    }
+  ],
+  "function": "Neutralise la comparaison concurrentielle. Quand le marche est solution-aware et sature de produits a feature equivalente, comparer ingredient-par-ingredient ou prix-par-prix est perdu d'avance. En nommant le produit comme sa propre categorie (format proprietaire) ou en reframant un ingredient banal en mecanisme-hero unique, l'ad deplace la question de 'lequel est le meilleur ?' vers 'c'est quoi CA ?' : le produit devient incomparable, donc incontournable.",
+  "when_to_use": "Marche solution-aware a product-aware, sature, ou la differenciation par feature est epuisee et la guerre des prix menace. Marche le mieux quand le produit a un vrai angle (ingredient sourcable, combo reel, molecule Rx) qui rend le nom-categorie credible. Tres puissant en telehealth/supplement ou la conformite interdit les claims durs : le nom-categorie porte la promesse sans la chiffrer.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-17", "RCV-42", "RCV-45", "RCV-48", "RCV-94", "RCV-105"],
+      "realization": "Deux realisations : (1) ingredient-hero reframe — 'La tomate, comme vous ne l'avez JAMAIS VUE. Melatonine vegetale issue de la tomate' (RCV-17), l'ingredient banal devient un mecanisme proprietaire ; (2) format-nom — 'La gummy 2-en-1 : dormir plus vite, dormir plus profondement' / 'supergummies' (RCV-42), 'Le duo IMBATTABLE contre la fatigue et le stress' (RCV-105). Le produit est pose comme une categorie a part, jamais en comparaison directe."
+    },
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-05"],
+      "realization": "Combo-name proprietaire : 'LE DUO CHEVEUX PARFAIT' (HAIR BOOST pousse + CELLULE BOOST anti-chute) presente comme un duo ideal indivisible plutot que deux SKU comparables. ATTESTATION FAIBLE : le pattern est note en prose dans proof_text ('positionnement category-of-one du combo'), PAS encode dans le mechanic_id structure (hook=resolution-promise). Compte comme source confirmante par le framing observe, mais la plus fragile des trois."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": [
+        "RCV-125", "RCV-126", "RCV-130", "RCV-133", "RCV-144", "RCV-153", "RCV-158", "RCV-161", "RCV-162", "RCV-167",
+        "RCV-172", "RCV-180", "RCV-181", "RCV-188", "RCV-193", "RCV-197", "RCV-198", "RCV-212", "RCV-214", "RCV-219", "RCV-223", "RCV-225"
+      ],
+      "realization": "UNE seule factory creative genree (hims + hers = 1 source, D#485). Variante format-nom proprietaire dominante et la plus dense du corpus : '3-in-1 for fuller hair' (RCV-125), 'Sex chews for a better sex life' (RCV-130), 'Sex Rx + Multivitamin / Get hard results' (RCV-133), '2-IN-1. Sex Rx + Climax Control' (RCV-161), 'hairblends gummies' (RCV-197/212), 'labs by hers' (RCV-188). Reframe Rx-as-category : 'Real hair regrowth needs Rx' (RCV-180), 'ED meds for a new era. Generic for Viagra' (RCV-153). Le nom-format porte la promesse sans claim chiffre (contrainte compliance compounded/FDA)."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "beauty-hair", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Vu sur 3 sources independantes, 3 verticales, 2 geos (FR + US) : pattern parmi les plus robustes du corpus, sur a emprunter partout. exploit = rester sur la verticale operee (ex supplement sommeil -> ingredient-hero comme naali). explore = oser reslotter la variante format-nom proprietaire (le '[n]-in-1' / nom-invente du telehealth) sur une verticale eloignee : emprunt conscient mais a faible distance vu l'universalite. La variante ingredient-hero (FR/supplement) et la variante format-nom (US/telehealth) sont deux dialectes du meme pattern : choisir selon que la marque a un ingredient sourcable (hero) ou un combo reel (format-nom)."
+  },
+  "related_mechanic_ids": [
+    "category-of-one-claim",
+    "resolution-promise",
+    "mechanism-reveal",
+    "ingredients-pillars"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds / circulation",
+      "reslotted": "Variante format-nom proprietaire : 'Le 3-en-1 jambes legeres : compression + drainage + recuperation' — un format-categorie invente qui sort la chaussette de la comparaison avec les bas de contention classiques. Variante ingredient-hero : 'La menthe poivree, comme vous ne l'avez jamais portee -> micro-encapsulation menthol active a chaque pas'."
+    },
+    {
+      "target": "Marque cafe fonctionnel · energie sans crash",
+      "reslotted": "Ingredient-hero reframe : 'Le champignon, comme vous ne l'avez jamais bu -> Lion's Mane micro-dose pour le focus sans le pic-puis-crash de la cafeine'. Pose le cafe non comme un cafe-de-plus mais comme sa propre categorie (nootropic brew)."
+    }
+  ],
+  "anti_patterns": [
+    "Inventer un nom-categorie SANS substance reelle derriere (pas de combo reel, pas d'ingredient sourcable, pas de molecule) : le marche flaire le vernis marketing, le reframe sonne creux et le claim-categorie devient un risque compliance non couvert.",
+    "Empiler le nom-categorie SUR une guerre de features chiffrees dans la meme ad : ca re-ouvre la comparaison qu'on voulait fermer. Le category-of-one fonctionne en FERMANT la comparaison, pas en la gagnant.",
+    "Unaware / problem-aware froid : si l'audience ne connait pas encore le probleme, un nom-categorie abstrait ('sex chews', 'supergummies') ne resonne pas — il faut d'abord agiter le pain. Le pattern vise solution-aware et au-dela.",
+    "Reslot aveugle de la variante telehealth Rx ('needs Rx', 'Generic for X') hors telehealth : la legitimite vient de la prescription reelle ; sans elle le 'Rx-as-category' est vide. Mono-vertical sur cette sous-variante meme si le pattern parent est universal."
+  ],
+  "curation_notes": "Promu sur 3 sources independantes (naali / karacare / himshers), 3 verticales, 2 geos : un des patterns les plus surs du corpus, status promote-ready solide. CAVEAT PROVENANCE majeur : seules naali (6 RCV) et himshers (22 RCV) portent le pattern dans le mechanic_id STRUCTURE 'category-of-one-claim' ; karacare l'atteste uniquement en prose (proof_text de RCV-05, hook encode resolution-promise). Le compte reste >=2 meme en ecartant karacare (naali + himshers = 2 sources independantes), donc la promotion tient quoi qu'il arrive ; karacare renforce mais ne porte pas seul. Deux dialectes a tracker separement : ingredient-hero reframe (FR/supplement, naali) vs format-nom proprietaire (US/telehealth, himshers) — meme job de persuasion, ancre differente. Ce qui RENFORCERAIT : (1) un 3e signal perf reel via la feedback loop (lequel des deux dialectes convertit le mieux par verticale) ; (2) re-tagger karacare RCV-05 avec le mechanic_id structure pour solidifier l'attestation ; (3) chercher la variante format-nom hors telehealth (un naali 'supergummies' va dans ce sens) pour confirmer que le dialecte US-telehealth se transfere bien en FR-supplement.",
+  "_schema_version": "library-pattern/1.0"
+}

@@ -1,6 +1,12 @@
 ---
 name: connect-source
-description: Connect an external platform (Meta Ads, Shopify, Klaviyo, GA4, etc.) to PhantomOS. Guides operator through credentials setup, scope choice (workspace or brand), and capabilities. Uses convention if available in resources/conventions/, otherwise invokes scope skill (BUILD mode) to map the new platform first.
+description: >
+  Connect an external platform (Meta Ads, Shopify, Klaviyo, GA4, etc.) to PhantomOS.
+  Guides operator through credentials setup, scope choice (workspace or brand), and
+  capabilities. Uses convention if available in resources/conventions/, otherwise invokes
+  scope skill (BUILD mode) to map the new platform first.
+  FR: "connecte meta ads", "connecte shopify", "branche une source externe", "connecte mes outils".
+  EN: "connect meta ads", "connect shopify", "connect a source", "connect my tools".
 type: orchestrator
 isolation_scope: brand_only
 layer: territoire

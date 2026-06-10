@@ -3,14 +3,20 @@
   "$id": "pain_points.schema.json",
   "title": "Pain Point (audience-specific)",
   "description": "v1.1 alignment · sub-audience storage v2.64. Pain point ressenti par audience(s). Storage: brands/{slug}/audiences/{audience_slug}/pain_points/{PNT-NN}.json (NEW v2.64 · sub-audience sémantique pure · pain_point est expression audience-specific). Cross-refs audiences additionnelles via also_affects_audiences[] quand pain shared cross-audiences (canonical entry stocké chez primary owner audience). v1.0 baseline ship v2.63 · refactor ontologie pure · extracted from profile.pain_points[] legacy v1.7. Same pattern que friction · top-level collection à l'origine, sub-audience location post-v2.64.",
-  "_schema_version": "pain_points/1.1",
+  "_schema_version": "pain_points/1.2",
   "_changelog": {
+    "1.2": "C1 onboarding-native (D#500) · strict additif : root map _extraction (provenance mécanique, $ref _shared/extraction-provenance.json) + verbatim_quotes[] gagnent date/url/verbatim_ref (pointeur ^VOC-NN vers le record Layer A voc-verbatim.schema.json).",
     "1.1": "v2.64 BREAKING storage path · sub-audience location · sémantique pure (pain = expression audience-specific). Migration via operations/migrations/v2.64-subfolder-collections.py idempotent. also_affects_audiences[] cross-refs ajoutés pour pain shared scenarios.",
     "1.0": "v2.63 baseline. Extracted from profile.pain_points[] legacy v1.7 (BREAKING). Now top-level collection canonical. PNT-NN id pattern. Cross-refs affected_audiences[] + affected_products[] (cohérence friction). Closes ontologie inconsistance (friction top-level mais pain sub-field legacy)."
   },
   "type": "object",
   "required": ["pain_id", "formulation", "meta"],
   "properties": {
+    "_extraction": {
+      "type": "object",
+      "additionalProperties": { "$ref": "_shared/extraction-provenance.json" },
+      "description": "Provenance mécanique (C1). Clé = glob field path ou chemin exact."
+    },
     "pain_id": {
       "type": "string",
       "pattern": "^PNT-[0-9]{2,3}$",
@@ -41,7 +47,10 @@
         "properties": {
           "text": { "type": "string" },
           "source": { "type": "string", "description": "Reddit thread, Trustpilot review id, etc." },
-          "sample_size": { "type": "integer", "description": "Frequency mention canonical signal" }
+          "sample_size": { "type": "integer", "description": "Frequency mention canonical signal" },
+          "date": { "type": "string", "format": "date" },
+          "url": { "type": "string" },
+          "verbatim_ref": { "type": ["string", "null"], "pattern": "^VOC-[0-9]{2,5}$", "description": "Pointeur vers le record Layer A (voc-verbatim.schema.json)." }
         }
       }
     },

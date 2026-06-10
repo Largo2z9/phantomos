@@ -1,0 +1,96 @@
+{
+  "pattern_id": "HOK-listicle-curiosity",
+  "pattern_type": "hook-mechanic",
+  "name": "Listicle-Curiosité",
+  "one_liner": "Ouvrir sur une liste numérotée/séquencée annoncée (N éléments, N étapes, N temps) qui crée une boucle de curiosité ouverte : l'esprit doit lire la suite pour fermer la liste, ce qui force le scroll-stop et le déroulé complet de la créa.",
+  "skeleton": "[déclencheur_liste = count|séquence|tranche-horaire] [cadre_promesse vers résultat_désiré] -> [item_1] -> [item_2] -> [item_N] (chaque item = micro-bénéfice ou format ou actif) [+ horizon_résultat chiffré optionnel]",
+  "slots": [
+    {
+      "name": "déclencheur_liste",
+      "description": "Le device qui ouvre la boucle : un compte numérique ('3 ingredients'), une séquence de verbes/formats ('Treat. Drop. Pop.'), ou une grille horaire ('7h ... 22h'). C'est lui qui promet une liste finie et donc crée la curiosité de la compléter.",
+      "examples": [
+        "3 ingredients",
+        "Treat. Drop. Pop.",
+        "7h ... 9h ... 10h ... 22h (timeline horaire)"
+      ]
+    },
+    {
+      "name": "cadre_promesse",
+      "description": "Le résultat/état désiré qui justifie la liste et donne envie de la lire. Posé au-dessus ou autour des items.",
+      "examples": [
+        "to support hair regrowth",
+        "More Rx minoxidil options / Fuller hair",
+        "Une journée zen & sereine"
+      ]
+    },
+    {
+      "name": "items_liste",
+      "description": "Les N entrées de la liste, chacune portant une charge propre : un actif/ingrédient, un format de prise, ou une micro-action de routine. La somme = le déroulé qui ferme la boucle de curiosité.",
+      "examples": [
+        "Finasteride helps stop hair loss / Minoxidil helps regrow hair / Biotin to maintain healthy hair",
+        "Treat (topical bar) / Drop (serum dropper) / Pop (chewable)",
+        "7h Reveil en douceur 2 Gummies Anti-Stress au Safran / 18h rituel Magnesium+ / 22h Dormir profondement"
+      ]
+    },
+    {
+      "name": "horizon_resultat",
+      "description": "Optionnel · un palier temporel chiffré qui ferme la promesse et ajoute une seconde boucle (combien de temps ?). Fréquent en telehealth-rx, absent dans la variante routine.",
+      "examples": [
+        "3-6 months to see results",
+        "Fuller hair in 3-6 months",
+        "(absent · naali clôt sur l'état '22h Dormir profondement')"
+      ]
+    }
+  ],
+  "function": "Ouvre une boucle de curiosité fermée par construction (la liste est finie et annoncée) : le cerveau réclame de compléter la liste, ce qui produit le scroll-stop et tire le lecteur à travers tout le déroulé. Secondairement, la structure listicle empile plusieurs charges de persuasion (actifs, formats, micro-bénéfices) dans un seul cadre digeste sans surcharge.",
+  "when_to_use": "Performant quand l'offre a plusieurs composants distincts et énumérables (3 actifs, 3 formats de prise, des étapes de routine) et sur des audiences problem/solution/product-aware en TOFU-MOFU où il faut éduquer sans lourdeur. Idéal en statique éditorial-graphique (callouts, triptyque, grille horaire) où chaque item occupe son slot visuel.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-88"],
+      "realization": "Grille horaire 7h->22h 'Une journee zen & sereine' qui égrène une routine de la journée et ancre 2 produits dans ses items (7h 2 Gummies Anti-Stress au Safran, 18h rituel Magnesium+, 22h Dormir bien, rapidement, et profondement). La liste = tranches horaires; la curiosité = dérouler la journée idéale jusqu'au sommeil."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-142", "RCV-211", "RCV-215"],
+      "realization": "Deux réalisations de la même factory : (a) hims RCV-142 ouvre 'count' numérique '3 ingredients to support hair regrowth. 3-6 months to see results.' puis liste Finasteride/Minoxidil/Biotin avec leur fonction; (b) hers RCV-211/215 ouvre une séquence de verbes-formats 'Treat. Drop. Pop. More Rx minoxidil options. Fuller hair in 3-6 months.' où chaque verbe = un format de prise du minoxidil. hims+hers = une seule factory créative genrée (compter comme 1 source · D#485)."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Cross-vertical (FR wellness + US telehealth) et cross-géo : emprunt assez sûr. Exploit = rester dans une catégorie à composants énumérables (suppléments multi-actifs, gammes multi-formats). Explore = reslotter le device-liste vers des verticales sans actifs (mode, food, équipement) en remplaçant 'ingrédients/formats' par 'étapes/usages/raisons'. Le sous-device timeline-horaire (naali) est le plus transposable; le sous-device count-d'actifs (hims) suppose un produit composé."
+  },
+  "related_mechanic_ids": [
+    "listicle-curiosity",
+    "ingredients-pillars",
+    "product-reveal",
+    "resolution-timeline",
+    "ingredient-count-claim",
+    "timeline-specific-result"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "'3 raisons pour des jambes legeres des ce soir.' -> 1. compression graduee qui relance le retour veineux -> 2. maille respirante qui evite la chaleur -> 3. zero couture qui supprime les points de pression [+ 'difference des le 1er soir]'."
+    },
+    {
+      "target": "naali-style routine reslotté · marque skincare FR",
+      "reslotted": "'Une peau nette & apaisee, du reveil au coucher.' -> 7h nettoyant doux -> 9h serum vitamine C -> 21h creme reparatrice nuit -> 'au reveil, un grain de peau visiblement lisse'."
+    }
+  ],
+  "anti_patterns": [
+    "Liste ouverte/non bornée ('plein de raisons', 'et bien plus') : casse la boucle de curiosité, qui repose sur une liste FINIE et annoncée. Toujours donner le compte ou borner la séquence.",
+    "Items redondants ou sans charge propre (3 façons de dire la même chose) : la liste paraît gonflée et le lecteur décroche avant la fin.",
+    "Trop d'items (>5-6) en statique : la grille devient illisible et la promesse se dilue; au-delà, basculer sur un autre mécanique.",
+    "En telehealth-rx, ne pas laisser le device-liste écraser le disclaimer FDA/Rx obligatoire (toujours présent en bas de visuel dans le corpus himshers)."
+  ],
+  "curation_notes": "promote-ready : 2 sources INDÉPENDANTES (naali FR wellness + himshers US telehealth, factory-aware). 4 RCV de traçabilité. Le pattern recouvre 3 sous-réalisations du même device d'ouverture-liste : count-numérique (hims RCV-142), séquence-de-verbes/formats (hers RCV-211/215, ads-miroir quasi identiques de la même factory · ne pas les compter comme diversité), grille-horaire-routine (naali RCV-88). karacare (beauty-hair FR) NON attesté sur ce mécanique dans le corpus actuel : une 3e source indépendante le ferait passer en breadth potentiellement universal. Caveat : les 4 supports sont STATIQUES (pas de timeline réelle) · le mécanique est ici un device de lecture/scroll, pas un hook vidéo des 3 premières secondes; à re-vérifier si des supports vidéo entrent au corpus.",
+  "_schema_version": "library-pattern/1.0"
+}

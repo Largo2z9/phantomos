@@ -1,0 +1,78 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "3d-anatomy-stylized",
+  "display_name": "Anatomie 3D stylisee",
+  "family": "3d-anatomy",
+  "typology_st": "variable",
+  "description": "Rendu 3D d'une zone du corps (peau, follicule, articulation, intestin, dent) ou se joue le mecanisme produit, mais simplifie et habille aux couleurs de la marque plutot que photorealiste. Le but est de rendre le mecanisme LISIBLE en un coup d'oeil (avant/apres, cible visee, mode d'action) sans choquer ni sembler clinique. A utiliser quand l'ad doit demontrer un mecanisme invisible (absorption, ciblage, reparation) sur une DA propre et brandee. Sert en image fixe (frame de carrousel, hook statique) comme en boucle motion courte (zoom mecanisme).",
+  "render_recipe": {
+    "prompt_skeleton": "Stylized 3D anatomical render of {body_zone} showing {mechanism}, simplified non-photoreal forms with clean rounded geometry, {brand_color_palette} color scheme, {state_before_after}, soft studio gradient background, {lighting}, {camera_lens}, {composition_notes}, marketing demonstration illustration, clear readable cross-section, no text",
+    "slots": [
+      { "name": "body_zone", "description": "Zone anatomique ciblee (ex 'hair follicle and scalp layer', 'gut lining with villi', 'knee joint cartilage', 'skin epidermis cross-section', 'tooth enamel')." },
+      { "name": "mechanism", "description": "Le mecanisme produit a rendre visible (ex 'active ingredient penetrating the follicle root', 'probiotics coating the gut wall', 'collagen rebuilding cartilage')." },
+      { "name": "brand_color_palette", "description": "Palette marque a injecter (2-3 couleurs de la charte; teinte produit en accent sur les elements actifs)." },
+      { "name": "state_before_after", "description": "Etat montre: zone abimee/inflammee, zone reparee/saine, ou split before-after dans le meme cadre." }
+    ],
+    "lighting": "Soft global illumination, ambient occlusion douce dans les creux, un key light directionnel doux + fill ambiant; pas d'ombres dures, pas de speculaire clinique agressif. Lueur d'accent subtile sur l'ingredient actif pour le pointer sans fleche.",
+    "camera_lens": "Equivalent 50-85mm, vue de trois-quarts ou coupe transversale frontale, faible profondeur de champ pour isoler la zone d'action, perspective quasi orthographique pour garder le mecanisme lisible (eviter la distorsion grand-angle).",
+    "palette_mood": "Couleurs marque desaturees-mais-vivantes, registre 'medical doux' pas 'horreur biologique'. Chair stylisee tiree vers la palette de charte (jamais rouge-viande cru). Accent sature reserve a l'element actif/ingredient. Mood propre, rassurant, premium.",
+    "texture_grain": "Surfaces lisses semi-mates type matcap doux, micro-grain leger pour eviter le plastique parfait, zero pores hyper-detailles ni veinure realiste. Materiau coherent d'un element a l'autre (meme langage de surface sur toute la coupe).",
+    "composition_notes": "Une seule zone d'action focale par frame, mecanisme centre, hierarchie before/after lisible gauche-droite ou avant-plan/arriere-plan. Reserver une marge negative pour overlay copy ulterieur. Echelle exageree assumee (le follicule/la villosite est grossi pour la demo, ce n'est pas trompeur)."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "1:1",
+      "alt_aspect_ratios": ["4:5", "9:16"],
+      "resolution": "2K",
+      "guidance": "medium-high pour tenir la coherence anatomique et la palette marque"
+    },
+    "video_params": {
+      "motion": "Zoom lent vers la zone d'action puis transition before->after du mecanisme (ingredient qui penetre, zone qui se repare). Camera orbit tres leger pour donner du volume, jamais de mouvement brusque. Element actif anime en flux directionnel doux.",
+      "duration_s_range": [2, 5],
+      "transitions": "Cut propre ou morph doux between etat abime et etat repare; pas de glitch, pas de flash. Synchroniser la revelation du mecanisme sur le beat copy/VO."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Anatomie fausse ou inventee: villosites/follicules/couches qui n'existent pas, organes melanges, nombre de couches de peau incoherent.",
+    "Element actif/ingredient pose au mauvais endroit (penetre une zone ou il n'agit pas reellement) qui rend la demo trompeuse.",
+    "Derive photorealiste non voulue: pores hyper-detailles, veinure, texture viande crue qui casse le registre stylise et vire au gore/clinique repoussant.",
+    "Palette qui ignore la marque: chair rouge cru ou bleu medical generique au lieu des couleurs de charte; accent sature pose ailleurs que sur l'ingredient actif.",
+    "Plastique parfait IA: surfaces miroir sans micro-grain, lumiere CGI plate sans ambient occlusion, look 'stock medical 3D' interchangeable.",
+    "Coupe transversale illisible: trop d'elements concurrents, pas de zone focale unique, before/after non distinguable.",
+    "Symboles flottants generes par defaut (fleches/+/molecules random, faux texte/labels baragouins) que le modele ajoute pour 'faire scientifique'.",
+    "Echelle incoherente entre elements (un globule plus gros qu'une cellule voisine sans logique de demo)."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [3, 8],
+    "pairs_well_with": [
+      "split-screen-comparison",
+      "diagram-medical-2d",
+      "graphic-icons-overlay",
+      "pack-shot-brand-template",
+      "brand-motion-graphic"
+    ],
+    "avoid_when": [
+      "Marque ultra-premium minimaliste (creative_zone tres haute) ou un rendu 3D demonstratif casse le registre epure.",
+      "Categorie sans mecanisme physiologique clair a montrer (mode, deco, accessoire): rien a 'reveler' anatomiquement.",
+      "Claim sante non substantie: montrer un mecanisme anatomique sur une allegation non prouvee = risque compliance + trompeur.",
+      "Verticale ou le realisme medical credible est exige (dispositif medical serieux) -> preferer 3d-anatomy-realistic.",
+      "Sujet a forte aversion visuelle (parasites, gore) ou le stylise n'attenue pas assez le degout cible."
+    ]
+  },
+  "refs": [
+    "DTC hair-growth: coupe follicule stylise teinte marque, ingredient actif glow descendant vers la racine.",
+    "DTC gut-health/probiotics: paroi intestinale stylisee, 'bonnes bacteries' colorees charte tapissant la villosite, before inflamme / after sain.",
+    "DTC joint/collagen: cartilage genou stylise, comblement progressif anime sur palette marque."
+  ],
+  "related_mechanic_ids": [
+    "mechanism-reveal",
+    "before-after-visual",
+    "problem-agitation-visual"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

@@ -29,17 +29,8 @@ description: >
   (brief markdown rendered, confirm ou ajuste) → compose-creative × N variants (visuels via
   nano-banana-2 + brief copy fiche v5). Synthèse finale 5 sections investigation-posture.
   Single operator intent, delegated pipeline across 2 producer skills.
-triggers_fr:
-  - "brief créa sur {angle_id}"
-  - "compose un brief créa"
-  - "génère brief + créa"
-  - "creative-brief-composer {angle_id}"
-  - "matérialise l'angle {angle_id}"
-triggers_en:
-  - "creative brief composer"
-  - "compose brief and creative"
-  - "generate brief + variants"
-  - "materialize angle"
+  FR: "brief créa sur {angle_id}", "compose un brief créa", "génère brief + créa", "creative-brief-composer {angle_id}", "matérialise l'angle {angle_id}".
+  EN: "creative brief composer", "compose brief and creative", "generate brief + variants", "materialize angle".
 permissions:
   reads: [brand, product, profile, learning, strategy, angle, canon, visual_identity]
   writes: [brief, creative, learning]
@@ -186,7 +177,7 @@ Pour chaque NEW entity registered matching extension_hooks frontmatter ·
 - Match `entity_type` ∈ frontmatter `extension_hooks` enum
 - Match `consumable_by` field registry contains `{skill_name}` 
 - Include NEW entity dans inputs Phase 1 pipeline ci-dessous
-- Output enrichi avec lineage extension consommée dans atome_irreductible
+- Output enrichi avec lineage extension consommée dans frame
 
 Halt si NEW entity registered sans `consumable_by` field flagué (scaffold-extension v1.2.0 legacy) · 
 silent skip · pas error · l'opérateur peut patcher manuellement le scaffold-extension Phase 9 register-and-flag pour ajouter `consumable_by`.

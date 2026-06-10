@@ -37,7 +37,6 @@
     "pain_benefit_chain": "structured",
     "objections": "structured"
   },
-
   "meta": {
     "$comment": "Audience mere · is_mother: true · parent_audience_slug: null · les sous-poches plantar-fasciitis-diagnosed et heel-pain-general herieront le scope general defini ici et y ajouteront leurs specificity_modifiers (awareness stage, trigger, evaluation criteria specifique).",
     "name": "Chronic foot pain 45+",
@@ -46,9 +45,15 @@
     "parent_audience_slug": null,
     "is_mother": true,
     "example_canon_showcased": "Canon V3 §8.2 audience cartography · pattern mere/sous-poches semantique pure (v2.64) · awareness stage divergence parent vs enfants · entry_door pain_driven inherite cross-sous-poches",
-    "applies_to_products": ["massage-insoles"],
+    "applies_to_products": [
+      "massage-insoles"
+    ],
     "scope": "broad",
-    "tags": ["chronic-pain", "45-plus", "diagnostic-spectrum"],
+    "tags": [
+      "chronic-pain",
+      "45-plus",
+      "diagnostic-spectrum"
+    ],
     "audience_type": "primary",
     "validation_status": {
       "state": "validated",
@@ -61,32 +66,41 @@
     "created": "2026-05-14",
     "updated": "2026-05-14"
   },
-
   "_meta": {
     "$comment": "Annotations canon-aware NEW v2.69.1 · backward compat strict additif · n'override aucun field existing · documente patterns cross-cutting cartographie canon v2.64 (parent/enfants sémantique pure) sans casser le pattern.",
     "cross_narrative_notes": "Cross-narrative paid targeting · audience chronic-pain-45 peut être COMBINÉE avec workers-shifts en single ad copy via testimonial crossover (e.g. Michelle plantar fasciitis + 10h shifts work boots capture chronic + workers simultanément). Cartographie audience = substrat stable (qui souffre quoi). Targeting ad runtime = production decision distincte (qui voit l'ad). Les deux ne sont pas contradictoires · cartographie canon v2.64 préserve 7 audiences sémantique pure · targeting runtime peut combiner via narrative shared. Cf learnings.json LRN-0002 + angles/ANG-01 hero pattern observed Stepprs paid live TrendTrack 2026-05-16."
   },
-
   "purchase_driver": "pain_relief",
-
   "persona_archetype": {
     "$comment": "Archetype hybride · condition_based primary (douleur chronique pieds = trait definitoire) + demographic secondary (45+ trait age) · psychographic secondary (self-perception still active refuse decline). Audit Phase B v2.29.0 · forcer single archetype perd info, audience reelle combine 2-3.",
     "primary": "condition_based",
-    "secondary": ["demographic", "psychographic"]
+    "secondary": [
+      "demographic",
+      "psychographic"
+    ]
   },
-
   "buyer_user_split": {
     "$comment": "Mostly self-buy (70%) · 30% family-purchased gift (enfants achetent pour parents 65+ ou conjoint flag). Cross-ref spec.json gift_economy DEPRECATED · migration vers audience.buyer_user_split canon v1.3+.",
     "is_split": true,
     "buyer_role": "self OR adult child OR spouse",
     "user_role": "self (45-65 adult with chronic foot pain)",
-    "buyer_emotions": ["concern about parent mobility decline", "guilt about not being able to help physically", "relief found a non-invasive option"],
-    "user_experience": ["surprise relief works", "validation chosen solution", "preserved autonomy"]
+    "buyer_emotions": [
+      "concern about parent mobility decline",
+      "guilt about not being able to help physically",
+      "relief found a non-invasive option"
+    ],
+    "user_experience": [
+      "surprise relief works",
+      "validation chosen solution",
+      "preserved autonomy"
+    ]
   },
-
   "identity": {
     "description": "Adultes 45+ avec douleurs chroniques pieds (diagnostiquees ou non-diagnostiquees). Trigger achat = douleur quotidienne handicapante affectant qualite de vie (premiere marche du matin, fin de journee, longues stations debout). Audience plus mature que Workers shifts. Spectrum diagnostique · sous-poche enfant plantar-fasciitis-diagnosed = a vu podiatre, sous-poche enfant heel-pain-general = pas vu podiatre.",
-    "age_range": { "min": 45, "max": 65 },
+    "age_range": {
+      "min": 45,
+      "max": 65
+    },
     "gender": "all",
     "profession_category": "white-collar pre-retirement OR retiree active OR caregiver grands-parents",
     "income_level": "medium",
@@ -105,13 +119,11 @@
       "recommandation podiatre OR amie meme age"
     ]
   },
-
   "role": {
     "$comment": "Type primary_buyer + user_self · 70% self-buy (own pain). 30% family-influenced (gift parents ou conjoint flag 'tu boitilles'). Driver dominant pain (90% mere · skew vs brand 65% pain mixed).",
     "type": "end_user",
     "proxy_link_id": null
   },
-
   "psychology": {
     "core_desire": "Continuer mes activites quotidiennes sans cette douleur talon qui empoisonne tout · preserver autonomie marche.",
     "values": [
@@ -136,17 +148,43 @@
       "Money-back guarantee = risque-free trial",
       "J'ai droit a investir dans ma mobilite"
     ],
-    "emotions": ["frustration douleur quotidienne", "resignation cautious", "espoir mesure", "fear chronic decline avec age"],
-    "social_codes": ["partage entre amies 45+ ce qui marche", "discret sur diagnostic", "fierte solutions trouvees"],
-    "life_moments": ["premiere marche matin", "fin de journee marche", "vacances marche prolongee", "annonce diagnostic podiatre", "conjoint flag 'tu boitilles'"],
+    "emotions": [
+      "frustration douleur quotidienne",
+      "resignation cautious",
+      "espoir mesure",
+      "fear chronic decline avec age"
+    ],
+    "social_codes": [
+      "partage entre amies 45+ ce qui marche",
+      "discret sur diagnostic",
+      "fierte solutions trouvees"
+    ],
+    "life_moments": [
+      "premiere marche matin",
+      "fin de journee marche",
+      "vacances marche prolongee",
+      "annonce diagnostic podiatre",
+      "conjoint flag 'tu boitilles'"
+    ],
     "jtbd": {
       "primary": "Continuer mes activites quotidiennes (marche · jardinage · garde-enfants grands-parents) sans cette douleur talon qui empoisonne tout.",
       "secondary": "Eviter la degradation · ne pas devenir cette personne sedentaire qui se plaint constamment.",
       "context": "Le matin avant la routine OR fin de journee apres station debout prolongee · douleur quotidienne handicapante affectant qualite de vie.",
       "emotional_driver": "relief",
-      "drives": ["pain relief", "preserved mobility", "self-perception still active"],
-      "fears": ["chronic decline avec age", "burden famille (perte autonomie marche)", "devenir sedentaire et se plaindre"],
-      "status_signals": ["smart aging consumer", "I take care of myself proactively"],
+      "drives": [
+        "pain relief",
+        "preserved mobility",
+        "self-perception still active"
+      ],
+      "fears": [
+        "chronic decline avec age",
+        "burden famille (perte autonomie marche)",
+        "devenir sedentaire et se plaindre"
+      ],
+      "status_signals": [
+        "smart aging consumer",
+        "I take care of myself proactively"
+      ],
       "self_perception": "Active adult who refuses to be defined by ageing physical issues."
     },
     "dream_scenario_narrative": {
@@ -158,18 +196,27 @@
     "confidence_chain": {
       "sourcing_method": "derived_indirect",
       "verbatim_count": 0,
-      "blocked_sources": ["pas de mining direct lance sur Stepprs · cas pédagogique canon"],
+      "blocked_sources": [
+        "pas de mining direct lance sur Stepprs · cas pédagogique canon"
+      ],
       "confidence_level": "moyenne",
       "caveat": "Dream scenario inféré canon DR Schwartz · target_recipient relationnel (petits-enfants + fils/fille) cohérent avec life_moments encodés (garde-enfants grands-parents) + drives (preserved mobility) + fears (burden famille). À valider via mine-voc verbatims réels si brand opérateur."
     }
   },
-
   "decision_process": {
     "$comment": "Awareness stage mere = solution_aware mixte · sait que probleme existe (douleur quotidienne) et cherche solution active. Sous-poches divergent · plantar-fasciitis-diagnosed = product_aware (compare options) · heel-pain-general = problem_aware (cherche premiere solution).",
     "awareness_trigger": "Specific moment · premiere marche du matin douleur lancinante OR conjoint flag 'tu boitilles' OR podiatre annonce plantar fasciitis.",
     "research_behavior": {
-      "primary_sources": ["search 'plantar fasciitis treatment'", "Amazon comparison + reviews", "DTC site review (Stepprs/Powerstep/Vionic)"],
-      "secondary_sources": ["YouTube podiatrist explainer videos", "Facebook groups testimonials", "Reddit r/PlantarFasciitis threads"],
+      "primary_sources": [
+        "search 'plantar fasciitis treatment'",
+        "Amazon comparison + reviews",
+        "DTC site review (Stepprs/Powerstep/Vionic)"
+      ],
+      "secondary_sources": [
+        "YouTube podiatrist explainer videos",
+        "Facebook groups testimonials",
+        "Reddit r/PlantarFasciitis threads"
+      ],
       "decision_makers": "self"
     },
     "evaluation_criteria": [
@@ -197,7 +244,6 @@
     "time_to_decide": "1-4 weeks (research approfondie · expression passees echecs Dr Scholl/custom orthotics decevants)",
     "risk_tolerance": "waits_for_proof"
   },
-
   "behavior": {
     "purchase_frequency": "occasional",
     "conversion_timeline": "considered",
@@ -219,10 +265,18 @@
     ],
     "vocab_register": "medical mid-tier · familiar avec terms (plantar fascia · heel spur · metatarsalgia · podiatrist · orthotics) mais pas expert clinical",
     "brand_relationships": "Dr Scholl tried failed (cheap pads inefficaces) · Vionic shoes worn occasionally · custom orthotics expensive disappointing (cher mais limite a chaussures specifiques) · Stepprs nouvelle decouverte espoir.",
-    "seasonal_spikes": ["spring (return to outdoor walking)", "after summer vacation (long walks revealed pain)", "January (resolutions self-care)"],
-    "channel_preferences": ["search google", "Amazon", "Facebook ads (groups arthritis retargeting)", "email (if past customer)"]
+    "seasonal_spikes": [
+      "spring (return to outdoor walking)",
+      "after summer vacation (long walks revealed pain)",
+      "January (resolutions self-care)"
+    ],
+    "channel_preferences": [
+      "search google",
+      "Amazon",
+      "Facebook ads (groups arthritis retargeting)",
+      "email (if past customer)"
+    ]
   },
-
   "voice": {
     "vocabulary_to_use": [
       "mes premiers pas le matin",
@@ -238,10 +292,34 @@
       "comme avant 30 ans"
     ],
     "key_expressions": [
-      { "text": "mes premiers pas le matin sont un calvaire", "origin": "voc", "platform": "reddit-plantar-fasciitis", "frequency": 47, "sample_size": 200 },
-      { "text": "j'ai essaye Dr Scholl ca a rien fait", "origin": "voc", "platform": "amazon-reviews", "frequency": 89, "sample_size": 200 },
-      { "text": "les orthoses sur mesure n'ont pas marche et ca coute $700", "origin": "voc", "platform": "reddit-plantar-fasciitis", "frequency": 32, "sample_size": 200 },
-      { "text": "je suis pas pret a vivre comme une vieille a 55 ans", "origin": "voc", "platform": "facebook-arthritis-groups", "frequency": 18, "sample_size": 200 }
+      {
+        "text": "mes premiers pas le matin sont un calvaire",
+        "origin": "voc",
+        "platform": "reddit-plantar-fasciitis",
+        "frequency": 47,
+        "sample_size": 200
+      },
+      {
+        "text": "j'ai essaye Dr Scholl ca a rien fait",
+        "origin": "voc",
+        "platform": "amazon-reviews",
+        "frequency": 89,
+        "sample_size": 200
+      },
+      {
+        "text": "les orthoses sur mesure n'ont pas marche et ca coute $700",
+        "origin": "voc",
+        "platform": "reddit-plantar-fasciitis",
+        "frequency": 32,
+        "sample_size": 200
+      },
+      {
+        "text": "je suis pas pret a vivre comme une vieille a 55 ans",
+        "origin": "voc",
+        "platform": "facebook-arthritis-groups",
+        "frequency": 18,
+        "sample_size": 200
+      }
     ],
     "tone_self": "informed · slightly resigned · cautiously hopeful",
     "tone_register": "direct medical-aware, preuves concretes, pas de superlatifs, partage experience passee echecs",
@@ -258,7 +336,6 @@
       "marcher sur un nuage (cross-ref Stepprs promise 'Walking on Air')"
     ]
   },
-
   "benefits": [
     {
       "$comment": "Benefit BEN-01 cross-ref spec.json Massage Insoles · functional plantar fasciitis pain relief (latence 7-14j) · mecanisme primary arch support engineered + cushioning impact absorption. Emotional lever relief (primary mere) car driver dominant pain.",
@@ -266,12 +343,21 @@
       "priority": 1,
       "formulation": "Premiere marche du matin sans douleur lancinante apres 1-2 semaines de port quotidien",
       "chain": [
-        { "level": "functional", "formulation": "Plantar fascia decomprime par arch support engineered · impact absorption cushioning · douleur talon reduit 70%+ sous 7-14 jours" },
-        { "level": "emotional", "formulation": "Je retrouve mes matins normaux · je peux faire mes 30 min de marche sans calvaire" },
-        { "level": "identity", "formulation": "Je reste l'adulte active que je suis · pas la personne qui boitille a 55 ans" }
+        {
+          "level": "functional",
+          "formulation": "Plantar fascia decomprime par arch support engineered · impact absorption cushioning · douleur talon reduit 70%+ sous 7-14 jours"
+        },
+        {
+          "level": "emotional",
+          "formulation": "Je retrouve mes matins normaux · je peux faire mes 30 min de marche sans calvaire"
+        },
+        {
+          "level": "identity",
+          "formulation": "Je reste l'adulte active que je suis · pas la personne qui boitille a 55 ans"
+        }
       ],
       "emotional_lever": "relief",
-      "awareness_stage": "solution_aware"
+      "awareness_stage": "solution-aware"
     },
     {
       "$comment": "Benefit BEN-02 cross-ref spec.json Massage Insoles · emotional 'Walking on Air' (latence emotional 0 · instant feel) + mecanisme massage textured stimulation. Lever identity (preserved active self).",
@@ -279,23 +365,29 @@
       "priority": 2,
       "formulation": "Sensation 'walking on air' des le premier port · zero heel pain by hour 8",
       "chain": [
-        { "level": "functional", "formulation": "Massage textured stimulation + cushioning · instant comfort feel des le premier port" },
-        { "level": "emotional", "formulation": "Je ne pense plus a mes pieds en fin de journee · liberation mentale quotidienne" },
-        { "level": "identity", "formulation": "Je suis le smart consumer qui a trouve la solution · preserved mobility = preserved identity" }
+        {
+          "level": "functional",
+          "formulation": "Massage textured stimulation + cushioning · instant comfort feel des le premier port"
+        },
+        {
+          "level": "emotional",
+          "formulation": "Je ne pense plus a mes pieds en fin de journee · liberation mentale quotidienne"
+        },
+        {
+          "level": "identity",
+          "formulation": "Je suis le smart consumer qui a trouve la solution · preserved mobility = preserved identity"
+        }
       ],
       "emotional_lever": "identity",
-      "awareness_stage": "solution_aware"
+      "awareness_stage": "solution-aware"
     }
   ],
-
   "pain_benefit_chain": [],
-
   "objections": [],
-
   "market_position": {
-    "$comment": "Awareness level mere = solution_aware · diverge avec sous-poches (product_aware vs problem_aware). Segment size mere 35% acquisition Stepprs estimate · cross-ref strategy.json target audience tree priority.",
-    "awareness_level": "solution_aware",
-    "sophistication_override": "stage_3_mechanism_comparison",
+    "$comment": "Awareness dominant mere = solution_aware · diverge avec sous-poches (product_aware vs problem_aware). Sophistication v3 = mechanism comparison (Schwartz stage 3 · ex stage_3_mechanism_comparison pre-C1). Segment size mere 35% acquisition Stepprs estimate · cross-ref strategy.json target audience tree priority.",
+    "awareness_dominant": "solution-aware",
+    "sophistication_override": "v3",
     "segment_size_pct_of_brand": 35,
     "price_sensitivity": "low-medium · pret a payer $50-150 (vs $500-800 orthese sur mesure · perception value forte)",
     "competition_alternatives": [
@@ -307,7 +399,6 @@
     ],
     "differentiation_appeal": "Daily-wearable insole avec engineered arch support similar a orthese sur mesure · 10x moins cher ($27 vs $500-800) · 90-day money back risk-free · podiatrist recommended · cross-ref spec.json positioning entre Dr Scholl mass et Vionic premium clinical · lifestyle comfort innovation."
   },
-
   "research_meta": {
     "confidence": 75,
     "opportunity_score": 9,

@@ -16,121 +16,183 @@
     "validation_status": {
       "state": "validated"
     },
-    "updated": "2026-05-15"
+    "updated": "2026-05-15",
+    "scope": "pre_cart"
   },
   "offer_groups": [
     {
-      "group_id": "standalone",
+      "group_id": "GRP-01",
       "name": "Single pair standalone",
-      "type": "standalone",
-      "$comment": "Entry-level offer · permet test scepticisme efficacité avec risk minimal + 90-day guarantee.",
+      "$comment": "ex group_id 'standalone' · Entry-level offer · permet test scepticisme efficacité avec risk minimal + 90-day guarantee.",
       "offers": [
         {
           "offer_id": "OFR-01",
           "name": "Stepprs Massage Insoles · 1 pair",
+          "type": "single",
           "active": true,
           "pricing": {
-            "price": 27.00,
-            "compare_at_price": 42.00,
+            "price": 27.0,
+            "compare_at_price": 42.0,
             "currency": "USD",
             "discount_pct": 35
           },
-          "variants": ["any color × any size"],
-          "intent": "trial · 1 pair entry-level"
+          "variants": [
+            "any color × any size"
+          ],
+          "intent": "trial · 1 pair entry-level",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 1
+            }
+          ]
         }
       ]
     },
     {
-      "group_id": "bundle_tiered_volume",
+      "group_id": "GRP-02",
       "name": "Volume bundles (2-pair · 3-pair · 5-pair)",
-      "type": "bundle",
-      "$comment": "Bundle volume tiered · AOV uplift · discount progressif scaling (45 → 55 → 60%). Drive multi-room utility (workers · home · backup · gift).",
+      "$comment": "ex group_id 'bundle_tiered_volume' · Bundle volume tiered · AOV uplift · discount progressif scaling (45 → 55 → 60%). Drive multi-room utility (workers · home · backup · gift).",
       "offers": [
         {
           "offer_id": "OFR-02",
           "name": "2-pair bundle",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 46.20,
-            "compare_at_price": 84.00,
+            "price": 46.2,
+            "compare_at_price": 84.0,
             "currency": "USD",
             "discount_pct": 45,
-            "price_per_unit_value": 23.10
+            "price_per_unit_value": 23.1
           },
-          "intent": "double-shift workers (work + home)"
+          "intent": "double-shift workers (work + home)",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 2
+            }
+          ]
         },
         {
           "offer_id": "OFR-03",
           "name": "3-pair bundle",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 56.70,
-            "compare_at_price": 126.00,
+            "price": 56.7,
+            "compare_at_price": 126.0,
             "currency": "USD",
             "discount_pct": 55,
-            "price_per_unit_value": 18.90
+            "price_per_unit_value": 18.9
           },
-          "intent": "family bundle · couple + 1 set spare"
+          "intent": "family bundle · couple + 1 set spare",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 3
+            }
+          ]
         },
         {
           "offer_id": "OFR-04",
           "name": "5-pair bundle",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 84.00,
-            "compare_at_price": 210.00,
+            "price": 84.0,
+            "compare_at_price": 210.0,
             "currency": "USD",
             "discount_pct": 60,
-            "price_per_unit_value": 16.80
+            "price_per_unit_value": 16.8
           },
-          "intent": "bulk gift + rotation usage shifts intensive"
+          "intent": "bulk gift + rotation usage shifts intensive",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 5
+            }
+          ]
         }
       ]
     },
     {
-      "group_id": "bundle_thematic_kits",
+      "group_id": "GRP-03",
       "name": "Thematic foot relief kits (Plantar Fasciitis · Heel · Ultimate)",
-      "type": "bundle",
-      "$comment": "Bundles thématiques par pain · convert problem-aware audience cherche solution complete. Pricing premium vs bundle volume · plus de produits différents = higher AOV.",
+      "$comment": "ex group_id 'bundle_thematic_kits' · Bundles thématiques par pain · convert problem-aware audience cherche solution complete. Pricing premium vs bundle volume · plus de produits différents = higher AOV.",
       "offers": [
         {
           "offer_id": "OFR-05",
           "name": "Plantar Fasciitis Kit",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 48.00,
-            "compare_at_price": 75.00,
+            "price": 48.0,
+            "compare_at_price": 75.0,
             "currency": "USD",
             "discount_pct": 36
           },
-          "includes": ["Massage Insoles 1 pair", "Heel Cushion Pads", "Massage Roller (mini)"],
-          "intent": "problem-aware audience plantar fasciitis · solution multi-touch"
+          "includes": [
+            "Massage Insoles 1 pair",
+            "Heel Cushion Pads",
+            "Massage Roller (mini)"
+          ],
+          "intent": "problem-aware audience plantar fasciitis · solution multi-touch",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 1
+            }
+          ]
         },
         {
           "offer_id": "OFR-06",
           "name": "Heel Relief Kit",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 39.00,
-            "compare_at_price": 60.00,
+            "price": 39.0,
+            "compare_at_price": 60.0,
             "currency": "USD",
             "discount_pct": 35
           },
-          "includes": ["Massage Insoles 1 pair", "Heel Cushion Pads"],
-          "intent": "heel pain spécifique · entry kit"
+          "includes": [
+            "Massage Insoles 1 pair",
+            "Heel Cushion Pads"
+          ],
+          "intent": "heel pain spécifique · entry kit",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 1
+            }
+          ]
         },
         {
           "offer_id": "OFR-07",
           "name": "Ultimate Foot Relief Kit",
+          "type": "bundle",
           "active": true,
           "pricing": {
-            "price": 97.00,
-            "compare_at_price": 150.00,
+            "price": 97.0,
+            "compare_at_price": 150.0,
             "currency": "USD",
             "discount_pct": 35
           },
-          "includes": ["Massage Insoles 1 pair", "Heel Cushion Pads", "Massage Roller (full)", "Height Insoles", "Foot Health Mastery eBook"],
-          "intent": "BOF audience chronic pain mature · solution premium complete"
+          "includes": [
+            "Massage Insoles 1 pair",
+            "Heel Cushion Pads",
+            "Massage Roller (full)",
+            "Height Insoles",
+            "Foot Health Mastery eBook"
+          ],
+          "intent": "BOF audience chronic pain mature · solution premium complete",
+          "product_refs": [
+            {
+              "slug": "massage-insoles",
+              "quantity": 1
+            }
+          ]
         }
       ]
     }
@@ -141,7 +203,7 @@
     "$comment": "Garantie canon · neutralise objection #1 scepticisme efficacité. 90 jours = couvre Patience Window plantar fasciitis (7-14j efficacité observée)."
   },
   "shipping_rules": {
-    "free_shipping_threshold": 50.00,
+    "free_shipping_threshold": 50.0,
     "free_shipping_currency": "USD",
     "shipping_time_business_days": "4-6",
     "shipping_insurance": "Tracked Insured Shipping included",
@@ -164,15 +226,15 @@
     {
       "product_slug": "massage-roller",
       "name": "Massage Roller",
-      "price": 29.00,
-      "compare_at_price": 45.00,
+      "price": 29.0,
+      "compare_at_price": 45.0,
       "intent": "complement post-shift recovery"
     },
     {
       "product_slug": "heel-cushion-pads",
       "name": "Heel Cushion Pads",
-      "price": 13.00,
-      "compare_at_price": 20.00,
+      "price": 13.0,
+      "compare_at_price": 20.0,
       "intent": "targeted heel pain entry"
     }
   ]

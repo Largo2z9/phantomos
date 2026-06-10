@@ -76,7 +76,7 @@ There is a real session cost. The agent loads the agent contract, the active con
 
 ## Agency client-data tension (DTC growth lead specific)
 
-A growth lead at an agency who encodes brand-specific knowledge per DTC client into PhantomOS faces a contractual question on retainer termination : the encoded substrate (audiences, angles, creatives, learnings) belongs to whom ? The agency, the client, or both ? does not enforce this. The pattern that works in practice :
+A growth lead at an agency who encodes brand-specific knowledge per DTC client into PhantomOS faces a contractual question on retainer termination : the encoded substrate (audiences, angles, creatives, learnings) belongs to whom ? The agency, the client, or both ? PhantomOS does not enforce this. The pattern that works in practice :
 
 - **Workspace separation.** One workspace per client brand. The encoded substrate per brand stays portable. On retainer termination, the workspace transfers to the client (export of `brands/{slug}/` folder), or stays with the agency, depending on the service contract.
 - **Operator-side discipline.** No skill handles this split today. It requires explicit framing in the service contract (workspace ownership, transfer clause, encoded data property).
@@ -94,7 +94,7 @@ Native multi-operator (role-based access, simultaneous editing, client read-only
 
 ## When to revisit this page
 
-The extractibility test (see manifesto § 8) applies to every feature and every profile. If your situation fits neither the best-fit nor the misfit descriptions, read the related vertical pack sections of `docs/vision/roadmap.md` before investing. The product evolves ; what's misfit today may become fit in six months if the corresponding vertical pack ships.
+The extractibility test (every core feature must survive swapping the craft's central entity, otherwise it ships in a vertical pack ; see `docs/system/extending.md`) applies to every feature and every profile. If your situation fits neither the best-fit nor the misfit descriptions, read the related vertical pack sections of `docs/vision/roadmap.md` before investing. The product evolves ; what's misfit today may become fit in six months if the corresponding vertical pack ships.
 
 ---
 

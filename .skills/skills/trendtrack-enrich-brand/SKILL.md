@@ -50,16 +50,6 @@ disambiguates_against:
   snapshot-brand: "snapshot-brand scrape PDP brand publique · trendtrack-enrich-brand fetch external intelligence TrendTrack (ads · trustpilot · socials · traffic) qui ne peuvent PAS être scraped depuis PDP brand. Complémentaire · snapshot-brand pour spec/offers/profile depuis URL · trendtrack-enrich-brand pour external intelligence."
   decompose-ad: "decompose-ad analyse 1 ad concurrente fournie par URL OR ad_id pour reverse-engineer formula. trendtrack-enrich-brand fetch sample ads brand pour PATTERN analysis (scaling strategy · creative format split · geo distribution) PAS deep-dive single ad."
   watch-competitors: "watch-competitors monitor changements competitors over time. trendtrack-enrich-brand snapshot one-shot enrichment moment T."
-triggers_fr:
-  - "enrichis cette brand depuis trendtrack"
-  - "trendtrack data {brand_slug}"
-  - "fetch trendtrack {brand_slug}"
-  - "ajoute intelligence externe ads"
-triggers_en:
-  - "trendtrack enrich {brand_slug}"
-  - "fetch trendtrack data"
-  - "competitive intelligence enrich"
-  - "external market data brand"
 ---
 
 # Skill · TrendTrack Enrich Brand

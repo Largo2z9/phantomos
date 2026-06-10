@@ -7,15 +7,6 @@ layer: territoire
 recommended_model: sonnet
 mode: proposed
 operator_facing: true
-triggers_fr:
-  - "décompose l'angle {ANG-NN}"
-  - "approfondis cet angle"
-  - "deep dive angle {ANG-NN}"
-  - "décortique l'angle"
-triggers_en:
-  - "decompose angle"
-  - "deep dive angle"
-  - "enrich angle formula"
 description: >
   v1.2.0 (v2.64 ontologie sémantique pure · pain_points + objections sub-audience) · Triangulation cross-canon refactor · spec_activated (products/{p}/spec.json#mechanism_id) + pain_ref (audiences/{a}/pain_points/{PNT-NN}.json) + objection_ref (audiences/{a}/objections/{OBJ-NN}.json) tous canonical sub-audience. Step 4 bridge atoms · benefit_served référence audiences/{audience_slug}/pain_points/{PNT-NN}.json sub-audience. Step 2 tension atoms · reason_blocked référence audiences/{audience_slug}/objections/{OBJ-NN}.json sub-audience. Step 2 observation atom · phenomenon source canonical depuis sub-audience pain_points verbatim_quotes. Backward compat strict additif · fallback top-level v2.63 + profile sub-fields v1.7 preserved.
   v1.1.0 (v2.63 ontologie pure · pain_points + objections collections top-level) · Step 4 bridge atoms refactor · benefit_served peut désormais référencer `pain_points/{PNT-NN}.json` collection (PNT-NN ref si la formula bridge résout un pain canonical). Step 2 tension atoms · reason_blocked peut référencer `objections/{OBJ-NN}.json` collection (OBJ-NN si tension est une objection cartographiée). Triangulation cross-canon · spec_activated + pain_ref + objection_ref tous canonical. Backward compat lecture profile.pain_points[] + profile.objections[] legacy preserved (pre-v2.63 brands).
@@ -31,6 +22,8 @@ description: >
   DOIT référencer `spec.mechanism_id` OR `spec.benefit_id` existant, jamais inventer.
   FR · "décompose l'angle {ANG-NN}", "approfondis cet angle", "deep dive angle {ANG-NN}", "décortique l'angle"
   EN · "decompose angle", "deep dive angle", "enrich angle formula"
+  FR: "décompose l'angle {ANG-NN}", "approfondis cet angle", "deep dive angle {ANG-NN}", "décortique l'angle".
+  EN: "decompose angle", "deep dive angle", "enrich angle formula".
 consumes:
   - path: docs/doctrine/angle-anatomy-doctrine.md
   - path: docs/doctrine/hooks-method-doctrine.md
@@ -141,7 +134,7 @@ Load silently ·
 - `brands/{slug}/audiences/{audience_slug}/profile.json` ·
   - `voice.key_expressions[]` (corpus pour phenomenon + state_actual)
   - `psychology.jtbd` (functional + emotional + social)
-  - `market_position.awareness_level`
+  - `market_position.awareness_dominant` (RENAME C1 profile/2.3, ex awareness_level)
   - **Backward compat** · `pain_points[]` + `objections[]` sub-fields legacy preserved en lecture, mais sub-audience collections prennent priorité si présentes.
 
 - `brands/{slug}/products/{p_slug}/spec.json` ·
@@ -203,7 +196,7 @@ Ce que l'audience aspire à atteindre. Source priority ·
 La raison pour laquelle le gap state_actual → state_desired n'est pas franchi. 3 types canon ·
 - **External obstacle** · contrainte matérielle (prix, temps, accessibilité). Source · `objections/*.json` (collection top-level v2.63) `type="cost"` ou `"access"` · fallback legacy `audience.objections[]`.
 - **Internal belief** · croyance limitante. Source · `objections/*.json` `type="scepticism"` ou `"self-doubt"` · fallback legacy `audience.objections[]`.
-- **Lack of awareness** · manque d'information sur la solution. Source · `audience.awareness_level` problem-aware ou solution-aware (pas product-aware).
+- **Lack of awareness** · manque d'information sur la solution. Source · `audience.market_position.awareness_dominant` problem-aware ou solution-aware (pas product-aware).
 
 **Canonical ref OBJ-NN (v1.1.0 NEW · v2.63 ontologie pure)** · si la friction match une objection canonique dans `objections/*.json`, stage atom enrichi avec `reason_blocked.objection_ref: "OBJ-NN"` canonical (en plus du `reason_blocked.type` enum). Persist via mutation gate path · `angles/{ANG-NN}.json#/formula/tension/reason_blocked_objection_ref`. Triangulation cross-canon · downstream `produce-copy-brief` peut drill direct l'objection canonique + son `response_counter` cristallisé. Backward compat (pre-v2.63) · skip canonical ref, type enum seul.
 

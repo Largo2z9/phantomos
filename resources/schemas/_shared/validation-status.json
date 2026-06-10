@@ -1,9 +1,38 @@
 {
   "$id": "validation-status.json",
   "title": "Validation status (canon shared)",
-  "description": "Cycle de vie partagé pour entités testables (profile, angle, creative). Source canon : audit Phase B v2.29.0.",
-  "type": "string",
-  "enum": ["hypothesis", "tested", "validated", "scaled", "fatigued"],
+  "description": "Cycle de vie partagé pour entités testables (brand, profile, angle, creative, offer). Deux formes admises : string (forme courte, écrite par les skills) ou objet {state, ...} (forme riche avec provenance · validated_by, validated_at, notes). Source canon : audit Phase B v2.29.0, forme objet réconciliée v2.89.3.",
+  "oneOf": [
+    {
+      "type": "string",
+      "enum": [
+        "hypothesis",
+        "tested",
+        "validated",
+        "scaled",
+        "fatigued"
+      ]
+    },
+    {
+      "type": "object",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "hypothesis",
+            "tested",
+            "validated",
+            "scaled",
+            "fatigued"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  ],
   "_meta": {
     "hypothesis": "pas encore testé en campagne",
     "tested": "ad set lancé, résultats inconclusifs",

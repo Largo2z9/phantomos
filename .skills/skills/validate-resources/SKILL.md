@@ -145,6 +145,15 @@ Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x p
 - Flag: **unmapped fields**, **orphaned type entries**, **empty derived fields**
 - **Report only**
 
+### 11b-bis. _extraction Consistency (C1 · sibling de 11b)
+
+- Sur les porteurs canon (brand, spec, offer, profile, pain_points, objections · liste fermée C1) : chaque entrée de la root map `_extraction` valide contre `_shared/extraction-provenance.json` (extraction_method dans l'enum, extraction_confidence 0-1, extracted_at date-time)
+- Les clés de `_extraction` = globs ou chemins valides (mêmes règles que `_field_types` : pas de clé orpheline vers un champ inexistant)
+- **`extraction_method: "absent"` SANS `lever` = FAIL** (politique d'échec C1 : une brique introuvable porte son levier, jamais inventée)
+- HR field-types C1 : tout champ de `offer.economics_proxy` et `angle.test_readiness.eligibility.overall` doit être tagué `derived` dans `_field_types` · sinon flag **MAJOR : derived non tagué**
+- Sans ce check, `_extraction` existe mais n'est jamais validé (échec silencieux)
+- **Report only**
+
 ### 12b. Learnings Lifecycle
 
 - Scan `learnings.json.entries[]` dans chaque brand

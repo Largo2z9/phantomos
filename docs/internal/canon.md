@@ -53,7 +53,7 @@ Centralement typées, référencées par les schemas au lieu d'être redéclaré
 
 ## Atlas brand
 
-Concept canonique upstream pour cartographie holistique data e-commerce d'une marque. Composé de 6 entités core (brand · spec · offers · profile · learnings · strategy) + 3 dérivés (angles · creatives produced · scoring matrix). Navigable via `/phantom` cockpit. Distinct d'Atlas canon copy (S5 cross-brand référentiel). Doctrine · `docs/system/atlas-brand.md`.
+Concept canonique upstream pour cartographie holistique data e-commerce d'une marque. Composé de 7 entités core (brand · spec · offers · profile · angle · learnings · strategy) + 2 dérivés (creatives produced · scoring matrix). Navigable via `/phantom` cockpit. Distinct d'Atlas canon copy (S5 cross-brand référentiel). Doctrine · `docs/system/atlas-brand.md`.
 
 ## Atlas canon copy
 

@@ -1,0 +1,103 @@
+{
+  "pattern_id": "CPT-timeline-result-ladder",
+  "pattern_type": "concept-structural",
+  "name": "Timeline Result Ladder",
+  "one_liner": "Échelonne le résultat promis par paliers temporels croissants (mois 1/2/3, sem 2/4/8, 0-30/31-60/61-90j) pour rendre une transformation lente crédible et tenir l'attente à chaque étape plutôt que de tout miser sur un seul claim final.",
+  "skeleton": "[palier_temps_1] -> [bénéfice_amorce : signal précoce, faible mais visible] ; [palier_temps_2] -> [bénéfice_cœur : accélération + claim_chiffré] ; [palier_temps_N] -> [état_final : payoff densifié ou social/relationnel]",
+  "slots": [
+    {
+      "name": "palier_temps_N",
+      "description": "Borne temporelle de chaque marche. Trois formes observées : ordinaux de mois ('1er MOIS / 2e MOIS / 3e MOIS'), multiples de semaines croissants ('APRÈS 2 SEMAINES / 4 SEMAINES / 8 SEMAINES'), ou bandes de jours ('0-30 / 31-60 / 61-90+ JOURS'). 3 paliers est la dose modale ; un ancrage simple à 2 bornes (avant/après daté, ou 'en X mois') est la version dégradée.",
+      "examples": [
+        "1er MOIS · 2e MOIS · 3e MOIS (karacare RCV-01)",
+        "0-30 JOURS · 31-60 JOURS · 61-90+ JOURS (karacare RCV-09)",
+        "APRÈS 2 SEMAINES · APRÈS 4 SEMAINES · APRÈS 8 SEMAINES (naali RCV-27)"
+      ]
+    },
+    {
+      "name": "bénéfice_amorce",
+      "description": "Le gain du premier palier. Volontairement modeste et physiologiquement plausible (premiers signaux, confort, racines nourries) pour ne pas griller la crédibilité dès l'ouverture. Pose la promesse que 'ça commence à marcher vite'.",
+      "examples": [
+        "Premiers resultats visibles. Les racines sont mieux nourries, la casse diminue (karacare RCV-01)",
+        "Fortifie le cheveu, booste les bulbes et reduit la chute (karacare RCV-09, 0-30j)",
+        "APRES 2 SEMAINES: Contribue a maintenir le confort pendant la nuit (naali RCV-27)"
+      ]
+    },
+    {
+      "name": "bénéfice_cœur",
+      "description": "Le gain du palier intermédiaire, qui accélère la promesse et porte souvent le claim chiffré (cm de pousse, lbs perdues, repousse). C'est le pivot où le résultat devient tangible.",
+      "examples": [
+        "La croissance se poursuit. Les longueurs se densifient (karacare RCV-01)",
+        "31-60 JOURS: Accelere la croissance... Jusqu'a 4 cm de pousse par mois (karacare RCV-09)",
+        "APRES 4 SEMAINES: vous dormez jusqu'a 6h du matin (naali RCV-27)"
+      ]
+    },
+    {
+      "name": "état_final",
+      "description": "Le payoff du dernier palier. Soit une densification de l'état corporel ('plus longue, plus forte, plus brillante'), soit un basculement social/relationnel ('votre femme vous demande ce qui a changé', validation d'un tiers). La marche émotionnelle qui clôt l'échelle.",
+      "examples": [
+        "3e MOIS: La chevelure est plus longue, plus forte, plus brillante (karacare RCV-01)",
+        "APRES 8 SEMAINES -> Votre femme vous demande ce qui a change (naali RCV-104)",
+        "APRES 6 SEMAINES: L'enseignant souligne une meilleure capacite de concentration (naali RCV-78)"
+      ]
+    }
+  ],
+  "function": "Réduit le scepticisme 'ça met trop longtemps / ça ne marchera pas' en distribuant la preuve sur une trajectoire : chaque marche donne une raison de tenir, neutralise l'abandon précoce (les compléments/Rx demandent 1-3 mois pour agir) et reframe la lenteur comme un protocole maîtrisé plutôt qu'une promesse floue. Le palier final transforme un bénéfice fonctionnel en payoff émotionnel ou social.",
+  "when_to_use": "Catégories où le résultat est réel mais différé (compléments capillaires, sommeil/stress, repousse Rx, perte de poids GLP-1) et où l'objection dominante est le délai/la patience. Optimal en MOFU/consideration (solution-aware à product-aware) quand l'audience croit au mécanisme mais doute du temps de retour. Se marie avec un device 'ordonnance/rituel' (carte d'instructions + dosage) qui renforce le cadrage protocole.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-01", "RCV-09", "RCV-02", "RCV-04", "RCV-07", "RCV-03"],
+      "realization": "Ladder mois-par-mois et bandes de jours. RCV-01 : '1er MOIS: premiers resultats visibles, racines mieux nourries, casse diminue / 2e MOIS: la croissance se poursuit, longueurs se densifient / 3e MOIS: chevelure plus longue, plus forte, plus brillante' (+ claim 'jusqu'a +12 cm en 3 mois'). RCV-09 : '0-30 JOURS: fortifie, booste les bulbes, reduit la chute / 31-60 JOURS: accelere la croissance, nouvelles repousses, jusqu'a 4 cm/mois / 61-90+ JOURS: densifie'. Versions à 1 palier (ancrage simple) : 'en meme pas 30 jours' (RCV-02), 'renforcés en 90 jours' (RCV-04), '4 cm par mois' (RCV-07)."
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-27", "RCV-78", "RCV-104", "RCV-15", "RCV-53"],
+      "realization": "Ladder semaine-par-semaine via device 'ordonnance/rituel du soir'. RCV-27 : 'APRES 2 SEMAINES: maintient le confort la nuit / APRES 4 SEMAINES: vous dormez jusqu'a 6h du matin / APRES 8 SEMAINES: retrouvez votre equilibre naturel'. RCV-78 : '2 SEMAINES: routine du soir plus sereine / 4 SEMAINES: equilibre emotionnel pendant les devoirs / 6 SEMAINES: l'enseignant souligne une meilleure concentration' (palier final = validation tierce). RCV-104 : 'SEMAINE 1 -> nuit plus sereine / SEMAINE 4 -> fonctionnement cognitif normal / 8 SEMAINES -> votre femme vous demande ce qui a change' (payoff relationnel). Version 1 palier : 'presque un mois... plus calme, plus apaisée' (RCV-15)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-123", "RCV-147", "RCV-149", "RCV-152", "RCV-153", "RCV-185"],
+      "realization": "UNE factory créative genrée (hims+hers = 1 source, ads-miroir confirmées RCV-143≈174 mot-pour-mot). Forme = ancrage temporel daté/borné plutôt que ladder 3 marches. hims RCV-123 : before/after date-stampé 'JANUARY -> SEPTEMBER' (transformation ~8 mois). hims RCV-147 : '8 months in. 25 lbs lost.' RCV-149 : 'Chew today, See thicker, fuller hair in 3-6 months'. hers RCV-153/185 : 'Start now, see results by spring... Minoxidil, an ingredient shown to regrow hair in 3-6 months'. Telehealth utilise surtout le palier-cadre (start-now -> outcome-by-T) et l'ancrage saisonnier, sous contrainte compliance (Rx required, FDA disclaimer)."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Pattern le plus sûr à emprunter : confirmé cross-vertical (3 catégories) ET cross-géo (FR + US). En mode exploit, rester dans la verticale de la marque opérée et calquer la granularité d'origine (capillaire = mois/cm, sommeil/stress = semaines, perte de poids = mois/lbs). En mode explore, le reslot vers une verticale lointaine est quasi gratuit car la structure (3 paliers temps -> bénéfices croissants -> payoff final) est invariante ; surfacer à l'opérateur uniquement le choix de l'unité temporelle (jours/sem/mois) et la nature du palier final (corporel vs social)."
+  },
+  "related_mechanic_ids": [
+    "resolution-timeline",
+    "timeline-specific-result",
+    "before-after-timeline",
+    "resolution-promise"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds / circulation (chaussettes de compression)",
+      "reslotted": "APRÈS 1 SEMAINE -> les jambes lourdes en fin de journée s'allègent ; APRÈS 1 MOIS -> moins de gonflement aux chevilles, vous tenez debout sans inconfort (claim chiffré : -X% de sensation de lourdeur) ; APRÈS 3 MOIS -> circulation soutenue au quotidien, vos proches remarquent que vous bougez plus facilement."
+    },
+    {
+      "target": "marque sommeil / mélatonine (wellness-supplement, exploit proche naali)",
+      "reslotted": "APRÈS 3 NUITS -> vous vous endormez plus vite, le rituel s'installe ; APRÈS 2 SEMAINES -> vous tenez la nuit complète sans réveil à 4h ; APRÈS 4 SEMAINES -> vous vous réveillez reposé et on vous dit que vous avez l'air en forme."
+    }
+  ],
+  "anti_patterns": [
+    "Promettre un payoff fort dès le palier 1 (grille la plausibilité physiologique et casse la crédibilité de l'échelle entière). Le premier palier doit être modeste.",
+    "Empiler trop de paliers (>4) : la lecture s'alourdit, la mécanique perd son punch. 3 marches est la dose optimale observée.",
+    "Reslotter sans recaler l'unité temporelle sur le mécanisme réel (un Rx en 3-6 mois ne peut pas afficher un ladder 'sem 1/2/3' crédible ; un complément capillaire ne montre rien en 3 jours).",
+    "En catégorie réglementée (telehealth-rx, claims santé), un ladder chiffré non sourcé expose au compliance (la factory himshers borne ses claims à des timeframes d'études + disclaimers FDA/Rx). Ne pas inventer de paliers chiffrés invérifiables hors corpus.",
+    "Confondre l'échelle (ladder multi-palier) avec un simple ancrage à un timeframe unique ('en 30 jours') : ce dernier est la version dégradée, pas le pattern complet."
+  ],
+  "curation_notes": "Promu sur RÉCURRENCE cross-source (3 sources indépendantes, factory-aware) — pas encore sur perf réelle. Garde-fou factory respecté : hims + hers = 1 source (himshers), ads-miroir mot-pour-mot confirmées (RCV-143≈174, $69/mo identique). Compte = karacare + naali + himshers = 3. Nuance de forme à surveiller : la forme PLEINE (ladder 3 paliers détaillés) est portée par les deux sources FR (karacare, naali) ; la source US (himshers) instancie surtout la forme ANCRAGE (start-now -> outcome-by-T, before/after daté, '3-6 months'), pas le ladder 3 marches. Donc le pattern est universel sur l'AXE temporel-de-résultat, mais la granularité '3 paliers escaladés' est attestée fortement en FR et seulement en germe en US. Ce qui renforcerait : (1) perf réelle via feedback-loop sur une créa produite avec ce skeleton ; (2) un 4e système indépendant montrant le ladder 3-paliers en US/EN pour solidifier la forme pleine cross-géo ; (3) test A/B 3 paliers vs ancrage simple pour trancher la dose optimale. Normalisation à prévoir avant clustering automatisé : unifier les bornes ('2 mois' vs '60 jours' vs '8 semaines' pointent la même durée)."
+  ,
+  "_schema_version": "library-pattern/1.0"
+}

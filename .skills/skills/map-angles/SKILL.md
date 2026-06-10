@@ -29,15 +29,8 @@ description: |
   v1.0.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (angle-anatomy, breakthrough-advertising-5-stages, audiences-cartography). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts.
   v1.0.0 (S55 · v2.58 · D#386 canon) · Atomique cartography extraction.
   Cartographie le PORTFOLIO angles brand-wide depuis audiences cartographiées · scaffold N angles ANG-NN.json light pass (formula 4 components + lineage canon obligatoire) sans deep production matrix scoring. Invocable séparément pour refresh cartographie angles sans relancer le full pipeline produce-paid-angles. Distinct produce-paid-angles qui scoring + ranks + close drill-down matrix · map-angles scaffold le PORTFOLIO depuis cross-product audience × axis origin (audience-derived · product-derived · category-derived · brand-derived · temporal-cultural).
-triggers_fr:
-  - "map-angles {brand}"
-  - "cartographie les angles"
-  - "extrait les angles brand-wide"
-  - "refresh angles brand"
-triggers_en:
-  - "map angles"
-  - "cartograph angles brand-wide"
-  - "refresh angles"
+  FR: "map-angles {brand}", "cartographie les angles", "extrait les angles brand-wide", "refresh angles brand".
+  EN: "map angles", "cartograph angles brand-wide", "refresh angles".
 disambiguates_against:
   - produce-paid-angles: "produce-paid-angles scoring + ranks 5-7 angles top sur UNE audience avec matrice 5-lens framework + close drill-down deep production. map-angles SCAFFOLD le portfolio angles brand-wide light pass (cross-product audience × origin_axis) sans scoring numérique exposé. Refresh cartographie sans relancer le full pipeline scoring."
   - decompose-angle: "decompose-angle deep pass UNE angle existante (formula 4 components → atoms recursive · verbatim sources · sample sizes). map-angles scaffold N angles light pass (formula text-level only)."

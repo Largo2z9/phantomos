@@ -16,7 +16,14 @@ Output: JSON report to stdout + human-readable summary.
 
 Usage:
     python3 validate-all.py [--root PATH] [--strict] [--include-archive]
+
+Requires Python 3.9+ and jsonschema. Schemas under resources/schemas/ use
+relative $ref (e.g. "_shared/validation-status.json"): on jsonschema >= 4.18
+they are resolved through a referencing.Registry built from the schemas dir,
+on older versions through a file:// RefResolver. Both paths are handled below.
 """
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -29,6 +36,13 @@ try:
 except ImportError:
     print("ERROR: jsonschema not installed. Run: pip install jsonschema --break-system-packages")
     sys.exit(2)
+
+try:
+    from referencing import Registry, Resource
+    from referencing.jsonschema import DRAFT202012
+    HAVE_REFERENCING = True
+except ImportError:
+    HAVE_REFERENCING = False
 
 
 # ---------- Config ----------
@@ -72,6 +86,7 @@ SEVERITY = {
     "audience_parent_slug_unknown": "MED",
     "offers_cycle": "HIGH",
     "offers_dangling_requires": "MED",
+    "mechanism_other_saturation": "MED",
 }
 
 
@@ -87,8 +102,29 @@ def load_json(path: Path):
         return None, str(e)
 
 
+def _build_ref_support(root: Path):
+    """Make relative $ref ("_shared/x.json") resolvable across jsonschema versions.
+
+    Returns a dict of kwargs to pass to Draft202012Validator(...).
+    """
+    schemas_dir = root / "resources/schemas"
+    if HAVE_REFERENCING:
+        resources = []
+        for p in schemas_dir.rglob("*.json"):
+            data, err = load_json(p)
+            if err:
+                continue
+            uri = p.relative_to(schemas_dir).as_posix()
+            resources.append((uri, Resource.from_contents(data, default_specification=DRAFT202012)))
+        return {"registry": Registry().with_resources(resources)}
+    # Legacy jsonschema (< 4.18): RefResolver resolves file:// URIs relative to schemas dir.
+    from jsonschema import RefResolver  # deprecated upstream, kept as fallback only
+    return {"resolver": RefResolver(base_uri=schemas_dir.as_uri() + "/", referrer={})}
+
+
 def load_schemas(root: Path):
     schemas = {}
+    ref_kwargs = _build_ref_support(root)
     for key, rel in SCHEMA_FILES.items():
         path = root / rel
         data, err = load_json(path)
@@ -96,7 +132,7 @@ def load_schemas(root: Path):
             print(f"FATAL: cannot load schema {key}: {err}", file=sys.stderr)
             sys.exit(2)
         Draft202012Validator.check_schema(data)
-        schemas[key] = Draft202012Validator(data)
+        schemas[key] = Draft202012Validator(data, **ref_kwargs)
     return schemas
 
 
@@ -295,7 +331,13 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
             # orphan non-core file (config, strategy, status, learnings, etc)
             # skip silently — only flag if in products/ or audiences/ with wrong name
             if "products" in jf.parts or "audiences" in jf.parts:
-                expected_names = {"spec.json", "offers.json", "profile.json"}
+                # Canonical sub-collections (v2.63+ pain/objection collections, frictions,
+                # production namespaces) are first-class citizens, never orphans.
+                canonical_subdirs = {"pain_points", "objections", "frictions", "sources",
+                                     "creatives", "competitive-intel", "asset-library", "extensions"}
+                if canonical_subdirs & set(jf.parts):
+                    continue
+                expected_names = {"spec.json", "offers.json", "profile.json", "visual_identity.json"}
                 if jf.name not in expected_names:
                     issues.append({
                         "type": "orphan_file",
@@ -381,6 +423,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
             specs_by_product[parent_slug] = {
                 "problem_ids": problem_ids,
                 "benefit_ids": benefit_ids,
+                "mech_modes": [m.get("mode_of_action") for m in data.get("mechanisms", []) or [] if m.get("mode_of_action")],
                 "file": str(rel),
             }
 
@@ -436,11 +479,13 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
             audiences_declared.add(audience_slug)
             pain_refs = set()
             benefit_refs = set()
+            # Legacy instances may carry pre-v2.0 string entries here; the
+            # jsonschema pass already reports the type mismatch — never crash on it.
             for p in data.get("pain_points", []) or []:
-                if p.get("ref"):
+                if isinstance(p, dict) and p.get("ref"):
                     pain_refs.add(p["ref"])
             for b in data.get("benefits", []) or []:
-                if b.get("ref"):
+                if isinstance(b, dict) and b.get("ref"):
                     benefit_refs.add(b["ref"])
             profiles_by_audience[audience_slug] = {
                 "pain_refs": pain_refs,
@@ -595,6 +640,20 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "severity": SEVERITY["audience_parent_slug_unknown"],
                 "file": prof["file"],
                 "msg": f"meta.parent_slug='{parent}' does not match any known audience",
+            })
+
+    # 9. mode_of_action 'other' saturation — signals a missing family in the
+    # registry, not an unclassifiable product. SSOT: resources/registries/mechanism-families.md
+    all_modes = []
+    for ps, meta in specs_by_product.items():
+        all_modes += meta.get("mech_modes", [])
+    if len(all_modes) >= 3:
+        n_other = all_modes.count("other")
+        if n_other / len(all_modes) > 0.30:
+            issues.append({
+                "type": "mechanism_other_saturation",
+                "severity": SEVERITY["mechanism_other_saturation"],
+                "msg": f"mode_of_action='other' on {n_other}/{len(all_modes)} mechanisms (>30%) — a family is missing: promote it in resources/registries/mechanism-families.md instead of defaulting to 'other'",
             })
 
     # Count severity

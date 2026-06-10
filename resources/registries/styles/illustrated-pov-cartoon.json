@@ -1,0 +1,84 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "illustrated-pov-cartoon",
+  "display_name": "Cartoon POV illustré",
+  "family": "ai-generated",
+  "typology_st": "variable",
+  "description": "Illustration cartoon dessinée à la main vue en point de vue subjectif (first-person POV) : le spectateur regarde sa propre scène, on voit ses mains/bras tenir le produit, son corps, sa table, son écran, comme s'il vivait la situation. Trait dessiné assumé (linework, aplats, ombrage cel/flat), pas une photo. Sert à mettre le prospect DANS la scène (immersion immédiate, identification sans casting), à raconter une mini-situation relatable (la galère avant / le soulagement après), ou à donner un ton léger et complice qui désamorce un sujet gênant. À éviter dès qu'il faut de la preuve réelle, un perçu premium/clinique, ou un packshot conversion net.",
+  "render_recipe": {
+    "prompt_skeleton": "hand-drawn cartoon illustration, first-person POV (point of view shot looking down/forward from the viewer's eyes), {pov_anchor} visible in foreground holding/using {product}, {scene_context} relatable everyday setting, {subject_action} that dramatizes the {problem_or_benefit}, flat/cel-shaded illustrated style with clean linework and bold color fills, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, deliberately drawn not photographed, single cohesive cartoon style throughout, product label legible and correct",
+    "slots": [
+      { "name": "pov_anchor", "description": "L'ancrage corporel du POV qui crée l'immersion : ce que le spectateur voit de lui-même (ex 'a pair of hands', 'two arms reaching forward', 'hands holding a phone', 'legs and feet on a couch', 'a hand applying the product to skin'). C'est le coeur du style : sans ancrage POV, ce n'est plus subjectif." },
+      { "name": "product", "description": "Le produit réel transposé en illustration cartoon : silhouette et label reconnaissables, tenu ou utilisé par le pov_anchor au premier plan. Le nom de marque doit rester lisible et correctement orthographié." },
+      { "name": "scene_context", "description": "Le décor relatable qui ancre le use-case en vue subjective (ex 'a cluttered desk', 'a bathroom mirror', 'a bed at night', 'a kitchen counter', 'a gym floor'). Vu comme si on y était." },
+      { "name": "subject_action", "description": "L'action ou micro-situation qui dramatise le problème ou le bénéfice (ex 'struggling to open a jar', 'applying the cream and instantly relieved', 'scrolling stressed at 2am'). C'est la narration POV." },
+      { "name": "problem_or_benefit", "description": "Le problème vécu (scène 'avant') ou le bénéfice ressenti (scène 'après') que la situation incarne. Porte l'angle de l'ad." },
+      { "name": "lighting", "description": "Schéma d'ombrage illustré (voir champ lighting par défaut). Lumière dessinée, pas photographique." },
+      { "name": "camera_lens", "description": "Cadrage POV (voir camera_lens). Champ de vision subjectif, premier plan corporel proche." },
+      { "name": "palette_mood", "description": "Palette + mood, alignés sur la charte marque, en aplats cartoon. Levier d'ownabilité de la signature." },
+      { "name": "texture_grain", "description": "Traitement du trait/aplat (voir texture_grain) : linework, cel-shading, halftone léger, pas de grain photo." },
+      { "name": "composition_notes", "description": "Contraintes de compo (POV crédible, espace pour overlay texte, hero produit lisible au premier plan)." }
+    ],
+    "lighting": "Ombrage dessiné à la main, pas de lumière photographique : cel-shading par aplats (zones d'ombre et de lumière franches sur les mains/bras/produit), ou flat-shading léger, highlights peints sur le packaging pour le rendre désirable. Lumière qui sert l'ambiance de la scène (jour froid de salle de bain, lueur chaude de lampe de chevet, glow bleu d'écran la nuit) plutôt que la cohérence physique stricte.",
+    "camera_lens": "Perspective subjective first-person : champ de vision large façon yeux humains (équivalent 24-35mm), premier plan corporel proche (mains/avant-bras qui entrent dans le cadre depuis le bas ou les côtés), point de fuite vers la scène. Léger fish-eye/grand-angle acceptable pour renforcer l'immersion POV. Pas de bokeh optique réaliste : profondeur suggérée par les aplats et le détail du trait (avant-plan net, fond simplifié).",
+    "palette_mood": "Aplats cartoon cohérents, palette limitée et lisible alignée sur la charte marque, accents de couleur pour guider l'oeil vers le produit. Mood complice/léger/relatable par défaut (chaud, optimiste), ou contrasté avant/après (palette terne+désaturée pour la galère, vive+saturée pour le soulagement). Jamais documentaire ni neutre.",
+    "texture_grain": "Rendu illustratif assumé : linework propre (contours visibles ou semi-visibles), aplats de couleur, cel-shading ou flat-shading, éventuellement une trame halftone/grain de papier discrète pour le côté dessiné-main. Aucun grain de capteur photo, aucune imperfection censée mimer le réel. Cohérence du trait sur toute l'image (un seul style de dessin, pas un collage).",
+    "composition_notes": "POV crédible : le pov_anchor (mains/corps) occupe le premier plan et ancre le regard, la scène et le produit se lisent au-delà. Hero produit net et lisible au premier plan, label correct. Negative space réservé pour l'overlay texte. Un seul point focal (produit ou geste clé). Profondeur construite par les couches d'aplats (avant-plan détaillé, fond simplifié). Garder la situation lisible en 1 seconde au scroll."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "resolution": "2K",
+      "guidance": "medium-high pour verrouiller le parti pris dessiné-main et le cadrage POV sans déraper vers le photoréalisme tiède ni vers le rendu 3D lisse",
+      "negative_prompt": "photorealistic, real photograph, 3d render, photoreal human skin, plastic waxy skin, dead glassy eyes, extra fingers, deformed hands, fused fingers, six-finger hands, broken hand anatomy, hallucinated text on label, misspelled brand name, third-person full-body shot, floating disembodied hands, inconsistent line style, multiple conflicting art styles, cluttered incoherent composition, generic default illustration, watermark"
+    },
+    "video_params": {
+      "motion": "Animation 2D dessinée au service de la narration POV : geste des mains au premier plan (saisir, appliquer, ouvrir), parallaxe entre avant-plan corporel et fond simplifié, micro-mouvements de scène, transformation avant/après du décor ou de l'expression. Cadence d'animation cartoon (limited animation type 12 fps assumé OU fluide selon le ton), pas un faux réalisme filmé. Garder le pov_anchor stable et le focal produit lisible.",
+      "duration_s_range": [3, 8],
+      "transitions": "Transitions dessinées assumées : wipes, morph du décor avant/après vu en POV, reveal du produit qui entre dans le champ porté par les mains, swipe de page cartoon. Loopable pour le feed. Éviter les hard cuts secs de code UGC raw ; ici la continuité POV (on ne quitte pas les yeux du spectateur) fait partie de la signature."
+    }
+  },
+  "anti_ai_guardrails": [
+    "POV cassé / vue tierce involontaire : l'IA dérive vers un plan large à la 3e personne (on voit un personnage entier de face) au lieu de la vue subjective. Le pov_anchor (mains/corps du spectateur au premier plan) DOIT être présent, sinon le style est raté.",
+    "Mains/doigts foireux au premier plan : doigts surnuméraires, fondus, collés ou en nombre faux, défaut IA classique ET ici en gros plan central puisque les mains tiennent le produit. Zone de vérif n°1, compter les doigts.",
+    "Mains désincarnées / flottantes : mains qui n'ont pas de bras crédibles qui les relient au point de vue, elles flottent dans le vide et cassent l'illusion 'c'est mon corps'.",
+    "Dérive vers le photoréalisme ou la 3D lisse : si le rendu commence à ressembler à une photo ratée ou à un render 3D, il quitte le code dessiné-main et tombe dans l'uncanny. Le trait cartoon doit être franc et assumé.",
+    "Texte/label halluciné : glyphes inventés ou nom de marque déformé/mal orthographié sur le produit tenu au premier plan, encore plus visible car le packaging est central. Vérifier chaque caractère.",
+    "Incohérence de trait (collage) : zones de l'image dans des styles de dessin différents (un coin réaliste, un coin cartoon plat, un coin esquissé). Le linework et l'ombrage doivent être UN seul style cohérent sur toute l'image.",
+    "Perspective POV incohérente : point de fuite, échelle des mains vs scène, ou ligne d'horizon qui ne tiennent pas ensemble, la vue subjective doit rester géométriquement crédible (mains proches grandes, scène en recul).",
+    "Look générique 'default cartoon AI' : illustration passe-partout sans direction (même palette, mêmes contours épais standards, même tête ronde vue 10 000 fois) sans signature marque. Forcer une palette et un trait ownables.",
+    "Produit méconnaissable : silhouette/packaging tellement simplifié par le cartoon qu'on ne reconnaît plus le hero ni le label. Garder l'identité produit nette au premier plan malgré la stylisation.",
+    "Drift vidéo réaliste : animation qui tente de mimer du filmé réel et échoue (warping des mains, morphing involontaire du décor). Assumer l'animation 2D cartoon plutôt qu'un faux réalisme."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [3, 9],
+    "pairs_well_with": [
+      "graphic-icons-overlay",
+      "brand-motion-graphic",
+      "split-screen-comparison",
+      "claymation-3d-ai",
+      "ai-generated-stylized",
+      "pack-shot-brand-template"
+    ],
+    "avoid_when": [
+      "Marque premium/luxe ou clinique-médicale sérieuse en zone brand-safe basse (0-3) : le cartoon dessiné casse le perçu de prix et la crédibilité d'expertise.",
+      "Angle de preuve/efficacité qui exige du réel (avant/après corps, démo ingrédient, texture produit, testimonial visage) : une illustration ne peut pas porter une allégation factuelle, elle la décrédibilise.",
+      "Catégorie réglementée (santé, finance, compléments) où une mise en scène dessinée d'un bénéfice peut être lue comme allégation non substantiée ou minimisation par la plateforme.",
+      "Besoin d'un hero produit photoréaliste désirable et net (packshot conversion direct) : le traitement cartoon sort le produit de la lecture commerciale photo.",
+      "Quand l'identification à une VRAIE personne porte la conversion (UGC, testimonial castable) : le POV illustré donne de l'immersion mais pas la preuve sociale d'un humain réel à l'écran."
+    ]
+  },
+  "refs": [
+    "Wave créa DTC 2024-2025 : ads cartoon en POV subjectif (on voit ses propres mains tenir/utiliser le produit) pour immersion immédiate et identification sans casting, scroll-stopper léger en feed paid.",
+    "Use-case canon : mini-situation relatable vue à la 1re personne (galère du quotidien au premier plan = scène 'avant', soulagement avec le produit en main = scène 'après'), POV qui met le prospect DANS l'usage.",
+    "À distinguer de claymation-3d-ai (clay 3D fait-main, généralement vue tierce) et de ai-generated-stylized (surréel non-narratif) : ici la signature est le DESSIN cartoon EN vue subjective POV, l'immersion first-person prime."
+  ],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "other",
+  "display_name": "Autre (echappatoire)",
+  "family": "other",
+  "typology_st": "variable",
+  "description": "Catch-all generique pour tout style visuel/video qui ne tombe dans aucun des 21 styles cataloges. C'est une ECHAPPATOIRE de tagging, pas un vrai style: choisir 'other' veut dire que le bon style n'existe pas encore dans le registre OU n'a pas ete reconnu. A remplacer des que possible par le style precis (creer une nouvelle fiche si le pattern revient >=2 fois sur des sources independantes, via library-pattern pattern_type 'visual-style'). Tant qu'on est sur 'other', la recette reste deliberement minimale: on decrit le rendu voulu en clair plutot que de s'appuyer sur des reglages craft specifiques.",
+  "render_recipe": {
+    "prompt_skeleton": "{visual_description} of {subject}, in a {style_reference} visual style, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}. High craft, intentional and coherent rendering aligned with the brand creative direction, clean readable product, no AI tells.",
+    "slots": [
+      { "name": "visual_description", "description": "Description en clair du rendu voulu, en langage naturel, puisqu'aucune recette specifique n'existe (ex 'a hand-drawn marker sketch', 'a retro VHS-grade ad', 'a knolling flatlay'). C'est ici que se loge ce que le style cataloge ne couvre pas." },
+      { "name": "subject", "description": "Le sujet principal: produit, personne, scene, objet. Garder lisible et au centre de l'intention de l'ad." },
+      { "name": "style_reference", "description": "Reference de style la plus proche qu'on puisse nommer (mouvement, technique, medium, ere, artiste-genre generique sans copier une marque). Sert d'ancre au modele." },
+      { "name": "lighting", "description": "Lumiere voulue en clair (douce/dure, naturelle/studio, direction). Renseigner au runtime, pas de defaut impose sur un catch-all." },
+      { "name": "camera_lens", "description": "Cadrage/objectif ou point de vue voulu (ou 'n/a' si rendu non photographique). Renseigner au runtime." },
+      { "name": "palette_mood", "description": "Palette et ambiance alignees charte marque. Renseigner au runtime." },
+      { "name": "texture_grain", "description": "Texture/grain/finish voulu (mat, grain film, aplats nets, papier...). Renseigner au runtime." },
+      { "name": "composition_notes", "description": "Cadrage, hierarchie, espace pour overlay copy, ratio cible. Renseigner au runtime." }
+    ],
+    "lighting": "A definir au runtime selon le rendu vise (aucun defaut impose: 'other' ne presume pas d'un eclairage type).",
+    "camera_lens": "A definir au runtime, ou 'n/a' pour un rendu non photographique.",
+    "palette_mood": "A definir au runtime, toujours aligne sur la charte de la marque.",
+    "texture_grain": "A definir au runtime selon le medium decrit dans visual_description.",
+    "composition_notes": "Garder le sujet lisible et l'intention de l'ad claire; reserver de l'espace pour l'overlay copy si la frame en porte; respecter le ratio du placement (4:5 feed, 9:16 stories, 1:1 catalogue)."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "medium",
+      "notes": "Defaut image generique. Comme le style est inconnu, garder guidance medium et iterer: monter le guidance si on veut verrouiller une reference de style nette, le baisser pour laisser le modele interpreter. Si le rendu vise est temporel/anime, basculer sur le bras video (voir video_params) plutot que de forcer une frame fixe."
+    },
+    "video_params": {
+      "motion": "A definir selon le rendu vise (subtil/marque vs dynamique/native-feed). Aucun mouvement type impose par un catch-all.",
+      "duration_s_range": [3, 8],
+      "transitions": "Cut franc par defaut; cross-dissolve seulement si le rendu le justifie. A specifier au runtime."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Garde-fous generiques tous styles: texte/logo/packaging hallucine (glyphes inventes, fautes, marque deformee) sur tout element portant du texte, verifier au pixel.",
+    "Anatomie/mains fausses des qu'un humain ou une main apparait: doigts surnumeraires ou fusionnes, membres en trop, regard mort, asymetrie non voulue.",
+    "Incoherence physique: ombres et reflets qui ne suivent pas la source de lumiere, double ombre, perspective cassee, objets qui se fondent les uns dans les autres.",
+    "Look 'AI generique' par defaut (sur-lissage, plastique cireux, sur-saturation HDR, symetrie parfaite) qui trahit l'absence d'une vraie direction de style.",
+    "Derive hors charte: palette, ton ou ambiance qui s'eloignent de la DA de la marque parce que le style n'est pas cadre.",
+    "ALERTE TAGGING (a remonter par qc-creative): si l'asset matche en realite un des 21 styles cataloges, ne pas laisser 'other' -> re-tagger avec le bon primary_style_id. 'other' n'est legitime que pour un style genuinement absent du registre.",
+    "Style indecis / bouillie visuelle: faute de recette, le rendu melange plusieurs esthetiques sans intention. Exiger UN parti pris clair via visual_description + style_reference."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 10],
+    "pairs_well_with": [],
+    "avoid_when": [
+      "Un des 21 styles cataloges decrit deja le rendu voulu: utiliser CE style, pas 'other' (l'echappatoire degrade le pilotage du prompt et la qualite du QC).",
+      "Production a fort enjeu (creative principale, gros budget paid) ou la qualite craft doit etre garantie: un style sans recette n'offre aucun garde-fou specifique, fiabiliser d'abord en definissant un vrai style.",
+      "Le pattern 'other' revient plusieurs fois sur des assets similaires: signal qu'il faut promouvoir une nouvelle fiche de style dediee plutot que rester sur le catch-all."
+    ]
+  },
+  "refs": [],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

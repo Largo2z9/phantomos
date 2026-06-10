@@ -1,0 +1,79 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.0",
+  "released_at": "2026-06-07",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 81,
+  "skills_count_after": 81,
+  "schemas_new": [
+    "decomposition.schema.json (decomposition/1.2)",
+    "genome.schema.json (genome/1.1)",
+    "genome-package.schema.json (genome-package/1.2)",
+    "library-pattern.schema.json (library-pattern/1.0)",
+    "produced-asset.schema.json (produced-asset/1.0)"
+  ],
+  "schemas_modified": [
+    "creative.schema.json (1.2 -> 1.4 · lineage{} + variant_of CRT|RCV + performance ouvert + mecanique_ref)"
+  ],
+  "summary": "Sprint MINOR v2.89.0 · LA CHAINE DE PRODUCTION CREATIVE CABLEE + RECONCILIATION TAXO 2-GRAINS. Deux blocs. (A) Operationnalisation chaine crea (Phase 0 + Brique 4) : gate write-to-context + mutation-guard elargis (creatives/ CRT + competitive-intel/ RCV + resources/concepts|registries|canon · invariant gate⊆guard) · stockage par batch (scale 10k) · 5 schemas backstop (decomposition support-agnostic 1.2 · genome 1.1 · genome-package 1.2 · library-pattern 1.0 · produced-asset 1.0) · 5 skills de prod repathes (decompose-ad 2.4.0 · compose-creative · recompose-creative · adapt-from-competitor · import-asset asset-library). (B) Reconciliation taxonomie mecaniques (D#488-491) : modele 2-GRAINS acte = mecanique AD-LEVEL (le CONCEPT · creative-mechanics-registry SSOT · roi pour l'IMAGE car spatial) × mecanique HOOK-LEVEL (l'accroche · registries/hooks/ · territoire VIDEO car temporel). NEW champ decomposition.mecanique + genome_tags.mecanique_id (le chainon manquant · forward+reverse cables · round-trip A=B verifie). NEW bibliotheque hooks cross-brand (16 fiches library-pattern promote-ready + README declarant le hook-mechanics-registry orphelin) + concept timeline-result-ladder + creative-mechanics-registry enrichi (+3 graduations point-out/stat-claim/question-reponse + evidence index). Doctrine cross-brand-curation (garde-fou >=2 sources independantes) + perf-feedback-loop + creative-storage. Audit OS 11-agents passe (1 critical ferme + hardening). Backward compat strict additif · champs optionnels · 0 suppression breaking.",
+  "changes": {
+    "schemas": [
+      "+decomposition 1.2",
+      "+genome 1.1",
+      "+genome-package 1.2",
+      "+library-pattern 1.0",
+      "+produced-asset 1.0",
+      "~creative 1.4"
+    ],
+    "skills_modified": [
+      "decompose-ad 2.4.0",
+      "compose-creative 1.9.0",
+      "recompose-creative 1.4.0",
+      "adapt-from-competitor 2.0.0",
+      "import-asset (asset-library align)",
+      "import-meta-results 2.0.0"
+    ],
+    "registries_libraries": [
+      "NEW registries/hooks/ (16 fiches + README)",
+      "NEW concepts/timeline-result-ladder",
+      "NEW creative-mechanics-evidence.md",
+      "~creative-mechanics-registry (+3 graduations + pointeur evidence)"
+    ],
+    "docs_sops": [
+      "NEW sops/creative-production/cross-brand-curation.md",
+      "NEW sops/creative-production/perf-feedback-loop.md",
+      "NEW conventions/creative-storage.md"
+    ],
+    "gate_guard": [
+      "write-to-context.py ALLOWED_PATH_PATTERNS elargi",
+      "mutation-guard.py PROTECTED_GLOBS += canon (BUG-RESOURCES-UNGUARDED ferme)"
+    ]
+  },
+  "two_grain_reconciliation": {
+    "ad_level": "creative-mechanics-registry (concept · image=spatial)",
+    "hook_level": "registries/hooks/ (accroche · video=temporel)",
+    "bridge": "decomposition.mecanique <-> genome_tags.mecanique_id (round-trip A=B verifie jsonschema)"
+  },
+  "tests_non_regression": {
+    "round_trip_A_B": "PASS (genome_tags{mecanique_id+dialogue-chat-screenshot} passe genome-package)",
+    "gate_subset_guard": "PASS (canon+asset-library+concepts allowed&protected)",
+    "schemas_json_valid": "PASS (6/6)",
+    "skills_yaml": "PASS (manifest 81, 0 drop)",
+    "corpus_rd": "342/342 decompos valides (R&D _reference, hors release)"
+  },
+  "decisions_captured": "D#476-491 (montage doctrine · contrat A=B · blueprint · Phase 0 · seed corpus · reconciliation taxo · audit+hardening)",
+  "out_of_scope_noted": [
+    "fiches-archetypes (registries/archetypes/ absente · cote A)",
+    "asset-library producteur (P0 · nom canonique tranche)",
+    "corpus hook over-projection statiques (arbitrage)",
+    "batchs video a fournir (axe hook/temporel non encore exerce)"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.0",
+    "push (operateur)",
+    "valider runtime sur workspace test v287+"
+  ]
+}

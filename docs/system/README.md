@@ -1,6 +1,6 @@
 # docs/system · index doctrines canon
 
-Index navigable des 27 doctrines canon shipped PhantomOS pour skill-authors et contributeurs. CLAUDE.md root pointe ici pour la liste exhaustive · runtime LLM n'a pas besoin de cet inventaire en contexte.
+Index navigable des 28 doctrines canon shipped PhantomOS pour skill-authors et contributeurs. CLAUDE.md root pointe ici pour la liste exhaustive · runtime LLM n'a pas besoin de cet inventaire en contexte.
 
 Pour les docs architecture (spec technique · contrats · patterns · cookbook · extending) cf section finale.
 
@@ -20,6 +20,7 @@ Contextual Intelligence est la doctrine racine. Toutes les autres doctrines la s
 ## Cartographie & substrate
 
 - **Compositional Cartography** (v3.1) · `compositional-cartography.md` · équation LIVRABLE = NOYAU × CONTEXTE × MODIFIEURS · 4 arbres + matrice + modulateurs · implémentation domaine-spécifique de CMR au créatif
+- **Creative Axis Canonicalization Doctrine** (v2.88.0) · `creative-axis-canonicalization-doctrine.md` · hiérarchie créative 4 niveaux (brand promise → big idea → axe créatif → créa instance) + mapping workflow A ↔ équation v3.1
 - **Canonical Matrix Reasoning** · `canonical-matrix-reasoning.md` · schema + canon matrix = cohérence output 95% · cardinality cap · internal scoring · modulator/cell
 - **Audiences Cartography** (v2.64) · `audience-cartography.md` · parent/enfants sémantique pure · 4 mouvements + 3 axes · hand-off pédagogique vers mine-voc
 - **Pain Benefit Chain** (v2.79.4) · `pain-benefit-chain.md` · functional · identity · emotional · aspirational · chaînage canonique douleur/bénéfice pour audience et copy

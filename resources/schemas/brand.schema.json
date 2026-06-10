@@ -2,8 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Brand",
   "description": "Per-brand identity, positioning, financials, market context. Lives in brands/{slug}/brand.json. v2.1+: purchase_driver default + audience_trees[] for marketplaces. v2.2+: brand_equity_level + creative_zone (canon V3 §3, §4.3).",
-  "_schema_version": "brand/2.4",
+  "_schema_version": "brand/2.5",
   "_changelog": {
+    "2.5": "C1 onboarding-native (D#500) · strict additif : root map _extraction (provenance mécanique, $ref _shared/extraction-provenance.json). FLAG (non corrigé, arbitrage A9 hors batch) : market.meta.confidence est en échelle 0-100, incohérent avec le canon 0-1 (validation-state, extraction_confidence) · ne pas propager le 0-100.",
     "2.4": "v2.57 Notion stride-up follow-up + hybrid business support · identity.business_model enum (DTC/service/hybrid/subscription/marketplace) + identity.business_model_signals (object avec physical_locations_detected/services_detected/products_detected/revenue_split_estimated/declared_by_operator). Drive le rendering /phantom contextuel par modèle business. Backward compat strict additif (default DTC implicite pour brands pre-v2.57).",
     "2.3": "v2.56 Notion stride-up parity · meta.validation_status $ref _shared/validation-status (composite avec meta.status existant). Backward compat strict additif."
   },
@@ -13,6 +14,11 @@
     "_schema": { "type": "string" },
     "_version": { "type": "string" },
     "_field_types": { "type": "object", "additionalProperties": { "type": "string" } },
+    "_extraction": {
+      "type": "object",
+      "additionalProperties": { "$ref": "_shared/extraction-provenance.json" },
+      "description": "Provenance mécanique (C1). Clé = glob field path (mêmes patterns que _field_types) ou chemin exact pour granularité per-item."
+    },
 
     "purchase_driver": {
       "description": "Brand-level default purchase driver. Cascades to audience profiles unless overridden. See research/profile-v2.0-proposal/drivers-presets.md for taxonomy. Set to 'mixed' for brands with two distinct driver populations (requires audience_trees[] for marketplaces).",
@@ -32,8 +38,8 @@
     },
 
     "brand_equity_level": {
-      "type": "string",
-      "enum": ["low", "medium", "high"],
+      "type": ["string", "null"],
+      "enum": ["low", "medium", "high", null],
       "description": "Force de reconnaissance brand. low = besoin hook + angle + proof empilés (brands < 6 mois). medium = hook ou angle peuvent porter seuls (niches établies). high = logo seul suffit (Apple, Liquid Death). Détermine le curseur copy/visual viable et l'optionalité du concept dans creative.schema. Référence canon V3 §4.3."
     },
 
@@ -41,9 +47,9 @@
       "type": "object",
       "description": "Zone du curseur copy/visual 0-10 où les créas de cette brand gravitent. Observé empiriquement après N créas décomposées. Permet aux skills creative-strategist de calibrer leurs outputs. Référence canon V3 §3.",
       "properties": {
-        "min": { "type": "integer", "minimum": 0, "maximum": 10 },
-        "max": { "type": "integer", "minimum": 0, "maximum": 10 },
-        "dominant": { "type": "integer", "minimum": 0, "maximum": 10, "description": "Curseur médian observé. Sert de défaut pour produce-paid-angles." },
+        "min": { "type": ["integer", "null"], "minimum": 0, "maximum": 10 },
+        "max": { "type": ["integer", "null"], "minimum": 0, "maximum": 10 },
+        "dominant": { "type": ["integer", "null"], "minimum": 0, "maximum": 10, "description": "Curseur médian observé. Sert de défaut pour produce-paid-angles." },
         "_observed_on_n_creatives": { "type": "integer", "description": "Nombre de créas décomposées qui ont alimenté cette zone. <10 = hypothèse." }
       }
     },
@@ -147,6 +153,21 @@
       }
     },
 
+    "brand_da": {
+      "type": "object",
+      "description": "Direction Artistique de marque (parti-pris esthetique reutilisable). Distinct de tone_of_voice (verbal) et de visual_identity produit (assets bruts). Lu par compose + qc-creative pour choisir un style_id coherent (registries/styles/) et tenir la coherence DA. allowed_style_ids pioche dans l'enum SSOT des 22 styles (genome.schema/decomposition.schema).",
+      "additionalProperties": false,
+      "properties": {
+        "palette_mood": { "type": "string", "description": "Ambiance chromatique (ex 'orange vif sature + blanc casse, chaleureux')." },
+        "accent_color": { "type": "string", "description": "Couleur accent signature (hex ou nom)." },
+        "grain_texture": { "type": "string", "description": "Grain/texture/finition recurrente." },
+        "do": { "type": "array", "items": { "type": "string" }, "description": "Codes DA a tenir." },
+        "dont": { "type": "array", "items": { "type": "string" }, "description": "Codes DA a bannir." },
+        "allowed_style_ids": { "type": "array", "items": { "type": "string" }, "description": "style_id autorises pour cette marque (sous-ensemble de l'enum 22 des registries/styles/). compose choisit dedans, qc-creative warn si hors liste." },
+        "creative_zone": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 10 }, "minItems": 2, "maxItems": 2, "description": "Fourchette [min,max] du curseur creative_zone de marque (0 ultra-propre brand-safe, 10 raw/agressif)." }
+      }
+    },
+
     "proofs": {
       "type": "object",
       "properties": {
@@ -164,7 +185,8 @@
     "social_media": {
       "type": "object",
       "properties": {
-        "_notes": {}
+        "_notes": {},
+        "$comment": { "type": "string" }
       },
       "additionalProperties": {
         "type": "object",
@@ -182,15 +204,21 @@
         "_notes": {}
       },
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "account_id": { "type": ["string", "null"] },
-          "pixel_id": { "type": ["string", "null"] },
-          "catalog_id": { "type": ["string", "null"] },
-          "store_url": { "type": "string" },
-          "list_id": { "type": ["string", "null"] },
-          "active": { "type": "boolean" }
-        }
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "account_id": { "type": ["string", "null"] },
+              "pixel_id": { "type": ["string", "null"] },
+              "catalog_id": { "type": ["string", "null"] },
+              "store_url": { "type": "string" },
+              "list_id": { "type": ["string", "null"] },
+              "active": { "type": "boolean" }
+            }
+          },
+          { "type": "null", "$comment": "platform not connected yet" },
+          { "type": "string", "$comment": "plain URL shorthand (e.g. shopify_url)" }
+        ]
       }
     },
 

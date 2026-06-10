@@ -1,0 +1,1510 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "decomposition.schema.json",
+  "title": "Decomposition (reverse analysis of ONE ad — competitor benchmark or internal QC)",
+  "description": "DECOMPOSITION d'UNE ad (reverse). Vit a brands/{slug}/competitive-intel/{batch}/{RCV-NN}/decomposition.json (benchmark concurrent) OU sert le QC interne. Miroir reverse du genome-package (forward). audio+edit optionnels (support-agnostic).",
+  "type": "object",
+  "version": "1.3.0",
+  "required": [
+    "meta",
+    "identification",
+    "script",
+    "visual",
+    "analysis_meta"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Schema metadata · versioning + traceability",
+      "required": [
+        "schema_version",
+        "analysis_date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "enum": ["1.0.0", "1.1.0", "1.2.0", "1.3.0"]
+        },
+        "analysis_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "analyst": {
+          "type": "string",
+          "description": "Claude session id OR human analyst name"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "identification": {
+      "type": "object",
+      "description": "Video identification · file + source + targeting metadata",
+      "required": [
+        "video_id",
+        "brand_slug",
+        "support",
+        "video_meta"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "video_id": {
+          "type": "string",
+          "description": "Unique id · prefer Meta ad_id if known · else filename"
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "video",
+            "static",
+            "carousel-card",
+            "carousel-set",
+            "gif-animated",
+            "cinemagraph",
+            "other"
+          ],
+          "description": "Type de support de l'ad. Conditionne quels blocs s'appliquent · un statique n'a ni audio, ni edit, ni timeline (body_arc encode l'ordre de lecture via beat_id, start_s/end_s omis)."
+        },
+        "video_file_path": {
+          "type": "string"
+        },
+        "brand_slug": {
+          "type": "string",
+          "description": "PhantomOS brand workspace slug · ex 'glp1sos' · 'stepprs'"
+        },
+        "advertiser_id_fb": {
+          "type": "string",
+          "description": "Facebook Page ID"
+        },
+        "source_platform": {
+          "type": "string",
+          "enum": [
+            "meta-ads-library",
+            "tiktok-creative-center",
+            "trendtrack-export",
+            "manual-upload",
+            "youtube-ads",
+            "other"
+          ]
+        },
+        "url_meta_ad_library": {
+          "type": "string",
+          "format": "uri"
+        },
+        "countries_targeted": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2"
+          }
+        },
+        "placement_inferred": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "reels",
+              "stories",
+              "feed",
+              "audience-network",
+              "marketplace",
+              "search",
+              "in-stream",
+              "tiktok-feed",
+              "tiktok-spark",
+              "other"
+            ]
+          }
+        },
+        "video_meta": {
+          "type": "object",
+          "required": [
+            "aspect_ratio"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "duration_s": {
+              "type": "number",
+              "minimum": 0
+            },
+            "width_px": {
+              "type": "integer"
+            },
+            "height_px": {
+              "type": "integer"
+            },
+            "aspect_ratio": {
+              "type": "string",
+              "enum": [
+                "9:16",
+                "1:1",
+                "4:5",
+                "16:9",
+                "4:3",
+                "2:3",
+                "3:4",
+                "custom"
+              ]
+            },
+            "fps": {
+              "type": "number"
+            },
+            "file_size_kb": {
+              "type": "integer"
+            }
+          }
+        },
+        "timeline_external": {
+          "type": "object",
+          "description": "Meta Ad Library lifecycle data if available · optional",
+          "additionalProperties": false,
+          "properties": {
+            "date_first_seen": {
+              "type": "string",
+              "format": "date"
+            },
+            "date_last_seen": {
+              "type": "string",
+              "format": "date"
+            },
+            "days_active_current": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "script": {
+      "type": "object",
+      "description": "Narrative structure · transcript + hook + body arc + cta · SCRIPT scope (D#2026-05-25 SCRIPT vs PRODUCTION split)",
+      "required": [
+        "transcript_full",
+        "language",
+        "hook"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "transcript_full": {
+          "type": "string"
+        },
+        "transcript_source": {
+          "type": "string",
+          "enum": [
+            "groq-whisper-large-v3-turbo",
+            "groq-whisper-large-v3",
+            "openai-whisper",
+            "manual-transcription",
+            "meta-captions-extracted",
+            "other"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "description": "BCP-47 · 'en', 'es', 'fr', etc."
+        },
+        "script_word_count": {
+          "type": "integer"
+        },
+        "script_words_per_second": {
+          "type": "number"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "start_s",
+              "end_s",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "start_s": {
+                "type": "number"
+              },
+              "end_s": {
+                "type": "number"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "hook": {
+          "type": "object",
+          "required": [
+            "mechanic_id",
+            "hook_text_first_15_words"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "mechanic_id": {
+              "type": "string",
+              "description": "Référence à hook-mechanics-registry (NEW canon) · ~25-40 mécaniques canonisées · à raffiner cross-N",
+              "enum": [
+                "paradox-testimonial",
+                "confrontation-rhetorical",
+                "listicle-curiosity",
+                "false-solution-debunking",
+                "authority-demolition",
+                "mechanism-reveal",
+                "resolution-promise",
+                "social-relational-pain",
+                "hidden-secret-framing",
+                "doctor-dialogue",
+                "taboo-signal",
+                "visceral-specific-testimony",
+                "negative-command",
+                "pov-illustrated-humor",
+                "allegory-romance",
+                "macro-graphic-icons",
+                "before-after-timeline",
+                "pricing-anchor",
+                "testimonial-paradox-numeric",
+                "scientific-claim-reveal",
+                "competitor-comparison-explicit",
+                "category-of-one-claim",
+                "if-then-conditional-hook",
+                "rhetorical-shock-question",
+                "other-uncategorized"
+              ]
+            },
+            "hook_text_first_15_words": {
+              "type": "string"
+            },
+            "hook_text_first_3s": {
+              "type": "string"
+            },
+            "hook_skeleton_inferred": {
+              "type": "string",
+              "description": "Skeleton paramétrique inféré · ex '[positive_outcome] on my [object], but [negative_paradox]'"
+            },
+            "hook_atlas_slots": {
+              "type": "object",
+              "description": "Slots remplis depuis atlas brand · ex { positive_outcome: 'Down 20 lbs', object: 'GLP-1', paradox: 'bloated like pregnant' }",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "hook_overlay_color_accent": {
+              "type": "string",
+              "description": "Couleur d'accent overlay hook · ex 'dark-green', 'red', 'white-default'"
+            },
+            "hook_visual_style_first_shot": {
+              "type": "string",
+              "description": "Reference vers visual.styles_observed[].style_id"
+            },
+            "hook_emoji_present": {
+              "type": "boolean"
+            }
+          }
+        },
+        "body_arc": {
+          "type": "array",
+          "description": "Decomposition narrative en beats canoniques · plus le découpage est fin, plus l'extraction pattern est précise. start_s/end_s OPTIONNELS (vidéo) · un statique encode l'ordre via beat_id sans timestamps.",
+          "items": {
+            "type": "object",
+            "required": [
+              "beat_id",
+              "beat_type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "beat_id": {
+                "type": "integer"
+              },
+              "start_s": {
+                "type": "number"
+              },
+              "end_s": {
+                "type": "number"
+              },
+              "duration_s": {
+                "type": "number"
+              },
+              "beat_type": {
+                "type": "string",
+                "enum": [
+                  "hook",
+                  "pain-litany",
+                  "pain-amplification",
+                  "authority-demolition",
+                  "false-solution-rebuttal",
+                  "mechanism-reveal",
+                  "solution-direction",
+                  "ingredients-pillars",
+                  "competitor-comparison",
+                  "product-reveal",
+                  "product-specs",
+                  "resolution-timeline",
+                  "benefit-lifestyle",
+                  "social-proof",
+                  "scientific-claim",
+                  "guarantee-statement",
+                  "cta",
+                  "disclaimer",
+                  "transition",
+                  "loop-callback"
+                ]
+              },
+              "narrative_purpose": {
+                "type": "string"
+              },
+              "key_phrases": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linked_atlas_pain_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linked_atlas_mechanism_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linked_atlas_objection_ids": {
+                "type": "array",
+                "description": "OBJ-NN canoniques adresses par ce beat (D#492). A renseigner surtout quand beat_type = 'false-solution-rebuttal' (ou authority-demolition / competitor-comparison) = le grain ou l'objection apparait REELLEMENT dans la pub. Symetrique de linked_atlas_pain_ids. L'objection n'est PAS un axe de la pub entiere (pas systematique) : elle vit au beat qui la traite, et globalement dans l'angle (lineage.objection_ref).",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linked_atlas_ingredient_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linked_atlas_competitor_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "visual_style_during": {
+                "type": "string",
+                "description": "Reference vers visual.styles_observed[].style_id"
+              }
+            }
+          }
+        },
+        "cta": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start_s": {
+              "type": "number"
+            },
+            "end_s": {
+              "type": "number"
+            },
+            "duration_s": {
+              "type": "number"
+            },
+            "format_type": {
+              "type": "string",
+              "enum": [
+                "brand-end-card",
+                "pack-shot-cta",
+                "text-overlay-only",
+                "multi-element-stack",
+                "domain-only-card",
+                "tagline-bottle-domain",
+                "tagline-bottle-mbg-seal",
+                "other"
+              ]
+            },
+            "copy_keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "urgency_elements": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "ex 'TODAY ONLY', 'ENDS MIDNIGHT'"
+            },
+            "mbg_seal_present": {
+              "type": "boolean"
+            },
+            "domain_visible": {
+              "type": "string",
+              "description": "Le domain s'il est visible · empty string sinon"
+            },
+            "pricing_visible": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "primary": {
+                  "type": "string"
+                },
+                "strike_through": {
+                  "type": "string"
+                },
+                "discount_pct": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "proprietary_vocabulary": {
+          "type": "array",
+          "description": "Termes brand-specific · ex 'GLP-1 Fog', 'Clockwork Mornings', 'Sulphur Burps Defense'",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "term": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "pain-anchor",
+                  "ingredient",
+                  "competitor-name",
+                  "brand-name",
+                  "benefit-name",
+                  "mechanism-concept",
+                  "audience-self-label",
+                  "other"
+                ]
+              },
+              "frequency": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "compliance_disclaimers_visible": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fda-dramatization",
+              "fda-not-evaluated",
+              "not-affiliated-brand",
+              "individual-results-vary",
+              "medical-disclaimer",
+              "age-restriction",
+              "consult-doctor",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "description": "Production observable · styles + character + anatomy + pack shot + end card + text overlays · PRODUCTION scope",
+      "required": [
+        "styles_observed",
+        "character_pattern"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format_orientation": {
+          "type": "string",
+          "enum": [
+            "vertical-9-16",
+            "square-1-1",
+            "vertical-4-5",
+            "horizontal-16-9",
+            "vertical-2-3",
+            "horizontal-3-4",
+            "other"
+          ]
+        },
+        "styles_observed": {
+          "type": "array",
+          "description": "Inventaire des styles visuels distincts utilisés dans cette vidéo. Une vidéo factory mix typiquement 3-4 styles.",
+          "items": {
+            "type": "object",
+            "required": [
+              "style_id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "style_id": {
+                "type": "string",
+                "enum": [
+                  "real-photo-lifestyle",
+                  "real-photo-testimonial-static",
+                  "real-photo-product-studio",
+                  "real-photo-macro-detail",
+                  "ugc-selfie-talking",
+                  "claymation-3d-ai",
+                  "illustrated-pov-cartoon",
+                  "3d-anatomy-realistic",
+                  "3d-anatomy-stylized",
+                  "3d-anatomy-xray",
+                  "stock-footage-broll",
+                  "pack-shot-brand-template",
+                  "brand-motion-graphic",
+                  "macro-photo-mouth-skin-etc",
+                  "graphic-icons-overlay",
+                  "split-screen-comparison",
+                  "screen-recording-mockup",
+                  "diagram-medical-2d",
+                  "stop-motion-physical",
+                  "ai-generated-realistic-photo",
+                  "ai-generated-stylized",
+                  "other"
+                ]
+              },
+              "palette_description": {
+                "type": "string",
+                "description": "Texture / couleurs / mood · ex 'warm-organic-orange', 'cold-blue-clinical'"
+              },
+              "beats_associated": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "approx_shot_count": {
+                "type": "integer"
+              },
+              "evidence_frame_paths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "character_pattern": {
+          "type": "object",
+          "required": [
+            "character_archetype"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "character_archetype": {
+              "type": "string",
+              "description": "Pattern d'archétype révélé N=3 · stratégie identification audience",
+              "enum": [
+                "single-character-multi-settings",
+                "single-couple-multi-settings",
+                "multi-characters-parallel",
+                "no-character-anatomy-only",
+                "talking-head-single",
+                "talking-head-multi",
+                "animated-non-human-character",
+                "narrator-author-only-voice",
+                "dialogue-chat-screenshot",
+                "split-before-after",
+                "other"
+              ]
+            },
+            "character_age_target_inferred": {
+              "type": "string",
+              "enum": [
+                "young-20-30",
+                "adult-30-40",
+                "mid-life-40-50",
+                "senior-50-65",
+                "senior-65plus",
+                "multi-age",
+                "ambiguous"
+              ]
+            },
+            "character_gender_visible": {
+              "type": "string",
+              "enum": [
+                "female",
+                "male",
+                "mixed",
+                "none-visible",
+                "animated-ambiguous"
+              ]
+            },
+            "character_consistency_across_shots": {
+              "type": "string",
+              "enum": [
+                "strict-same-person",
+                "costume-consistent-different-shots",
+                "same-archetype-different-actors",
+                "varied-multi-persona",
+                "n-a"
+              ]
+            },
+            "talking_head_present": {
+              "type": "boolean"
+            },
+            "lipsync_present": {
+              "type": "boolean"
+            },
+            "voiceover_present": {
+              "type": "boolean"
+            }
+          }
+        },
+        "anatomy_3d": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "present": {
+              "type": "boolean"
+            },
+            "placement_beats": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "beat_ids où anatomy 3D apparaît"
+            },
+            "palette": {
+              "type": "string",
+              "enum": [
+                "organic-orange",
+                "stop-motion-claymation",
+                "blue-xray-transparent",
+                "medical-white-clean",
+                "stylized-cartoon",
+                "other"
+              ]
+            },
+            "shot_count": {
+              "type": "integer"
+            },
+            "duration_total_s": {
+              "type": "number"
+            },
+            "style_class": {
+              "type": "string",
+              "enum": [
+                "realistic-medical",
+                "stylized-friendly",
+                "claymation-physical",
+                "2d-illustrated",
+                "ai-generated",
+                "other"
+              ]
+            }
+          }
+        },
+        "pack_shot": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "present": {
+              "type": "boolean"
+            },
+            "reuse_id": {
+              "type": "string",
+              "description": "Identifier cross-vidéo · si setup identique observé dans autre vidéo · null sinon"
+            },
+            "style_class": {
+              "type": "string",
+              "enum": [
+                "photo-studio-real-clean",
+                "photo-studio-real-context",
+                "animated-3d-rotation",
+                "brand-illustrated",
+                "in-context-scene",
+                "macro-product-detail",
+                "other"
+              ]
+            },
+            "shot_count": {
+              "type": "integer"
+            },
+            "bottle_visible": {
+              "type": "boolean"
+            },
+            "capsules_visible": {
+              "type": "boolean"
+            }
+          }
+        },
+        "end_card": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "present": {
+              "type": "boolean"
+            },
+            "variant_id": {
+              "type": "string",
+              "description": "Identifier de template end card · ex 'brand-template-tagline-A', 'mbg-seal-variant-B'"
+            },
+            "tagline_text": {
+              "type": "string"
+            },
+            "domain_visible": {
+              "type": "string"
+            },
+            "mbg_seal_present": {
+              "type": "boolean"
+            },
+            "logo_visible": {
+              "type": "boolean"
+            },
+            "duration_s": {
+              "type": "number"
+            },
+            "ai_indicators_present": {
+              "type": "boolean",
+              "description": "ex text rendering anomalies, label flou, etc. · flag pour signal stack production"
+            }
+          }
+        },
+        "text_overlays": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "style_class": {
+              "type": "string",
+              "enum": [
+                "pills-bottom",
+                "captions-bottom-narrow",
+                "kinetic-typography",
+                "static-text-corners",
+                "meme-style-top-bottom",
+                "varying-styles",
+                "no-overlays"
+              ]
+            },
+            "position_dominant": {
+              "type": "string",
+              "enum": [
+                "center-bottom",
+                "center-top",
+                "center-middle",
+                "varying"
+              ]
+            },
+            "font_family_observed": {
+              "type": "string"
+            },
+            "accent_color_count": {
+              "type": "integer"
+            },
+            "sync_to_voice": {
+              "type": "boolean"
+            },
+            "avg_words_per_overlay": {
+              "type": "number"
+            },
+            "avg_overlay_duration_s": {
+              "type": "number"
+            },
+            "auto_caption_tool_inferred": {
+              "type": "string",
+              "enum": [
+                "captions-ai",
+                "submagic",
+                "opus-clip",
+                "veed",
+                "kapwing",
+                "manual",
+                "unknown"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "description": "Voice + music + audio stack",
+      "additionalProperties": false,
+      "properties": {
+        "voice_modality_dominant": {
+          "type": "string",
+          "enum": [
+            "voiceover-only",
+            "talking-head-only",
+            "mixed-voiceover-and-talking",
+            "text-only-no-voice"
+          ]
+        },
+        "music_present": {
+          "type": "boolean"
+        },
+        "music_genre_inferred": {
+          "type": "string",
+          "enum": [
+            "low-key-emotional",
+            "upbeat-pop",
+            "clinical-corporate",
+            "dramatic-cinematic",
+            "ambient",
+            "tension-suspense",
+            "documentary-warm",
+            "none",
+            "other"
+          ]
+        },
+        "music_provider_hypothesis": {
+          "type": "string",
+          "enum": [
+            "epidemic-sound",
+            "artlist",
+            "musicbed",
+            "soundstripe",
+            "uppbeat",
+            "youtube-library",
+            "unknown"
+          ]
+        },
+        "voice_gender": {
+          "type": "string",
+          "enum": [
+            "female",
+            "male",
+            "mixed-multi",
+            "none"
+          ]
+        },
+        "voice_age_inferred": {
+          "type": "string",
+          "enum": [
+            "young",
+            "adult",
+            "mature",
+            "senior",
+            "varied"
+          ]
+        },
+        "voice_accent": {
+          "type": "string",
+          "enum": [
+            "american-neutral",
+            "american-southern",
+            "british-rp",
+            "australian",
+            "french",
+            "spanish",
+            "european-neutral",
+            "other",
+            "unidentified"
+          ]
+        },
+        "voice_emotional_tone": {
+          "type": "string",
+          "enum": [
+            "neutral-narrative",
+            "empathic-caring",
+            "authoritative-confident",
+            "confessional-vulnerable",
+            "enthusiastic-excited",
+            "clinical-detached",
+            "conversational-friendly",
+            "other"
+          ]
+        },
+        "voice_clone_inferred": {
+          "type": "boolean",
+          "description": "Indices voice clone · pitch consistency cross-shots, lack of breath naturals, identical phonemes"
+        },
+        "voice_provider_hypothesis": {
+          "type": "string",
+          "enum": [
+            "elevenlabs",
+            "cartesia",
+            "openai-tts",
+            "azure-tts",
+            "google-tts",
+            "human-vo-talent",
+            "human-creator",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "edit": {
+      "type": "object",
+      "description": "Cadence + transitions + structure montage",
+      "additionalProperties": false,
+      "properties": {
+        "shot_count_total": {
+          "type": "integer"
+        },
+        "cadence_avg_s": {
+          "type": "number"
+        },
+        "cadence_min_s": {
+          "type": "number"
+        },
+        "cadence_max_s": {
+          "type": "number"
+        },
+        "transitions_dominant": {
+          "type": "string",
+          "enum": [
+            "hard-cut",
+            "cross-dissolve",
+            "zoom-punch",
+            "whip-pan",
+            "match-cut",
+            "varying-mix"
+          ]
+        },
+        "pace_pattern": {
+          "type": "string",
+          "enum": [
+            "steady-uniform",
+            "acceleration-toward-end",
+            "decay-from-hook",
+            "variable-by-beat",
+            "fast-then-slow-cta"
+          ]
+        },
+        "text_overlay_to_voice_sync_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "0 = aucun sync · 1 = sync parfait"
+        }
+      }
+    },
+    "production_stack_inferred": {
+      "type": "object",
+      "description": "Hypothèses stack de production · pourcentages indicatifs · evidence required",
+      "additionalProperties": false,
+      "properties": {
+        "real_footage_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "ai_gen_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "stock_library_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "motion_template_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "ai_indicators_observed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "uncanny-valley-face",
+              "text-rendering-anomaly",
+              "physics-anomaly",
+              "face-consistency-failure-cross-shot",
+              "hand-distortion",
+              "background-glitch",
+              "timeline-inconsistency",
+              "smoothness-too-clean",
+              "hair-rendering-weird",
+              "eye-direction-incoherent",
+              "other"
+            ]
+          }
+        },
+        "stack_components_inferred": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "component_id",
+              "confidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "type": "string",
+                "enum": [
+                  "voice-clone-elevenlabs",
+                  "voice-clone-cartesia",
+                  "voice-clone-openai",
+                  "human-vo-talent",
+                  "auto-captions-captions-ai",
+                  "auto-captions-submagic",
+                  "stock-medical-3d-library",
+                  "stock-broll-storyblocks",
+                  "stock-broll-envato",
+                  "stock-broll-pond5",
+                  "ai-image-to-video-veo3",
+                  "ai-image-to-video-kling",
+                  "ai-image-to-video-runway",
+                  "ai-text-to-video-veo3",
+                  "ai-text-to-video-sora",
+                  "ai-image-gen-midjourney",
+                  "ai-image-gen-gemini",
+                  "ai-image-gen-flux",
+                  "photo-shoot-real-studio",
+                  "video-shoot-real-onlocation",
+                  "ugc-creator-briefed",
+                  "after-effects-motion-template",
+                  "canva-template",
+                  "capcut-edit",
+                  "premiere-pro-edit",
+                  "davinci-resolve-edit",
+                  "other"
+                ]
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "evidence_short": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "atlas_consumed": {
+      "type": "object",
+      "description": "Mapping vers atlas brand existant · linked si atlas brand fourni en input, unlinked sinon (observation pure)",
+      "additionalProperties": false,
+      "properties": {
+        "pain_points_referenced": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pain_id": {
+                "type": "string",
+                "description": "Atlas brand pain_id si linked · null sinon"
+              },
+              "pain_text_observed": {
+                "type": "string"
+              },
+              "atlas_link_status": {
+                "type": "string",
+                "enum": [
+                  "linked",
+                  "unlinked",
+                  "new-to-atlas"
+                ]
+              },
+              "intensity_score_inferred": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5,
+                "description": "Sévérité du pain dans le narratif · 1=mention légère · 5=focus dominant"
+              }
+            }
+          }
+        },
+        "mechanisms_invoked": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "mechanism_id": {
+                "type": "string"
+              },
+              "mechanism_text_observed": {
+                "type": "string"
+              },
+              "atlas_link_status": {
+                "type": "string",
+                "enum": [
+                  "linked",
+                  "unlinked",
+                  "new-to-atlas"
+                ]
+              }
+            }
+          }
+        },
+        "ingredients_mentioned": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ingredient_name": {
+                "type": "string"
+              },
+              "role_described": {
+                "type": "string",
+                "description": "ex 'gently draws water in', 'speeds stomach back up'"
+              },
+              "dose_mentioned": {
+                "type": "string",
+                "description": "ex '200mg twice daily' · null si non-mentionné"
+              },
+              "atlas_link_status": {
+                "type": "string",
+                "enum": [
+                  "linked",
+                  "unlinked",
+                  "new-to-atlas"
+                ]
+              }
+            }
+          }
+        },
+        "competitors_demolished": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "competitor_name": {
+                "type": "string",
+                "description": "ex 'Miralax', 'Dulcolax', 'fiber gummies', 'multivitamins'"
+              },
+              "competitor_category": {
+                "type": "string",
+                "enum": [
+                  "product-name-specific",
+                  "category-generic",
+                  "advice-conventional",
+                  "professional-expertise"
+                ]
+              },
+              "debunk_argument": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "proof_elements_used": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "proof_type": {
+                "type": "string",
+                "enum": [
+                  "testimonial-personal-first-person",
+                  "testimonial-doctor-quote",
+                  "authority-medical-claim",
+                  "authority-clinical-study-reference",
+                  "timeline-specific-result",
+                  "ingredient-count-claim",
+                  "clinical-dose-claim",
+                  "review-count-aggregate-claim",
+                  "rating-numeric-claim",
+                  "scientific-percentage-claim",
+                  "before-after-visual",
+                  "guarantee-mbg-claim",
+                  "other"
+                ]
+              },
+              "proof_text": {
+                "type": "string"
+              },
+              "verifiable_externally": {
+                "type": "boolean",
+                "description": "Le claim est-il verifiable externe (review platform, etc.) ?"
+              }
+            }
+          }
+        },
+        "offer_elements_visible": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "offer_type": {
+                "type": "string",
+                "enum": [
+                  "discount-pct",
+                  "discount-amount",
+                  "bundle-buy-x-get-y",
+                  "free-shipping",
+                  "gift-with-purchase",
+                  "guarantee-mbg",
+                  "ships-fast",
+                  "subscription-discount",
+                  "urgency-time-limited",
+                  "scarcity-stock-limited",
+                  "other"
+                ]
+              },
+              "offer_text": {
+                "type": "string"
+              },
+              "placement_in_video": {
+                "type": "string",
+                "enum": [
+                  "throughout",
+                  "cta-only",
+                  "mid-video-mention"
+                ]
+              }
+            }
+          }
+        },
+        "product_specs_mentioned": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "spec_type": {
+                "type": "string",
+                "description": "ex 'ingredient-count', 'serving-size', 'taste', 'flavor', 'capsule-count'"
+              },
+              "spec_value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "audience_targeting_inferred": {
+      "type": "object",
+      "description": "Inférence audience cible · confidence required",
+      "additionalProperties": false,
+      "properties": {
+        "audience_persona_visual_label": {
+          "type": "string",
+          "description": "Description courte · ex 'glp1-user-30-40-working' · 'glp1-user-senior-couple'"
+        },
+        "audience_atlas_link": {
+          "type": "string",
+          "description": "Reference vers brands/{slug}/audiences/{audience_id} si linked"
+        },
+        "awareness_level_schwartz": {
+          "type": "string",
+          "enum": [
+            "unaware",
+            "problem-aware",
+            "solution-aware",
+            "product-aware",
+            "most-aware"
+          ]
+        },
+        "funnel_stage_inferred": {
+          "type": "string",
+          "enum": [
+            "TOFU-awareness",
+            "MOFU-consideration",
+            "BOFU-purchase",
+            "retention-existing-customer"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "perf_signals_external": {
+      "type": "object",
+      "description": "Performance signals externes si disponibles (Meta Ad Library · Trendtrack Pro · etc.) · optionnel · enrichit B3 Cluster C signal Largo creative-factory R&D",
+      "additionalProperties": false,
+      "properties": {
+        "ad_library_id": {
+          "type": "string"
+        },
+        "first_seen_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "last_seen_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "days_active": {
+          "type": "integer"
+        },
+        "platforms_distributed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impressions_range_eu": {
+          "type": "string",
+          "description": "EU-only · Meta Ad Library disclosure"
+        },
+        "spend_range_eu": {
+          "type": "string"
+        },
+        "trendtrack_signals": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reach_30d": {
+              "type": "number"
+            },
+            "longest_running_days": {
+              "type": "integer"
+            },
+            "ranking_intra_brand": {
+              "type": "integer"
+            }
+          }
+        },
+        "internal_perf_data": {
+          "type": "object",
+          "description": "Si l'opérateur a déjà tagué et tracké · join Phase 8",
+          "additionalProperties": false,
+          "properties": {
+            "ctr": {
+              "type": "number"
+            },
+            "cpm": {
+              "type": "number"
+            },
+            "cvr": {
+              "type": "number"
+            },
+            "cac": {
+              "type": "number"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "winner",
+                "average",
+                "killed",
+                "running"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "analysis_meta": {
+      "type": "object",
+      "description": "Métadonnées de l'analyse elle-même · traçabilité + confiance",
+      "required": [
+        "analysis_method"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "analysis_method": {
+          "type": "string",
+          "enum": [
+            "claude-multimodal-frames-plus-transcript",
+            "claude-transcript-only",
+            "human-review",
+            "hybrid-claude-human-verified"
+          ]
+        },
+        "frames_analyzed_count": {
+          "type": "integer"
+        },
+        "frames_analyzed_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "frames_timestamps_s": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "transcript_full_processed": {
+          "type": "boolean"
+        },
+        "confidence_overall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "anomalies_flagged": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Signaux suspects · ex 'transcript incomplet', 'frame analysis low confidence', 'character archetype ambiguous'"
+        },
+        "next_review_notes": {
+          "type": "string"
+        },
+        "duration_analysis_min": {
+          "type": "number"
+        }
+      }
+    },
+    "mecanique": {
+      "type": "object",
+      "description": "Mécanique AD-LEVEL = le CONCEPT de l'ad (ex 'trending-fake-natif', 'product_focus', 'versus'). Référence creative-mechanics-registry par id free-string (SSOT, jamais enum-locké, jamais écrire dans le registre depuis un skill). DISTINCT du hook (script.hook.mechanic_id = niveau accroche, surtout vidéo). Canon : une ad porte 1 mecanique ad-level ; le hook n'a de sens qu'en support temporel. Image=spatial (le concept est roi) · vidéo=temporel (concept + hook). D#488 réconciliation taxo.",
+      "additionalProperties": false,
+      "required": [
+        "mecanique_id"
+      ],
+      "properties": {
+        "mecanique_id": {
+          "type": "string",
+          "description": "id du registre creative-mechanics-registry (free-string). 'other' si aucune ne fitte (+ proposal_flag=true)."
+        },
+        "mecanique_name": {
+          "type": "string",
+          "description": "nom humain affiché de la mécanique"
+        },
+        "axis": {
+          "type": "string",
+          "enum": [
+            "claim",
+            "visual"
+          ],
+          "description": "axe registre · claim=copy/concept · visual=composition/format"
+        },
+        "typology_st": {
+          "type": "string",
+          "enum": [
+            "spatial",
+            "temporel"
+          ],
+          "description": "spatial=image (composition fixe, 1 idée 1 frame, pas de hook temporel) · temporel=vidéo (déroulé). Canon registre."
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "proposal_flag": {
+          "type": "boolean",
+          "description": "true si mecanique_id='other' → candidat graduation registre (checkpoint opérateur)."
+        }
+      }
+    }
+  },
+  "_schema_version": "decomposition/1.3",
+  "_changelog": {
+    "1.0": "Promotion de video-ad-analysis-v1.0 (le reverse, miroir du genome-package). Generalise video->ad : audio+edit RETIRES du required top-level (conditionnels au support : un statique/carousel n'a ni audio ni edit). Schema natif d'une decomposition (RCV benchmark ou QC interne). beat_type/style_id/mechanic_id natifs = le pont A=B. Brique 4 etape D.",
+    "1.1": "Support-agnostic complet (signal 9/9 STATIC-NO-TIMELINE du 1er batch reference _reference karacare). NEW identification.support (enum video/static/carousel-card/carousel-set/gif-animated/cinemagraph/other) REQUIRED = declare le support. body_arc[].start_s/end_s passent OPTIONNELS (un statique encode l'ordre de lecture via beat_id, sans timestamps fake). video_meta.duration_s passe OPTIONNEL (un statique n'a pas de duree). meta.schema_version accepte 1.0.0|1.1.0. Backward compat : relachement de contraintes + 1 seul champ requis ajoute (backfille sur le corpus existant). _schema_version top-level reste metadata de schema (PAS un champ d'instance · additionalProperties:false le rejette · les instances portent meta.schema_version).",
+    "1.2": "NEW champ top-level `mecanique` (AD-LEVEL = le CONCEPT de l'ad · ref creative-mechanics-registry free-string · axis claim/visual + typology_st spatial/temporel). Câble le chaînon manquant : le décompose taguait le hook (accroche, surtout vidéo) mais PAS le concept ad-level canonique. Optionnel = backward compat (décompos 1.1 restent valides). meta.schema_version accepte 1.2.0. D#488 réconciliation taxo (hook=territoire vidéo, image=territoire concept).",
+    "1.3": "NEW body_arc[].linked_atlas_objection_ids (D#492 · l'angle comme unité de 1ère classe). L'objection n'est PAS un axe universel de la pub (pas systématique) : elle vit AU BEAT qui la traite (surtout false-solution-rebuttal) et globalement DANS l'angle (angle.lineage.objection_ref). Complément du fix forward genome_tags.angle_id (l'angle joignable à la perf porte l'objection + l'OTRB + le payoff). Backward compat additif (champ optionnel · 342 décompos 1.2.0 restent valides · meta.schema_version accepte 1.3.0)."
+  }
+}

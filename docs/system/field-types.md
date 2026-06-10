@@ -67,6 +67,22 @@
 
 ---
 
+## Orthogonalité `_field_types` vs `_extraction` vs confidence (C1)
+
+Trois couches DISTINCTES, jamais fusionnées :
+
+| Couche | Question à laquelle elle répond | Où elle vit |
+|---|---|---|
+| `_field_types` (épistémique) | **Comment on SAIT** (observé, déclaré, structuré, calculé) | root map de chaque entité |
+| `_extraction` (mécanique) | **Comment c'est OBTENU** (api_json, json_ld, dom_parse, headless, absent) + quand + fraîcheur TTL | root map `$ref _shared/extraction-provenance.json` · porteurs : brand, spec, offer, profile, pain_points, objections, voc-verbatim |
+| confidence (inférence) | **À quel point on CROIT l'inférence** | `validation-state.json` · `psychology.confidence_chain` |
+
+Une donnée `observed` par `dom_parse` fragile ne pèse pas comme une `observed` par `api_json` : le moteur de raisonnement aval lit les deux étiquettes. `extraction_method: absent` = tenté et introuvable → exige `lever` (politique d'échec C1 : jamais inventer une brique).
+
+**Hard rule additionnelle (C1)** : tout champ de `offer.economics_proxy` et `angle.test_readiness.eligibility.overall` = `derived` obligatoire dans `_field_types` (jamais rempli à la main).
+
+---
+
 ## Legacy labels
 
 Pre-v2.1 archives may still contain `raw` or `declared` :

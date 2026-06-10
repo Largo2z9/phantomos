@@ -72,7 +72,7 @@ Chaîne causale entre une spec produit et un bénéfice (ex. KSM-66 → réducti
 
 ## Awareness stage
 
-Niveau de conscience de l'audience (Eugene Schwartz) · unaware · problem-aware · solution-aware · product-aware · most-aware. Vit à deux endroits canon · `audience.psychology.market_position.awareness_level` (snapshot où l'audience est globalement) ET `angle.awareness_movement` (entry_stage → exit_stage · où l'angle prend l'audience et l'amène). Pas une dimension orthogonale de composition créative · corrélée à l'audience (cf `canonical-matrix-reasoning.md` activation sélective).
+Niveau de conscience de l'audience (Eugene Schwartz) · unaware · problem-aware · solution-aware · product-aware · most-aware. Vit à deux endroits canon · `audience.market_position.awareness_dominant` (snapshot où l'audience est globalement · RENAME C1 depuis awareness_level, profile/2.3) ET `angle.awareness_movement` (entry_stage → exit_stage · où l'angle prend l'audience et l'amène). Pas une dimension orthogonale de composition créative · corrélée à l'audience (cf `canonical-matrix-reasoning.md` activation sélective).
 
 ## Atome irréductible
 

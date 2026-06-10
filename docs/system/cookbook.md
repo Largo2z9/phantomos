@@ -59,7 +59,7 @@ if signal_list:
 ```
 1. brand.json → tone_of_voice, positioning
 2. spec.json → problems_solved[], benefits[]
-3. profile.json → pain.primary_problem, pain.trigger_primary, psychology.awareness_level
+3. profile.json → pain.primary_problem, pain.trigger_primary, market_position.awareness_dominant
 4. resources/catalogues/angles.json → available angles (if present in KB)
 5. resources/quality-specs/hook.json → hook quality criteria (if present in KB)
 ```
@@ -67,7 +67,7 @@ if signal_list:
 ### Angle selection logic
 
 ```
-awareness_level = profile.psychology.awareness_level
+awareness_level = profile.market_position.awareness_dominant
 
 if awareness_level == "unaware":
  angle_type = "problem agitation"

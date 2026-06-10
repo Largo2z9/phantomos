@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "library-pattern.schema.json",
+  "title": "Cross-Brand Library Pattern (curated)",
+  "description": "Un PATTERN cross-marque curé = une brique d'expertise réutilisable, MONTÉE du corpus de référence (competitive-intel decompositions) vers les bibliothèques partagées shippées. C'est le produit de la passe de CURATION (phase 2 du seeding). Vit dans resources/concepts/{slug}.json (concept structurel) ou resources/registries/hooks/{slug}.json (hook) ou resources/registries/archetypes/{slug}.json (fiche-archétype). La promotion exige >=2 SOURCES INDÉPENDANTES (une factory créative multi-marques = 1 source). Le pont vers le génome = related_mechanic_ids (mêmes enums que decomposition.schema). Le 4e invariant (curseur sectoriel) vit dans vertical_scope.",
+  "type": "object",
+  "version": "1.0.0",
+  "required": [
+    "pattern_id",
+    "pattern_type",
+    "name",
+    "one_liner",
+    "skeleton",
+    "promote_status",
+    "confirming_sources",
+    "independent_source_count",
+    "vertical_scope",
+    "_schema_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "pattern_id": {
+      "type": "string",
+      "pattern": "^(CPT|HOK|ARC|PRF|OFR)-[a-z0-9-]+$",
+      "description": "Préfixe par type · CPT concept · HOK hook · ARC fiche-archétype · PRF proof · OFR offre · suivi d'un slug kebab. Ex 'CPT-timeline-result-ladder'."
+    },
+    "pattern_type": {
+      "type": "string",
+      "enum": [
+        "concept-structural",
+        "hook-mechanic",
+        "fiche-archetype",
+        "proof-pattern",
+        "offer-pattern",
+        "visual-style"
+      ],
+      "description": "Type de brique · détermine aussi le home (concepts/ vs registries/hooks/ vs registries/archetypes/ vs registries/styles/). 'visual-style' = un style_id perf-validé promu watch->promote-ready (>=2 sources indépendantes), backing des registries/styles/."
+    },
+    "name": {
+      "type": "string",
+      "description": "Nom humain court de la mécanique."
+    },
+    "one_liner": {
+      "type": "string",
+      "description": "Ce que c'est + POURQUOI ça performe, en une phrase."
+    },
+    "skeleton": {
+      "type": "string",
+      "description": "Le squelette paramétrique · slots entre crochets. Ex '[palier_temps_1] -> [benefice_amorce] ; [palier_temps_2] -> [benefice_coeur + claim_chiffre] ; [palier_N] -> [etat_final]'."
+    },
+    "slots": {
+      "type": "array",
+      "description": "Les variables du squelette + comment les remplir.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "examples": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "function": {
+      "type": "string",
+      "description": "Le job de persuasion que la mécanique accomplit (ex 'réduit le scepticisme ça-met-trop-longtemps en montrant un gain à chaque étape')."
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "Conditions de marché/awareness où ça marche le mieux."
+    },
+    "promote_status": {
+      "type": "string",
+      "enum": ["promote-ready", "watch", "deprecated"],
+      "description": "promote-ready = confirmé par >=2 sources INDÉPENDANTES · watch = 1 source seule (à confirmer) · deprecated = invalidé."
+    },
+    "confirming_sources": {
+      "type": "array",
+      "description": "Les sources (marques/factories) où le pattern est attesté, avec preuves.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "vertical", "example_rcv_ids"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Nom de la source · une FACTORY multi-marques (ex hims+hers) = UNE source, à nommer comme telle."
+          },
+          "vertical": { "type": "string", "description": "ex 'beauty-hair', 'wellness-supplement', 'telehealth-rx'." },
+          "geo": { "type": "string", "description": "ex 'FR', 'US'." },
+          "example_rcv_ids": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^RCV-[0-9]{1,4}$" },
+            "description": "Les décompositions du corpus qui attestent le pattern (traçabilité)."
+          },
+          "realization": {
+            "type": "string",
+            "description": "La réalisation concrète observée (copy réelle) chez cette source."
+          }
+        }
+      }
+    },
+    "independent_source_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Nombre de sources INDÉPENDANTES (factory multi-marques = 1). >=2 requis pour promote-ready. C'est le garde-fou anti-faux-positif de diversité."
+    },
+    "vertical_scope": {
+      "type": "object",
+      "description": "Le 4e invariant · CURSEUR SECTORIEL. Tag l'origine verticale du pattern pour que le régime explore/exploit (freedom_cursor de A) sache si c'est un emprunt proche (exploit) ou lointain (explore). Ne verrouille JAMAIS · rend l'emprunt conscient.",
+      "additionalProperties": false,
+      "required": ["origins", "breadth"],
+      "properties": {
+        "origins": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Les verticales d'origine observées (ex ['beauty-hair', 'telehealth-rx'])."
+        },
+        "breadth": {
+          "type": "string",
+          "enum": ["mono-vertical", "cross-vertical", "universal"],
+          "description": "mono = vu dans 1 verticale · cross = 2+ verticales · universal = transversal toutes catégories (le plus robuste)."
+        },
+        "freedom_cursor_note": {
+          "type": "string",
+          "description": "Comment l'appliquer selon le curseur · exploit = rester dans la verticale de la marque opérée · explore = oser le reslot depuis une verticale lointaine (emprunt surfacé à l'opérateur)."
+        }
+      }
+    },
+    "related_mechanic_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Le PONT vers le génome · les enums decomposition.schema (hook.mechanic_id, beat_type, proof_type) que ce pattern instancie. Ex ['resolution-promise', 'resolution-timeline', 'timeline-specific-result']."
+    },
+    "transfer_examples": {
+      "type": "array",
+      "description": "Démos de portabilité · le squelette reslotté pour une marque/verticale cible hypothétique.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string", "description": "marque/verticale cible (ex 'Stepprs · pieds/circulation')." },
+          "reslotted": { "type": "string", "description": "le squelette rempli pour cette cible." }
+        }
+      }
+    },
+    "anti_patterns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Quand NE PAS l'utiliser / pièges observés."
+    },
+    "curation_notes": {
+      "type": "string",
+      "description": "Notes de curation · caveats, signaux à surveiller, ce qui ferait passer watch -> promote-ready."
+    },
+    "_schema_version": {
+      "type": "string",
+      "const": "library-pattern/1.0"
+    }
+  },
+  "_schema_version": "library-pattern/1.0",
+  "_changelog": {
+    "1.0": "NEW. Objet-pattern cross-marque curé = produit de la passe de curation (phase 2 seeding · D#486). Monte les patterns confirmés du corpus de référence vers les bibliothèques partagées shippées. Garde-fou promotion = independent_source_count >=2 (factory multi-marques = 1 source · découverte hims+hers D#485). vertical_scope = le 4e invariant (curseur sectoriel D#480). related_mechanic_ids = pont vers genome/decomposition enums."
+  }
+}

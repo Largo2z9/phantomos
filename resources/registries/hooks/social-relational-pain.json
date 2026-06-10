@@ -1,0 +1,87 @@
+{
+  "pattern_id": "HOK-social-relational-pain",
+  "pattern_type": "hook-mechanic",
+  "name": "Pain Social/Relationnel",
+  "one_liner": "Ouvre non pas sur le symptôme clinique mais sur sa retombée dans le lien (un proche qui souffre, qui remarque, ou une relation/identité dégradée), parce qu'un pain vécu À TRAVERS quelqu'un d'autre est plus chargé émotionnellement et moins 'pub' qu'un bénéfice produit frontal.",
+  "skeleton": "[ancrage_relationnel : proche concerné OU regard d'un proche OU frein identitaire dans le lien] · [pain rendu visible dans le quotidien relationnel] (-> [retournement : un proche remarque le mieux OU le lien se répare])",
+  "slots": [
+    {
+      "name": "ancrage_relationnel",
+      "description": "Le point d'entrée n'est pas 'moi/mon symptôme' mais la relation : un proche dont on souffre (enfant, conjoint), le regard d'un proche qui constate, ou un frein d'identité/image qui pèse dans le rapport aux autres. C'est ce qui distingue ce hook du témoignage viscéral classique centré sur soi.",
+      "examples": [
+        "C'est pour mon fils de 10 ans et moi",
+        "\"Tu sembles plus sereine ces derniers temps\" - Mon mari",
+        "Ca fait 3 ans que je n'ose pas me couper les cheveux (frein identitaire vis-à-vis de son image)"
+      ]
+    },
+    {
+      "name": "pain_relationnel_quotidien",
+      "description": "Le pain rendu concret dans la scène de vie partagée : le moment précis où il abîme la relation ou l'estime (le rituel du soir, l'ambiance familiale, l'évitement social). Plus la scène est ordinaire et datée, plus elle est crédible.",
+      "examples": [
+        "faire ses devoirs etait un veritable combat chaque soir",
+        "l'ambiance de nos soirees (tendue avant)",
+        "par peur de perdre en volume (donc je m'interdis le coiffeur depuis 3 ans)"
+      ]
+    },
+    {
+      "name": "retournement_relationnel",
+      "description": "La résolution se lit AUSSI dans le lien : un proche remarque le mieux (preuve à la 2e/3e personne), l'ambiance se répare, ou la personne ose enfin l'acte social qu'elle évitait. Optionnel sur les formats ultra-courts (RCV-72 s'arrête au constat du proche).",
+      "examples": [
+        "Tu sembles plus sereine ces derniers temps (le conjoint constate)",
+        "l'ambiance de nos soirees s'est considerablement amelioree",
+        "aujourd'hui j'ai pris mon premier rdv (chez le coiffeur)"
+      ]
+    }
+  ],
+  "function": "Déplace l'angle d'attaque du symptôme individuel vers sa charge relationnelle, là où le pain est le plus lourd et le moins discutable. Un parent qui parle de son enfant ou un conjoint qui constate un changement portent une crédibilité que la marque ne peut pas s'auto-attribuer : la preuve devient sociale et la promesse devient un enjeu de lien, pas un bénéfice à vendre.",
+  "when_to_use": "Pains dont la vraie douleur est relationnelle ou identitaire, pas seulement physiologique (stress qui pèse sur le foyer, agitation d'un enfant, frein d'image qui isole). Marchés problem-aware où le symptôme seul est banalisé : recadrer 'à travers le proche' réveille l'intensité. Excellent en statique UGC (dialogue DM, citation manuscrite, story-témoignage) où un seul visuel doit porter toute la charge émotionnelle.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-03"],
+      "realization": "Frein identitaire ancré dans la durée : 'Ca fait 3 ans que je n'ose pas me couper les cheveux par peur de perdre en volume... Et aujourd'hui j'ai pris mon premier rdv. J'ai pris 12cm de longueur grace a @karacare_officiel.' Le pain n'est pas 'mes cheveux tombent' mais l'évitement social/identitaire (s'interdire le coiffeur 3 ans), résolu par l'acte enfin osé."
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-34", "RCV-72"],
+      "realization": "Deux réalisations distinctes. (RCV-34, dialogue DM parent-enfant) 'C'est pour mon fils de 10 ans et moi. Il debordait d'energie, et faire ses devoirs etait un veritable combat chaque soir... En 4 semaines, l'ambiance de nos soirees s'est considerablement amelioree' : pain porté par le proche (l'enfant) + retournement dans l'ambiance familiale. (RCV-72, citation manuscrite) '\"Tu sembles plus sereine ces derniers temps\" - Mon mari naali Magnesium +' : preuve à la 3e personne, le conjoint constate le mieux (le pain stress est implicite, lu à travers le regard du proche)."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu sur 2 verticales mais FR-only et beauty/wellness : cross-vertical, pas encore universal. En exploit, garder le proche natif de la cible (enfant/conjoint en wellness, image de soi en beauty). En explore, le squelette se reslotte vers toute catégorie dont le pain a une retombée relationnelle ou identitaire crédible (douleur qui prive d'une activité partagée, fatigue qui pèse sur le couple). Éviter le reslot si le bénéfice n'a aucun témoin social plausible (le proche-qui-remarque sonnerait faux)."
+  },
+  "related_mechanic_ids": [
+    "social-relational-pain",
+    "hook",
+    "pain-litany",
+    "testimonial-personal-first-person",
+    "social-proof",
+    "resolution-timeline"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "C'est pour ma mère et moi. À 68 ans elle ne voulait plus venir marcher avec moi le dimanche, ses jambes lourdes la clouaient à la maison... En 3 semaines elle a redemandé à reprendre nos balades."
+    },
+    {
+      "target": "skincare anti-acné · FR DTC",
+      "reslotted": "\"T'as la peau qui va beaucoup mieux en ce moment\" - Ma soeur. (le proche remarque avant que tu n'oses le dire toi-même)"
+    }
+  ],
+  "anti_patterns": [
+    "Centrer sur 'moi et mon symptôme' sans le lien : retombe en témoignage viscéral classique (HOK-visceral-testimony), on perd la charge relationnelle qui fait la spécificité.",
+    "Plaquer un proche-qui-remarque sur un bénéfice invisible de l'extérieur (taux sanguin, micro-confort) : le constat du proche sonne faux car rien n'est observable socialement.",
+    "Instrumentaliser un enfant ou une figure vulnérable sur une catégorie sensible (compliance/éthique) sans véracité : risque de backlash et de rejet 'pub manipulatrice'.",
+    "Marché unaware/cold où la relation n'est pas encore un enjeu pour le prospect : l'angle relationnel suppose un pain déjà ressenti dans le quotidien (problem-aware minimum)."
+  ],
+  "curation_notes": "2 sources INDÉPENDANTES (karacare beauty-hair + naali wellness-supplement), 3 RCV de traçabilité (RCV-03, RCV-34, RCV-72) → seuil ≥2 atteint, promote-ready. FR-only et beauty+wellness uniquement → breadth=cross-vertical, PAS universal : himshers (telehealth-rx US) n'a produit aucune décomposition sur cette mécanique dans le corpus, donc 3e source absente et géo non confirmé hors France. naali est la source la plus riche : 2 réalisations structurellement différentes (dialogue DM parent-enfant RCV-34 vs citation manuscrite conjoint RCV-72) qui prouvent que le pattern absorbe plusieurs porteurs du lien (proche dont on souffre / proche qui constate). Tous les exemplaires sont des statiques UGC (anomalie STATIC-NO-TIMELINE récurrente) : confirmation vidéo à observer. Ce qui ferait passer cross-vertical→universal : une 3e source dans une autre verticale/géo (ex un himshers US ou une catégorie hors beauty/wellness). 3e signal (perf réelle via feedback-loop) reste à câbler.",
+  "_schema_version": "library-pattern/1.0"
+}

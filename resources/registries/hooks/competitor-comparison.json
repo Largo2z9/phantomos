@@ -1,0 +1,93 @@
+{
+  "pattern_id": "HOK-competitor-comparison",
+  "pattern_type": "hook-mechanic",
+  "name": "Comparaison Concurrent Explicite",
+  "one_liner": "Mettre DEUX entités en regard frontal dès l'accroche (le produit vs un concurrent nommé, vs une catégorie-standard, ou vs un autre SKU de la marque), souvent avec un écart chiffré, pour faire trancher l'œil avant de raisonner · le contraste côte-à-côte EST la preuve · performe en MOFU-consideration où le prospect compare déjà.",
+  "skeleton": "[entité_A : marque/produit/promesse + métrique_A] vis-à-vis [entité_B : concurrent_nommé | catégorie_standard | autre_SKU + métrique_B] (+ [écart_quantifié : 5x, 95%, vs.] | [verdict_de_tri / complémentarité])",
+  "slots": [
+    {
+      "name": "entité_A",
+      "description": "Le terme favorable de la comparaison · le produit/marque opéré, avec sa métrique-force (chiffre haut, prix bas, bénéfice signature) mise en avant.",
+      "examples": [
+        "hims · 130+ health signals tested",
+        "Better sex life (sildenafil hims)",
+        "Gummies Anti-Stress au Safran",
+        "ANTI-STRESS · Relaxation & humeur positive + safran"
+      ]
+    },
+    {
+      "name": "entité_B",
+      "description": "Le terme défavorable / mis en regard · 3 réalisations observées : (a) concurrent NOMMÉ (Viagra), (b) catégorie-standard générique (Routine bloodwork), (c) autre SKU de la MÊME marque (intra-brand, pour trier le choix sans démolir).",
+      "examples": [
+        "Viagra® (concurrent nommé)",
+        "Routine bloodwork ~25 tests (catégorie-standard générique)",
+        "Magnesium+ (autre SKU naali, intra-brand)"
+      ]
+    },
+    {
+      "name": "écart_quantifié",
+      "description": "Le delta chiffré qui matérialise la supériorité ou le marqueur 'vs.' qui pose le cadre comparatif · présent quand la comparaison est une démolition, parfois absent quand c'est un tri intra-marque (remplacé par 'vs.' / 'à associer en complément').",
+      "examples": [
+        "Learn 5x more about your health",
+        "95% cheaper than Viagra®",
+        "130+ vs ~25 tests",
+        "vs.",
+        "*à associer en complément"
+      ]
+    },
+    {
+      "name": "verdict_de_tri",
+      "description": "La conclusion que le contraste impose · soit une supériorité (A gagne), soit un guide-de-choix (A pour X besoin, B pour Y besoin), soit une complémentarité (prendre les deux).",
+      "examples": [
+        "without the brand name price",
+        "axe émotionnel/mental (A) vs axe corps/énergie (B)",
+        "à associer en complément"
+      ]
+    }
+  ],
+  "function": "Court-circuite le raisonnement comparatif du prospect en posant le verdict visuellement AVANT qu'il aille chercher l'info ailleurs · le split-screen côte-à-côte fait du contraste lui-même la preuve (130+ écrasé contre ~25, le prix barré contre le prix de marque). Deux jobs distincts sous la même mécanique : (1) DÉMOLITION — disqualifier un concurrent nommé ou une catégorie-standard via un écart chiffré, en récupérant le crédit d'un référent connu (Viagra, bloodwork) puis en le retournant ('même chose, 95% moins cher' / '5x plus') ; (2) TRI INTRA-MARQUE — aider le prospect product-aware à choisir entre deux SKU de la marque selon son besoin, ou à les prendre en complément (zéro démolition, le 'vs.' devient un guide d'achat). Dans les deux cas l'œil tranche avant la tête.",
+  "when_to_use": "MOFU-consideration · audience product-aware ou solution-aware qui COMPARE déjà (entre marques, entre catégories, ou entre tes propres SKU). Marché à référent fort et connu (Viagra, le bilan sanguin standard) où récupérer puis retourner le crédit du référent est rentable. Idéal en statique split-screen / deux-colonnes (le format porte la mécanique). Variante intra-brand : quand la gamme a plusieurs SKU proches qui se cannibalisent et qu'il faut orienter le choix plutôt qu'arbitrer. NON adapté en TOFU/unaware (pas encore de cadre de comparaison dans la tête du prospect) ni quand le concurrent nommé est plus fort/plus crédible que toi (tu lui offres du reach).",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-67", "RCV-102"],
+      "realization": "TRI INTRA-MARQUE (zéro démolition) · deux SKU naali mis en regard split-screen pour orienter le choix. RCV-102 : titre 'Gummies Anti-Stress au Safran vs. Magnesium+' puis deux colonnes de bénéfices discriminants (A = axe émotionnel/mental 'Réduit le stress et l'anxiété, améliore l'humeur' · B = axe corps/énergie 'Réduit la fatigue physique et nerveuse, restaure l'énergie'). RCV-67 : même paire (ANTI-STRESS + safran 60 gommes vs Magnesium+ Taurine B6 30 doses) mais cadrée en complémentarité, note de bas '*à associer en complément'. Le 'vs.' est ici un guide d'achat, pas une arme — flaggé INTRA-BRAND-COMPARISON dans le corpus."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-151", "RCV-165", "RCV-190"],
+      "realization": "DÉMOLITION à écart chiffré · deux sous-flavors. (1) Concurrent NOMMÉ + ancre-prix : 'Better sex life, without the brand name price. 95% cheaper than Viagra®' (RCV-151 hims · sildenafil = générique de Viagra, le concurrent nommé est le pivot du message, écart 95%). (2) Catégorie-standard générique + multiplicateur : 'Learn 5x more about your health. 130+ health signals tested. Routine bloodwork ~25 tests' rendu en split deux-tubes (RCV-165 hims ≡ RCV-190 hers, ads-miroir mot-pour-mot sur le panel lab-testing → comptées comme UNE source 'himshers', garde-fou D#485 honoré). Le référent connu (Viagra, bloodwork de routine) est récupéré puis retourné par le chiffre."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu cross-vertical (supplément FR + telehealth US) ET cross-géo (FR + US) → mécanique structurelle portable, emprunt sûr en mode exploit pour toute marque DTC dont le prospect compare déjà. ATTENTION : deux sous-mécaniques distinctes sous le même mechanic_id ne se reslottent PAS dans les mêmes conditions. La sous-flavor TRI INTRA-MARQUE (naali) est quasi universelle dès qu'il y a 2+ SKU proches (zéro risque conformité, zéro reach offert à un concurrent). La sous-flavor DÉMOLITION CONCURRENT-NOMMÉ (himshers/Viagra) exige un référent connu plus cher/moins bon que toi ET porte un risque légal (trademark, 'not affiliated' obligatoire) → à resloter en explore conscient, surfacé à l'opérateur. La sous-flavor DÉMOLITION CATÉGORIE-STANDARD (bloodwork) est plus sûre (pas de marque visée) et la plus transférable des deux démolitions."
+  },
+  "related_mechanic_ids": ["competitor-comparison-explicit", "competitor-comparison", "pricing-anchor", "scientific-percentage-claim", "ingredient-count-claim"],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation (DTC, catégorie-standard à démolir)",
+      "reslotted": "Vos chaussettes de compression médicale · 30 mmHg de soutien gradué ciblé vis-à-vis d'une chaussette de contention pharmacie standard ~15 mmHg uniforme · 2x plus de soutien là où la jambe en a besoin (démolition catégorie-standard, sous-flavor bloodwork reslottée · pas de marque nommée donc faible risque)."
+    },
+    {
+      "target": "Marque supplément multi-SKU (tri intra-marque)",
+      "reslotted": "Cure Sommeil Profond vs. Cure Énergie Matin · l'une t'endort (mélatonine + valériane), l'autre te réveille (rhodiola + B12) · à associer pour un cycle complet (tri intra-marque, sous-flavor naali · guide d'achat, zéro démolition)."
+    }
+  ],
+  "anti_patterns": [
+    "TOFU / unaware : sans cadre de comparaison déjà présent dans la tête du prospect, le 'vs.' ne mord sur rien. La mécanique présuppose product/solution-aware qui compare déjà.",
+    "Nommer un concurrent PLUS fort ou plus crédible que toi : tu lui offres du reach et tu te poses en challenger sous lui. Ne démolir un nom que si tu peux gagner le contraste (prix, métrique, scope).",
+    "Démolition concurrent-nommé sans le garde-fou légal : citer 'Viagra®' / un trademark exige les mentions 'not affiliated / registered trademark of' (RCV-151 les porte toutes). Omettre = risque conformité + plainte.",
+    "Écart non vérifiable présenté comme fait : '5x more', '95% cheaper', '130+ vs ~25' sont des claims chiffrés (flaggés verifiable_externally:false dans le corpus) — toujours adossés à une définition en astérisque (ici la note définissant les ~25 biomarqueurs du bloodwork). Balancer le multiplicateur sans la base = claim creux.",
+    "Tri intra-marque qui vire à la cannibalisation : si les deux SKU comparés ne sont pas vraiment discriminés (A pour X besoin, B pour Y besoin), le 'vs.' sème le doute au lieu de guider et tue les deux ventes."
+  ],
+  "curation_notes": "Promu sur 2 sources INDÉPENDANTES factory-aware (naali FR-supplément + himshers US-telehealth · karacare ABSENT du cluster, vérifié 0 match, donc pas de 3e source). RCV-165 (hims) ≡ RCV-190 (hers) = ads-miroir lab-testing mot-pour-mot ('Learn 5x more', 130+ vs ~25) → comptées comme UNE source 'himshers' (garde-fou D#485 honoré · les compter en 2 aurait été un faux-positif de diversité). CAVEAT MAJEUR : deux sous-mécaniques hétérogènes co-existent sous le même mechanic_id et chez des sources différentes — naali ne fait QUE du TRI INTRA-MARQUE (comparaison non-adversariale, guide d'achat, flaggé INTRA-BRAND-COMPARISON), himshers ne fait QUE de la DÉMOLITION (concurrent nommé Viagra OU catégorie-standard bloodwork, avec competitors_demolished rempli). La récurrence cross-source confirme le SQUELETTE structurel (deux entités en regard + écart), pas un même job de persuasion. Watch : si une 3e source indépendante apparaît, vérifier si elle porte la flavor démolition ou la flavor tri — une convergence nette d'un côté pourrait justifier un split en deux patterns (HOK-competitor-demolition vs HOK-sku-sort). RCV-151 (hims/Viagra) chevauche pricing-anchor (HOK-pricing-anchor) : le corpus retient competitor-comparison-explicit car le concurrent nommé est le pivot, mais le pattern est co-instancié — pont related_mechanic_ids vers pricing-anchor. 3e signal (perf gagnante via feedback-loop) à attendre avant canon.",
+  "_schema_version": "library-pattern/1.0"
+}

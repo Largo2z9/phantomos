@@ -1,0 +1,94 @@
+{
+  "pattern_id": "HOK-paradox-testimonial",
+  "pattern_type": "hook-mechanic",
+  "name": "Témoignage Paradoxal",
+  "one_liner": "Ouvre un témoignage par une tension qui ne devrait pas exister (quantité de réachat suspecte, format trop facile/agréable pour un problème sérieux, capacité 'd'avant' retrouvée), et c'est cette résolution du paradoxe qui porte la preuve : le lecteur croit la satisfaction parce qu'elle est étonnante, pas affirmée.",
+  "skeleton": "[amorce_paradoxale : signal qui détonne par rapport à l'attendu] -> [résolution_par_le_client/l'autorité : la révélation qui légitime et recadre en bénéfice] (+ [marqueur_crédibilité : attribution nominative OU mise en scène conversationnelle OU autorité empruntée])",
+  "slots": [
+    {
+      "name": "amorce_paradoxale",
+      "description": "Le signal d'ouverture qui crée une tension cognitive : un fait qui semble incohérent, exagéré, suspect ou trop beau pour le problème en jeu. C'est le moteur du hook, ce qui arrête le scroll avant tout argument produit.",
+      "examples": [
+        "Nathalie, ta commande de 6 boites... c'est pour toute l'annee ?",
+        "Marc, 8 boites en 4 mois... impressionnant ! Tu revends ?",
+        "These are the easiest and, dare we say, tastiest way to support thinning hair.",
+        "I have the stamina to do the things I used to.",
+        "Je me sens differente. Comme si je redevenais solaire."
+      ]
+    },
+    {
+      "name": "résolution_par_le_client_ou_autorité",
+      "description": "La révélation qui dénoue la tension et la convertit en preuve : un usage réel inattendu, un démenti recadré en aubaine, ou la confirmation prestige que le paradoxe (facile ET sérieux) tient vraiment. Le bénéfice arrive comme conclusion logique du paradoxe, pas comme claim direct.",
+      "examples": [
+        "C'est pour mon fils de 10 ans et moi (usage croisé qui légitime les 6 boîtes)",
+        "Non, honnetement, c'est une veritable aubaine (démenti du 'tu revends ?' recadré en valeur)",
+        "...way to support thinning hair (le sérieux du problème valide le 'facile et savoureux')",
+        "to do the things I used to (la capacité restaurée = retour à l'état antérieur)",
+        "la personne que j'etais avant (le 'différente' se résout en 'redevenue moi')"
+      ]
+    },
+    {
+      "name": "marqueur_crédibilité",
+      "description": "Le dispositif qui ancre le témoignage comme réel : attribution nominative (prénom + âge), mise en scène conversationnelle fondateur-cliente (faux chat / split-screen), ou autorité éditoriale empruntée. Interchangeable selon le format.",
+      "examples": [
+        "Robert C., 50 (attribution nominative + âge)",
+        "Nadir / Notre cliente (mise en scène conversationnelle fondateur <> client)",
+        "-VOGUE (autorité presse empruntée)",
+        "8 boites en 4 mois (preuve de réachat répété comme crédibilité)",
+        "Paid testimonial (disclaimer telehealth qui paradoxalement signe l'authenticité)"
+      ]
+    }
+  ],
+  "function": "Désamorce le scepticisme 'encore un témoignage trop beau' en le retournant : au lieu d'affirmer la satisfaction, le hook met en scène un signal qui détonne (un client qui achète comme un revendeur, un format trop plaisant pour un vrai problème) et laisse la résolution faire la preuve. Le lecteur baisse la garde parce qu'on lui présente d'abord une objection ('tu revends ?', 'trop facile pour être sérieux') avant de la dissoudre. La crédibilité se transfère par la tension résolue, pas par l'enthousiasme déclaré.",
+  "when_to_use": "Marchés solution-aware à product-aware où le témoignage plat est saturé et le scepticisme élevé (compléments, telehealth, beauty). Excellent en statique UGC / split-screen / faux chat où le visuel ne porte pas la preuve et où la tension textuelle doit arrêter le scroll. La variante 'quantité de réachat suspecte' marche fort en MOFU consideration (preuve de loyauté). La variante 'autorité paradoxale' (facile ET sérieux) marche en BOFU avec packshot. Exige un paradoxe réellement étonnant : sans tension franche, ça retombe en testimonial générique.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-55", "RCV-83", "RCV-107"],
+      "realization": "Trois variantes du paradoxe. RCV-55 (faux chat fondateur Nadir <> Nathalie) : 'Nathalie, ta commande de 6 boites... c'est pour toute l'annee ? -> C'est pour mon fils de 10 ans et moi' (quantité inhabituelle résolue par usage croisé mère+enfant). RCV-107 (faux SMS Nadir <> Marc) : 'Marc, 8 boites en 4 mois... impressionnant ! Tu revends ? -> Non, honnetement, c'est une veritable aubaine' (réachat suspect, accusation humoristique recadrée en aubaine). RCV-83 (quote statique) : 'Je me sens differente. Comme si je redevenais solaire, la personne que j'etais avant.' (paradoxe identitaire : différente = redevenue soi). Marqueur de crédibilité = mise en scène conversationnelle fondateur <> client (Nadir / Notre cliente)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-139", "RCV-201", "RCV-207"],
+      "realization": "RCV-139 (hims, testostérone) : '\"I have the stamina to do the things I used to.\" Robert C., 50' (capacité restaurée présentée comme retour paradoxal à l'état antérieur, attribution nominative + âge, disclaimer 'Paid testimonial'). RCV-201 et RCV-207 (hers, hairblends gummies) : '\"These are the easiest and, dare we say, tastiest way to support thinning hair.\" -VOGUE' (paradoxe 'facile ET savoureux' pour un problème sérieux, résolu par l'autorité presse empruntée VOGUE). hims+hers = une seule factory créative genrée (D#485), comptée comme UNE source ; RCV-201 et RCV-207 sont deux quasi-doublons de la même création hers."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu sur 2 verticales (supplément FR + telehealth US) et cross-géo, mais PAS sur beauty-hair (karacare ne le porte pas dans le corpus) : breadth=cross-vertical, pas universal. En exploit, garder la variante native de la verticale opérée (faux chat fondateur pour le supplément DTC FR, autorité presse ou attribution nominative pour le telehealth US). En explore, le squelette se reslotte dès qu'il existe un signal qui peut détonner (quantité, facilité, restauration) : surfacer à l'opérateur que l'emprunt vers une verticale tierce (ex pieds, skincare) reste non confirmé par le corpus."
+  },
+  "related_mechanic_ids": [
+    "paradox-testimonial",
+    "testimonial-personal-first-person",
+    "timeline-specific-result",
+    "false-solution-rebuttal",
+    "hook",
+    "social-proof"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "Sophie, 3 paires commandées d'un coup... c'est pour offrir ? -> Non, une pour chaque pièce de la maison, je ne veux plus JAMAIS marcher pieds nus sur du carrelage froid. (quantité suspecte résolue par usage réel, faux chat fondateur <> cliente)"
+    },
+    {
+      "target": "skincare anti-acné · FR DTC",
+      "reslotted": "\"Le seul soin que j'ai eu envie d'appliquer le soir, et c'est pour mon acné.\" -ELLE (paradoxe 'agréable ET pour un vrai problème de peau' validé par autorité presse empruntée)"
+    }
+  ],
+  "anti_patterns": [
+    "Paradoxe faible ou inexistant : si l'amorce n'étonne pas réellement ('j'adore ce produit'), il n'y a pas de tension à résoudre et ça retombe en témoignage plat (visceral-testimony ou social-proof simple).",
+    "Mise en scène conversationnelle incohérente : le faux chat doit tenir (RCV-107 a un NAME-MISMATCH 'Notre cliente' féminin pour un client nommé 'Marc' masculin) sous peine de casser la crédibilité du dispositif.",
+    "Quantité-réachat suspecte sur un produit consommable sensible : la variante '6 boîtes pour mon fils de 10 ans' (RCV-55) porte un claim cross-use enfant sur un magnésium sans disclaimer, risque compliance.",
+    "Verticales à forte contrainte réglementaire (telehealth-rx) : le témoignage paradoxal doit porter ses disclaimers ('Paid testimonial', FDA compounded, prescription required) comme chez himshers, sinon risque réglementaire.",
+    "Autorité empruntée non vérifiable ou inventée : la variante '-VOGUE' tient parce que la citation presse est externe et vérifiable ; fabriquer une fausse citation d'autorité est un piège juridique et de crédibilité."
+  ],
+  "curation_notes": "Promote-ready au seuil minimal : 2 sources INDÉPENDANTES (naali + himshers), 6 RCV de traçabilité. karacare (beauty-hair) ne porte PAS ce mécanisme dans le corpus -> breadth plafonnée à cross-vertical (pas universal comme visceral-testimony). Le pattern recouvre trois sous-variantes du paradoxe qui partagent le même squelette : (a) quantité/réachat suspect résolu par usage réel (RCV-55, RCV-107, mise en scène faux chat fondateur), (b) autorité paradoxale 'facile ET sérieux' validée par presse empruntée (RCV-201, RCV-207, VOGUE), (c) restauration/identité 'd'avant' retrouvée (RCV-139 stamina, RCV-83 solaire). himshers reste une factory unique (D#485) : RCV-201 et RCV-207 sont quasi-doublons de la même création hers, ils ne gonflent pas le compte de sources. Frontière avec visceral-testimony : ici le moteur est la TENSION paradoxale en amorce (objection mise en scène puis dissoute), là c'est la spécificité viscérale du résultat ressenti ; un même hook peut instancier les deux. Tous les exemplaires sont des statiques (anomalie STATIC-NO-TIMELINE récurrente) : confirmation vidéo à observer. Pour passer de cross-vertical à universal : trouver une 3e source indépendante hors supplément/telehealth (ex beauty-hair karacare ou une marque tierce). 3e signal (perf réelle via feedback-loop) reste à câbler pour sceller en canon.",
+  "_schema_version": "library-pattern/1.0"
+}

@@ -1,0 +1,137 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "split-screen-comparison",
+  "display_name": "Split-screen comparatif",
+  "family": "comparison",
+  "typology_st": "variable",
+  "description": "Cadre divise en deux moities cote a cote (ou avant/apres) qui confronte deux etats: probleme vs solution, eux vs nous, jour 0 vs jour 30. La hierarchie visuelle penche toujours en faveur du cote 'apres/nous' (plus lumineux, plus net, plus desirable). A utiliser quand l'angle repose sur un contraste demonstratif: superiorite produit, transformation, ou rejet d'une alternative inferieure.",
+  "render_recipe": {
+    "prompt_skeleton": "Split-screen comparison composition, exact vertical divider down the center, two equal halves. LEFT half: {left_state} showing {left_subject}, {left_mood_treatment}. RIGHT half: {right_state} showing {right_subject}, {right_mood_treatment}. Same {subject_type} framed identically on both sides for fair-comparison credibility, only the {comparison_variable} changes. Clean center seam, {label_treatment}. {lighting}. {camera_lens}. {palette_mood}. {texture_grain}. {composition_notes}. Aspect {aspect_ratio}.",
+    "slots": [
+      {
+        "name": "left_state",
+        "description": "Le cote 'perdant' (avant, eux, ancienne methode). Ex 'BEFORE state', 'competitor product', 'old routine'."
+      },
+      {
+        "name": "left_subject",
+        "description": "Ce qui occupe la moitie gauche. Ex 'dull tired skin', 'cluttered cheap-looking packaging', 'tangled supplement pile'."
+      },
+      {
+        "name": "left_mood_treatment",
+        "description": "Traitement qui sous-vend ce cote sans le caricaturer: legerement plus froid/terne/desature, jamais grotesque (credibilite). Ex 'slightly cooler flatter light, muted desaturation, soft shadow'."
+      },
+      {
+        "name": "right_state",
+        "description": "Le cote 'gagnant' (apres, nous, nouvelle methode). Ex 'AFTER state', 'our product', 'new routine'."
+      },
+      {
+        "name": "right_subject",
+        "description": "Ce qui occupe la moitie droite, version desirable du meme sujet. Ex 'radiant healthy skin', 'premium branded packaging', 'single clean daily dose'."
+      },
+      {
+        "name": "right_mood_treatment",
+        "description": "Traitement qui valorise: legerement plus lumineux, plus net, plus chaud/vibrant, contraste un cran plus haut. Ex 'brighter crisp light, slight warmth, gentle pop in saturation'."
+      },
+      {
+        "name": "subject_type",
+        "description": "La nature du sujet compare, pour forcer un cadrage identique des deux cotes. Ex 'same model face', 'same product on same surface', 'same skin close-up'."
+      },
+      {
+        "name": "comparison_variable",
+        "description": "La SEULE variable qui doit changer entre les deux moities (le reste constant = comparaison loyale credible). Ex 'skin condition', 'product quality', 'result after use'."
+      },
+      {
+        "name": "label_treatment",
+        "description": "Comment marquer les cotes. Preferer zones reservees pour overlay texte ajoute en post (BEFORE/AFTER, eux/nous) plutot que texte genere par le modele. Ex 'clean empty banner zones top of each half for post-added labels'."
+      },
+      {
+        "name": "lighting",
+        "description": "Voir champ lighting."
+      },
+      {
+        "name": "camera_lens",
+        "description": "Voir champ camera_lens."
+      },
+      {
+        "name": "palette_mood",
+        "description": "Voir champ palette_mood."
+      },
+      {
+        "name": "texture_grain",
+        "description": "Voir champ texture_grain."
+      },
+      {
+        "name": "composition_notes",
+        "description": "Voir champ composition_notes."
+      },
+      {
+        "name": "aspect_ratio",
+        "description": "Format de sortie selon placement. Ex '4:5' (feed), '9:16' (story/reel), '1:1' (carrousel)."
+      }
+    ],
+    "lighting": "Eclairage globalement coherent entre les deux moities (meme direction de source) pour que la comparaison reste credible, avec un delta volontaire mais subtil: cote gauche un cran plus plat/froid, cote droit un cran plus lumineux et flatteur. Eviter un contraste d'eclairage si fort qu'il trahit le truquage.",
+    "camera_lens": "Cadrage strictement identique des deux cotes (meme focale, meme distance, meme angle, meme echelle du sujet). Focale neutre type 50mm equivalent pour produit/visage, pas de distorsion grand-angle qui rendrait un cote plus avantageux. La symetrie de cadrage est le coeur de la credibilite du split.",
+    "palette_mood": "Deux sous-palettes assorties a la marque: gauche desaturee/neutre/froide (sensation 'avant', 'banal'), droite saturee/chaude/premium (sensation 'apres', 'desirable'). Garder la separation chromatique lisible meme en miniature et en scroll rapide.",
+    "texture_grain": "Texture realiste et coherente entre les deux cotes (meme support, meme grain). Si comparaison peau/produit, conserver pores, micro-reliefs et imperfections legeres des deux cotes; le cote 'apres' est ameliore, pas lisse au point d'etre artificiel.",
+    "composition_notes": "Diviseur central net et exactement vertical (ou diagonale assumee si choix DA), 50/50 par defaut. Sujet centre dans chaque moitie, meme point focal a la meme hauteur des deux cotes. Reserver des zones propres (haut de chaque moitie ou bandeau central) pour les labels ajoutes en post. Le regard doit lire gauche puis droite et atterrir sur le cote 'gagnant'."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "high",
+      "note": "Generer le split en une seule image quand le sujet doit etre rigoureusement identique des deux cotes (meme visage/produit). Sinon generer chaque moitie separement avec seed/sujet partages puis assembler, pour controler le cadrage. Ajouter les labels BEFORE/AFTER en post, jamais via le modele."
+    },
+    "video_params": {
+      "motion": "Variante temporelle: soit reveal par wipe (la barre de separation balaie de gauche a droite pour devoiler le cote 'apres'), soit slider before/after anime, soit les deux moities qui jouent en parallele (geste/usage des deux cotes). Mouvement de camera minimal voire nul pour garder l'alignement.",
+      "duration_s_range": [3, 8],
+      "transitions": "Wipe central vertical, slider drag, ou hard cut synchronise. Eviter les transitions tape-a-l'oeil qui cassent la lecture comparative."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Diviseur central flou, ondule ou non vertical: le seam doit etre net et droit, un seam baveux trahit le montage IA",
+    "Cadrage asymetrique entre les deux moities (sujet plus gros, plus proche ou mieux eclaire d'un cote par accident) qui detruit la credibilite de comparaison loyale",
+    "Sujet incoherent entre les cotes quand il devrait etre le meme: deux visages differents, deux produits aux proportions divergentes, deux mains qui ne matchent pas",
+    "Texte BEFORE/AFTER ou eux/nous genere par le modele: glyphes hallucines, lettres deformees, fautes; reserver l'espace et ajouter le label en post",
+    "Cote 'apres' sur-lisse jusqu'au plastique/cire (peau sans pores, produit sans micro-reflet) qui sonne faux et tue la conversion",
+    "Caricature du cote 'avant' (trop sombre, trop sale, grotesque) qui rend la comparaison non credible et juridiquement risquee",
+    "Doigts/mains surnumeraires ou tordus quand un sujet humain manipule le produit des deux cotes",
+    "Eclairage incoherent entre les moities (sources de directions opposees) qui revele un collage artificiel au lieu d'une comparaison maitrisee",
+    "Ombres et reflets du diviseur central qui ne correspondent a aucune logique physique (halo IA le long du seam)",
+    "Logos/packaging hallucines sur le cote 'nous': marque inventee, texte produit illisible (gerer le packaging reel en post si critique)"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [2, 8],
+    "pairs_well_with": [
+      "real-photo-macro-detail",
+      "real-photo-product-studio",
+      "real-photo-testimonial-static",
+      "graphic-icons-overlay",
+      "macro-photo-mouth-skin-etc",
+      "screen-recording-mockup"
+    ],
+    "avoid_when": [
+      "Aucune difference visuelle reelle a montrer entre les deux etats (le split devient un argument creux et peu credible)",
+      "Comparaison directe nommee a un concurrent identifiable sans preuve, sur plateformes a forte police publicitaire (risque compliance Meta/TikTok)",
+      "Marque ultra-premium minimaliste ou le split avant/apres lit 'infopub bon marche' et casse le positionnement (creative_zone 0-1 propre)",
+      "Claim before/after sante/peau sans data ni disclaimer dans une categorie regulee (supplements, skincare medical)",
+      "Quand un seul hero shot raconte mieux l'histoire: ne pas forcer un split si le contraste n'est pas le coeur de l'angle"
+    ]
+  },
+  "refs": [
+    "Avant/apres skincare: meme visage, moitie gauche peau terne, moitie droite peau eclatante, seam vertical net, labels post",
+    "Nous vs eux produit: notre packaging premium a droite vs blister generique a gauche, meme surface, meme lumiere",
+    "Slider before/after anime (reel 9:16): la barre glisse pour devoiler le resultat apres usage"
+  ],
+  "related_mechanic_ids": [
+    "before-after",
+    "us-vs-them",
+    "problem-solution",
+    "social-proof-demonstration"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

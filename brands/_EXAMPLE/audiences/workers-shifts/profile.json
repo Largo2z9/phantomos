@@ -52,7 +52,10 @@
       "Cross-ref Stepprs spec.json mechanisms (Arch support → plantar fasciitis · Impact cushioning → end-of-shift comfort) + benefits latency (emotional 0 · functional 7-14j · identity 30-90j)"
     ],
     "created": "2026-05-15",
-    "updated": "2026-05-15"
+    "updated": "2026-05-15",
+    "name": "Shift workers on their feet",
+    "slug": "workers-shifts",
+    "entry_door": "pain_driven"
   },
   "_meta": {
     "$comment": "Annotations canon-aware NEW v2.69.1 · backward compat strict additif · n'override aucun field existing · documente patterns cross-cutting cartographie canon v2.64 (parent/enfants sémantique pure) sans casser le pattern.",
@@ -61,7 +64,7 @@
   "identity": {
     "label": "Workers shifts (8-12h debout)",
     "$comment_label": "Label opérateur-facing · scope général sans spécificité occupation (sous-poches nurses-12h, warehouse-10h, hospitality-retail héritent et précisent).",
-    "awareness_stage": "solution_aware",
+    "awareness_stage": "solution-aware",
     "$comment_awareness": "Canon Schwartz · cible cherche déjà une solution insole (a probablement essayé Dr. Scholl). Acheteur ne demande plus 'pourquoi j'ai mal aux pieds' · il demande 'quelle insole choisir vs énième déception'. Drive registre copy = différenciation vs alternatives, pas éducation problème.",
     "demographics": {
       "age_range": "25-55",
@@ -86,9 +89,18 @@
       "daily-life functionality (rentrer le soir sans gémir, jouer avec les kids, marcher chien sans grimacer)"
     ],
     "fears": [
-      "chronic injury forced retirement (perdre le job pour raison santé)",
-      "missing days work cost (sick days unpaid pour occupations majorité)",
-      "conjoint qui flag la dégradation visible (limping · plaintes répétées · refus activités weekend)"
+      {
+        "fear_text": "chronic injury forced retirement (perdre le job pour raison santé)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "missing days work cost (sick days unpaid pour occupations majorité)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "conjoint qui flag la dégradation visible (limping · plaintes répétées · refus activités weekend)",
+        "source_verbatim_ref": null
+      }
     ],
     "status_signals": [
       "I'm the kind who solves problems pragmatically (pas le whiner)",
@@ -106,7 +118,9 @@
     "confidence_chain": {
       "sourcing_method": "derived_indirect",
       "verbatim_count": 0,
-      "blocked_sources": ["pas de mining direct lance sur Stepprs · cas pédagogique canon"],
+      "blocked_sources": [
+        "pas de mining direct lance sur Stepprs · cas pédagogique canon"
+      ],
       "confidence_level": "moyenne",
       "caveat": "Dream scenario inféré canon DR Schwartz · target_recipient relationnel (conjoint) cohérent avec drives + fears encodés. À valider via mine-voc verbatims réels si brand opérateur · cas pédagogique canon ne nécessite pas activation paid producer."
     }

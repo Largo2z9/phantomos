@@ -87,19 +87,44 @@
       "scaled": null,
       "fatigued": null,
       "_note": "Example brand · état validated par construction pédagogique · pas via test ROAS réel"
-    }
+    },
+    "slug": "stepprs",
+    "created": "2026-04-10",
+    "updated": "2026-06-10"
   },
   "identity": {
     "name": "Stepprs",
     "slug": "_EXAMPLE",
     "url": "https://stepprs.com/",
     "language": "en",
-    "target_geo": ["US", "UK", "DE", "FR", "IT", "ES", "RO", "BE", "NL", "AT", "PL"],
+    "target_geo": [
+      "US",
+      "UK",
+      "DE",
+      "FR",
+      "IT",
+      "ES",
+      "RO",
+      "BE",
+      "NL",
+      "AT",
+      "PL"
+    ],
     "year_founded": 2024,
     "brand_mission": "Make foot care accessible and enjoyable for everyone",
     "brand_vision": "Daily comfort innovation · pain relief without the clinical positioning",
-    "brand_personality": ["expert-backed", "approachable", "warm", "practical"],
-    "brand_values": ["accessibility", "engineered quality", "trusted by experts", "everyday wearability"],
+    "brand_personality": [
+      "expert-backed",
+      "approachable",
+      "warm",
+      "practical"
+    ],
+    "brand_values": [
+      "accessibility",
+      "engineered quality",
+      "trusted by experts",
+      "everyday wearability"
+    ],
     "brand_story": "Stepprs was started with the goal of improving overall foot care for all, focused on thoughtful design and quality materials.",
     "business_model": "DTC",
     "business_model_signals": {
@@ -120,7 +145,12 @@
   "tone_of_voice": {
     "style": "friendly motivational expert-backed",
     "register": "casual",
-    "banned_words": ["medical-grade", "podiatric orthotic", "clinically prescribed", "rajeunir"],
+    "banned_words": [
+      "medical-grade",
+      "podiatric orthotic",
+      "clinically prescribed",
+      "rajeunir"
+    ],
     "voice": "warm pedagogical confident practical"
   },
   "platforms": {
@@ -184,70 +214,112 @@
     "monthly_visits": 859978,
     "monthly_visits_growth_30d": 0.0532,
     "traffic_history_6m": [
-      {"month": "2025-11", "visits": 968000},
-      {"month": "2025-12", "visits": 1009000},
-      {"month": "2026-01", "visits": 980000},
-      {"month": "2026-02", "visits": 825000},
-      {"month": "2026-05", "visits": 859978}
+      {
+        "month": "2025-11",
+        "visits": 968000
+      },
+      {
+        "month": "2025-12",
+        "visits": 1009000
+      },
+      {
+        "month": "2026-01",
+        "visits": 980000
+      },
+      {
+        "month": "2026-02",
+        "visits": 825000
+      },
+      {
+        "month": "2026-05",
+        "visits": 859978
+      }
     ],
     "$comment": "Mock financials cohérents avec 800k customers · AOV bundles foot care · LTV moyen (subscription absente · repeat partiel · 90-day money back guarantee modeste refund_rate). NEW data sourced TrendTrack 2026-05-16 · monthly_visits 860k + growth +5.3% sur 30j · traffic_history 6 mois récents (pic 1M déc-2025, dip 825k fév-2026, rebond mai-2026)."
   },
   "seasonality": {
-    "primary_peak_months": ["May", "June", "July", "August"],
-    "secondary_peak_months": ["November", "December"],
-    "off_season_months": ["February", "March"],
+    "primary_peak_months": [
+      "May",
+      "June",
+      "July",
+      "August"
+    ],
+    "secondary_peak_months": [
+      "November",
+      "December"
+    ],
+    "off_season_months": [
+      "February",
+      "March"
+    ],
     "$comment": "Pic été · activité piétonne haute (marche · jardinage · vacances debout). Pic décembre · cadeaux mère/grand-mère."
   },
   "market": {
-    "categories": ["Apparel", "Clothing Accessories", "Footwear", "Health", "Health Conditions", "Medical Devices & Equipment", "Pain Management"],
+    "categories": [
+      "Apparel",
+      "Clothing Accessories",
+      "Footwear",
+      "Health",
+      "Health Conditions",
+      "Medical Devices & Equipment",
+      "Pain Management"
+    ],
     "products_count": 26,
     "myshopify_domain": "ec0012-2.myshopify.com",
     "competitors": [
       {
         "name": "Dr. Scholl's",
         "url": "https://www.drscholls.com/",
-        "market_position": "mass drugstore incumbent",
+        "market_position": "leader",
         "estimated_monthly_revenue": null,
-        "price_vs_us": "30-50% lower",
+        "price_vs_us": "lower",
         "primary_channel": "retail pharmacy + grocery",
-        "positioning": "drugstore mass · trusted generic · entry-level pricing"
+        "positioning": "drugstore mass · trusted generic · entry-level pricing",
+        "market_position_note": "mass drugstore incumbent",
+        "price_vs_us_note": "30-50% lower"
       },
       {
         "name": "Powerstep",
         "url": "https://powerstep.com/",
-        "market_position": "clinical mid-tier",
+        "market_position": "challenger",
         "estimated_monthly_revenue": null,
-        "price_vs_us": "20-40% higher",
+        "price_vs_us": "higher",
         "primary_channel": "DTC + podiatrist referral",
-        "positioning": "clinical-positioned · arch support engineering · podiatrist endorsed"
+        "positioning": "clinical-positioned · arch support engineering · podiatrist endorsed",
+        "market_position_note": "clinical mid-tier",
+        "price_vs_us_note": "20-40% higher"
       },
       {
         "name": "Superfeet",
         "url": "https://superfeet.com/",
-        "market_position": "sport/clinical premium",
+        "market_position": "niche",
         "estimated_monthly_revenue": null,
-        "price_vs_us": "50-100% higher",
+        "price_vs_us": "higher",
         "primary_channel": "DTC + specialty sporting goods",
-        "positioning": "performance/sport vertical · premium materials · running heritage"
+        "positioning": "performance/sport vertical · premium materials · running heritage",
+        "market_position_note": "sport/clinical premium",
+        "price_vs_us_note": "50-100% higher"
       },
       {
         "name": "Vionic",
         "url": "https://vionicshoes.com/",
-        "market_position": "podiatrist recommended lifestyle",
+        "market_position": "challenger",
         "estimated_monthly_revenue": null,
-        "price_vs_us": "70-150% higher",
+        "price_vs_us": "higher",
         "primary_channel": "DTC + department stores",
-        "positioning": "lifestyle premium · podiatrist designed · footwear extension"
+        "positioning": "lifestyle premium · podiatrist designed · footwear extension",
+        "market_position_note": "podiatrist recommended lifestyle",
+        "price_vs_us_note": "70-150% higher"
       }
     ],
     "sophistication": "medium-high",
     "category_maturity": "established",
     "regulatory_environment": "low · OTC consumer product · pas de claims médicaux contraignants FDA",
     "awareness_distribution": {
-      "unaware": 0.10,
+      "unaware": 0.1,
       "problem_aware": 0.45,
-      "solution_aware": 0.30,
-      "product_aware": 0.10,
+      "solution_aware": 0.3,
+      "product_aware": 0.1,
       "most_aware": 0.05,
       "$comment": "Niche foot care dominée problem_aware + solution_aware · acheteurs cherchent déjà solution. Hooks doivent valider tension existante pas créer urgency."
     }
@@ -273,5 +345,57 @@
     "market": "mature",
     "atlas_state": "exemple complet pédagogique · 4 arbres compositional cartography canon v3.1 démontrés (Spec→Mécanisme→Bénéfice · Audience→Pain→Bénéfice · Angle OTRB · Roadmap timeline)",
     "$comment": "Stage scale · 800k customers acquired · focus retention + expansion vs net new acquisition primaire."
-  }
+  },
+  "products_index": [
+    {
+      "slug": "massage-insoles",
+      "name": "Stepprs Massage Insoles",
+      "role": "hero",
+      "enriched": true
+    }
+  ],
+  "audiences_index": [
+    {
+      "slug": "workers-shifts",
+      "name": "Shift workers on their feet",
+      "parent_slug": null,
+      "is_mother": true
+    },
+    {
+      "slug": "hospitality-retail",
+      "name": "Hospitality & retail shifts",
+      "parent_slug": "workers-shifts",
+      "is_mother": false
+    },
+    {
+      "slug": "warehouse-10h",
+      "name": "Warehouse 10h shifts",
+      "parent_slug": "workers-shifts",
+      "is_mother": false
+    },
+    {
+      "slug": "nurses-12h",
+      "name": "Nurses 12h shifts",
+      "parent_slug": "workers-shifts",
+      "is_mother": false
+    },
+    {
+      "slug": "chronic-pain-45",
+      "name": "Chronic foot pain 45+",
+      "parent_slug": null,
+      "is_mother": true
+    },
+    {
+      "slug": "heel-pain-general",
+      "name": "Heel pain general",
+      "parent_slug": "chronic-pain-45",
+      "is_mother": false
+    },
+    {
+      "slug": "plantar-fasciitis-diagnosed",
+      "name": "Plantar fasciitis diagnosed",
+      "parent_slug": "chronic-pain-45",
+      "is_mother": false
+    }
+  ]
 }

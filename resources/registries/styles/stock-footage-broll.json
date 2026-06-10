@@ -1,0 +1,87 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "stock-footage-broll",
+  "display_name": "B-roll stock (plans d'ambiance)",
+  "family": "stock",
+  "typology_st": "temporel",
+  "description": "Plans d'ambiance generiques de banque d'images : mains qui versent, nature qui respire, time-lapse de ville, gros plan de texture, silhouette de coureur au coucher de soleil. Aucun acteur identifiable, aucun produit hero, aucune marque : ce sont des images d'illustration interchangeables qui habillent une voix-off ou un texte. A utiliser comme tissu conjonctif d'une video paid (cover sur la voix-off, illustration d'un benefice abstrait, respiration entre deux plans forts, fond d'un hook texte), jamais comme preuve produit ni comme plan signature. C'est le style le plus bas-cout/bas-risque et aussi le plus generique : il sert a remplir, pas a vendre.",
+  "render_recipe": {
+    "prompt_skeleton": "Generic ambient stock-footage style still, b-roll establishing frame of {subject_scene}, {action_motion} captured in passing, anonymous and unbranded, no recognizable faces (faces turned away, cropped or out of focus), no product hero, neutral universal setting, shot like a cinematic stock library clip, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, polished but interchangeable illustrative footage, room for voice-over or text overlay",
+    "slots": [
+      { "name": "subject_scene", "description": "Le sujet d'ambiance generique a illustrer (ex 'hands pouring coffee into a mug', 'wheat field swaying at sunrise', 'busy city crosswalk', 'water droplets on a leaf', 'jogger silhouette on a beach'). Universel, non-marque, non-identifiable. C'est une metaphore visuelle du message, pas le produit reel." },
+      { "name": "action_motion", "description": "Le micro-mouvement/geste capture sur le vif qui rend le plan vivant (ex 'slow pour', 'gentle breeze', 'foot traffic blur', 'condensation forming', 'slow stride'). Doit rester un geste d'ambiance, jamais une demo produit precise." },
+      { "name": "lighting", "description": "Voir champ lighting (lumiere naturelle flatteuse type stock : golden hour, fenetre douce, contre-jour propre)." },
+      { "name": "camera_lens", "description": "Voir champ camera_lens (focale cinema, faible profondeur de champ, bokeh propre, mouvement sur slider/gimbal)." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood (teal-orange neutre, desature premium, mood universel positif)." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain (rendu 4K propre, grain leger cinema optionnel, zero artefact)." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes (regle des tiers safe, negative space pour overlay texte, cadrage centre-droit standard)." }
+    ],
+    "lighting": "Lumiere naturelle flatteuse et 'safe' typique des banques d'images : golden hour douce, contre-jour propre avec halo leger, lumiere de fenetre diffuse, jamais d'eclairage dur ou dramatique signature. Expose pour etre universellement agreable et neutre, jamais expressif. Le but est que le plan soit beau mais oubliable, integrable derriere n'importe quel message.",
+    "camera_lens": "Esthetique cinema de stock : focale moyenne a longue, faible profondeur de champ (sujet net, arriere-plan en bokeh propre et rond), mouvement fluide type slider/gimbal/dolly lent. Cadrage stable et soigne. Pas de shake, pas de telephone tenu a la main : ce style sonne 'production', pas 'capture brute'. Eviter le fish-eye ou toute distorsion signature.",
+    "palette_mood": "Etalonnage neutre et passe-partout : teal-orange leger, ou desature premium, ou pastel chaud universel. Mood positif-neutre (calme, propre, aspirationnel doux), jamais une signature couleur forte qui collerait a une seule marque. La palette doit pouvoir cohabiter avec n'importe quelle charte posee par-dessus.",
+    "texture_grain": "Rendu propre haute definition (4K), nettete cinema, grain de film leger et optionnel pour l'aspect 'tourne pour de vrai'. Surfaces realistes mais lisses. Zero artefact de compression, zero bruit numerique sale. La texture doit dire 'clip de banque pro', ni amateur ni hyper-stylise.",
+    "composition_notes": "Cadrage standard et sur (regle des tiers, sujet centre-droit ou centre), beaucoup de negative space volontaire (ciel, mur, fond flou) pour laisser tomber un texte overlay ou une voix-off respirer. Composition equilibree, lisible au scroll, sans element qui accroche trop l'oeil : le plan est un decor, pas le focus. Eviter tout cadrage trop signature ou trop charge."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_story_reel": "9:16",
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_square": "1:1",
+      "resolution": "2K",
+      "guidance": "medium : verrouiller l'anonymat (pas de visage identifiable), la neutralite de marque et le mood stock propre, mais laisser le sujet d'ambiance respirer sans sur-contraindre. Trop haut fige un rendu fige/carte-postale.",
+      "negative_prompt": "recognizable face, named celebrity, branded packaging, visible logo, product hero shot, on-screen text, watermark, stock-site watermark, getty shutterstock overlay, harsh signature lighting, fisheye distortion, handheld shake, amateur phone footage, oversaturated, plastic skin, extra fingers, garbled text",
+      "note": "L'endpoint image genere des keyframes du plan d'ambiance (frame d'etablissement + 1-2 etats du micro-mouvement). Le mouvement reel (slow pour, breeze, dolly) se monte cote bras video a partir des keyframes, ou se source directement en clip stock video. NB : pour ce style precis, un vrai clip de banque (stock library) est souvent plus rapide et moins cher que la generation ; la fiche sert quand on veut un b-roll sur-mesure non-traceable ou non-disponible en banque."
+    },
+    "video_params": {
+      "motion": "Mouvement lent et contemplatif : push-in ou pull-out doux sur dolly/slider, parallax leger, ou simple capture d'un geste naturel au ralenti (slow pour, breeze, condensation). Vitesse 'b-roll' (souvent 50-60% slow-mo). Aucun mouvement brusque, aucun cut interne : un plan = un geste continu et apaisant. Le b-roll doit glisser sous la voix-off, jamais voler l'attention.",
+      "duration_s_range": [2, 6],
+      "transitions": "Coupes nettes ou fondus courts entre plans d'ambiance, ou cross-dissolve doux pour un montage 'mood'. Souvent enchaine en sequence rapide (2-3 b-rolls de 2s) pour habiller un segment de voix-off. Pas de transition signature : le b-roll se fond, il ne se met pas en scene. Match-on-action possible entre deux plans qui partagent un mouvement."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Visage identifiable hallucine : le stock b-roll doit rester anonyme (visages detournes, croppes ou flous). L'IA genere souvent un visage net et 'castable' qui transforme le plan d'ambiance en faux acteur, ou pire un visage deforme/asymetrique. Verifier qu'aucun visage net n'apparait.",
+    "Faux watermark de banque d'images : l'IA imite les overlays type Getty/Shutterstock/iStock (texte diagonal, logo translucide). C'est le tell #1 d'un b-roll IA. Rejeter tout watermark, filigrane diagonal ou texte de banque incruste.",
+    "Texte/logo halluciné dans la scene : pancartes, devantures de magasin, etiquettes, ecrans avec du faux texte garbled. Le b-roll doit etre non-marque et sans texte lisible parasite. Verifier chaque surface portant potentiellement du texte.",
+    "Mains/doigts ratés sur les plans 'mains qui font un geste' (verser, tenir, toucher) : c'est le sous-genre le plus frequent du b-roll et le plus piege par l'IA (doigts surnumeraires, fusionnes, articulation impossible). Inspecter chaque main au pixel.",
+    "Sur-stylisation qui tue le 'generique' : eclairage dramatique signature, etalonnage trop fort, cadrage trop auteur. Le b-roll DOIT etre beau mais oubliable ; un plan trop signature ne se fond plus sous la voix-off et devient le focus a tort.",
+    "Look 'carte postale IA' fige : composition trop parfaite/symetrique, lumiere irréelle trop léchée, mood saccharine. Trahit la generation et casse la credibilite 'tourne pour de vrai'. Viser une imperfection naturelle (grain leger, asymetrie douce).",
+    "Physique cassee sur les elements en mouvement : eau qui coule de travers, fumee/vapeur incoherente, reflets impossibles, foule dont les membres fusionnent en arriere-plan flou. Verifier la coherence des fluides et des foules.",
+    "Peau plastique/cireuse sur les gros plans corporels (mains, peau, pieds) repris en macro : meme guardrail que real-photo, la texture doit rester organique avec pores et micro-defauts.",
+    "Sur la video : mouvement trop rapide ou cuts internes qui sortent du registre 'ambiance contemplative' ; b-roll qui accroche trop l'oeil et vole l'attention de la voix-off ; slow-mo robotique ou interpolation baveuse (artefacts de frame-blend) qui trahit un montage IA."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 5],
+    "pairs_well_with": [
+      "ugc-selfie-talking",
+      "real-photo-lifestyle",
+      "graphic-icons-overlay",
+      "brand-motion-graphic",
+      "split-screen-comparison"
+    ],
+    "avoid_when": [
+      "L'angle repose sur la preuve produit ou la demonstration concrete : un b-roll generique n'illustre rien de specifique, il dilue la promesse au lieu de la prouver. Passer sur real-photo-product-studio, screen-recording-mockup ou ugc-selfie-talking pour une demo reelle.",
+      "Besoin d'authenticite brute / scroll-natif (zone raw 6-10) : le b-roll stock propre sonne 'pub corporate generique', c'est l'inverse du natif feed, il signale l'ad de loin et fait scroller. Passer sur UGC selfie tenu a la main.",
+      "Le plan doit porter le hero produit desirable (lancement, convoitise) : le b-roll relegue tout au decor et n'a aucun produit a montrer, mauvais pour la convoitise. Passer sur pack-shot ou real-photo-product-studio.",
+      "L'ad entiere repose sur le b-roll (pas seulement en cover/respiration) : un montage 100% stock sans plan de preuve ni visage qui parle sonne vide et interchangeable, faibles performances. Le b-roll est un liant, pas une colonne vertebrale.",
+      "Identification humaine forte requise (temoignage, relatabilite d'un visage) : l'anonymat du b-roll empeche tout attachement. Passer sur real-photo-testimonial-static ou ugc-selfie-talking."
+    ]
+  },
+  "related_mechanic_ids": [
+    "problem-agitation",
+    "lifestyle-aspiration",
+    "voice-over-narrative",
+    "before-after-bridge",
+    "emotional-hook"
+  ],
+  "refs": [
+    "Code DTC paid : b-roll generique (mains qui versent, nature, time-lapse ville, texture macro, silhouette golden hour) en cover sous une voix-off ou derriere un hook texte, montage 'mood' de 2-3 plans courts.",
+    "Use-case canon : illustrer un benefice abstrait ('gagne du temps', 'retrouve ton energie') sans produit, ou faire respirer entre deux plans forts (UGC, packshot). Liant, jamais signature.",
+    "Tell anti-IA a surveiller : faux watermark de banque (Getty/Shutterstock), visage IA trop net/castable, mains ratees sur les plans de geste, look carte-postale fige."
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

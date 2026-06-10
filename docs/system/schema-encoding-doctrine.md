@@ -1,6 +1,6 @@
 # Schema Encoding Doctrine (SED) · Operating Doctrine
 
-> Working draft, R&D zone, Build mode. To be reviewed, then promoted to `workspace-template/docs/system/schema-encoding-doctrine.md` in Release mode. **SED is the substrate sub-doctrine of `contextual-intelligence.md` (CI).** Without rigorous schema encoding, the matrix-driven reasoning of CMR has nothing to range over and the agent's intelligence has no stable ground.
+> **SED is the substrate sub-doctrine of `contextual-intelligence.md` (CI).** Without rigorous schema encoding, the matrix-driven reasoning of CMR has nothing to range over and the agent's intelligence has no stable ground.
 
 ---
 

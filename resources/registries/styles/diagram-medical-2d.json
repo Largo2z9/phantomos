@@ -1,0 +1,109 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "diagram-medical-2d",
+  "display_name": "Schéma médical 2D",
+  "family": "diagram",
+  "typology_st": "spatial",
+  "description": "Diagramme médical 2D explicatif : illustration vectorielle plate qui montre un mécanisme physiologique ou un mode d'action via flèches numérotées, zones légendées et coupe stylisée (peau, intestin, cellule, articulation, follicule). On ne cherche pas le photoréalisme mais la lisibilité pédagogique : prouver le 'comment ça marche' d'un ingrédient ou d'un produit en rendant le mécanisme visible et compréhensible en un coup d'œil. À utiliser sur les angles science/éducation, frame 'mode d'action' d'un carrousel, ou ad qui doit asseoir la crédibilité d'un mécanisme invisible.",
+  "render_recipe": {
+    "prompt_skeleton": "Clean flat 2D medical infographic diagram explaining {mechanism} of {product_or_ingredient}, showing a stylized cross-section of {body_region}, with {numbered_arrows} indicating the step-by-step process and clearly placed callout labels for {labeled_parts}, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, vector illustration style, editorial science explainer aesthetic, anatomically plausible, flat shading, crisp clean linework, no photorealism, no 3D render",
+    "slots": [
+      {
+        "name": "mechanism",
+        "description": "Le mécanisme physiologique ou mode d'action à expliquer. Ex 'how konjac fiber expands in the stomach to increase satiety', 'how compression improves venous return in the leg', 'how the active ingredient penetrates the skin barrier'. C'est le sujet réel du schéma."
+      },
+      {
+        "name": "product_or_ingredient",
+        "description": "Le produit ou l'ingrédient actif dont on illustre l'action. Reste générique si seul le mécanisme compte (ex 'a dietary fiber', 'the serum molecule')."
+      },
+      {
+        "name": "body_region",
+        "description": "La zone anatomique en coupe stylisée à représenter. Ex 'the stomach and small intestine', 'a skin layer cross-section (epidermis, dermis)', 'a leg vein with valves', 'a hair follicle'. Garder anatomiquement plausible mais simplifié."
+      },
+      {
+        "name": "numbered_arrows",
+        "description": "Le séquençage en étapes à matérialiser par des flèches numérotées (1, 2, 3) qui guident la lecture du mécanisme. Décrire l'ordre des étapes (ingestion, expansion, absorption, etc.) pour que le flux soit cohérent."
+      },
+      {
+        "name": "labeled_parts",
+        "description": "Les éléments à légender (callouts) : organes, couches, molécules, points d'action. Garder un nombre limité (3 à 6 labels) pour la lisibilité. Le texte doit rester court et lisible (voir guardrails sur le texte halluciné)."
+      },
+      {
+        "name": "lighting",
+        "description": "Slot rempli par défaut ci-dessous. Un diagramme 2D plat n'a pas de lumière photographique : on parle d'ombrage plat et de contraste de lecture, pas d'éclairage de scène. Surcharger rarement."
+      },
+      {
+        "name": "camera_lens",
+        "description": "Slot rempli par défaut. Vue frontale orthographique (pas de perspective photo). Surcharger seulement pour un léger angle iso si la DA le demande."
+      },
+      {
+        "name": "palette_mood",
+        "description": "Palette à aligner sur la charte marque. Slot rempli par défaut médical/éditorial restreint, surcharger avec la couleur accent de la marque pour les flèches et highlights actifs."
+      },
+      {
+        "name": "texture_grain",
+        "description": "Slot rempli par défaut (aplats plats, zéro grain photo). Surcharger seulement pour une légère texture papier/risographie si la DA éditoriale le justifie."
+      },
+      {
+        "name": "composition_notes",
+        "description": "Cadrage et hiérarchie de lecture. Slot rempli par défaut (sujet central, flèches qui guident l'œil, marge pour overlay copy), surcharger selon le format frame carrousel ou ad."
+      }
+    ],
+    "lighting": "Flat even illumination with no photographic light source, soft uniform fill across the whole canvas, depth suggested only by flat tonal shading and subtle drop separation between layers, high figure-to-ground contrast so labels and arrows stay legible.",
+    "camera_lens": "Orthographic front-on illustrative view, no lens distortion, no photographic perspective or depth-of-field, schematic cross-section as if drawn in a textbook or editorial science explainer.",
+    "palette_mood": "Restrained medical-editorial palette: clean neutral background (off-white or pale brand tint), 2 to 3 anatomical tones plus a single saturated brand accent reserved for active arrows, highlights and the key step. Trustworthy, calm, credible, never garish rainbow infographic.",
+    "texture_grain": "Pure flat vector shading, crisp anti-aliased linework, no photographic grain, no noise, no gradients beyond gentle flat tonal steps, optional very light paper/riso texture only if the brand DA is editorial.",
+    "composition_notes": "Central stylized cross-section as the hero, numbered arrows leading the eye through the process in reading order, callout labels on connector lines pointing to parts, clear visual hierarchy (one mechanism per frame, not a busy collage), generous margins for headline/copy overlay, 4:5 or 1:1 friendly framing for feed."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "high (lock schematic flat style, anatomical plausibility and arrow logic; lower slightly only if linework turns stiff or labels overflow)"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Texte et labels hallucinés : glyphes inventés, mots médicaux mal orthographiés ou inventés dans les callouts, légendes illisibles. Le texte généré par le modèle est peu fiable, garder les labels courts et prévoir une réintégration typographique propre en post si besoin",
+    "Anatomie fausse ou implausible : organes mal placés, mauvais nombre de couches de peau, vaisseau qui se branche n'importe où, coupe qui ne correspond pas à la zone du body. Le mécanisme doit rester crédible pour un public qui connaît son corps",
+    "Flèches incohérentes : numérotation dans le désordre, flèches qui ne pointent vers rien, sens du flux contradictoire avec le mécanisme décrit, double comptage d'étapes",
+    "Dérive vers le 3D / photoréalisme : ombrage volumétrique, reflets, profondeur de champ, rendu organique réaliste alors que le style est un schéma 2D plat. Rester flat vector",
+    "Surcharge cognitive : trop de labels, micro-détails inutiles, collage de plusieurs mécanismes dans une seule frame qui tue la lisibilité pédagogique",
+    "Symétrie / répétition mécanique IA : éléments anatomiques clonés à l'identique (cellules ou villosités copiées-collées en tuile parfaitement régulière) au lieu d'une variation organique crédible",
+    "Connector lines des callouts qui se croisent salement ou pointent à côté de la zone légendée, cassant la lecture label vers partie",
+    "Palette rainbow criarde façon infographie générique qui casse la crédibilité médicale et le code charte marque",
+    "Faux logo / fausses mentions réglementaires hallucinés (claims santé inventés gravés dans le schéma) : aucun claim non validé ne doit apparaître dans le visuel"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 5],
+    "pairs_well_with": [
+      "real-photo-product-studio",
+      "real-photo-macro-detail",
+      "graphic-icons-overlay",
+      "3d-anatomy-stylized",
+      "split-screen-comparison"
+    ],
+    "avoid_when": [
+      "L'argument est émotionnel/identitaire ou repose sur le désir et la preuve sociale : un schéma froid n'active pas l'envie, privilégier lifestyle ou UGC",
+      "Le produit n'a pas de mécanisme d'action différenciant à expliquer (commodité, mode, déco) : le schéma n'a rien à prouver",
+      "Charte raw/agressive UGC native (zone créa très haute) : le schéma éditorial propre détonne et sent l'ad institutionnelle dans un feed brut",
+      "On veut un rendu organique réaliste du corps ou de l'organe (impact viscéral) : passer sur 3d-anatomy-realistic ou 3d-anatomy-stylized",
+      "Le mécanisme est trop complexe pour tenir lisiblement en une frame : le forcer en 2D crée une surcharge illisible, mieux vaut une séquence ou une vidéo explicative"
+    ]
+  },
+  "refs": [
+    "Frame 'mode d'action' d'un carrousel science : coupe estomac stylisée, fibre konjac qui gonfle, flèches 1-2-3 ingestion vers satiété (mécanisme invisible rendu visible)",
+    "Schéma jambe avec valves veineuses et flèches de retour veineux pour expliquer l'effet d'une chaussette de compression",
+    "Coupe peau éditoriale (épiderme/derme) avec molécule active qui pénètre, callouts courts façon explainer de magazine santé"
+  ],
+  "related_mechanic_ids": [
+    "mechanism-reveal",
+    "ingredients-pillars",
+    "product-specs"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "screen-recording-mockup",
+  "display_name": "Screen recording / mockup app",
+  "family": "screen-mockup",
+  "typology_st": "temporel",
+  "description": "Capture d'ecran filmee ou mockup d'interface qui montre une UI en action: fil de messages/SMS, notification push qui tombe, app produit qu'on scrolle, panier/checkout, avis 5 etoiles qui defile, conversation WhatsApp. Le code est la preuve par l'ecran: on lit ce qui se passe sur un telephone ou un dashboard comme si on regardait par-dessus l'epaule de quelqu'un. A utiliser pour les angles social proof (captures d'avis/DM), demo de fonctionnement d'une app, faux echange de texto qui raconte le probleme, notification de vente, ou onboarding produit numerique.",
+  "render_recipe": {
+    "prompt_skeleton": "Clean UI screen capture of {ui_surface} displayed inside {device_frame}, showing {ui_content}, pixel-accurate native interface with correct {os_chrome} (status bar, time, battery, signal), {accent_color} brand accent, crisp anti-aliased typography, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, flat screen-real rendering, no hand, no photographic scene around the screen unless framed in a device",
+    "slots": [
+      { "name": "ui_surface", "description": "Le type d'interface montree: iMessage/SMS thread, WhatsApp chat, push notification banner, Shopify checkout, product app dashboard, Trustpilot/Amazon review list, Instagram DM, mobile order confirmation, email inbox. Determine tout le layout." },
+      { "name": "device_frame", "description": "Le contenant: bare full-bleed screen (UI plein cadre, le plus propre), iPhone mockup avec Dynamic Island/encoche, Android frame, laptop/browser window pour un dashboard. Choisir bare-screen pour la lisibilite max, device mockup pour ancrer 'c'est un vrai telephone'." },
+      { "name": "ui_content", "description": "Le contenu textuel exact a afficher (driver de l'angle): le texte des bulles de message, le wording de la notif ('Stephanie vient d'acheter...'), les avis, les champs du checkout, le montant. C'est la zone load-bearing, doit etre dictee mot a mot, pas laissee au modele." },
+      { "name": "os_chrome", "description": "Le systeme imite: iOS (SF Pro, status bar, bulles bleues/grises), Android Material, web browser chrome. Doit etre coherent (pas d'icones iOS sur un layout Android)." },
+      { "name": "accent_color", "description": "La couleur d'accent de la marque/app injectee dans l'UI (boutons, liens, badge non-lu) pour que la capture colle a la charte. Voir palette_mood." },
+      { "name": "lighting", "description": "Voir champ lighting. UI = lumiere d'ecran emise, pas eclairage de scene; n'overrider que si la capture est posee dans une main/sur une surface filmee." },
+      { "name": "camera_lens", "description": "Voir champ camera_lens. Override seulement si on filme l'ecran physiquement (rendu 'screen-record dans la vraie vie') plutot qu'un rendu UI a plat." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes." }
+    ],
+    "lighting": "Pas d'eclairage de scene: l'image est l'ecran lui-meme, lumiere emise uniforme et plate, blancs purs et noirs profonds de dalle OLED/LCD, zero ombre portee sur l'UI. Si l'ecran est pose dans un device mockup, ajouter au plus un leger gloss/reflet de vitre tres discret en haut de la dalle. Jamais de spot, de gradient d'ambiance ni d'ombre dramatique sur une interface.",
+    "camera_lens": "Rendu frontal a plat, perpendiculaire a l'ecran (0 degre, pas de perspective): l'UI est nette pixel-par-pixel comme un vrai screenshot, aucun flou, aucune profondeur de champ. Variante 'screen filme': leger angle, micro-moire/scanline de dalle, focale telephone ~26mm qui capte un ecran reel avec un soupcon de reflet ambiant. Par defaut: zero distorsion, alignement parfait des bords.",
+    "palette_mood": "Couleurs systeme natives exactes: bleu iMessage #007AFF, vert WhatsApp #25D366, gris bulles recues, fond clair ou dark-mode pur, accent de marque injecte sur les boutons/badges. Contraste eleve et propre, lisibilite ecran avant tout. Mood = numerique, net, credible, pas de grading photo ni de teinte d'ambiance.",
+    "texture_grain": "Aucun grain photographique: surface vectorielle nette, anti-aliasing propre sur le texte et les icones, rendu screenshot 1:1. Tolere une legere compression JPEG facon capture partagee si on cherche le 'vrai screenshot reenvoye'. En mode ecran-filme: fine moire/pixel-grid de dalle et micro-reflet, sinon flat-clean total.",
+    "composition_notes": "Hierarchie de lecture verticale type mobile: status bar en haut, contenu au centre, barre de saisie/CTA en bas. Le message ou la notif qui porte l'angle doit etre dans le tiers haut, lisible en 1 seconde au pouce. Respecter les marges natives iOS/Android (pas de texte colle aux bords). Aligner tout sur la grille. Si plusieurs bulles, sequence de lecture claire du haut vers le bas. Format 9:16 par defaut (mobile), 16:9 ou 4:5 pour un dashboard desktop."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "9:16",
+      "resolution": "1080x1920",
+      "note": "Endpoint image = keyframe(s) de l'UI a un instant T (etat du thread, notif affichee, avis visible). Le texte est critique et souvent hallucine: generer puis CORRIGER le texte en post (overlay propre ou compositing) plutot que de tout confier au modele. Pour un dashboard desktop passer en 16:9/4:5. Le scroll/animation passe par le bras video."
+    },
+    "video_params": {
+      "motion": "Scroll vertical fluide et lent (defile d'avis, de chat, de feed) cale sur la vitesse de lecture, ou apparition sequencee: une notif qui slide-in depuis le haut, une bulle de message qui pop avec le 'typing...' puis le texte, un compteur/montant qui s'incremente, un tap qui declenche un ecran suivant. Mouvement piloté par l'UI (transitions systeme natives), pas par un mouvement de camera.",
+      "duration_s_range": [4, 20],
+      "transitions": "Transitions natives d'interface: push d'ecran iOS (slide horizontal), slide-in/out de notification depuis le haut, fade de modal, expansion d'une carte. Hard cut sec entre deux etats d'app facon screen-record monte. Zero transition habillee facon montage video (pas de wipe decoratif, pas de morph). Le 'typing indicator' avant un message = transition narrative cle."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Texte hallucine dans les bulles/notifs/avis (glyphes inventes, mots fondus, fautes involontaires): c'est LE defaut majeur de ce style, chaque caractere du ui_content doit etre verifie ou corrige en post",
+    "OS chrome incoherent: heure impossible (25:99), batterie/signal absurdes, melange d'icones iOS et Android, status bar mal formee, encoche/Dynamic Island deformee",
+    "Bulles de chat mal alignees ou queue de bulle (tail) du mauvais cote: les messages recus a gauche/gris, envoyes a droite/bleu, jamais l'inverse, jamais centres",
+    "Couleurs systeme fausses: bleu iMessage qui n'est pas #007AFF, vert WhatsApp approximatif, dark-mode avec des gris incoherents (trahit le faux)",
+    "Avatars/photos de profil avec visages IA fondus dans une liste de chat ou d'avis: garder des avatars simples ou flous, pas de visage hallucine miniature",
+    "Marque/logo de l'app deforme dans la barre de titre ou l'icone (nom de marque mal orthographie, logo approximatif): zone texte = zone a risque",
+    "Typographie non-native: police generique au lieu de SF Pro (iOS) / Roboto (Android), mauvais poids, anti-aliasing crade, texte pixelise alors qu'une UI est vectorielle nette",
+    "Geometrie d'UI molle: coins arrondis incoherents, boutons mal alignes, marges qui ne respectent pas la grille, icones de tailles disparates (une vraie UI est pixel-perfect)",
+    "Etoiles d'avis mal comptees (4,5 etoiles rendues comme 6, demi-etoile cassee) ou nombre d'avis/note moyenne incoherent avec les etoiles affichees",
+    "Reflet/main parasite: si on ne veut PAS le mode ecran-filme, bannir tout reflet de vitre, doigt, ombre de main qui ferait croire a une photo et casserait le rendu screenshot propre",
+    "Faux realisme 3D: relief, ombre portee ou perspective sur une UI censee etre a plat (un screenshot n'a ni volume ni ombre)"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [3, 9],
+    "pairs_well_with": [
+      "ugc-selfie-talking",
+      "real-photo-testimonial-static",
+      "split-screen-comparison",
+      "graphic-icons-overlay",
+      "pack-shot-brand-template"
+    ],
+    "avoid_when": [
+      "Marque qui ne vend rien de numerique ni n'a de preuve textuelle credible a montrer (l'UI sonne plaquee, gadget): la capture doit prouver quelque chose de reel, pas decorer",
+      "Categorie reglementee (sante, finance, complements) ou un faux SMS/avis/notification fabrique frole le faux temoignage ou l'allegation non substantiee: n'utiliser que des captures vraies et substantiables",
+      "Besoin d'un hero produit desirable et sensoriel (texture, matiere, packaging): l'ecran a plat est froid, passer sur packshot ou macro",
+      "Quand le texte de l'UI est dense/long: illisible au pouce en feed, l'angle se noie, reduire a une bulle ou une notif unique sinon basculer sur un autre style",
+      "Marque luxe en zone ultra-brand-safe (0-2) qui exige un rendu chaud et leche: la capture brute d'interface casse le prestige sauf si l'app elle-meme est le produit premium"
+    ]
+  },
+  "related_mechanic_ids": [
+    "social-proof-screenshot",
+    "fake-text-conversation",
+    "notification-sale-alert",
+    "product-demo-walkthrough"
+  ],
+  "refs": [
+    "Pub DTC social proof: capture d'avis 5 etoiles Trustpilot/Amazon ou de DM client qui scrolle",
+    "Faux echange iMessage/WhatsApp qui met en scene le probleme puis la solution (storytelling par texto)",
+    "Notification de vente/push facon 'X vient d'acheter' ou demo d'app produit en screen-record monte"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

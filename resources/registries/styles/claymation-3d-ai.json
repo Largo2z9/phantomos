@@ -1,0 +1,79 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "claymation-3d-ai",
+  "display_name": "Claymation 3D IA",
+  "family": "ai-generated",
+  "typology_st": "variable",
+  "description": "Pâte à modeler 3D générée par IA : personnages et produits sculptés type claymation/stop-motion, surfaces mates avec micro-empreintes de doigts et grain d'argile. Sert à dédramatiser un sujet sensible (corps, santé, money, before/after) ou à donner un ton ludique scroll-stopper en feed paid, là où une photo réelle serait trop crue, banale ou non castable.",
+  "render_recipe": {
+    "prompt_skeleton": "claymation stop-motion still of {subject} {action}, handmade polymer clay / plasticine sculpture, visible fingerprints and tool marks in the clay, soft matte surface, {product} rendered as a clay miniature with sculpted label, {set_description} miniature handcrafted set, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, tactile imperfect handmade feel, shallow depth of field, photographed on a tabletop set",
+    "slots": [
+      { "name": "subject", "description": "Le personnage ou héros en pâte à modeler (ex 'a chubby clay character', 'a smiling clay woman', 'a clay gut/stomach mascot')." },
+      { "name": "action", "description": "Ce que fait le sujet, lié au bénéfice/problème (ex 'holding the product', 'looking relieved', 'before/after transformation pose')." },
+      { "name": "product", "description": "Le produit réel transposé en miniature clay, avec son packaging/label sculpté reconnaissable." },
+      { "name": "set_description", "description": "Le décor miniature (kitchen counter, bathroom shelf, gym, bedroom) qui ancre le use-case." },
+      { "name": "lighting", "description": "Schéma lumière (voir champ lighting par défaut)." },
+      { "name": "camera_lens", "description": "Cadrage/objectif (voir champ camera_lens par défaut)." },
+      { "name": "palette_mood", "description": "Palette + mood couleur, alignés sur la charte marque." },
+      { "name": "texture_grain", "description": "Niveau de grain/texture clay attendu." },
+      { "name": "composition_notes", "description": "Contraintes de compo (espace pour overlay texte, règle des tiers, packshot lisible)." }
+    ],
+    "lighting": "soft three-point studio lighting, large diffused key from upper left, gentle fill, warm bounce, subtle rim to separate the clay from background; soft contact shadows on the tabletop, no harsh speculars",
+    "camera_lens": "50mm macro-leaning lens, eye-level to slightly-high tabletop angle, shallow depth of field (f/2.8 look) with the hero in crisp focus and set gently blurred",
+    "palette_mood": "warm friendly playful palette, candy/pastel or brand-accented tones, cohesive limited set of clay colors, optimistic non-clinical mood",
+    "texture_grain": "matte clay surface with visible fingerprint dimples, tool grooves and tiny dust specks, faint plasticine sheen only on edges, no plastic gloss, gentle photographic film grain",
+    "composition_notes": "hero centered or rule-of-thirds with clean negative space reserved for text overlay, product label fully legible and facing camera, single clear focal subject, tabletop horizon kept low for a toy-diorama feel"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "resolution": "2K",
+      "guidance": "medium-high to lock the handmade clay texture without going glossy/CGI",
+      "negative_prompt": "glossy plastic, hyperreal CGI render, smooth render, photoreal human skin, extra fingers, deformed hands, floating limbs, hallucinated text on label, six-finger hands, dead glassy eyes, uncanny realistic face"
+    },
+    "video_params": {
+      "motion": "frame-by-frame stop-motion cadence: deliberately choppy/stepped animation (8-12 fps feel), small clay deformations between poses, slight jitter on the held product, no smooth slerp tweening, mouth/limb morphs that read as hand-posed clay",
+      "duration_s_range": [3, 8],
+      "transitions": "hard clay-morph cuts or squash-and-stretch reveals (product molding into shape, before/after clay reshape), no glossy dissolves; loopable for feed"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Surface plastique brillante / rendu CGI lisse : la pâte doit rester MATE avec empreintes de doigts, pas un jouet vernis.",
+    "Sur-perfection géométrique : si tout est trop symétrique et propre, on perd le fait-main, ré-injecter de l'irrégularité (bosses, asymétrie, marques d'outil).",
+    "Mains/doigts clay foireux : doigts surnuméraires, fondus ou collés, le défaut IA classique encore plus visible en gros plan macro.",
+    "Visage uncanny : yeux vitreux/morts ou trop réalistes greffés sur un corps clay, garder des yeux clairement sculptés (billes, points enfoncés).",
+    "Label/packaging halluciné : glyphes inventés ou texte illisible sur le produit miniature, le nom de marque doit être net et correct (vérifier ortho).",
+    "Échelle incohérente : produit/personnage/décor à des échelles qui ne tiennent pas ensemble (mascotte géante vs set minuscule).",
+    "Ombres/contact manquants : sujet qui flotte sans ombre de contact sur le plan, casse l'illusion tabletop stop-motion.",
+    "Drift CGI sur la vidéo : animation trop fluide/slerp qui trahit l'IA, garder la cadence stop-motion saccadée hand-posed.",
+    "Lumière trop dure/spéculaire : highlights plastiques qui transforment l'argile mate en jouet brillant."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [2, 7],
+    "pairs_well_with": [
+      "graphic-icons-overlay",
+      "split-screen-comparison",
+      "pack-shot-brand-template",
+      "brand-motion-graphic",
+      "stop-motion-physical"
+    ],
+    "avoid_when": [
+      "Marque premium/luxe ou clinique-médicale sérieuse où le ludique casse la crédibilité et le perçu de prix.",
+      "Claim de preuve/efficacité qui exige du réel (avant/après corps, démo ingrédient, texture produit) : le clay décrédibilise la preuve.",
+      "Besoin d'un visage humain castable/relatable (testimonial, UGC) où l'identification à une vraie personne porte la conversion.",
+      "Catégorie réglementée santé/finance où un rendu cartoon peut être lu comme minimisation/non-sérieux par la plateforme ou le prospect."
+    ]
+  },
+  "refs": [
+    "Wave créa DTC 2024-2025 : clay/claymation ads pour dédramatiser corps/digestion/santé intime et casser le scroll en feed (genre Squatch/Liquid Death school of playful clay).",
+    "Use-case canon : mascotte clay du problème (gut, peau, stress) tenant le produit miniature, set diorama tabletop."
+  ],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

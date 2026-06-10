@@ -1,0 +1,90 @@
+{
+  "_schema_version": "library-pattern/1.0",
+  "pattern_id": "HOK-resolution-promise-effortless",
+  "pattern_type": "hook-mechanic",
+  "name": "Outcome-Imperatif / Resultat-sans-effort",
+  "one_liner": "Ouvrir sur le resultat desirable deja acquis (impératif court ou etat-cible nomme) en annulant la friction percue (effort minimal, geste anodin), pour que le prospect projette le benefice sans jamais ressentir le cout.",
+  "skeleton": "[benefice_desire / outcome_imperatif_court] {+ [annulation_friction : effort minimal | geste anodin | absence d'effort] } {+ [ancrage_temps : en [timeframe] | par [unite_temps]] }",
+  "slots": [
+    {
+      "name": "benefice_desire / outcome_imperatif_court",
+      "description": "L'etat-cible que le prospect veut, pose d'entree comme acquis. Soit un impératif court verbe-en-tete ('Get hard', 'Get your X back'), soit un etat-cible nomme ('Cheveux plus longs', 'De bonnes nuits'). Toujours en premier, jamais introduit par le probleme.",
+      "examples": [
+        "Cheveux plus longs (karacare RCV-05)",
+        "Get hard, control your finish (himshers RCV-115)",
+        "De bonnes nuits vous attendent (naali RCV-74)",
+        "Thicker hair: 3 months away (himshers RCV-173)"
+      ]
+    },
+    {
+      "name": "annulation_friction",
+      "description": "Le geste/cout est requalifie en quasi-inexistant : 'aucun effort', dose triviale ('1 pill a day', '2 minutes par jour', '2 Gummies'), ou rituel anodin. Slot optionnel mais c'est lui qui distingue la variante effortless de l'impératif sec.",
+      "examples": [
+        "Aucun effort (karacare RCV-05)",
+        "2 minutes par jour / Petit rituel (karacare RCV-01)",
+        "1 pill a day (himshers RCV-173)",
+        "Le rituel quotidien ultime (naali RCV-18)"
+      ]
+    },
+    {
+      "name": "ancrage_temps",
+      "description": "Optionnel. Borne le delai pour rendre la promesse credible et imminente : 'en 90 jours', '4 cm par mois', '3 months away', 'by spring'. Convertit le desir en echeance proche.",
+      "examples": [
+        "en 90 jours (karacare RCV-04)",
+        "4 cm par mois (karacare RCV-07)",
+        "3 months away (himshers RCV-173)",
+        "see results by spring (himshers RCV-205)"
+      ]
+    }
+  ],
+  "function": "Court-circuite l'objection 'ca va me demander trop d'effort / trop de temps' AVANT qu'elle se forme, en presentant le resultat comme deja la et le cout comme nul. L'impératif verbe-en-tete (hims/hers) prend l'ordre directement ; l'etat-cible + friction annulee (karacare/naali) fait projeter le benefice sans le prix. Dans les deux cas le prospect entre par le desir, pas par la douleur.",
+  "when_to_use": "Marche solution-aware a product-aware (le prospect connait deja la categorie et le desir, il hesite sur le cout/effort/credibilite). Tres efficace en MOFU consideration, en formats statiques ou ultra-courts (overlay 3s) ou il faut delivrer la promesse instantanement. Bon fit quand le produit a un geste d'usage simple (gummies, 1 pill, cure) ou un resultat visuel/sensible.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-01", "RCV-04", "RCV-05", "RCV-07"],
+      "realization": "Etat-cible + friction annulee + ancrage temps : 'Cheveux plus longs. Aucun effort.' (RCV-05) · 'Petit rituel. Grands effets. 2 minutes par jour.' (RCV-01) · 'Des cheveux renforces en 90 jours' (RCV-04) · '2 Gummies. 11 Vitamines. 4 cm par mois.' (RCV-07)."
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-18", "RCV-23", "RCV-40", "RCV-74"],
+      "realization": "Etat-cible emotionnel pose comme acquis, rituel/geste anodin comme vehicule : 'De bonnes nuits vous attendent.' (RCV-74) · 'Le DUO pour des journees sereines et des nuits profondes' (RCV-23) · 'Essayez le rituel quotidien ultime pour se detendre et enfin relacher la pression' (RCV-18) · 'Prete a affronter les tempetes emotionnelles' (RCV-40)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-115", "RCV-120", "RCV-128", "RCV-173", "RCV-205"],
+      "realization": "Impératif court verbe-en-tete (outcome direct), + dose triviale ou ancrage temps : 'Get hard, control your finish.' (hims RCV-115) · 'Get your testosterone back' (hims RCV-120) · 'Stay hard, all night.' (hims RCV-128) · 'Thicker hair: 3 months away. 1 pill a day.' (hers RCV-173) · 'Start now, see results by spring.' (hers RCV-205). hims + hers = UNE factory creative genree (ads-miroir, D#485), comptee comme 1 source."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Vu sur 3 verticales independantes ET 2 geos (FR + US) -> universal, le plus sur a emprunter partout. En mode exploit, rester sur la variante de la verticale operee (etat-cible + friction annulee pour beauty/wellness FR ; impératif court verbe-en-tete pour Rx/performance). En mode explore, oser croiser : importer l'impératif sec US sur une marque FR, ou greffer l'annulation de friction effortless sur un produit qui n'en parle pas encore. La distance verticale est faible ici, l'emprunt reste proche meme cross-vertical."
+  },
+  "related_mechanic_ids": ["resolution-promise", "resolution-timeline", "timeline-specific-result"],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation (FR · wellness-confort)",
+      "reslotted": "'Des jambes legeres. Sans effort.' [benefice_desire + friction annulee] + '15 min par jour' [annulation_friction : geste anodin] + 'des le 1er mois' [ancrage_temps]. Variante impérative US-importee (explore) : 'Reactivez votre circulation.'"
+    },
+    {
+      "target": "LIV Happy Food · konjac/satiete (FR · food-DTC)",
+      "reslotted": "'Moins de fringales. Aucun changement de regime.' [benefice_desire + friction annulee] + '1 gelule avant le repas' [annulation_friction : dose triviale] + 'effet des le 1er repas' [ancrage_temps]."
+    }
+  ],
+  "anti_patterns": [
+    "Ne pas ouvrir sur le probleme/la douleur : ca casse l'entree par le desir et reactive l'objection effort que la mécanique est censee desamorcer.",
+    "Eviter sur un marche unaware/problem-aware pur : sans desir categoriel pre-existant, l'outcome pose comme acquis sonne creux (pas de pont vers le besoin).",
+    "Ne pas promettre l'effortless si le produit demande un vrai protocole contraignant : friction annulee mensongere = churn et perte de credibilite (le geste vante doit etre reellement trivial).",
+    "L'impératif court verbe-en-tete sur categorie Rx/sante exige le disclaimer reglementaire attenant (observe systematiquement chez himshers) ; le copier sans le cadre legal = risque compliance."
+  ],
+  "curation_notes": "Confirme par 3 sources INDEPENDANTES (factory-aware) : karacare (4 RCV), naali (21 RCV), himshers (37 RCV = hims 26 + hers 11, comptee 1 seule factory creative genree D#485) -> 61 decompositions au total portent le mechanic_id resolution-promise. Garde-fou >=2 largement franchi -> promote-ready. Deux realisations distinctes sous le meme mecanisme : (A) etat-cible + annulation de friction effortless (FR beauty/wellness), (B) impératif court verbe-en-tete (US Rx/performance) ; le squelette unifie les deux via slots optionnels. Pour durcir : (1) le 3e signal (perf reelle via feedback-loop) manque encore, la promotion repose sur la recurrence cross-source pas sur le win confirme ; (2) variante effortless quasi-absente cote himshers (eux misent sur l'ordre direct + dose triviale, pas sur 'aucun effort' explicite) -> surveiller si l'annulation-de-friction est vraiment universelle ou plutot FR-typee ; (3) chevauchement fort avec la mécanique resolution-timeline (echelle mois par mois karacare RCV-01) -> garder les deux patterns distincts, celui-ci = la PROMESSE d'ouverture, l'autre = l'echelonnement de la preuve."
+}

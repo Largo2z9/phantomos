@@ -15,10 +15,10 @@
 - workers-shifts: Workers shifts (8-12h debout)
 
 ## Offers active: 7
-- By type: other:7
+- By type: bundle:6, single:1
 
 ## Status
 - Wedge complete: True
 
-_Generated: 2026-05-27T22:34:43Z_
+_Generated: 2026-06-10T17:42:05Z_
 _Refresh: python3 .skills/build-brand-snapshot.py _EXAMPLE_

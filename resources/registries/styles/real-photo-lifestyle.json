@@ -1,0 +1,76 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "real-photo-lifestyle",
+  "display_name": "Photo lifestyle reelle",
+  "family": "real-photo",
+  "typology_st": "spatial",
+  "description": "Photo reelle d'un humain en situation d'usage du produit, candid (pris sur le vif) pas pose studio ni stock generique. Sert quand on veut de la preuve sociale crediblement humaine: le produit vit dans un vrai quotidien, vraie peau, vraie lumiere de maison. A choisir pour les angles 'identification' et les marques qui jouent l'authenticite plutot que le glossy.",
+  "render_recipe": {
+    "prompt_skeleton": "Candid lifestyle photograph of {subject_person} {action_with_product} in {real_setting}, real natural moment, {time_of_day} {lighting}, shot on {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, authentic unposed everyday scene, real human skin texture with pores and subtle imperfections, shallow depth of field, no studio backdrop",
+    "slots": [
+      { "name": "subject_person", "description": "Le sujet humain: age/genre/look credible cible (ex 'a woman in her early 30s', 'a dad in his 40s'). Reste vague assez pour eviter le look mannequin." },
+      { "name": "action_with_product", "description": "Ce que la personne fait AVEC le produit, geste naturel d'usage (ex 'applying the serum at her bathroom mirror', 'drinking from the bottle after a run'). Pas 'holding and smiling at camera'." },
+      { "name": "real_setting", "description": "Lieu reel et habite du quotidien (cuisine encombree, salle de bain du matin, canape, rue). Decor vivant, pas plateau." },
+      { "name": "time_of_day", "description": "Moment qui justifie la lumiere (matin, golden hour, fin de journee)." },
+      { "name": "lighting", "description": "Surcharge runtime si besoin, sinon laisser le defaut lighting de la fiche." },
+      { "name": "camera_lens", "description": "Surcharge runtime, sinon defaut camera_lens de la fiche." },
+      { "name": "palette_mood", "description": "Surcharge runtime alignee charte marque, sinon defaut palette_mood." },
+      { "name": "texture_grain", "description": "Surcharge runtime, sinon defaut texture_grain." },
+      { "name": "composition_notes", "description": "Surcharge runtime (cadrage produit lisible mais integre), sinon defaut composition_notes." }
+    ],
+    "lighting": "Soft natural daylight from a window or open sky, directional but diffused, gentle falloff and real-world ambient bounce, occasional mild lens flare or window highlight; avoid flat ring-light and avoid hard studio strobe",
+    "camera_lens": "Full-frame mirrorless, 35mm or 50mm prime at f/1.8-f/2.8, eye-level handheld framing with a touch of imperfection, slight motion authenticity",
+    "palette_mood": "Warm, true-to-life skin tones, naturally desaturated and slightly filmic, lived-in colors that match a real home or street, not oversaturated commercial pop",
+    "texture_grain": "Fine natural film/sensor grain, real skin micro-texture (pores, fine lines, faint shine), fabric and surface texture preserved, no beauty-retouch smoothing",
+    "composition_notes": "Off-center subject, rule-of-thirds, product clearly readable in-hand or in-context but woven into the scene not floated; foreground/background clutter allowed for realism; negative space left for overlay copy when needed"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "medium",
+      "notes": "4:5 feed default; switch to 9:16 for Stories/Reels static and 1:1 for catalogue. Keep guidance medium to preserve candid realism (high guidance pushes back toward glossy stock)."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Peau plastique/cireuse ou sur-lissee facon filtre beaute: exiger pores, texture, micro-imperfections",
+    "Doigts/mains deformes, doigts surnumeraires ou fusionnes (frequent quand la main tient le produit)",
+    "Regard mort ou yeux vitreux/asymetriques, pupilles dupliquees",
+    "Symetrie faciale parfaite et look mannequin/stock qui tue le candid",
+    "Sourire force fixant l'objectif facon catalogue (briser le 4e mur = perte d'authenticite)",
+    "Eclairage trop parfait/plateau sans aucune ombre, bokeh artificiel uniforme",
+    "Packaging/etiquette du produit avec texte hallucine ou logo deforme: verifier la lisibilite",
+    "Reflets et ombres incoherents avec la source de lumiere, double ombre",
+    "Accessoires fondus dans le decor (lunettes/bijoux/vetements qui se melangent a la peau)",
+    "Sur-saturation HDR commerciale qui efface le rendu naturel"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [2, 7],
+    "pairs_well_with": [
+      "real-photo-testimonial-static",
+      "real-photo-macro-detail",
+      "ugc-selfie-talking",
+      "split-screen-comparison",
+      "real-photo-product-studio"
+    ],
+    "avoid_when": [
+      "Marque ultra-clinique/medicale ou la preuve doit etre 3d-anatomy ou diagram (le lifestyle dilue la credibilite scientifique)",
+      "Besoin d'un packshot propre fond neutre pour catalogue/PLP (prendre real-photo-product-studio)",
+      "Zone creative raw/agressive 8-10 ou un UGC selfie brut convertit mieux que le lifestyle leche",
+      "Lisibilite produit critique (detail texture/ingredient): passer macro",
+      "Marque tres premium/glossy ou le candid lit comme bon marche"
+    ]
+  },
+  "refs": [
+    "Candid morning-routine skincare application near a bathroom window, 35mm, warm daylight",
+    "Person drinking a supplement bottle mid-walk on a city street, golden hour, handheld 50mm",
+    "Home kitchen scene preparing/using product, soft window light, lived-in clutter in background"
+  ],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

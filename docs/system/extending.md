@@ -2,7 +2,7 @@
 
 How an operator adds custom entities, sidecar schemas, custom skills, and external pipeline integrations without breaking the coherence of the workspace. This document defines the extension layer, its primitives, and the rules that keep extensions interoperable with the core.
 
-PhantomOS V1 ships with six entities per brand (brand, product, offer, audience, learnings, strategy) and a set of core skills. An operator who wants to encode competitor ad tracking, deeper financial cohorts, real-time scraped data, contacts network, commercial pipeline, freelances roster, home automation devices, personal admin trackers, or any other domain-specific concept must not hack around the workspace. The extension layer gives them a canonical way to add their own layer while keeping the core stable and the whole workspace legible.
+PhantomOS V1 ships with seven entities per brand (brand, product, offer, audience, angle, learnings, strategy) and a set of core skills. An operator who wants to encode competitor ad tracking, deeper financial cohorts, real-time scraped data, contacts network, commercial pipeline, freelances roster, home automation devices, personal admin trackers, or any other domain-specific concept must not hack around the workspace. The extension layer gives them a canonical way to add their own layer while keeping the core stable and the whole workspace legible.
 
 ## Three scopes
 

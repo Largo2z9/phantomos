@@ -1,7 +1,7 @@
 {
   "_schema": "installation/1.0",
-  "_comment": "Tracks the workspace template version installed locally and the history of updates applied. Initialized at first install, updated by update-workspace skill. Never edit manually.",
-  "template_version_installed": "2.10.1",
+  "_comment": "Tracks the workspace template version installed locally and the history of updates applied. Ships as null, initialized from _version.json at first update-workspace run, updated by update-workspace skill. Never edit manually.",
+  "template_version_installed": null,
   "first_install_at": null,
   "last_update_at": null,
   "history": []

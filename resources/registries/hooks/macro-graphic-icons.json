@@ -1,0 +1,110 @@
+{
+  "pattern_id": "HOK-macro-graphic-icons",
+  "pattern_type": "hook-mechanic",
+  "name": "Concept-Card Graphique (icônes / quadrants / Venn)",
+  "one_liner": "Le hook est porté par la STRUCTURE visuelle (icônes, colonnes, grille, bandes, mapping ingrédient→fonction) plutôt que par une mécanique copy : l'œil parcourt une carte-concept qui rend la promesse lisible en 1 coup d'œil, sans audio ni timeline.",
+  "skeleton": "[promesse_ou_cadre_structurant] + carte graphique à N cases : [case_1: label/icône → bénéfice|pain|format] · [case_2: ...] · [case_N: ...] → [synthèse: produit qui relie les cases].",
+  "slots": [
+    {
+      "name": "promesse_ou_cadre_structurant",
+      "description": "L'élément en tête qui cadre la lecture de la carte (angle différenciant, dualité Problèmes/Solutions, outcome+urgence, rituel en verbes, ou cadre offre). Optionnel sur les cartes pures-litanie.",
+      "examples": [
+        "Une approche multi-cibles pour calmer.",
+        "Problèmes / Solutions",
+        "Regrow hair ASAP. ONCE-A-DAY CHEW.",
+        "Treat. Pop. Drop.",
+        "Rx hair regrowth, your way."
+      ]
+    },
+    {
+      "name": "case_label",
+      "description": "Le label court de chaque case de la carte · une icône, un ingrédient, un format produit, ou un pain. C'est la variable répétée N fois qui structure la grille/colonne/Venn.",
+      "examples": [
+        "Mélatonine végétale",
+        "Safran 100% rouge",
+        "Finasteride",
+        "Biotin",
+        "Minoxidil",
+        "Pill",
+        "Gummy",
+        "Serum",
+        "Nuits agitées",
+        "Insomnie"
+      ]
+    },
+    {
+      "name": "case_payload",
+      "description": "Ce que chaque case délivre · le bénéfice/mécanisme/fonction associé au label (mapping label→payload). C'est le cœur de persuasion par case.",
+      "examples": [
+        "Réduit le temps d'endormissement et aide à réguler le cycle du sommeil",
+        "Apaise le stress, calme le mental et favorise la relaxation nocturne",
+        "helps stop hair loss",
+        "supports healthy hair",
+        "regrows hair"
+      ]
+    },
+    {
+      "name": "synthese_produit",
+      "description": "La case/centre qui relie toutes les autres · packshot central, action combinée, ou résultat global. C'est ce que la carte fait converger.",
+      "examples": [
+        "Action 2-en-1 · Endormissement plus rapide & sommeil plus profond",
+        "naali DREAM (flacon tenu en main, label visible)",
+        "chew central 3D Hair Hybrids (hims mark)",
+        "Fuller hair in 3-6 months.*"
+      ]
+    }
+  ],
+  "function": "Rend une promesse multi-composantes lisible SANS dérouler une argumentation : la mise en page (grille, colonnes, bandes, icônes, mapping ingrédient→fonction) fait le travail de structuration que ferait un script. Pour un format statique sans audio ni timeline, c'est le hook : l'œil scanne la carte et capte l'offre/le mécanisme en un coup d'œil. Justifie un produit multi-actifs ou multi-formats en montrant que chaque brique a un job.",
+  "when_to_use": "Format STATIQUE (image fixe, pas de vidéo/timeline). Audience problem-aware à product-aware. Produit avec plusieurs actifs, plusieurs pains adressés, plusieurs formats, ou un rituel en étapes · quand la valeur tient dans la COMPOSITION et pas dans une seule grosse claim. Idéal MOFU/consideration et TOFU concept (grille de pains).",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-11", "RCV-22", "RCV-46", "RCV-61", "RCV-77", "RCV-80", "RCV-101"],
+      "realization": "Décline la carte sur toutes ses variantes : litanie de 3 pains rayés en rouge ('+3 heures à s'endormir. Sommeil léger et fragile. Rythme décalé.' RCV-11), 3 piliers icônes ingrédient→mécanisme ('Mélatonine végétale · Safran 100% rouge · Action 2-en-1' RCV-46), 2 colonnes Problèmes/Solutions ('Insomnie. Réveils nocturnes. Sommeil léger et non réparateur.' RCV-61), grille 2x2 multi-cibles ('Une approche multi-cibles pour calmer. Nuits agitées. Tension physique. Fatigue de l'après-midi. Un esprit qui s'emballe.' RCV-101), et litanie 'Idéal pour :' bénéfices (RCV-22). Style visuel récurrent = graphic-icons-overlay + canva-template."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-135", "RCV-186", "RCV-217", "RCV-218"],
+      "realization": "Mapping ingrédient→fonction en callouts autour d'un packshot central ('Finasteride helps stop hair loss. + Biotin supports healthy hair. + Minoxidil regrows hair.' hims RCV-135), rituel réduit à 3 verbes en bandes ('Treat. Pop. Drop.' chaque verbe = un format produit, 'Fuller hair in 3-6 months.*' hers RCV-186), et grille de formats en tuiles labellisées ('Rx hair regrowth, your way. Pill. Gummy. Serum.' hers RCV-217). hims+hers = UNE factory créative genrée (D#485), comptée une seule source."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Cross-vertical (FR wellness + US telehealth) et cross-géo : emprunt sûr en mode exploit pour toute marque supplément/santé à composition multi-actifs ou multi-formats. En mode explore, se reslotte vers d'autres catégories à 'plusieurs briques' (skincare multi-ingrédients, nutrition, hardware modulaire) car la mécanique est une logique de mise en page, pas un claim sectoriel · l'emprunt lointain reste conscient mais peu risqué."
+  },
+  "related_mechanic_ids": [
+    "macro-graphic-icons",
+    "ingredients-pillars",
+    "pain-litany",
+    "mechanism-reveal",
+    "product-reveal",
+    "product-specs",
+    "resolution-timeline",
+    "timeline-specific-result"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds / circulation",
+      "reslotted": "Carte 3 piliers icône→fonction autour d'un packshot semelle : [icône compression] Compression graduée · stimule le retour veineux · [icône voûte] Soutien de voûte · réduit la fatigue plantaire · [icône anti-odeur] Maille respirante · pieds au sec. Synthèse centrale : 'Action 3-en-1 · jambes légères toute la journée.'"
+    },
+    {
+      "target": "U.MEAL · repas fonctionnel",
+      "reslotted": "Grille 2x2 multi-cibles 'Une approche complète pour tenir la journée' : [Coup de barre 11h] · [Fringale 16h] · [Cerveau dans le brouillard] · [Repas sautés] → synthèse 'Une formule qui couvre les 4 trous de la journée.'"
+    }
+  ],
+  "anti_patterns": [
+    "Format vidéo avec timeline réelle : la mécanique est conçue pour le statique scannable · en vidéo, une mécanique copy-driven (hook parlé) porte mieux les 3 premières secondes.",
+    "Carte surchargée : au-delà de 4-5 cases, la lisibilité en 1 coup d'œil casse et le bénéfice de la mécanique disparaît.",
+    "Aucun fil qui relie les cases : sans synthèse-produit centrale (packshot/action combinée), la carte reste une liste plate sans payoff.",
+    "Audience unaware : la grille de pains/ingrédients suppose un minimum de problem-awareness · sur cold-cold, un hook narratif single-claim convertit mieux."
+  ],
+  "curation_notes": "Promu sur 2 sources INDÉPENDANTES factory-aware (naali + himshers, hims+hers = 1 factory D#485). 11 RCV de traçabilité (7 naali, 1 hims, 3 hers). Caveat de clustering : l'enum 'macro-graphic-icons' a servi de bucket par défaut quand le hook est mécanique-graphique faute de mécanique copy-driven (cf anomalies GRAPHIC-MECHANIC RCV-186, PROOF-EMPTY RCV-135) · à surveiller, le pattern recouvre plusieurs sous-variantes (litanie-icônes, colonnes Problèmes/Solutions, grille NxN, mapping ingrédient→fonction, tuiles-formats) qui pourraient se scinder si une 3e source ne confirme pas leur unité. Aucune source thin/prose-only : copy réelle extraite des transcripts sur les deux sources. karacare ABSENTE du cluster (0 RCV) · passerait à 3 sources = universal si confirmée plus tard. Passe watch→promote-ready stable ; signal manquant = perf réelle (feedback loop) avant canon.",
+  "_schema_version": "library-pattern/1.0"
+}

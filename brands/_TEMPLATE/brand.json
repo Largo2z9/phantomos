@@ -1,7 +1,7 @@
 {
   "$comment": "Brand identity + positioning + financials. Factual context, not strategy.",
-  "_schema": "brand/L1-brand",
-  "_version": "2.2",
+  "_schema": "brand/2.4",
+  "_version": "2.4",
   "_changelog": {
     "2.2": "S55: brand_equity_level (low/medium/high) + creative_zone (min/max/dominant 0-10) added. Determine viable copy/visual cursor and concept optionality. Canon V3 §3, §4.3.",
     "2.1": "S30d-close: purchase_driver added (brand-level default, cascades to audiences). audience_trees[] added (optional marketplaces). Per D#243, D#244, D#246, D#250.",

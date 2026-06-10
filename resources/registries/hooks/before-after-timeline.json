@@ -1,0 +1,118 @@
+{
+  "pattern_id": "HOK-before-after-timeline",
+  "pattern_type": "hook-mechanic",
+  "name": "Before/After Chiffré-Daté",
+  "one_liner": "Accroche qui colle un ancrage temporel explicite (avant/après, ou palier de semaines) à un résultat chiffré ou visuellement prouvé · performe parce qu'elle compresse la preuve de transformation ET la promesse de délai en un seul geste, tuant l'objection 'ça met combien de temps' avant qu'elle se forme.",
+  "skeleton": "[ancrage_temporel: label_avant | temps_ecoule | palier_semaine] -> [resultat_transforme: chiffre_quantifie | preuve_visuelle_split] (+ [benefice_emotionnel_miroir] | + [payoff_relationnel])",
+  "slots": [
+    {
+      "name": "ancrage_temporel",
+      "description": "Le marqueur de temps qui date la transformation. Trois réalisations observées : (a) labels avant/après nus (Avant / Après, BEFORE / MONTH 9), (b) temps écoulé chiffré (9 months in, 8 months in, 14 months in), (c) échelle de paliers escalante (APRÈS LA SEMAINE 1 -> S4 -> 8 semaines).",
+      "examples": [
+        "Avant. Apres.",
+        "BEFORE / MONTH 9",
+        "9 months in.",
+        "8 months in.",
+        "14 months in.",
+        "January / After 8 months",
+        "APRES LA SEMAINE 1 -> APRES LA SEMAINE 4 -> APRES 8 SEMAINES",
+        "in 3-6 months"
+      ]
+    },
+    {
+      "name": "resultat_transforme",
+      "description": "Le delta de transformation, soit chiffré (kilos/livres perdus), soit prouvé visuellement par un split avant/après côte-à-côte (même personne / même zone). C'est le cœur du claim.",
+      "examples": [
+        "59 lbs lost",
+        "120 lbs down",
+        "25 lbs lost",
+        "31 lbs down",
+        "Regrow hair",
+        "photos Avant/Apres cote a cote de la chevelure (racines/cuir chevelu)",
+        "two side-by-side mirror selfies (avant gauche / apres droite)"
+      ]
+    },
+    {
+      "name": "benefice_emotionnel_miroir",
+      "description": "Optionnel · un bénéfice émotionnel posé en miroir syntaxique du résultat physique (le 'X down / Y up' de la factory telehealth). Convertit le chiffre en sens.",
+      "examples": [
+        "Confidence up",
+        "Combattre la chute (empowerment vs peur)"
+      ]
+    },
+    {
+      "name": "payoff_relationnel",
+      "description": "Optionnel · la preuve sociale du changement vue par l'entourage, posée au dernier palier temporel. Tangibilise le résultat sans le mesurer.",
+      "examples": [
+        "Votre femme vous demande ce qui a change",
+        "Check off your new year hair goals"
+      ]
+    },
+    {
+      "name": "identite_source",
+      "description": "Optionnel mais récurrent chez la factory testimonial · le badge 'vraie cliente nommée' qui ancre le résultat à une personne réelle (renforce la crédibilité du before/after).",
+      "examples": [
+        "BELLA | Real Customer",
+        "ZACH. Real Hims Customer.",
+        "ERIN | Real Customer",
+        "BRITTANY | Real Customer"
+      ]
+    }
+  ],
+  "function": "Réduit le scepticisme 'ça met trop longtemps / ça ne marche pas vraiment' en collant la PREUVE de transformation (chiffre ou visuel) directement sur un DÉLAI nommé. L'opérateur n'a plus à promettre un résultat dans le vide : il le date. Le palier escalant (variante naali) va plus loin en montrant un gain à chaque étape, ce qui rend la patience supportable.",
+  "when_to_use": "Catégories à résultat visible/mesurable dans le temps (perte de poids, repousse cheveux, sommeil, peau). Marche surtout en problem-aware -> product-aware (la personne sait qu'elle a le problème et évalue si la solution tient son délai). Besoin d'un asset before/after réel (photo) ou d'un chiffre crédible · sans l'un des deux, le hook se vide.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-06"],
+      "realization": "Avant/Après nu sur la chute de cheveux, prouvé par deux photos cuir chevelu/racines côte-à-côte : 'Avoir peur de la chute. Combattre la chute. Avant. Apres.' Pas de chiffre · le delta est porté par le split visuel réel + le miroir émotionnel peur->combat."
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-104"],
+      "realization": "Variante palier escalant (timeline-ladder) : 'APRES LA SEMAINE 1 -> Un soutien pour une nuit plus sereine ; APRES LA SEMAINE 4 -> Contribue au fonctionnement cognitif normal ; APRES 8 SEMAINES -> Votre femme vous demande ce qui a change.' Le résultat final est un payoff relationnel, pas un chiffre."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-146", "RCV-147", "RCV-176", "RCV-187", "RCV-191", "RCV-199", "RCV-202", "RCV-203"],
+      "realization": "Factory testimonial chiffré-daté la plus dense du corpus. 'X months in. Y lbs lost.' ancré sur un client nommé + split selfie miroir : 'ZACH. Real Hims Customer. 120 lbs down. Confidence up. MONTH 9. BEFORE.' (RCV-146) et son miroir genré 'BELLA | Real Customer. 9 months in. 59 lbs lost.' (RCV-187). Variante repousse cheveux 'Regrow hair in 3-6 months' (RCV-191) et saisonnière 'January / After 8 months' (RCV-202). hims+hers = UNE source (factory genrée, ads-miroir mot-pour-mot · D#485)."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Pattern le plus robuste du registre · vu cross-vertical (beauty, wellness, telehealth) ET cross-géo (FR + US). En mode exploit, l'emprunt est sûr dans n'importe quelle catégorie à résultat temporel. En mode explore, le seul vrai choix de design est la VARIANTE : split avant/après nu (karacare) vs chiffre-daté testimonial (himshers) vs échelle de paliers (naali). Choisir la variante selon l'asset disponible (photo réelle vs chiffre crédible vs simple promesse étagée), pas selon la verticale."
+  },
+  "related_mechanic_ids": [
+    "before-after-timeline",
+    "resolution-timeline",
+    "timeline-specific-result",
+    "before-after-visual"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "'2 semaines. Jambes plus legeres.' -> photo cheville avant/apres (oedeme reduit) + 'APRES 6 SEMAINES -> vous remettez vos chaussures preferees.' (variante palier escalant, asset = mesure de cheville plutot que selfie)."
+    },
+    {
+      "target": "skincare-acne · DTC",
+      "reslotted": "'CLAIRE | vraie cliente. 8 semaines. -70% d'imperfections.' + split selfie peau avant/apres cote-a-cote + 'Confiance retrouvee.' (variante chiffre-date testimonial calquee sur la factory telehealth)."
+    }
+  ],
+  "anti_patterns": [
+    "Pas d'asset réel : un before/after sans photo crédible ni chiffre vérifiable (label 'Avant/Après' collé sur deux stocks différents) se lit comme du fake et tue la confiance.",
+    "Délai trop long affiché nu sans gain intermédiaire : '8 semaines' seul démotive · si le résultat est lent, préférer la variante palier escalant (naali) qui donne un gain à chaque étape.",
+    "Catégorie réglementée (telehealth, santé) : le chiffre-daté force une charge de disclaimers lourde (paid testimonial, results not typical, individual results may vary). Ne pas l'utiliser sans le cadre compliance qui va avec.",
+    "Résultat non visible/non mesurable (ex : produit dont le bénéfice est intangible) : sans delta observable, le mécanisme n'a rien à dater."
+  ],
+  "curation_notes": "3 sources indépendantes (factory-aware · hims+hers comptés comme 1 himshers, D#485) -> promote-ready solide. La source himshers est la plus dense (8 RCV) mais ne compte que pour 1 · ne pas la laisser sur-pondérer la promotion. Tout le corpus est STATIQUE (anomalie STATIC-NO-TIMELINE récurrente) : le 'timeline' est encodé dans le texte/labels et le split visuel, pas dans un montage vidéo · le pattern reste valide en statique. Trois variantes distinctes coexistent sous le même mechanic_id : (a) split avant/après nu prouvé visuellement (karacare), (b) chiffre-daté testimonial nommé (himshers), (c) échelle de paliers escalante / timeline-ladder (naali) · à terme, candidates à splitter en sous-patterns si la skill de génération a besoin de les distinguer finement. Signal manquant = perf réelle (3e signal flaggé dans la SOP) · promotion ici basée sur la récurrence cross-source, pas sur du gagnant prouvé.",
+  "_schema_version": "library-pattern/1.0"
+}

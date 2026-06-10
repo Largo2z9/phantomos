@@ -177,29 +177,29 @@ No public benchmark compares PhantomOS against Claude Projects, ChatGPT Teams, o
 
 **Impact.** Moves the cost argument from structural to empirical. Removes the main commercial objection for operators evaluating adoption.
 
-### Extension layer — `scaffold-extension` orchestrator
+### Extension layer · `scaffold-extension` orchestrator
 
-The extension layer is specified in `docs/system/extending.md` (custom entities, sidecar schemas, custom skills, external pipelines + three governance rules). requires the operator to perform the four scaffolding steps manually. Future iteration ships `scaffold-extension` as a builder orchestrator to collapse the manual path into a guided operator flow.
+The extension layer is specified in `docs/system/extending.md` (custom entities, sidecar schemas, custom skills, external pipelines + three governance rules). Today the operator performs the four scaffolding steps manually. Future iteration ships `scaffold-extension` as a builder orchestrator to collapse the manual path into a guided operator flow.
 
-The orchestrator is **not** a single monolithic skill. It composes eight single-responsibility sub-skills, each with a bounded scope — intent analysis, registry reuse suggestion, schema drafting, naming validation, cross-reference checking, canon validation, file scaffolding, and index registration. Full decomposition in `docs/system/extending.md § Future`.
+The orchestrator is **not** a single monolithic skill. It composes eight single-responsibility sub-skills, each with a bounded scope : intent analysis, registry reuse suggestion, schema drafting, naming validation, cross-reference checking, canon validation, file scaffolding, and index registration. Full decomposition in `docs/system/extending.md § Future`.
 
 **Adoption gate.** The orchestrator is not built speculatively. Trigger to build: two to three real operators have completed the manual path on real extensions (competitor tracking, financial cohorts, hook libraries, or whatever emerges). The eight sub-skills are codified from observed patterns, not from theory. This is the first live application of the workflow-decomposition methodology.
 
-**Impact.** Removes the friction that currently pushes operators to hack around the workspace instead of extending it cleanly. Preserves the governance rules (schema, index, README) that keep extensions interoperable with the core. Unlocks the promotion path — extensions that prove value across operators can graduate to vertical packs or core.
+**Impact.** Removes the friction that currently pushes operators to hack around the workspace instead of extending it cleanly. Preserves the governance rules (schema, index, README) that keep extensions interoperable with the core. Unlocks the promotion path : extensions that prove value across operators can graduate to vertical packs or core.
 
 ### Vertical packs for non-DTC profiles (future+, conditional on demand)
 
-ships with the DTC paid acquisition kit. Vertical packs for other operator profiles are roadmap future+, conditioned on actual client demand from those segments (no anticipated build) :
+PhantomOS ships with the DTC paid acquisition kit. Vertical packs for other operator profiles are roadmap future+, conditioned on actual client demand from those segments (no anticipated build) :
 
-- **`consulting-core`** — replaces DTC-specific entities with `engagement`, `stakeholder`, `sow`, `milestone`, `deliverable`. Adds skills for client deliverables, pipeline review, methodology productization.
-- **`media-buyer-freelance`** — monthly retainer reporting, client dashboard export, cross-account benchmark library.
-- **`coach-expert-pack`** — knowledge productization for coaches and experts.
+- **`consulting-core`** · replaces DTC-specific entities with `engagement`, `stakeholder`, `sow`, `milestone`, `deliverable`. Adds skills for client deliverables, pipeline review, methodology productization.
+- **`media-buyer-freelance`** · monthly retainer reporting, client dashboard export, cross-account benchmark library.
+- **`coach-expert-pack`** · knowledge productization for coaches and experts.
 
 Impact. Opens PhantomOS to operator profiles outside DTC paid once demand from those segments is validated. Not a priority.
 
 ### Multi-operator and client-facing layer (future)
 
-single-operator by design per workspace by design. Adds the multi-tenant layer for agency operators running multiple DTC clients in parallel :
+PhantomOS is single-operator per workspace by design. This layer adds the multi-tenant architecture for agency operators running multiple DTC clients in parallel :
 
 - **Role-based access** on the workspace (owner, collaborator, read-only).
 - **Per-client read-only dashboard** for the agency to share encoded state with its client.

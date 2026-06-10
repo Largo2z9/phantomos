@@ -1,0 +1,934 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "genome.schema.json",
+  "title": "Genome (per-creative ADN = ONE script of the GenomePackage A->B contract)",
+  "description": "Le GENOME PAR-CREA. Vit a brands/{slug}/creatives/{batch}/{CRT-NN}/genome.json. C'EST EXACTEMENT UN script du contrat A->B (genome-package.schema.json#/definitions/script), serialise seul. ZERO-DRIFT: construit programmatiquement depuis la def script du contrat, strictement NU (aucun champ _schema/_version/_field_types ajoute) -> un genome.json valide est re-ingerable tel quel dans scripts[] du paquet (round-trip A=B preserve). Tout edit de forme se fait sur genome-package.schema.json#/definitions/script PUIS on regenere ce fichier. NOTE: la cle 'lineage' ICI (principe/derivation abstraite: concept_id/angle_id/ref_ad_id) est distincte de creative.lineage (= join/tracabilite). SSOT du groupage de variantes = creative.concept_id (les autres concept_id sont descriptifs). Le fichier physique existe pour le gate/smoke-test (write-to-context .../genome.json), PAS pour validate-resources (qui ne valide que resources/, jamais brands/).",
+  "_schema_version": "genome/1.2",
+  "_mirror_of": "genome-package.schema.json#/definitions/script",
+  "type": "object",
+  "required": [
+    "script_id",
+    "support",
+    "route",
+    "hook",
+    "frames",
+    "genome_tags"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "script_id": {
+      "type": "string",
+      "pattern": "^GSC-[0-9]{2,4}$",
+      "description": "Id unique dans le paquet. Cle de join avec la perf future (= meme espace que video_id cote reverse). C'est ce qui rend A=B operant. Id stable, never reassigned (convention canon PREFIX-NN). Prefixe GSC (Genome SCript) dedie, PAS CRT (ce n'est pas une instance creative.json brand-side)."
+    },
+    "support": {
+      "type": "string",
+      "description": "Sous-pipeline cible (D#472 segmentation-par-support). Decide quelle machine de B s'allume + combien de frames + si le timing s'applique. 'static' = exactement 1 frame, pas de timing. 'carousel' = 2+ frames (cartes swipe), pas de timing. 'video' = 2+ frames (plans), chacun avec timing.duration_s + video_settings obligatoire.",
+      "enum": [
+        "static",
+        "carousel",
+        "video"
+      ]
+    },
+    "route": {
+      "type": "string",
+      "description": "GATE format A7 lu par B. 'route_a_full_ia' = tout generer IA. 'route_b_export_brief' = exporter un brief humain/UGC (= amorcage asset-library).",
+      "enum": [
+        "route_a_full_ia",
+        "route_b_export_brief"
+      ]
+    },
+    "regime_override": {
+      "type": "string",
+      "description": "Optionnel. Surcharge le regime racine pour CE script. Si absent, herite de regime.mode.",
+      "enum": [
+        "explore",
+        "exploit",
+        "balanced"
+      ]
+    },
+    "aspect_ratio": {
+      "type": "string",
+      "description": "Mirror enum reverse video_meta.aspect_ratio. Doctrine D#475 9:16-master/4:5-safe. Si video, doit etre coherent avec video_settings.master_aspect_ratio.",
+      "enum": [
+        "9:16",
+        "1:1",
+        "4:5",
+        "16:9",
+        "4:3",
+        "2:3",
+        "3:4",
+        "custom"
+      ]
+    },
+    "hook": {
+      "$ref": "#/definitions/hook"
+    },
+    "frames": {
+      "type": "array",
+      "description": "LE COUPLAGE COPY+VISUEL (BI-FACE D#472, premier-classe v1.1). Tableau ORDONNE de frames; chaque frame colle { role, copy_script (ce qui est dit), visual_script (ce qui est montre), timing? }. UNE seule forme de frame pour les 3 supports. static=exactement 1 frame · carousel=2+ frames (cartes swipe ordonnees) · video=2+ frames (plans ordonnes). La somme des copy_script = le script copy complet; la somme des visual_script = le script visuel complet; les deux sont colles frame-par-frame. La SEQUENCE des frames[].role = la signature structurelle qui apprend (mirror reverse body_arc).",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/frame"
+      }
+    },
+    "video_settings": {
+      "$ref": "#/definitions/video_settings"
+    },
+    "lineage": {
+      "$ref": "#/definitions/lineage"
+    },
+    "locks": {
+      "$ref": "#/definitions/locks"
+    },
+    "copy_meta": {
+      "$ref": "#/definitions/copy_meta"
+    },
+    "genome_tags": {
+      "$ref": "#/definitions/genome_tags"
+    },
+    "required_assets": {
+      "type": "array",
+      "description": "Optionnel mais recommande (angle riche). Liste de prod pre-resolue contre les 8 slots de capacite B (D#254, seul slot-1 cable). B route sans re-deriver la liste d'assets.",
+      "items": {
+        "$ref": "#/definitions/required_asset"
+      }
+    }
+  },
+  "definitions": {
+    "script": {
+      "type": "object",
+      "description": "Une unite routable = une pub = DEUX scripts couples. COEUR REQUIS = strict minimum pour router: script_id, support, route, hook, frames, genome_tags. frames[] PORTE le couplage copy+visuel (BI-FACE D#472, premier-classe v1.1). video_settings n'est requis QUE si support=video (reglages audio-led D#476, allOf if/then). Le reste (regime_override, lineage, locks, copy_meta, required_assets) optionnel.",
+      "required": [
+        "script_id",
+        "support",
+        "route",
+        "hook",
+        "frames",
+        "genome_tags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "script_id": {
+          "type": "string",
+          "pattern": "^GSC-[0-9]{2,4}$",
+          "description": "Id unique dans le paquet. Cle de join avec la perf future (= meme espace que video_id cote reverse). C'est ce qui rend A=B operant. Id stable, never reassigned (convention canon PREFIX-NN). Prefixe GSC (Genome SCript) dedie, PAS CRT (ce n'est pas une instance creative.json brand-side)."
+        },
+        "support": {
+          "type": "string",
+          "description": "Sous-pipeline cible (D#472 segmentation-par-support). Decide quelle machine de B s'allume + combien de frames + si le timing s'applique. 'static' = exactement 1 frame, pas de timing. 'carousel' = 2+ frames (cartes swipe), pas de timing. 'video' = 2+ frames (plans), chacun avec timing.duration_s + video_settings obligatoire.",
+          "enum": [
+            "static",
+            "carousel",
+            "video"
+          ]
+        },
+        "route": {
+          "type": "string",
+          "description": "GATE format A7 lu par B. 'route_a_full_ia' = tout generer IA. 'route_b_export_brief' = exporter un brief humain/UGC (= amorcage asset-library).",
+          "enum": [
+            "route_a_full_ia",
+            "route_b_export_brief"
+          ]
+        },
+        "regime_override": {
+          "type": "string",
+          "description": "Optionnel. Surcharge le regime racine pour CE script. Si absent, herite de regime.mode.",
+          "enum": [
+            "explore",
+            "exploit",
+            "balanced"
+          ]
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "description": "Mirror enum reverse video_meta.aspect_ratio. Doctrine D#475 9:16-master/4:5-safe. Si video, doit etre coherent avec video_settings.master_aspect_ratio.",
+          "enum": [
+            "9:16",
+            "1:1",
+            "4:5",
+            "16:9",
+            "4:3",
+            "2:3",
+            "3:4",
+            "custom"
+          ]
+        },
+        "hook": {
+          "$ref": "#/definitions/hook"
+        },
+        "frames": {
+          "type": "array",
+          "description": "LE COUPLAGE COPY+VISUEL (BI-FACE D#472, premier-classe v1.1). Tableau ORDONNE de frames; chaque frame colle { role, copy_script (ce qui est dit), visual_script (ce qui est montre), timing? }. UNE seule forme de frame pour les 3 supports. static=exactement 1 frame · carousel=2+ frames (cartes swipe ordonnees) · video=2+ frames (plans ordonnes). La somme des copy_script = le script copy complet; la somme des visual_script = le script visuel complet; les deux sont colles frame-par-frame. La SEQUENCE des frames[].role = la signature structurelle qui apprend (mirror reverse body_arc).",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/frame"
+          }
+        },
+        "video_settings": {
+          "$ref": "#/definitions/video_settings"
+        },
+        "lineage": {
+          "$ref": "#/definitions/lineage"
+        },
+        "locks": {
+          "$ref": "#/definitions/locks"
+        },
+        "copy_meta": {
+          "$ref": "#/definitions/copy_meta"
+        },
+        "genome_tags": {
+          "$ref": "#/definitions/genome_tags"
+        },
+        "required_assets": {
+          "type": "array",
+          "description": "Optionnel mais recommande (angle riche). Liste de prod pre-resolue contre les 8 slots de capacite B (D#254, seul slot-1 cable). B route sans re-deriver la liste d'assets.",
+          "items": {
+            "$ref": "#/definitions/required_asset"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "support": {
+                "const": "static"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "frames": {
+                "minItems": 1,
+                "maxItems": 1,
+                "description": "support=static -> EXACTEMENT 1 frame (un seul couple copy+visuel, pas de timing)."
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "support": {
+                "const": "carousel"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "frames": {
+                "minItems": 2,
+                "description": "support=carousel -> 2+ frames (cartes swipe ordonnees, pas de timing)."
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "support": {
+                "const": "video"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "video_settings"
+            ],
+            "properties": {
+              "frames": {
+                "minItems": 2,
+                "description": "support=video -> 2+ frames (plans ordonnes); chaque frame DOIT porter timing.duration_s (audio-led D#476).",
+                "items": {
+                  "required": [
+                    "role",
+                    "copy_script",
+                    "visual_script",
+                    "timing"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "frame": {
+      "type": "object",
+      "description": "UNE FRAME = UNE UNITE COPY+VISUEL COUPLEE (BI-FACE D#472). Atome partage par les 3 supports: static (1 frame), carousel (carte), video (plan). REQUIS: role (le vocab analytique reverse = la signature qui apprend), copy_script (les mots), visual_script (l'image). timing optionnel au niveau frame mais OBLIGATOIRE si support=video (if/then niveau script). 'UNE idee = UNE frame = UNE respiration' (D#476): la copy de la frame finit avant la coupe/le swipe.",
+      "required": [
+        "role",
+        "copy_script",
+        "visual_script"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/beat_type",
+          "description": "Role NARRATIF de la frame dans l'arc = le DUAL-VOCAB UNIFIE (v1.1). UTILISE le vocab ANALYTIQUE du reverse (20 termes, mirror EXACT body_arc.beat_type) au lieu de l'ancien vocab prod 6-termes disjoint. La SEQUENCE des role[] = la signature structurelle = exactement ce que genome_tags.beat_type_sequence projette a plat. Une seule histoire de la pub: la timeline que B construit EST la signature qui apprend. S'applique aux 3 supports (cartes carousel et plans video portent un role narratif)."
+        },
+        "copy_script": {
+          "$ref": "#/definitions/copy_script",
+          "description": "FACE COPY de la frame = ce qui est DIT/ECRIT sur cette frame. video -> vo_text (la VO de ce plan). static/carousel -> headline/overlay/body de cette frame/carte."
+        },
+        "visual_script": {
+          "$ref": "#/definitions/visual_script",
+          "description": "FACE VISUEL de la frame = ce qui est MONTRE sur cette frame, AVEC le CONCEPT VISUEL + la ref_ad passee EN IMAGE (learning n1 D#473). Couplage premier-classe a la copy."
+        },
+        "timing": {
+          "$ref": "#/definitions/timing",
+          "description": "Optionnel au niveau frame; OBLIGATOIRE si support=video (if/then niveau script). static/carousel -> absent (pas de timing, swipe manuel). video -> duration_s cible (la VO ffprobe-ee = horloge maitre reelle, D#476)."
+        }
+      }
+    },
+    "copy_script": {
+      "type": "object",
+      "description": "FACE COPY d'une frame = les MOTS de cette frame (BI-FACE D#472, face copy). MECE par support: video remplit vo_text (la ligne dite, finit avant la coupe); static/carousel remplissent headline/overlay_text/body_text. AUCUN champ requis individuellement (un plan muet b-roll = copy_script {} present mais vide) -> la presence de l'objet materialise le couplage.",
+      "additionalProperties": false,
+      "properties": {
+        "vo_text": {
+          "type": "string",
+          "description": "VIDEO: texte voix-off de CE plan (la ligne dite, finit avant la coupe; montrer PUIS dire D#476). Vide autorise (plan muet/b-roll). La somme des vo_text = script copy video complet = source du castage voix."
+        },
+        "headline": {
+          "type": "string",
+          "description": "STATIC/CAROUSEL: accroche principale de cette frame/carte (la punchline qui porte le role)."
+        },
+        "overlay_text": {
+          "type": "string",
+          "description": "STATIC/CAROUSEL (et video si overlay): texte en surimpression sur l'image (sous-accroche/label/sticker)."
+        },
+        "body_text": {
+          "type": "string",
+          "description": "STATIC/CAROUSEL: corps de texte plus long de cette frame/carte (preuve, detail, micro-argument)."
+        },
+        "cta_text": {
+          "type": "string",
+          "description": "Optionnel. Texte d'appel a l'action porte par cette frame (typiquement la derniere frame role='cta')."
+        }
+      }
+    },
+    "visual_script": {
+      "type": "object",
+      "description": "FACE VISUEL d'une frame = ce qui est MONTRE (BI-FACE D#472, face craft). PORTE LE CONCEPT VISUEL + la ref_ad passee EN IMAGE = learning n1 prod D#473 (copier le CONCEPT VISUEL d'une ad gagnante, pas juste le copy; passer l'ad de ref en IMAGE attachee, pas en description texte, sinon on garde le squelette et on perd l'ame). REQUIS: visual_concept (le quoi-on-montre) + style_id (le comment). ref_ad_as_image, first_frame_prompt, char_ref_attached, is_xray_cutaway rendent ce couplage operant cote B.",
+      "required": [
+        "visual_concept",
+        "style_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "visual_concept": {
+          "type": "string",
+          "description": "LE CONCEPT VISUEL de cette frame (D#473): ce qu'on montre + le plan d'assemblage (composition, sujet, action, mood), PAS juste une description plate. Copier la STRUCTURE de la ref, jamais sa surface (garde-fou surface-bleed D#474: drop props/elements propres a la ref)."
+        },
+        "style_id": {
+          "$ref": "#/definitions/style_id"
+        },
+        "ref_ad_as_image": {
+          "type": "object",
+          "description": "L'AD DE REF PASSEE EN IMAGE (learning n1 D#473). On attache l'ad gagnante en IMAGE au modele (slot-1 image_urls), PAS une description texte -> le modele copie le CONCEPT VISUEL (face craft), pas juste le squelette copy. Vide si origin=scratch.",
+          "additionalProperties": false,
+          "properties": {
+            "ref_image_path": {
+              "type": "string",
+              "description": "Chemin/URL de l'image de l'ad de ref a attacher au modele (ex '~/ads-library/hims/ad-290.png'). C'est l'image elle-meme, pas une description."
+            },
+            "ref_ad_id": {
+              "type": "string",
+              "description": "Id de l'ad de ref (= video_id/ad_id cote reverse). Le pont apprenable concret au niveau frame."
+            },
+            "transfer_mode": {
+              "type": "string",
+              "description": "Ce qu'on transfere depuis la ref-image. 'structure-only' = plan d'assemblage seul (garde-fou surface-bleed D#474, defaut sain). 'structure-plus-style' = structure + parti-pris visuel. 'concept-full' = concept visuel complet re-derive (exploit serre).",
+              "enum": [
+                "structure-only",
+                "structure-plus-style",
+                "concept-full"
+              ]
+            }
+          }
+        },
+        "composition": {
+          "type": "string",
+          "description": "Optionnel. Cadrage/composition de la frame (plan large/serre, regle des tiers, placement sujet+texte). D#475 9:16-master compose pour crop central 4:5-safe (sujet+overlays tiennent)."
+        },
+        "first_frame_prompt": {
+          "type": "string",
+          "description": "Prompt image pret pour slot-1 (Nano Banana Pro). VIDEO: first-frame du plan (first-frame-then-animate puis slot-3 Seedance image-to-video). STATIC: le prompt de l'image finale. CAROUSEL: le prompt de la carte. Full-bleed explicite (anti-letterbox D#475)."
+        },
+        "char_ref_attached": {
+          "type": "boolean",
+          "description": "Optionnel. true = char-ref reinjecte sur cette frame (consistency lock cross-cut/cross-carte, D#475). Tient le perso a travers un cut (video) ou d'une carte a l'autre (carousel)."
+        },
+        "is_xray_cutaway": {
+          "type": "boolean",
+          "description": "Optionnel. true = frame x-ray/cutaway vif sante/corps (insert b-roll mecanisme qui vend le pourquoi-ca-marche, D#476, slot-8). Remplace l'ancien beat_type 'turn-xray' (devenu un flag, plus une valeur de role) -> n'altere pas le vocab analytique unifie."
+        },
+        "packshot_required": {
+          "type": "boolean",
+          "description": "Optionnel. true = cette frame montre le produit -> exiger le VRAI packshot scrape (D#473, JAMAIS halluciner; ref dans locks.product_lock.packshot_ref), compose en post (slot-7)."
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "description": "Timing d'une frame. S'APPLIQUE SEULEMENT en video (if/then niveau script: video -> timing requis avec duration_s). static/carousel = pas de timing (swipe/scroll manuel). Audio-led D#476: la duration_s est CIBLE, la VO ffprobe-ee est l'horloge maitre reelle.",
+      "required": [
+        "duration_s"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "duration_s": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Duree cible du plan (D#476 plans courts 2-4s). La duree REELLE est dictee par la VO ffprobe-ee (horloge maitre). VO demarre ~0.4s, finit ~0.4s avant la fin du plan."
+        },
+        "order_index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optionnel. Index explicite du plan dans la timeline (redondant avec l'ordre du tableau, utile si re-trie)."
+        }
+      }
+    },
+    "video_settings": {
+      "type": "object",
+      "description": "VIDEO SEULEMENT (requis si support=video). Reglages audio-led au niveau SCRIPT (D#476): la voix commande, l'image obeit. La VO est l'horloge maitre (ecrite+generee+ffprobe-ee EN PREMIER). Budget ~2.2 mots/s FR, plans 2-4s. mux JAMAIS -shortest. captions toujours. Les durees/VO par plan vivent dans frames[].timing + frames[].copy_script.vo_text; ce bloc porte les reglages globaux du montage.",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Langue de la VO = langue du script (D#476, voix castee au perso). BCP-47 ex 'fr'."
+        },
+        "words_per_second_budget": {
+          "type": "number",
+          "default": 2.2,
+          "description": "Budget mots/sec (D#476). ~2.2 FR pose. Sert au cast voix + au controle de debordement (deborde = couper des mots, jamais accelerer la voix)."
+        },
+        "master_aspect_ratio": {
+          "type": "string",
+          "description": "Format master (D#475 9:16-master/4:5-safe). Doit etre coherent avec script.aspect_ratio.",
+          "enum": [
+            "9:16",
+            "1:1",
+            "4:5",
+            "16:9",
+            "4:3",
+            "2:3",
+            "3:4",
+            "custom"
+          ]
+        },
+        "voice_design_brief": {
+          "type": "string",
+          "description": "Brief Voice Design ElevenLabs (D#476): on DECRIT la voix en texte FR, castee au perso. Ex 'voix francaise agee chaleureuse'. (Note prod: utiliser l'AUDIO du preview, le generated_voice_id n'est pas reutilisable.)"
+        },
+        "mux_never_shortest": {
+          "type": "boolean",
+          "const": true,
+          "description": "HARD RULE D#476: JAMAIS -shortest (a coupe le CTA en v1). Image trop courte -> geler la derniere frame. Toujours true."
+        },
+        "captions_required": {
+          "type": "boolean",
+          "const": true,
+          "description": "Captions toujours derives de la VO (85% scrollent muet, D#476). Toujours true."
+        },
+        "unify_grade_grain": {
+          "type": "boolean",
+          "description": "D#476: grade d'unification + grain partage obligatoire pour harmoniser les plans IA multi-source. Jamais juger sur rushes bruts."
+        },
+        "estimated_cost_usd": {
+          "type": "number",
+          "description": "Cost-warning D#475/476: annoncer le cout AVANT gen. ~$3.90 pour une video 15s 5 plans (Nano Banana frame ~$0.12 + Seedance 1080p 5s ~$0.65/clip)."
+        }
+      }
+    },
+    "hook": {
+      "type": "object",
+      "description": "Hook FIRST-CLASS (D#472 plan 0). VERBAL requis (mechanic_id mirror reverse + texte). VISUEL optionnel mais first-class (premier frame qui arrete le scroll, cable slot-1). NB: le hook materialise aussi la 1ere frame (role typiquement 'hook'); il reste ici en first-class pour le routage diffusion + test hook concurrents.",
+      "required": [
+        "mechanic_id",
+        "hook_text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mechanic_id": {
+          "type": "string",
+          "description": "Mirror EXACT reverse script.hook.mechanic_id (hook-mechanics-registry). Identite enum = pont A=B verbal.",
+          "enum": [
+            "paradox-testimonial",
+            "confrontation-rhetorical",
+            "listicle-curiosity",
+            "false-solution-debunking",
+            "authority-demolition",
+            "mechanism-reveal",
+            "resolution-promise",
+            "social-relational-pain",
+            "hidden-secret-framing",
+            "doctor-dialogue",
+            "taboo-signal",
+            "visceral-specific-testimony",
+            "negative-command",
+            "pov-illustrated-humor",
+            "allegory-romance",
+            "macro-graphic-icons",
+            "before-after-timeline",
+            "pricing-anchor",
+            "testimonial-paradox-numeric",
+            "scientific-claim-reveal",
+            "competitor-comparison-explicit",
+            "category-of-one-claim",
+            "if-then-conditional-hook",
+            "rhetorical-shock-question",
+            "other-uncategorized"
+          ]
+        },
+        "hook_text": {
+          "type": "string",
+          "description": "Texte du hook verbal (premiers ~15 mots), re-derive d'un verbatim reel de l'atlas."
+        },
+        "hook_skeleton": {
+          "type": "string",
+          "description": "Optionnel. Squelette parametrique. Ex '[positive_outcome] but [negative_paradox]'."
+        },
+        "visual": {
+          "type": "object",
+          "description": "Optionnel mais first-class. Le hook VISUEL (plan 0). Cable slot-1 (image/first-frame). variant_index permet N first-frames concurrents sur un meme tronc. Coherent avec frames[0].visual_script.",
+          "required": [
+            "style_id",
+            "visual_hook_description"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "style_id": {
+              "$ref": "#/definitions/style_id"
+            },
+            "visual_hook_description": {
+              "type": "string",
+              "description": "Ce que montre le premier frame (le stop-scroll)."
+            },
+            "first_frame_prompt": {
+              "type": "string",
+              "description": "Prompt image pret pour slot-1 (Nano Banana Pro). Full-bleed explicite (anti-letterbox D#475)."
+            },
+            "variant_index": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index si plusieurs hooks visuels concurrents branches sur le meme tronc body."
+            }
+          }
+        }
+      }
+    },
+    "genome_tags": {
+      "type": "object",
+      "description": "TAGS GENOME = le pont A=B, denormalise et plat (joignable a la perf sans traverser tout l'arbre). MEMES enums que le reverse -> la perf se rattache au meme espace -> route apprenable. REQUIS: support + mechanic_id + primary_style_id (le minimum pour router diffusion + test hook + style). Le reste optionnel mais mirror-enum. NB v1.1: beat_type_sequence = la PROJECTION PLATE de scripts.frames[].role (meme enum body_arc.beat_type) -> une seule histoire de la pub, pas un second vocab.",
+      "required": [
+        "support",
+        "mechanic_id",
+        "primary_style_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "support": {
+          "type": "string",
+          "enum": [
+            "static",
+            "carousel",
+            "video"
+          ]
+        },
+        "mechanic_id": {
+          "type": "string",
+          "description": "Reprend hook.mechanic_id. Tag de jointure verbal avec le reverse.",
+          "enum": [
+            "paradox-testimonial",
+            "confrontation-rhetorical",
+            "listicle-curiosity",
+            "false-solution-debunking",
+            "authority-demolition",
+            "mechanism-reveal",
+            "resolution-promise",
+            "social-relational-pain",
+            "hidden-secret-framing",
+            "doctor-dialogue",
+            "taboo-signal",
+            "visceral-specific-testimony",
+            "negative-command",
+            "pov-illustrated-humor",
+            "allegory-romance",
+            "macro-graphic-icons",
+            "before-after-timeline",
+            "pricing-anchor",
+            "testimonial-paradox-numeric",
+            "scientific-claim-reveal",
+            "competitor-comparison-explicit",
+            "category-of-one-claim",
+            "if-then-conditional-hook",
+            "rhetorical-shock-question",
+            "other-uncategorized"
+          ]
+        },
+        "mecanique_id": {
+          "type": "string",
+          "description": "Optionnel mais recommandé. Mécanique AD-LEVEL = le CONCEPT de l'ad (ex 'trending-fake-natif', 'product_focus', 'versus') · free-string → creative-mechanics-registry (SSOT). Mirror du reverse decomposition.mecanique.mecanique_id. DISTINCT du mechanic_id ci-dessus (qui est le HOOK, niveau accroche, surtout vidéo). Pont A=B sur l'axe concept. D#488 réconciliation taxo."
+        },
+        "primary_style_id": {
+          "$ref": "#/definitions/style_id"
+        },
+        "character_archetype": {
+          "type": "string",
+          "description": "Optionnel. Mirror reverse visual.character_pattern.character_archetype.",
+          "enum": [
+            "single-character-multi-settings",
+            "single-couple-multi-settings",
+            "multi-characters-parallel",
+            "no-character-anatomy-only",
+            "talking-head-single",
+            "talking-head-multi",
+            "animated-non-human-character",
+            "narrator-author-only-voice",
+            "dialogue-chat-screenshot",
+            "split-before-after",
+            "other"
+          ]
+        },
+        "beat_type_sequence": {
+          "type": "array",
+          "description": "Optionnel mais recommande (tous supports). PROJECTION PLATE de scripts.frames[].role (= meme enum body_arc.beat_type du reverse). C'EST LE FIX DUAL-VOCAB v1.1: ce tableau DOIT etre la sequence ordonnee des frames[].role, pas un second vocab independant -> la timeline que B construit EST la signature qui apprend (mirror reverse body_arc.beat_type, comparable a la perf). Une seule histoire de la pub.",
+          "items": {
+            "$ref": "#/definitions/beat_type"
+          }
+        },
+        "awareness_level": {
+          "type": "string",
+          "description": "Optionnel. Mirror reverse awareness_level_schwartz.",
+          "enum": [
+            "unaware",
+            "problem-aware",
+            "solution-aware",
+            "product-aware",
+            "most-aware"
+          ]
+        },
+        "regime_at_generation": {
+          "type": "string",
+          "description": "Optionnel. Regime denormalise au moment de la generation: la perf x regime recalibre la jauge.",
+          "enum": [
+            "explore",
+            "exploit",
+            "balanced"
+          ]
+        },
+        "atlas_link_status": {
+          "type": "string",
+          "description": "Optionnel. Mirror reverse atlas_link_status.",
+          "enum": [
+            "linked",
+            "unlinked",
+            "new-to-atlas"
+          ]
+        },
+        "angle_id": {
+          "type": "string",
+          "pattern": "^ANG-[0-9]{2,3}$",
+          "description": "Optionnel mais RECOMMANDE (D#492). L'ANGLE = unite strategique de 1ere classe (ANG-NN, denormalise depuis lineage.angle_id vers la jointure perf plate). L'angle BUNDLE la strategie : formula OTRB (observation/tension/reframe/bridge) + lineage.objection_ref (l'objection neutralisee) + lien audience (dream_scenario). En le rendant joignable a la perf, on apprend 'ANG-NN a marche' -> et l'angle porte son objection + son reframe + son payoff. Resout transitivement l'angle-mort objection (l'objection vit DANS l'angle, pas comme 5e axe universel : elle n'est PAS systematique). UNE promotion propre au lieu de N slots mirrores."
+        },
+        "audience_slug": {
+          "type": "string",
+          "description": "Optionnel mais recommande (D#492). L'audience ciblee (denormalise depuis lineage). Porte le dream_scenario (le payoff emotionnel distinct par audience). Joignable a la perf via ce tag -> on apprend 'le payoff de CETTE audience a marche' (via angle -> audience -> dream_scenario). Resout transitivement le payoff-non-joignable."
+        }
+      }
+    },
+    "beat_type": {
+      "type": "string",
+      "description": "VOCAB ANALYTIQUE UNIFIE (v1.1). Mirror EXACT reverse body_arc.beat_type (20 termes). C'est LE SEUL vocab de role pour les frames ET pour genome_tags.beat_type_sequence -> A=B au niveau timeline. Remplace l'ancien vocab prod 6-termes (hook/problem/turn/turn-xray/payoff/cta) qui etait disjoint et corrompait l'apprentissage. 'turn-xray' n'est plus un role mais le flag visual_script.is_xray_cutaway.",
+      "enum": [
+        "hook",
+        "pain-litany",
+        "pain-amplification",
+        "authority-demolition",
+        "false-solution-rebuttal",
+        "mechanism-reveal",
+        "solution-direction",
+        "ingredients-pillars",
+        "competitor-comparison",
+        "product-reveal",
+        "product-specs",
+        "resolution-timeline",
+        "benefit-lifestyle",
+        "social-proof",
+        "scientific-claim",
+        "guarantee-statement",
+        "cta",
+        "disclaimer",
+        "transition",
+        "loop-callback"
+      ]
+    },
+    "style_id": {
+      "type": "string",
+      "description": "Mirror EXACT reverse visual.styles_observed[].style_id. Le style visuel.",
+      "enum": [
+        "real-photo-lifestyle",
+        "real-photo-testimonial-static",
+        "real-photo-product-studio",
+        "real-photo-macro-detail",
+        "ugc-selfie-talking",
+        "claymation-3d-ai",
+        "illustrated-pov-cartoon",
+        "3d-anatomy-realistic",
+        "3d-anatomy-stylized",
+        "3d-anatomy-xray",
+        "stock-footage-broll",
+        "pack-shot-brand-template",
+        "brand-motion-graphic",
+        "macro-photo-mouth-skin-etc",
+        "graphic-icons-overlay",
+        "split-screen-comparison",
+        "screen-recording-mockup",
+        "diagram-medical-2d",
+        "stop-motion-physical",
+        "ai-generated-realistic-photo",
+        "ai-generated-stylized",
+        "other"
+      ]
+    },
+    "lineage": {
+      "type": "object",
+      "description": "Optionnel mais recommande. Lignage concept/angle. Permet a B de RE-DERIVER (jamais copier) et a ingest-learning de remonter du revenue vers le principe.",
+      "additionalProperties": false,
+      "properties": {
+        "concept_id": {
+          "type": "string",
+          "description": "Reference banque de concepts (principe abstrait, jamais script source)."
+        },
+        "angle_id": {
+          "type": "string",
+          "pattern": "^ANG-[0-9]{2,3}$",
+          "description": "Reference angle produit par score-angle (A4, grille 35/25/20/20). Mirror du pattern angle.schema#angle_id (ANG-NN, never reassigned) -> garantit la jointure genome -> brands/{slug}/angles/."
+        },
+        "ref_ad_id": {
+          "type": "string",
+          "description": "Si origin=reverse: l'ad gagnante re-derivee (= video_id cote reverse). Le pont apprenable concret au niveau lignage. Coherent avec frames[].visual_script.ref_ad_as_image.ref_ad_id. NE PAS pattern-locker en CRT/ANG : le format est dicte par le reverse (= video_id/ad_id cote reverse), pas par la convention CRT-NN brand-side."
+        },
+        "persona_label": {
+          "type": "string",
+          "description": "Mirror reverse audience_persona_visual_label. Persona cible re-derive."
+        },
+        "anti_generic_passed": {
+          "type": "boolean",
+          "description": "Test anti-generique D#472: concurrent pourrait dire pareil ? audience finit la phrase ?"
+        }
+      }
+    },
+    "locks": {
+      "type": "object",
+      "description": "Optionnel. Les 2 LOCKS (D#472) + charte = contraintes dures de coherence que B doit tenir sans les inventer.",
+      "additionalProperties": false,
+      "properties": {
+        "character_lock": {
+          "type": "object",
+          "description": "Perso = coherent + sur-cible SANS precision physique imposee (sauf mascotte/photorealiste). char_ref vide = B produit la ref. Re-injecte par frame via visual_script.char_ref_attached.",
+          "additionalProperties": false,
+          "properties": {
+            "char_ref_id": {
+              "type": "string",
+              "description": "Reference character-sheet / multi-ref attachee par frame (D#475). Vide = B doit la produire."
+            },
+            "consistency_strategy": {
+              "type": "string",
+              "description": "D#475: multi-ref par plan ou frame-chaining. PAS de LORA sauf mascotte.",
+              "enum": [
+                "char-ref-attached-per-shot",
+                "frame-chaining",
+                "lora-recurring-mascot",
+                "none"
+              ]
+            },
+            "brief": {
+              "type": "string",
+              "description": "Description sur-cible sans precision physique imposee. Ex 'grand-mere chronic-pain'."
+            }
+          }
+        },
+        "product_lock": {
+          "type": "object",
+          "description": "Produit = reconnaissable-dans-le-style; pixel-exact SEULEMENT si photorealiste. JAMAIS halluciner un packshot (D#473): scraper le vrai. Frames concernees: visual_script.packshot_required=true.",
+          "additionalProperties": false,
+          "properties": {
+            "packshot_ref": {
+              "type": "string",
+              "description": "Chemin/URL du VRAI produit scrape (D#473). Vide = B doit le scraper."
+            },
+            "photoreal_exact": {
+              "type": "boolean",
+              "description": "true = exiger pixel-exact (photorealiste). false = reconnaissable-dans-le-style suffit."
+            }
+          }
+        },
+        "brand_charter_ref": {
+          "type": "string",
+          "description": "Reference charte marque (couleurs/logo/typo, D#473). Le concept de ref s'y adapte, il ne s'y colle pas."
+        }
+      }
+    },
+    "copy_meta": {
+      "type": "object",
+      "description": "Optionnel. METADONNEES de copy au niveau SCRIPT (le copy par frame vit dans frames[].copy_script; ici = ce qui est transverse a tout le script). + garde-fous prod (anti-surface-bleed, compliance). Remplace l'ancien 'copy' v1.0 (full_text/overlay_copy migres dans frames[].copy_script).",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "BCP-47. Ex 'fr', 'en'. Langue copy = langue script (D#476). Pour video, coherent avec video_settings.language."
+        },
+        "full_text": {
+          "type": "string",
+          "description": "Optionnel. Texte complet derive = concatenation des frames[].copy_script (vo_text pour video, headline+body pour static/carousel). Source du castage voix / vue d'ensemble. Redondant avec frames[] (cache), pas la source de verite."
+        },
+        "anti_surface_bleed_note": {
+          "type": "string",
+          "description": "Garde-fou D#474: copier le plan d'assemblage de la ref, PAS ses props/elements (ex pas de gummies sur une ad de semelles). S'applique au transfert de visual_script.ref_ad_as_image."
+        },
+        "compliance_disclaimers_required": {
+          "type": "array",
+          "description": "Mirror reverse. Garde-fou compliance sante (GLP-1/Meta ban-account, D#472).",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fda-dramatization",
+              "fda-not-evaluated",
+              "not-affiliated-brand",
+              "individual-results-vary",
+              "medical-disclaimer",
+              "age-restriction",
+              "consult-doctor",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "required_asset": {
+      "type": "object",
+      "description": "Un asset a produire/router via les 8 emplacements de capacite B (D#254, seul slot-1 cable). Liste pre-resolue, B route sans re-deriver.",
+      "required": [
+        "asset_role",
+        "capability_slot",
+        "production_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "asset_role": {
+          "type": "string",
+          "description": "Ex 'first-frame-hook', 'frame-2-anim', 'voice-track', 'captions-track', 'packshot', 'xray-broll'."
+        },
+        "capability_slot": {
+          "type": "string",
+          "description": "Emplacement de capacite B (8 slots, D#472). Nomme par CAPACITE (outil-adaptateur interchangeable derriere).",
+          "enum": [
+            "slot-1-image-first-frame",
+            "slot-2-lock-character-ref",
+            "slot-3-animate",
+            "slot-4-voice",
+            "slot-5-captions",
+            "slot-6-montage",
+            "slot-7-packshot-real",
+            "slot-8-xray-broll"
+          ]
+        },
+        "production_status": {
+          "type": "string",
+          "description": "to-generate = B produit; exists = reutilise asset-library; export-route-b = Route B amorce la library.",
+          "enum": [
+            "to-generate",
+            "exists-in-asset-library",
+            "export-to-human-route-b"
+          ]
+        },
+        "frame_index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optionnel. Index de la frame (dans scripts.frames[]) que cet asset sert. Relie l'asset au couple copy+visuel concerne."
+        },
+        "asset_library_ref": {
+          "type": "string",
+          "description": "Si exists: ref brands/{slug}/asset-library/{id}."
+        },
+        "tool_hint": {
+          "type": "string",
+          "description": "Outil-adaptateur derriere le slot (hint, interchangeable). Ex 'nanobanana', 'seedance', 'elevenlabs', 'zapcap', 'shotstack'."
+        },
+        "spec_brief": {
+          "type": "string",
+          "description": "Brief de prod pret (prompt/description). Pas de re-derivation cote B."
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "support": {
+            "const": "static"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "frames": {
+            "minItems": 1,
+            "maxItems": 1,
+            "description": "support=static -> EXACTEMENT 1 frame (un seul couple copy+visuel, pas de timing)."
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "support": {
+            "const": "carousel"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "frames": {
+            "minItems": 2,
+            "description": "support=carousel -> 2+ frames (cartes swipe ordonnees, pas de timing)."
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "support": {
+            "const": "video"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "video_settings"
+        ],
+        "properties": {
+          "frames": {
+            "minItems": 2,
+            "description": "support=video -> 2+ frames (plans ordonnes); chaque frame DOIT porter timing.duration_s (audio-led D#476).",
+            "items": {
+              "required": [
+                "role",
+                "copy_script",
+                "visual_script",
+                "timing"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

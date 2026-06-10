@@ -1,0 +1,81 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "ai-generated-stylized",
+  "display_name": "Rendu IA stylisé",
+  "family": "ai-generated",
+  "typology_st": "variable",
+  "description": "Rendu IA assumé et non-photo : esthétique surréelle, hyper-stylisée, volontairement impossible (échelles déformées, couleurs irréelles, matières hybrides, compositions oniriques). On ne cache PAS que c'est généré, on le revendique comme parti pris créatif. Sert à arrêter le scroll par l'étrange/le spectaculaire, à visualiser un bénéfice abstrait (énergie, calme, transformation) ou à donner une signature visuelle ownable à une marque qui assume une zone créative haute. À éviter dès qu'il faut de la preuve réelle ou un perçu premium/clinique.",
+  "render_recipe": {
+    "prompt_skeleton": "highly stylized AI-generated {subject} {action}, surreal {concept_metaphor} aesthetic, non-photorealistic illustrative render, {product} integrated as a stylized hero (recognizable silhouette and label, not photoreal), dreamlike impossible composition, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, bold art-directed digital artwork, deliberately not a photograph, cohesive single visual style throughout",
+    "slots": [
+      { "name": "subject", "description": "Le héros stylisé : personnage, produit, organe, ou élément abstrait (ex 'a glowing stylized figure', 'a floating skincare bottle', 'an abstract energy burst'). Pas un humain photoréaliste." },
+      { "name": "action", "description": "Ce qui se passe, lié au bénéfice/angle (ex 'bursting with neon energy', 'melting into liquid color', 'levitating over a surreal landscape')." },
+      { "name": "concept_metaphor", "description": "La métaphore visuelle qui porte le concept abstrait (ex 'glowing inner energy', 'calm liquid flow', 'before/after as two surreal worlds'). C'est le cœur du style : visualiser l'invisible." },
+      { "name": "product", "description": "Le produit transposé en hero stylisé : silhouette et label reconnaissables, mais traités dans l'esthétique IA (pas un packshot photoréaliste). Le nom de marque doit rester lisible et correct." },
+      { "name": "lighting", "description": "Schéma lumière stylisé (voir champ lighting par défaut). Peut être irréel/néon/glow assumé." },
+      { "name": "camera_lens", "description": "Cadrage/perspective (voir camera_lens). La perspective peut être impossible/exagérée, c'est voulu." },
+      { "name": "palette_mood", "description": "Palette + mood, alignés sur la charte marque mais poussés vers l'irréel/saturé. C'est le levier d'ownabilité de la signature visuelle." },
+      { "name": "texture_grain", "description": "Texture du rendu (voir texture_grain) : illustratif, peinture digitale, glow, gradients, pas de grain photo." },
+      { "name": "composition_notes", "description": "Contraintes de compo (espace pour overlay texte, hero lisible, focal unique)." }
+    ],
+    "lighting": "Lumière irréelle et assumée : glow interne qui émane du sujet, néons colorés, rim-light saturé, sources lumineuses impossibles (le sujet éclaire la scène), god-rays stylisés. Pas de schéma trois-points réaliste, pas de cohérence physique stricte, la lumière sert le mood et le concept avant le réalisme.",
+    "camera_lens": "Perspective art-directée, souvent frontale ou héroïque/contre-plongée pour magnifier le sujet. Profondeur exagérée ou aplatie selon l'effet, perspectives impossibles autorisées (échelles qui ne tiennent pas, horizon déformé). Pas de simulation d'objectif photo réaliste ni de bokeh optique fidèle : flou stylisé/peint plutôt qu'optique.",
+    "palette_mood": "Palette poussée vers l'irréel : couleurs saturées, gradients audacieux, duotone ou néon, teintes impossibles (peau bleue, ciel violet), forte cohésion chromatique au service d'une signature marque ownable. Mood spectaculaire, onirique ou hypnotique selon l'angle, jamais neutre/documentaire.",
+    "texture_grain": "Rendu illustratif / peinture digitale / 3D stylisée : surfaces lisses ou texturées-main, gradients propres, glow et bloom assumés, matières hybrides (liquide-métal, verre-énergie). Aucun grain de capteur photo, aucune imperfection censée mimer le réel. La cohérence du traitement sur toute l'image prime (un seul style, pas un collage).",
+    "composition_notes": "Hero unique et lisible au centre ou en règle des tiers, négatif space réservé pour l'overlay texte, profondeur construite par les couches de glow/gradient. Composition spectaculaire mais pas chargée : un seul point focal fort. Produit/label net et correctement orthographié malgré la stylisation. Garder l'étrange maîtrisé (lisible en 1 seconde au scroll), pas le chaos illisible."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "resolution": "2K",
+      "guidance": "medium-high pour verrouiller le parti pris stylisé sans déraper vers le photoréalisme tiède ni vers le bruit illisible",
+      "negative_prompt": "photorealistic, real photograph, photoreal human skin, plastic waxy skin, dead glassy eyes, extra fingers, deformed hands, hallucinated text on label, misspelled brand name, muddy desaturated colors, cluttered incoherent collage, multiple conflicting art styles, low-effort generic AI render, watermark"
+    },
+    "video_params": {
+      "motion": "Mouvement stylisé et fluide au service du concept : morphs, transformations de matière (liquide qui se forme, énergie qui pulse), parallaxe sur les couches de glow/gradient, lévitation lente du hero, particules. Pas de réalisme physique strict, le mouvement est chorégraphié comme une animation, pas filmé. Garder un focal stable et lisible malgré l'effet.",
+      "duration_s_range": [3, 8],
+      "transitions": "Transitions stylisées assumées : morphs fluides, dissolves colorés, reveals par vague de lumière/liquide, transformations before/after entre deux mondes surréels. Loopable pour le feed. Éviter les hard cuts secs (qui appartiennent au code UGC/raw), ici la fluidité onirique fait partie de la signature."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Dérive vers le photoréalisme tiède : si le rendu commence à ressembler à une vraie photo ratée (ni assumé stylisé, ni crédible réel), il tombe dans l'uncanny valley. Le style doit être franchement non-photo, pas un entre-deux.",
+    "Texte/label halluciné : glyphes inventés, nom de marque déformé ou mal orthographié sur le produit ou en lettering intégré. Vérifier chaque caractère, c'est le défaut IA le plus repérable.",
+    "Mains/doigts foireux quand un humain stylisé est présent : doigts surnuméraires, fondus ou collés. Même stylisé, la main reste une zone à risque, surtout si elle tient le produit.",
+    "Bouillie illisible / surcharge : trop d'éléments, trop de glow, composition chaotique sans point focal. L'étrange doit rester lisible en 1 seconde au scroll, sinon ça passe pour du low-effort AI slop.",
+    "Incohérence de style interne (collage) : zones de l'image dans des styles différents (un coin photoréaliste, un coin cartoon, un coin 3D). Le traitement doit être UN seul style cohérent sur toute l'image.",
+    "Produit méconnaissable : silhouette/packaging tellement stylisé qu'on ne reconnaît plus le hero ni le label. Garder l'identité produit nette malgré le parti pris.",
+    "Look générique 'default Midjourney' : rendu IA passe-partout sans direction artistique (même glow violet/orange, mêmes particules, même composition centrée vue 10 000 fois). Forcer une palette et une métaphore ownables à la marque.",
+    "Anatomie/perspective ratée non assumée : si la déformation n'est pas un parti pris clair mais une erreur (membre en trop, perspective accidentellement cassée), elle lit comme bug, pas comme style. Le surréel doit être intentionnel et maîtrisé.",
+    "Drift vidéo réaliste : mouvement qui tente de mimer du filmé réel et échoue (morphing de visage involontaire, warping de fond). Assumer l'animation chorégraphiée plutôt que de viser un faux réalisme."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [5, 10],
+    "pairs_well_with": [
+      "graphic-icons-overlay",
+      "brand-motion-graphic",
+      "split-screen-comparison",
+      "claymation-3d-ai",
+      "pack-shot-brand-template"
+    ],
+    "avoid_when": [
+      "Marque premium/luxe ou clinique-médicale sérieuse en zone brand-safe basse (0-4) : le rendu surréel assumé casse le perçu de prix et la crédibilité d'expertise.",
+      "Angle de preuve/efficacité qui exige du réel (avant/après corps, démo ingrédient, texture produit, testimonial) : un rendu non-photo décrédibilise toute allégation factuelle.",
+      "Catégorie réglementée (santé, finance, compléments) où un visuel irréel peut être lu comme trompeur/non substantié, ou un bénéfice abstrait stylisé comme allégation non prouvée.",
+      "Audience qui rejette l'esthétique IA visible (cible premium âgée, B2B sérieux) ou marché saturé de slop AI où le code stylisé sonne low-effort/cheap au lieu de signature.",
+      "Besoin d'un hero produit photoréaliste désirable et net (packshot conversion) : le traitement stylisé sort le produit de la lecture commerciale directe."
+    ]
+  },
+  "refs": [
+    "Wave créa DTC 2024-2025 : ads IA stylisées assumées pour visualiser un bénéfice abstrait (énergie, focus, calme, sommeil) ou créer une signature visuelle ownable scroll-stopper en feed paid.",
+    "Use-case canon : métaphore visuelle surréelle du bénéfice (hero produit en lévitation/glow, before/after comme deux mondes oniriques, concept abstrait rendu spectaculaire).",
+    "À distinguer de ai-generated-realistic-photo (qui cache la génération et vise le réel) et de claymation-3d-ai (clay matte fait-main) : ici le parti pris est le non-photo revendiqué."
+  ],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

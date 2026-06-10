@@ -1,0 +1,8 @@
+{
+  "$id": "sophistication-stage.json",
+  "title": "Market sophistication stage Schwartz (canon shared)",
+  "description": "5 stades Schwartz. Promu depuis l'enum inline angle.lineage.schwartz_sophistication (mêmes valeurs, zéro breaking). DISTINCT de brand.market.market_overview.sophistication (nascent/growing/mature/hyper_saturated = maturité marché, concept séparé, ne pas fusionner).",
+  "type": "string",
+  "enum": ["v1", "v2", "v3", "v4", "v5"],
+  "_meta": { "doctrine_ref": "Eugene Schwartz, Breakthrough Advertising 1966" }
+}

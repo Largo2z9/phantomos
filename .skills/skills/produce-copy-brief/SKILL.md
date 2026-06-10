@@ -147,7 +147,7 @@ Paramètres posés · ce sur quoi je pars
 
   6. Hypothèses figées
      Stage conscience audience · {unaware → most-aware ·
-     lu market_position.awareness_level}
+     lu market_position.awareness_dominant}
      Canal · {landing / email / Meta / TikTok / SMS · default
      INFER depuis stack + brand focus}
      Pricing leverage · {urgency active / bundle / risk-reversal /
@@ -264,7 +264,7 @@ Load the substrate silently. Never narrate the loading.
 
 **Audience profile (toujours lu)** ·
 
-- `brands/{slug}/audiences/{audience-slug}/profile.json` · `voice.key_expressions[]` (text, frequency, sample_size, platform), `voice.vocabulary_to_avoid[]`, `voice.tone_register`, `psychology.jtbd.{primary, context, emotional_driver}`, `decision_process.trust_anchors[]`, `market_position.awareness_level`, demographics. **Note v2.64** · `pain_points[]` + `objections[]` sub-fields legacy preserved en lecture pour backward compat, mais sub-audience collections prennent priorité si présentes.
+- `brands/{slug}/audiences/{audience-slug}/profile.json` · `voice.key_expressions[]` (text, frequency, sample_size, platform), `voice.vocabulary_to_avoid[]`, `voice.tone_register`, `psychology.jtbd.{primary, context, emotional_driver}`, `decision_process.trust_anchors[]`, `market_position.awareness_dominant` (RENAME C1 profile/2.3), demographics. **Note v2.64** · `pain_points[]` + `objections[]` sub-fields legacy preserved en lecture pour backward compat, mais sub-audience collections prennent priorité si présentes.
 - `brands/{slug}/products/{hero}/spec.json` · `identity.{name, niche, positioning}`, `unique_mechanism`, `problems_solved[]` with `verbatim_quotes[]`, `benefits[].chain` (functional → emotional → identity), `proofs.{social, authority, performance, scientific}`, `compliance`, `market_context.{sophistication, demonstrability, trust_barrier}`.
 - `brands/{slug}/products/{hero}/offers.json` · active offer matching the channel, or active offer general if not channel-specific. Pricing, urgency, bonus, duration tier.
 - `brands/{slug}/brand.json` · `tone_of_voice.{style, register, banned_words, frequent_words}`, `positioning`, `market.*` if VoM has run (vernacular, white-spaces).

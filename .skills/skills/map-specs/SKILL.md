@@ -13,19 +13,8 @@ description: >
   v1.0.0 (v2.58 D#386 NEW) · Sub-skill atomique cartographie deep enrichment des sub-fields `spec.specs.*` d'un produit (composition structurée, nutrition_facts, posology, contraindications, origin, production_method, preparation, external_databases, target_suitability, durability, perishability). Distinct de snapshot-brand qui fait le light pass surface · map-specs drill-down sub-field par sub-field, canon-driven (INCI cosmétique, Open Food Facts food, EFSA supplements), invocable séparément par l'opérateur pour creuser/refresh la fiche technique sans relancer le full snapshot.
   FR · "map-specs {product}", "creuse les specs de {product}", "approfondis specs produit", "détaille la composition".
   EN · "map specs", "deep dive specs product", "detail composition".
-triggers_fr:
-  - "map-specs {product}"
-  - "creuse les specs de {product}"
-  - "approfondis specs produit"
-  - "détaille la composition"
-  - "drill spec produit"
-  - "fiche technique deep"
-triggers_en:
-  - "map specs"
-  - "deep dive specs product"
-  - "detail composition"
-  - "drill product specs"
-  - "deep product card"
+  FR: "map-specs {product}", "creuse les specs de {product}", "approfondis specs produit", "détaille la composition", "drill spec produit", "fiche technique deep".
+  EN: "map specs", "deep dive specs product", "detail composition", "drill product specs", "deep product card".
 disambiguates_against:
   snapshot-brand: "snapshot-brand est le light pass scrape URL → spec.json (identity, composition top-level, pricing). map-specs deep-dive les sub-fields spec.specs.* après que le light pass existe."
   define-specs: "define-specs est l'orchestrateur Phase 1 qui combine snapshot + Q&A + sources upload pour assembler la spec from scratch. map-specs est atomique sur sub-fields spec.specs.* d'une spec déjà initialisée."

@@ -51,12 +51,15 @@
       "Hashtag viral #Mailman directement applicable (USPS mailman = sous-segment warehouse-adjacent)"
     ],
     "created": "2026-05-15",
-    "updated": "2026-05-15"
+    "updated": "2026-05-15",
+    "name": "Warehouse 10h shifts",
+    "slug": "warehouse-10h",
+    "entry_door": "pain_driven"
   },
   "identity": {
     "label": "Warehouse workers 10h+ days (Amazon · UPS · USPS · Manufacturing)",
     "$comment_label": "Sous-poche warehouse/logistics/manufacturing · scope inclut Amazon FC · UPS handlers · USPS mailmen · manufacturing floor workers.",
-    "awareness_stage": "solution_aware",
+    "awareness_stage": "solution-aware",
     "demographics": {
       "age_range": "28-55",
       "$comment_age": "Skew plus âgé que nurses · warehouse career-long souvent · peak pain accumulation 35-50.",
@@ -79,9 +82,18 @@
       "family time weekend (kids deserve présent parent pas crash sofa)"
     ],
     "fears": [
-      "hernie discale forced workers comp claim (process long · revenu coupé)",
-      "missing days work cost (union benefits liés à attendance · sick days limités)",
-      "kids voir parent diminished physical (perte respect peer · pride paternel/maternel)"
+      {
+        "fear_text": "hernie discale forced workers comp claim (process long · revenu coupé)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "missing days work cost (union benefits liés à attendance · sick days limités)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "kids voir parent diminished physical (perte respect peer · pride paternel/maternel)",
+        "source_verbatim_ref": null
+      }
     ],
     "status_signals": [
       "I'm the kind who works hard physically (warehouse pride · pas le office whiner)",

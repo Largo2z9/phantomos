@@ -5,7 +5,7 @@ PhantomOS is the agentic workspace for DTC paid acquisition operators. Contribut
 ## Local setup
 
 ```bash
-git clone https://github.com/<your-org>/phantomos.git
+git clone https://github.com/Largo2z9/phantomos.git
 cd phantomos
 ```
 

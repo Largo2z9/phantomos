@@ -68,7 +68,7 @@ Include field placeholders with {curly braces}.
 | `description` | Yes | Must include trigger phrases in both FR and EN |
 | `permissions.reads` | Yes | Array of entity types this skill reads: `brand`, `product`, `offer`, `profile`, `learning`, `strategy` |
 | `permissions.writes` | Yes | Array of entity types this skill mutates: `brand`, `product`, `offer`, `profile`, `learning`, `strategy`, or `[]` if read-only |
-| `permissions.mode` | Yes | `proposed` (for mutations that need review), `direct` (for human-facing skills that write authoritative data), `none` (for read-only skills) |
+| `permissions.mode` | Yes | `proposed` (for mutations that need review), `direct` (for human-facing skills that write authoritative data), `none` (for read-only skills), `interactive` (skill drives a guided operator dialogue and writes validated answers turn by turn), `silent` (background write, no operator gate or surface ; the caller surfaces the summary) |
 | `pipeline.preconditions` | No | What must exist before this skill runs |
 | `pipeline.postconditions` | No | What should run after this skill |
 

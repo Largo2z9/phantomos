@@ -13,17 +13,6 @@ extension_hooks:
   - audience_entity   # NEW audiences custom scaffolded
   - angle_entity      # NEW angle types
   - territory_entity  # NEW territory custom
-triggers_fr:
-  - "matrice paid pour {brand}"
-  - "produit-paid-matrix"
-  - "pitch paid DTC"
-  - "génère la matrice angles audiences pour {brand}"
-  - "score les territoires paid"
-triggers_en:
-  - "produce paid matrix"
-  - "paid pitch matrix"
-  - "rank paid territories"
-  - "score angles by audience"
 description: >
   v1.3.0 (v2.75.0 NEW extension_hooks frontmatter declaration · permet manifest registry scan Step 0 DRGFP enrichi · NEW entities scaffolded via scaffold-extension v1.2.0+ avec consumable_by matching ce skill consommées automatiquement runtime. Backward compat strict additif · extension_hooks vide default · legacy v2.74.x comportement hard-coded canon entities preserved. Pattern canon doctrine extension-discovery-doctrine.md NEW v2.75.0.)
   v1.2.0 (v2.64 ontologie sémantique pure · pain_points + objections sub-audience) · chain produce-paid-angles v1.10 + weight-dimensions + score-matrix · cohérence read `audiences/{audience_slug}/pain_points/*.json` + `audiences/{audience_slug}/objections/*.json` sub-audience canonical downstream sub-skills. Synthesis territoires top-3 peut référencer pain_points/objections canonical IDs (PNT-NN + OBJ-NN) sub-audience dans rationale Section 2 Déduit. Backward compat strict additif · fallback top-level v2.63 + profile sub-fields v1.7 preserved.
@@ -44,6 +33,8 @@ description: >
   les territoires paid", "pitch paid DTC".
   EN · "produce paid matrix", "paid pitch matrix", "rank paid territories", "score
   angles by audience".
+  FR: "matrice paid pour {brand}", "produit-paid-matrix", "pitch paid DTC", "génère la matrice angles audiences pour {brand}", "score les territoires paid".
+  EN: "produce paid matrix", "paid pitch matrix", "rank paid territories", "score angles by audience".
 permissions:
   reads: [brand, product, profile, learning, strategy, angles, dimension_weights]
   writes: [angles, dimension_weights, scoring, learning]
@@ -158,7 +149,7 @@ Pour chaque NEW entity registered matching extension_hooks frontmatter ·
 - Match `entity_type` ∈ frontmatter `extension_hooks` enum
 - Match `consumable_by` field registry contains `{skill_name}` 
 - Include NEW entity dans inputs Phase 1 pipeline ci-dessous
-- Output enrichi avec lineage extension consommée dans atome_irreductible
+- Output enrichi avec lineage extension consommée dans frame
 
 Halt si NEW entity registered sans `consumable_by` field flagué (scaffold-extension v1.2.0 legacy) · 
 silent skip · pas error · l'opérateur peut patcher manuellement le scaffold-extension Phase 9 register-and-flag pour ajouter `consumable_by`.
@@ -496,7 +487,7 @@ The matrice paid sur une fashion brand DTC (différent vertical) surface différ
 ### v1.3.0 (v2.75.0 NEW extension_hooks · 2026-05-16)
 
 - **NEW frontmatter field `extension_hooks`** · liste enum entity types acceptés (`audience_entity`, `angle_entity`, `territory_entity`) · permet manifest registry scan Step 0 DRGFP enrichi.
-- **NEW Step 0 DRGFP Manifest Registry Scan** · pre-flight discovery NEW entities scaffolded via scaffold-extension v1.2.0+ avec `consumable_by` matching ce skill, consommées automatiquement runtime · output enrichi lineage extension dans atome_irreductible.
+- **NEW Step 0 DRGFP Manifest Registry Scan** · pre-flight discovery NEW entities scaffolded via scaffold-extension v1.2.0+ avec `consumable_by` matching ce skill, consommées automatiquement runtime · output enrichi lineage extension dans frame.
 - **Step 0 legacy renommé Step 0bis** · Pre-flight DRGFP gates existing pipeline preserved · pas de logique modifiée.
 - **Backward compat strict additif** · `extension_hooks` optional · default empty · legacy v2.74.x comportement hard-coded canon entities preserved · silent skip si NEW entity registered sans `consumable_by` field (pas error).
 - **Cross-ref doctrine canon NEW** · `docs/system/extension-discovery-doctrine.md` v2.75.0 + `scaffold-extension` v1.2.0+ Phase 9 register-and-flag (upstream registry).

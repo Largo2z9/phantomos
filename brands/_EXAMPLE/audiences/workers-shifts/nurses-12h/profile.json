@@ -51,12 +51,15 @@
       "Verbatim Tanya nurse 'first impression really promising' + '12-hour shifts' canon cible verbatim"
     ],
     "created": "2026-05-15",
-    "updated": "2026-05-15"
+    "updated": "2026-05-15",
+    "name": "Nurses 12h shifts",
+    "slug": "nurses-12h",
+    "entry_door": "pain_driven"
   },
   "identity": {
     "label": "Nurses 12h shifts (hospital + clinical)",
     "$comment_label": "Sous-poche spécifique nurse 12h hospital · scope plus restreint que mère workers-shifts.",
-    "awareness_stage": "solution_aware",
+    "awareness_stage": "solution-aware",
     "demographics": {
       "age_range": "26-50",
       "$comment_age": "Skew plus jeune que mère · nursing peak career 26-50 · burn out forced switch après 50.",
@@ -79,9 +82,18 @@
       "energy reserve à la maison pour family (pas crash sofa post-shift)"
     ],
     "fears": [
-      "burn out forced switch carrière (perdre mission qui définit identité)",
-      "missing shifts cost colleagues (guilt culture nursing · pas le whiner qui appelle sick)",
-      "patient safety impacted by my exhaustion (responsabilité morale lourde)"
+      {
+        "fear_text": "burn out forced switch carrière (perdre mission qui définit identité)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "missing shifts cost colleagues (guilt culture nursing · pas le whiner qui appelle sick)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "patient safety impacted by my exhaustion (responsabilité morale lourde)",
+        "source_verbatim_ref": null
+      }
     ],
     "status_signals": [
       "I'm the kind who endures (nursing pride · sacrifice valorisé)",

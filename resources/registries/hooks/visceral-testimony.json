@@ -1,0 +1,100 @@
+{
+  "pattern_id": "HOK-visceral-testimony",
+  "pattern_type": "hook-mechanic",
+  "name": "Témoignage Viscéral Spécifique",
+  "one_liner": "Ouvre sur une déclaration première personne qui nomme un résultat ressenti précis (pas un bénéfice générique), donnant au lecteur la sensation d'entendre une vraie personne plutôt qu'une promesse de marque.",
+  "skeleton": "[voix_première_personne] · [résultat_viscéral_spécifique sur le pain réel] (+ [marqueur_authenticité : durée vécue OU aveu de scepticisme OU attribution nominative OU signal casual])",
+  "slots": [
+    {
+      "name": "voix_première_personne",
+      "description": "Ancrage 'je/moi' qui signale un vécu individuel, pas une voix de marque. Peut être implicite (citation entre guillemets attribuée).",
+      "examples": [
+        "Je ne perds plus aucuns cheveux",
+        "ça fait presque un mois que je prends les gummies",
+        "J'ai ete insomniaque toute ma vie",
+        "\"I feel like myself again.\"",
+        "c'est super efficace pour les stressés comme moi"
+      ]
+    },
+    {
+      "name": "résultat_viscéral_spécifique",
+      "description": "Le résultat ressenti, nommé concrètement sur le pain réel (pas 'ça marche' mais l'état exact retrouvé). C'est le coeur viscéral du hook.",
+      "examples": [
+        "LES gummies qui ont sauve mes cheveux... vraiment!",
+        "plus calme, plus apaisée au moment du coucher",
+        "Des les premieres nuits, j'ai dormi d'une traite",
+        "I feel like myself again",
+        "Now my sex drive is fully restored"
+      ]
+    },
+    {
+      "name": "marqueur_authenticité",
+      "description": "Le détail qui rend le témoignage crédible : durée d'usage vécue, aveu de scepticisme antérieur, attribution nominative (prénom + âge), ou signal de registre casual/parlé.",
+      "examples": [
+        "Et ca en meme pas 30 jours (compression temps)",
+        "J'ai fini ma cure de 3 mois (durée vécue)",
+        "J'y croyais plus trop / j'ai ete choquee (scepticisme renversé)",
+        "Robert C., 50 (attribution nominative + âge)",
+        "comme moi mdrr 😅 (signal casual parlé)"
+      ]
+    }
+  ],
+  "function": "Réduit le scepticisme 'encore une pub' en faisant entendre une personne réelle qui nomme un gain précis qu'elle a ressenti. Le caractère spécifique du résultat (vs bénéfice générique) + le marqueur d'authenticité transfèrent la crédibilité du locuteur à la marque avant tout argument produit.",
+  "when_to_use": "Marchés problem-aware à product-aware où le scepticisme est élevé (compléments, telehealth, beauty). Particulièrement fort en format statique/story UGC où le visuel ne porte pas la preuve. Le résultat doit être ressenti et nommable par le consommateur lui-même (état émotionnel, symptôme résolu), pas une métrique de labo.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-02"],
+      "realization": "LES gummies qui ont sauve mes cheveux... vraiment! Je ne perds plus aucuns cheveux, c'est bluffant! Et ca en meme pas 30 jours. (testimonial first-person, résultat viscéral 'sauvé mes cheveux' + compression temps 30 jours)"
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-15", "RCV-19", "RCV-54", "RCV-84"],
+      "realization": "Variantes : 'ça fait presque un mois que je prends les gummies anti-stress... plus calme, plus apaisée au moment du coucher' (RCV-15) · 'J'ai ete insomniaque toute ma vie... j'ai ete choquee. Des les premieres nuits, j'ai dormi d'une traite' (RCV-19, scepticisme renversé) · 'c'est super efficace pour les stressés comme moi mdrr' (RCV-54, signal casual) · 'J'ai fini ma cure de 3 mois... je vous fais un petit retour' (RCV-84, durée vécue)"
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-137", "RCV-171"],
+      "realization": "Citation première personne attribuée : '\"I feel like myself again.\" Robert C., 50' (RCV-137) · '\"Now my sex drive is fully restored.\" Robert C., 50' (RCV-171). Résultat viscéral de restauration de soi + attribution nominative (prénom + âge) comme marqueur d'authenticité. hims+hers = une seule factory créative genrée (D#485), comptée comme UNE source."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Vu cross-vertical (3 verticales) ET cross-géo (FR + US) : le pattern le plus sûr à emprunter partout. En exploit, garder la réalisation native de la verticale (résultat ressenti propre à la catégorie). En explore, le squelette se reslotte tel quel vers n'importe quelle catégorie dès qu'un résultat ressentable et nommable existe (le marqueur d'authenticité s'adapte au registre de la marque cible)."
+  },
+  "related_mechanic_ids": [
+    "visceral-specific-testimony",
+    "testimonial-personal-first-person",
+    "timeline-specific-result",
+    "hook",
+    "social-proof"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "\"Je peux enfin rester debout toute la journée sans avoir les pieds en feu.\" Sophie M., 42 — première fois en trois ans que je ne pense plus à mes pieds le soir."
+    },
+    {
+      "target": "skincare anti-acné · FR DTC",
+      "reslotted": "ça fait six semaines que j'utilise le sérum et pour la première fois je sors sans fond de teint. J'y croyais plus, j'avais TOUT essayé."
+    }
+  ],
+  "anti_patterns": [
+    "Résultat générique ('ça marche super bien', 'je recommande') sans nommer l'état précis ressenti : retombe en social-proof plat, perd le viscéral.",
+    "Claim de résultat invérifiable et hyperbolique sur un marché unaware/cold sans aucun marqueur d'authenticité : lit comme une pub, le scepticisme n'est pas désamorcé.",
+    "Verticales à forte contrainte compliance (telehealth-rx) : le témoignage doit porter ses disclaimers ('Paid testimonial', FDA compounded) sous peine de risque réglementaire, comme chez himshers.",
+    "Sur un résultat non ressentable par le consommateur (métrique de labo, taux sanguin) : le viscéral ne prend pas, préférer un proof-pattern chiffré."
+  ],
+  "curation_notes": "Solide : 3 sources INDÉPENDANTES (karacare + naali + himshers), 7 RCV de traçabilité, cross-vertical ET cross-géo → breadth=universal. Le pattern absorbe plusieurs marqueurs d'authenticité (durée vécue, scepticisme renversé, attribution nominative, casual) : ils sont interchangeables, pas cumulatifs obligatoires. RCV-171 réutilise la même persona 'Robert C., 50' que RCV-137, confirmant himshers = une factory (compte = 1 source, jamais 2). naali est la source la plus dense (4 RCV, variantes riches du marqueur). Tous les exemplaires du corpus sont des statiques UGC/story (anomalie STATIC-NO-TIMELINE récurrente) : la confirmation en format vidéo reste à observer. Passage watch→promote-ready déjà acquis ; le 3e signal (perf réelle via feedback-loop) reste à câbler pour sceller en canon."
+  ,
+  "_schema_version": "library-pattern/1.0"
+}

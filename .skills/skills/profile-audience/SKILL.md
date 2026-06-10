@@ -29,18 +29,8 @@ description: |
   v1.4.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (audiences-cartography, objections-mapping, pain-benefit-chain, breakthrough-advertising-5-stages). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts.
   v1.4.0 (v2.58 coverage extend) · role.type derivation depuis buyer_user_split · objections.severity_score synthesis · behavior.* sub-fields VoC-anchored. Closes 3 orphans audit v2.57.
   Synthétise les outputs de mining (voc/vom/audience) en profil audience structuré 8 dimensions canon V3. Consume verbatims raw, produit profile.json conforme schema v1.3 avec validation gate operator. Ne mine pas, synthétise.
-triggers_fr:
-  - "profil audience"
-  - "synthétise l'audience"
-  - "8 dimensions audience"
-  - "structure audience"
-  - "cartographie sub-cluster"
-triggers_en:
-  - "profile audience"
-  - "synthesize audience"
-  - "8 dimensions"
-  - "structure audience"
-  - "map sub-cluster"
+  FR: "profil audience", "synthétise l'audience", "8 dimensions audience", "structure audience", "cartographie sub-cluster".
+  EN: "profile audience", "synthesize audience", "8 dimensions", "structure audience", "map sub-cluster".
 disambiguates_against:
   - mine-voc: "mine-voc capture verbatims clients (raw signals). profile-audience SYNTHÉTISE ces signals en profil 8-dim structuré."
   - mine-vom: "mine-vom capture vernaculaire marché. profile-audience consume les outputs des mining skills."

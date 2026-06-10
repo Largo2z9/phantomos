@@ -1,0 +1,37 @@
+{
+  "$id": "extraction-provenance.json",
+  "title": "Extraction provenance (canon shared, mécanique)",
+  "description": "Provenance MÉCANIQUE d'une brique extraite : procédé, date, fiabilité du procédé, fraîcheur. Orthogonale à _field_types (épistémique observed/stated/derived/structured) et aux confidences d'inférence (validation-state.json, psychology.confidence_chain). Consommé via la root map _extraction (clé = glob field path ou chemin exact, valeur = cet objet), miroir exact du mental model _field_types. Porteurs canon (liste fermée C1) : brand, spec, offer, profile, pain_points, objections, voc-verbatim (inline). PAS sur angle/genome/creative/learnings (objets DERIVED par nature, la provenance mécanique appartient aux briques extraites).",
+  "type": "object",
+  "required": ["extraction_method", "extracted_at"],
+  "properties": {
+    "extraction_method": {
+      "type": "string",
+      "enum": ["api_json", "json_ld", "dom_parse", "headless", "absent"],
+      "description": "absent = tenté et introuvable (distinct de null au niveau brique = pas tenté). absent exige lever."
+    },
+    "extraction_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fiabilité du PROCÉDÉ, échelle 0-1 canon validation-state. NE PAS aligner sur brand.market.meta.confidence (0-100, incohérence existante flaggée, ne pas propager)."
+    },
+    "extracted_at": { "type": "string", "format": "date-time" },
+    "source_url": { "type": "string" },
+    "ttl_days": {
+      "type": "integer",
+      "default": 90,
+      "description": "Fraîcheur (politique d'échec/fraîcheur D11). Précédents canon : canon-tool.validations[].decay_ttl_days (90) et skill-prerequisites.freshness_ttl_days. Overrides indicatifs en _meta."
+    },
+    "lever": {
+      "type": ["string", "null"],
+      "description": "Levier nommé pour lever l'absence (skill, source, action). Jamais inventer la donnée."
+    }
+  },
+  "if": { "properties": { "extraction_method": { "const": "absent" } }, "required": ["extraction_method"] },
+  "then": { "required": ["lever"] },
+  "_meta": {
+    "orthogonality": "_field_types = épistémique · _extraction = mécanique · validation-state / confidence_chain = confiance d'inférence",
+    "ttl_hints": { "offers/pricing": 30, "spec": 90, "voc": 180, "brand": 90 }
+  }
+}

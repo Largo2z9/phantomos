@@ -63,7 +63,7 @@ description: >
 permissions:
   reads: [brand, product]
   writes: [learning]
-  mode: proposed
+  mode: proposed             # proposed | direct | none | interactive | silent. See _TEMPLATE authoring notes.
   subagent_safe: true        # Default per typology (true for producer/curator/navigator, false for capturer/orchestrator/builder). Declare explicitly.
 pipeline:
   preconditions: what must exist before this skill runs

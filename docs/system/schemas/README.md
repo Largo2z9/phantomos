@@ -10,17 +10,30 @@ Chaque schema sous `resources/schemas/*.schema.json` a une doc dédiée ici qui 
 
 ## Index par entité
 
+**Atlas (amont) :**
+
 | Entité | Schema | Doc | Statut |
 |---|---|---|---|
-| brand | brand.schema.json | [brand.md](brand.md) | v2.2 |
-| spec (produit) | spec.schema.json | [spec.md](spec.md) | v1.9 |
+| brand | brand.schema.json | [brand.md](brand.md) | brand/2.4 (+ `brand_da` v2.89) |
+| spec (produit) | spec.schema.json | [spec.md](spec.md) | v1.11 |
 | profile (audience) | profile.schema.json | [profile.md](profile.md) | active |
 | offer | offer.schema.json | [offer.md](offer.md) | v2.0 DRAFT |
-| angle | angle.schema.json | [angle.md](angle.md) | v1.2 |
-| creative | creative.schema.json | TODO v2.29 | ship en cours |
+| angle | angle.schema.json | [angle.md](angle.md) | angle/1.3 |
 | sop | sop.schema.json | TODO P2 | docs à venir |
 | canon-tool | canon-tool.schema.json | TODO P2 | docs à venir |
 | connected-sources | connected-sources.schema.json | TODO P2 | docs à venir |
+
+**Production (chaîne créa · Brique 4 + v2.89) :**
+
+| Entité | Schema | Statut |
+|---|---|---|
+| creative (lignage) | creative.schema.json | creative/1.4 shippé |
+| genome (ADN) | genome.schema.json | genome/1.2 |
+| genome-package (contrat A→B) | genome-package.schema.json | genome-package/1.3 |
+| decomposition (reverse) | decomposition.schema.json | decomposition/1.3 |
+| produced-asset (sidecar binaire + qc) | produced-asset.schema.json | produced-asset/1.0 |
+| library-pattern (patterns promus) | library-pattern.schema.json | library-pattern/1.0 (+ `visual-style`) |
+| style-recipe (backing style_id) | style-recipe.schema.json | style-recipe/1.0 · NEW v2.89 · 22 fiches `registries/styles/` |
 
 ## Graphe de dépendances
 

@@ -1,0 +1,88 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "stop-motion-physical",
+  "display_name": "Stop-motion objets reels",
+  "family": "stop-motion",
+  "typology_st": "temporel",
+  "description": "De vrais objets physiques (le produit, son packaging, ses ingredients, des accessoires) animes image par image sur un set tabletop: chaque frame est une pose legerement deplacee, ce qui donne la cadence saccadee et le charme fait-main du stop-motion (Lego, PES, Oreo, Squarespace school). A utiliser pour faire bouger un produit qui ne bouge pas tout seul (un flacon qui se deballe, des gelules qui s'alignent, des ingredients qui sautent dans un bol), pour un effet scroll-stopper artisanal et tactile, ou pour un demo satisfaisant/ASMR. A distinguer de claymation-3d-ai (la c'est de la pate a modeler sculptee/generee, ici ce sont les VRAIS objets de la marque, materiaux et label authentiques).",
+  "render_recipe": {
+    "prompt_skeleton": "stop-motion frame of {object} {action} on {surface}, real physical object animated frame-by-frame on a handcrafted tabletop set, tangible real materials (glass / cardboard / metal / powder / pills exactly as the real product), {set_dressing}, hint of the rig (visible armature pin, pause-bubble, fishing-line wire) acceptable, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, deliberate handmade stepped-animation feel, single keyframe of a stop-motion sequence, no smooth CGI tweening",
+    "slots": [
+      { "name": "object", "description": "Le vrai objet anime: le produit + son packaging exact (flacon, boite, sachet) ou ses composants reels (gelules, poudre, fruits, ingredients). Materiau et label authentiques, jamais une re-sculpture stylisee." },
+      { "name": "action", "description": "Le micro-mouvement capte sur CETTE frame, lie au benefice: 'mid unboxing, lid lifting off', 'pills lining up into a row', 'ingredients hopping into a bowl', 'product assembling itself piece by piece'. Toujours mid-action, jamais pose figee." },
+      { "name": "surface", "description": "Le plan de travail tabletop: wooden board, marble counter, seamless paper backdrop, kitchen counter, bathroom shelf. Ancre le use-case et donne l'ombre de contact." },
+      { "name": "set_dressing", "description": "Le decor miniature/props autour qui raconte le contexte (cuisine, salle de bain, bureau), volontairement un peu artisanal facon set fait-main." },
+      { "name": "lighting", "description": "Voir champ lighting. Surcharger seulement si la marque impose une ambiance (golden, clinique propre, neon)." },
+      { "name": "camera_lens", "description": "Voir champ camera_lens." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood, aligne sur la charte marque." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes (espace overlay texte, label lisible, horizon bas diorama)." }
+    ],
+    "lighting": "Eclairage de set tabletop fixe et constant d'une frame a l'autre (la coherence lumiere entre poses EST la signature stop-motion): key douce diffusee en hauteur, fill leger, petit rim pour detacher l'objet du fond. Ombres de contact nettes et stables sur le plan, speculars maitrises sur le verre/metal. Surtout aucune variation d'expo ou de temperature entre frames (un flicker incoherent = artificiel).",
+    "camera_lens": "Camera locked-off sur trepied/banc-titre, focale 35-50mm a hauteur de table ou legere plongee diorama, ouverture moyenne (f/5.6-f/8) pour garder l'objet net et lisible. Profondeur de champ raisonnee (pas de bokeh cinema ecrasant), cadrage rigoureusement identique d'une pose a l'autre. Possibles micro-mouvements de camera 'incrementes' frame par frame facon banc-titre, jamais un travelling motorise fluide.",
+    "palette_mood": "Palette charte marque, couleurs franches et tactiles, contraste propre et joyeux, mood artisanal/satisfaisant. Couleurs reelles des materiaux respectees (le carton kraft reste kraft, le verre ambre reste ambre). Pas de grading pub teale-and-orange, pas de sur-saturation cartoon.",
+    "texture_grain": "Materiaux PHYSIQUES authentiques: reflets reels du verre/plastique, grain du carton, poussiere de poudre, brillance d'une gelule, fibres du tissu. Micro-imperfections du fait-main (un objet jamais exactement repositionne au pixel pres), legere texture photographique. Aucun rendu lisse/plastique CGI, aucune surface 'trop propre' qui trahit le synthetique.",
+    "composition_notes": "Cadrage tabletop diorama, horizon bas, heros centre ou regle des tiers avec negative space reserve a l'overlay texte. Label produit entierement lisible et face camera. Un seul sujet focal clair. Compo stable et reproductible frame a frame (le sujet doit rester dans la meme zone, seul le micro-deplacement change)."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "resolution": "2K",
+      "guidance": "medium-high pour verrouiller les materiaux reels et le label sans deriver vers du CGI lisse ou de la pate a modeler",
+      "negative_prompt": "smooth CGI render, glossy plastic re-render of real materials, clay / plasticine, photoreal human, extra fingers, deformed hands, hallucinated label text, melted / morphing object identity, motion blur smear, smooth slerp tweening, floating object without contact shadow",
+      "note": "Endpoint image = generer la SEQUENCE de keyframes du stop-motion (pose 1, pose 2, pose 3...), pas une seule image. Verrouiller l'objet/label/set/lumiere identiques entre frames (image-to-image ou meme seed + variation de pose) sinon l'identite de l'objet derive. Le rendu choppy final se monte cote bras video a partir de ces keyframes."
+    },
+    "video_params": {
+      "motion": "Cadence stop-motion assumee saccadee (feel 8-15 fps, animation 'on twos'/'on threes'): l'objet avance par petits pas discrets entre poses, micro-jitter inherent au repositionnement manuel, pas de tweening fluide. Mouvements lies au benefice: deballage, auto-assemblage, alignement, ingredients qui sautent, produit qui 'pousse'. Camera locked-off ou mouvements de banc-titre incrementes, jamais un pan/zoom motorise lisse.",
+      "duration_s_range": [3, 10],
+      "transitions": "Hard cuts ou reveals stop-motion (objet qui se transforme/s'assemble piece par piece, before/after par substitution de pose), morphs facon match-cut artisanal. Boucle-able pour le feed. Zero fondu/dissolve glossy, zero transition habillee qui casse le code fait-main."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Derive d'identite de l'objet entre frames: le flacon/la boite/la gelule qui change de forme, de couleur, de proportions ou de label d'une pose a l'autre. L'objet doit rester STRICTEMENT le meme, seule sa position change (defaut IA #1 du stop-motion genere).",
+    "Re-render plastique/lisse CGI des materiaux reels: le verre, le carton, le metal doivent garder leur texture et leurs reflets PHYSIQUES, pas devenir une surface synthetique trop propre.",
+    "Confusion avec la pate a modeler (claymation): pas d'empreintes de doigts ni d'aspect sculpte argile, ici ce sont de VRAIS objets manufactures, materiaux durs et nets.",
+    "Tweening trop fluide / motion blur cinema: incoherent avec le stop-motion, garder la cadence saccadee stepped (pas de smear de mouvement, pas d'interpolation lisse).",
+    "Flicker/incoherence de lumiere et d'exposition entre frames: l'eclairage tabletop doit etre rigoureusement constant, une variation d'expo ou de temperature trahit la generation frame par frame non maitrisee.",
+    "Ombre de contact manquante ou flottante: l'objet doit poser sur le plan avec une ombre stable, sinon il levite = illusion tabletop cassee.",
+    "Label/packaging halluciné: glyphes inventes, nom de marque deforme ou texte illisible sur le produit reel. Le label doit etre net, correct et identique sur chaque frame (verifier chaque caractere).",
+    "Mains/doigts foireux si une main entre dans le cadre pour manipuler l'objet (doigts surnumeraires, jointures fondues): zone a risque en gros plan macro tabletop.",
+    "Cadrage qui derape entre poses: la camera doit etre locked-off, si le cadre/zoom bouge tout seul d'une frame a l'autre le sequencement stop-motion devient incoherent.",
+    "Echelle/perspective incoherente entre objet, props et set (heros geant vs decor minuscule) qui casse le diorama tabletop.",
+    "Reflets/highlights speculaires aleatoires qui sautent d'une frame a l'autre sur le verre ou le metal: garder des speculars stables et coherents."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [2, 7],
+    "pairs_well_with": [
+      "pack-shot-brand-template",
+      "brand-motion-graphic",
+      "graphic-icons-overlay",
+      "claymation-3d-ai",
+      "macro-photo-mouth-skin-etc",
+      "split-screen-comparison"
+    ],
+    "avoid_when": [
+      "Besoin d'un visage humain castable/relatable (testimonial, UGC) ou l'identification a une vraie personne porte la conversion: le stop-motion objet n'a pas de porte-parole.",
+      "Claim de preuve clinique/efficacite sur le corps (avant/apres peau, demo physiologique): un produit qui s'anime tout seul ne prouve pas un resultat biologique, passer sur diagram/3d-anatomy ou real-photo.",
+      "Marque premium/luxe en zone brand-safe tres basse (0-1) ou le code attendu est un packshot studio leche immobile: le cote artisanal/ludique du stop-motion peut diluer le perçu de prix haut de gamme.",
+      "Budget/delai serres avec besoin d'un seul visuel fixe: le stop-motion exige une sequence de keyframes coherentes, sur-cout vs un simple packshot ou une photo lifestyle.",
+      "Categorie ou le sujet exige du serieux sobre (finance, assurance B2B) ou la cadence saccadee ludique sonne pas-serieux."
+    ]
+  },
+  "related_mechanic_ids": [
+    "product-demo-mechanical",
+    "unboxing-reveal",
+    "satisfying-asmr-loop"
+  ],
+  "refs": [
+    "Ecole stop-motion produit DTC/brand: PES, Lego, Oreo/Cadbury, Squarespace, deballages et auto-assemblages tabletop satisfaisants en feed.",
+    "Use-case canon: le produit reel qui se deballe/s'assemble seul, les ingredients/gelules qui sautent et s'alignent, demo satisfaisante boucle-able pour le scroll paid."
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

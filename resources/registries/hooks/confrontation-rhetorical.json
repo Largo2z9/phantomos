@@ -1,0 +1,91 @@
+{
+  "pattern_id": "HOK-confrontation-rhetorical",
+  "pattern_type": "hook-mechanic",
+  "name": "Confrontation Rhétorique (validation du vécu)",
+  "one_liner": "Confronte le prospect au gap entre ce que la catégorie/l'autorité affirme (le standard, le verdict rassurant, la croyance reçue) et son vécu réel (frustration, symptôme non expliqué), ce qui valide son expérience et crée le besoin de la solution.",
+  "skeleton": "[verdict_categorie_OU_standard_OU_croyance] -> CONTRE -> [vecu_reel_contradictoire_du_prospect] ? -> pivot vers [mecanisme_brand_qui_resout_le_gap]",
+  "slots": [
+    {
+      "name": "verdict_categorie_OU_standard_OU_croyance",
+      "description": "Ce que la catégorie, l'autorité ou la sagesse reçue dit/promet. Réalisé en 4 variantes : (a) verdict rassurant d'une autorité, (b) la solution standard que le prospect utilise déjà, (c) la croyance répandue à démonter, (d) l'effort/temps que la catégorie exige.",
+      "examples": [
+        "\"Your blood work looks fine.\" (verdict autorité médicale · hers)",
+        "le magnesium standard, mal assimilé et contenant des sels de mauvaise qualité (solution standard · naali-111)",
+        "Tous les suppléments de magnésium sont absorbés de la même manière (croyance répandue · naali-113)",
+        "la patience de méditer (effort exigé par la catégorie · naali-53)"
+      ]
+    },
+    {
+      "name": "vecu_reel_contradictoire_du_prospect",
+      "description": "L'expérience vécue qui contredit le verdict / dément la croyance / refuse l'effort. C'est le coeur de la confrontation : nommer ce que le prospect ressent vraiment, souvent en opposition frontale (But you... / Vous êtes frustré(e)... / Vous prenez toujours...).",
+      "examples": [
+        "But you don't feel fine. (hers · RCV-175)",
+        "Vous êtes frustré(e) par le magnésium standard ? (naali · RCV-111)",
+        "Vous prenez toujours des sels de magnésium standard ? (naali · RCV-113)",
+        "Pour ceux qui n'ont pas la patience de méditer. (naali · RCV-53)"
+      ]
+    },
+    {
+      "name": "mecanisme_brand_qui_resout_le_gap",
+      "description": "Le pivot : le produit/mécanisme de la marque comme réponse exacte au gap confronté. Souvent introduit après une bascule (Réalité / le reveal produit / Oui->reveal).",
+      "examples": [
+        "TEST 130+ HEALTH SIGNALS · labs by hers (hers · RCV-175)",
+        "4 formes de magnésium bio-disponibles + taurine + safran (naali · RCV-111)",
+        "Réalité. 4 formes à forte absorption + synergie du safran (naali · RCV-113)",
+        "naali ANTI-STRESS · 3 secondes suffisent (naali · RCV-53)"
+      ]
+    }
+  ],
+  "function": "Valide le vécu du prospect AVANT de vendre : en nommant la contradiction qu'il ressent (le bilan dit que ça va mais il ne va pas bien / il achète du magnésium standard mais reste fatigué), la mécanique transforme un scepticisme passif en reconnaissance active ('c'est exactement moi'), puis canalise ce besoin nouvellement conscient vers le mécanisme de la marque. Disqualifie le standard/la catégorie comme cause du problème, pas le prospect.",
+  "when_to_use": "Idéal en problem-aware à solution-aware, sur un marché saturé d'une solution standard décevante (catégorie commoditisée) ou face à une autorité/sagesse reçue qui minimise le vécu. Marche fort quand le prospect a déjà essayé la catégorie sans résultat (frustration latente à réveiller). Moins adapté en unaware (rien à confronter) ou most-aware (le prospect connaît déjà le gap, passer à l'offre).",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-53", "RCV-111", "RCV-113"],
+      "realization": "3 réalisations distinctes du même squelette confrontant. RCV-53 : '3 secondes suffisent. Pour ceux qui n'ont pas la patience de méditer.' (confronte l'effort exigé par la catégorie méditation). RCV-111 : 'Vous êtes frustré(e) par le magnésium standard, mal assimilé et contenant des sels de mauvaise qualité ?' (arbre de décision Oui/Non confrontant le standard décevant). RCV-113 : 'Vous prenez toujours des sels de magnésium standard ? Mythe... Réalité...' (confronte une croyance reçue via Mythe/Réalité)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-175"],
+      "realization": "labs by hers (ligne diagnostic/blood-testing) : '\"Your blood work looks fine.\" But you don't feel fine.' Confronte le verdict rassurant de l'autorité médicale (le système de santé dismissif) au vécu réel non expliqué, puis pivote vers le test élargi 130+ signaux comme ce que le bilan standard manque. hims+hers comptés comme UNE source factory genrée (D#485)."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Cross-vertical ET cross-géo (FR supplément + US telehealth), ce qui en fait un emprunt sûr au-delà de ses origines. exploit = rester sur le standard décevant de la catégorie opérée (ex magnésium standard pour un supplément). explore = oser le format 'verdict d'autorité vs vécu' (la voix hers) sur une verticale lointaine où une autorité minimise le problème (ex un kiné qui dit que des chaussettes suffisent vs des pieds qui gonflent quand même)."
+  },
+  "related_mechanic_ids": [
+    "confrontation-rhetorical",
+    "rhetorical-shock-question",
+    "competitor-comparison",
+    "false-solution-rebuttal",
+    "solution-direction",
+    "mechanism-reveal",
+    "product-reveal"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "\"Votre médecin dit que vos chaussettes de contention suffisent.\" Mais vos pieds gonflent toujours en fin de journée ? -> Stepprs · compression graduée ciblée mollet-cheville, là où la contention standard relâche."
+    },
+    {
+      "target": "Thao · grip socks (sport/yoga)",
+      "reslotted": "Vous portez toujours des chaussettes de sport classiques ? Mythe : toutes les chaussettes tiennent sur le tapis. Réalité : grip silicone 5 zones = zéro glissade en warrior pose -> Thao grip socks."
+    }
+  ],
+  "anti_patterns": [
+    "Ne pas confronter le PROSPECT lui-même (le rendre coupable) : la mécanique blâme le standard/la catégorie/l'autorité, jamais l'audience. 'Vous êtes trop fainéant pour méditer' = anti-pattern ; 'Pour ceux qui n'ont pas la patience de méditer' = correct (validation, pas reproche).",
+    "Éviter en marché unaware : sans solution standard ou croyance à confronter, le gap n'existe pas pour le prospect (rien ne résonne).",
+    "Ne pas confondre avec la simple question-choc rhétorique (rhetorical-shock-question) : ici il faut un GAP explicite (verdict/standard CONTRE vécu), pas juste une question d'accroche.",
+    "Risque compliance en telehealth-rx : la branche 'autorité médicale a tort' frôle le claim médical (RCV-175 porte un disclaimer fine-print : 'not intended to diagnose, treat, or cure'). Garder la confrontation sur le ressenti, pas sur un diagnostic."
+  ],
+  "curation_notes": "promote-ready : 2 sources indépendantes factory-aware (naali FR-supplément · himshers US-telehealth, hims+hers = 1 source). Source la plus dense = naali (3 RCV, 3 sous-formats du squelette : effort-confronté, frustration-standard, Mythe/Réalité), preuve que la mécanique est productive et reslotable dans une même marque. himshers attesté sur 1 RCV (labs by hers, ligne diagnostic, variante 'verdict d'autorité vs vécu') : plus mince mais réalisation nette et copy réelle. karacare (beauty-hair FR) NON confirmé pour cette mécanique (RCV-06 matche 'rhetoric' textuellement mais via rhetorical-shock-question, pas confrontation-rhetorical) : ajouter karacare ferait passer à 3 sources / breadth potentiellement universal si une 3e verticale confirme. À surveiller : le sous-format 'verdict d'autorité' (hers) vs 'standard décevant' (naali) pourraient mériter un split si le corpus grossit. Promotion sur récurrence cross-source ; signal perf réelle (feedback loop) pas encore disponible.",
+  "_schema_version": "library-pattern/1.0"
+}

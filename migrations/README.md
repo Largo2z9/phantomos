@@ -10,6 +10,15 @@ Cross-reference doctrine · `docs/system/update-distribution-doctrine.md` (v2.80
 
 One Python script per BREAKING release. Lives at the root of `migrations/`. Discoverable by version sort.
 
+## Two migration locations (do not confuse)
+
+| Location | Scope | Discovered by |
+|---|---|---|
+| `migrations/` (this folder) | One script per release, brings the whole workspace from version N-1 to N. Always shipped, even no-op. | `/update` (version sort, sequential) |
+| `operations/migrations/` | Schema-bump data migrations only (operator data transformed, e.g. `brand.json` v2.1 → v2.2). Naming `v{version}-{slug}.py`. | Release manifests (`migration_script` field), executed via `migrate-workspace` |
+
+Both follow the same 4-method canonical structure below. A schema-bump release typically ships both: the release script here, and the data script in `operations/migrations/` referenced by the manifest.
+
 ## Naming Convention
 
 ```

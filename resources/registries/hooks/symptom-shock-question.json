@@ -1,0 +1,89 @@
+{
+  "pattern_id": "HOK-symptom-shock-question",
+  "pattern_type": "hook-mechanic",
+  "name": "Symptôme → Question-Choc",
+  "one_liner": "Ouvrir sur un symptôme/question (souvent horodaté ou daté d'un stade de vie) que le prospect reconnaît viscéralement, formulé comme interrogation qui recadre la gêne diffuse en signe d'agir maintenant · performe parce que l'auto-identification par le symptôme (\"c'est moi\") fait le tri d'audience et déclenche la résonance avant tout argument produit.",
+  "skeleton": "[symptôme_ou_question_horodaté/relatable] ? → [recadrage_en_signe_d'agir + action_amorce]",
+  "slots": [
+    {
+      "name": "symptôme_ou_question_horodaté/relatable",
+      "description": "Le symptôme vécu, énoncé en interrogation directe à la 2e personne (ou en lamento auto-narré). La force vient de la spécificité : heure précise (2h35), stade de vie (\"mes 30 ans\"), état paradoxal (\"survolté mais épuisé\"), ou raccourci stigmatisé (\"Low T?\"). Plus c'est précis et reconnaissable, plus le tri d'audience est net. Peut être empilé en 2-3 questions courtes qui resserrent le persona.",
+      "examples": [
+        "Réveillé la nuit ? Fatigué la journée ?",
+        "Toujours réveillé à 2h35 du matin ?",
+        "Are my 30s suppose to feel like this?",
+        "Low T?",
+        "Submergé(e) par le stress ?"
+      ]
+    },
+    {
+      "name": "recadrage_en_signe_d'agir + action_amorce",
+      "description": "Le retournement : la gêne diffuse est nommée comme un SIGNAL qui appelle un geste, suivi de l'amorce d'action à faible friction (tester, découvrir, vérifier depuis chez soi). C'est ce qui transforme la plainte en porte d'entrée. Parfois implicite (le produit révélé répond à la question), parfois explicite et impératif.",
+      "examples": [
+        "Ceci est ton SIGNE d'agir MAINTENANT.",
+        "Find out from home.",
+        "Test your testosterone levels today.",
+        "Vous êtes au BON endroit.",
+        "CHECK SIGNALS OF 1,000+ CONDITIONS"
+      ]
+    }
+  ],
+  "function": "Fait le tri d'audience par auto-identification (\"c'est exactement moi\") AVANT tout argument produit, et convertit une gêne diffuse non actionnée en raison d'agir immédiate. Réduit la friction d'entrée en transformant la plainte en porte (un symptôme reconnu = un problème nommé = une solution implicitement disponible).",
+  "when_to_use": "Marché problem-aware à solution-aware où le prospect ressent le symptôme sans l'avoir nommé/relié à une cause actionnable. Idéal TOFU/MOFU sur des catégories à symptôme tangible (sommeil, énergie, stress, hormones, chute capillaire). Parfait pour static ad / hook de scroll où il faut accrocher en 3 mots. Le format daté/horodaté (2h35, \"mes 30 ans\") sur-performe quand le symptôme a une signature temporelle reconnaissable.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-12", "RCV-21", "RCV-41", "RCV-52", "RCV-64", "RCV-81"],
+      "realization": "Question-symptôme en ouverture de static ad, souvent horodatée ou empilée : \"Réveillé la nuit ? Fatigué la journée ? Vous êtes au BON endroit\" (RCV-12) · \"Toujours réveillé à 2h35 du matin ? Ceci est ton SIGNE d'agir MAINTENANT\" (RCV-21, horodaté + recadrage explicite) · \"Ces signes vous parlent ? Mettre 2h à s'endormir. Tourner en rond dans le lit...\" (RCV-41, litanie de symptômes) · \"Submergé(e) par le stress ?\" (RCV-64) · \"Votre rythme de vie effréné vous rend-il « survolté mais épuisé » ?\" (RCV-81, état paradoxal)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-117", "RCV-156", "RCV-160", "RCV-183", "RCV-196", "RCV-175"],
+      "realization": "Raccourci-symptôme stigmatisé suivi d'une action diagnostique à faible friction : \"Low T? Find out from home.\" (RCV-117) · \"Low energy? Test your testosterone.\" (RCV-156) · \"Low sex drive? Test your testosterone levels today.\" (RCV-160). Côté hers, recadrage par stade de vie : \"Are my 30s suppose to feel like this?\" → CHECK SIGNALS OF 1,000+ CONDITIONS (RCV-183, RCV-196) · variante confrontation autorité : \"Your blood work looks fine. But you don't feel fine.\" (RCV-175). NOTE factory : hims+hers comptés comme UNE seule source (factory créative genrée, D#485)."
+    },
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-03"],
+      "realization": "Réalisation auto-narrée (UGC story) du symptôme-comme-signal, framé en durée d'évitement puis retournement : \"Ça fait 3 ans que je n'ose pas me couper les cheveux par peur de perdre en volume... Et aujourd'hui j'ai pris mon premier rdv.\" (RCV-03). Le symptôme (évitement identitaire daté) est posé puis recadré en bascule d'action, même grammaire de fond que la question-choc bien que formulée en je plutôt qu'en interrogation directe (mechanic adjacent social-relational-pain)."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx", "beauty-hair"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Vu cross-vertical (sommeil/stress, hormones/telehealth, cheveux) ET cross-géo (FR + US) → invariant universel, le plus sûr à emprunter partout. exploit = rester sur le symptôme natif de la verticale de la marque opérée (ex. réveils nocturnes pour un sommeil-brand). explore = reslotter le squelette depuis une verticale lointaine en gardant la grammaire (symptôme spécifique/horodaté → recadrage signe d'agir), emprunt sûr ici puisque la mécanique ne dépend pas de la catégorie. Le sur-pouvoir transférable = la spécificité (heure précise, stade de vie, état paradoxal) plus que le symptôme lui-même."
+  },
+  "related_mechanic_ids": [
+    "rhetorical-shock-question",
+    "confrontation-rhetorical",
+    "social-relational-pain",
+    "pain-litany",
+    "pain-amplification"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "\"Jambes lourdes en fin de journée ? Chevilles qui gonflent dès 16h ?\" → \"C'est le signe que ta circulation réclame un coup de pouce. Teste en 30 secondes.\""
+    },
+    {
+      "target": "Marque peau/acné adulte · skincare DTC",
+      "reslotted": "\"Adulte et toujours des boutons à 32 ans ?\" → \"Ce n'est pas une fatalité, c'est un signal hormonal à décoder. Fais le bilan peau depuis chez toi.\""
+    }
+  ],
+  "anti_patterns": [
+    "Symptôme trop générique/vague (\"Pas en forme ?\", \"Envie d'aller mieux ?\") : ne fait pas le tri d'audience, ne déclenche pas le \"c'est moi\". La spécificité (horodatage, stade de vie, état paradoxal) est le moteur, pas l'accessoire.",
+    "Audience unaware : si le prospect ne ressent pas encore le symptôme comme un problème, la question tombe à plat (pas de résonance). Réserver au problem-aware minimum.",
+    "Empiler trop de questions (4+) : dilue le tri et fatigue avant le recadrage. 1-3 questions resserrées max.",
+    "Recadrage absent : poser le symptôme sans le retourner en signe d'agir laisse le prospect dans la plainte sans porte de sortie (la mécanique perd sa fonction de conversion).",
+    "Verticales rx/santé : la question-symptôme stigmatisée (\"Low T?\") performe mais doit cohabiter avec les disclaimers FDA/compliance (cf. fine print himshers) · ne pas sur-promettre un diagnostic."
+  ],
+  "curation_notes": "Promu sur 3 sources INDÉPENDANTES (naali · himshers · karacare) avec hims+hers comptés comme 1 factory (D#485, ads-miroir genrées) → independent_source_count=3, au-delà du garde-fou ≥2. Cluster le plus dense du corpus pour ce mécanisme : ~12 RCV attestés (majorité naali). Caveat de granularité : naali + himshers portent la forme PURE (question-choc interrogative, souvent horodatée) ; karacare RCV-03 est une réalisation ADJACENTE (symptôme auto-narré en \"je\" recadré en bascule, tagué social-relational-pain) — la grammaire de fond (symptôme spécifique → signe d'agir) est commune, mais la surface diffère (interrogation directe vs lamento UGC). Ce qui renforcerait : (a) une 2e réalisation karacare en forme interrogative directe pour solidifier la source beauty-hair au-delà de l'adjacence ; (b) signal perf réel via la feedback loop (perf-feedback-loop.md) — la curation promeut ici sur la RÉCURRENCE cross-source, pas encore sur la perf gagnante. Sous-variantes à surveiller pour un éventuel split futur : symptôme-horodaté (2h35), stade-de-vie (\"mes 30 ans\"), confrontation-autorité (\"blood work looks fine, but you don't feel fine\"), litanie-de-signes (RCV-41).",
+  "_schema_version": "library-pattern/1.0"
+}

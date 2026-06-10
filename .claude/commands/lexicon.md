@@ -91,7 +91,7 @@ Lexique opérateur-facing PhantomOS. Liste 10-15 magic keywords canon qui déblo
 
 **Ce que ça déclenche** · raisonnement canon · le territoire = substrat stable de la brand (identity + positioning + audiences + produits + angles + offers) · encodé une fois · alimente les productions runtime à la demande.
 
-**Exemple concret** · "regarde mon territoire Stepprs" → snapshot brand digest + 6 entités canon + cross-refs · l'agent charge tout en 1 lecture.
+**Exemple concret** · "regarde mon territoire Stepprs" → snapshot brand digest + 7 entités canon + cross-refs · l'agent charge tout en 1 lecture.
 
 ---
 

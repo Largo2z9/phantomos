@@ -1,7 +1,7 @@
 {
   "_version": "1.0",
-  "_generated_at": "2026-05-27T22:34:14Z",
-  "_count": 81,
+  "_generated_at": "2026-06-10T23:02:37Z",
+  "_count": 82,
   "skills": [
     {
       "name": "adapt-from-competitor",
@@ -10,13 +10,22 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "adapte cette créa concurrente",
+          "fais une variante de cette ad",
+          "adapte cette pub à ma marque",
+          "décline cette créa pour nous"
+        ],
+        "en": [
+          "adapt this competitor ad",
+          "make a variant of this creative",
+          "adapt this ad to my brand"
+        ]
       },
       "disambiguates_against": {
-        "decompose-ad": "decompose-ad reverse-engineer 1 ad concurrente en fiche v5 + grille variables 3 niveaux ANATOMIE. adapt-from-competitor consume cet output + adapte à la brand opérée via chain orchestrator.",
-        "recompose-creative": "recompose-creative adapte UNE créa interne brand-side (produced/{CRT-N}.json) sur 1 axis variant explicite. adapt-from-competitor adapte depuis UNE créa CONCURRENTE décomposée (competitive-intel/decomposed/{CRT-NN}.json) avec multi-axes (audience + pain + proof + mécanisme + offer simultanément, NOYAU preserved strict).",
-        "creative-brief-composer": "creative-brief-composer orchestrator produit brief copy + variants visuels depuis angle interne brand (ANG-NN). adapt-from-competitor orchestrator chain produit brief copy + variants depuis créa concurrente décomposée + adaptation contexte brand. adapt-from-competitor upstream invoke creative-brief-composer downstream après isolation variables."
+        "decompose-ad": "decompose-ad reverse-engineer 1 ad concurrente en décompo native (benchmark → competitive-intel/{batch}/{RCV-NN}/decomposition.json, schéma decomposition/1.0) + fiche v5 ANATOMIE 3 niveaux. adapt-from-competitor consume cette décompo RCV + adapte à la brand opérée via chain orchestrator (écrit une variante CRT-NN brand-side).",
+        "recompose-creative": "recompose-creative adapte UNE créa interne brand-side (source creatives/{batch}/{CRT-NN}/creative.json, namespace CRT) sur 1 axis variant explicite, variant_of=CRT. adapt-from-competitor adapte depuis UNE créa CONCURRENTE décomposée (source competitive-intel/{batch}/{RCV-NN}/decomposition.json, namespace RCV) avec multi-axes (audience + pain + proof + mécanisme + offer simultanément, NOYAU preserved strict), variant_of=RCV cross-namespace. recompose ne consomme JAMAIS un RCV-NN directement.",
+        "creative-brief-composer": "creative-brief-composer orchestrator produit brief copy + variants visuels depuis angle interne brand (ANG-NN). adapt-from-competitor orchestrator chain produit brief copy + variants depuis créa concurrente décomposée (RCV-NN) + adaptation contexte brand. adapt-from-competitor upstream invoke creative-brief-composer downstream après isolation variables."
       },
       "isolation_scope": "brand_only",
       "layer": "production",
@@ -437,8 +446,19 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "compose une créa",
+          "produis un visuel",
+          "génère une créa pour",
+          "creative pour cette audience",
+          "matérialise l'angle"
+        ],
+        "en": [
+          "compose a creative",
+          "generate a visual",
+          "produce creative for",
+          "materialize the angle"
+        ]
       },
       "disambiguates_against": {
         "decompose-ad": "decompose-ad fait du REVERSE (analyse ad existante). compose-creative fait du FORWARD (génère depuis brief).",
@@ -457,8 +477,18 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "overlay logo crisp",
+          "compose post-gen text",
+          "fix wordmark régression",
+          "intégrer logo SVG sur visuel"
+        ],
+        "en": [
+          "overlay crisp text",
+          "post-gen logo composite",
+          "fix wordmark regression",
+          "integrate SVG logo on visual"
+        ]
       },
       "disambiguates_against": {
         "compose-creative": "compose-creative genere le visuel via fal.ai. compose-overlay-text intervient APRES pour fix logo + sub-text avec PIL.",
@@ -505,8 +535,18 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "connecte meta ads",
+          "connecte shopify",
+          "branche une source externe",
+          "connecte mes outils"
+        ],
+        "en": [
+          "connect meta ads",
+          "connect shopify",
+          "connect a source",
+          "connect my tools"
+        ]
       },
       "disambiguates_against": {
         "setup-brand": "setup-brand creates a new brand workspace. connect-source links an external platform to an existing brand or workspace.",
@@ -554,8 +594,19 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "crée packshot canon",
+          "génère photo produit propre",
+          "prépare packshot source canon",
+          "canonalise packshot",
+          "nettoie packshot officiel"
+        ],
+        "en": [
+          "craft canonical packshot",
+          "generate clean product shot",
+          "prepare canonical product photo",
+          "produce canonical packshot source"
+        ]
       },
       "disambiguates_against": {
         "compose-creative": "compose-creative consume canonical packshot pour générer pub paid social. craft-packshot CRÉE le canonical packshot upstream (asset source of truth).",
@@ -604,8 +655,19 @@
       "subagent_safe": false,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "brief créa sur {angle_id}",
+          "compose un brief créa",
+          "génère brief + créa",
+          "creative-brief-composer {angle_id}",
+          "matérialise l'angle {angle_id}"
+        ],
+        "en": [
+          "creative brief composer",
+          "compose brief and creative",
+          "generate brief + variants",
+          "materialize angle"
+        ]
       },
       "disambiguates_against": {
         "produce-copy-brief": "route to produce-copy-brief alone when operator wants ONLY a brief artifact, no visual creative downstream. creative-brief-composer chains brief → N visual variants in one pass.",
@@ -666,7 +728,7 @@
         "audit-meta-account": "route to audit-meta-account when operator wants to audit a full Meta account (KPI, structure campaigns, pixel, attribution), not a single ad. decompose-ad is one creative at a time.",
         "produce-paid-angles": "route to produce-paid-angles when operator wants to PRODUCE angles (forward generation from brand intelligence). decompose-ad is reverse-engineering on an existing ad.",
         "analyze-copy": "route to analyze-copy for long-form copy decomposition (VSL, sales letter, email). decompose-ad is single-ad creative, copy + visual + format coupled, equation v3.1.",
-        "watch-competitors": "route to watch-competitors for ongoing surveillance of a competitor library. decompose-ad is one ad, deep, persisted to creatives."
+        "watch-competitors": "route to watch-competitors for ongoing surveillance of a competitor library. decompose-ad is one ad, deep, persisted (benchmark → competitive-intel/{batch}/{RCV-NN}/decomposition.json ; interne → creatives/{batch}/{CRT-NN}/)."
       },
       "isolation_scope": "brand_only",
       "layer": "production",
@@ -679,8 +741,17 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "décompose l'angle {ANG-NN}",
+          "approfondis cet angle",
+          "deep dive angle {ANG-NN}",
+          "décortique l'angle"
+        ],
+        "en": [
+          "decompose angle",
+          "deep dive angle",
+          "enrich angle formula"
+        ]
       },
       "disambiguates_against": {
         "decompose-ad": "decompose-ad reverse-engineers an existing COMPETITOR ad (extracts angle from observed creative). decompose-angle enriches an OWN angle already cartographied (deep dive own strategic angle). Route to decompose-ad when operator pastes a competitor ad URL/screenshot; route to decompose-angle when operator references an internal ANG-NN.",
@@ -728,8 +799,25 @@
       "subagent_safe": true,
       "mode": "interactive",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "define brand voice",
+          "tone of voice",
+          "définit la voix brand",
+          "voice chart",
+          "ton de voix",
+          "ancre le tone",
+          "pose le tone of voice {brand}",
+          "cadre la voix de {brand}"
+        ],
+        "en": [
+          "define brand voice",
+          "tone of voice",
+          "voice chart",
+          "brand voice chart",
+          "anchor brand voice",
+          "set brand voice",
+          "define voice for {brand}"
+        ]
       },
       "disambiguates_against": {
         "snapshot-brand": "snapshot-brand extracts tone_of_voice passively from site scrape (style + register + voice strings). define-brand-voice workshops the tone methodically via 4D Nielsen Norman axes + do/don't lexique + sample sentences per touchpoint. Invoke define-brand-voice AFTER snapshot-brand has anchored the brand passively, to upgrade the voice substrate from declarative strings to operational chart.",
@@ -748,8 +836,22 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "définis les specs",
+          "crée la fiche produit",
+          "remplis le produit",
+          "spec produit",
+          "qu'est-ce que le produit",
+          "cartographie le produit"
+        ],
+        "en": [
+          "define specs",
+          "create product card",
+          "populate product",
+          "product spec",
+          "what is the product",
+          "map the product"
+        ]
       },
       "disambiguates_against": {
         "snapshot-brand": "snapshot-brand fait le scrape URL pur (auto). define-specs orchestre snapshot + Q&A operator + sources upload pour produits sans URL ou champs non-scrapés.",
@@ -762,7 +864,7 @@
     },
     {
       "name": "encode-batch",
-      "type": "shared",
+      "type": "curator",
       "model": "haiku",
       "subagent_safe": true,
       "mode": "direct",
@@ -793,8 +895,16 @@
       "subagent_safe": true,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "exporte cette session",
+          "archive cette conversation",
+          "exporte la conversation en markdown"
+        ],
+        "en": [
+          "export this session",
+          "archive this conversation",
+          "export session transcript"
+        ]
       },
       "disambiguates_against": {
         "capture-learning": "route to capture-learning when the operator wants to persist a single fact or insight as a structured learning entry. export-session captures the entire conversation as a transcript, not a learning.",
@@ -843,8 +953,26 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "importe un asset",
+          "ajoute le logo brand",
+          "ajoute un badge cert",
+          "ajoute la mascotte",
+          "ajoute un pattern background",
+          "canonise un asset",
+          "drop asset brand",
+          "upload asset visuel"
+        ],
+        "en": [
+          "import an asset",
+          "add brand logo",
+          "add cert badge",
+          "add mascotte",
+          "add background pattern",
+          "canonize an asset",
+          "drop brand asset",
+          "upload visual asset"
+        ]
       },
       "disambiguates_against": {
         "craft-packshot": "craft-packshot GÉNÈRE un packshot via fal.ai (besoin = brand n'a pas de photo studio). import-asset STORE un asset déjà fourni (logo SVG/PNG, badge cert PNG, mascotte). Si operator a juste besoin de stocker · import-asset. Si génération nécessaire · craft-packshot.",
@@ -865,17 +993,17 @@
         "fr": [
           "import results Meta",
           "import perf ads",
-          "feed atlas vivant",
-          "alimente validations canon",
+          "land la perf",
           "import meta perf",
-          "pull insights canon"
+          "pull insights par ad_id",
+          "récupère la perf des créas"
         ],
         "en": [
           "import Meta results",
           "import ad perf",
-          "feed validations canon",
-          "pull canon results",
-          "import meta insights"
+          "land perf",
+          "pull meta insights",
+          "pull results by ad_id"
         ]
       },
       "disambiguates_against": {},
@@ -953,8 +1081,17 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "map-angles {brand}",
+          "cartographie les angles",
+          "extrait les angles brand-wide",
+          "refresh angles brand"
+        ],
+        "en": [
+          "map angles",
+          "cartograph angles brand-wide",
+          "refresh angles"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand_only",
@@ -968,8 +1105,17 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "map-audiences {brand}",
+          "cartographie les audiences",
+          "split snapshot audience",
+          "extrait les audiences mères"
+        ],
+        "en": [
+          "map audiences",
+          "cartograph audiences brand",
+          "split mother audiences"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand_only",
@@ -983,8 +1129,21 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "map-benefits {product}",
+          "chaine fonctionnel-émotionnel-identitaire",
+          "approfondis les bénéfices",
+          "détaille la chain bénéfices",
+          "drill bénéfices produit",
+          "chain functional emotional identity"
+        ],
+        "en": [
+          "map benefits",
+          "deep dive benefits chain",
+          "detail benefit chain",
+          "drill product benefits",
+          "functional emotional identity chain"
+        ]
       },
       "disambiguates_against": {
         "snapshot-brand": "snapshot-brand light pass surface (benefit titles + functional layer). map-benefits drill compositionnel deep chain functional → emotional → identity + NEW fields v1.10 (emotional_signal, latency, evidence_verbatim).",
@@ -1002,8 +1161,17 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "creuse les mécanismes de {product}",
+          "approfondis mechanisms {product}",
+          "map-mechanisms {product}",
+          "deep dive mécanismes {product}"
+        ],
+        "en": [
+          "map mechanisms",
+          "deep dive mechanisms",
+          "enrich mechanisms {product}"
+        ]
       },
       "disambiguates_against": {
         "snapshot-brand": "snapshot-brand produces the light pass (mechanism_id + name + description) on the full product spec. map-mechanisms enriches the deep fields (target, mode_of_action, time_window, etc.) on mechanisms already cartographied. Route to snapshot-brand when the product spec doesn't exist yet.",
@@ -1021,8 +1189,21 @@
       "subagent_safe": true,
       "mode": "proposed",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "map-specs {product}",
+          "creuse les specs de {product}",
+          "approfondis specs produit",
+          "détaille la composition",
+          "drill spec produit",
+          "fiche technique deep"
+        ],
+        "en": [
+          "map specs",
+          "deep dive specs product",
+          "detail composition",
+          "drill product specs",
+          "deep product card"
+        ]
       },
       "disambiguates_against": {
         "snapshot-brand": "snapshot-brand est le light pass scrape URL → spec.json (identity, composition top-level, pricing). map-specs deep-dive les sub-fields spec.specs.* après que le light pass existe.",
@@ -1262,8 +1443,19 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "matrice paid pour {brand}",
+          "produit-paid-matrix",
+          "pitch paid DTC",
+          "génère la matrice angles audiences pour {brand}",
+          "score les territoires paid"
+        ],
+        "en": [
+          "produce paid matrix",
+          "paid pitch matrix",
+          "rank paid territories",
+          "score angles by audience"
+        ]
       },
       "disambiguates_against": {
         "produce-paid-angles": "route directly to produce-paid-angles when operator wants ranked angles for ONE audience only (single-audience scope, ~15 min). produce-paid-matrix orchestrates the brand-wide matrice across all top audiences.",
@@ -1284,8 +1476,17 @@
       "subagent_safe": true,
       "mode": "interactive",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "produis le positionnement",
+          "positioning statement",
+          "formule mon positionnement",
+          "canvas de positionnement"
+        ],
+        "en": [
+          "positioning statement",
+          "produce positioning canvas",
+          "position my brand"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand",
@@ -1299,8 +1500,23 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "pose le focus Q{n} de {brand}",
+          "produit-strategy {brand}",
+          "cadre la stratégie {brand}",
+          "définit les objectifs annuels {brand}",
+          "produit la stratégie {brand}",
+          "trimestriel pour {brand}",
+          "focus du trimestre {brand}"
+        ],
+        "en": [
+          "produce strategy",
+          "set quarterly focus",
+          "frame strategy {brand}",
+          "define annual goals {brand}",
+          "set strategic focus {brand}",
+          "produce strategy {brand}"
+        ]
       },
       "disambiguates_against": {
         "setup-brand": "setup-brand cadrage léger initial du brand (identity + product + audience first cut). produce-strategy = cadrage stratégique deep, Q&A reviewable, 3-5 GOAL-NN + current_focus trimestriel. Invoke produce-strategy après que setup-brand a livré la structure.",
@@ -1319,8 +1535,20 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "profil audience",
+          "synthétise l'audience",
+          "8 dimensions audience",
+          "structure audience",
+          "cartographie sub-cluster"
+        ],
+        "en": [
+          "profile audience",
+          "synthesize audience",
+          "8 dimensions",
+          "structure audience",
+          "map sub-cluster"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand_only",
@@ -1377,6 +1605,31 @@
       "isolation_scope": "brand_only",
       "layer": "territoire",
       "path": ".skills/skills/propose-schema-draft/SKILL.md"
+    },
+    {
+      "name": "qc-creative",
+      "type": "curator",
+      "model": "sonnet",
+      "subagent_safe": true,
+      "mode": "none",
+      "triggers": {
+        "fr": [
+          "controle qualite de la creative",
+          "gate avant spend",
+          "verifie le rendu de l'ad",
+          "qc creative"
+        ],
+        "en": [
+          "qc the creative",
+          "output gate before spend",
+          "check the rendered ad",
+          "creative quality gate"
+        ]
+      },
+      "disambiguates_against": {},
+      "isolation_scope": "brand_only",
+      "layer": "meta",
+      "path": ".skills/skills/qc-creative/SKILL.md"
     },
     {
       "name": "query-context",
@@ -1442,7 +1695,7 @@
       },
       "disambiguates_against": {
         "compose-creative": "compose-creative crée ex nihilo depuis brand intelligence + angle. recompose-creative ADAPTE un creative existant (1 dimension change, concept core préservé).",
-        "decompose-ad": "decompose-ad analyse une ad EXTERNE (reverse-engineering benchmark concurrent). recompose-creative adapte une créa INTERNE (mode internal_production, source CRT-N déjà persisté).",
+        "decompose-ad": "decompose-ad analyse une ad EXTERNE (reverse-engineering benchmark concurrent). recompose-creative adapte une créa INTERNE (mode internal_production, source CRT-NN déjà persisté sous creatives/{batch}/{CRT-NN}/).",
         "produce-paid-angles": "produce-paid-angles produit un nouveau ANGLE (forward generation depuis brand intelligence). recompose-creative garde l'angle, change autre dimension (audience/platform/format/hook/visual)."
       },
       "isolation_scope": "brand_only",
@@ -1694,8 +1947,19 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "score la matrice",
+          "priorise les territoires",
+          "matrice scoring",
+          "top territoires",
+          "where to test next"
+        ],
+        "en": [
+          "score matrix",
+          "prioritize territories",
+          "matrix scoring",
+          "top territories"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand_only",
@@ -2099,8 +2363,16 @@
       "subagent_safe": false,
       "mode": "direct",
       "triggers": {
-        "fr": [],
-        "en": []
+        "fr": [
+          "pondère les dimensions",
+          "weight dimensions audience",
+          "coefficient scoring"
+        ],
+        "en": [
+          "weight dimensions",
+          "dimension relevance",
+          "scoring coefficient"
+        ]
       },
       "disambiguates_against": {},
       "isolation_scope": "brand_only",

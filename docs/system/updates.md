@@ -29,7 +29,7 @@ Template files: updates can freely overwrite (post-confirm for breaking). Operat
 
 ## Change types
 
-Every entry in `docs/releases/{version}-manifest.json → changes[]` declares one of:
+Every entry in `docs/internal/releases/manifest/{version}-manifest.json → changes[]` declares one of:
 
 ### `doc-change` / `doc-added`
 
@@ -100,7 +100,7 @@ A JSON schema version bumps (e.g. `brand.json` v2.1 → v2.2). **Requires a migr
  "schema": "brand.schema.json",
  "from_schema_version": "2.1",
  "to_schema_version": "2.2",
- "migration_script": "operations/migrations/brand-v2.1-to-v2.2.py",
+ "migration_script": "operations/migrations/v2.2-brand-identity-fields.py",
  "affected_files_glob": "brands/*/brand.json",
  "safe": false,
  "requires_confirmation": true,
@@ -119,12 +119,13 @@ Any change that requires operator action beyond a migration script (e.g. manual 
 Every release, in order:
 
 1. **Bump `_version.json`** with the new `template_version`, `released_at`, and a pointer to the manifest.
-2. **Write `docs/releases/{version}-manifest.json`** listing every change. One entry per change, typed precisely.
-3. **For every `schema-bump`**: write the migration script under `operations/migrations/{schema}-v{from}-to-v{to}.py`. Test it on `_EXAMPLE` before shipping.
+2. **Write `docs/internal/releases/manifest/{version}-manifest.json`** listing every change. One entry per change, typed precisely.
+3. **For every `schema-bump`**: write the migration script under `operations/migrations/v{version}-{slug}.py` (actual convention of the shipped scripts). Test it on `_EXAMPLE` before shipping.
 4. **Update `CHANGELOG.md`** with the human-readable summary (complements the machine manifest, not a replacement).
 5. **Run `python3 .skills/build-manifest.py`** to refresh the skills manifest if any skill changed.
-6. **Run the pre-release gate** (see next section) before commit.
-7. **Commit and tag** the release.
+6. **Run `python3 resources/scripts/rebuild-index.py --check`** if any resource was added, renamed, or removed under `resources/` (rebuild without `--check` on drift). The index must never ship out of sync with the filesystem.
+7. **Run the pre-release gate** (see next section) before commit.
+8. **Commit and tag** the release.
 
 ---
 
@@ -142,13 +143,13 @@ grep -rE "sandbox/|05-projects/context-engine/(sandbox|schemas|research|data-lay
 Zero matches expected. Any match = a Build-mode ref leaked into Release. Remove or rephrase before ship.
 
 ### Gate 2 · Every change is in the manifest
-Run `git diff v{previous}..HEAD -- workspace-template/` and verify every changed file is declared in `docs/releases/{new_version}-manifest.json → changes[]`. Unlisted change = silent behavior change for testers. Either add to manifest with a real `note:` field, or revert.
+Run `git diff v{previous}..HEAD -- workspace-template/` and verify every changed file is declared in `docs/internal/releases/manifest/{new_version}-manifest.json → changes[]`. Unlisted change = silent behavior change for testers. Either add to manifest with a real `note:` field, or revert.
 
 ### Gate 3 · Schema bumps have migration scripts
 For every `schema-bump` entry in the manifest, the `migration_script` path must exist and be executable. Smoke-test it on `brands/_EXAMPLE/` locally before ship:
 
 ```bash
-python3 operations/migrations/{schema}-v{from}-to-v{to}.py brands/_EXAMPLE/
+python3 operations/migrations/v{version}-{slug}.py brands/_EXAMPLE/
 ```
 
 Migration script missing or failing = release blocked.
@@ -157,17 +158,17 @@ Migration script missing or failing = release blocked.
 If `manifest.breaking == true` or any change has `requires_confirmation: true`, the `notes` field **must** spell out the operator action required. Vague `notes` = testers will either skip the update or brick their workspace.
 
 ### Gate 5 · Sync verified
-After commit but before tag:
+After commit but before tag, diff the template against every distribution clone (paths are maintainer-local; current clones are the alpha-test and test-clean workspaces):
 
 ```bash
-diff -rq workspace-template/ /Users/{user}/phantomos-alpha-test/
-diff -rq workspace-template/ /Users/{user}/phantomos-test-clean/
+diff -rq workspace-template/ {path-to-alpha-test-clone}/
+diff -rq workspace-template/ {path-to-test-clean-clone}/
 ```
 
 Zero diffs expected. Any diff = the sync step was skipped and testers pulling from the clone repos get stale code.
 
 ### Gate 6 · CHANGELOG and _version agree
-`CHANGELOG.md` top entry must match `_version.json → template_version` and `docs/releases/` must contain the corresponding `{version}-manifest.json`. Mismatch = one of the three was forgotten.
+`CHANGELOG.md` top entry must match `_version.json → template_version` and `docs/internal/releases/manifest/` must contain the corresponding `{version}-manifest.json`. Mismatch = one of the three was forgotten.
 
 ### Gate 7 · R&D hygiene check (weekly, not per-release)
 Run `python3 05-projects/context-engine/hygiene-audit.py`. Parasitic files, top-level orphans, or stale+unreferenced items in the R&D zone won't block the release but should be cleaned before they accumulate.
@@ -202,7 +203,7 @@ Once a release is tagged, partners running PhantomOS locally need a way to know 
 
 > *PhantomOS v{X.Y.Z} dispo. Theme : {theme courte}.*
 > *Run `update-workspace` skill quand tu veux. Migration auto sur tes données. Breaking changes : {none / surfacés au lancement}.*
-> *Detail : `docs/releases/{version}-manifest.json` (lis-le si tu veux comprendre le diff avant de pull).*
+> *Detail : `docs/internal/releases/manifest/{version}-manifest.json` (lis-le si tu veux comprendre le diff avant de pull).*
 
 **Partner-side flow:**
 
@@ -225,9 +226,9 @@ Once a release is tagged, partners running PhantomOS locally need a way to know 
 ## Related
 
 - `_version.json` · current template version registry.
-- `docs/releases/` · every release manifest lives here, one file per version.
+- `docs/internal/releases/manifest/` · every release manifest lives here, one file per version.
 - `operations/migrations/` · every schema migration script lives here.
 - `.skills/skills/update-workspace/SKILL.md` · the receiver's installer.
 - `.skills/skills/migrate-workspace/SKILL.md` · delegated schema migration.
-- `operator/installation.json` · partner-local version state (initialized at first install, updated on every successful update-workspace run).
+- `operator/installation.json` · partner-local version state (ships with `template_version_installed: null`, initialized from `_version.json` at first update-workspace run, updated on every successful run).
 - `CHANGELOG.md` · human-readable companion to the machine manifests.

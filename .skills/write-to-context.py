@@ -135,9 +135,27 @@ ALLOWED_PATH_PATTERNS = [
     re.compile(r"^brands/[^/]+/angles/[^/]+\.json$"),
     re.compile(r"^brands/[^/]+/custom/.+\.json$"),
     re.compile(r"^brands/[^/]+/[^/]+\.extensions\.json$"),
+    # creatives organized by BATCH folder: creatives/{batch}/{CRT-NN}/ (bricks 1+3, D#480/481).
+    # batch = a production run, date-stamped (e.g. 2026-06-06-01) → groups for scale (10k+ creatives,
+    # navigable, git-friendly) instead of a flat dir. CRT = our own creatives. The id is claimed by
+    # mkdir of the {CRT-NN}/ folder (no central allocator/lock). Brand-scoped → covered by mutation-guard.
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/creative\.json$"),
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/genome\.json$"),
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/produced/[a-z0-9_-]+\.json$"),
+    # decomposed competitor ads — SEPARATE root (competitive-intel) + SEPARATE id namespace (RCV).
+    re.compile(r"^brands/[^/]+/competitive-intel/[a-z0-9-]+/RCV-[0-9]{2,4}/decomposition\.json$"),
+    # benchmark ref-image sidecar manifest (symmetric with CRT produced/, brick 4 step D).
+    re.compile(r"^brands/[^/]+/competitive-intel/[a-z0-9-]+/RCV-[0-9]{2,4}/produced/[a-z0-9_-]+\.json$"),
     re.compile(r"^operator/[^/]+\.json$"),
     # canon validations (v2.26.0+) — append-only validations[] from learn-from-session promotion.
     re.compile(r"^resources/canon/[a-z-]+/[a-z-]+/[a-z0-9-]+\.json$"),
+    # cross-brand expertise libraries (brick 2, D#481) — guarded by mutation-guard PROTECTED_GLOBS.
+    # Filenames = lowercase-dash slug (the structured ID like CONCEPT-NN lives inside the file).
+    re.compile(r"^resources/concepts/[a-z0-9-]+\.json$"),
+    re.compile(r"^resources/registries/[a-z-]+/[a-z0-9-]+\.json$"),
+    # asset-library json sidecars (brand-level · binaires .png/.jpg ecrits direct comme produced/).
+    # Nom canonique = asset-library/ (aligne genome.schema + produced-asset.schema · D#491). Guard via brands/ glob.
+    re.compile(r"^brands/[^/]+/asset-library/[a-z0-9_-]+\.json$"),
 ]
 
 

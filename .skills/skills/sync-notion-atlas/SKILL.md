@@ -62,17 +62,6 @@ produces_proposals_for:
   - brands/{slug}/roadmap.json
   - brands/{slug}/creatives/{CRT-NN}.json
   - brands/{slug}/funnel.json
-triggers_fr:
-  - "sync notion atlas {brand_slug}"
-  - "pull notion vers phantom"
-  - "import notion vers {brand_slug}"
-  - "synchronise mon notion avec phantom"
-  - "tire mon atlas notion dans phantom"
-triggers_en:
-  - "sync notion atlas"
-  - "pull notion to phantom"
-  - "import from notion"
-  - "sync workspace from notion"
 disambiguates_against:
   snapshot-brand: "route to snapshot-brand quand l'opérateur fournit une URL e-commerce brand (scrape direct PDP / homepage / collection). sync-notion-atlas est UPSTREAM différent · pull depuis workspace Notion structuré opérateur, pas scrape brand publique. Pas la même source, pas la même richesse data."
   import-asset: "route to import-asset pour assets visuels individuels (logo, badges, mascotte) ou par auto_multi sur une brand URL. sync-notion-atlas couvre la data structurée canon des 11 collections, pas les assets binaires."

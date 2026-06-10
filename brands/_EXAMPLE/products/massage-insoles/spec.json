@@ -57,18 +57,22 @@
     "$comment": "Identity stable · drive le tagline + positioning de tous les angles paid downstream."
   },
   "specs": {
-    "composition": {
-      "primary_layer": "Textured massage surface (silicone-rubber blend)",
-      "support_layer": "Engineered arch support structure (EVA foam)",
-      "base_layer": "Anti-slip backing (silicone grip)",
-      "$comment": "3 couches fonctionnelles · chacune triggers un mécanisme distinct (cf mechanisms[] · arbre Spec→Mécanisme canon v3.1)."
-    },
-    "variants": {
-      "colors": ["orange", "black"],
-      "sizes": ["S (US 5-7)", "M (US 7-9)", "L (US 9-11)", "XL (US 11-13)"],
-      "kids_sizes": ["K-S (US 1-3 kids)", "K-M (US 3-5 kids)"],
-      "fit_modifier": "trimmable edges · cut along dotted line scissors"
-    },
+    "composition": [
+      "Textured massage surface (silicone-rubber blend) · primary layer",
+      "Engineered arch support structure (EVA foam) · support layer",
+      "Anti-slip backing (silicone grip) · base layer"
+    ],
+    "variants": [
+      "color: orange",
+      "color: black",
+      "size: S (US 5-7)",
+      "size: M (US 7-9)",
+      "size: L (US 9-11)",
+      "size: XL (US 11-13)",
+      "kids size: K-S (US 1-3 kids)",
+      "kids size: K-M (US 3-5 kids)",
+      "fit: trimmable edges · cut along dotted line scissors"
+    ],
     "dimensions": {
       "thickness_mm": 6,
       "weight_per_pair_g": 95,
@@ -88,10 +92,14 @@
       "mode_of_action": "mechanical_stimulation",
       "time_window": "immediate",
       "duration": "during wear",
-      "evidence_level": "anecdotal_strong",
+      "evidence_level": "anecdotal",
       "market_sophistication": "medium",
-      "triggered_by_specs": ["composition.primary_layer"],
-      "$comment": "Mécanisme entry-level · ressenti immédiat · drive emotional benefit 'Walking on Air' (cf benefits[0])."
+      "triggered_by_specs": [
+        "composition.primary_layer"
+      ],
+      "$comment": "Mécanisme entry-level · ressenti immédiat · drive emotional benefit 'Walking on Air' (cf benefits[0]).",
+      "mechanism_id": "MEC-01",
+      "evidence_level_note": "anecdotal_strong"
     },
     {
       "name": "Arch support engineered structure",
@@ -100,10 +108,16 @@
       "mode_of_action": "biomechanical_redistribution",
       "time_window": "7d",
       "duration": "during wear + cumulative comfort 7-14d",
-      "evidence_level": "clinical_claim",
-      "market_sophistication": "medium-high",
-      "triggered_by_specs": ["composition.support_layer", "specs.dimensions.thickness_mm"],
-      "$comment": "Mécanisme structurel cœur · drive functional benefit pain reduction (cf benefits[1] · plantar fasciitis + arch pain)."
+      "evidence_level": "mechanistic_only",
+      "market_sophistication": "high",
+      "triggered_by_specs": [
+        "composition.support_layer",
+        "specs.dimensions.thickness_mm"
+      ],
+      "$comment": "Mécanisme structurel cœur · drive functional benefit pain reduction (cf benefits[1] · plantar fasciitis + arch pain).",
+      "mechanism_id": "MEC-02",
+      "evidence_level_note": "clinical_claim",
+      "market_sophistication_note": "medium-high"
     },
     {
       "name": "Impact absorption cushioning",
@@ -112,10 +126,14 @@
       "mode_of_action": "shock_absorption",
       "time_window": "immediate",
       "duration": "during wear · cumulative end-of-shift comfort",
-      "evidence_level": "clinical_claim",
+      "evidence_level": "mechanistic_only",
       "market_sophistication": "high",
-      "triggered_by_specs": ["composition.support_layer"],
-      "$comment": "Mécanisme worker shifts critique · 10-hour days warehouse + 12-hour shifts nursing · drive functional benefit 'zero heel pain by hour 8' (cf benefits[2])."
+      "triggered_by_specs": [
+        "composition.support_layer"
+      ],
+      "$comment": "Mécanisme worker shifts critique · 10-hour days warehouse + 12-hour shifts nursing · drive functional benefit 'zero heel pain by hour 8' (cf benefits[2]).",
+      "mechanism_id": "MEC-03",
+      "evidence_level_note": "clinical_claim"
     },
     {
       "name": "Anti-slip stability grip",
@@ -124,10 +142,14 @@
       "mode_of_action": "friction_grip",
       "time_window": "immediate",
       "duration": "during wear",
-      "evidence_level": "anecdotal_strong",
+      "evidence_level": "anecdotal",
       "market_sophistication": "medium",
-      "triggered_by_specs": ["composition.base_layer"],
-      "$comment": "Mécanisme support · supprime la friction d'ajustement constant · drive utility benefit daily wearability (cf benefits[3])."
+      "triggered_by_specs": [
+        "composition.base_layer"
+      ],
+      "$comment": "Mécanisme support · supprime la friction d'ajustement constant · drive utility benefit daily wearability (cf benefits[3]).",
+      "mechanism_id": "MEC-04",
+      "evidence_level_note": "anecdotal_strong"
     }
   ],
   "benefits": [
@@ -137,11 +159,23 @@
       "emotional_signal": "Soulagement immédiat ressenti dès le premier pas · sensation lift + souplesse",
       "latency_min": 0,
       "latency_max": 0,
-      "evidence_verbatim": ["the first impression is really promising (Tanya, nurse)"],
-      "pain_addressed": ["heaviness_feet", "morning_stiffness"],
+      "evidence_verbatim": [
+        {
+          "text": "the first impression is really promising",
+          "platform": "Tanya, nurse"
+        }
+      ],
+      "pain_addressed": [
+        "heaviness_feet",
+        "morning_stiffness"
+      ],
       "mechanism_ref": "Massage textured surface stimulation",
-      "target_audience": ["workers-shifts", "chronic-pain-45"],
-      "$comment": "Bénéfice émotionnel hero · tagline brand. Latency 0 = instant gratification · vend l'achat sur premier essai."
+      "target_audience": [
+        "workers-shifts",
+        "chronic-pain-45"
+      ],
+      "$comment": "Bénéfice émotionnel hero · tagline brand. Latency 0 = instant gratification · vend l'achat sur premier essai.",
+      "benefit_id": "BEN-01"
     },
     {
       "benefit": "Plantar fasciitis pain relief",
@@ -149,11 +183,24 @@
       "emotional_signal": "Soulagement de la douleur talon matinale qui empoisonne les premiers pas",
       "latency_min": 7,
       "latency_max": 14,
-      "evidence_verbatim": ["First full shift with zero heel pain by hour 8 (Dean H)"],
-      "pain_addressed": ["plantar_fasciitis", "heel_pain", "arch_pain"],
+      "evidence_verbatim": [
+        {
+          "text": "First full shift with zero heel pain by hour 8",
+          "platform": "Dean H"
+        }
+      ],
+      "pain_addressed": [
+        "plantar_fasciitis",
+        "heel_pain",
+        "arch_pain"
+      ],
       "mechanism_ref": "Arch support engineered structure",
-      "target_audience": ["chronic-pain-45", "workers-shifts"],
-      "$comment": "Bénéfice fonctionnel cœur · résout la douleur chronique #1 dans la niche. Latency 7-14j = patience required, mais validation forte une fois ressentie."
+      "target_audience": [
+        "chronic-pain-45",
+        "workers-shifts"
+      ],
+      "$comment": "Bénéfice fonctionnel cœur · résout la douleur chronique #1 dans la niche. Latency 7-14j = patience required, mais validation forte une fois ressentie.",
+      "benefit_id": "BEN-02"
     },
     {
       "benefit": "End-of-shift comfort (long standing)",
@@ -162,13 +209,25 @@
       "latency_min": 0,
       "latency_max": 7,
       "evidence_verbatim": [
-        "2 years · 10 hour days in a warehouse (Mike Kowalski)",
-        "12-hour shifts (Tanya, nurse)"
+        {
+          "text": "2 years · 10 hour days in a warehouse",
+          "platform": "Mike Kowalski"
+        },
+        {
+          "text": "12-hour shifts",
+          "platform": "Tanya, nurse"
+        }
       ],
-      "pain_addressed": ["foot_fatigue_long_shifts", "joint_impact_concrete_floors"],
+      "pain_addressed": [
+        "foot_fatigue_long_shifts",
+        "joint_impact_concrete_floors"
+      ],
       "mechanism_ref": "Impact absorption cushioning",
-      "target_audience": ["workers-shifts"],
-      "$comment": "Bénéfice fonctionnel audience principal Workers shifts. Mécanisme directly mapped à l'usage occupational quotidien."
+      "target_audience": [
+        "workers-shifts"
+      ],
+      "$comment": "Bénéfice fonctionnel audience principal Workers shifts. Mécanisme directly mapped à l'usage occupational quotidien.",
+      "benefit_id": "BEN-03"
     },
     {
       "benefit": "Daily wearability sans friction",
@@ -176,11 +235,24 @@
       "emotional_signal": "Une fois posées, on les oublie · pas de glissement, pas d'ajustement constant",
       "latency_min": 0,
       "latency_max": 1,
-      "evidence_verbatim": ["Won't make your shoes feel tight · Fits easily into work boots, sneakers, trainers (copy site)"],
-      "pain_addressed": ["fit_friction", "insole_slipping"],
+      "evidence_verbatim": [
+        {
+          "text": "Won't make your shoes feel tight · Fits easily into work boots, sneakers, trainers",
+          "platform": "copy site"
+        }
+      ],
+      "pain_addressed": [
+        "fit_friction",
+        "insole_slipping"
+      ],
       "mechanism_ref": "Anti-slip stability grip",
-      "target_audience": ["workers-shifts", "chronic-pain-45", "daily-preventif"],
-      "$comment": "Bénéfice utility cross-audience · objection 'won't fit shoes' réfutée. Drive repeat purchase + bundle conversion."
+      "target_audience": [
+        "workers-shifts",
+        "chronic-pain-45",
+        "daily-preventif"
+      ],
+      "$comment": "Bénéfice utility cross-audience · objection 'won't fit shoes' réfutée. Drive repeat purchase + bundle conversion.",
+      "benefit_id": "BEN-04"
     },
     {
       "benefit": "Identité 'I take care of myself smart'",
@@ -188,34 +260,96 @@
       "emotional_signal": "Reconnaissance qu'on a fait un choix engineered + endorsed plutôt que générique drugstore",
       "latency_min": 30,
       "latency_max": 90,
-      "evidence_verbatim": ["he called me two days later and said order me another pair · that tells you everything (James, recommendation)"],
-      "pain_addressed": ["self_perception_smart_consumer"],
+      "evidence_verbatim": [
+        {
+          "text": "he called me two days later and said order me another pair · that tells you everything",
+          "platform": "James, recommendation"
+        }
+      ],
+      "pain_addressed": [
+        "self_perception_smart_consumer"
+      ],
       "mechanism_ref": "Arch support engineered structure",
-      "target_audience": ["chronic-pain-45", "daily-preventif"],
-      "$comment": "Bénéfice identitaire bottom-of-funnel · drives word-of-mouth + brand advocacy. Latency longue · maturité usage."
+      "target_audience": [
+        "chronic-pain-45",
+        "daily-preventif"
+      ],
+      "$comment": "Bénéfice identitaire bottom-of-funnel · drives word-of-mouth + brand advocacy. Latency longue · maturité usage.",
+      "benefit_id": "BEN-05"
     }
   ],
   "problems_solved": [
     {
       "problem": "Plantar fasciitis · douleur talon chronique matinale",
-      "chain": "physical→functional→emotional",
-      "verbatim_quotes": ["First full shift with zero heel pain by hour 8"],
-      "frequency": "common (45+ population)",
-      "urgency": "high (douleur quotidienne handicapante)"
+      "chain": [
+        {
+          "level": "surface",
+          "formulation": "physical"
+        },
+        {
+          "level": "consequence",
+          "formulation": "functional"
+        },
+        {
+          "level": "deep",
+          "formulation": "emotional"
+        }
+      ],
+      "verbatim_quotes": [
+        {
+          "text": "First full shift with zero heel pain by hour 8"
+        }
+      ],
+      "frequency": 6,
+      "urgency": 8,
+      "problem_id": "PRB-01",
+      "frequency_note": "common (45+ population)",
+      "urgency_note": "high (douleur quotidienne handicapante)"
     },
     {
       "problem": "Foot fatigue end-of-shift 8-12h standing",
-      "chain": "physical→emotional",
-      "verbatim_quotes": ["2 years · 10 hour days warehouse", "12-hour shifts nurse"],
-      "frequency": "very_common (workers occupations)",
-      "urgency": "high (impact quotidien performance + bien-être)"
+      "chain": [
+        {
+          "level": "surface",
+          "formulation": "physical"
+        },
+        {
+          "level": "deep",
+          "formulation": "emotional"
+        }
+      ],
+      "verbatim_quotes": [
+        {
+          "text": "2 years · 10 hour days warehouse"
+        },
+        {
+          "text": "12-hour shifts nurse"
+        }
+      ],
+      "frequency": 8,
+      "urgency": 8,
+      "problem_id": "PRB-02",
+      "frequency_note": "very_common (workers occupations)",
+      "urgency_note": "high (impact quotidien performance + bien-être)"
     },
     {
       "problem": "Insole drugstore ne fits pas / glisse / inefficace",
-      "chain": "friction→trust_breakdown",
+      "chain": [
+        {
+          "level": "surface",
+          "formulation": "friction"
+        },
+        {
+          "level": "deep",
+          "formulation": "trust_breakdown"
+        }
+      ],
       "verbatim_quotes": [],
-      "frequency": "common (acheteurs ayant déjà essayé Dr. Scholl)",
-      "urgency": "medium (objection #1 = scepticisme efficacité énième insole)"
+      "frequency": 6,
+      "urgency": 5,
+      "problem_id": "PRB-03",
+      "frequency_note": "common (acheteurs ayant déjà essayé Dr. Scholl)",
+      "urgency_note": "medium (objection #1 = scepticisme efficacité énième insole)"
     }
   ],
   "promise": {
@@ -237,23 +371,28 @@
     "press_mentions": []
   },
   "market_context": {
-    "main_competitors_in_category": ["Dr. Scholl's", "Powerstep", "Superfeet", "Vionic"],
+    "main_competitors_in_category": [
+      "Dr. Scholl's",
+      "Powerstep",
+      "Superfeet",
+      "Vionic"
+    ],
     "price_position": "mid-tier ($27 single · $48-150 bundles)",
     "differentiation_hook": "Daily wearable engineered insole · pas clinical · pas mass · podiatrist endorsed sans positioning intimidant"
   },
   "pricing": {
     "currency": "USD",
-    "price": 27.00,
-    "compare_at_price": 42.00,
+    "price": 27.0,
+    "compare_at_price": 42.0,
     "discount_pct": 35,
     "price_per_unit": {
-      "value": 27.00,
+      "value": 27.0,
       "unit": "pair",
       "currency": "USD"
     },
-    "cogs": 6.00,
+    "cogs": 6.0,
     "gross_margin": 0.78,
-    "breakeven_cpa": 21.00,
+    "breakeven_cpa": 21.0,
     "$comment": "Pricing canon · COGS bas (mass production silicone+EVA) · margin 78% confort scaling paid. Compare_at 42 = anchor pricing pour 35% off frame perpétuel (Mom's Day · Black Friday · etc.)."
   },
   "sustainability": {

@@ -34,18 +34,6 @@ description: >
   freestyles strategic prose to fill a multi-skill atlas request.
   FR: "génère l'atlas complet de {brand}", "build atlas {brand}", "lance le pipeline complet", "construis tout pour {brand}", "atlas complet from scratch".
   EN: "build complete atlas", "generate full atlas {brand}", "build everything for {brand}", "run full pipeline", "full atlas from scratch".
-triggers_fr:
-  - "génère l'atlas complet"
-  - "build atlas {brand}"
-  - "lance le pipeline complet"
-  - "construis tout pour {brand}"
-  - "atlas complet from scratch"
-triggers_en:
-  - "build complete atlas"
-  - "generate full atlas"
-  - "build everything"
-  - "run full pipeline"
-  - "full atlas from scratch"
 permissions:
   reads: [brand, product, offer, profile, learning, strategy]
   writes: [brand, product, offer, profile, learning, strategy]
@@ -353,7 +341,7 @@ Pour chaque NEW entity registered matching extension_hooks frontmatter ·
 - Match `entity_type` ∈ frontmatter `extension_hooks` enum
 - Match `consumable_by` field registry contains `{skill_name}` 
 - Include NEW entity dans inputs Phase 1 pipeline ci-dessous
-- Output enrichi avec lineage extension consommée dans atome_irreductible
+- Output enrichi avec lineage extension consommée dans frame
 
 Halt si NEW entity registered sans `consumable_by` field flagué (scaffold-extension v1.2.0 legacy) · 
 silent skip · pas error · l'opérateur peut patcher manuellement le scaffold-extension Phase 9 register-and-flag pour ajouter `consumable_by`.

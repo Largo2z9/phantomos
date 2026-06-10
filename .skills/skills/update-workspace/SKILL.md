@@ -1,7 +1,7 @@
 ---
 name: update-workspace
 type: orchestrator
-version: "1.1.0"
+version: "1.2.0"
 recommended_model: sonnet
 layer: meta
 reasoning_pattern: null
@@ -22,7 +22,7 @@ pipeline:
   preconditions: |
     - workspace currently installed (template files present)
     - /operator/installation.json present OR first-run detection
-    - manifests available at docs/releases/{version}-manifest.json
+    - manifests available at docs/internal/releases/manifest/{version}-manifest.json
   postconditions: |
     - template files updated to target version
     - operator data untouched
@@ -72,7 +72,7 @@ Chairman reporting an update installation. Plain language, no technical detail e
 
 ## Invocation
 
-Operator says *"update"*, *"mets à jour"*, *"applique la nouvelle version"*, or the agent detects a version mismatch between `/operator/installation.json → template_version_installed` and `_version.json → template_version`.
+Operator says *"update"*, *"mets à jour"*, *"applique la nouvelle version"*, or the agent detects a version mismatch between `/operator/installation.json → template_version_installed` and `_version.json → template_version`. A `null` installed version is not a mismatch : it is a fresh install awaiting first-run initialization (see Step 1).
 
 ---
 
@@ -84,7 +84,9 @@ Read:
 - `_version.json → template_version` (the target/latest)
 - `/operator/installation.json → template_version_installed` (what's installed)
 
-If `/operator/installation.json` does not exist → first-run post-install. Set `template_version_installed` to the template's current version, write `installation.json`, and exit (no update needed, this is a fresh install).
+If `/operator/installation.json` does not exist → check `brands/` for real brand folders (ignore `_` prefixed) BEFORE concluding. **No real brand** → first-run post-install : set `template_version_installed` to the template's current version, write `installation.json`, and exit (no update needed, this is a fresh install). **Real brands present** → this is an OLD INSTANCE without version tracking, NOT a fresh install : treating it as first-run would silently skip every data migration. STOP, surface to the operator, and determine the actually-installed version together (old `_version.json` if the template was not yet overwritten, `CHANGELOG.md` head, or operator memory). Write that version to `installation.json`, then proceed with the normal chain.
+
+If `installation.json` exists but `template_version_installed` is `null` → same logic : no real brand → first-run case (the template ships it as `null`), set it to `_version.json → template_version`, set `first_install_at`, and exit. Real brands present → old-instance case above, never init-and-exit.
 
 If versions match → *"Tu es déjà à jour en {version}. Rien à faire."* → exit.
 
@@ -92,7 +94,7 @@ If installed < target → continue.
 
 ### Step 2 — Build the update chain
 
-List every manifest at `docs/releases/{version}-manifest.json` where `from_version >= installed` and `to_version <= target`. Sort by `to_version` ascending. This is the chain of updates to apply in order.
+List every manifest at `docs/internal/releases/manifest/{version}-manifest.json` where `from_version >= installed` and `to_version <= target`. Sort by `to_version` ascending. This is the chain of updates to apply in order.
 
 If any manifest in the chain has `breaking: true` or `requires_confirmation: true` → present the list to the operator with summaries and explicit confirm via `AskUserQuestion`. Otherwise proceed silently.
 
@@ -187,7 +189,7 @@ If flags or migration warnings: surface as a short action list, not a report dum
 - `docs/system/updates.md` · doctrine for publishing clean updates.
 - `docs/system/engagement-disclosure-doctrine.md` (v2.79.5) · disclosure pré-engagement.
 - `docs/system/decomposition-visibility-doctrine.md` (v2.79.5+) · NIVEAU 0 paramètres décomposés.
-- `docs/releases/{version}-manifest.json` · per-release change manifest.
+- `docs/internal/releases/manifest/{version}-manifest.json` · per-release change manifest.
 - `.skills/skills/migrate-workspace/SKILL.md` · delegated schema migration (consume `migrations/` framework v2.80.0).
 - `migrations/` · framework canon v2.80.0 (scripts Python par BREAKING release).
 - `_version.json` · target version registry.

@@ -20,21 +20,6 @@ description: >
   consumers (build-atlas-complete · produce-paid-angles · etc) ne consomment.
   FR: "importe ce dossier" "ingère cet archive" "drop ce client folder" "j'ai un dossier client" "importe le portfolio brand"
   EN: "import this folder" "ingest archive" "drop this client folder" "import portfolio"
-triggers_fr:
-  - "importe ce dossier"
-  - "ingère cet archive"
-  - "drop ce client folder"
-  - "j'ai un dossier client"
-  - "importe le portfolio brand"
-  - "ingère ce dossier vrac"
-  - "drop ce dossier client"
-triggers_en:
-  - "import this folder"
-  - "ingest archive"
-  - "drop this client folder"
-  - "import portfolio"
-  - "bulk import folder"
-  - "import client folder"
 permissions:
   reads: [brand, product, profile, sources]
   writes: [brand, product, profile, learning, sources]

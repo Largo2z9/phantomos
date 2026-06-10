@@ -1,0 +1,80 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "real-photo-testimonial-static",
+  "display_name": "Photo temoignage statique",
+  "family": "real-photo",
+  "typology_st": "spatial",
+  "description": "Photo reelle d'une personne (client, utilisateur) associee a une citation/verbatim de temoignage, en image fixe. Sert la preuve sociale en paid social: un vrai visage credible + une phrase courte attribuee. A utiliser quand on veut ancrer la confiance par l'humain reel plutot que par le studio produit ou la promesse de marque.",
+  "render_recipe": {
+    "prompt_skeleton": "Candid documentary portrait photograph of {persona_description}, {age_range}, {emotion} expression looking {gaze_direction}, {framing} framing, photographed in {environment}, {lighting}, shot on {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, authentic real person, natural unretouched skin with visible pores and texture, photojournalistic realism",
+    "slots": [
+      { "name": "persona_description", "description": "Qui est la personne (genre, type physique, style, signaux d'appartenance a l'audience cible de la marque). Doit matcher le profil audience, pas un mannequin generique." },
+      { "name": "age_range", "description": "Tranche d'age realiste alignee sur l'avatar (ex 'late 30s', 'woman in her 50s'). Eviter le jeune-parfait par defaut." },
+      { "name": "emotion", "description": "Etat emotionnel credible et coherent avec le verbatim (ex 'relieved', 'quietly confident', 'warm genuine smile'). Pas de joie publicitaire exageree." },
+      { "name": "gaze_direction", "description": "Direction du regard ('softly at camera' pour la connexion, 'slightly off-camera' pour le candid). Regard vivant, present." },
+      { "name": "framing", "description": "Cadrage ('head and shoulders', 'mid-shot waist-up', 'close-up'). Laisser de l'espace pour incruster le verbatim en post." },
+      { "name": "environment", "description": "Contexte de vie reel et coherent avec le produit/usage (ex 'home kitchen', 'bathroom counter', 'park bench', 'office'). Decor habite, pas de fond studio." },
+      { "name": "lighting", "description": "Override optionnel du lighting par defaut si la scene l'exige (ex golden hour fenetre vs lumiere indoor douce)." },
+      { "name": "camera_lens", "description": "Override optionnel du couple boitier/objectif si on veut un rendu specifique." },
+      { "name": "palette_mood", "description": "Override optionnel de la palette pour matcher la creative_zone et la charte de la marque." },
+      { "name": "texture_grain", "description": "Override optionnel du grain/texture selon le degre de raw vise." },
+      { "name": "composition_notes", "description": "Override optionnel sur la compo (negative space cote verbatim, regle des tiers, orientation)." }
+    ],
+    "lighting": "Soft natural daylight, slightly directional from a window, gentle falloff, subtle shadows that keep facial volume, no harsh studio strobes, no ring-light catchlight, even skin exposure without blown highlights",
+    "camera_lens": "Full-frame DSLR/mirrorless, 50mm to 85mm prime, f/2.8 to f/4 for soft but readable background separation, eye-level perspective, slight handheld imperfection",
+    "palette_mood": "Warm, true-to-life skin tones, muted natural palette, honest and trustworthy mood, slightly desaturated rather than glossy-commercial, color grade that reads editorial not advertising",
+    "texture_grain": "Fine natural sensor grain, real skin micro-texture (pores, fine lines, faint blemishes kept), fabric weave visible, zero plastic smoothing, light film-like grain acceptable",
+    "composition_notes": "Subject offset to one third with deliberate negative space on the opposite side to host the testimonial quote overlay; eye-level; uncluttered but lived-in background; verbatim stays legible, never crossing the face"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "medium",
+      "notes": "4:5 pour le feed Meta/IG par defaut, 1:1 acceptable. Generer le portrait propre puis incruster le verbatim en post (typo controlee) plutot que de laisser le modele halluciner le texte."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Peau plastique, cireuse ou sur-lissee facon rendu beaute (bannir, garder pores et micro-texture)",
+    "Regard mort ou vitreux, yeux desalignes, pupilles asymetriques",
+    "Sourire publicitaire fige et trop parfait (dents alignees irreelles, expression sans muscle facial coherent)",
+    "Doigts surnumeraires ou fusionnes, mains deformees si visibles dans le cadre",
+    "Oreilles, dents ou asymetries faciales aberrantes",
+    "Catchlight de ring-light parfaitement circulaire qui trahit le studio IA",
+    "Visage de mannequin generique trop symetrique, deconnecte du profil audience reel",
+    "Texte/verbatim genere par le modele directement dans l'image (glyphes hallucines) au lieu d'une incrustation post-prod",
+    "Fond studio uni ou bokeh artificiel qui casse la credibilite documentaire",
+    "Sur-saturation et grading glossy-commercial qui font basculer du temoignage vers la pub evidente"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 6],
+    "pairs_well_with": [
+      "real-photo-lifestyle",
+      "real-photo-product-studio",
+      "ugc-selfie-talking",
+      "graphic-icons-overlay",
+      "split-screen-comparison"
+    ],
+    "avoid_when": [
+      "La marque n'a aucun temoignage/avis reel a citer (fabriquer un verbatim = risque trust + compliance)",
+      "Creative_zone tres raw/agressive (>6): un portrait propre incruste de citation parait trop sage, preferer ugc-selfie-talking",
+      "Categorie sante/medical ou un claim de resultat est implique sans preuve (risque plateforme et regulateur)",
+      "Besoin de demontrer un mecanisme ou un avant/apres (preferer diagram-medical-2d, split-screen-comparison ou 3d-anatomy)"
+    ]
+  },
+  "refs": [
+    "Quote-card temoignage classique paid social: vrai visage cadre tiers + citation courte attribuee (prenom + initiale) en overlay propre",
+    "Pattern preuve sociale 'verified buyer' avec etoiles/avis incrustees a cote du verbatim"
+  ],
+  "related_mechanic_ids": [
+    "social-proof-testimonial",
+    "before-after-claim",
+    "authority-endorsement"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

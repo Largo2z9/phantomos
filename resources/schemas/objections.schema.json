@@ -3,14 +3,20 @@
   "$id": "objections.schema.json",
   "title": "Objection (audience-specific barrage achat)",
   "description": "v1.1 alignment · sub-audience storage v2.64. Objection ressentie par audience(s) lors du parcours achat. Storage: brands/{slug}/audiences/{audience_slug}/objections/{OBJ-NN}.json (NEW v2.64 · sub-audience sémantique pure · objection est expression audience-specific). Cross-refs audiences additionnelles via also_affects_audiences[] quand objection shared cross-audiences (canonical entry stocké chez primary owner audience). v1.0 baseline ship v2.63 · refactor ontologie pure · extracted from profile.objections[] legacy v1.7. Same pattern que friction + pain_points · top-level collection à l'origine, sub-audience location post-v2.64.",
-  "_schema_version": "objections/1.1",
+  "_schema_version": "objections/1.2",
   "_changelog": {
+    "1.2": "C1 onboarding-native (D#500) · strict additif : root map _extraction (provenance mécanique, $ref _shared/extraction-provenance.json) + verbatim_quotes[] gagnent date/url/verbatim_ref (pointeur ^VOC-NN vers le record Layer A voc-verbatim.schema.json).",
     "1.1": "v2.64 BREAKING storage path · sub-audience location · sémantique pure (objection = expression audience-specific). Migration via operations/migrations/v2.64-subfolder-collections.py idempotent. also_affects_audiences[] cross-refs ajoutés pour objection shared scenarios.",
     "1.0": "v2.63 baseline. Extracted from profile.objections[] legacy v1.7 (BREAKING). Top-level collection canonical. OBJ-NN id pattern."
   },
   "type": "object",
   "required": ["objection_id", "formulation", "type", "meta"],
   "properties": {
+    "_extraction": {
+      "type": "object",
+      "additionalProperties": { "$ref": "_shared/extraction-provenance.json" },
+      "description": "Provenance mécanique (C1). Clé = glob field path ou chemin exact."
+    },
     "objection_id": { "type": "string", "pattern": "^OBJ-[0-9]{2,3}$" },
     "formulation": { "type": "string" },
     "type": {
@@ -34,7 +40,10 @@
         "properties": {
           "text": { "type": "string" },
           "source": { "type": "string" },
-          "sample_size": { "type": "integer" }
+          "sample_size": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "url": { "type": "string" },
+          "verbatim_ref": { "type": ["string", "null"], "pattern": "^VOC-[0-9]{2,5}$", "description": "Pointeur vers le record Layer A (voc-verbatim.schema.json)." }
         }
       }
     },

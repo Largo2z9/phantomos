@@ -8,19 +8,13 @@ recommended_model: sonnet
 subagent_safe: true
 mode: proposed
 operator_facing: false
-triggers_fr:
-  - "pondère les dimensions"
-  - "weight dimensions audience"
-  - "coefficient scoring"
-triggers_en:
-  - "weight dimensions"
-  - "dimension relevance"
-  - "scoring coefficient"
 disambiguates_against:
   - profile-audience: "profile-audience structure les 8 dimensions raw. weight-dimensions PONDÈRE leur relevance par angle."
   - score-matrix: "score-matrix (futur v2.34) consomme weight-dimensions pour compute scoring final."
 description: >
   v1.1.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (territoires-prioritisation). Skill peut désormais consume ces doctrines canon copywriting/strategy pour informer production sans dépendre schemas exacts.
+  FR: "pondère les dimensions", "weight dimensions audience", "coefficient scoring".
+  EN: "weight dimensions", "dimension relevance", "scoring coefficient".
 consumes:
   - brands/{slug}/audiences/{audience}/profile.json (8 dimensions structurées)
   - brands/{slug}/angles/{angle}.json (formula + lineage)
@@ -70,7 +64,7 @@ Cross-ref doctrine : `docs/system/dependency-resolution-protocol.md`.
 ### HR1 · Load audience profile + angles list
 
 Read `brands/{slug}/audiences/{audience}/profile.json` (8 dimensions populated obligatoire).
-Read `brands/{slug}/angles/*.json` compatibles avec cette audience (filter via `awareness_movement.in ≤ profile.market_position.awareness_level`).
+Read `brands/{slug}/angles/*.json` compatibles avec cette audience (filter via `awareness_movement.in ≤ profile.market_position.awareness_dominant` · RENAME C1 profile/2.3).
 
 Si profile incomplet (une dimension manquante) ou aucun angle compatible : abort avec warning structuré, ne PAS écrire dimension_weights.json.
 

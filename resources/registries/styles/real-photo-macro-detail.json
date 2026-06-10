@@ -1,0 +1,100 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "real-photo-macro-detail",
+  "display_name": "Macro détail réel",
+  "family": "real-photo",
+  "typology_st": "spatial",
+  "description": "Gros plan macro photoréaliste sur la texture ou la matière du produit (grain, fibre, surface, tranche, gouttelette, mousse, poudre, maille). On ne montre pas le produit en entier ni en contexte d'usage : on isole une zone et on laisse la matière prouver la qualité. À utiliser quand la valeur perçue tient dans le craft physique (ingrédient visible, finition, densité, fraîcheur) et que l'argument est 'regarde de près, c'est réel'.",
+  "render_recipe": {
+    "prompt_skeleton": "Extreme macro product photograph, {subject_zone} of {product}, filling the frame, razor-thin depth of field with {focus_point} in tack-sharp focus and background melting into soft bokeh, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, photorealistic, true-to-life material, no text, no graphics overlay",
+    "slots": [
+      {
+        "name": "subject_zone",
+        "description": "La zone matière isolée qu'on grossit (texture/surface/coupe). Ex 'la maille tricotée', 'la tranche de la barre', 'la goutte de sérum sur la peau', 'le grain de la mousse', 'les fibres de la semelle'. C'est le sujet réel de la photo, pas le produit entier."
+      },
+      {
+        "name": "product",
+        "description": "Le produit ou la matière source. Ex 'semelle de chaussette compression', 'crème konjac', 'barre repas fonctionnelle'. Reste générique si seul le détail compte."
+      },
+      {
+        "name": "focus_point",
+        "description": "Le point précis qui doit être net (le reste tombe en flou). Ex 'a single woven fiber', 'one cross-section edge', 'the meniscus of the droplet'. C'est ce que la profondeur de champ étroite met en avant."
+      },
+      {
+        "name": "lighting",
+        "description": "Le schéma lumière macro. Slot rempli par défaut ci-dessous, à surcharger pour matière brillante (cross-polarized pour tuer les reflets) ou mate (grazing light pour relief)."
+      },
+      {
+        "name": "camera_lens",
+        "description": "Setup optique macro. Slot rempli par défaut, surcharger le rapport de grossissement selon la finesse de la matière."
+      },
+      {
+        "name": "palette_mood",
+        "description": "Palette et ambiance, à aligner sur la charte marque. Slot rempli par défaut neutre, surcharger avec les couleurs accent de la marque."
+      },
+      {
+        "name": "texture_grain",
+        "description": "Le rendu de grain/matière à préserver. Slot rempli par défaut, surcharger selon la surface (poreuse, satinée, fibreuse, cristalline)."
+      },
+      {
+        "name": "composition_notes",
+        "description": "Cadrage et placement. Slot rempli par défaut (remplissage cadre + règle des tiers sur la zone nette), surcharger si besoin d'un angle rasant ou d'un fill-frame total."
+      }
+    ],
+    "lighting": "raking side light at a low grazing angle to carve out surface relief and micro-texture, one soft key plus a subtle rim to separate the in-focus edge, cross-polarized fill on glossy or wet materials to control specular hotspots, no harsh on-axis flash",
+    "camera_lens": "true macro lens at 1:1 to 2:1 magnification (100mm macro equivalent), tripod-stable, focus-stacked feel on the subject edge while the rest falls into shallow natural bokeh, f-stop chosen for a paper-thin plane of focus",
+    "palette_mood": "natural true-to-material color, restrained and premium, brand accent reserved for a single supporting tone, never oversaturated, mood is tactile and trustworthy ('you can feel it')",
+    "texture_grain": "preserve authentic surface micro-detail (weave, pores, crystals, fibers, foam cells, droplet meniscus), keep believable fine photographic grain, never plasticky or over-smoothed, real material imperfections kept",
+    "composition_notes": "fill the frame with the matter, place the sharp zone on a rule-of-thirds line or dead-center for a hero detail, negative space as soft bokeh, single clear subject (one texture story per frame, not a collage)"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "1:1",
+      "resolution": "2K",
+      "guidance": "medium-high to lock material realism, lower if textures start looking synthetic"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Texture plastifiée ou cireuse : la matière rendue lisse et synthétique alors que le macro doit montrer le grain réel (pores, fibres, cristaux)",
+    "Sur-lissage / denoise agressif qui efface le micro-détail et tue l'argument 'regarde de près'",
+    "Pattern de texture répété en tuile (tiling) : la même micro-maille copiée-collée de façon mécaniquement régulière, signature IA",
+    "Bokeh artificiel en donut ou transition net/flou non optique (halo, bord dur) au lieu d'une vraie profondeur de champ macro",
+    "Reflets spéculaires hallucinés sur surface mouillée/brillante (gouttes incohérentes, highlights qui ne suivent pas une source lumière unique)",
+    "Gouttelettes ou cristaux clonés à l'identique, formes trop parfaites et symétriques qui n'existent pas dans la vraie matière",
+    "Glyphes ou micro-texte hallucinés gravés dans la matière (faux logo, fausses mentions sur l'emballage en gros plan)",
+    "Couleur de matière fausse ou irréaliste (ingrédient à la mauvaise teinte) qui casse la crédibilité du craft",
+    "Échelle incohérente : grain trop gros ou trop fin par rapport à la matière réelle, lecture macro impossible"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 6],
+    "pairs_well_with": [
+      "real-photo-product-studio",
+      "real-photo-lifestyle",
+      "graphic-icons-overlay",
+      "split-screen-comparison"
+    ],
+    "avoid_when": [
+      "L'argument est émotionnel/identitaire et non matière : le macro vend le craft, pas le désir d'appartenance",
+      "Le produit n'a pas de détail physique différenciant à grossir (service, digital, commodité visuellement banale)",
+      "Besoin de montrer l'usage, l'échelle ou le contexte d'utilisation : le macro isole et perd le réel d'usage",
+      "Charte raw/agressive UGC (zone créa très haute) : le macro studio propre détonne avec un feed brut natif"
+    ]
+  },
+  "refs": [
+    "Gros plan sur la maille tricotée d'une chaussette compression, fibres nettes, fond bokeh (texture = preuve de qualité)",
+    "Macro sur une goutte de sérum posée sur la peau, ménisque net, reflet contrôlé (fraîcheur/efficacité visible)",
+    "Tranche de barre repas fonctionnelle en coupe, grain visible des ingrédients, lumière rasante (densité/composition réelle)"
+  ],
+  "related_mechanic_ids": [
+    "product-reveal",
+    "ingredients-pillars",
+    "mechanism-reveal",
+    "product-specs"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

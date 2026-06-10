@@ -16,6 +16,8 @@ description: >
   cette semaine".
   EN triggers: "export this session" "archive this conversation" "save this session"
   "export last session" "export sessions from this week" "dump session as markdown".
+  FR: "exporte cette session", "archive cette conversation", "exporte la conversation en markdown".
+  EN: "export this session", "archive this conversation", "export session transcript".
 permissions:
   reads: [workspace]
   writes: [workspace]

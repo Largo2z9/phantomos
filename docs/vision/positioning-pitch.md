@@ -6,7 +6,9 @@
 
 ## Ce que c'est
 
-PhantomOS est un environnement de travail local conçu pour permettre à un opérateur d'encoder son métier, quel qu'il soit, dans un système structuré, et de le faire opérer par un agent IA. Le produit n'est pas une bibliothèque de contenu spécialisé. Le produit est **l'environnement lui-même** : les disciplines d'encodage des données, la mécanique de raisonnement de l'agent, l'extensibilité par l'utilisateur, et la persistance de la connaissance entre les sessions.
+PhantomOS est un environnement de travail local pour opérateurs paid DTC : la marque, les audiences, les angles et les apprentissages encodés dans des fichiers structurés et versionnés que l'opérateur possède, opérés par un agent IA. Le produit n'est pas une bibliothèque de contenu spécialisé. Le produit est **l'environnement lui-même** : les disciplines d'encodage des données, la mécanique de raisonnement de l'agent, l'extensibilité par l'utilisateur, et la persistance de la connaissance entre les sessions.
+
+Le pattern est général, la preuve est locale : la même architecture peut encoder d'autres métiers, mais c'est sur le DTC paid que le système est livré, outillé et validé.
 
 Le système est livré avec un kit de skills et de ressources métier prêtes à l'emploi, qui sert à la fois de démonstration de ce qui est possible et de point de départ utilisable. Ces skills et ressources livrés peuvent être utilisés tels quels, modifiés, remplacés, ou complétés par d'autres que l'opérateur ajoute lui-même au fil de l'usage.
 
@@ -22,7 +24,7 @@ Trois écarts récurrents apparaissent dès qu'on essaie d'industrialiser le tra
 
 PhantomOS adresse ces trois écarts par une architecture ouverte et extensible, indépendante du domaine modélisé.
 
-Le constat est étayé. L'étude MIT NANDA *State of AI in Business 2025* mesure à **95% la part des projets d'IA générative en entreprise sans ROI mesurable**, diagnostic explicite : *"most GenAI systems do not retain feedback, adapt to context, or improve over time."* Le problème n'est pas le modèle, il est architectural. HFS Research chiffre la bascule des services professionnels vers le *Services-as-a-Software* à **1 500 milliards de dollars d'ici 2035**. La demande est priced. L'écart d'exécution reste à combler.
+Le diagnostic est documenté : la plupart des systèmes d'IA générative en entreprise ne conservent rien, *"most GenAI systems do not retain feedback, adapt to context, or improve over time"* (MIT NANDA, 2025). Le problème n'est pas le modèle, il est architectural. Il se mesure aussi chez nous : sur le moteur créatif de PhantomOS, encoder les corrections en règles a fait passer la part d'outputs mal classifiés de 26% à 3,5%. La boucle qui manque aux projets qui échouent est exactement celle-là.
 
 ## Comment le système fonctionne
 
@@ -38,7 +40,7 @@ L'environnement repose sur quatre couches superposées, identiques quel que soit
 
 L'utilisateur interagit avec le système en langage naturel. L'agent identifie l'intention, sélectionne la capacité pertinente, applique la méthodologie référencée, et produit un livrable défendable et traçable.
 
-La discipline qui sous-tend cette mécanique a été nommée publiquement en juin 2025 par Andrej Karpathy et Tobi Lütke (Shopify) sous le terme *context engineering*, *"the delicate art and science of filling the context window with just the right information for each step."* PhantomOS en est la formulation opérationnelle, transformée en runtime.
+Tout le monde sait désormais que la qualité d'un agent dépend de ce qu'on met dans son contexte. Presque personne ne le fait avec discipline : un canon versionné, des corrections qui deviennent des règles, une trace à chaque mutation. PhantomOS est cette discipline, livrée en environnement de travail.
 
 ## Onboarding doctrine, posture light explicite
 
@@ -56,7 +58,7 @@ Cette doctrine évite l'écueil classique des outils d'encodage qui imposent un 
 
 Pour rendre le système immédiatement utilisable et démontrer ce que peut produire un environnement bien rempli, PhantomOS est livré avec un kit initial constitué de :
 
-- une trentaine de skills couvrant les principales tâches d'un opérateur travaillant dans le marketing direct et l'e-commerce DTC : encodage initial d'une marque, extraction de la voix client, production de briefs publicitaires, audit de scripts existants, scoring d'offres, analyse de performance, génération de rapports clients,
+- 82 skills versionnés couvrant les principales tâches d'un opérateur travaillant dans le marketing direct et l'e-commerce DTC : encodage initial d'une marque, extraction de la voix client, production de briefs publicitaires, audit de scripts existants, scoring d'offres, analyse de performance, génération de rapports clients,
 - une bibliothèque de référence en copywriting et persuasion, regroupant les principes établis sur plusieurs décennies par les auteurs de référence du domaine, structurés sous forme de variables exploitables par l'agent,
 - des registres et frameworks transverses qui permettent à l'agent de raisonner sur des combinaisons d'angles, d'audiences, de canaux et de leviers psychologiques.
 
@@ -64,7 +66,7 @@ Pour rendre le système immédiatement utilisable et démontrer ce que peut prod
 
 ## Ce que le système permet de faire
 
-Les usages possibles dépendent du métier encodé et des skills disponibles. Sur le périmètre du kit livré, l'environnement couvre l'ensemble du cycle de vie d'une marque ou d'un projet de connaissance.
+Les usages possibles dépendent du métier encodé et des skills disponibles. Sur le périmètre du kit livré, l'environnement couvre l'ensemble du cycle de vie d'une marque.
 
 **En phase de recherche et de validation amont.** Identifier les segments d'audience prioritaires, miner les retours clients sur les sources publiques, cartographier les concurrents et les espaces blancs du marché, tester l'adéquation produit-marché sur des hypothèses early-stage.
 
@@ -82,11 +84,11 @@ Le système est conçu pour que ces capacités s'étendent par ajout, jamais par
 
 PhantomOS est destiné aux opérateurs dont la valeur dépend d'une expertise méthodologique répétable, applicable à plusieurs contextes, marques ou clients.
 
-Le premier angle de valeur, dominant pour la majorité des profils, est triple : **gain de temps mesurable** (zéro re-briefing, zéro switching cost entre outils), **interface unique centralisée** (un seul environnement remplace plusieurs onglets, plusieurs comptes, plusieurs bibliothèques disjointes), et **avant-gardisme accessible** (utiliser les pratiques d'encodage agentique sans devoir les construire from scratch).
+Le premier angle de valeur, dominant pour la majorité des profils, est triple : **gain de temps mesurable** (zéro re-briefing, zéro switching cost entre outils), **interface unique centralisée** (un seul environnement remplace plusieurs onglets, plusieurs comptes, plusieurs bibliothèques disjointes), et **une avance pratique** (utiliser les disciplines d'encodage agentique sans devoir les construire soi-même).
 
 Profils en fit direct :
 
-- les fondateurs DTC past month 6 avec ROAS stable, qui veulent productiser leur méthode d'acquisition payante,
+- les fondateurs DTC passé le mois six avec ROAS stable, qui veulent productiser leur méthode d'acquisition payante (entre le mois trois et le mois six, post-premier-signal, le fit est conditionnel : structurer ce qui a un signal, pas des hypothèses),
 - les growth leads en agence opérant entre 3 et 15 comptes DTC clients,
 - les solo-opérateurs DTC paid qui passent l'essentiel de leur temps sur Meta, TikTok, Google Ads,
 - les opérateurs portfolio gérant plusieurs marques DTC en propre ou en equity.
@@ -102,11 +104,9 @@ PhantomOS se positionne entre trois familles d'outils existants sans en être un
 - la discipline d'écriture qui transforme chaque correction en règle persistante exploitable par l'agent à la session suivante,
 - le compound effect comme propriété systémique : chaque livrable produit, chaque décision capturée, augmente la densité du système,
 - l'interface unique centralisée qui remplace le switching cost entre une dizaine d'outils par un environnement cohérent,
-- l'indépendance vis-à-vis du fournisseur d'IA sous-jacent, qui prémunit l'utilisateur contre les changements de tarification, de politique, ou de capacité d'un éditeur unique.
+- la propriété du format : le workspace est local, en fichiers lisibles, possédé par l'opérateur, transposable. Le runtime actuel est Claude Code ; le canon, lui, appartient à l'opérateur et part avec lui, quel que soit l'outil qui le lira demain.
 
-Le consensus technique converge sur ce point : *"as context windows become commoditized, competitive value shifts to how well structured the information within them becomes"* (Atlan, 2026).
-
-**Vis-à-vis des bases de connaissance passives**, le système transforme la connaissance en ressource exécutable plutôt qu'en archive consultable. Les fichiers ne sont pas lus manuellement par un humain qui en extrait la valeur, mais composés en livrables par un agent. C'est la distinction que Palantir a institutionnalisée à grande échelle entre *encoding* et *logging* : encoder structure la connaissance pour qu'un agent l'opère, logger l'archive pour qu'un humain la relise. La quasi-totalité des projets d'entreprise font du logging sophistiqué et l'appellent encoding, ce qui explique en partie le taux d'échec mesuré par MIT NANDA.
+**Vis-à-vis des bases de connaissance passives**, le système transforme la connaissance en ressource exécutable plutôt qu'en archive consultable. Les fichiers ne sont pas lus manuellement par un humain qui en extrait la valeur, mais composés en livrables par un agent. Encoder n'est pas logger : encoder structure la connaissance pour qu'un agent l'opère, logger l'archive pour qu'un humain la relise. La quasi-totalité des projets d'entreprise font du logging sophistiqué et l'appellent encoding. C'est le geste que Palantir vend aux Fortune 500 avec son Ontology, ramené ici à l'échelle d'un opérateur, dans un dossier de fichiers qu'il possède.
 
 **Vis-à-vis des produits SaaS verticaux**, PhantomOS ne propose pas une interface fermée et figée mais un environnement ouvert, extensible par l'utilisateur, propriétaire de ses données, et applicable à plusieurs métiers au-delà du domaine d'illustration initial.
 
@@ -116,11 +116,11 @@ L'effet de PhantomOS se manifeste sur trois axes.
 
 L'utilisateur passe d'une production où chaque livrable est construit en réexpliquant le contexte, à une production où le contexte est déjà chargé et où l'agent s'appuie sur l'historique cumulé de la marque, du domaine ou du portefeuille.
 
-L'expertise méthodologique cesse d'être une compétence individuelle non transmissible pour devenir une propriété du système. La qualité produite par un opérateur outillé devient comparable à celle d'un expert sur les tâches encadrées par les capacités encodées, ce qui rend la scalabilité opérationnelle moins dépendante du recrutement.
+L'expertise méthodologique cesse d'être une compétence individuelle non transmissible pour devenir une propriété du système. Le système est conçu pour que la qualité produite sur les tâches encadrées par les capacités encodées dépende de l'environnement, et plus seulement de l'individu qui l'opère, ce qui rend la scalabilité opérationnelle moins dépendante du recrutement. Cette propriété reste à démontrer en longitudinal chez des opérateurs externes ; c'est le test en cours.
 
 À mesure que l'utilisation se prolonge (encodage progressif des marques, accumulation des apprentissages, développement de skills propres, raffinement de la méthodologie par l'opérateur), le workspace devient un actif défendable. La valeur n'est pas dans le modèle d'IA, qui restera commodifié, mais dans la connaissance structurée et la méthodologie codifiée que l'opérateur accumule dans son propre système.
 
-Cette transformation est cohérente avec ce que Dan Shipper (Every) décrit comme l'*Allocation Economy* (la bascule d'une économie où la connaissance est produite vers une économie où le travail est *alloué* à des systèmes), et avec la formule de Sarah Tavel (Benchmark) sur les nouvelles entreprises de services : *"sell work, not software."*
+Cette transformation rejoint la bascule documentée du marché vers la facturation du travail fini plutôt que du logiciel (*"sell work, not software"*, Sarah Tavel, Benchmark). La partie difficile n'est pas d'y croire, c'est d'échapper à l'écrasement des marges quand tout le monde y croit. C'est précisément ce que la propriété du canon protège : la méthode encodée reste un actif de l'opérateur, pas une feature du prestataire.
 
 ## Vision
 
@@ -132,11 +132,6 @@ L'enjeu de fond est la transformation d'un talent humain rare en un système exp
 
 ## Sources publiques citées
 
-- HFS Research, *The $1.5 Trillion Services-as-a-Software Opportunity* (2025).
-- MIT NANDA, *State of AI in Business 2025*.
-- Andrej Karpathy & Tobi Lütke, *context engineering*, juin 2025.
-- Dan Shipper (Every), *The Allocation Economy* (2024).
-- Sarah Tavel (Benchmark), *AI startups: sell work, not software* (2024).
-- Palantir, *Ontology* et Forward Deployed Engineer.
-- Atlan, *Context window limitations in LLMs* (2026).
-- Daron Acemoglu, *The Simple Macroeconomics of AI*, NBER w32487.
+- MIT NANDA, *State of AI in Business 2025* (citée pour son diagnostic du learning gap, pas pour ses chiffres, méthodologiquement contestés).
+- Sarah Tavel (Benchmark), *AI startups: sell work, not software* (2023).
+- Palantir, *Ontology*, citée comme analogue d'échelle Fortune 500.

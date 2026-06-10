@@ -165,7 +165,7 @@ Paramètres posés · ce sur quoi je pars
      Niveau sophistication marché · {stage Schwartz · lu brand.json
      OR inféré spec.market_context}
      Niveau conscience audience · {unaware → most-aware · lu profile
-     market_position.awareness_level}
+     market_position.awareness_dominant}
      Canal · Meta vs autre · {default Meta si stack signals · sinon
      inferred ou opérateur stated}
 
@@ -247,7 +247,7 @@ Load the encoded substrate for this brand and this audience. Read silently · ne
 
 **Audience profile (toujours lu)** ·
 
-- `brands/{slug}/audiences/{audience-slug}/profile.json` · voice.key_expressions[] (with frequency / sample_size), psychology.jtbd (functional / emotional / social), market_position.awareness_level, demographics. **Note v2.64** · `pain_points[]` + `objections[]` sub-fields legacy preserved en lecture pour backward compat, mais sub-audience collections prennent priorité si présentes.
+- `brands/{slug}/audiences/{audience-slug}/profile.json` · voice.key_expressions[] (with frequency / sample_size), psychology.jtbd (functional / emotional / social), market_position.awareness_dominant (RENAME C1 profile/2.3), demographics. **Note v2.64** · `pain_points[]` + `objections[]` sub-fields legacy preserved en lecture pour backward compat, mais sub-audience collections prennent priorité si présentes.
 - `brands/{slug}/products/{product-slug}/spec.json` · problems_solved[].verbatim_quotes[], benefits[].chain (functional → emotional → identity), proofs.{social|authority|performance|scientific}, market_context.sophistication, identity.
 - `brands/{slug}/products/{product-slug}/offers.json` · active offers, urgency flags, bundle structure, subscription presence (informs offer-led angle activation).
 - `brands/{slug}/brand.json` · tone_of_voice, market.* if VoM has run (vernacular, sophistication_stage, awareness_distribution, white_spaces, external_intelligence).

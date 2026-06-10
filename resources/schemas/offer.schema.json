@@ -2,8 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Product Offers",
   "description": "Commercial offers for a product. Breaking from v1.8: flat offers[] wrapped in offer_groups[] with attribute inheritance (2-level, group then offer). v2.1 (v2.42): scope enum élargi (pre_cart conservé, post_cart ouvert) avec cross-ref funnel.schema.json pour stages funnel post-cart. Lives in brands/{slug}/products/{slug}/offers.json once validated.",
-  "_schema_version": "offer/2.2",
+  "_schema_version": "offer/2.3",
   "_changelog": {
+    "2.3": "C1 onboarding-native (D#500) · strict additif : (a) root map _extraction (provenance mécanique, $ref _shared/extraction-provenance.json) · (b) offer_groups[].offers[].economics_proxy (marge proxy INFÉRÉE niveau offre, DERIVED only · inference_basis = observables existants bundle_discount_depth/free_shipping_threshold/upsell_take_rate/subscription_discount/bulk_tiers · breakeven_cpa_estimate cross-ref spec.pricing.breakeven_cpa). NE duplique PAS : AOV (brand.financials.aov), cogs (spec.pricing.cogs), breakeven produit (spec.pricing.breakeven_cpa).",
     "2.2": "v2.56 Notion stride-up parity · meta.validation_status $ref _shared/validation-status. Backward compat strict additif.",
     "2.1": "v2.42 cleanup: `_schema_version` field root standardisé (format `{name}/{semver}`, remplace `_version` const). Marker DRAFT retiré du title. `meta.scope` passé de const `pre_cart` à enum [`pre_cart`, `post_cart`] pour ouvrir aux funnel stages post-add-to-cart. Cross-ref ajouté vers funnel.schema.json (parent_offer_group). Backward compat strict: lecteurs anciens reçoivent toujours pre_cart par défaut, post_cart est additif. Source canon: PATCH 2A v2.42.",
     "2.0": "Initial v2.0 (DRAFT pré-cleanup): flat offers[] wrapped in offer_groups[] avec attribute inheritance (2-level). 10 structural types (single|bundle|prepay|subscription|membership|gifting|seasonal|launch|digital|service). C2 membership, C3 intro_phases cascading, C4 early_access cohort_tiers, C5 personalization pointer, C6 commitment structuré, C8 referral product_refs structurés."
@@ -15,6 +16,11 @@
     "_schema": { "type": "string" },
     "_version": { "type": "string", "description": "Backward compat alias of root `_schema_version`. v2.0 instances écrivaient `2.0` ici; v2.1+ readers SHOULD read the root field. Writers MAY echo the semver portion for legacy tooling." },
     "_field_types": { "type": "object", "additionalProperties": { "type": "string" } },
+    "_extraction": {
+      "type": "object",
+      "additionalProperties": { "$ref": "_shared/extraction-provenance.json" },
+      "description": "Provenance mécanique. Clé = glob field path (mêmes patterns que _field_types) ou chemin exact pour granularité per-item."
+    },
 
     "meta": {
       "type": "object",
@@ -246,6 +252,20 @@
                     "savings_amount": { "type": ["number", "null"] },
                     "savings_percent": { "type": ["number", "null"] },
                     "price_comparison_note": { "type": ["string", "null"] }
+                  }
+                },
+
+                "economics_proxy": {
+                  "type": "object",
+                  "description": "Marge proxy INFÉRÉE niveau offre (C1). DERIVED only (field-types HR-1, jamais rempli à la main, taguer derived dans _field_types). PAS d'AOV ici (vit dans brand.financials.aov), PAS de cogs ici (spec.pricing.cogs), PAS de breakeven produit ici (spec.pricing.breakeven_cpa). Tout champ ajouté ici qui duplique brand ou spec = dérive, refuser.",
+                  "properties": {
+                    "margin_proxy": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "DERIVED. Marge brute estimée de l'offre." },
+                    "inference_basis": {
+                      "type": "array",
+                      "items": { "type": "string", "enum": ["bundle_discount_depth", "free_shipping_threshold", "upsell_take_rate", "subscription_discount", "bulk_tiers"] },
+                      "description": "Observables sources existants : shared.shipping.threshold · meta.post_cart.expected_take_rate · discounts subscription · incentives.bulk_tiers."
+                    },
+                    "breakeven_cpa_estimate": { "type": ["number", "null"], "description": "DERIVED. Cross-ref spec.pricing.breakeven_cpa (niveau produit)." }
                   }
                 },
 

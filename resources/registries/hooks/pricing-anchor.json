@@ -1,0 +1,85 @@
+{
+  "pattern_id": "HOK-pricing-anchor",
+  "pattern_type": "hook-mechanic",
+  "name": "Ancre Prix / Offre-comme-Hook",
+  "one_liner": "Mettre un chiffre-prix (prix d'appel bas, plafond, valeur barrée offerte ou paiement simplifié) AU PREMIER PLAN comme accroche, pour neutraliser la friction-coût avant toute autre persuasion · performe en BOFU product-aware où le prix est le dernier verrou.",
+  "skeleton": "[cadre_catégorie | occasion] + [ancre_prix : prix_d_appel_bas « as low as » | plafond « pour moins de X » | valeur_barrée_OFFERT | paiement_simplifié] (+ [condition_qualifiante / disclaimer])",
+  "slots": [
+    {
+      "name": "cadre_catégorie",
+      "description": "La catégorie ou l'occasion qui contextualise le prix · ce que l'ancre rend accessible.",
+      "examples": [
+        "Weight loss plans",
+        "Cadeaux",
+        "Cialis. Prescribed online by Canadian doctors",
+        "Cadeau de bienvenue",
+        "six months of weight loss"
+      ]
+    },
+    {
+      "name": "ancre_prix",
+      "description": "Le chiffre/cadre-prix mis au premier plan · 4 variantes observées : (a) prix d'appel bas 'as low as / get started for', (b) plafond 'pour moins de X', (c) valeur barrée présentée OFFERT, (d) simplification de paiement 'one upfront payment'.",
+      "examples": [
+        "starting as low as $69 per month",
+        "Get started for $39",
+        "pour moins de 30€",
+        "Valeur de 69€ · 22,90€ OFFERT (x3)",
+        "with one upfront payment"
+      ]
+    },
+    {
+      "name": "condition_qualifiante",
+      "description": "La condition qui rend l'ancre vraie (mensualisation, prépaiement, premières commandes, abonnement) · souvent en astérisque/disclaimer, mais structurellement liée à l'ancre.",
+      "examples": [
+        "*for a 10-month plan paid upfront in full",
+        "Offre valable sur les premières commandes",
+        "M'ABONNER ET ÉCONOMISER",
+        "Prescription required"
+      ]
+    }
+  ],
+  "function": "Désamorce la friction-prix (le 'c'est trop cher' / 'je sais pas combien ça coûte') en faisant du chiffre lui-même l'accroche · transforme le coût, normalement objection finale, en hameçon d'entrée. Mensualise (gros ticket → '$69/mois'), plafonne (cadeau borné 'moins de 30€'), ou gonfle la valeur perçue (barrer 69€ et l'offrir). En BOFU product-aware, le prospect connaît déjà la catégorie : le dernier verrou est l'argent, et le hook s'attaque directement à ce verrou.",
+  "when_to_use": "BOFU · audience product-aware (connaît la catégorie/le produit, hésite sur le prix). Marché à ticket élevé ou perçu comme cher (telehealth Rx/GLP-1, abonnements supplément) où le prix est LA barrière. Offres d'acquisition (premières commandes, cadeaux de bienvenue, abonnement). Idéal en statique bold-type ou packshot promo. NON adapté en TOFU/unaware (le prix ne parle qu'à qui veut déjà acheter).",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-13", "RCV-20", "RCV-47", "RCV-63"],
+      "realization": "Trois flavors : (a) plafond-cadeau 'Cadeaux pour moins de 30€' (RCV-13) · (b) valeur barrée gamifiée '69€ GRATUIT. Vous avez débloqué. 1 Mousseur 22,90€ OFFERT. 1 Shaker 22,90€ OFFERT. 1 Cuillère 22,90€ OFFERT.' (RCV-20) et sa variante abonnement 'Cadeaux de bienvenue · Valeur de 69 EUR · ... M'ABONNER ET ÉCONOMISER' (RCV-63) · (c) cadeau de bienvenue + prix réduit 'recevez 3 cadeaux OFFERTS ... à prix réduit · Offre valable sur les premières commandes' (RCV-47). L'ancre est toujours la valeur offerte / le plafond, pas un prix d'appel mensualisé."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-143", "RCV-154", "RCV-174", "RCV-200"],
+      "realization": "Prix d'appel bas mensualisé en titre géant : 'Weight loss plans starting as low as $69 per month* *for a 10-month plan paid upfront in full' (RCV-143 hims = RCV-174 hers, ads-miroir mot-pour-mot · confirme factory=1-source D#485) · prix d'entrée Rx 'Cialis. Prescribed online by Canadian doctors. Get started for $39.' (RCV-154) · simplification de paiement 'Get six months of weight loss with one upfront payment' (RCV-200, anchor implicite sans chiffre). La condition qualifiante (10-mois prépayés / upfront) porte le prix d'appel."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu cross-vertical (supplément FR + telehealth US) ET cross-géo (FR + US) → emprunt sûr en mode exploit pour toute marque DTC à composante prix/abonnement. La sous-flavor 'valeur barrée OFFERT / cadeau-bundle' est très portable (toute marque produit) ; la sous-flavor 'prix d'appel mensualisé as-low-as' suppose un ticket élevé ou un abonnement (à resloter en explore conscient pour un produit one-shot bon marché où il n'y a pas de friction-prix à désamorcer)."
+  },
+  "related_mechanic_ids": ["pricing-anchor", "gift-with-purchase", "discount-amount", "discount-pct", "subscription-discount"],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation (DTC one-shot, ticket moyen)",
+      "reslotted": "Pack jambes légères · pour moins de 25€ · 1 paire compression OFFERTE dès 2 achetées (plafond + valeur barrée, sous-flavor naali · pas le prix mensualisé qui suppose un abonnement)."
+    },
+    {
+      "target": "Marque supplément abonnement (telehealth-like)",
+      "reslotted": "Votre cure mensuelle dès 19€/mois* *pour un engagement 6 mois payé en une fois (prix d'appel as-low-as + condition qualifiante, sous-flavor himshers reslottée en supplément)."
+    }
+  ],
+  "anti_patterns": [
+    "TOFU / unaware : balancer un prix à qui ne connaît pas encore la catégorie ou le besoin = friction, pas accroche. L'ancre-prix présuppose product-aware.",
+    "Produit one-shot peu cher sans friction-coût réelle : ancrer le prix n'a rien à désamorcer, ça banalise le produit au lieu de le vendre.",
+    "Ancre sans la condition qualifiante visible : 'as low as $69' sans le '*10-month plan paid upfront' = promesse-prix non tenue, risque conformité + déception au checkout (RCV-143/174 mettent toujours le disclaimer).",
+    "Empiler l'ancre par-dessus un concept créatif fort : ces ads sont LOW-SEED-VALUE par nature (le message EST l'offre). Utiliser comme hook promo BOFU, pas comme remplacement d'un angle TOFU/MOFU."
+  ],
+  "curation_notes": "Promu sur 2 sources INDÉPENDANTES factory-aware (naali FR-supplément + himshers US-telehealth · karacare ABSENT du cluster, donc pas de 3e source). RCV-143 (hims) ≡ RCV-174 (hers) = ads-miroir mot-pour-mot → comptées comme UNE source 'himshers' (garde-fou D#485 honoré · les compter en 2 aurait été un faux-positif de diversité). Caveat : TOUTES les decompositions du cluster sont flaggées LOW-SEED-VALUE / PROMO-LOW-SEED (le message entier est l'offre, zéro concept créatif/proof/mécanisme narratif) — c'est attendu pour une mécanique de hook-prix, mais ça signifie que le pattern est robuste sur la RÉCURRENCE cross-source, pas (encore) sur la perf réelle. 3e signal (perf gagnante via feedback-loop) à attendre avant canon. Deux sous-flavors distinctes co-existent sous le même mechanic_id : naali = valeur-barrée/plafond/cadeau-bundle ; himshers = prix-d'appel-mensualisé as-low-as. Watch : si une 3e source indépendante apparaît, vérifier laquelle des deux sous-flavors elle porte (pourrait justifier un split en deux patterns).",
+  "_schema_version": "library-pattern/1.0"
+}

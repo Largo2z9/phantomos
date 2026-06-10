@@ -1,0 +1,108 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "macro-photo-mouth-skin-etc",
+  "display_name": "Macro corps reel",
+  "family": "real-photo",
+  "typology_st": "spatial",
+  "description": "Gros plan macro photorealiste sur une zone CORPORELLE humaine (bouche/levres, peau, ongle, cheveu, cils, cuir chevelu) en tres gros plan, le corps lui-meme tient lieu de preuve. A distinguer de real-photo-macro-detail qui grossit la matiere du PRODUIT: ici on grossit la PERSONNE pour montrer un etat (brillance, hydratation, grain de peau, surface d'ongle, fibre capillaire) ou un avant/apres. A choisir pour les angles beauty/skincare/oral-care/hair ou l'argument est 'regarde le resultat sur le corps de tres pres'."
+  ,
+  "render_recipe": {
+    "prompt_skeleton": "Extreme macro beauty photograph of {body_zone} of {subject_descriptor}, filling the frame, razor-thin depth of field with {focus_point} in tack-sharp focus and the rest melting into soft natural bokeh, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, photorealistic living human tissue, true-to-life skin/lip/nail/hair material, no text, no graphics overlay, no plastic retouch",
+    "slots": [
+      {
+        "name": "body_zone",
+        "description": "La zone corporelle isolee qu'on grossit. Ex 'parted lips with a glossy sheen', 'a cheek showing pores and fine skin grain', 'a fingernail surface and cuticle', 'a single strand of hair / the hair cuticle', 'lash line / eyelashes', 'a scalp parting'. C'est le vrai sujet de la photo, jamais le produit entier."
+      },
+      {
+        "name": "subject_descriptor",
+        "description": "Le porteur credible de la zone, vague et realiste (ex 'a woman in her early 30s', 'mature skin late 40s', 'a man with stubble'). Sert a calibrer age/teint/etat sans virer look mannequin. Reste minimal: seule la zone est en cadre."
+      },
+      {
+        "name": "focus_point",
+        "description": "Le point precis qui doit etre net, le reste tombe en flou. Ex 'the lip texture catching the highlight', 'a few pores on the cheekbone', 'the free edge of the nail', 'a single hair cuticle scale'. C'est ce que la profondeur de champ etroite met en avant comme preuve."
+      },
+      {
+        "name": "lighting",
+        "description": "Schema lumiere macro beaute. Slot rempli par defaut ci-dessous; surcharger en cross-polarise pour mater une brillance excessive (peau grasse/levre tres glossy) ou en grazing light pour reveler le relief du grain de peau / la surface de l'ongle."
+      },
+      {
+        "name": "camera_lens",
+        "description": "Setup optique macro. Slot rempli par defaut; surcharger le rapport de grossissement selon la finesse (1:1 pour une zone de peau, 2:1+ pour un cheveu ou une cuticule)."
+      },
+      {
+        "name": "palette_mood",
+        "description": "Palette et ambiance, a aligner sur la charte marque. Slot rempli par defaut (carnation vraie, premium, accent marque reserve a un ton secondaire); surcharger avec les couleurs accent de la marque."
+      },
+      {
+        "name": "texture_grain",
+        "description": "Le rendu de grain/matiere vivante a preserver (pores, lignes des levres, microrelief de l'ongle, ecailles du cheveu). Slot rempli par defaut; surcharger selon le claim: 'hydrate/repulpe' garde un grain lisse mais vivant, 'imperfection avant' garde rougeurs/secheresse visibles."
+      },
+      {
+        "name": "composition_notes",
+        "description": "Cadrage et placement. Slot rempli par defaut (remplissage cadre, zone nette sur une ligne des tiers, une seule histoire par frame); surcharger pour un split avant/apres ou un fill-frame total."
+      }
+    ],
+    "lighting": "Soft directional macro beauty light, one large diffused key skimming the surface to reveal living micro-relief (pores, lip lines, nail sheen, hair cuticle), a gentle fill to keep shadows readable, controlled specular highlight that follows a single coherent source, cross-polarized fill to tame excessive shine on glossy lips or oily skin, never flat on-axis ring-light, never harsh strobe",
+    "camera_lens": "True macro lens at 1:1 to 2:1 magnification (100mm macro equivalent), tripod-stable, paper-thin plane of focus on the body zone while the rest falls into shallow natural bokeh, f-stop chosen for a believable optical depth-of-field, no focus-breathing halo",
+    "palette_mood": "Natural true-to-life skin/lip/nail/hair tones, healthy and premium but believable, restrained saturation, brand accent reserved for a single supporting tone (a hint of product color), warm trustworthy mood ('look how real and healthy this is up close')",
+    "texture_grain": "Preserve authentic living micro-texture: real skin pores and fine lines, natural lip creases and gloss, nail surface striations and cuticle, individual hair fibers and cuticle scales; keep believable fine photographic grain; never plasticky, never airbrushed, real human imperfections kept unless the claim is 'after'",
+    "composition_notes": "Fill the frame with the body zone, place the sharp area on a rule-of-thirds line or dead-center for a hero detail, soft bokeh as negative space, one clear subject and one claim per frame (one zone, one proof, not a collage); leave clean negative space if a before/after split or overlay copy is expected"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "1:1",
+      "resolution": "2K",
+      "guidance": "medium-high to lock living-tissue realism, lower if skin/lips start reading synthetic or waxy",
+      "notes": "1:1 default for hero detail; 4:5 for feed, 9:16 for Stories/Reels static; for a before/after split prefer 1:1 or 4:5 and keep one consistent lighting setup across both halves."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Peau plastique/cireuse ou sur-lissee facon filtre beaute: la zone doit garder pores, lignes et microrelief vivants, jamais une surface de mannequin lisse",
+    "Levres en plastique brillant fige: gloss credible avec creases naturelles, pas une surface vinyle uniforme sans grain",
+    "Surface d'ongle trop parfaite et vitreuse, sans striations ni cuticule reelle, ou forme d'ongle anatomiquement fausse",
+    "Cheveu en fil de plastique lisse identique repete: garder des fibres distinctes, des ecailles de cuticule, des irregularites naturelles, pas un pattern clone",
+    "Dents fausses (nombre/forme incoherents, gencive plate, alignement impossible) quand la bouche est ouverte",
+    "Cils/poils dupliques a l'identique, espacement mecaniquement regulier (signature IA), implantation impossible",
+    "Reflets speculaires hallucines sur surface mouillee/glossy (highlights qui ne suivent pas une source lumiere unique, double brillance)",
+    "Bokeh artificiel en donut ou transition net/flou non optique (halo, bord dur) au lieu d'une vraie profondeur de champ macro",
+    "Carnation/teint faux ou irrealiste (peau orange, levre fausse, sous-ton incoherent) qui casse la credibilite du claim",
+    "Glyphes ou micro-texte hallucines graves dans la peau/l'ongle (faux tatouage, fausses mentions) ou logo deforme si un bout de produit entre dans le cadre",
+    "Echelle incoherente: pores ou fibres trop gros/trop fins par rapport a la zone reelle, lecture macro impossible",
+    "Avant/apres trafique de facon incoherente (l'apres change la geometrie du visage, pas seulement l'etat de la zone): garder la meme personne, meme cadrage, seul l'etat evolue"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [1, 6],
+    "pairs_well_with": [
+      "real-photo-macro-detail",
+      "real-photo-testimonial-static",
+      "split-screen-comparison",
+      "real-photo-lifestyle",
+      "graphic-icons-overlay"
+    ],
+    "avoid_when": [
+      "L'argument est identitaire/emotionnel ou de contexte d'usage: le macro corps isole et perd le recit de vie (prendre real-photo-lifestyle)",
+      "Claim medical/clinique fort qui exige une preuve mecanistique: la peau de pres montre un etat, pas un mecanisme (passer 3d-anatomy ou diagram-medical-2d)",
+      "Le produit n'a aucun resultat corporel visible a grossir (le macro corps n'a alors rien a prouver)",
+      "Risque compliance beaute (claim avant/apres non substantie): un macro 'resultat' peut sur-promettre, valider le claim avant de generer",
+      "Zone creative raw/agressive 8-10 ou un UGC selfie brut natif convertit mieux que le macro studio propre"
+    ]
+  },
+  "refs": [
+    "Macro sur des levres entrouvertes au gloss net, creases visibles, highlight controle (resultat repulpant/hydratant credible)",
+    "Gros plan sur une pommette montrant pores et grain de peau, lumiere rasante (preuve d'hydratation/grain affine)",
+    "Surface d'un ongle et de la cuticule en tres gros plan, striations nettes (claim soin ongle/cuticule)",
+    "Brin de cheveu isole montrant la cuticule, fibres nettes sur fond bokeh (claim reparation/brillance capillaire)"
+  ],
+  "related_mechanic_ids": [
+    "before-after",
+    "product-reveal",
+    "mechanism-reveal",
+    "ingredients-pillars"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

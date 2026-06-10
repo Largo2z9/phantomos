@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "produced-asset.schema.json",
+  "title": "Produced Asset (sidecar manifest of ONE produced binary)",
+  "description": "MANIFEST d'UN binaire produit. Vit a brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.json en SIDECAR de produced/{slug}.jpg|.mp4. Anti BUG-ASSET-ORPHAN: tout binaire ecrit sous produced/ DOIT avoir son sidecar json passe par le gate (write-to-context mode=proposed); le binaire lui-meme est ecrit DIRECT (write-to-context ne gere que le json). Ce schema est PETIT et NEUF: il ne duplique NI le genome (ADN = ce que l'ad EST) NI le creative (lignage = tracabilite strategique). Il decrit le COMMENT-le-binaire-a-ete-fabrique (production-how): outil/endpoint, params, asset source, hash, QC. Un dossier {CRT-NN}/produced/ peut contenir N sidecars (un par binaire: packshot-front.json, frame-01.json, voice-track.json, composite-final.json). Le {slug} du fichier = [a-z0-9_-]+ (regex du gate L144). COSTUME brand-instance (_field_types/_schema/_version) OPTIONNEL additif (coherent avec genome/creative qui ne les requierent pas). v1.0 baseline brique 4 etape A.",
+  "_schema_version": "produced-asset/1.0",
+  "_changelog": {
+    "1.0": "Brique 4 etape A baseline. Sidecar manifest neuf pour produced/{slug}.json. Champs: asset_role, file, capability_slot, tool, endpoint, params, source_asset_ref, hash, qc, status, created_at, created_by_skill, frame_index, genome_ref. Partition stricte vs genome (ADN) et creative (lignage): voir field_split_mapping. capability_slot reprend l'enum des 8 slots de capacite B (meme SSOT que genome required_asset.capability_slot) pour coherence cross-fichier."
+  },
+  "type": "object",
+  "required": [
+    "asset_role",
+    "file",
+    "status",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "_schema": {
+      "type": "string",
+      "description": "OPTIONNEL additif (costume brand-instance). NON requis. Si present vaut 'produced-asset'."
+    },
+    "_version": {
+      "type": "string",
+      "description": "OPTIONNEL additif. NON requis. Alias lisible de _schema_version racine."
+    },
+    "_field_types": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "observed",
+          "stated",
+          "derived",
+          "structured"
+        ]
+      },
+      "description": "OPTIONNEL additif (costume brand-instance), NON requis. enum borne anti-derive si l'operateur l'ajoute."
+    },
+    "asset_role": {
+      "type": "string",
+      "description": "Role de ce binaire dans la creа. Aligne sur genome required_asset.asset_role (texte libre cote contrat, ex 'first-frame-hook', 'frame-01-anim', 'voice-track', 'captions-track', 'packshot-front', 'xray-broll', 'composite-final'). C'est le QUOI-est-ce-binaire."
+    },
+    "file": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+\\.(jpg|jpeg|png|webp|mp4|mov|webm|mp3|wav|m4a|srt|vtt)$",
+      "description": "Nom du binaire sidecar-e, relatif au dossier produced/ (ex 'packshot-front.jpg', 'frame-01.mp4', 'voice-track.mp3'). Le stem [a-z0-9_-]+ DOIT egaler le {slug} du fichier sidecar (produced/{slug}.json sidecar de produced/{slug}.{ext}). Extensions bornees (image/video/audio/captions). Le binaire est ecrit DIRECT (hors-gate); ce manifest est ecrit via le gate."
+    },
+    "capability_slot": {
+      "type": "string",
+      "description": "Optionnel. Emplacement de capacite B ayant produit ce binaire. MEME enum SSOT que genome required_asset.capability_slot (8 slots). Relie le binaire a la machine de B qui l'a fait.",
+      "enum": [
+        "slot-1-image-first-frame",
+        "slot-2-lock-character-ref",
+        "slot-3-animate",
+        "slot-4-voice",
+        "slot-5-captions",
+        "slot-6-montage",
+        "slot-7-packshot-real",
+        "slot-8-xray-broll"
+      ]
+    },
+    "frame_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Optionnel. Index de la frame (dans genome.frames[]) que ce binaire sert. Relie le binaire au couple copy+visuel concerne. Null/absent pour les assets transverses (voix complete, composite final multi-frame)."
+    },
+    "tool": {
+      "type": "string",
+      "description": "Optionnel. Outil-adaptateur derriere le slot (interchangeable). Ex 'nanobanana', 'seedance', 'elevenlabs', 'zapcap', 'shotstack', 'fal'. = production-how, jamais dans genome/creative."
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Optionnel. Endpoint precis appele pour generer ce binaire (ex 'fal-ai/nano-banana-pro', 'fal-ai/bytedance/seedance/v1/pro/image-to-video'). Tracabilite reproductibilite."
+    },
+    "params": {
+      "type": "object",
+      "description": "Optionnel. Parametres exacts passes a l'outil (prompt, seed, aspect_ratio, resolution, duration_s, voice settings...). Structure libre (chaque outil a ses params). additionalProperties autorise = on ne contraint pas la forme par outil.",
+      "additionalProperties": true
+    },
+    "source_asset_ref": {
+      "type": "object",
+      "description": "Optionnel. D'ou vient la matiere de ce binaire (ad de ref en image, packshot scrape, frame parent en frame-chaining, asset reutilise de l'asset-library). Trace la chaine de production.",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ref_ad_image",
+            "scraped_packshot",
+            "parent_frame",
+            "asset_library",
+            "char_ref",
+            "operator_upload",
+            "other"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "Chemin/URL de la source (ex '~/ads-library/hims/ad-290.png', '../produced/frame-01.jpg', 'brands/{slug}/asset-library/{id}')."
+        },
+        "ref_ad_id": {
+          "type": "string",
+          "description": "Si kind=ref_ad_image: id de l'ad de ref (= video_id/ad_id cote reverse). Pont apprenable au niveau binaire."
+        }
+      }
+    },
+    "hash": {
+      "type": "string",
+      "description": "Optionnel. Hash du binaire (ex 'sha256:...') pour deduplication / integrite / detection de regen. Absent autorise (cout de calcul evite tant que pas necessaire).",
+      "pattern": "^(sha256|md5|blake3):[a-f0-9]+$"
+    },
+    "qc": {
+      "type": "object",
+      "description": "Optionnel. Resultat du QC post-gen (distinctive_features tenues, packshot reconnaissable, char consistency, anti-letterbox, debordement VO). Le contrat A ne porte pas le QC d'un binaire; il vit ici cote produit.",
+      "additionalProperties": false,
+      "properties": {
+        "passed": {
+          "type": "boolean",
+          "description": "Verdict binaire du QC."
+        },
+        "checks": {
+          "type": "array",
+          "description": "Liste des controles passes/echoues.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "regen_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Nombre de regenerations avant d'atteindre le pass (signal cout/difficulte)."
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Etat de ce binaire. 'generated' = produit IA OK. 'exported' = exporte vers humain/UGC (Route B). 'reused' = repris de l'asset-library. 'staged' = en /tmp pas encore deplace. 'failed' = gen echouee (trace conservee).",
+      "enum": [
+        "generated",
+        "exported",
+        "reused",
+        "staged",
+        "failed"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage de production du binaire (tracabilite)."
+    },
+    "created_by_skill": {
+      "type": "string",
+      "description": "Optionnel. Skill ayant produit le binaire (ex 'compose-creative', 'recompose-creative', 'adapt-from-competitor', 'decompose-ad')."
+    },
+    "genome_ref": {
+      "type": "string",
+      "pattern": "^GSC-[0-9]{2,4}$",
+      "description": "Optionnel. script_id du genome.json du meme dossier {CRT-NN}/ que ce binaire sert. Relie le sidecar a l'ADN sans dupliquer l'ADN."
+    }
+  }
+}

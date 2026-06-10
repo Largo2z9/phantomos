@@ -1,0 +1,107 @@
+{
+  "pattern_id": "HOK-scientific-claim-reveal",
+  "pattern_type": "hook-mechanic",
+  "name": "Révélation Claim Scientifique",
+  "one_liner": "Ouvrir sur un claim d'efficacité posé comme un fait scientifique (pourcentage chiffré, framing « la science de... », ou endossement autorité/presse) avant tout argument produit · performe parce que le chiffre/l'autorité préinstalle la crédibilité et fait passer la promesse pour une donnée prouvée plutôt qu'une affirmation marketing, court-circuitant le scepticisme à l'entrée.",
+  "skeleton": "[promesse_ou_contexte_traitement] : [claim_scientifique = pourcentage_chiffré_d'audience OU cadre_science/autorité] → [bénéfice/résultat] ( + [reveal_produit] )",
+  "slots": [
+    {
+      "name": "promesse_ou_contexte_traitement",
+      "description": "L'amorce qui cadre le claim : soit une promesse-résolution (« la chute s'arrête ici »), soit le contexte du traitement/protocole (« After anxiety treatment through hers »), soit une catégorie-science nommée (« Bienvenue dans la Safranothérapie »). Sert de rampe pour que le chiffre/l'autorité atterrisse comme une conclusion d'étude, pas un slogan.",
+      "examples": [
+        "La chute s'arrête ici.",
+        "After anxiety treatment through hers:",
+        "Bienvenue dans la Safranothérapie. La science du bien-être par le safran.",
+        "Featured in VOGUE"
+      ]
+    },
+    {
+      "name": "claim_scientifique",
+      "description": "Le cœur de la mécanique : la donnée présentée comme scientifique. Forme PURE = pourcentage chiffré rattaché à une audience/un résultat (« 91% of women reported feeling happier », triple stat 90/90/95%). Formes ADJACENTES = framing-science sans chiffre (« la science du bien-être par le safran ») ou endossement-autorité/presse (« Featured in VOGUE », « BEST PRESCRIPTION PRODUCT »). Le pourcentage surdimensionné à l'écran est la réalisation la plus forte (proof_type scientific-percentage-claim) ; le framing-science et l'endossement-autorité sont des variantes plus molles (authority-medical-claim).",
+      "examples": [
+        "Moins cassant 90%. Plus fort 90%. Résultats visibles 95%.",
+        "91% of women reported feeling happier",
+        "La science du bien-être par le safran",
+        "BEST PRESCRIPTION PRODUCT"
+      ]
+    },
+    {
+      "name": "bénéfice/résultat",
+      "description": "L'état/bénéfice auquel le claim est rattaché (souvent fusionné dans le claim lui-même quand le pourcentage qualifie directement un résultat). Donne au chiffre sa charge émotionnelle : ce n'est pas « 91% » dans l'abstrait, c'est « 91% se sont senties plus heureuses ».",
+      "examples": [
+        "Résultats visibles",
+        "feeling happier",
+        "futur vous vous remerciera"
+      ]
+    },
+    {
+      "name": "reveal_produit",
+      "description": "Le reveal du produit/format qui suit le claim (flacon, gummy, blend Rx), souvent accompagné des piliers ingrédients ou du nom de gamme propriétaire. Optionnel dans le hook strict mais quasi systématique dans le beat suivant.",
+      "examples": [
+        "CELLULE BOOST / 60 gummies",
+        "Balance Blend Rx / SSRI Ingredient + Supplements",
+        "Magnésium + safran / OSMOSE",
+        "RX HAIR REGROWTH GUMMY"
+      ]
+    }
+  ],
+  "function": "Préinstalle la crédibilité AVANT l'argument produit en habillant la promesse en donnée scientifique. Le pourcentage chiffré (ou l'autorité/presse) déplace la charge de la preuve : le prospect lit une conclusion d'étude, pas une affirmation de marque, ce qui désamorce le réflexe « c'est du marketing ». Réduit le scepticisme d'entrée (« est-ce que ça marche vraiment ? ») en posant l'efficacité comme acquise et mesurée, et donne au scroll un point d'ancrage chiffré qui se mémorise.",
+  "when_to_use": "Marché solution-aware à product-aware où l'efficacité est l'objection dominante et où un chiffre/une autorité tranche. Idéal static ad / hook de scroll : un pourcentage surdimensionné accroche en moins d'1 seconde. Catégories à promesse mesurable (anti-chute, santé mentale, bien-être par actif, repousse capillaire). La forme pourcentage-chiffré sur-performe quand le résultat est émotionnel (« 91% se sont senties plus heureuses ») ; la forme endossement-presse/autorité sert mieux les marques à capital de marque (Vogue) ou les catégories où le chiffre est interdit/risqué (compliance Rx).",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "karacare",
+      "vertical": "beauty-hair",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-8"],
+      "realization": "Forme PURE = triple stat-claim en pourcentages surdimensionnés posé juste après la promesse-résolution, comme preuve d'efficacité structurante de l'ad : « La chute s'arrête ici. Moins cassant 90%. Plus fort 90%. Résultats visibles 95%. » (RCV-8). Trois proof_elements taggés scientific-percentage-claim, affichés en cards bordeaux dégradé. Caveat sourcing : les 3 pourcentages n'affichent aucune référence d'étude visible (non vérifiables externe, flag STAT-CLAIMS-UNSOURCED dans la décompo) — le claim performe par la FORME scientifique, pas par une source réelle."
+    },
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-33"],
+      "realization": "Forme ADJACENTE = framing-science sans chiffre : « Bienvenue dans la Safranothérapie. La science du bien-être par le safran. Votre futur vous vous remerciera » (RCV-33). Le claim est un cadre-autorité (« la science de... » + catégorie propriétaire « Safranothérapie® ») taggé proof_type authority-medical-claim, pas un pourcentage. C'est la même intention (poser l'efficacité comme scientifiquement établie) mais la surface est molle (aucune donnée chiffrée). Source la plus THIN du cluster pour cette mécanique."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-182", "RCV-192", "RCV-204", "RCV-216"],
+      "realization": "Forme PURE dominante = pourcentage chiffré rattaché à un résultat émotionnel, en ads-miroir répétées : « AFTER ANXIETY TREATMENT THROUGH HERS: 91% of women reported feeling happier » (RCV-182 ≈ RCV-192 ≈ RCV-204, proof_type scientific-percentage-claim, suivi du reveal Balance Blend Rx + SSRI Ingredient). Variante ADJACENTE endossement-presse/autorité : « Featured in VOGUE. RX HAIR REGROWTH GUMMY. BEST PRESCRIPTION PRODUCT » (RCV-216, authority-medical-claim). Tous portent les disclaimers FDA/compounded/Rx-required en fine print. NOTE factory : hims+hers comptés comme UNE seule source (factory créative genrée, ads-miroir mot-pour-mot, D#485)."
+    }
+  ],
+  "independent_source_count": 3,
+  "vertical_scope": {
+    "origins": ["beauty-hair", "wellness-supplement", "telehealth-rx"],
+    "breadth": "universal",
+    "freedom_cursor_note": "Vu cross-vertical (anti-chute cheveux, bien-être par actif, santé mentale/repousse) ET cross-géo (FR + US) → invariant universel, sûr à emprunter partout. exploit = poser un claim natif de la verticale de la marque opérée avec un chiffre crédible pour la catégorie (ex. % de réduction des jambes lourdes pour un circulation-brand). explore = reslotter le squelette depuis une verticale lointaine en gardant la grammaire (promesse → claim chiffré → bénéfice), emprunt sûr car la mécanique ne dépend pas de la catégorie. Le sur-pouvoir transférable = la FORME scientifique (pourcentage surdimensionné rattaché à un résultat émotionnel) plus que le chiffre exact. ⚠ curseur compliance : la forme pourcentage-non-sourcé est portable mais juridiquement fragile (cf. flag STAT-CLAIMS-UNSOURCED karacare, disclaimers FDA himshers) — surfacer le risque à l'opérateur en mode explore."
+  },
+  "related_mechanic_ids": [
+    "scientific-claim",
+    "scientific-percentage-claim",
+    "authority-medical-claim",
+    "authority-clinical-study-reference",
+    "clinical-dose-claim",
+    "rating-numeric-claim"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "« Les jambes lourdes s'arrêtent ici. 89% ressentent un soulagement dès la 1re semaine. 92% recommandent. » → reveal semelle/actif circulation. (forme pourcentage-chiffré reslottée depuis karacare/himshers, à chiffrer sur données réelles)"
+    },
+    {
+      "target": "Marque skincare anti-âge · DTC",
+      "reslotted": "« La science de la régénération cellulaire par le rétinol encapsulé. 94% notent une peau plus lisse en 28 jours. » → reveal sérum. (fusionne le framing-science naali + le pourcentage-chiffré himshers)"
+    }
+  ],
+  "anti_patterns": [
+    "Pourcentage sans source ni contexte qui sonne inventé (« 100% efficace », chiffres ronds trop beaux) : déclenche le scepticisme au lieu de le désamorcer, surtout en audience high-aware. Un chiffre crédible (91%, 89%) bat un chiffre parfait.",
+    "Empiler trop de stats (5+ pourcentages) : dilue l'impact et signale le marketing. La forme karacare (3 stats) ou himshers (1 stat forte) marche mieux que la liste.",
+    "Forme framing-science molle (« la science de X ») seule, sans chiffre ni autorité concrète : la plus thin (cf. naali) — pose un vernis scientifique sans preuve, faible en audience sceptique. À renforcer par une donnée ou un endossement.",
+    "Verticales Rx/santé : le pourcentage-claim performe mais DOIT cohabiter avec les disclaimers de compliance (FDA, compounded, Rx-required · cf. fine print himshers). Claim chiffré non sourcé en santé = risque légal réel, pas qu'un anti-pattern créatif.",
+    "Audience unaware : un claim chiffré tombe à plat si le prospect n'a pas encore relié le problème à une solution mesurable — la mécanique suppose au minimum solution-aware."
+  ],
+  "curation_notes": "Promu sur 3 sources INDÉPENDANTES (karacare · naali · himshers) avec hims+hers comptés comme 1 factory (D#485, ads-miroir genrées RCV-182≈192≈204) → independent_source_count=3, au-delà du garde-fou ≥2. Cluster mince mais cross-source : 6 RCV attestés au total (karacare 1, naali 1, hers 4 dont 3 ads-miroir + 1 variante). ⚠ Caveat de granularité fort : les sources ne portent pas toutes la même FORME. Forme PURE (pourcentage chiffré, proof_type scientific-percentage-claim) = karacare (RCV-8) + himshers (RCV-182/192/204). Forme ADJACENTE molle (framing-science / endossement-autorité, proof_type authority-medical-claim, AUCUN chiffre) = naali (RCV-33) + himshers RCV-216. naali est la source la plus thin : sa réalisation est un cadre-science (« la science du bien-être par le safran ») sans donnée — la promotion repose sur l'intention commune (poser l'efficacité comme scientifique) plus que sur une surface identique. Ce qui renforcerait : (a) une 2e réalisation naali en pourcentage-chiffré pour solidifier la verticale supplement sur la forme PURE ; (b) signal perf réel via la feedback loop (perf-feedback-loop.md) — promotion ici sur la RÉCURRENCE cross-source, pas encore sur la perf gagnante. Split futur possible si le corpus grossit : séparer percentage-stat-claim (forme pure, dure) de science-authority-framing (forme molle, sans chiffre) — actuellement regroupés sous mechanic_id scientific-claim-reveal dans toutes les décompos.",
+  "_schema_version": "library-pattern/1.0"
+}

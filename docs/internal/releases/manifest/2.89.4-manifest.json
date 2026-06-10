@@ -1,0 +1,47 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.4",
+  "released_at": "2026-06-10",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 82,
+  "schemas_new": [],
+  "schemas_modified": [
+    "spec.schema.json#mechanisms[].mode_of_action (enum supprime -> string libre · WIDENING pur · le vocabulaire vit desormais dans resources/registries/mechanism-families.md)",
+    "spec.schema.json#mechanisms[].evidence_level (enum ELARGI : +regulatory_validated +regulatory_partial · efsa_validated/efsa_partial conserves legacy en lecture · aucune valeur retiree)"
+  ],
+  "summary": "Extractibilite des mecanismes. Ferme la decouverte v2.89.3 : l'enum mode_of_action encodait silencieusement une hypothese complements alimentaires dans le core (cofactor/probiotic/adaptogen...), et evidence_level nommait deux barreaux d'apres le regulateur europeen des supplements (efsa_*). Un produit physique n'entrait que par les echappatoires, violant l'esprit du test d'extractibilite D#307. Traitement differencie par nature de champ : mode_of_action est un VOCABULAIRE (ouvert, vit en donnees, pattern data-vs-logique deja acte pour la mecanique ad-level) · evidence_level est une ECHELLE (fermee, load-bearing pour le scoring, generalisee en additive).",
+  "changes": {
+    "schema": [
+      "~resources/schemas/spec.schema.json (mode_of_action string libre avec pointeur registre · evidence_level +regulatory_validated/+regulatory_partial, efsa_* legacy lecture seule documente en description)"
+    ],
+    "registry": [
+      "+resources/registries/mechanism-families.md (NEW · SSOT vocabulaire mode_of_action · 11 familles ingestibles CANON heritees de l'enum historique · 4 familles physiques CANDIDATE 1-source (Stepprs) : mechanical_stimulation, biomechanical_redistribution, shock_absorption, friction_grip · regle de promotion au 2e signal independant · regle 'other = poubelle surveillee >30%' avec precedent proof_type 26%->3,5%)"
+    ],
+    "validator": [
+      "~resources/scripts/validate-all.py (NEW check semantique 9 mechanism_other_saturation · MED · collecte mode_of_action pendant le walk specs, flag si 'other' >30% sur >=3 mecanismes avec pointeur registre)"
+    ],
+    "example_data": [
+      "~brands/_EXAMPLE/products/massage-insoles/spec.json (mode_of_action retrouve ses valeurs semantiques reelles au lieu des echappatoires mappees en v2.89.3 · les champs mode_of_action_note supprimes, devenus la valeur elle-meme · vitrine = demonstration du nouveau pattern registre)"
+    ]
+  },
+  "tests_non_regression": {
+    "validate_all_strict": "PASS (0/0/0/0 sur _EXAMPLE et _TEMPLATE, py3.9 et py3.11)",
+    "spec_schema_valid": "PASS (json.load + check_schema via run)",
+    "vitrine_mode_of_action": "PASS (4 valeurs candidates du registre, 0 'other', saturation check muet)",
+    "rebuild_index_check": "PASS (registries/ hors scope index par design)"
+  },
+  "decisions_captured": ["v2.89.4 : vocabulaire de mecanismes = registre de donnees (jamais enum schema) · echelle de preuve = enum ferme generalise regulatory_* · seuil 30% other = signal famille manquante"],
+  "out_of_scope_noted": [
+    "Skills define-specs / map-mechanisms / snapshot-brand : leurs SOP citent encore implicitement l'ancien enum dans des exemples eventuels · a aligner sur le registre au prochain passage sur ces skills (non bloquant, la string libre accepte tout)",
+    "Promotion des 4 familles physiques : attend la 2e marque physique reelle (regle anti-speculation)",
+    "first-session-example.md + capabilities.md FR : toujours en attente (lots precedents)"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.4",
+    "push (operateur)"
+  ]
+}

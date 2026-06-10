@@ -28,7 +28,7 @@ docs/
 │       └── first-session-example.md
 │
 ├── vision/                public-facing
-│   ├── prisms.md              six framings of PhantomOS
+│   ├── prisms.md              eight framings of PhantomOS
 │   ├── roadmap.md             what ships next
 │   └── manifesto.md           the thesis behind the product
 │

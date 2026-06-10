@@ -7,15 +7,6 @@ layer: territoire
 recommended_model: sonnet
 mode: proposed
 operator_facing: true
-triggers_fr:
-  - "creuse les mécanismes de {product}"
-  - "approfondis mechanisms {product}"
-  - "map-mechanisms {product}"
-  - "deep dive mécanismes {product}"
-triggers_en:
-  - "map mechanisms"
-  - "deep dive mechanisms"
-  - "enrich mechanisms {product}"
 consumes:
   - path: docs/doctrine/pain-benefit-chain-doctrine.md
   - path: brands/{slug}/audiences/*/pain_points/*.json
@@ -35,6 +26,8 @@ description: >
   utilisables séparément).
   FR · "creuse les mécanismes de {product}", "approfondis mechanisms {product}", "map-mechanisms {product}", "deep dive mécanismes {product}"
   EN · "map mechanisms", "deep dive mechanisms", "enrich mechanisms {product}"
+  FR: "creuse les mécanismes de {product}", "approfondis mechanisms {product}", "map-mechanisms {product}", "deep dive mécanismes {product}".
+  EN: "map mechanisms", "deep dive mechanisms", "enrich mechanisms {product}".
 permissions:
   reads: [brand, product]
   writes: [product]

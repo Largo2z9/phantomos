@@ -1,0 +1,86 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "ai-generated-realistic-photo",
+  "display_name": "Photo IA hyperrealiste",
+  "family": "ai-generated",
+  "typology_st": "variable",
+  "description": "Image generee par IA qui vise le photoreel indistinguable d'une vraie prise de vue, mais qui represente une scene impossible ou non rentable a shooter en vrai (mise en scene irrealisable, lieu inaccessible, casting/produit/echelle impossibles, compositing trop couteux). Sert quand on veut le credit visuel d'une photo reelle SANS le tournage : zero shooting, zero model release, iteration infinie d'angles. A choisir pour produire vite des concepts photoreels que la prod physique ne pourrait pas livrer, en assumant que le rendu doit passer pour reel (sinon prendre ai-generated-stylized).",
+  "render_recipe": {
+    "prompt_skeleton": "Photorealistic photograph of {impossible_scene} featuring {subject}, {product} integrated naturally and label-accurate, indistinguishable from a real camera shot, {lighting}, shot on {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, true-to-life materials and physically plausible light, real human skin with pores and micro-imperfections, coherent shadows and reflections, no illustration look, no CGI render look, no plastic surfaces",
+    "slots": [
+      { "name": "impossible_scene", "description": "Le coeur du style: la scene irrealisable ou non shootable qui justifie l'IA (ex 'a single drop of serum frozen mid-air splitting into a cross-section', 'the product floating in a hyperreal underwater room', 'a 20-storey-tall product on a city street at golden hour'). Doit rester photoreel, pas fantaisiste cartoon." },
+      { "name": "subject", "description": "Le sujet humain ou heros de la scene si present (peau/age/look credible cible). Laisser vide si scene produit pure. Eviter le look mannequin/stock." },
+      { "name": "product", "description": "Le produit reel a integrer, packaging et label corrects et lisibles (point de rupture IA n1: verifier l'ortho et le logo)." },
+      { "name": "lighting", "description": "Surcharge runtime si besoin, sinon defaut lighting de la fiche. Doit rester physiquement coherent avec la scene." },
+      { "name": "camera_lens", "description": "Surcharge runtime, sinon defaut camera_lens de la fiche." },
+      { "name": "palette_mood", "description": "Surcharge runtime alignee charte marque, sinon defaut palette_mood." },
+      { "name": "texture_grain", "description": "Surcharge runtime, sinon defaut texture_grain. Le grain photo est l'arme anti-look-IA." },
+      { "name": "composition_notes", "description": "Surcharge runtime (cadrage, espace overlay), sinon defaut composition_notes." }
+    ],
+    "lighting": "Physically plausible photographic lighting motivated by a real source in the scene, directional key with soft falloff, real ambient bounce and color spill from surrounding surfaces, coherent specular highlights and contact shadows; avoid the flat evenly-lit AI glow and the absence of any cast shadow",
+    "camera_lens": "Full-frame look, 35mm/50mm for scenes with people or 85mm/100mm macro for product hero, realistic aperture bokeh (f/2-f/4), slight lens vignetting and chromatic aberration at edges, eye-level or product-hero angle, framing with a touch of real-camera imperfection",
+    "palette_mood": "True-to-life color science, natural white balance, restrained saturation that reads as a graded photo not an HDR poster, brand-accent tones woven in without breaking realism",
+    "texture_grain": "Fine photographic sensor grain, real skin micro-texture (pores, fine lines, faint shine), authentic material textures (fabric weave, glass refraction, liquid surface tension), no beauty-retouch over-smoothing, no waxy plastic sheen",
+    "composition_notes": "One clear focal hero, rule-of-thirds, product label legible and camera-facing, negative space reserved for overlay copy; depth cues (foreground occlusion, atmospheric falloff) to sell the realism; keep the impossible element believable within the frame, not screaming 'render'"
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "aspect_ratio_square": "1:1",
+      "resolution": "2K",
+      "guidance": "medium to medium-high; too high pushes toward glossy AI-poster look, too low loses the impossible-scene control. Tune per scene.",
+      "negative_prompt": "illustration, cartoon, 3D render, CGI, video game render, plastic skin, waxy skin, over-smoothed, airbrushed, extra fingers, six-finger hands, deformed hands, fused fingers, dead glassy eyes, asymmetrical mismatched eyes, duplicated pupils, hallucinated text, garbled label, warped logo, oversaturated HDR, flat AI glow, missing shadows, floating subject, uncanny perfect symmetry"
+    },
+    "video_params": {
+      "motion": "subtle photoreal camera move only (slow dolly/push-in, gentle parallax) and physically plausible micro-motion in the scene (liquid ripple, fabric drift, light shift); the impossible element animates believably, NOT cartoonishly; avoid the morphing/warping AI-video drift on faces, hands and the product label",
+      "duration_s_range": [3, 8],
+      "transitions": "photoreal cuts or slow cross-dissolves, match-cut on the hero; no glitchy AI warps, no melting morphs; keep label and face stable across frames; loopable for feed"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Peau plastique/cireuse ou sur-lissee facon filtre beaute: exiger pores, texture, micro-imperfections (defaut n1 qui trahit l'IA sur un sujet humain).",
+    "Doigts surnumeraires, mains deformees, doigts fusionnes (encore plus fatal ici car le style PRETEND etre une vraie photo).",
+    "Regard mort, yeux vitreux, pupilles asymetriques ou dupliquees, reflets cornee incoherents.",
+    "Symetrie faciale parfaite et look mannequin/stock generique qui hurle le rendu IA.",
+    "Texte/label/logo hallucine sur le packaging: glyphes inventes, ortho fausse, logo deforme (verifier mot par mot, point de rupture majeur).",
+    "Glow IA plat sans aucune ombre portee ni contact shadow: la lumiere doit avoir une source et des ombres coherentes.",
+    "Reflets, ombres et profondeur de champ physiquement impossibles (double ombre, bokeh uniforme artificiel, reflet qui ne matche pas la scene).",
+    "Materiaux faux: verre/liquide/metal au rendu CGI lisse, tension de surface de liquide irrealiste, gouttes parfaitement identiques.",
+    "Drift d'echelle et de perspective dans la scene impossible: elements qui ne tiennent pas ensemble geometriquement.",
+    "Geometrie de fond incoherente (lignes qui ne se rejoignent pas, architecture impossible non intentionnelle, repetitions de pattern).",
+    "Sur-saturation HDR / look poster IA qui casse l'illusion photo: garder un etalonnage photo credible.",
+    "Sur la video: morphing/warping des visages, mains et du label entre frames, le tell n1 de l'IA video."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [3, 8],
+    "pairs_well_with": [
+      "real-photo-product-studio",
+      "real-photo-lifestyle",
+      "macro-photo-mouth-skin-etc",
+      "split-screen-comparison",
+      "graphic-icons-overlay",
+      "pack-shot-brand-template"
+    ],
+    "avoid_when": [
+      "La scene EST shootable en vrai a cout raisonnable: une vraie photo (real-photo-*) sera plus credible et moins risquee qu'une IA qui imite le reel.",
+      "Categorie reglementee sante/finance ou un visuel photoreel non reel sur un claim de preuve (avant/apres corps, demo efficacite) peut etre lu comme trompeur par la plateforme ou le prospect.",
+      "Besoin de preuve sociale authentique castable (testimonial/UGC) ou l'identification a une vraie personne porte la conversion: l'IA realiste reste un risque uncanny.",
+      "Marque ultra-brand-safe propre (zone 0-2) ou le moindre artefact IA detecte detruit la confiance.",
+      "Zone raw/agressive 9-10 ou un UGC selfie brut et imparfait convertit mieux que le hyperreal trop leche.",
+      "Le concept assume sa nature IA/irreelle: passer ai-generated-stylized plutot que de viser l'indistinguable."
+    ]
+  },
+  "refs": [
+    "Scene produit impossible a shooter: produit en cross-section flottant, goutte figee en plein air, echelle geante en rue, all photoreel.",
+    "Hero produit hyperreel sous-marin/anti-gravite/dans un environnement inaccessible, rendu indistinguable d'une vraie prise de vue.",
+    "Concept photoreel iterable a l'infini (10 angles/lieux du meme produit) la ou un shooting physique en livrerait un seul."
+  ],
+  "related_mechanic_ids": [],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

@@ -1,8 +1,10 @@
 ---
 name: compose-creative
-version: 1.8.0
+version: 1.9.0
 patch_notes_v2_87_4:
-  - "1.8.0 (v2.87.4 canonical many-to-many enforcement) · NEW HR-CC-CANON-1 · enforcement entry canonical `brands/{slug}/creatives/{CRT-NN}/` OBLIGATOIRE post-génération. Anti-pattern banned · sauver asset JPG/PNG standalone hors structure canonical (e.g. `visual-identity/creative_ANG-01_*.jpg` orphelin). Toute génération DOIT créer · (1) `creatives/{CRT-NN}/creative.json` conforme creative.schema v1.2+ avec lineage populated (angle_ref + audience_ref + product_ref + mechanism_ref + concept_ref) + tags populated (concept + creative + variant + mécanique narrative typed) + cross-refs many-to-many activés. (2) asset JPG sauvé dans `creatives/{CRT-NN}/produced/` (pas hors structure). (3) brief copy markdown S55 fiche v5 dans `creatives/{CRT-NN}/brief.md`. Closes audit Fincut session v2.87.3 finding · compose-creative générait visuel sans entry canonical · perte traçabilité + pas de tableau composition + pas de base de données imbriquée many-to-many. Backward compat strict additif · cycle runtime Step 0 → Step 4 preserved · seul l'output enforcement change. NOTE Notion bridge auto-wire creatives DEFERRED v2.88.0+ · skill `sync-creatives-to-notion` pas encore shipped (sync-notion-atlas v2.0.1 territoire-only canon respecté · creatives = production layer skill séparé). Backlog mainteneur."
+  - "1.8.0 (v2.87.4 canonical many-to-many enforcement) · NEW HR-CC-CANON-1 · enforcement entry canonical `brands/{slug}/creatives/{batch}/{CRT-NN}/` OBLIGATOIRE post-génération (forme batch · Brique 4 étape B repath · {batch}=run date-stampé). Anti-pattern banned · sauver asset JPG/PNG standalone hors structure canonical (e.g. `visual-identity/creative_ANG-01_*.jpg` orphelin). Toute génération DOIT créer · (1) `creatives/{batch}/{CRT-NN}/genome.json` (ADN · genome/1.2) + `creatives/{batch}/{CRT-NN}/creative.json` (lignage · creative.schema v1.3) avec lineage populated (angle_ref + audience_ref + product_ref + mechanism_ref + concept_ref) + tags populated (concept + creative + variant + mécanique narrative typed) + cross-refs many-to-many activés. (2) asset JPG sauvé dans `creatives/{batch}/{CRT-NN}/produced/{slug}.jpg` AVEC son sidecar `produced/{slug}.json` (produced-asset/1.0 · pas hors structure, pas d'orphelin). (3) brief copy markdown S55 fiche v5 dans `creatives/{batch}/{CRT-NN}/brief.md`. Closes audit Fincut session v2.87.3 finding · compose-creative générait visuel sans entry canonical · perte traçabilité + pas de tableau composition + pas de base de données imbriquée many-to-many. NOTE v2.87.4 cette règle restait phantom (déclarée ici, jamais exécutée body) · MATÉRIALISÉE en section `## HR-CC-CANON-1` exécutable par Brique 4 étape B (v1.9.0). NOTE Notion bridge auto-wire creatives DEFERRED v2.88.0+ · skill `sync-creatives-to-notion` pas encore shipped (sync-notion-atlas v2.0.1 territoire-only canon respecté · creatives = production layer skill séparé). Backlog mainteneur."
+patch_notes_brick4_step_b:
+  - "1.9.0 (Brique 4 étape B · repath batch + split genome/creative/sidecar + mkdir-claim) · La règle HR-CC-CANON-1 (déclarée en frontmatter v2.87.4 mais JAMAIS exécutée dans le body) est désormais MATÉRIALISÉE en section `## HR-CC-CANON-1` réelle et exécutable. (1) REPATH · la maison créa passe de la forme plate `brands/{slug}/produced/{CRT-N}.{json,jpg,md}` à la forme batch `brands/{slug}/creatives/{batch}/{CRT-NN}/` (genome.json + creative.json + produced/{slug}.json sidecar + produced/{slug}.jpg binaire + brief.md). {batch} = run date-stampé du jour (ex 2026-06-07-01 · lowercase+chiffres+tirets). Pattern id CRT-[0-9]{2,4}. (2) mkdir-CLAIM · STEP 0 atomique AVANT tout write · résout {batch}, scanne le max CRT-NN cross-batch, `mkdir creatives/{batch}/{CRT-NN}/` (réservation = la claim · retry +1 si EEXIST) + `mkdir produced/`. Les refus HR7 (packshot absent) passent AVANT la claim (jamais de dossier vide réservé). (3) SPLIT persist · l'unique creative.json devient genome.json (ADN · hook/frames/support/genome_tags/script_id GSC-NN · conforme genome.schema genome/1.2) + creative.json (lignage · creative_id CRT / concept_id / variant_of / variant_axis / lineage{} / perf / tags / meta · conforme creative.schema creative/1.4) + produced/{slug}.json (manifest binaire · tool/endpoint/params/source/hash/qc/status · conforme produced-asset.schema produced-asset/1.0 · UN sidecar par binaire .jpg produit, anti-orphelin). Le binaire .jpg écrit DIRECT sous produced/ ; le sidecar json passe par le gate `write_to_context`. (4) HR7 anti-pattern 4 (L865 plate-legacy) réécrit · distingue INTERDIT (write .json direct) vs ATTENDU (binaire .jpg direct sous produced/ AVEC sidecar json gated). Cross-ref `resources/conventions/creative-storage.md` (D#481). Backward compat · forme cible imposée par le gate write-to-context.py (briques 1+3) · les anciennes écritures plates étaient déjà rejetées runtime, ce patch aligne le SOP sur le gate."
 patch_notes_v2_87_6:
   - "1.8.0 (v2.87.6 SUBSTRATE sprint · enforcement many-to-many + dream_scenario_narrative consume) · Sprint substrate canon · refresh atlas Stepprs deep desire chain v2.87.4 (chronic-pain-45 grand-parent narrative + workers-shifts conjoint Friday evening narrative) + NEW section walkthrough Porte A many-to-many `tour.md` Anatomie de la structure. Impact ce skill · compose-creative consume désormais `audiences/{slug}/profile.json#psychology.dream_scenario_narrative` (canon v2.87.4) pour brief copy S55 fiche v5 · le target_recipient relationnel (grand-parent transgénérationnel · conjoint post-shift) et le social_payoff doivent flow vers le visual concept + le hook copy. Pattern · si dream_scenario_narrative présent dans audience cible → encode visual cue relationnel (grand-mère + petits-enfants au parc · conjointe + mari sortie restaurant) plutôt que generic product shot. Closes gap v2.87.4 · canon deep desire chain existait dans schema mais consume runtime compose-creative restait fonctionnel pain-relief flat. Enforcement many-to-many entry canonical hardcoded préservé v2.87.4 · v2.87.6 ajoute consume substrate dream_scenario_narrative déclaratif · runtime implementation backlog v2.88.0+ (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 type: producer
@@ -38,21 +40,15 @@ description: >
   Génère une créa (visuel via fal.ai nano-banana-2/edit + brief copy markdown S55 fiche v5)
   depuis un brief structuré ancré dans canon × profil audience × angle × brand visual_identity.
   Assemblage compositionnel selon équation v3.1 (NOYAU x CONTEXTE x MODIFIEURS).
-  Persiste creative.schema v1.2 + JPG local + brief markdown.
+  Persiste (Brique 4 étape B · split) sous brands/{slug}/creatives/{batch}/{CRT-NN}/ ·
+  genome.json (ADN · genome/1.2) + creative.json (lignage · creative/1.4) + produced/{slug}.json
+  (sidecar manifest binaire · produced-asset/1.0) + produced/{slug}.jpg (binaire direct) + brief.md.
+  Dossier {CRT-NN}/ réservé par mkdir-claim atomique (STEP 0) avant tout write.
   Inputs supportés : (audience_slug, angle_id, product_slug optional), ou hypothèse from
   scratch ("produit angle pour {brand_slug} post-grossesse" sans angle_id, le skill propose 2-3
   angles depuis profile.json + canon copy).
-triggers_fr:
-  - "compose une créa"
-  - "produis un visuel"
-  - "génère une créa pour"
-  - "creative pour cette audience"
-  - "matérialise l'angle"
-triggers_en:
-  - "compose a creative"
-  - "generate a visual"
-  - "produce creative for"
-  - "materialize the angle"
+  FR: "compose une créa", "produis un visuel", "génère une créa pour", "creative pour cette audience", "matérialise l'angle".
+  EN: "compose a creative", "generate a visual", "produce creative for", "materialize the angle".
 disambiguates_against:
   decompose-ad: "decompose-ad fait du REVERSE (analyse ad existante). compose-creative fait du FORWARD (génère depuis brief)."
   produce-paid-angles: "produce-paid-angles produit des ANGLES (stratégie textuelle). compose-creative produit la CRÉA finale (visuel + brief copy)."
@@ -86,8 +82,29 @@ consumes:
     min_version: 3.1.0
   - path: resources/registries/creative-mechanics-registry.md
     min_version: 1.0.0
+  - path: resources/registries/styles/*.json
+    min_version: 1.0.0
+    note: "NEW style-library (backing primary_style_id) · la fiche du style choisi pilote le prompt (render_recipe), fournit les anti_ai_guardrails au gate qc-creative, et le da_compat vérifié vs brand.json#brand_da"
+  - path: resources/registries/style-registry.md
+    min_version: 1.0.0
+  - path: resources/concepts/*.json
+    min_version: 1.0.0
+    note: "NEW history-aware · patterns concept promus (library-pattern). Sur freedom_cursor=exploit, piocher un pattern promote-ready matchant le mecanique_id choisi (via related_mechanic_ids) au lieu de composer à froid."
+  - path: resources/registries/hooks/*.json
+    min_version: 1.0.0
+    note: "NEW history-aware · patterns hook promus cross-brand (surtout vidéo). EN PLUS de canon/copy/hooks (archétypes de copy), distinct."
   - path: resources/schemas/creative.schema.json
-    min_version: 1.2.0
+    min_version: 1.3.0
+    note: "couche lignage (Brique 4 étape B · creative/1.4 · variant_of CRT|RCV + lineage{})"
+  - path: resources/schemas/genome.schema.json
+    min_version: 1.0.0
+    note: "NEW Brique 4 étape B · ADN par-créa (genome/1.2 · script_id GSC-NN, hook, frames, support, genome_tags)"
+  - path: resources/schemas/produced-asset.schema.json
+    min_version: 1.0.0
+    note: "NEW Brique 4 étape B · sidecar manifest binaire (produced-asset/1.0 · 1 par .jpg produit, anti-orphelin)"
+  - path: resources/conventions/creative-storage.md
+    min_version: 1.0.0
+    note: "forme batch creatives/{batch}/{CRT-NN}/ + allocation mkdir-claim (D#481)"
   - path: docs/doctrine/angle-anatomy-doctrine.md
   - path: docs/doctrine/hooks-method-doctrine.md
   - path: docs/doctrine/pain-benefit-chain-doctrine.md
@@ -95,13 +112,18 @@ consumes:
   - path: docs/system/output-clarity-doctrine.md
   - path: docs/system/operator-vocabulary-translation.md
 produces_validations_for:
+  # Brique 4 étape B · les tags mécanique/concept vivent désormais dans genome.json (ADN),
+  # les validations vers le canon copy se sourcent de la couche genome (genome_tags.mechanic_id /
+  # hook.mechanic_id), pas de creative.json.
   - resources/canon/copy/hooks/*.json
   - resources/canon/copy/mecaniques/*.json
   - resources/canon/copy/archetypes-voix/*.json
 produces_proposals_for:
-  - brands/{slug}/produced/{CRT-N}.json
-  - brands/{slug}/produced/{CRT-N}.jpg
-  - brands/{slug}/produced/{CRT-N}.md
+  - brands/{slug}/creatives/{batch}/{CRT-NN}/genome.json
+  - brands/{slug}/creatives/{batch}/{CRT-NN}/creative.json
+  - brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.json
+  - brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.jpg
+  - brands/{slug}/creatives/{batch}/{CRT-NN}/brief.md
 prerequisites:
   - field: angles/{angle_id}.json
     level: L1
@@ -139,16 +161,15 @@ permissions:
       version_canon_date: "2025-11"
       replaced_legacy: "fal-ai/nano-banana-pro/edit (v1.0.x · Gemini 2.5 Flash Image)"
       auto_upgrade: false
-pipeline:
-  preconditions: "angle.json existe avec lineage canon. profile.json 8 dimensions populated. spec.json#visual_identity populated avec primary_front packshot. credentials FAL_API_KEY présent dans credentials_shared.env."
-  postconditions: "creative.json conforme creative.schema v1.2 persisté. JPG local persisté dans produced/. brief markdown S55 fiche v5 forward rendu à l'opérateur. Validation silencieuse via validate-resources."
+  preconditions: "angle.json existe avec lineage canon. profile.json 8 dimensions populated. spec.json#visual_identity populated avec primary_front packshot. credentials FAL_API_KEY présent dans credentials_shared.env. {batch} courant résolu (run date-stampé du jour, ex 2026-06-07-NN) et `mkdir -p brands/{slug}/creatives/{batch}/` exécuté AVANT le mkdir-claim, sinon STEP 0 n'a pas de dossier-batch parent."
+  postconditions: "genome.json (genome/1.2) + creative.json (creative/1.4) persistés sous brands/{slug}/creatives/{batch}/{CRT-NN}/ via write_to_context mode=proposed. JPG écrit DIRECT sous {CRT-NN}/produced/{slug}.jpg AVEC sidecar produced/{slug}.json (produced-asset/1.0) le traçant (anti-orphelin). brief.md écrit DIRECT sous {CRT-NN}/. Dossier {CRT-NN}/ + produced/ créés par mkdir-claim atomique (STEP 0) avant tout write. brief markdown S55 fiche v5 forward rendu à l'opérateur. Validation silencieuse via validate-resources."
 ---
 
 # Skill: compose-creative
 
-> **Compose a creative forward.** v1.0.0 · S55 fiche v5 forward · creative.schema v1.2 · équation v3.1 · pendant FORWARD de decompose-ad.
+> **Compose a creative forward.** v1.9.0 · S55 fiche v5 forward · split genome/1.2 + creative/1.4 + produced-asset/1.0 · forme batch `creatives/{batch}/{CRT-NN}/` · équation v3.1 · pendant FORWARD de decompose-ad.
 
-Producer, not decomposer. Lit (angle × audience × brand × product visual_identity × canon copy), applique l'équation compositionnelle v3.1 en mode forward, génère un visuel via fal.ai nano-banana-2/edit (v2.46 canon, Gemini 3 Pro Image), écrit un brief copy markdown S55 fiche v5, persiste un creative.schema v1.2 brand-side. Le mécanisme reste invisible (pas de field paths, pas de scores numériques, pas de noms internes). L'opérateur voit une fiche quatre sections forward, un JPG local, et un bloc tags retrieval.
+Producer, not decomposer. Lit (angle × audience × brand × product visual_identity × canon copy), applique l'équation compositionnelle v3.1 en mode forward, génère un visuel via fal.ai nano-banana-2/edit (v2.46 canon, Gemini 3 Pro Image), écrit un brief copy markdown S55 fiche v5. Persiste (Brique 4 étape B · split) sous `brands/{slug}/creatives/{batch}/{CRT-NN}/` · genome.json (ADN · mécanique/format/concept/stop_scroller/hook/frames/genome_tags typed/script_id GSC-NN) + creative.json (lignage · refs + variant_of + variant_axis + meta.validation_status + performance + tags) + sidecar produced/{slug}.json (manifest binaire) + brief.md. Le dossier {CRT-NN}/ est réservé par mkdir-claim atomique AVANT tout write. Le mécanisme reste invisible (pas de field paths, pas de scores numériques, pas de noms internes). L'opérateur voit une fiche quatre sections forward, un JPG local, et un bloc tags retrieval.
 
 ## Tone
 
@@ -292,7 +313,12 @@ Operator peut ajouter `composite_mode` au input · `full_regen` (default · pipe
 
 ## HR2 · Apply équation v3.1 compositionnelle
 
-Assembler creative.schema v1.2 selon NOYAU × CONTEXTE × MODIFIEURS.
+Assembler l'ADN (genome.schema · genome/1.2 · genome.json) + le lignage (creative.schema · creative/1.4 · creative.json) selon NOYAU × CONTEXTE × MODIFIEURS. Le NOYAU (mécanique × format × stop_scroller × ton) projette dans `genome.json` ; le CONTEXTE/MODIFIEURS (refs, intent_mix, execution, performance) dans `creative.json`. La persist split est détaillée HR5.
+
+**History-aware (NEW · pioche vs froid) :** lire `regime.freedom_cursor` (genome-package · explore↔exploit).
+- **exploit** (cursor bas) · pour le `mecanique_id` AD-level choisi, chercher un pattern PROMU (`resources/concepts/*.json` = `library-pattern` avec `promotion.status: promote-ready`) qui le matche via `related_mechanic_ids`. Si trouvé, injecter son `skeleton`/`slots` comme base · composer SUR l'historique qui a marché cross-brand, pas à froid. Idem côté hook si vidéo (`registries/hooks/*.json`).
+- **explore** (cursor haut) · autoriser un reslot novateur (pattern d'une autre verticale, ou mécanique moins évidente), et le SURFACER à l'opérateur comme pari assumé.
+- Aucun pattern promu disponible · composer à froid (comportement actuel), `freedom_cursor_note` consigné.
 
 **NOYAU (invariant créa) :**
 
@@ -333,6 +359,7 @@ Pipeline image gen :
    2. Si absent, fallback `brands/{slug}/products/{product_slug}/visual_identity.json#packshots.primary_front` (sibling, verifier `_belongs_to` pointer).
    3. Si les 2 paths absents ou null, refuse de composer (regression label garantie cf HR1.4).
 2. Construis prompt structuré :
+   - **Style (style-library · NEW)** : lire la fiche `resources/registries/styles/{genome_tags.primary_style_id}.json`. Son `render_recipe.prompt_skeleton` (+ `slots`, `lighting`, `camera_lens`, `palette_mood`, `texture_grain`, `composition_notes`) PILOTE le squelette du rendu au lieu de l'improviser. Vérifier `primary_style_id ∈ brand.json#brand_da.allowed_style_ids` (sinon warn opérateur). Transmettre les `anti_ai_guardrails` de la fiche au gate `qc-creative` (Axe 5). Index lisible · `resources/registries/style-registry.md`.
    - Référence DNA visuel angle (mécanique narrative + scène depuis HR2 NOYAU).
    - Hard constraints `visual_identity` (non-négo) :
      - Container : `{container.shape} {container.material} {container.cap_type}, {container.transparency}`.
@@ -348,8 +375,8 @@ Pipeline image gen :
    - `aspect_ratio="4:5"` (default Meta feed, override possible via input opérateur). Enum supportée par endpoint : `auto, 21:9, 16:9, 3:2, 4:3, 5:4, 1:1, 4:5, 3:4, 2:3, 9:16`.
    - `output_format="jpeg"`, `resolution="1K"` (default Meta feed, override `2K` si haute fidélité requise).
    - Auth header `Authorization: Key ${FAL_API_KEY}`.
-4. Download résultat dans `/tmp/compose-creative/{brand}-{crt_id}.jpg`.
-5. Move final vers `brands/{brand}/produced/{CRT-N}.jpg`.
+4. Download résultat dans `/tmp/compose-creative/{brand}-{crt_id}.jpg` (staging éphémère).
+5. Move final vers `brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.jpg` (binaire écrit DIRECT · le dossier `{CRT-NN}/produced/` existe déjà, réservé par le mkdir-claim HR-CC-CANON-1 STEP 0). PUIS écrire le sidecar manifest `produced/{slug}.json` (produced-asset/1.0 · `asset_role`, `file`, `tool: "fal"`, `endpoint`, `params`, `status: "generated"`, `created_at`, `genome_ref: <script_id GSC-NN>`) via `write_to_context` mode=proposed (anti BUG-ASSET-ORPHAN · tout binaire sous produced/ a son sidecar json gated). Double régime explicite · binaire .jpg direct, sidecar .json par le gate. Détail HR5 + HR-CC-CANON-1.
 
 **Retry logic label preservation :**
 
@@ -361,6 +388,19 @@ Pipeline image gen :
 - Valider chaque `distinctive_features[]` présent dans le render (lecture image + cross-check description).
 - Valider color_palette dominantes match (hex tolérance ±15%).
 - Échec sur 1+ feature → flag à l'opérateur + propose re-gen avec prompt renforcé.
+
+### HR-QC-GATE · Gate QC de sortie (qc-creative) · pas de spend sans vert
+
+Après le QC soft ci-dessus et AVANT de présenter la créa comme prête (avant persist final), invoquer le gate `qc-creative` sur le binaire produit. On met du budget média derrière, rien ne passe sans gate vert.
+
+1. **Invoquer** `qc-creative` avec `creative_dir = brands/{slug}/creatives/{batch}/{CRT-NN}/` (Task tool · curator · sonnet · subagent_safe). Il REGARDE le binaire (vision) et rend `{shippable, decision, per_binary[], blocking_issues[], fix_list[]}`.
+2. **Écrire le verdict** dans `produced/{slug}.json#qc` (`passed`, `checks[]`, `regen_count`) via `write_to_context` mode=proposed (réceptacle produced-asset/1.0 existant). C'est le caller qui écrit, jamais le gate.
+3. **Brancher la décision** :
+   - `PASS` (`shippable: true`) → persist normal, créa éligible au spend.
+   - `FIX` avec un `block` fidélité (logo/produit re-généré) ET `assets_canonical.{slot}._validated_by_operator: true` présent → **auto-retry en `composite_mode: layered`** (HR3b · coller le vrai asset canon) puis re-gate. Généralise l'auto-trigger HR3.4 step 2 à la fidélité produit · c'est la boucle qui ferme le défaut logo.
+   - `FIX` sans asset canon → persister avec `produced/{slug}.json#qc.passed: false` (non-shippable) + surfacer le `fix_list` à l'opérateur en langage métier (soft offer · canoniser le packshot / déposer le logo).
+   - `KILL` → ne pas présenter comme prête ; proposer de recomposer (concept troué / produit faux).
+4. **Jalon `shippable`** = dérivé (tous binaires fidélité-critique `qc.passed` + zéro blocking), DISTINCT de `validation_status` (cycle perf). Ne jamais marquer une créa spend-ready sans `qc-creative` PASS.
 
 ---
 
@@ -376,7 +416,7 @@ Calibrer `max_retry` selon complexité scène détectée à partir du prompt ass
 Après les retries autorisés, si le wordmark principal (`label.wordmark_text`) est préservé MAIS le sub-label (`label.sub_label`) ou duration indicator (`label.duration_indicator`) reste flou ou illisible :
 1. NE PAS continuer à retry (gain marginal, brûle budget API).
 2. **v1.3+ auto-trigger layered mode si canonical asset disponible** · check `visual_identity.assets_canonical.{slot}._validated_by_operator: true` · si oui, redéclencher pipeline en `composite_mode: layered` (HR3b) plutôt que persister régression. Solution canonique au problème historique.
-3. Si pas de canonical asset · persister la créa avec wordmark préservé + set `meta.label_compositing_required: true` dans `creative.json`.
+3. Si pas de canonical asset · persister la créa avec wordmark préservé + set `meta.label_compositing_required: true` dans `creative.json` (sous `brands/{slug}/creatives/{batch}/{CRT-NN}/creative.json` · ce flag est de la traçabilité/lignage, il vit dans creative.json, PAS dans genome.json).
 4. Note dans brief markdown S55 fiche v5 (Section 1, ligne Branding), langage métier · *"Petit texte sous le logo flou sur le packshot. Si on canonise une fois la photo produit officielle, ça sera net sur toutes les pubs suivantes."*
 5. Flag explicite opérateur reco no-orphan, langage métier, soft offer · *"Logo principal préservé, mais le petit texte sous le logo est flou. Si tu veux, on peut canoniser le packshot une fois et le réutiliser sur toutes tes pubs (net garanti)."*
 
@@ -580,14 +620,15 @@ Override possibles via operator input ou angle.formula.observation context (ex a
 
 ### Step 3b.4 · Output composite
 
-Save final composite dans `/tmp/compose-creative/{brand}-{crt_id}.jpg` (replace scene-only temp file). Path final downstream HR3 step 5 standard (move vers `brands/{brand}/produced/{CRT-N}.jpg`).
+Save final composite dans `/tmp/compose-creative/{brand}-{crt_id}.jpg` (replace scene-only temp file · staging éphémère). Path final downstream HR3 step 5 standard · move vers `brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.jpg` (binaire écrit DIRECT) + émettre le sidecar `produced/{slug}.json` via `write_to_context` mode=proposed (mode layered produit aussi un binaire qui DOIT être manifest-tracé · même régime que HR3 step 5). Le production-how (endpoint, params, canonical asset path) vit dans le sidecar (= le manifest = COMMENT le binaire a été fabriqué), PAS dans creative.json.
 
-Note dans `meta` ·
-- `composite_mode: "layered"`
-- `composite_scene_endpoint: "fal-ai/nano-banana-2/edit"`
-- `composite_canonical_asset_path: <relative path>`
-- `composite_canonical_asset_validated_at: <date depuis visual_identity.json>`
-- `composite_params: {scale_factor, position, shadow_offset, shadow_blur, shadow_opacity}`
+Note dans le sidecar `produced/{slug}.json` (produced-asset/1.0) · le COMMENT-le-binaire-a-été-fait ·
+- `tool: "fal"` + `endpoint: "fal-ai/nano-banana-2/edit"`
+- `params: {composite_mode: "layered", scale_factor, position, shadow_offset, shadow_blur, shadow_opacity}`
+- `source_asset_ref: {kind: "scraped_packshot", path: <canonical asset path relative>}` (+ `composite_canonical_asset_validated_at: <date depuis visual_identity.json>` en additif)
+- `status: "generated"`, `created_at`, `genome_ref: <script_id GSC-NN>`
+
+(Stratégie-pourquoi reste dans creative.json ; production-comment dans le sidecar. Si laissé dans creative.json, le sidecar serait vide et la valeur anti-orphelin perdue.)
 
 **Avantage layered.** Text fidelity 100% (packshot canonisé craft-packshot · 8/8 quality check pass déjà validé opérateur). Pas de retry budget burned sur label preservation. Pipeline déterministe sur produit · stochastique uniquement sur scène.
 
@@ -763,10 +804,11 @@ Selon réponse operator, l'agent invoke concrètement ·
 
 Pas de "run import-asset Mode C" en surface operator. Le bridge code ci-dessus est instruction agent-facing pour câblage runtime, jamais leak operator.
 
-**Meta logged additif** ·
-- `composite_layers: [...]` (array ordered des layers appliqués avec params résolus)
-- `composite_layers_assets_paths: [...]` (paths absolus pour audit)
-- `composite_layers_missing: [...]` (array layers demandés mais slot vide, surface à operator v2.50+)
+**Meta logged additif** · le binaire composite final multi-layer est tracé par SON sidecar `produced/{slug}.json` (produced-asset/1.0). Chaque champ de prod va dans le manifest, pas dans creative.json ·
+- `params.composite_layers: [...]` (array ordered des layers appliqués avec params résolus) → sidecar
+- `params.composite_layers_assets_paths: [...]` (paths absolus pour audit) → sidecar ; les assets sources (packshot/logo/badge) sont référencés depuis visual_identity, pas re-tracés ici
+- `params.composite_layers_missing: [...]` (array layers demandés mais slot vide, surface à operator v2.50+) → sidecar
+- `status: "generated"`, `created_at`, `genome_ref: <script_id GSC-NN>` → sidecar (chaque binaire composite final obtient son sidecar)
 
 **Workflow recommandé v2.48** ·
 1. `craft-packshot` upstream → canonical packshot validé
@@ -791,7 +833,7 @@ Format opérateur-facing structuré (équivalent decompose-ad output, mode forwa
 | Body | Description body description (si présent) |
 | CTA texte | Verbatim button label + texte autour |
 | Branding | Logo position, packshot oui/non, couleur dominante (hex), font signal |
-| Visuel généré | Path local `/tmp/compose-creative/{...}.jpg` → `produced/{CRT-N}.jpg` |
+| Visuel généré | Staging `/tmp/compose-creative/{...}.jpg` → `creatives/{batch}/{CRT-NN}/produced/{slug}.jpg` (binaire + sidecar `produced/{slug}.json`) |
 
 **Section 2 · CE QUE LA CRÉA RACONTE** (intention stratégique)
 
@@ -815,28 +857,81 @@ Format opérateur-facing structuré (équivalent decompose-ad output, mode forwa
 
 ---
 
-## HR5 · Persist creative.json + JPG + markdown
+## HR5 · Persist split genome.json + creative.json + sidecar + brief.md (Brique 4 étape B)
 
-Conforme creative.schema v1.2 :
+> Le mkdir-claim atomique (réservation du `{CRT-NN}/`) est exécuté en **STEP 0 de HR-CC-CANON-1** (section ci-dessous), AVANT cette persist. HR5 écrit dans le dossier déjà réservé.
 
-- `_schema_version: "creative/1.2"`.
-- `_equation_ref` const v3.1.
+L'unique `creative.json` historique se SPLIT en trois fichiers `.json` (+ le brief `.md`), chacun conforme à son schéma. Mapping champ→fichier = celui des schémas (`genome.schema.json` ADN, `creative.schema.json` lignage, `produced-asset.schema.json` sidecar).
+
+**genome.json** (ADN · conforme `genome.schema.json` `_schema_version: "genome/1.2"`, strictement nu, aucun costume `_field_types`) ·
+- `script_id` : `GSC-NN` (Genome SCript · clé de join perf future · PAS CRT-NN · pattern `^GSC-[0-9]{2,4}$`).
+- `support` : `static | carousel | video` (depuis HR2 `format`).
+- `route` : `route_a_full_ia` (default forward) ou `route_b_export_brief`.
+- `hook` : `{mechanic_id (enum), hook_text}` depuis HR2 NOYAU stop_scroller + canon hooks. `hook.visual` optionnel (first-frame stop-scroll).
+- `frames` : tableau ordonné copy+visuel (static = 1 frame, carousel/video = 2+). Chaque frame `{role (beat_type), copy_script, visual_script}`.
+- `genome_tags` : `{support, mechanic_id, primary_style_id}` requis + `beat_type_sequence` (projection plate des `frames[].role`) + **`mecanique_id`** (le CONCEPT ad-level choisi en HR2 · → `creative-mechanics-registry` SSOT · DISTINCT du `mechanic_id` HOOK · pont A=B sur l'axe concept · D#491) + **`angle_id`** (l'ANGLE ANG-NN choisi en HR2 = unité STRATÉGIQUE de 1ère classe · porte l'objection [via `angle.lineage.objection_ref`] + l'OTRB + le payoff [via l'audience] · joignable à la perf · D#492) + **`audience_slug`** (porte le dream_scenario) + `awareness_level` recommandés.
+- `lineage` (optionnel ADN abstrait) : `{concept_id, angle_id (ANG-NN), persona_label}`.
+
+**creative.json** (lignage · conforme `creative.schema.json` `_schema_version: "creative/1.4"`) ·
+- `creative_id` : `CRT-NN` (réservé par mkdir-claim STEP 0 · pattern `^CRT-[0-9]{2,3}$`).
+- `mode` : `concept | template | asset`. `audience_slug`. `_equation_ref` const v3.1.
+- `concept_id` : nouveau `cpt_{brand_slug}_{angle_short}_{NNN}` (SSOT du groupage de variantes).
+- `variant_of` : `null` (source canonique) ou `CRT-NN`/`RCV-NN` du parent si dérivé. `variant_axis` : enum canonique `[photo_swap, promo_toggle, hook_swap, background_swap, persona_split, null]`.
+- `lineage{}` : `{angle_ref (ANG-NN), audience_ref, product_ref, mechanism_ref, concept_ref, variant_of, brief_ref (BRF-NN), ad_id}`.
 - `intent_mix` (multi-weighted depuis HR2). Champ legacy `intent` mirror backward-compat.
-- `execution.overlay_density` (0.0-1.0 numérique) + `execution.brand_mark_present` (bool). Champ legacy `craft_mode` mirror dérivé.
-- `meta.validation_status` (object composite) : `{status: "hypothesis", confidence: 0.5, confidence_source: "default"}` (créa pas encore testée en prod).
-- `meta.test_results[]` empty (sera populé après campagne live).
-- `performance.longevity_signal` vide (pas encore en prod).
-- `tags.source: "internal_production"`.
-- `tags.concept_id` : nouveau `cpt_{brand_slug}_{angle_short}_{NNN}` ou `variant_of: {parent_concept_id}` si dérivé.
+- `execution.overlay_density` (0.0-1.0) + `execution.brand_mark_present` (bool). Champ legacy `craft_mode` mirror dérivé.
+- `meta.validation_status` (object composite) : `{status: "hypothesis", confidence: 0.5, confidence_source: "default"}` (créa pas encore testée). `meta.created`. `meta.created_by_skill: "compose-creative"`. `meta.test_results[]` empty.
+- `performance.longevity_signal` vide (pas encore en prod). `tags.source: "internal_production"`.
 
-**Mutation gate :**
+**produced/{slug}.json** (sidecar manifest binaire · conforme `produced-asset.schema.json` `_schema_version: "produced-asset/1.0"`) · UN sidecar par binaire `.jpg` produit (anti-orphelin) ·
+- `asset_role` (ex `"composite-final"`, `"first-frame-hook"`), `file` (ex `"{slug}.jpg"`), `status: "generated"`, `created_at` requis.
+- `tool: "fal"`, `endpoint: "fal-ai/nano-banana-2/edit"`, `params` (prompt/aspect_ratio/resolution + composite params si layered), `source_asset_ref`, `hash` optionnel, `qc` optionnel.
+- `genome_ref` : `<script_id GSC-NN>` (relie le binaire à l'ADN sans le dupliquer).
 
-1. Generate `creative_id`. Pattern `CRT-NN`. Lookup max existing ID dans `brands/{slug}/produced/`, increment.
-2. Write via `write_to_context(field_path, value, source, confidence, mode="proposed")`. **NEVER edit JSON directly via Edit/Write/NotebookEdit.**
-3. Persist JPG : move `/tmp/compose-creative/{brand}-{crt_id}.jpg` → `brands/{brand}/produced/{CRT-N}.jpg`.
-4. Write brief markdown : `brands/{brand}/produced/{CRT-N}.md` (format S55 fiche v5 forward).
+**Mutation gate (séquence) :**
+
+1. **Dossier déjà réservé** par le mkdir-claim atomique STEP 0 (HR-CC-CANON-1) · `creatives/{batch}/{CRT-NN}/` + `produced/` existent. NE PAS s'appuyer sur le `mkdir(exist_ok=True)` du gate (non-atomique · 2 runs concurrents écraseraient le même `CRT-NN`).
+2. Write `genome.json` + `creative.json` + sidecar `produced/{slug}.json` via `write_to_context(field_path, value, source, confidence, mode="proposed")` (les trois `.json`). **NEVER edit JSON directly via Edit/Write/NotebookEdit.**
+3. Persist JPG : move `/tmp/compose-creative/{brand}-{crt_id}.jpg` → `brands/{slug}/creatives/{batch}/{CRT-NN}/produced/{slug}.jpg`. **Le binaire `.jpg`/`.mp4` est écrit DIRECT** (`write_to_context` ne gère que le `.json`), MAIS son sidecar `.json` (step 2) passe par le gate. Double régime non-négociable.
+4. Write brief markdown : `brands/{slug}/creatives/{batch}/{CRT-NN}/brief.md` (nom fixe `brief.md`, format S55 fiche v5 forward). **Écrit DIRECT via l'outil Write** (`.md` n'est NI dans `ALLOWED_PATH_PATTERNS` du gate write-to-context, NI dans mutation-guard qui ne garde que `.json`) · ne PAS router le `.md` via `write_to_context` (échouerait).
 5. Si `mecanique_id == "other"` → emit event `mecanique_proposal_flag` avec payload `{observed_mecanique_signature, ad_creative_id, registry_gap_description}`.
-6. Trigger `validate-resources` silencieusement post-write. Flag MAJOR/CRITICAL à l'opérateur si remonte.
+6. Trigger `validate-resources` silencieusement post-write (valide genome + creative + sidecar contre `genome.schema.json` / `creative.schema.json` / `produced-asset.schema.json`, et la forme de path contre `ALLOWED_PATH_PATTERNS`). Flag MAJOR/CRITICAL à l'opérateur si remonte.
+
+---
+
+## HR-CC-CANON-1 · Entry canonical batch + mkdir-claim (Brique 4 étape B · exécutable)
+
+> Cette règle était déclarée en frontmatter (`patch_notes_v2_87_4`) mais JAMAIS exécutée. Elle est ici MATÉRIALISÉE en section réelle. Toute génération créa DOIT créer son dossier canonique `brands/{slug}/creatives/{batch}/{CRT-NN}/` AVANT tout write, persister le split (genome + creative + sidecar + brief), et interdire tout asset orphelin hors structure. Cross-ref `resources/conventions/creative-storage.md` (D#481).
+
+### Refus AVANT claim (ordre HR7)
+
+Tous les refus HR7-style (HR7 anti-pattern 1 · `packshots.primary_front` absent dans les 2 paths · HR7 anti-pattern 3 · `angle.json` absent / `formula` vide · `FAL_API_KEY` absent) s'exécutent **AVANT STEP 0c**. Un run refusé ne doit JAMAIS laisser un dossier `CRT-NN/` réservé vide. La claim atomique ne se prend qu'une fois la génération garantie possible.
+
+### STEP 0 · mkdir-claim atomique (AVANT tout write_to_context)
+
+Le mkdir-claim s'exécute en **STEP 0**, juste avant la génération visuelle persistée (HR3/HR3b produisent le binaire en `/tmp` ; HR5 persiste dans le dossier réservé ici).
+
+**STEP 0a · résoudre {batch}.** `{batch}` = run date-stampé du jour, lowercase + chiffres + tirets (regex gate `[a-z0-9-]+`). Default = `$(date +%Y-%m-%d)-NN` où NN = prochain run 2-digit du jour. Résoudre NN · lister `brands/{slug}/creatives/` pour les dossiers matchant `$(date +%Y-%m-%d)-*`, prendre le max suffixe, sinon `01`. Un run PEUT réutiliser le batch de session déjà ouvert. `mkdir -p brands/{slug}/creatives/{batch}/` (idempotent · le dossier-batch n'est PAS la claim).
+
+**STEP 0b · candidat CRT-NN (scan max cross-batch).** Scanner TOUT l'arbre du namespace CRT pour le max existant, PAS juste le batch courant (les id sont globalement uniques dans le namespace CRT, batch-indépendants) ·
+```
+ls -d brands/{slug}/creatives/*/CRT-* 2>/dev/null | grep -oE 'CRT-[0-9]{2,4}' | sort -t- -k2 -n | tail -1
+```
+→ N. Candidat = `CRT-(N+1)`, zero-paddé à ≥2 digits. CRT scanné SÉPARÉMENT de RCV (jamais fusionnés · RCV = namespace concurrent decompose-ad).
+
+**STEP 0c · claim atomique.** `mkdir brands/{slug}/creatives/{batch}/CRT-{N+1}/` SANS `-p` sur le segment final (le parent `{batch}/` existe déjà depuis 0a). `mkdir` sur un dossier existant échoue → **c'est le verrou** (la réservation). Sur succès · l'id est à toi, immédiatement `mkdir -p brands/{slug}/creatives/{batch}/CRT-{N+1}/produced/`. Sur EEXIST · `N = N+1`, retry (boucle bornée, ex 50 essais). C'est le SEUL mécanisme de réservation · pas de fichier-index, pas de lock-file, pas d'écrivain privilégié. Les trous d'id sont inoffensifs (unicité requise, pas absence-de-trou).
+
+> **PIÈGE (vérifié source · write-to-context.py L453 `target.parent.mkdir(parents=True, exist_ok=True)`)** · ce mkdir du gate n'est PAS une claim atomique. Si un skill saute STEP 0c et compte sur le mkdir du gate, deux runs concurrents passent tous les deux et écrivent dans le MÊME `CRT-NN`, clobbering silencieux. Le `mkdir` atomique (sans `exist_ok`) DOIT être fait par le skill en STEP 0c.
+
+**STEP 0d · write dans le dossier réservé.** MAINTENANT (HR5) · `write_to_context` les trois `.json` (`genome.json`, `creative.json`, sidecar `produced/{slug}.json`) en mode=proposed. Binaires (.jpg/.mp4) déplacés DIRECT sous `.../produced/` (write_to_context ne gère que le json). `brief.md` écrit DIRECT (outil Write · `.md` exempt de `ALLOWED_PATH_PATTERNS` ET de mutation-guard).
+
+### Lignage 5-refs obligatoire
+
+`creative.json#lineage` doit être populé · `angle_ref` (ANG-NN) + `audience_ref` + `product_ref` + `mechanism_ref` + `concept_ref` (miroir descriptif de `concept_id`, SSOT groupage = `creative.concept_id` top-level). `variant_of` (CRT-NN/RCV-NN) si dérivé. Cross-refs many-to-many activés.
+
+### Interdit orphelin
+
+JAMAIS sauver un asset JPG/PNG standalone hors structure (e.g. `visual-identity/creative_ANG-01_*.jpg` orphelin). TOUT binaire vit sous `creatives/{batch}/{CRT-NN}/produced/` AVEC son sidecar `produced/{slug}.json` (manifest gated). Pas de binaire sans sidecar (anti BUG-ASSET-ORPHAN). Pas d'entry créa sans genome.json + creative.json.
 
 ---
 
@@ -862,7 +957,7 @@ Une reco forte, pas trois équivalentes.
 1. **Compose sans visual_identity.** Régression label garantie sous 2 iter (audit S55 wordmark with brackets dégradé en variant sans brackets sur brand test workspace). Refuse de composer si `packshots.primary_front` absent dans les 2 paths (spec.json#visual_identity ET sibling visual_identity.json).
 2. **Hardcoded mécanique.** Modifier le prompt mécanique hardcodé dans le skill au lieu de lookup canon registry SSOT. Drift inévitable cross-products.
 3. **Skip angle.formula validation.** NOYAU sans angle = creative null. Refuse de composer si `angle.json` absent ou `formula` vide.
-4. **Direct write produced/.** Mode `proposed` non-optionnel. Mutation gate via `write_to_context` obligatoire.
+4. **Confusion régime d'écriture sous `creatives/{batch}/{CRT-NN}/produced/`.** INTERDIT · écrire un `.json` (genome.json / creative.json / sidecar produced/{slug}.json) en direct (Edit/Write) · toujours `write_to_context` mode=proposed (mode `proposed` non-optionnel). ATTENDU · écrire les binaires `.jpg`/`.mp4` DIRECT sous `produced/` (write_to_context ne gère que le json), MAIS chaque binaire DOIT avoir son sidecar `produced/{slug}.json` gated (anti BUG-ASSET-ORPHAN). Double régime · json par le gate, binaire direct + sidecar gated. Ne JAMAIS écrire un binaire sans sidecar, ni un `.json` hors gate.
 5. **Regen >3 iter pour label preservation.** Basculer en mode layered (HR-COMPOSITE) si canonical asset dispo, sinon flag opérateur en langage métier (HR3.4). Ne pas brûler API budget en boucle.
 6. **JSON brut leak.** Surface `intent_mix: {primary: DR, weights: {DR: 0.6}}` à l'opérateur. Règle : traduction systématique en langage métier.
 7. **Plumbing leak.** Surface `field_path`, `source`, `confidence`, `mode` à l'opérateur. Règle : opérateur voit `observé / déduit / déclaré / incertain`, jamais numbers.
@@ -893,7 +988,7 @@ Accroche texte     "{verbatim hook · max 8 mots}"
 Corps              {description body · 1 ligne · ou — si pas de body}
 Bouton             "{verbatim CTA}"
 Branding           {plain · ex "Logo en bas à droite · photo officielle du produit centrée"}
-Photo générée      ouvre dans Preview · open {path}
+Photo générée      ouvre dans Preview · open {path} (= creatives/{batch}/{CRT-NN}/produced/{slug}.jpg)
 
 ───────────────────────────────────────────────────────────────
 2 · CE QUE LA PUB RACONTE
@@ -938,14 +1033,15 @@ Risques            · {observable · ex "claim 'cliniquement testé' nécessite 
 - **Multi-products brand.** Si `product_slug` absent et marque a 2+ produits, demande choix opérateur (1 question AskUserQuestion). Ne devine pas.
 - **Visual_identity partiel.** `primary_front` présent mais `distinctive_features[]` vide → continue, flag confidence dégradée. `primary_front` absent → refuse.
 - **fal.ai API down ou rate limit.** Surface honnête, propose retry ETA + langage métier soft offer. Ne tente pas mock.
-- **Label régressé après 3 iter.** Persiste creative.json + JPG avec note `label_compositing_required: true` dans meta (backstage). Flag à l'opérateur en langage métier HR3.4 (soft offer · canoniser la photo produit pour text fidelity garantie).
-- **Concept variant.** Si opérateur déclare "comme CRT-12 mais hook différent", set `variant_of: {parent_concept_id}` + `variant_axis: hook_swap`. Lineage préservé.
+- **Label régressé après 3 iter.** Persiste le split (genome.json + creative.json + sidecar + brief.md) sous `creatives/{batch}/{CRT-NN}/`, JPG direct sous `produced/{slug}.jpg`, note `meta.label_compositing_required: true` dans `creative.json` (backstage, lignage). Flag à l'opérateur en langage métier HR3.4 (soft offer · canoniser la photo produit pour text fidelity garantie).
+- **Concept variant.** Si opérateur déclare "comme CRT-12 mais hook différent", set `variant_of: "CRT-12"` + `variant_axis: hook_swap` dans `creative.json` (lignage · le namespace reste CRT-NN, jamais RCV · valeur depuis l'enum canonique creative.schema). Lineage préservé.
 
 ---
 
 ## Cross-refs
 
-- Schema cible : `resources/schemas/creative.schema.json` v1.2 (D#391, audit Phase B v2.29.0 + v2.32 alignment).
+- Schemas cibles (Brique 4 étape B · split) : `resources/schemas/creative.schema.json` v1.3 (lignage · D#391 + variant_of CRT|RCV + lineage{}), `resources/schemas/genome.schema.json` v1.0 (ADN par-créa · script_id GSC-NN, hook, frames, support, genome_tags), `resources/schemas/produced-asset.schema.json` v1.0 (sidecar manifest binaire · 1 par .jpg, anti-orphelin).
+- Convention stockage : `resources/conventions/creative-storage.md` (D#481 · forme batch `creatives/{batch}/{CRT-NN}/` + allocation mkdir-claim atomique).
 - Équation : `resources/templates/creative-formula.md` v3.1 (stress-tested S55, 23 ads cross-typologies).
 - SSOT mécaniques : `resources/registries/creative-mechanics-registry.md`.
 - Schwartz stages : `resources/schemas/_shared/awareness-stage.json`.

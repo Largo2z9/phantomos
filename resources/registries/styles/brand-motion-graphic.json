@@ -1,0 +1,90 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "brand-motion-graphic",
+  "display_name": "Motion graphic marque",
+  "family": "motion-graphic",
+  "typology_st": "temporel",
+  "description": "Animation 2D de marque pilotee par la charte : typo cinetique, formes geometriques, icones et chiffres qui apparaissent, glissent et se transforment au rythme, sur fond aplat ou degrade brand. Aucun humain ni produit photoreel, tout est vectoriel/graphique. A utiliser pour faire passer un message dense vite (annonce, offre, stat, etape par etape, comparaison chiffree) en feed paid, quand la marque doit rester ultra-reconnaissable et le code design propre prime sur l'authenticite brute.",
+  "render_recipe": {
+    "prompt_skeleton": "Frame from a branded 2D motion graphic, flat vector design system, {message} expressed as kinetic typography and animated shapes, bold {brand_typeface} headline mid-animation, {graphic_elements} (icons, arrows, counters, geometric blocks) entering frame, solid {brand_palette} background, generous negative space, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, clean grid-aligned layout, no photorealistic humans, no real product photography, pure graphic brand language",
+    "slots": [
+      { "name": "message", "description": "L'idee unique a animer (ex 'free shipping today', '3 steps to glowing skin', '-40% off', '2x faster results'). Une seule idee par frame, pas un paragraphe." },
+      { "name": "brand_typeface", "description": "La typo de marque exacte a animer (nom de la fonte + graisse, ex 'heavy grotesk sans', 'condensed display'). C'est le heros visuel, doit etre la fonte reelle de la charte." },
+      { "name": "graphic_elements", "description": "Les briques graphiques qui portent le sens: fleches de direction, compteur de chiffre, badge %, pictos line/solid, blocs colores, courbe montante. Lies au message, pas decoratifs." },
+      { "name": "brand_palette", "description": "Le set de couleurs brand exact (hex de la charte): 1-2 couleurs dominantes + 1 accent. Aplats francs, pas de degrade sauf si la charte en a un." },
+      { "name": "lighting", "description": "Voir champ lighting (le motion graphic est flat, la 'lumiere' = ombres portees douces et hierarchie d'aplats)." },
+      { "name": "camera_lens", "description": "Voir champ camera_lens (pas de vraie camera: angle frontal a plat, eventuels faux paralax/depth entre calques)." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes." }
+    ],
+    "lighting": "Rendu flat sans source de lumiere physique: pas de modele 3D, pas de speculaire. Profondeur suggeree par des ombres portees longues et douces sous les calques (soft drop shadows), un leger empilement z entre typo, badges et formes. Aplats francs et lisibles, contraste eleve entre fond et texte. Aucune simulation de lumiere realiste.",
+    "camera_lens": "Pas de camera reelle: vue frontale a plat, alignee sur une grille. Profondeur uniquement par parallax de calques (foreground texte / background formes) ou par un leger scale-in. Pas de focale, pas de bokeh, pas de distorsion d'objectif. Eventuel faux 2.5D (calques decales) si la charte l'autorise, jamais de perspective photographique.",
+    "palette_mood": "Palette de marque stricte et limitee (1-2 dominantes + 1 accent), aplats satures et confiants, mood design-studio propre et premium. Cohesion totale avec la charte (memes hex partout), zero couleur hors-charte. Mood energique et net plutot que chaleureux/organique.",
+    "texture_grain": "Surfaces vectorielles parfaitement nettes, bords francs anti-aliases, zero grain photo ni bruit (sauf grain subtil volontaire si la charte en a un). Aplats unis ou degrades-charte propres. Le rendu doit etre crisp a 100%, aucune texture organique, aucune compression visible.",
+    "composition_notes": "Layout sur grille, hierarchie typo claire (1 headline dominant + 1 sous-element max par frame), generous negative space autour du message, accent place selon regle des tiers. Tout aligne au pixel/baseline. Logo marque en zone constante (coin ou centre selon charte). Pas de surcharge: une idee animee = une frame lisible en moins d'une seconde."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_story_reel": "9:16",
+      "aspect_ratio_square": "1:1",
+      "resolution": "2K",
+      "guidance": "high pour verrouiller le rendu vectoriel flat et la fidelite charte (palette + typo), eviter le drift vers du 3D ou du photoreel",
+      "negative_prompt": "photorealistic human, real product photo, 3d render, gradient mesh noise, film grain, lens flare, photographic depth of field, hallucinated text, garbled letters, fake brand logo, off-brand colors, drop shadow realism, skeuomorphism",
+      "note": "L'endpoint image genere des keyframes/states cles (state 0 message cache -> state final message complet). Le mouvement (entrees de calques, kinetic typo, transformations de chiffres) se monte cote bras video ou animation After Effects a partir des keyframes. Generer 2-3 keyframes (debut/milieu/fin d'anim) pour cadrer l'interpolation."
+    },
+    "video_params": {
+      "motion": "Kinetic typography: les mots/chiffres entrent en slide, scale-in, mask-reveal ou wipe, calage rythmique sur la voix-off ou le beat (animation on the beat). Compteurs qui s'incrementent, fleches qui tracent, badges qui pop avec un leger overshoot/ease-out (snappy, pas mou). Easing courbe (ease-in-out, pas lineaire), micro-anticipation et settle. Calques qui se relaient en cascade, jamais tout statique ni tout en mouvement en meme temps.",
+      "duration_s_range": [3, 15],
+      "transitions": "Transitions graphiques sur la marque: mask-wipe, shape-morph (un picto qui se transforme en suivant), match-cut de forme/couleur, push/slide entre frames, formes qui balayent l'ecran (transition par aplat de couleur brand). Coupes rythmees on the beat. Pas de fondu enchaine photographique mou, pas de crossfade flou, pas de transition 'video' generique."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Texte/typo hallucine: glyphes inventes, lettres deformees, mots mal orthographies ou faux kerning, c'est LE defaut critique d'un style ou le texte EST le heros. Verifier chaque caractere et chaque chiffre du message au pixel.",
+    "Logo marque deforme ou recree au hasard: l'IA hallucine un faux logo. Le logo doit etre le vrai asset (place en post-prod si besoin), jamais genere.",
+    "Couleurs hors-charte: l'IA derive vers des teintes proches mais fausses. Verifier les hex exacts contre la charte, rejeter tout aplat off-brand.",
+    "Drift vers le 3D / skeuomorphisme: ombres realistes, biseaux, reflets plastiques, profondeur photographique qui cassent le flat design. Garder vectoriel pur, aplats francs.",
+    "Bords flous / anti-aliasing sale / artefacts de compression: le rendu doit etre crisp a 100%, bords nets, pas de halo ni de bavure autour de la typo et des formes.",
+    "Grain photo, bruit ou texture organique parasites incoherents avec un rendu vectoriel propre (sauf grain volontaire de charte).",
+    "Faux pictos incoherents: icones inventees, asymetriques, au style melange (line + solid + 3D dans la meme frame), incompatibles avec un design system unifie.",
+    "Alignement casse: elements desalignes de la grille, espacement aleatoire, hierarchie typo confuse (deux headlines qui se battent), negative space mange.",
+    "Sur-densite: trop de messages/elements dans une frame qui devient illisible en moins d'une seconde de scroll. Une idee = une frame.",
+    "Sur la video: easing lineaire/robotique ou mouvement mou sans overshoot, kinetic typo qui ne calle pas sur le rythme, calques qui bougent tous en meme temps (bouillie), trahit l'absence de timing motion designer."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 6],
+    "pairs_well_with": [
+      "pack-shot-brand-template",
+      "graphic-icons-overlay",
+      "split-screen-comparison",
+      "diagram-medical-2d",
+      "claymation-3d-ai"
+    ],
+    "avoid_when": [
+      "Angle qui repose sur la preuve reelle ou l'identification humaine (testimonial, UGC, demo produit a la main): un motion graphic abstrait n'apporte aucune preuve tangible et casse la relatabilite, passer sur ugc-selfie-talking ou real-photo.",
+      "Besoin d'un hero produit desirable et net (lancement ou la convoitise du produit porte la conversion): le motion graphic relegue le produit a un picto, mauvais pour le packshot, passer sur pack-shot-brand-template ou real-photo-product-studio.",
+      "Marque en zone raw/agressive (7-10) ou le code attendu est natif/desordre type feed: un motion propre charte sonne 'pub corporate' et tue l'effet scroll-natif.",
+      "Message sans charte solide en amont (typo + palette + logo non figes): le style amplifie l'absence d'identite, le rendu parait generique/template.",
+      "Frame surchargee de claims a justifier un par un: le format va vite, il ne peut pas porter une argumentation longue, decouper en sequence ou passer sur diagram/educational."
+    ]
+  },
+  "related_mechanic_ids": [
+    "launch-narrative",
+    "offer-breakdown",
+    "direct-benefit",
+    "cost-calculator",
+    "educational_diagram"
+  ],
+  "refs": [
+    "Code DTC paid: ad 100% kinetic typo + formes brand pour annonce/offre/stat, montee on the beat, transitions par aplat de couleur charte.",
+    "Use-case canon: '3 etapes' / '-40% aujourd'hui' / 'X clients satisfaits' anime en motion graphic flat, logo en zone constante, une idee par frame.",
+    "Reference esthetique: motion design studio propre (flat 2D, drop shadows doux, parallax de calques) plutot que VFX/3D ou rendu photoreel."
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

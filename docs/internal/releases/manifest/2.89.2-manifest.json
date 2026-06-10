@@ -1,0 +1,78 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.2",
+  "released_at": "2026-06-10",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 82,
+  "schemas_new": [],
+  "schemas_modified": [],
+  "summary": "Passe coherence (lot 1 de l'audit 2026-06-08/09). Six chantiers fermes apres investigation cause-racine par item (5 investigateurs paralleles, rapports avant/apres exacts). Zero schema bump, zero suppression, backward compat totale. Motif : un produit qui vend la discipline d'encodage ne peut pas shipper des index vides, des compteurs faux et des donnees vitrine hors-schema ; chaque incoherence de surface refute la these.",
+  "changes": {
+    "operator_state": [
+      "~operator/installation.json (template_version_installed: '2.10.1' -> null · valeur figee depuis v2.10.2 commit 3a695b3, jamais bumpee en 146 releases car champ d'etat runtime range dans la zone template · null = jamais stale par construction, coherent avec first_install_at/last_update_at/history deja null · _comment enrichi)",
+      "~.skills/skills/update-workspace/SKILL.md (Step 1 : cas 'template_version_installed is null' = first-run, initialise depuis _version.json + first_install_at puis exit · Invocation : null n'est pas un version mismatch · PAIRE ATOMIQUE avec l'edit installation.json)"
+    ],
+    "resources_index": [
+      "+resources/scripts/rebuild-index.py (NEW · regen idempotente d'index.json depuis le filesystem, 7 dossiers types de l'enum schema, dates git, domains overrides, validation jsonschema, mode --check pour gate de release · ferme la cause racine : le kit a ete seede par drops directs sans jamais passer par ingest-resource, et aucune etape du pipeline release ne regenait l'index)",
+      "~index.json (REGENERE : 22 ressources indexees, etait total_resources: 0 · routing:1 framework:5 sop:3 quality-spec:1 convention:8 template:4 · registries/canon/concepts hors scope volontaire : pas dans l'enum du schema, extension = decision de schema pas d'indexation)",
+      "~docs/system/updates.md (publishing checklist : etape rebuild-index --check ajoutee)"
+    ],
+    "entity_canon_7": [
+      "~brands/_TEMPLATE/CLAUDE.md (titre 6->7 Entities + ligne Angles dans la table · le scaffold datait d'avant D#425 v2.77)",
+      "~docs/vision/prisms.md (prism 8 : seven entities avec angle nomme)",
+      "~docs/system/extending.md (seven entities)",
+      "~docs/system/atlas-brand.md (7 core : angle deplace de derivees vers core avec path canon angles/{slug}/angle.json · derivees 3->2 · 4 edits synchrones)",
+      "~docs/internal/canon.md (entree Atlas brand : 7 core + 2 derives)",
+      "~.claude/commands/phantom.md (2 occurrences : synthese 7 entites core + 2 derivees)",
+      "~.claude/commands/lexicon.md (7 entites canon)",
+      "~docs/system/README.md (27 -> 28 doctrines + bullet creative-axis-canonicalization-doctrine.md manquant ajoute section Cartographie & substrate)"
+    ],
+    "skills_grammar": [
+      "~22 SKILL.md (cles YAML triggers_fr:/triggers_en: jamais parsees par build-manifest converties en blocs 'FR: ...' / 'EN: ...' en fin de description: > · 18 conversions + 5 nettoyages de doubles declarations dont phrases quasi-doublons verifiees subsumees + 3 fichiers en description: | geres)",
+      "~4 SKILL.md operator-facing sans aucun trigger equipes (adapt-from-competitor, connect-source avec description inline convertie en bloc, export-session, produce-positioning-canvas)",
+      "~.skills/skills/encode-batch/SKILL.md (type: shared -> curator · 7e typologie hors-canon eliminee · test binaire curator de patterns.md matche exactement : invoque par 5 producers, operator_facing false, defauts haiku/subagent_safe/direct identiques)",
+      "~.skills/skills/_TEMPLATE/SKILL.md + .skills/how-to-build-skills.md (modes interactive et silent documentes, utilises par des skills reels mais absents de la doc de grammaire)",
+      "~.skills/_manifest.json (REGENERE : 82 skills, 6 typologies propres producer:29 orchestrator:22 curator:18 navigator:5 builder:4 capturer:4 · 1 seul skill sans triggers = produce-decomposition-ecr, sub-skill de scaffold-extension, legitime)",
+      "~.skills/README.md (catalogue 'Skills shipped' regenere 38 -> 82 depuis le manifest + descriptions frontmatter, roles patch-note nettoyes, note de regeneration)",
+      "~.skills/INDEX.md (header recadre : cards = noyau 46 de v2.33, _manifest.json = SSOT exhaustif · 'score-matrix (futur v2.34)' corrige, le skill est shippe)"
+    ],
+    "example_vitrine": [
+      "~brands/_EXAMPLE/products/massage-insoles/offers.json (champ type required par offer.schema ajoute aux 7 offres : single x1, bundle x6 · 3 champs type au niveau group hors-schema retires dont 'standalone' hors-enum · cause racine cote donnees, le builder etait aligne schema)",
+      "~brands/_EXAMPLE/_snapshot.md (REGENERE via build-brand-snapshot.py : 'By type: bundle:6, single:1', etait 'other:7')"
+    ],
+    "hygiene": [
+      "~docs/system/schema-encoding-doctrine.md (header 'Working draft, R&D zone, Build mode. To be promoted...' retire · leak Build->Release que le Gate 1 ne capte pas car il ne greppe que des chemins)",
+      "~docs/system/updates.md (6 occurrences docs/releases/ -> docs/internal/releases/manifest/ · Gate 5 chemins machine mainteneur degenerises · convention nommage operations/migrations alignee sur les scripts reels v{version}-{slug}.py)",
+      "~migrations/README.md (NEW section 'Two migration locations' : migrations/ racine par release vs operations/migrations/ schema-bumps, distinction jamais documentee)",
+      "~CONTRIBUTING.md (URL placeholder github.com/<your-org>/ -> github.com/Largo2z9/phantomos.git)"
+    ]
+  },
+  "tests_non_regression": {
+    "build_manifest": "PASS (82 skills, 0 drop, jargon bank 119)",
+    "triggers_populated": "PASS (1 seul skill sans triggers = produce-decomposition-ecr, sub-skill legitime · etait ~23)",
+    "typologies_canon": "PASS (6 typologies exactement, 0 'shared')",
+    "snapshot_example": "PASS (24 lines · By type: bundle:6, single:1)",
+    "offers_json_valid": "PASS (json.load + type present sur 7/7 offres)",
+    "index_rebuild": "PASS (22 ressources, validation jsonschema OK, comptes = prediction investigation)",
+    "entity_count_sweep": "PASS (grep '6 entit|six entities' template = 0 hors historique manifests/journal/changelog)",
+    "stale_version_sweep": "PASS (grep '2.10.1' hors manifests historiques = 0)"
+  },
+  "decisions_captured": ["lot coherence 2026-06-10 : canon 7 entites propage partout (suite D#425) · installation.json null-at-ship · index regen mecanique au release"],
+  "out_of_scope_noted": [
+    "docs/product/guides/first-session-example.md obsolete vs tour v2.90 (rewrite editorial, lot separe)",
+    "capabilities.md sections FR dans doc 'English throughout' + jargon leaks (lot separe)",
+    "release-manifest/1.0 jamais bumpe malgre l'evolution structurelle des manifests (decision de schema, a trancher)",
+    "INDEX.md cards : 36 skills posterieurs a v2.33 sans card intent (la table domaines et le manifest les couvrent · regen complete = chantier editorial)",
+    "validate-resources check 13b : verifier qu'il accepte bien les 5 modes documentes (proposed/direct/none/interactive/silent), backlog",
+    "DECOUVERT pendant ce lot (preexistant, verifie identique sur HEAD) : resources/scripts/validate-all.py ne tourne pas sur machine fraiche · (a) annotations type 3.10+ incompatibles python3 systeme macOS 3.9 · (b) refs $ref _shared/*.json non resolues avec jsonschema moderne (Unresolvable: _shared/validation-status.json · le script n'enregistre pas de referencing.Registry) · le validateur central du kit est donc inoperant hors machine mainteneur historique, a reparer en priorite du prochain lot"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.2",
+    "push (operateur)",
+    "sur workspace test : verifier qu'un clone frais avec installation.json null + 'update' repond 'fresh install, rien a appliquer'"
+  ]
+}

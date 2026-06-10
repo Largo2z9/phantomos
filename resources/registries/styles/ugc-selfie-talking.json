@@ -1,0 +1,84 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "ugc-selfie-talking",
+  "display_name": "UGC selfie face cam",
+  "family": "ugc",
+  "typology_st": "temporel",
+  "description": "Une vraie personne tient son telephone a bout de bras et parle direct camera, comme un message Snap ou TikTok filme dans son salon, sa voiture ou sa salle de bain. Le code est l'authenticite brute (pas de prod, pas de studio): on doit croire que c'est un client lambda, pas un acteur. A utiliser pour les angles temoignage, demo a la main, problem-solution conversationnel et tout ce qui doit passer pour du contenu natif feed plutot que pour une pub.",
+  "render_recipe": {
+    "prompt_skeleton": "Vertical 9:16 selfie video of {persona} holding their phone at arm's length, talking directly into the front camera in {setting}, {emotion} expression mid-sentence, casual everyday {wardrobe}, holding {product} loosely in frame, {lighting}, shot on {camera}, {palette_mood}, {texture_grain}, {composition_notes}, raw unedited home-video look, no studio, no professional set",
+    "slots": [
+      { "name": "persona", "description": "Qui parle: tranche d'age + genre + look proche de l'avatar cible (ex 'a 28-year-old woman with no makeup', 'a tired dad in his 30s'). Doit ressembler au client, pas a un mannequin." },
+      { "name": "setting", "description": "Le lieu domestique credible: bedroom with unmade bed, car driver seat, bathroom mirror corner, messy kitchen, sofa with a blanket. Le decor un peu en bordel renforce l'authenticite." },
+      { "name": "emotion", "description": "L'etat capte en plein milieu de phrase: excited/relieved/skeptical-then-convinced/venting. Jamais figee ou pose, toujours mid-action." },
+      { "name": "wardrobe", "description": "Tenue du quotidien non stylee: hoodie, oversized tee, pyjama top, gym clothes. Zero tenue 'shooting'." },
+      { "name": "product", "description": "Le produit tenu de facon naturelle, parfois hors focus, jamais presente comme un packshot. Label visible mais pas centre." },
+      { "name": "lighting", "description": "Voir champ lighting. A surcharger seulement si la marque impose une ambiance (ex golden hour fenetre)." },
+      { "name": "camera", "description": "Voir champ camera_lens. Override possible (front camera iPhone, vieux Android grainy) selon le niveau de rawness vise." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes." }
+    ],
+    "lighting": "Lumiere disponible non maitrisee: fenetre laterale en plein jour, plafonnier jaune le soir, ou ring-light bon marche qui laisse un double reflet rond dans les yeux. Hautes lumieres legerement cramees, ombres un peu bouchees, balance des blancs imparfaite (un poil chaude ou verdatre). Surtout pas d'eclairage trois points propre.",
+    "camera_lens": "Front camera de smartphone: focale ultra-large ~24mm equivalent, leger fisheye qui agrandit le nez et le centre du visage, bras pas tout a fait stable (micro-shake handheld), autofocus qui hesite une fraction de seconde. Profondeur de champ large (presque tout net), pas de bokeh cinema.",
+    "palette_mood": "Couleurs sorties de tel telles quelles, contraste leger, teintes peau realistes avec rougeurs/imperfections conservees. Mood chaleureux et banal, jamais teale-and-orange ni grading pub. Le feed natif comme reference, pas la color grade agence.",
+    "texture_grain": "Grain de capteur smartphone en basse lumiere, compression legere facon upload reseau social, micro-flou de mouvement sur les gestes rapides. Peau avec pores, duvet, brillance naturelle. Aucun lissage beaute, aucune nettete clinique.",
+    "composition_notes": "Cadrage selfie a bout de bras: tete et epaules, visage decentre vers le haut, un peu de plafond ou de mur derriere. Regard plante dans l'objectif (pas a cote). Sous-titres burned-in style TikTok possibles. Le bras qui tient le tel est implicite dans le cadrage incline. Ne jamais centrer comme un portrait studio."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "9:16",
+      "resolution": "1080x1920",
+      "note": "Endpoint image = keyframe/first-frame du selfie (visage mid-sentence). Le mouvement parle/lipsync passe par le bras video (image-to-video ou avatar talking-head). Generer 2-3 keyframes d'emotion differente pour ouvrir les variantes."
+    },
+    "video_params": {
+      "motion": "Handheld leger et constant (micro-shake bras tendu), tete et mains qui bougent en parlant, lipsync cale sur le script, regard maintenu camera. Pas de mouvement de camera 'realise' (pas de pan/zoom motorise), juste l'instabilite humaine du bras.",
+      "duration_s_range": [6, 30],
+      "transitions": "Hard cuts secs facon jump-cut TikTok entre les phrases (coupe les respirations/silences pour densifier le debit). Zero transition habillee (pas de fondu, pas de wipe, pas de morph). Eventuel jump-cut sur changement de plan/produit."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Peau plastique/cireuse ou sur-lissee: bannir, garder pores, brillance et imperfections (un selfie trop beau = detecte comme IA)",
+    "Regard mort ou yeux qui ne fixent pas l'objectif: les yeux doivent etre vivants et plantes dans la front camera, pas dans le vide",
+    "Doigts/mains sur le produit ou autour du telephone mal formes (doigts surnumeraires, jointures fondues): le produit est tenu, donc la main est en gros plan = zone a risque",
+    "Symetrie faciale parfaite facon mannequin: casser avec une asymetrie reelle (un cote du sourire, rougeurs, cheveux un peu en bordel)",
+    "Dents trop blanches/alignees et lipsync qui ne colle pas aux phonemes (bouche qui mouline sans former les mots)",
+    "Eclairage studio trois points trop propre ou bokeh cinema: incoherent avec une front camera, trahit la pub",
+    "Decor trop range/design-magazine: un salon parfait ne ressemble pas a un selfie spontane, ajouter du desordre credible",
+    "Texte hallucine sur les sous-titres burned-in ou sur le packaging produit (glyphes inventes, marque deformee): verifier chaque caractere",
+    "Grading pub teale-and-orange ou couleurs trop saturees: incompatible avec le rendu brut sorti de telephone",
+    "Reflet de ring-light circulaire dans les deux yeux trop parfait/double identique: garder UN reflet credible, pas un pattern dupplique pixel-perfect"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [4, 9],
+    "pairs_well_with": [
+      "real-photo-testimonial-static",
+      "screen-recording-mockup",
+      "split-screen-comparison",
+      "graphic-icons-overlay",
+      "macro-photo-mouth-skin-etc"
+    ],
+    "avoid_when": [
+      "Marque luxe/premium en zone brand-safe basse (0-3) ou le code attendu est studio leche: le rendu telephone raw casse la perception de prestige",
+      "Categorie reglementee (sante, finance, complements) ou un faux temoignage client direct camera frole l'allegation non substantiee ou le faux avis",
+      "Besoin d'un hero produit net et desirable (le selfie ecrase le produit, le sort du focus, mauvaise lisibilite packaging)",
+      "Audience qui rejette l'esthetique TikTok (B2B serieux, cible age premium) ou le code UGC sonne pas-serieux",
+      "Quand l'angle exige une demonstration mecanique precise ou un avant/apres mesure: passer sur split-screen ou diagram plutot que sur du face cam"
+    ]
+  },
+  "related_mechanic_ids": [
+    "testimonial-direct-address",
+    "problem-solution-narrative",
+    "founder-story"
+  ],
+  "refs": [
+    "Code visuel TikTok/Reels natif feed: face cam bras tendu, sous-titres burned-in, jump-cuts secs",
+    "Pub UGC DTC type 'storytime' ou 'honest review' filmee en selfie domestique (chambre/voiture/salle de bain)"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

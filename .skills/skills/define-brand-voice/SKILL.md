@@ -9,23 +9,6 @@ isolation_scope: brand
 layer: production
 mode: interactive
 reasoning_pattern: null
-triggers_fr:
-  - "define brand voice"
-  - "tone of voice"
-  - "définit la voix brand"
-  - "voice chart"
-  - "ton de voix"
-  - "ancre le tone"
-  - "pose le tone of voice {brand}"
-  - "cadre la voix de {brand}"
-triggers_en:
-  - "define brand voice"
-  - "tone of voice"
-  - "voice chart"
-  - "brand voice chart"
-  - "anchor brand voice"
-  - "set brand voice"
-  - "define voice for {brand}"
 description: >
   v1.0.0 (v2.80 ship) · Produit brand voice chart canonique brand via méthodologie
   Nielsen Norman 4D (Funny↔Serious · Formal↔Casual · Respectful↔Irreverent ·
@@ -42,6 +25,8 @@ description: >
       "ton de voix", "ancre le tone", "pose le tone of voice {brand}", "cadre la voix de {brand}".
   EN · "define brand voice", "tone of voice", "voice chart", "brand voice chart",
       "anchor brand voice", "set brand voice".
+  FR: "define brand voice", "tone of voice", "définit la voix brand", "voice chart", "ton de voix", "ancre le tone", "pose le tone of voice {brand}", "cadre la voix de {brand}".
+  EN: "define brand voice", "tone of voice", "voice chart", "brand voice chart", "anchor brand voice", "set brand voice", "define voice for {brand}".
 permissions:
   reads:
     - brands/{slug}/brand.json

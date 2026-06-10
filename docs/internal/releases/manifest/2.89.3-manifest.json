@@ -1,0 +1,58 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.3",
+  "released_at": "2026-06-10",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 82,
+  "schemas_new": [],
+  "schemas_modified": [
+    "_shared/validation-status.json (string enum -> oneOf [string enum | objet {state required, additionalProperties true}] · WIDENING pur, toute donnee valide avant reste valide · reconcilie la forme riche des donnees seedees avec la forme courte ecrite par les skills)",
+    "brand.schema.json (4 widenings : brand_equity_level nullable · creative_zone min/max/dominant nullables · social_media accepte $comment · platforms.additionalProperties anyOf objet|null|string)",
+    "spec.schema.json (identity.hero_image nullable)"
+  ],
+  "summary": "Le gardien ranime. validate-all.py (validateur central du kit) ne tournait sur aucune machine fraiche depuis une duree indeterminee : crash py3.9 (annotations 3.10+) et refs _shared non resolues (jsonschema >= 4.18). Repare cause-racine, puis premier run = 116 findings reels accumules pendant que le gardien dormait. Triage en 3 familles : (a) regles du validateur restees au canon pre-v2.63 (30 faux orphelins = collections pain_points/objections canon), (b) schemas en retard sur des conventions reelles (forme objet validation_status, nulls de squelette, $comment maison), (c) vraie derive de donnees vitrine (champs requis manquants, enums avec underscores, ids absents, index null, formats libres pre-contrat). Tout ferme : 0 CRITICAL / 0 HIGH / 0 MED / 0 LOW, mode strict PASS, sur _EXAMPLE et _TEMPLATE.",
+  "changes": {
+    "validator": [
+      "~resources/scripts/validate-all.py (from __future__ import annotations = py3.9 compatible · referencing.Registry construit depuis resources/schemas/ rglob pour resoudre les $ref relatifs, fallback RefResolver pour jsonschema < 4.18 · whitelist orphelins : sous-dossiers canon v2.63+ pain_points/objections/frictions/sources/creatives/competitive-intel/asset-library/extensions + visual_identity.json)"
+    ],
+    "schemas_additive": [
+      "~resources/schemas/_shared/validation-status.json (oneOf string|objet · les skills ecrivent la forme courte, les donnees riches portent provenance validated_by/validated_at/notes · les deux formes sont desormais contractuelles)",
+      "~resources/schemas/brand.schema.json (nullables squelette : brand_equity_level, creative_zone.min/max/dominant · $comment dans social_media · platforms anyOf objet|null|string pour 'pas encore connecte' et URLs courtes)",
+      "~resources/schemas/spec.schema.json (hero_image nullable)"
+    ],
+    "example_data": [
+      "~brands/_EXAMPLE/brand.json (meta.slug stepprs + created 2026-04-10 + updated · 4 competitors mappes aux enums market_position/price_vs_us avec valeurs d'origine en *_note · products_index peuple (massage-insoles hero enriched) · audiences_index peuple (7 entrees slug/name/parent_slug/is_mother) · etait null/null)",
+      "~brands/_EXAMPLE/products/massage-insoles/spec.json (benefit_id BEN-01..05 + problem_id PRB-01..03 + mechanism_id MEC-01..04 · mode_of_action/evidence_level/market_sophistication mappes aux enums avec origine en *_note · composition objet->array strings · variants objet->array strings prefixees · evidence_verbatim et verbatim_quotes strings->objets {text, platform} · chain strings->array {level, formulation} · frequency/urgency descriptifs->int 1-10 + *_note)",
+      "~brands/_EXAMPLE/products/massage-insoles/offers.json (meta.scope pre_cart · group_id GRP-01/02/03, ex-ids semantiques en $comment · product_refs objets {slug, quantity} avec quantites reelles des bundles 1/2/3/5)",
+      "~brands/_EXAMPLE/audiences/** 7 profils (4 profils branche workers : meta.name/slug/entry_door ajoutes + psychology.fears strings->objets {fear_text, source_verbatim_ref} conformes v2.88 · awareness *_aware underscore->hyphen sur les 7 profils · resolution refs BEN-01/BEN-02 via les nouveaux ids spec)"
+    ],
+    "template_skeleton": [
+      "~brands/_TEMPLATE/{brand,products/_example/spec,products/_example/offers,audiences/_example/profile}.json (_version alignees sur le canon reel : brand 2.4, spec 1.11, offer 2.2, profile 2.0 · labels _schema legacy brand/L1-brand, brand/L2-product, brand/L3-audience, offers remplaces par brand/2.4, spec/1.11, offer/2.2, profile/2.0 · le drift detector du validateur lit ces valeurs comme reference)",
+      "~brands/_TEMPLATE/audiences/_example/profile.json (meta.entry_door: null + awareness hyphen)"
+    ]
+  },
+  "tests_non_regression": {
+    "validate_all_py39": "PASS (python3 3.9 systeme : run complet, plus de crash annotations)",
+    "validate_all_strict": "PASS (python3.11 + jsonschema 4.x : 0 CRITICAL 0 HIGH 0 MED 0 LOW sur _EXAMPLE et _TEMPLATE, --strict exit 0)",
+    "snapshot_example": "PASS (regen 24 lines · By type: bundle:6, single:1 conserve)",
+    "schemas_check_schema": "PASS (Draft202012Validator.check_schema sur les 4 schemas via le run)",
+    "check_13b": "RESOLU SANS PATCH (13b ne valide que type: contre les 6 typologies · encode-batch curator conforme · mode: non contraint par 13b)",
+    "rebuild_index_check": "PASS (index inchange, scripts/ hors scope des 7 dossiers types)"
+  },
+  "decisions_captured": ["v2.89.3 : validation_status = oneOf string|objet contractuel · nulls de squelette contractuels · whitelist orphelins = sous-collections canon"],
+  "out_of_scope_noted": [
+    "DECOUVERTE MAJEURE a trancher : les enums spec.schema mode_of_action (cofactor/antioxidant/adaptogen/probiotic/coenzyme...) et evidence_level (efsa_validated/efsa_partial) sont biaises produits INGESTIBLES · un produit physique (Stepprs) n'y entre que par les echappatoires structural/other/anecdotal · viole l'esprit du test d'extractibilite D#307 · options : neutraliser les enums (mechanism families génériques) ou vertical-pack les valeurs supplements · decision structurelle operateur",
+    "first-session-example.md obsolete vs tour v2.90 (rewrite editorial, toujours en attente)",
+    "capabilities.md sections FR + jargon leaks (toujours en attente)",
+    "Le pre-release gate devrait inclure un run validate-all --strict (le gardien etait mort sans que rien ne le detecte) · candidat Gate 8"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.3",
+    "push (operateur)",
+    "runtime : python3 resources/scripts/validate-all.py --strict doit sortir 0 sur le workspace test"
+  ]
+}

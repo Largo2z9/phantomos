@@ -2,20 +2,39 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Product Specification",
   "description": "Product specification — deep product knowledge, factual context. Lives in brands/{slug}/products/{product}/spec.json.",
-  "_template_version": "1.11",
-  "_schema_version": "spec/1.11",
+  "_template_version": "1.12",
+  "_schema_version": "spec/1.12",
   "_changelog": {
+    "1.12": "C1 onboarding-native (D#500) · strict additif : (a) root map _extraction (provenance MÉCANIQUE, $ref _shared/extraction-provenance.json, miroir mental model _field_types) · (b) benefits[].claim_origin (brand_declared|voc|both, vocabulaire aligné profile._source_meta.origin) · (c) proofs.* items anyOf string|objet typé {text, proof_strength ($ref _shared/proof-strength.json), source_url, date} (backward compat : strings legacy valident toujours · lecteurs : typeof item === string ? item : item.text) · (d) NEW collection differentiators[] (delta vs alternative RÉELLE du prospect, statu quo inclus · DISTINCT de mechanisms[]/active_principle.technical_differentiator/competitive_comparison[] · l'alternative source vit dans problems_solved[].current_solutions, référencée pas re-saisie). NE duplique PAS : épistémique (_field_types), AOV (brand.financials.aov), CAC (spec.pricing.breakeven_cpa), TTL (porté par le shared).",
     "1.11": "v2.57 Notion stride-up follow-up + hybrid business support · identity.type enum enrichi (service / hybrid / clinical_service ajoutés aux existants functional / sensory / lifestyle). Permet de distinguer nature exacte produit pour rendering /phantom cohérent avec brand.business_model (v2.4) · brand business_model=service implique product type service ou clinical_service · brand business_model=hybrid implique mix de types. Backward compat strict (enum extension additive, existing spec.identity.type valeurs valident toujours).",
     "1.10": "v2.56 Notion stride-up parity : benefits enrichis (emotional_signal + latency_min/max + evidence_verbatim) · mechanism.duration ajouté · meta.validation_status $ref _shared. Backward compat strict additif."
   },
   "type": "object",
   "required": ["meta"],
+  "$defs": {
+    "proof_item": {
+      "anyOf": [
+        { "type": "string", "description": "Legacy, backward compat strict (précédent : specs.composition anyOf). Lecteurs : typeof item === string ? item : item.text." },
+        { "type": "object", "required": ["text"], "properties": {
+            "text": { "type": "string" },
+            "proof_strength": { "$ref": "_shared/proof-strength.json" },
+            "source_url": { "type": "string" },
+            "date": { "type": "string", "format": "date" }
+        } }
+      ]
+    }
+  },
   "properties": {
     "$comment": { "type": "string" },
     "_schema": { "type": "string" },
     "_version": { "type": "string" },
     "_changelog": { "type": "object" },
     "_field_types": { "type": "object", "additionalProperties": { "type": "string" } },
+    "_extraction": {
+      "type": "object",
+      "additionalProperties": { "$ref": "_shared/extraction-provenance.json" },
+      "description": "Provenance mécanique. Clé = glob field path (mêmes patterns que _field_types) ou chemin exact pour granularité per-item."
+    },
 
     "meta": {
       "type": "object",
@@ -52,7 +71,7 @@
         "tagline": { "type": "string" },
         "positioning": { "type": "string" },
         "url": { "type": "string" },
-        "hero_image": { "type": "string" },
+        "hero_image": { "type": ["string", "null"] },
         "google_product_category": { "type": ["string", "null"] },
         "anti_features": { "type": "array", "items": { "type": "string" } },
         "customizable": {
@@ -404,10 +423,10 @@
           "name": { "type": "string", "description": "Mechanism canonical name. E.g. 'Modulation cortisol stress', 'Production énergie cellulaire', 'Régénération follicule pileux'." },
           "description": { "type": "string", "description": "One-line how-it-works. Plain language, no jargon dump." },
           "target": { "type": ["string", "null"], "description": "Biological/cognitive/behavioral target. E.g. 'cortisol axis', 'mitochondrial energy', 'hair follicle stem cells', 'attention regulation'. Null if not yet enriched." },
-          "mode_of_action": { "type": ["string", "null"], "enum": [null, "cofactor", "antioxidant", "adaptogen", "probiotic", "coenzyme", "regulator", "stimulant", "inhibitor", "structural", "delivery", "other"], "description": "Type of action. Null until enriched." },
+          "mode_of_action": { "type": ["string", "null"], "description": "Type of action, free string (v2.89.4 · was a supplements-biased enum, de-hardcoded per the extractibility test). Vocabulary SSOT lives in resources/registries/mechanism-families.md · skills consult the registry before writing, new families are promoted there on the 2nd independent signal, never invented per-brand. Null until enriched." },
           "time_window": { "type": ["string", "null"], "enum": [null, "immediate", "7d", "14d", "30d", "60d", "90d+"], "description": "Time to observable effect. Null until enriched." },
           "duration": { "type": "string", "description": "Délai d'effet observable. Ex '15 minutes', '3 jours', '2 semaines'. Distinct de `time_window` enum existant : granularité opérateur libre, formulation naturelle." },
-          "evidence_level": { "type": ["string", "null"], "enum": [null, "clinical_cited", "efsa_validated", "efsa_partial", "anecdotal", "mechanistic_only"], "description": "Strength of proof for this specific mechanism on this product. Null until enriched." },
+          "evidence_level": { "type": ["string", "null"], "enum": [null, "clinical_cited", "regulatory_validated", "regulatory_partial", "anecdotal", "mechanistic_only", "efsa_validated", "efsa_partial"], "description": "Strength of proof for this specific mechanism on this product. Closed scale (load-bearing for proof scoring). clinical_cited = published study cited · regulatory_validated / regulatory_partial = claim validated (fully/partially) by a regulator or certification body, any geography or industry (EFSA, FDA, CE, ISO...) · anecdotal = customer-reported · mechanistic_only = plausible mechanism, no direct proof. LEGACY: efsa_validated / efsa_partial kept for backward read, write regulatory_* instead (v2.89.4). Null until enriched." },
           "market_sophistication": { "type": ["string", "null"], "enum": [null, "low", "medium", "high"], "description": "How well the target audience understands this mechanism. Low = educational territory available. High = saturated, need differentiation. Null until enriched." },
           "triggered_by_specs": { "type": "array", "items": { "type": "string" }, "description": "Spec ingredient/feature ids that activate this mechanism. Many-to-many (1 mechanism can be triggered by multiple specs)." },
           "_field_types": { "type": "object", "description": "Per-field source/confidence tags." },
@@ -451,6 +470,11 @@
                 "source_url": { "type": "string" }
               }
             }
+          },
+          "claim_origin": {
+            "type": "string",
+            "enum": ["brand_declared", "voc", "both"],
+            "description": "Provenance du bénéfice (C1) : revendiqué marque vs vécu rapporté client. Vocabulaire aligné profile._source_meta.origin, zéro nouveau vocabulaire. voc ou both exigent evidence_verbatim non vide."
           }
         }
       }
@@ -513,28 +537,28 @@
             "rating": { "type": ["number", "null"] },
             "review_count": { "type": ["integer", "null"] },
             "total_customers": { "type": ["integer", "null"] },
-            "testimonials": { "type": "array", "items": { "type": "string" } }
+            "testimonials": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } }
           }
         },
         "authority": {
           "type": "object",
           "properties": {
-            "expert_endorsements": { "type": "array", "items": { "type": "string" } },
-            "awards": { "type": "array", "items": { "type": "string" } },
-            "press_mentions": { "type": "array", "items": { "type": "string" } }
+            "expert_endorsements": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } },
+            "awards": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } },
+            "press_mentions": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } }
           }
         },
         "performance": {
           "type": "object",
           "properties": {
-            "quantifiable_results": { "type": "array", "items": { "type": "string" } },
-            "before_after": { "type": "array", "items": { "type": "string" } }
+            "quantifiable_results": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } },
+            "before_after": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } }
           }
         },
         "scientific": {
           "type": "object",
           "properties": {
-            "studies": { "type": "array", "items": { "type": "string" } }
+            "studies": { "type": "array", "items": { "$ref": "#/$defs/proof_item" } }
           }
         }
       }
@@ -619,6 +643,30 @@
         "properties": {
           "competitor_product": { "type": "string" },
           "feature": { "type": "string" }
+        }
+      }
+    },
+
+    "differentiators": {
+      "type": "array",
+      "description": "Delta net vs l'alternative RÉELLE du prospect, statu quo inclus. DISTINCT de mechanisms[] (comment le produit marche), de active_principle.technical_differentiator (delta technique) et de competitive_comparison[] (feature vs concurrent nommé). L'alternative source vit dans problems_solved[].current_solutions : référencer, ne pas re-saisir.",
+      "items": {
+        "type": "object",
+        "required": ["differentiator_id", "vs_alternative", "delta"],
+        "properties": {
+          "differentiator_id": { "type": "string", "pattern": "^DIF-[0-9]{2,3}$" },
+          "vs_alternative": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "enum": ["statu_quo", "diy_workaround", "competitor_product", "adjacent_category", "cheaper_substitute"] },
+              "label": { "type": "string" },
+              "current_solution_ref": { "type": ["string", "null"], "description": "Pointeur vers problems_solved[].current_solutions (index ou texte exact)." }
+            }
+          },
+          "delta": { "type": "string", "description": "Le gain net vs CETTE alternative précise." },
+          "proof_strength": { "$ref": "_shared/proof-strength.json" },
+          "_notes": { "type": "string" }
         }
       }
     },

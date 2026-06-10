@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VOC Verbatim (Layer A record)",
+  "description": "Codification du record jsonl Layer A défini en prose dans .skills/skills/mine-voc/SKILL.md Step 2-3. PAS une entité nouvelle : le home voix-client reste le couple Layer A jsonl + routing Layer B (pain_points, objections, spec, profile). Storage : brands/{slug}/sources/voc/{run-date}/{platform}.jsonl, 1 ligne = 1 record. Jamais auto-loadé (audit substrate). Les jsonl pre-schema restent valides en l'état, pas de validation rétroactive.",
+  "_schema_version": "voc-verbatim/1.0",
+  "_changelog": { "1.0": "C1 · codification du record Layer A + verbatim_id stable VOC-NN pour pointage Layer B + provenance mécanique inline." },
+  "type": "object",
+  "required": ["verbatim_id", "platform", "source_ref", "captured_at", "text", "product_slug", "language"],
+  "properties": {
+    "verbatim_id": { "type": "string", "pattern": "^VOC-[0-9]{2,5}$", "description": "Séquence par brand, allouée par mine-voc à l'écriture. Stable, jamais réassigné." },
+    "platform": { "type": "string", "enum": ["trustpilot", "judge_me", "loox", "okendo", "yotpo", "shopify_native", "sephora", "amazon", "reddit", "twitter", "youtube_comments", "tiktok", "instagram", "app_store", "play_store", "support_export"] },
+    "source_ref": { "type": "string", "description": "URL ou ref ID plateforme." },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "rating": { "type": ["number", "null"] },
+    "verified_buyer": { "type": ["boolean", "null"] },
+    "text": { "type": "string", "description": "Brut, zéro paraphrase." },
+    "product_slug": { "type": "string", "pattern": "^[a-z0-9-]*$" },
+    "language": { "type": "string" },
+    "username_anonymized": { "type": ["string", "null"] },
+    "coding": {
+      "type": "object",
+      "description": "4 lentilles canon resources/frameworks/voc-coding.md.",
+      "properties": {
+        "theme": { "type": "string" },
+        "jtbd": { "type": "string" },
+        "awareness_stage": { "$ref": "_shared/awareness-stage.json" },
+        "pain_category": { "type": "string" }
+      }
+    },
+    "canon_emotion_id": { "type": ["string", "null"] },
+    "canon_objection_pattern_id": { "type": ["string", "null"] },
+    "extraction": { "$ref": "_shared/extraction-provenance.json" }
+  }
+}

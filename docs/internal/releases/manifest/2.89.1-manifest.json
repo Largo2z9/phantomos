@@ -1,0 +1,50 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.1",
+  "released_at": "2026-06-09",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 82,
+  "schemas_new": [],
+  "schemas_modified": [],
+  "summary": "Passe discours sur les surfaces vision/produit. Docs only : zero code, zero schema, zero skill. Motif : stress-test externe du discours (recherche croisee juin 2026) a etabli que (a) les references tierces du manifesto sont demonetisees (MIT NANDA 95% methodologiquement demoli et devenu marqueur de vendor-speak, attribution AaaS/Huang fragile, TAM HFS non consensuel, genealogie context-engineering datee), (b) les manifestos dev-tools gagnants citent zero stat tierce et un seul concept proprietaire, (c) une claim d'usage fabriquee (prisms.md prisme 6, 'operators report...' a zero utilisateur externe) exposait tout le capital d'honnetete. Regle posee : zero statistique de marche tierce sur toute surface externe, chiffres first-party du moteur uniquement (522 ads, 82 skills, 146 releases, 26%->3,5%), claims d'usage first-person, categorie hote (jamais auto-proclamee), registre artisan. Doctrine complete : largo-kb vision.md Annexe F (R&D, hors template).",
+  "changes": {
+    "docs_vision": [
+      "~docs/vision/manifesto.md (REECRIT ~1150 mots : ouverture douleur operateur re-brief/corrections perdues · encoder!=logger seul concept porteur revendique en propre · Palantir = analogue d'echelle, plus source du concept · section 7 'What is proven, what is not' = chiffres first-party (522 ads, 82 skills, 146 releases, regle 2 sources independantes) + aveu zero operateur externe · differenciateur 4 = principe sacrificiel 'the canon belongs to the operator, not the tool' · risque commoditization complete par la reponse architecture (integrite vs taxonomie) · fenetre 18 mois remplacee par faits constates · cloture Hemingway non creditee remplacee par observation produit · SUPPRIME : stats MIT 95%/HFS 1,5T/Menlo/a16z, citations Atlan, sections 'Three theses endorsed publicly' et 'Two contrarian positions', sources tierces, 42 em-dashes)",
+      "~docs/vision/positioning-pitch.md (one-liner ressere wedge DTC paid + 'Le pattern est general, la preuve est locale' · 'quel qu'il soit' supprime · constat : 95%+HFS remplaces par learning gap en diagnostic + mesure moteur 26%->3,5% · paragraphe context-engineering/genealogie remplace par discipline en voix propre · kit 'une trentaine'->'82 skills versionnes' · attribution encoding/logging rapatriee, Palantir = analogue d'echelle · differenciateur independance fournisseur reformule en propriete du format (honnete vis-a-vis du runtime Claude Code) · citation Atlan supprimee · Shipper/Tavel reduits a Tavel + caveat marges · sources purgees a 3 entrees annotees)",
+      "~docs/vision/prisms.md (REECRIT : 8 prismes, le titre disait 'six angles' et l'intro pointait 'Prism 6 (Product)' pour le prisme 8 · prisme 6 : claim d'usage fabriquee ('Operators who use PhantomOS for three months report...') passee en first-person founder + aveu test externe a venir · prisme 1 retitre 'The missing middle of the agent economy' (de-substrat) · prisme 4 sans naming proprietaire triple · note d'usage : outil de calibrage interne, un prisme par surface, jamais publie en liste · regles discours ajoutees (zero stat tierce, claims first-person, 1 concept nomme max) · 18 em-dashes purges)",
+      "~docs/vision/roadmap.md (3 phrases cassees par stripping du nom produit reparees : 'Today the operator performs...', 'PhantomOS ships with the DTC paid acquisition kit', 'PhantomOS is single-operator per workspace by design' · 6 em-dashes purges)"
+    ],
+    "docs_product": [
+      "~docs/product/fit.md (phrase cassee reparee : 'The agency, the client, or both ? PhantomOS does not enforce this.' · cross-ref morte 'see manifesto par. 8' remplacee par definition inline du test d'extractibilite + pointeur docs/system/extending.md)",
+      "~docs/product/capabilities.md (2 leaks R&D anonymises : scenario 5 'Les operateurs Abyss collectif'->'Une equipe d'operateurs' · scenario 8 'Largo gere Abyss collectif avec 5-10 brands clients'->'Un operateur agency gere 5 a 10 brands clientes')"
+    ],
+    "root": [
+      "~README.md (lexicon : compte errone '13 operator-facing terms' supprime, le fichier contient ~27 entrees)",
+      "~docs/README.md ('six framings' -> 'eight framings')"
+    ]
+  },
+  "tests_non_regression": {
+    "third_party_stats_purged": "PASS (grep '95%|NANDA|HFS|trillion|Huang|Atlan|Menlo|a16z' sur docs/vision/manifesto.md + prisms.md = 0 ; positioning-pitch garde MIT learning-gap en diagnostic annote uniquement)",
+    "em_dash_zero": "PASS (grep em-dash sur manifesto/prisms/roadmap/positioning-pitch/fit/README = 0)",
+    "hemingway_signature_removed": "PASS (grep 'puis soudainement|then suddenly' = 0 cote template)",
+    "fabricated_usage_claim_removed": "PASS (prisms prisme 6 en first-person)",
+    "rd_leak_scan": "PASS (grep 'Largo|Abyss' docs/product/ = 0)",
+    "counts_aligned": "82 skills (manifest) cite dans positioning-pitch ; README sans compte lexicon"
+  },
+  "decisions_captured": ["passe discours 2026-06-09 (doctrine R&D : vision.md Annexe F, hors template)"],
+  "out_of_scope_noted": [
+    "Lint copy automatise en gate de release (em-dash, stats tierces, comptes vs _version.json) : flagge, non construit (candidat extension hygiene-audit ou pre-release gate)",
+    "docs/product/guides/first-session-example.md : flow d'onboarding obsolete vs tour v2.90 (drift signale, non corrige dans cette passe)",
+    "capabilities.md : sections FR dans une doc declaree 'English throughout' (drift signale, non corrige)",
+    "Surfaces R&D corrigees en parallele hors template : vision.md (notes statut references + Annexe F discipline wording), vision-public.md (rewrite miroir) · commit Build separe"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.1",
+    "push (operateur)",
+    "relecture Largo des 3 surfaces vision reecrites avant tout extract externe"
+  ]
+}

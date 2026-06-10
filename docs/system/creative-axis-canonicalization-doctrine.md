@@ -2,6 +2,8 @@
 
 > Canonique v2.88.0+. Doctrine canon qui codifie la hiérarchie créative stratégique (brand promise · big idea audience-scoped · axe créatif · créa instance) et le mapping du sous-workflow A Creative Strategy v3 vers l'équation compositionnelle v3.1 NOYAU × CONTEXTE × MODIFIEURS. Doctrine sœur de `creative-formula.md` v3.1 (équation maître substrate · CAC pose le niveau au-dessus stratégique audience-scoped), `creative-mechanics-registry.md` (29+ mécaniques canonisées · CAC référence par axe créatif), `output-clarity-doctrine.md` v2.79.2+ (visualisers matriciel ASCII enforcement), `pre-gate-evaluator-doctrine.md` NEW v2.88.1 (evaluator-optimizer A6 5 checks structurels). Ferme le gap *"comment passer d'une requête opérateur DTC à des assets publicitaires cohérents produits depuis l'atlas brand · qualité créative ne se joue pas dans la production IA mais dans la décomposition stratégique amont"* posé en R&D Creative Strategy session 25-27 mai 2026.
 
+> **⚠ SUPERSEDED PARTIEL · v2.89.0 (2026-06-07).** Les références à `pre-gate-evaluator-doctrine.md` (évaluateur A6), à **HR-CAC-4**, et au `creative_axis.schema` sont **obsolètes** : ces briques n'ont jamais été construites, et la direction 2.89.0 (génome `genome.schema` + gate QC de sortie `qc-creative`) les a leapfroguées. RESTENT CANON : la hiérarchie créative (brand promise · big idea audience-scoped · axe créatif · instance) et le mapping vers l'équation v3.1. Ne pas implémenter le pre-gate-evaluator.
+
 ---
 
 ## 1. Thèse fondatrice

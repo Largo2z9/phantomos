@@ -12,6 +12,9 @@ matrix_mode: coding
 consumes:
   - path: resources/frameworks/voc-coding.md
     min_version: 1.0.0
+  - path: resources/schemas/voc-verbatim.schema.json
+    min_version: 1.0.0
+    note: "C1 · SSOT du record Layer A (verbatim_id ^VOC-NN séquence par brand + extraction inline). La prose Step 3 est un rappel, le schéma fait foi."
   - path: docs/doctrine/pain-benefit-chain-doctrine.md
   - path: docs/doctrine/objections-mapping-doctrine.md
 description: >
@@ -331,26 +334,28 @@ Ces tags sont écrits sur le verbatim dans le Layer A jsonl (`brands/{slug}/sour
 
 Coding model: Sonnet for v1.0 · JTBD and Schwartz coding quality is the load-bearing factor and Haiku has not been validated yet. A/B test Haiku 4.5 on a 50-verbatim corpus in v1.1 before downgrading.
 
-Layer A entry shape, written to `brands/{slug}/sources/voc/{YYYY-MM-DD}/{platform}-{anchor}.jsonl`, one entry per line:
+Layer A entry shape, written to `brands/{slug}/sources/voc/{YYYY-MM-DD}/{platform}-{anchor}.jsonl`, one entry per line. **SSOT du record = `resources/schemas/voc-verbatim.schema.json` (voc-verbatim/1.0 · C1)** · la forme ci-dessous est un rappel, le schéma fait foi.
+
+**Allocation `verbatim_id` (C1)** : séquence numérique PAR BRAND `^VOC-[0-9]{2,5}$` (VOC-01, VOC-02, …), allouée à l'écriture du record · scanner le max existant cross-runs sous `sources/voc/**`, incrémenter · stable, jamais réassigné. C'est LA clé que les Layer B pointent (`verbatim_ref` dans pain_points/objections verbatim_quotes, `voice_ref` dans profile key_expressions, `source_verbatim_ref` dans fears). **Provenance mécanique** : remplir le bloc `extraction` inline ($ref `_shared/extraction-provenance.json` · method/confidence/extracted_at · `absent` exige `lever`). Les jsonl pre-schema (ancien format `id: VOC-{platform}-{nano_id}`) restent valides en l'état, pas de validation rétroactive (audit substrate).
 
 ```json
 {
-  "id": "VOC-{platform}-{nano_id}",
+  "verbatim_id": "VOC-23",
+  "platform": "trustpilot",
+  "source_ref": "https://www.trustpilot.com/review/example-brand.com/123456",
   "captured_at": "2026-04-24T14:32:00Z",
-  "source_platform": "trustpilot",
-  "source_url": "https://www.trustpilot.com/review/example-brand.com/123456",
-  "anchor_product_slug": "respire-sticks-deo",
   "rating": 2,
   "verified_buyer": true,
-  "verbatim": "<exact text, no edits>",
+  "text": "<exact text, no edits>",
+  "product_slug": "respire-sticks-deo",
   "language": "fr",
-  "themes": ["pain.functional", "objection.efficacite"],
-  "jtbd": {"functional": "regained morning routine", "emotional": null, "social": null},
-  "awareness_stage": "product_aware",
-  "pain_category": ["functional"],
-  "audience_signals": {"demographic_clues": ["mention of 'mes enfants'"], "register": "casual"},
-  "competitor_named": null,
-  "brand_vs_product": "product"
+  "coding": {
+    "theme": "pain.functional",
+    "jtbd": "regained morning routine",
+    "awareness_stage": "product_aware",
+    "pain_category": "functional"
+  },
+  "extraction": { "extraction_method": "headless", "extraction_confidence": 0.8, "extracted_at": "2026-04-24T14:32:00Z" }
 }
 ```
 

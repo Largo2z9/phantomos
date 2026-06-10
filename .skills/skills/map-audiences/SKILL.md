@@ -1,7 +1,9 @@
 ---
 name: map-audiences
 type: producer
-version: 1.3.0
+version: 1.3.1
+patch_notes_c1:
+  - "1.3.1 (C1 onboarding-native D#500) · GATE VALIDATION ÉTENDU · refus de passer une audience à validation_status: validated SANS : entry_door résolu (non-null) + jtbd.primary + (decision_process.awareness_trigger OU psychology.life_moments non vides) + market_position.awareness_dominant (RENAME C1 profile/2.3, ex awareness_level) + confidence_chain populated. Pattern exact du gate dream_scenario_narrative v2.87.4 · AUCUN required ajouté au schema (backward compat) · enforcement par le skill, pas par jsonschema. + audience_type enum += probe (segment à 1 indice = sonde, pas une audience opérable · promu quand confidence_chain.verbatim_count >= 5 · motivation OBLIGATOIRE, démographie dérivée optionnelle, cf D2 canon onboarding)."
 patch_notes_v2_87_4:
   - "1.3.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill heavy Q1-Q4 staging 3-5 audiences ~8-15 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant scaffold + Q1-Q4. Audit Fincut session v2.87.3 finding · Q1-Q4 proposal staged sans disclosure préalable · 3 audiences encodées sans gate dream_scenario_narrative + confidence_chain (canon Patch A v2.87.4 obligatoire pre-validation · cross-ref profile-audience v1.9.0+ HR-DD-1). Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+. Enforcement runtime hardcoded EDD Step 0 + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
 patch_notes_v2_87_6:
@@ -23,15 +25,8 @@ description: |
   v1.0.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (audiences-cartography, breakthrough-advertising-5-stages). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts.
   v1.0.0 (S55 · v2.58 · D#386 canon) · Atomique cartography extraction.
   Cartographie le PORTFOLIO audiences brand-wide en appliquant le framework 4 questions canon (porte d'entrée · niveau granularité · stade Schwartz · chevauchements). Scaffold N audiences mères + sous-poches via mutation gate avec validation_status hypothesis par défaut. Invocable séparément pour refresh cartographie audiences sans relancer le full snapshot. Distinct profile-audience qui drill UNE audience en deep 8 dimensions · map-audiences pose la carte brand-wide light pass.
-triggers_fr:
-  - "map-audiences {brand}"
-  - "cartographie les audiences"
-  - "split snapshot audience"
-  - "extrait les audiences mères"
-triggers_en:
-  - "map audiences"
-  - "cartograph audiences brand"
-  - "split mother audiences"
+  FR: "map-audiences {brand}", "cartographie les audiences", "split snapshot audience", "extrait les audiences mères".
+  EN: "map audiences", "cartograph audiences brand", "split mother audiences".
 disambiguates_against:
   - profile-audience: "profile-audience drill UNE audience en deep 8 dimensions canon V3 avec verbatims mining. map-audiences SCAFFOLD le portfolio brand-wide (N audiences mères + sous-poches) en light pass cartography (4 questions framework canon · validation_status hypothesis)."
   - snapshot-brand: "snapshot-brand est l'orchestrateur cartographie complète depuis URL (brand + products + audiences + close). map-audiences est l'atomique audiences-only invocable séparément pour refresh cartographie sans relancer le full snapshot. D#386."

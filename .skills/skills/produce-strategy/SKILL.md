@@ -9,21 +9,6 @@ isolation_scope: brand_only
 layer: territoire
 mode: proposed
 reasoning_pattern: null
-triggers_fr:
-  - "pose le focus Q{n} de {brand}"
-  - "produit-strategy {brand}"
-  - "cadre la stratégie {brand}"
-  - "définit les objectifs annuels {brand}"
-  - "produit la stratégie {brand}"
-  - "trimestriel pour {brand}"
-  - "focus du trimestre {brand}"
-triggers_en:
-  - "produce strategy"
-  - "set quarterly focus"
-  - "frame strategy {brand}"
-  - "define annual goals {brand}"
-  - "set strategic focus {brand}"
-  - "produce strategy {brand}"
 description: >
   v1.0.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (dtc-operator-playbook). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts.
   v1.0 baseline orchestrateur cadrage stratégique brand. Interactive flow Q&A · annual_goals
@@ -36,6 +21,8 @@ description: >
   FR · "pose le focus Q{n} de {brand}", "produit-strategy {brand}", "cadre la stratégie {brand}",
   "définit les objectifs annuels {brand}".
   EN · "produce strategy", "set quarterly focus", "frame strategy {brand}".
+  FR: "pose le focus Q{n} de {brand}", "produit-strategy {brand}", "cadre la stratégie {brand}", "définit les objectifs annuels {brand}", "produit la stratégie {brand}", "trimestriel pour {brand}", "focus du trimestre {brand}".
+  EN: "produce strategy", "set quarterly focus", "frame strategy {brand}", "define annual goals {brand}", "set strategic focus {brand}", "produce strategy {brand}".
 permissions:
   reads: [brand, product, profile, learning, strategy]
   writes: [strategy]

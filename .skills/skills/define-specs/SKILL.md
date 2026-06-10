@@ -14,20 +14,8 @@ patch_notes:
 description: >
   v1.3.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section Niveau LIVE thinking aloud obligatoire pendant exécution (au début Hard Rules avant Step 0bis). Action LOURDE · narratif étendu 2 niveaux abstraction (macro contexte produit positionnement + micro spec → mécanisme → bénéfice 3 couches phrasé en prose). Pose pair senior expert · audit temps réel + pédagogie indissociables. Cross-ref `decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 + AP-DVD-11. Backward compat strict additif (cycle runtime préservé).
   v1.3.0 (v2.78.2 decomposition-visibility-discipline) · Output NEW section Specs Visibility Matriciel 3 niveaux obligatoire après encoding (specs · mécanismes · bénéfices 3 couches canon pain-benefit-chain). Méthode pédagogique verbale obligatoire. v1.2.0 (v2.58 coverage extend) · service_specs Q&A flow activé pour spec.identity.type service/clinical_service/hybrid (v1.11) · contraindications Q&A flow activé pour produits/services à contraintes usage.
-triggers_fr:
-  - "définis les specs"
-  - "crée la fiche produit"
-  - "remplis le produit"
-  - "spec produit"
-  - "qu'est-ce que le produit"
-  - "cartographie le produit"
-triggers_en:
-  - "define specs"
-  - "create product card"
-  - "populate product"
-  - "product spec"
-  - "what is the product"
-  - "map the product"
+  FR: "définis les specs", "crée la fiche produit", "remplis le produit", "spec produit", "qu'est-ce que le produit", "cartographie le produit".
+  EN: "define specs", "create product card", "populate product", "product spec", "what is the product", "map the product".
 disambiguates_against:
   snapshot-brand: "snapshot-brand fait le scrape URL pur (auto). define-specs orchestre snapshot + Q&A operator + sources upload pour produits sans URL ou champs non-scrapés."
   cartograph: "cartograph est READ-ONLY (synthèse strategique). define-specs WRITE (peuple spec.json)."

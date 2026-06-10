@@ -1,0 +1,114 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "3d-anatomy-xray",
+  "display_name": "Anatomie 3D rayons-X",
+  "family": "3d-anatomy",
+  "typology_st": "variable",
+  "description": "Rendu 3D anatomique en vue rayons-X : un corps ou un membre semi-transparent (peau translucide, lueur de bord) qui laisse voir l'intérieur (os, articulation, muscle, organe, vaisseau, follicule, fibre) avec une zone d'intérêt mise en lumière. On ne montre pas la surface mais le dessous : rendre visible et viscéral le mécanisme interne qu'un produit cible (articulation qui glisse, circulation qui repart, intestin qui se calme, racine du cheveu qui se renforce). À utiliser sur les angles santé/mécanisme où il faut prouver une action profonde invisible, en frame 'voici ce qui se passe à l'intérieur' d'un carrousel, en hero image science, ou en clip temporel qui anime le rayon-X (rotation, sweep, pulse) pour dramatiser le before/after interne. Variable : image fixe rayons-X OU courte vidéo de scan animé selon le support.",
+  "render_recipe": {
+    "prompt_skeleton": "Photorealistic 3D x-ray anatomical render of {body_region}, semi-transparent translucent skin and tissue revealing the internal {internal_structures} beneath, the {focus_zone} highlighted with a glowing emphasis to show {mechanism}, medical scan aesthetic with rim light through the translucent body, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, anatomically accurate, see-through layered depth, clinical scientific credibility, not a flat 2D diagram, no cartoon",
+    "slots": [
+      {
+        "name": "body_region",
+        "description": "La région du corps en vue rayons-X. Ex 'a human knee joint', 'a lower leg from knee to ankle', 'the abdomen and digestive tract', 'a scalp and hair follicle in cross x-ray', 'a forearm and wrist'. Reste anatomiquement crédible et cadré sur la zone que le produit cible."
+      },
+      {
+        "name": "internal_structures",
+        "description": "Les structures internes à révéler sous la peau translucide. Ex 'bones, cartilage and joint capsule', 'veins and venous valves', 'stomach, intestines and gut lining', 'hair follicle root and dermal papilla', 'muscle fibers and tendons'. C'est ce qui doit être visible par transparence."
+      },
+      {
+        "name": "focus_zone",
+        "description": "La zone précise mise en lumière (glow) car c'est là qu'agit le produit. Ex 'the inflamed cartilage surface', 'the valve where blood pools', 'the irritated gut lining', 'the weakened follicle root'. Une seule zone héro par frame pour ne pas diluer le message."
+      },
+      {
+        "name": "mechanism",
+        "description": "Ce que le glow démontre : l'action interne à rendre visible. Ex 'cushioning restored between the bones', 'blood flow lifting back up the vein', 'the lining soothing and calming', 'the root being reinforced and re-anchored'. C'est le bénéfice profond matérialisé."
+      },
+      {
+        "name": "lighting",
+        "description": "Slot rempli par défaut ci-dessous. Lumière de scan médical : rim light qui traverse le corps translucide + glow localisé sur la focus_zone. Surcharger seulement pour aligner la couleur du glow sur l'accent charte marque."
+      },
+      {
+        "name": "camera_lens",
+        "description": "Slot rempli par défaut. Vue 3/4 ou frontale rapprochée sur la zone, légère profondeur. Surcharger pour un cadrage macro serré (follicule, valve) ou un plan large (membre entier)."
+      },
+      {
+        "name": "palette_mood",
+        "description": "Palette à aligner sur la charte. Slot rempli par défaut bleu/cyan clinique avec glow accent, surcharger en remplaçant le bleu froid par la couleur de marque (ex corail) pour s'approprier le code scan sans look stock médical générique."
+      },
+      {
+        "name": "texture_grain",
+        "description": "Slot rempli par défaut (surface translucide propre, micro-grain de scan). Surcharger rarement, seulement pour durcir ou adoucir le rendu scan selon la DA."
+      },
+      {
+        "name": "composition_notes",
+        "description": "Cadrage et hiérarchie. Slot rempli par défaut (zone héro centrée, fond sombre qui fait ressortir le glow, marge pour overlay copy), surcharger selon format frame carrousel, hero ad, ou plan vidéo."
+      }
+    ],
+    "lighting": "Medical scan lighting: strong rim light passing through the translucent body so internal structures read as layered depth, a soft volumetric glow localized on the focus zone (the active site) acting as the single hero highlight, dark low-key background so the see-through body and the emphasis glow pop, subtle internal subsurface scattering on tissue.",
+    "camera_lens": "3/4 or near-frontal anatomical view on the target region with a moderate macro feel, shallow but controlled depth so the highlighted focus zone stays sharp while deeper layers fall slightly back, no fisheye distortion, clinical product-shot framing.",
+    "palette_mood": "Default clinical x-ray palette: deep dark background, cool blue/cyan translucent body and bone tones, with a single saturated accent reserved for the focus-zone glow (swap the accent to the brand color to own the look). Credible, high-tech, scientific, never neon rave or garish multicolor.",
+    "texture_grain": "Clean translucent surfaces with believable subsurface depth, very fine scan-like micro grain on the body to suggest medical imaging, crisp edges on bones and structures, no heavy photographic noise, no cartoon flat shading, no plasticky CGI sheen.",
+    "composition_notes": "Single hero focus zone centered or on a rule-of-thirds anchor, the translucent body filling the frame enough to feel anatomical, dark negative space around it for the glow to breathe and for headline/copy overlay, one mechanism per frame (no busy multi-organ collage), 4:5 or 1:1 for feed, 9:16 safe-zone if exported as a vertical scan clip."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "high (lock anatomical accuracy, translucency and the single-glow focus; lower slightly only if the render turns into stiff neon CGI or the internal layers collapse into mush)"
+    },
+    "video_params": {
+      "motion": "Slow controlled scan motion only: gentle orbit/rotation around the region, a vertical or horizontal x-ray sweep that reveals layers, or a soft pulse/glow building on the focus zone to dramatize the mechanism activating. No fast cuts, no jitter, the body stays anatomically stable while the emphasis animates.",
+      "duration_s_range": [3, 6],
+      "transitions": "Smooth dissolve between an 'before' dull/inflamed internal state and an 'after' soothed/reinforced state, or a clean reveal wipe of the translucent layers; avoid hard jump-cuts that break the clinical-scan illusion."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Anatomie fausse ou implausible : os mal placés, mauvais nombre d'articulations, organe à la mauvaise position, vaisseau qui se branche n'importe où, follicule mal structuré. Le public connaît son corps, une anatomie fantaisiste tue la crédibilité scan",
+    "Squelette/membre clonés ou symétrie mécanique : structures internes copiées-collées en miroir parfait, doigts/orteils surnuméraires ou manquants visibles en transparence, côtes ou vertèbres répétées à l'identique au lieu d'une variation organique",
+    "Transparence incohérente : peau opaque par endroits puis vitre transparente ailleurs sans logique, couches qui ne s'empilent pas (on voit l'os mais pas la chair entre la peau et l'os), profondeur qui s'aplatit en collage 2D",
+    "Glow partout / multi-glow : plusieurs zones illuminées qui diluent le message, halo néon générique sur tout le corps. Un seul focus_zone héro, le reste reste calme",
+    "Dérive néon rave / sci-fi : palette rainbow criarde, lignes lumineuses cyberpunk, look hologramme jeu vidéo qui casse la crédibilité médicale et le code charte marque",
+    "Texte et mentions scan hallucinés : faux pseudo-texte d'imagerie médicale, chiffres/échelles/légendes inventés gravés dans le rendu, watermark de banque d'images CGI",
+    "CGI plastique sans subsurface : tissu qui ressemble à du plastique brillant ou à de la cire au lieu d'une matière translucide organique crédible, reflets durs faux",
+    "Claims santé inventés dans le visuel : flèches ou labels qui affirment un effet médical non validé directement dans l'image (réintégrer toute mention validée en post, jamais laisser le modèle écrire des claims)",
+    "Gore / réalisme viscéral repoussant : rendu sanglant, chair à vif, organe répugnant qui crée du dégoût au lieu de la pédagogie. Garder le rayon-X propre, clinique, désincarné"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [1, 6],
+    "pairs_well_with": [
+      "diagram-medical-2d",
+      "3d-anatomy-realistic",
+      "3d-anatomy-stylized",
+      "real-photo-product-studio",
+      "split-screen-comparison",
+      "graphic-icons-overlay"
+    ],
+    "avoid_when": [
+      "L'argument est émotionnel/identitaire, désir, statut ou preuve sociale : un scan froid n'active pas l'envie, privilégier lifestyle, UGC ou packshot",
+      "Le produit n'a aucun mécanisme d'action profond à prouver (mode, déco, commodité, accessoire) : le rayon-X n'a rien d'interne à révéler et sonne gadget",
+      "Charte raw/agressive UGC native (zone créa très haute) : le rendu scan léché détonne et sent l'ad institutionnelle dans un feed brut",
+      "On veut l'impact viscéral réaliste du corps ou de l'organe plein (pas en transparence) : passer sur 3d-anatomy-realistic",
+      "Cible sensible au médical / public anxieux ou contexte compliance strict : un visuel quasi-imagerie médicale peut sur-promettre un effet clinique, vérifier les claims avant",
+      "On a juste besoin d'expliquer un flux d'étapes lisible et pas de montrer la profondeur interne : un diagram-medical-2d plat est plus clair et moins cher à produire"
+    ]
+  },
+  "refs": [
+    "Frame 'à l'intérieur de votre genou' : genou en rayons-X, cartilage usé en rouge terne qui passe en glow apaisé pour montrer le coussin restauré par un complément articulaire",
+    "Jambe translucide du genou à la cheville, veines et valves visibles, glow qui remonte pour illustrer le retour veineux d'une chaussette de compression",
+    "Abdomen en scan, intestin irrité en surbrillance qui se calme, pour un complément digestif/konjac (mécanisme interne rendu viscéral)",
+    "Clip vertical 5s : scan du cuir chevelu qui zoome sur le follicule, sweep rayons-X, glow qui renforce la racine pour un soin anti-chute"
+  ],
+  "related_mechanic_ids": [
+    "mechanism-reveal",
+    "ingredients-pillars",
+    "before-after",
+    "product-specs"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

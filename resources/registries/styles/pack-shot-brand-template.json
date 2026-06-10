@@ -1,0 +1,84 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "pack-shot-brand-template",
+  "display_name": "Packshot gabarit marque",
+  "family": "packshot",
+  "typology_st": "spatial",
+  "description": "Gabarit packshot recurrent de marque: un layout fige et reutilisable (zones constantes pour produit, headline, badge offre, logo et fond charte) ou seul le produit/message change d'une declinaison a l'autre. Ce n'est pas un simple studio shot, c'est le TEMPLATE de la marque, son moule visuel signature pose une fois et redecline a la chaine (catalogue, gamme, offres successives). A utiliser pour produire une serie coherente vite (multi-produits, multi-promos) qui reste instantanement reconnaissable comme la marque, en frame hero d'ad ou frame de carrousel. Cherche la reconnaissance de marque et la cadence de production, pas l'effet de surprise.",
+  "render_recipe": {
+    "prompt_skeleton": "Branded product key visual built on a fixed brand template, {product} placed in the locked hero zone on a {brand_background} backdrop, {brand_typeface} headline reading {headline} in the fixed copy zone, {offer_badge} in the locked badge corner, brand logo in its constant {logo_position} zone, {lighting}, shot on {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}. Consistent recurring brand layout (same grid, same zones, same treatment across the whole product line), sharp accurate label and packaging, true-to-life materials, off-brand-free palette, clean repeatable template feel.",
+    "slots": [
+      { "name": "product", "description": "Le produit exact pose dans la zone hero verrouillee du gabarit (nom + format packaging: bottle, jar, tube, sachet, box). C'est la seule variable produit qui change d'une declinaison a l'autre, le reste du template reste fixe." },
+      { "name": "brand_background", "description": "Le fond signature du gabarit aligne charte: aplat, degrade-charte ou surface texturee recurrente (ex 'brand cream #F5EFE6 flat', 'soft brand gradient corail vers sable'). Doit etre IDENTIQUE sur toute la serie pour que le moule se reconnaisse." },
+      { "name": "brand_typeface", "description": "La typo de marque exacte du gabarit (fonte + graisse, ex 'heavy grotesk', 'condensed display'). Meme fonte, meme taille, meme position de headline sur toutes les declinaisons." },
+      { "name": "headline", "description": "Le texte court a poser dans la zone copy fixe (claim produit ou benefice, ex 'Eclat en 7 jours', '-30% cette semaine'). Court, une idee, dans le gabarit." },
+      { "name": "offer_badge", "description": "Le badge offre/preuve du coin verrouille (pastille %, 'NEW', note etoiles, 'best-seller'). Forme et position constantes, seul le contenu varie. Laisser vide si la declinaison n'a pas d'offre." },
+      { "name": "logo_position", "description": "La zone constante du logo (ex 'top-left', 'bottom-center'). NE CHANGE JAMAIS d'une declinaison a l'autre, c'est l'ancre de reconnaissance du gabarit." },
+      { "name": "lighting", "description": "Voir champ lighting par defaut. Le gabarit fige le schema lumiere, surcharger seulement si la charte a un parti pris fort, et alors l'appliquer a TOUTE la serie." },
+      { "name": "camera_lens", "description": "Voir champ camera_lens par defaut (combo focale + ouverture, identique sur la serie)." },
+      { "name": "palette_mood", "description": "Voir champ palette_mood par defaut (ambiance chromatique charte, constante sur la serie)." },
+      { "name": "texture_grain", "description": "Voir champ texture_grain par defaut." },
+      { "name": "composition_notes", "description": "Voir champ composition_notes par defaut (grille, zones, marges du gabarit, identiques d'une declinaison a l'autre)." }
+    ],
+    "lighting": "Lumiere studio douce et reproductible a l'identique sur toute la serie: large soft key de face-gauche a 45 degres, fill doux a droite, leger rim pour detacher le produit du fond, une seule ombre de contact maitrisee. La cle est la CONSTANCE: meme schema, meme intensite, meme direction sur chaque declinaison pour que le gabarit reste homogene.",
+    "camera_lens": "85mm a 100mm prime, f/8 a f/11 pour produit net, ISO bas, trepied verrouille, meme angle (frontal a legerement plongeant) reproduit sur toute la serie. Aucune variation de focale ou d'angle entre declinaisons.",
+    "palette_mood": "Palette de marque stricte et constante (memes hex partout), mood premium et propre, exposition equilibree, balance des blancs legerement chaude. Cohesion totale charte: zero couleur hors-charte, le mood doit etre identique sur chaque produit de la serie.",
+    "texture_grain": "Grain photographique fin et discret, micro-texture reelle du packaging preservee (papier mat, verre, metal brosse), zero sur-lissage plastique. Meme traitement de grain et de texture applique uniformement sur toute la serie.",
+    "composition_notes": "Layout sur grille FIGEE: zone hero produit, zone headline, coin badge, zone logo constante, marges et negative space identiques d'une declinaison a l'autre. Le produit occupe toujours la meme empreinte, le headline le meme bloc, le badge le meme coin. C'est la repetabilite du gabarit qui cree la reconnaissance. 4:5 ou 1:1 feed-friendly, generous negative space pour la lisibilite du message."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_square": "1:1",
+      "resolution": "2K",
+      "guidance": "high pour verrouiller le gabarit (zones, palette, typo, position logo) et garantir la coherence d'une declinaison a l'autre, eviter le drift de layout entre frames de la serie",
+      "negative_prompt": "inconsistent layout, shifting logo position, off-brand colors, hallucinated text, garbled letters, fake brand logo, drifting headline position, varying lighting between frames, plastic over-smoothed packaging, distorted label, random props, cluttered composition",
+      "note": "Pour une serie coherente: figer le gabarit sur une premiere declinaison validee, puis l'utiliser comme reference (image-to-image / style-lock) pour generer les declinaisons suivantes en ne changeant que le slot product (et headline/badge). Le logo exact et les zones de texte sont a verrouiller/recomposer en post-prod, pas a laisser halluciner par le modele."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Layout qui derive d'une declinaison a l'autre: position de logo, de headline ou de badge qui bouge, marges qui changent, grille cassee. LE defaut critique d'un gabarit est l'incoherence inter-frames: chaque declinaison doit superposer le meme moule au pixel.",
+    "Texte/headline hallucine dans la zone copy: glyphes inventes, mots mal orthographies, faux kerning. Verifier chaque caractere du headline et du badge contre le brief.",
+    "Logo marque deforme ou recree au hasard par l'IA: le logo doit etre le vrai asset (place/verrouille en post-prod), jamais genere ni approxime, et toujours a la meme place.",
+    "Couleurs hors-charte: fond brand ou palette qui derive vers des teintes proches mais fausses entre declinaisons. Verifier les hex exacts, rejeter tout off-brand qui casse l'homogeneite de la serie.",
+    "Lumiere/ombre incoherente d'une frame a l'autre: direction de key, intensite ou ombre de contact qui changent entre declinaisons, ce qui trahit l'absence de gabarit reel.",
+    "Etiquette / packaging illisible ou texte hallucine sur le pack (logo produit deforme, glyphes inventes): le label doit rester net et fidele sur chaque declinaison.",
+    "Materiau au rendu plastique cireux ou sur-lisse: garder la micro-texture reelle du packaging, identique sur toute la serie.",
+    "Geometrie du packaging distordue (bouchon de travers, proportions fausses, symetrie cassee sur un objet regulier).",
+    "Props parasites ou elements decoratifs non prevus par le gabarit qui apparaissent sur certaines frames et pas d'autres, cassant la repetabilite du moule.",
+    "Badge offre incoherent: forme, taille ou coin du badge qui varient entre declinaisons, ou badge present sur une frame sans offre. La forme du badge est fixe, seul son contenu change."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 5],
+    "pairs_well_with": [
+      "real-photo-product-studio",
+      "real-photo-macro-detail",
+      "graphic-icons-overlay",
+      "split-screen-comparison",
+      "brand-motion-graphic"
+    ],
+    "avoid_when": [
+      "La marque vise un territoire raw/UGC agressif (creative_zone haute): un gabarit propre et repetitif sent l'ad et la production en serie, il casse le code natif/desordre attendu dans le feed, passer sur ugc-selfie-talking ou real-photo-lifestyle.",
+      "Le hook repose sur la surprise, l'effet pattern-interrupt ou la nouveaute visuelle: un moule reconnaissable et redondant fait exactement l'inverse, il signale 'encore une pub de cette marque' et favorise le scroll.",
+      "La marque n'a pas de charte solide en amont (palette + typo + logo + grille non figes): le gabarit n'a aucun moule a poser et le rendu parait generique/template vide, figer d'abord la DA.",
+      "On veut demontrer un mecanisme interne ou physiologique, ou une preuve d'usage humaine: un packshot template ne porte ni demonstration ni relatabilite, passer sur 3d-anatomy, diagram-medical-2d ou ugc.",
+      "Production one-shot d'un seul visuel sans logique de serie: tout l'interet du gabarit est la cadence de declinaison, pour un visuel unique un simple real-photo-product-studio suffit sans verrouiller un moule."
+    ]
+  },
+  "refs": [
+    "Code DTC paid: serie d'ads/carrousels d'une meme marque ou chaque produit ou promo reprend EXACTEMENT le meme layout (zone produit, headline, badge %, logo en coin constant), reconnaissable au scroll.",
+    "Use-case canon: decliner une gamme entiere ou une succession d'offres hebdo sur un gabarit unique pose une fois et reutilise, le seul slot variable etant le produit et le message.",
+    "Reference esthetique: moule visuel signature de marque (catalogue / page produit / serie d'annonces) plutot que photo studio one-off, l'enjeu est la coherence inter-frames et la cadence."
+  ],
+  "related_mechanic_ids": [
+    "hero-product-isolation",
+    "offer-breakdown",
+    "before-after-frame"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

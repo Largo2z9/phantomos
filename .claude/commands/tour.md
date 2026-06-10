@@ -1,7 +1,9 @@
 ---
 name: tour
-version: v2.87.0
-description: Onboarding PhantomOS simplifié · 4 milestones canoniques + close réflexif réutilisé partout · M1 splitter 4 portes (A conversationnel · B brand-first · C import existant · D progressif libre) avec slugs runtime déterministes · M2 first deliverable encadré (default par porte · gate Porte A pédagogique Stepprs · disclosure pré-engagement EDD) · M3 close réflexif 4 options (volet/drill/exit/pivot canon Vincent · contient M9 dégradé first-skills opt-in) · M4 replay évolutif post-completion. Refonte v2.87.0 · simplification chirurgicale spec 686L → cible 400L tout en préservant canons Vincent runtime, HR-OHD-2 zéro typage profil métier, prose conversationnelle native, ton premium zéro concurrent nommé, politique FR/EN canon. Schema awareness.json v1.1 (tour_entry_door · first_deliverable_built · first_deliverable_skill · first_deliverable_validated_corrections · paths_skipped NEW). Mémoire canon Largo · `feedback_no_em_dash`, `feedback_no_jargon_to_operator`, `feedback_no_overengineer`, `feedback_onboarding_native_prose`, `largo_cognitive_profile` (matriciel = SLASH COMMANDS, pas onboarding).
+version: v2.90.0
+description: >-
+  REFONTE HYBRIDE v2.90.0 · frontière dur/mou review-gated en tête (la mécanique en dur · état/gates/garanties/interdits-de-forme · la voix LIBRE) + Beat 0 lecture d'état muette AVANT de parler (tue le wobble build-sur-read-only) + Porte A = VISITE de l'atlas exemple read-only (jamais build) + anatomie distillée UN VOLET À LA FOIS (réconcilie HR jamais-un-pavé) + cadrage BUSINESS-AGNOSTIQUE (offre = produit/service/autre, jamais "DTC", tout libellé survit à produit→prestation→compte→lieu, projeter sur l'opérateur avant l'exemple). Base v2.87.0 ·
+  Onboarding PhantomOS simplifié · 4 milestones canoniques + close réflexif réutilisé partout · M1 splitter 4 portes (A conversationnel · B brand-first · C import existant · D progressif libre) avec slugs runtime déterministes · M2 first deliverable encadré (default par porte · gate Porte A pédagogique Stepprs · disclosure pré-engagement EDD) · M3 close réflexif 4 options (volet/drill/exit/pivot canon Vincent · contient M9 dégradé first-skills opt-in) · M4 replay évolutif post-completion. Refonte v2.87.0 · simplification chirurgicale spec 686L → cible 400L tout en préservant canons Vincent runtime, HR-OHD-2 zéro typage profil métier, prose conversationnelle native, ton premium zéro concurrent nommé, politique FR/EN canon. Schema awareness.json v1.1 (tour_entry_door · first_deliverable_built · first_deliverable_skill · first_deliverable_validated_corrections · paths_skipped NEW). Mémoire canon Largo · `feedback_no_em_dash`, `feedback_no_jargon_to_operator`, `feedback_no_overengineer`, `feedback_onboarding_native_prose`, `largo_cognitive_profile` (matriciel = SLASH COMMANDS, pas onboarding).
 ---
 
 # Tour · PhantomOS Onboarding
@@ -11,6 +13,39 @@ Executable instructions for the agent. Handles first-run onboarding and replay. 
 **Doctrine de référence** · `docs/system/onboarding-holistic-doctrine.md` v2.80.3 (HR-OHD-2 · zéro typage profil métier initial) + `docs/system/entry-arc-doctrine.md` v2.81.0 (multi-entry 4 portes MECE · canons Vincent runtime · ton premium) + `docs/system/engagement-disclosure-doctrine.md` v2.79.5 (disclosure pré-engagement skills orchestrateurs).
 
 **Posture de rendu canon** · L'onboarding est en **prose conversationnelle native**. Zéro interface ASCII (boxes `━━━` `═══` `─────`, tableaux territoires structurés, légende iconographie au pied). Le pattern matriciel ASCII reste réservé aux slash commands `/phantom` `/bird` `/breakdown` `/about`. `/tour` ressemble à une intro humaine naturelle.
+
+---
+
+## Frontière dur / mou (méta-gate · ne jamais éroder)
+
+Artefact de gouvernance du tour. **Tout ajout de prose figée OU de gate doit citer quelle GARANTIE il protège, sinon il est rejeté.** Sans cette règle, le tour redérive vers le tout-scripté rigide un patch à la fois (régression observée v2.80.3 → v2.87.0). La force de l'hybride est dans sa gouvernance.
+
+**EN DUR (la mécanique · LUE jamais supposée · le modèle ne s'en écarte pas) :**
+- L'**ÉTAT du workspace, lu au runtime AVANT de parler** (Beat 0) · atlas exemple déjà construit ? marque de l'opérateur présente ? signal d'offre ? L'agent ne découvre jamais rien en direct devant l'opérateur.
+- Le **typage read/write par cible** · `_EXAMPLE` est READ-ONLY, on le VISITE jamais on ne le construit · la marque de l'opérateur est mutable. Lancer un write sur une cible read-only = wobble garanti, interdit.
+- Les **gates de garantie** · système présenté avant tout choix · livrable concret avant de proposer de construire un skill · disclosure avant orchestrateur · validation point par point · exit toujours visible.
+- Les **interdits de forme** · un volet à la fois (zéro pavé) · zéro box ASCII · exactement 4 options · jamais de code interne (`ANG-NN`, `PNT-NN`, chemins, noms de fonction) en prose · **une seule langue** détectée, zéro reswitch, y compris dans le raisonnement rendu à l'écran.
+- Les **faits injectés** (chiffres de l'exemple) sont LUS des fichiers, jamais figés (si l'exemple change, la prose figée ment).
+
+**LIBRE (la voix · on écrit l'intention pas la phrase) :**
+- Les mots du pitch, les analogies, le rythme, le downshift de registre, la gestion de la confusion.
+- Les libellés des 4 options, composés depuis la conversation réelle.
+- La **projection sur l'offre nommée par l'opérateur** · c'est exactement ce qui doit s'adapter business par business. La figer = re-spécialiser DTC.
+
+## Cadrage business-agnostique (load-bearing)
+
+PhantomOS est outillé e-com/DTC aujourd'hui, mais la **méthodologie tient pour TOUT business en acquisition payante avec une OFFRE à vendre** (produit OU service OU autre). Le job INVARIANT à présenter · *encoder ton offre une fois, l'agent raisonne dessus et produit ta créa d'acquisition à travers les sessions*. **Jamais cadrer sur "DTC".** Règle dure · tout libellé et tout cadrage doit survivre au remplacement `produit → prestation → compte → lieu`. **Projeter sur l'offre de l'opérateur AVANT de démontrer sur l'exemple.**
+
+---
+
+## Beat 0 · Lecture d'état muette (first action, AVANT de parler)
+
+Lire l'état réel AVANT le premier mot. L'agent ne suppose jamais, il lit. Cela tue le wobble (annoncer un build puis se rétracter) à la racine.
+
+1. `/operator/awareness.json` + `/operator/profile.json` (mode + ce qui est déjà connu).
+2. **État du workspace** · `brands/` contient-il une marque réelle (hors `_` prefix) ? L'atlas exemple `_EXAMPLE/` est-il déjà construit (il l'est toujours, et il est **READ-ONLY** · cible de VISITE, jamais de build) ? Signal d'offre présent (URL collée, marque nommée) ?
+
+Ces lectures sont muettes (jamais de commande ni de chemin à l'écran). Elles déterminent le mode ET le typage des cibles (ce qu'on peut écrire vs seulement lire).
 
 ---
 
@@ -49,20 +84,20 @@ Default to **standard** when ambiguous. Update assumption as more signals come. 
 
 **First-run** · accueil court qui dit **ce qu'est PhantomOS** (3-5 lignes), puis **immédiatement** `AskUserQuestion` 4 options explicit (les 4 portes MECE A/B/C/D). **Jamais** un pavé. **Jamais** une amorce amputée qui saute au choix sans avoir dit ce qu'est le système. **Jamais** demander *"tu fais quoi"* / *"ton métier"* / *"ton rôle"* (canon HR-OHD-2).
 
-**Pattern de rendu opérateur · prose conversationnelle native (langue détectée FR/EN). Zéro box ASCII. Zéro tableau. Zéro légende au pied.**
+**Pattern de rendu opérateur · prose conversationnelle native (langue détectée FR/EN). Zéro box ASCII. Zéro tableau. Zéro légende au pied.** Les formulations ci-dessous sont **ILLUSTRATIVES** (l'intention, pas un verbatim à recopier · compose à la voix détectée), et **cadrées offre-agnostique** (jamais "DTC").
 
-**FR version** ·
+**FR version (illustratif)** ·
 
 ```
-PhantomOS est un workspace agentic pour l'opération DTC. Tu encodes ta marque une fois (produits, audiences, stratégie, learnings), l'agent y raisonne et exécute à travers les sessions, et chaque sortie validée enrichit ta connaissance pour la suite.
+PhantomOS est un workspace agentic pour l'acquisition payante. Tu encodes ton offre une fois (ce que tu vends, à qui, ta stratégie, tes learnings), l'agent y raisonne et produit ta créa à travers les sessions, et chaque sortie validée enrichit ta connaissance pour la suite.
 
 Comment tu veux qu'on démarre ?
 ```
 
-**EN version** ·
+**EN version (illustrative)** ·
 
 ```
-PhantomOS is an agentic workspace for DTC operations. You encode your brand once (products, audiences, strategy, learnings), the agent reasons and executes on it across sessions, and every validated output enriches your knowledge for what's next.
+PhantomOS is an agentic workspace for paid acquisition. You encode your offer once (what you sell, to whom, your strategy, your learnings), the agent reasons and produces your creative across sessions, and every validated output enriches your knowledge for what's next.
 
 How do you want to start ?
 ```
@@ -102,16 +137,18 @@ Puis poser **immédiatement** `AskUserQuestion` 4 options explicit · les 4 port
 
 | Porte | Default skill canon | ETA | Cible |
 |---|---|---|---|
-| A `arc:substance` | `build-atlas-complete` sur `_EXAMPLE/stepprs` (cas pédagogique) | ~15 min | Montrer encoding réel sur cas canonique AVANT que l'opérateur setup la sienne |
+| A `arc:substance` | **VISITE guidée** de l'atlas exemple `_EXAMPLE/stepprs` DÉJÀ CONSTRUIT (**READ-ONLY** · on LIT les fichiers réels, on ne build jamais) · distillée un volet à la fois | ~10 min | Montrer un encoding réel, projeté sur l'offre de l'opérateur dès qu'elle est connue, AVANT qu'il setup la sienne |
 | B `setup:brand` | `setup-brand` → `snapshot-brand` → `build-atlas-complete` (cycle complet) | ~15-30 min | Brand opérateur encodée + atlas vivant complet |
 | C `import:archive` | `import-archive` OR `ingest-resource` OR `connect-source` selon ressources, puis `setup-brand` minimal | ~10-20 min | Brand encodée depuis l'existant + delta calibration |
 | D `explore:free` | Free-text scan signaux, puis agent recommande (manifest scan) | variable | L'agent observe puis propose |
 
 **Gate Porte A · option "explorer d'abord" préservée.** Pour Porte A, l'agent propose le default deliverable + une option *"Explorer un volet d'abord (pourquoi · comment · singularité · cycle · territoires)"* qui déclenche un slug `volet:{nom}` via M3 close réflexif. L'opérateur Porte A qui veut comprendre AVANT de produire pioche sans subir le livrable forcé.
 
-**Anatomie de la structure · walkthrough Porte A canon (rendu pendant build-atlas-complete Stepprs).** Une fois l'atlas Stepprs construit, l'agent rend une **vue narrative en 3 sections** (Pourquoi cet atlas existe · Ce qu'on a déroulé sur Stepprs · Cycle de validation). Registre institutionnel sobre, vulgarisé sans infantiliser. Pas un dump JSON, pas une légende de champs techniques.
+**Anatomie de la structure · VISITE Porte A (on LIT l'atlas exemple DÉJÀ construit · `_EXAMPLE/stepprs` · READ-ONLY · jamais de build).** L'agent montre l'encoding réel en distillant **UN VOLET À LA FOIS** (interdit de forme dur · jamais les 3 d'affilée), chiffres LUS des fichiers, projeté sur l'offre de l'opérateur dès qu'elle est connue (produit OU service OU autre). Après chaque volet, un close M3 propose d'aller plus loin ou de passer à l'offre de l'opérateur.
 
-Pattern de rendu canon (FR · à adapter EN selon langue détectée) ·
+**Le bloc ci-dessous est la MATIÈRE à lire et reformuler à la voix détectée (l'intention, PAS un verbatim à recopier mot pour mot), distillée volet par volet. Jamais un pavé. Jamais les 3 sections d'affilée.**
+
+Matière de référence (FR · à adapter EN selon langue détectée · garder l'exemple, mais cadrer offre-agnostique quand on projette) ·
 
 ```
 Pourquoi cet atlas existe
@@ -282,6 +319,11 @@ Sur chaque milestone, write via `write_to_context` ·
 
 ## Constraints (non-négociables)
 
+- **Frontière dur/mou review-gated (v2.90)** · respecter la table en tête · la mécanique (état, gates, garanties, interdits de forme) est DURE, la voix (pitch, analogies, libellés, projection sur l'offre) est LIBRE · tout ajout de prose figée ou de gate doit citer la garantie protégée, sinon rejeté.
+- **Beat 0 lecture d'état AVANT de parler (v2.90)** · lire l'état du workspace (atlas exemple read-only, marque présente, signal d'offre) avant le premier mot · l'agent ne découvre jamais rien en direct devant l'opérateur (tue le wobble).
+- **Typage read/write par cible** · `_EXAMPLE` READ-ONLY (on VISITE, jamais build) · marque opérateur mutable · Porte A = visite de l'atlas exemple déjà construit, JAMAIS `build-atlas-complete` sur l'exemple.
+- **Cadrage business-agnostique (v2.90)** · job invariant (encoder l'offre une fois, produire la créa d'acquisition cross-session) · JAMAIS "DTC" · tout libellé survit à `produit → prestation → compte → lieu` · projeter sur l'offre de l'opérateur AVANT l'exemple.
+- **Anatomie un volet à la fois** · jamais les 3 sections d'affilée (réconcilie HR jamais-un-pavé) · le bloc d'anatomie est de la MATIÈRE à reformuler à la voix, pas un verbatim.
 - **Doctrines de référence** · `docs/system/onboarding-holistic-doctrine.md` v2.80.3 (HR-OHD-2) + `docs/system/entry-arc-doctrine.md` v2.81.0 + `docs/system/engagement-disclosure-doctrine.md` v2.79.5.
 - **Multi-entry 4 portes canon v2.81+.** M1 splitter `AskUserQuestion` 4 options. Bypass URL pasted → Porte B. Slugs runtime déterministes.
 - **M2 first deliverable encadré canon v2.87.** Default deliverable par porte (Porte A = Stepprs pédagogique, B = brand opérateur, C = post-import, D = scan signaux). Free-text override toujours dispo. Disclosure pré-engagement EDD obligatoire AVANT exécution. Validation point par point.

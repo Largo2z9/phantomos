@@ -1,0 +1,83 @@
+{
+  "pattern_id": "HOK-negative-command",
+  "pattern_type": "hook-mechanic",
+  "name": "Commande Négative (Ne laissez pas…)",
+  "one_liner": "Un hook qui ouvre par un impératif négatif (« Ne laissez pas / Fini / Don't… ») pour interdire une fatalité ou un réflexe conventionnel, ce qui transforme un pain subi passivement en choix actif que le spectateur doit reprendre en main.",
+  "skeleton": "[impératif_négatif] [pain_subi / réflexe_conventionnel] ([clause_de_retournement]).",
+  "slots": [
+    {
+      "name": "impératif_négatif",
+      "description": "Le verbe d'interdiction qui porte la mécanique · forme négative ou de clôture qui retire au spectateur le droit de subir passivement. Peut être une vraie négation ('Ne laissez pas') ou une clôture-promesse ('Fini') ou un 'Don't'.",
+      "examples": [
+        "Ne laissez pas",
+        "Fini",
+        "Don't",
+        "Débranchez … pas (négation interne paradoxale)"
+      ]
+    },
+    {
+      "name": "pain_subi",
+      "description": "Le tourment récurrent que l'audience subit comme une fatalité · c'est l'objet que l'impératif interdit de laisser gagner / définir / persister.",
+      "examples": [
+        "les nuits agitées",
+        "votre stress",
+        "les nuits blanches",
+        "cover your grays (réflexe conventionnel de camouflage)"
+      ]
+    },
+    {
+      "name": "clause_de_retournement",
+      "description": "Optionnel · l'enjeu identitaire ou l'action opposée aspirationnelle qui complète l'injonction et donne le pivot émotionnel (ce qu'on protège, ou la nouvelle action désirable). Absente dans les variantes les plus courtes ('Fini les nuits blanches').",
+      "examples": [
+        "définir votre nouveau chapitre",
+        "pas votre ambition",
+        "gagner",
+        "Grow more of them (action opposée aspirationnelle)"
+      ]
+    }
+  ],
+  "function": "Convertit un pain subi passivement (fatalité du vieillissement, stress chronique, insomnie) en un choix actif refusable. L'impératif négatif retire à l'audience la permission de capituler, déclenche réactance positive ('je ne vais pas laisser ça') et crée un cadre identitaire (qui je refuse de devenir) avant même de nommer le produit.",
+  "when_to_use": "Audiences problem-aware qui ont normalisé leur pain comme une fatalité (transition de vie / ménopause, stress chronique, signes de vieillissement). Le plus fort quand le pain est vécu comme inévitable et que le hook peut le recadrer en ennemi à ne pas laisser vaincre. Fonctionne en TOFU/MOFU, statique comme vidéo.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-57", "RCV-59", "RCV-60", "RCV-73", "RCV-91"],
+      "realization": "Pivote autour de l'interdiction de fatalité · 'NE LAISSEZ PAS LES NUITS AGITÉES DÉFINIR VOTRE NOUVEAU CHAPITRE' (RCV-57, RCV-73 · cadre ménopause/transition), 'Ne laissez pas votre stress gagner' (RCV-60 · stress personnifié en adversaire), 'NOUVEAU : Fini les nuits blanches' (RCV-59 · clôture-promesse), 'DÉBRANCHEZ VOTRE ESPRIT, PAS VOTRE AMBITION' (RCV-91 · négation interne paradoxale protégeant la valeur identitaire)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-123", "RCV-140"],
+      "realization": "'Don't cover your grays. Grow more of them.' (RCV-123 · interdit le réflexe conventionnel de camouflage puis le retourne en action opposée aspirationnelle, sur before/after scalp) · variante impérative-commande 'Check your T at home' (RCV-140) mappée negative-command pour la même mécanique d'injonction directe levant la friction. Hims = factory hims+hers, comptée comme UNE source (D#485)."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu sur 2 verticales (supplément FR + telehealth US) et 2 géos · emprunt cross-vertical raisonnablement sûr. En exploit, rester sur le pain de la verticale opérée (insomnie, stress, signe de vieillissement). En explore, reslotter vers toute catégorie où un pain est vécu comme fatalité subie (pieds/circulation, peau, énergie). La forme 'interdiction de fatalité' (Ne laissez pas X définir Y) voyage mieux que la forme 'reframe d'un réflexe conventionnel' (Don't cover… grow…), plus dépendante d'un réflexe culturel identifiable."
+  },
+  "related_mechanic_ids": ["negative-command"],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "Ne laissez pas vos jambes lourdes définir vos fins de journée."
+    },
+    {
+      "target": "skincare · signes de fatigue",
+      "reslotted": "Fini le teint terne. Réveillez-le, ne le camouflez pas."
+    }
+  ],
+  "anti_patterns": [
+    "Pain non vécu comme fatalité · sur une audience unaware ou un pain trivial, l'impératif négatif sonne moralisateur/agressif au lieu de libérateur.",
+    "Négation creuse · 'Ne laissez pas X' sans enjeu identitaire ni clause de retournement retombe à plat ; le pivot émotionnel vient de ce qu'on protège (RCV-91 'pas votre ambition') ou de l'action opposée (RCV-123 'Grow more of them').",
+    "Empilement d'impératifs · un seul ordre négatif par hook ; en cumuler plusieurs dilue la réactance.",
+    "Glissement vers la commande positive pure · 'Check your T at home' (RCV-140) est à la limite du mécanisme (impératif sans négation explicite) ; à classer negative-command seulement quand l'injonction retire un réflexe/une friction, sinon c'est une simple commande."
+  ],
+  "curation_notes": "Promote-ready sur 2 sources indépendantes factory-aware (naali ≠ himshers, hims+hers = 1 source · D#485). naali est l'épine dorsale du cluster (5 RCV, 4 réalisations distinctes de la mécanique : interdiction-de-fatalité, stress-personnifié, clôture-promesse, paradoxe-identitaire). himshers est plus mince côté pureté du mécanique : RCV-123 est canonique (vraie commande négative + reframe) mais flaggé hook-bivalent (chevauche before-after-timeline dans la décompo), et RCV-140 est une commande impérative limite mappée negative-command par extension. Surveiller : si une 3e source indépendante (karacare · beauty-hair) confirme → breadth tend vers universal et le pattern devient le plus sûr à emprunter partout. 3e signal à venir = perf réelle via la feedback loop.",
+  "_schema_version": "library-pattern/1.0"
+}

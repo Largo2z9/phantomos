@@ -51,12 +51,15 @@
       "Rachel S verbatim 'roller after long day game changer' = cible hospitality canon (post-shift recovery ritual)"
     ],
     "created": "2026-05-15",
-    "updated": "2026-05-15"
+    "updated": "2026-05-15",
+    "name": "Hospitality & retail shifts",
+    "slug": "hospitality-retail",
+    "entry_door": "pain_driven"
   },
   "identity": {
     "label": "Hospitality + Retail standing (waiters · waitresses · retail floor)",
     "$comment_label": "Sous-poche service industry standing · scope inclut serveurs/serveuses restaurant · retail floor associates · baristas · bartenders · hotel front desk · customer-facing service standing 8h+.",
-    "awareness_stage": "solution_aware",
+    "awareness_stage": "solution-aware",
     "demographics": {
       "age_range": "22-45",
       "$comment_age": "Skew plus jeune que mère · service industry younger workforce · peak career change après 45.",
@@ -79,9 +82,18 @@
       "fast results (latency tolerance basse · si pas ressenti vite, return)"
     ],
     "fears": [
-      "claquer $27 dans énième insole qui marche pas (déjà testé Dr. Scholl déçu)",
-      "missing shifts cost (tipped workers = pas de sick days souvent · revenu direct lié shift)",
-      "customer voir grimace douleur (review négatif · tip réduit · management noticed)"
+      {
+        "fear_text": "claquer $27 dans énième insole qui marche pas (déjà testé Dr. Scholl déçu)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "missing shifts cost (tipped workers = pas de sick days souvent · revenu direct lié shift)",
+        "source_verbatim_ref": null
+      },
+      {
+        "fear_text": "customer voir grimace douleur (review négatif · tip réduit · management noticed)",
+        "source_verbatim_ref": null
+      }
     ],
     "status_signals": [
       "I'm scrappy · I find what works on a budget",

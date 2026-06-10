@@ -12,17 +12,6 @@ patch_notes_v2_87_4:
 patch_notes_v2_87_6:
   - "1.3.0 (v2.87.6 SUBSTRATE sprint · enforcement runtime maintien dette + SED packshots backlog inchangé) · Sprint substrate canon · refresh atlas Stepprs deep desire chain v2.87.4 (chronic-pain-45 grand-parent + workers-shifts conjoint Friday evening narrative) + NEW section walkthrough Porte A many-to-many `tour.md` Anatomie de la structure. Impact ce skill · packshot canonique Stepprs reste cas pédagogique inchangé (massage insoles produit visual identity). Enforcement runtime hardcoded EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation. SED packshots iterations subfolder backlog inchangé · 2 items pending-validations.md mainteneur reportés v2.88.0+ (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 mode: proposed
-triggers_fr:
-  - "crée packshot canon"
-  - "génère photo produit propre"
-  - "prépare packshot source canon"
-  - "canonalise packshot"
-  - "nettoie packshot officiel"
-triggers_en:
-  - "craft canonical packshot"
-  - "generate clean product shot"
-  - "prepare canonical product photo"
-  - "produce canonical packshot source"
 permissions:
   reads: [brand, product, visual_identity]
   writes: [visual_identity_sidecar, asset]
@@ -68,6 +57,8 @@ description: >
   flag _canonical: true. Save asset packshot canonical réutilisable par compose-creative downstream.
   Pattern stress-testé S55 v2.44 sur {product_slug} gen v10 (silhouette préservée + text verbatim + 8/8 pass
   · 1 attempt vs 9 échouées sur endpoint legacy nano-banana-pro/edit).
+  FR: "crée packshot canon", "génère photo produit propre", "prépare packshot source canon", "canonalise packshot", "nettoie packshot officiel".
+  EN: "craft canonical packshot", "generate clean product shot", "prepare canonical product photo", "produce canonical packshot source".
 disambiguates_against:
   compose-creative: "compose-creative consume canonical packshot pour générer pub paid social. craft-packshot CRÉE le canonical packshot upstream (asset source of truth)."
   compose-overlay-text: "compose-overlay-text fix logo + sub-text PIL post-gen sur creative pub. craft-packshot crée le packshot SOURCE upstream brand-level."

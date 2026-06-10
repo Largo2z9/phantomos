@@ -1,0 +1,84 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "3d-anatomy-realistic",
+  "display_name": "Anatomie 3D realiste",
+  "family": "3d-anatomy",
+  "typology_st": "variable",
+  "description": "Rendu 3D photorealiste d'un mecanisme corporel (digestion, articulation, follicule, vaisseau, cellule) montre tel qu'il fonctionne vraiment, avec textures biologiques credibles et eclairage de studio medical. A utiliser quand le produit agit sur un systeme interne invisible et qu'il faut le rendre visible/tangible pour justifier le mecanisme d'action. Spatial pour une frame demo produit, temporel quand on anime le before/after du mecanisme dans une video.",
+  "render_recipe": {
+    "prompt_skeleton": "Photorealistic 3D medical render of {body_system} showing {mechanism_action}, {affected_zone} highlighted, {product_effect} visualized as {effect_cue}, scientifically accurate anatomy, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}, clean isolated medical-studio background, no text",
+    "slots": [
+      { "name": "body_system", "description": "Le systeme/structure corporelle montre (ex 'human digestive tract', 'knee joint cartilage', 'hair follicle in scalp cross-section', 'gut microbiome villi', 'blood vessel wall')." },
+      { "name": "mechanism_action", "description": "Le mecanisme physiologique en cours, formule en langage anatomique reel (ex 'inflammation receding', 'collagen fibers rebuilding', 'nutrient absorption through the intestinal lining')." },
+      { "name": "affected_zone", "description": "La zone precise sur laquelle le produit agit, a mettre en avant visuellement (ex 'inflamed cartilage surface', 'damaged follicle bulb')." },
+      { "name": "product_effect", "description": "L'effet du produit a rendre visible (ex 'soothing active reaching the inflamed tissue', 'nutrients coating the lining')." },
+      { "name": "effect_cue", "description": "Le signal visuel qui materialise l'effet sans le rendre magique (ex 'subtle warm glow', 'translucent absorbing film', 'particles diffusing'). Tenir subtil, jamais cartoonesque." },
+      { "name": "lighting", "description": "Override d'eclairage si besoin, sinon defaut ci-dessous." },
+      { "name": "camera_lens", "description": "Override de focale/angle si besoin, sinon defaut ci-dessous." },
+      { "name": "palette_mood", "description": "Override de palette si la marque l'impose, sinon defaut ci-dessous." },
+      { "name": "texture_grain", "description": "Override de texture si besoin, sinon defaut ci-dessous." },
+      { "name": "composition_notes", "description": "Override de composition (cadrage, espace pour overlay) si besoin, sinon defaut ci-dessous." }
+    ],
+    "lighting": "Soft clinical key light at 45deg with gentle fill, subtle subsurface scattering to read tissue as wet and alive, controlled rim light to separate structure from background, no harsh shadows.",
+    "camera_lens": "85mm to 100mm macro-equivalent, shallow depth of field on the affected zone, slight low-to-frontal angle so the mechanism reads as the hero, clean focus stack.",
+    "palette_mood": "Anatomically plausible biology (deep reds, oxygenated pinks, muscle crimson, bone ivory, tissue beige) with at most one restrained brand accent on the effect cue; sober, credible, never neon.",
+    "texture_grain": "High micro-detail biological surfaces: moist membranes, fibrous tissue, capillary networks, micro-villi; faint render grain to avoid plastic CGI sterility, no painterly stylization.",
+    "composition_notes": "Single mechanism as hero, isolated on a clean gradient/medical background, breathing room reserved for a claim overlay or label callout; cross-section or cutaway when the action is internal."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "medium-high pour verrouiller l'exactitude anatomique sans figer la lumiere",
+      "negative_prompt": "cartoon, flat illustration, neon glow, plastic CGI sheen, anatomical errors, extra organs, text, watermark"
+    },
+    "video_params": {
+      "motion": "Mecanisme anime en temps reel : zoom progressif vers la zone affectee puis transition before/after (tissu enflamme -> tissu apaise, follicule affaibli -> follicule renforce). Camera lente, organique, jamais saccadee.",
+      "duration_s_range": [3, 6],
+      "transitions": "Morph/dissolve continu sur la zone affectee (etat degrade -> etat rehabilite), pas de cut sec; pulse subtil sur l'effect cue quand l'actif atteint la zone."
+    }
+  },
+  "anti_ai_guardrails": [
+    "Anatomie fausse : organes mal places, nombre/forme incorrects (ex intestin avec mauvaise topologie, articulation impossible) - verifier que la structure existe vraiment et est au bon endroit",
+    "Mecanisme physiologiquement faux ou inverse (ex 'absorption' rendue comme une expulsion, inflammation qui grossit la ou le produit est cense l'apaiser)",
+    "Sheen plastique CGI / surfaces seches : tissu biologique doit lire humide et vivant (subsurface scattering), pas une coque en plastique brillant",
+    "Effect cue magique facon dessin anime (glow neon, etincelles, particules fluo) qui detruit la credibilite medicale - tenir le signal subtil et plausible",
+    "Symetrie/repetition CGI artificielle (villi/capillaires clones a l'identique en pattern parfait) au lieu d'un desordre biologique naturel",
+    "Couleurs non biologiques (tissus bleus/violets/neon sans raison anatomique) qui trahissent le render IA",
+    "Echelle incoherente : structures micro (cellules, follicules) melangees a tort avec structures macro (organe entier) dans le meme plan sans cutaway logique",
+    "Faux details textuels (labels medicaux generes, chiffres anatomiques inventes, faux logos cliniques) baves par le modele - bannir tout texte dans le render"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [3, 8],
+    "pairs_well_with": [
+      "diagram-medical-2d",
+      "3d-anatomy-xray",
+      "real-photo-product-studio",
+      "split-screen-comparison",
+      "graphic-icons-overlay"
+    ],
+    "avoid_when": [
+      "Marque lifestyle/mode/food sans claim de mecanisme d'action interne (le rendu medical casse la DA)",
+      "Produit sans revendication physiologique credible - rendre un mecanisme inexistant = faux scientifique et risque compliance",
+      "Creative_zone tres bas (marque ultra-sobre/luxe minimaliste) ou le rendu clinique detaille parait trop demonstratif/TV-shopping",
+      "Categories a forte contrainte reglementaire (allegations sante medicales) ou montrer un mecanisme implique une preuve - valider compliance avant",
+      "Quand un before/after photo reel existe et performe : la photo reelle bat le render 3D sur la preuve sociale"
+    ]
+  },
+  "refs": [
+    "Supplement digestif DTC : cutaway intestinal montrant l'actif tapissant la paroi (effect cue = film translucide absorbant)",
+    "Collagene articulation : rendu cartilage genou enflamme -> apaise, glow chaud subtil sur la zone",
+    "Hair growth serum : coupe scalp avec follicule affaibli -> renforce, racine qui se redensifie"
+  ],
+  "related_mechanic_ids": [
+    "mechanism-of-action-reveal",
+    "before-after-internal",
+    "problem-visualization"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

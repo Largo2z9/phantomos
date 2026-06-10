@@ -19,19 +19,8 @@ description: >
   v1.0.0 (v2.58 D#386 NEW) · Sub-skill atomique cartographie deep enrichment des bénéfices produit `spec.benefits[]`. Chain compositionnelle functional → emotional → identity complete + v1.10 NEW fields (emotional_signal text · latency_min/max jours · evidence_verbatim[] anchored quotes). Distinct de mine-voc qui mine les verbatims Layer B · map-benefits structure deep chain et cross-link benefit ↔ mechanism ↔ audience. Distinct snapshot-brand light pass surface · map-benefits drill-down compositionnel. Invocable séparément par l'opérateur (`map-benefits ma-gelule`) ou orchestré par snapshot-brand.
   FR · "map-benefits {product}", "chaine fonctionnel-émotionnel-identitaire", "approfondis les bénéfices", "détaille la chain bénéfices".
   EN · "map benefits", "deep dive benefits chain", "detail benefit chain".
-triggers_fr:
-  - "map-benefits {product}"
-  - "chaine fonctionnel-émotionnel-identitaire"
-  - "approfondis les bénéfices"
-  - "détaille la chain bénéfices"
-  - "drill bénéfices produit"
-  - "chain functional emotional identity"
-triggers_en:
-  - "map benefits"
-  - "deep dive benefits chain"
-  - "detail benefit chain"
-  - "drill product benefits"
-  - "functional emotional identity chain"
+  FR: "map-benefits {product}", "chaine fonctionnel-émotionnel-identitaire", "approfondis les bénéfices", "détaille la chain bénéfices", "drill bénéfices produit", "chain functional emotional identity".
+  EN: "map benefits", "deep dive benefits chain", "detail benefit chain", "drill product benefits", "functional emotional identity chain".
 disambiguates_against:
   snapshot-brand: "snapshot-brand light pass surface (benefit titles + functional layer). map-benefits drill compositionnel deep chain functional → emotional → identity + NEW fields v1.10 (emotional_signal, latency, evidence_verbatim)."
   mine-voc: "mine-voc Layer B mine verbatims clients depuis Reddit/Trustpilot/forums (matière brute). map-benefits CONSUME les outputs mine-voc pour anchor evidence_verbatim[] par benefit. Pas le même verbe · mine-voc collecte, map-benefits structure."

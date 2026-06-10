@@ -3,15 +3,16 @@
   "$id": "angle.schema.json",
   "title": "Angle (brand-side instance)",
   "description": "Angle = couche stratégique. Stored at brands/{slug}/angles/{ANG-N}.json. Produced by produce-paid-angles (light pass: lineage + meta) and enriched on demand by decompose-angle (deep pass: recursive formula). One file per angle. Many-to-many with audiences (an angle can serve multiple audiences with different mechanics). Une créa peut référencer un angle via creative.context.angle_ref. Évolution v1.1 → v1.2 : 8 champs (intent, mecanique, seasonality_trigger, execution.craft_mode, execution.longevity_signal, execution.cta) migrés vers creative.schema.json (D#391 audit S55). source renommé en origin_axis pour libérer le polysémique. lineage.schwartz_conscience renommé en lineage.awareness_stage pour cohérence avec awareness_movement.",
-  "_schema_version": "angle/1.3",
+  "_schema_version": "angle/1.4",
   "_changelog": {
+    "1.4": "C1 onboarding-native (D#500) · strict additif : (a) NEW bloc top-level test_readiness (l'objet angle-de-test = CE bloc + la chaîne EXISTANTE · hook candidat = genome.hook + scripts GSC · format décidé = genome.support · retour perf = meta.test_results + creative.performance via genome_tags.angle_id · n'ajoute QUE : gate d'éligibilité amont eco/policy/claim, force de preuve typée, suggestion de format pré-genome) + definitions.eligibility_gate (status pass/fail/unknown défaut unknown + lever · politique d'échec C1 : jamais inventer) · (b) lineage.schwartz_sophistication enum inline → $ref _shared/sophistication-stage.json (mêmes valeurs, zéro breaking) · (c) meta.test_results[] += creative_ref (^CRT-NN) + script_id (^GSC-NN) · (d) property _schema_version const → enum [angle/1.3, angle/1.4] (pattern backward-compat creative.schema). NE PAS faire : hook_candidates[] (= les scripts GSC), 3e réceptacle perf, duplication awareness/sophistication dans test_readiness, bloc _extraction (objet DERIVED, A3).",
     "1.3": "v2.63 refactor ontologie pure additif · lineage.pain_ref (pattern ^PNT-[0-9]{2,3}$) optional · ref canonical vers pain_points/{PNT-NN}.json top-level collection v2.63 quand lineage.pain_extract dérive d'un pain identifié. lineage.objection_ref (pattern ^OBJ-[0-9]{2,3}$) optional · ref canonical vers objections/{OBJ-NN}.json quand formula.tension dérive d'une objection canonical. legacy lineage.pain_extract (text quote) preserved · pain_ref ajoute la canonical ref sans rupture. Backward compat strict additif.",
     "1.2": "v2.42 versioning cleanup: `_schema_version` field promu en root (format `{name}/{semver}`) pour cohérence cross-schemas. Property `_schema_version` const conservée pour backward compat read mais lecteurs doivent prendre la valeur root. Source canon: PATCH 2A v2.42."
   },
   "type": "object",
   "required": ["angle_id", "name", "audience_slug", "meta"],
   "properties": {
-    "_schema_version": { "const": "angle/1.3", "description": "Backward compat alias of root `_schema_version`. New readers SHOULD read the root field." },
+    "_schema_version": { "enum": ["angle/1.3", "angle/1.4"], "description": "Backward compat alias of root `_schema_version` (accepte 1.3 legacy + 1.4 courant). New readers SHOULD read the root field." },
 
     "_equation_ref": {
       "type": "string",
@@ -65,7 +66,7 @@
           "$ref": "_shared/awareness-stage.json",
           "description": "Renamed from schwartz_conscience in v1.2 for coherence with awareness_movement. The canonical Schwartz awareness stage tagged for this angle's lineage."
         },
-        "schwartz_sophistication": { "type": "string", "enum": ["v1", "v2", "v3", "v4", "v5"] },
+        "schwartz_sophistication": { "$ref": "_shared/sophistication-stage.json", "description": "C1 · promu en fragment shared (mêmes valeurs v1-v5, zéro breaking). Distinct de brand market_overview.sophistication (maturité marché)." },
         "hook_canon_id": { "type": "string" },
         "framework_canon_id": { "type": "string" },
         "angle_canon_id": { "type": "string" },
@@ -176,6 +177,27 @@
       "additionalProperties": true
     },
 
+    "test_readiness": {
+      "type": "object",
+      "description": "Bloc C1 angle-de-test. L'objet angle-de-test = CE bloc + la chaîne existante (hook candidat = genome.hook + variant_index + scripts GSC · format décidé = genome.support · retour perf = meta.test_results + creative.performance via genome_tags.angle_id). N'ajoute QUE : gate d'éligibilité amont, force de preuve typée, suggestion de format pré-genome.",
+      "properties": {
+        "format_suggested": { "type": ["string", "null"], "enum": ["static", "carousel", "video", null], "description": "SUGGESTION pré-production consommée par la génération genome. La DÉCISION = genome.support. Null = non tranché." },
+        "proof_strength": { "$ref": "_shared/proof-strength.json", "description": "Force typée de la preuve nommée dans lineage.proof_primary (qui reste la SSOT du contenu)." },
+        "proof_type": { "type": "string", "description": "Optionnel · mirror decomposition.proof_elements_used.proof_type (jointure axe preuve)." },
+        "eligibility": {
+          "type": "object",
+          "description": "Gate go/no-go AMONT (distinct de genome.copy_meta.compliance_disclaimers_required, production-side). Politique d'échec C1 : défaut unknown + levier nommé, jamais inventé.",
+          "properties": {
+            "economics": { "$ref": "#/definitions/eligibility_gate" },
+            "platform_policy": { "$ref": "#/definitions/eligibility_gate" },
+            "claim_substantiation": { "$ref": "#/definitions/eligibility_gate" },
+            "overall": { "type": "string", "enum": ["eligible", "blocked", "unknown"], "description": "DERIVED (jamais manuel, taguer derived dans _field_types) : blocked si un gate fail, unknown si un gate unknown, eligible sinon." }
+          }
+        },
+        "_field_types": { "type": "object" }
+      }
+    },
+
     "meta": {
       "type": "object",
       "required": ["validation_status", "created"],
@@ -198,11 +220,24 @@
               "campaign_id": { "type": "string" },
               "metric": { "type": "string" },
               "value": { "type": ["number", "string"] },
-              "verdict": { "type": "string" }
+              "verdict": { "type": "string" },
+              "creative_ref": { "type": "string", "pattern": "^CRT-[0-9]{2,4}$", "description": "C1 · la créa testée (jointure vers creatives/{batch}/{CRT-NN}/)." },
+              "script_id": { "type": "string", "pattern": "^GSC-[0-9]{2,4}$", "description": "C1 · le génome exécuté (jointure vers genome.json#script_id)." }
             }
           }
         },
         "_field_types": { "type": "object" }
+      }
+    }
+  },
+  "definitions": {
+    "eligibility_gate": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "enum": ["pass", "fail", "unknown"], "default": "unknown" },
+        "reason": { "type": "string" },
+        "lever": { "type": "string", "description": "Levier nommé pour lever l'unknown (skill, source, action)." },
+        "basis_ref": { "type": "string", "description": "Ref de la brique source, ex. offers.economics_proxy pour le gate economics. La fraîcheur/TTL vit sur la brique source via _extraction, pas dupliquée ici." }
       }
     }
   }

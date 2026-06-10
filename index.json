@@ -1,19 +1,336 @@
 {
   "$schema": "index.schema.json",
   "version": "1.0.0",
-  "last_updated": null,
+  "last_updated": "2026-06-10T07:06:34+00:00",
   "stats": {
-    "total_resources": 0,
+    "total_resources": 22,
     "by_type": {
       "catalogue": 0,
-      "routing": 0,
-      "framework": 0,
-      "sop": 0,
-      "quality-spec": 0,
-      "convention": 0,
-      "template": 0
+      "routing": 1,
+      "framework": 5,
+      "sop": 3,
+      "quality-spec": 1,
+      "convention": 8,
+      "template": 4
     }
   },
-  "resources": [],
+  "resources": [
+    {
+      "id": "awareness-angle-matrix",
+      "type": "routing",
+      "path": "resources/routing/awareness-angle-matrix.md",
+      "domain": "creative",
+      "title": "Awareness × Angle Matrix",
+      "created": "2026-03-18",
+      "updated": "2026-04-19",
+      "tags": [
+        "angle",
+        "awareness",
+        "matrix",
+        "routing"
+      ]
+    },
+    {
+      "id": "market-deepdive",
+      "type": "framework",
+      "path": "resources/frameworks/market-deepdive.md",
+      "domain": "general",
+      "title": "Market Deep-Dive — Analytical Framework",
+      "created": "2026-04-25",
+      "updated": "2026-04-25",
+      "tags": [
+        "deepdive",
+        "framework",
+        "market"
+      ]
+    },
+    {
+      "id": "paid-angle-scoring-weights",
+      "type": "framework",
+      "path": "resources/frameworks/paid-angle-scoring-weights.json",
+      "domain": "creative",
+      "title": "paid-angle-scoring-weights",
+      "created": "2026-04-26",
+      "updated": "2026-05-02",
+      "tags": [
+        "angle",
+        "framework",
+        "paid",
+        "scoring",
+        "weights"
+      ]
+    },
+    {
+      "id": "paid-angle-scoring",
+      "type": "framework",
+      "path": "resources/frameworks/paid-angle-scoring.md",
+      "domain": "creative",
+      "title": "Paid Angle Scoring Framework",
+      "created": "2026-04-25",
+      "updated": "2026-05-13",
+      "tags": [
+        "angle",
+        "framework",
+        "paid",
+        "scoring"
+      ]
+    },
+    {
+      "id": "voc-coding",
+      "type": "framework",
+      "path": "resources/frameworks/voc-coding.md",
+      "domain": "general",
+      "title": "VoC Coding Framework",
+      "created": "2026-04-25",
+      "updated": "2026-04-25",
+      "tags": [
+        "coding",
+        "framework",
+        "voc"
+      ]
+    },
+    {
+      "id": "vom-mining",
+      "type": "framework",
+      "path": "resources/frameworks/vom-mining.md",
+      "domain": "general",
+      "title": "VoM Mining — Analytical Framework",
+      "created": "2026-04-25",
+      "updated": "2026-04-25",
+      "tags": [
+        "framework",
+        "mining",
+        "vom"
+      ]
+    },
+    {
+      "id": "audit-meta-global",
+      "type": "sop",
+      "path": "resources/sops/audit-meta-global.md",
+      "domain": "media",
+      "title": "SOP — Audit Meta Global (single brand)",
+      "created": "2026-04-23",
+      "updated": "2026-05-05",
+      "tags": [
+        "audit",
+        "global",
+        "meta",
+        "sop"
+      ],
+      "step_count": null
+    },
+    {
+      "id": "cross-brand-curation",
+      "type": "sop",
+      "path": "resources/sops/creative-production/cross-brand-curation.md",
+      "domain": "creative",
+      "title": "SOP · Curation cross-brand (corpus → bibliothèques partagées)",
+      "created": "2026-06-07",
+      "updated": "2026-06-07",
+      "tags": [
+        "brand",
+        "cross",
+        "curation",
+        "sop"
+      ],
+      "step_count": null
+    },
+    {
+      "id": "perf-feedback-loop",
+      "type": "sop",
+      "path": "resources/sops/creative-production/perf-feedback-loop.md",
+      "domain": "creative",
+      "title": "Perf feedback loop — l'analyse fine (CHANTIER, TBD)",
+      "created": "2026-06-07",
+      "updated": "2026-06-07",
+      "tags": [
+        "feedback",
+        "loop",
+        "perf",
+        "sop"
+      ],
+      "step_count": null
+    },
+    {
+      "id": "hook-quality-spec",
+      "type": "quality-spec",
+      "path": "resources/quality-specs/hook-quality-spec.md",
+      "domain": "creative",
+      "title": "Hook Quality Spec",
+      "created": "2026-03-18",
+      "updated": "2026-04-19",
+      "tags": [
+        "hook",
+        "quality",
+        "quality-spec",
+        "spec"
+      ]
+    },
+    {
+      "id": "creative-storage",
+      "type": "convention",
+      "path": "resources/conventions/creative-storage.md",
+      "domain": "ops",
+      "title": "Creative storage convention (Phase 0 brique 3, D#481)",
+      "created": "2026-06-06",
+      "updated": "2026-06-06",
+      "tags": [
+        "convention",
+        "creative",
+        "storage"
+      ]
+    },
+    {
+      "id": "ga4",
+      "type": "convention",
+      "path": "resources/conventions/ga4.json",
+      "domain": "ops",
+      "title": "GA4",
+      "created": "2026-05-02",
+      "updated": "2026-05-02",
+      "tags": [
+        "convention",
+        "ga4"
+      ]
+    },
+    {
+      "id": "google-ads",
+      "type": "convention",
+      "path": "resources/conventions/google-ads.json",
+      "domain": "media",
+      "title": "Google Ads",
+      "created": "2026-05-02",
+      "updated": "2026-05-17",
+      "tags": [
+        "ads",
+        "convention",
+        "google"
+      ]
+    },
+    {
+      "id": "klaviyo",
+      "type": "convention",
+      "path": "resources/conventions/klaviyo.json",
+      "domain": "retention",
+      "title": "Klaviyo",
+      "created": "2026-05-02",
+      "updated": "2026-05-02",
+      "tags": [
+        "convention",
+        "klaviyo"
+      ]
+    },
+    {
+      "id": "meta-ads",
+      "type": "convention",
+      "path": "resources/conventions/meta-ads.json",
+      "domain": "media",
+      "title": "Meta Ads",
+      "created": "2026-04-19",
+      "updated": "2026-05-02",
+      "tags": [
+        "ads",
+        "convention",
+        "meta"
+      ]
+    },
+    {
+      "id": "shopify",
+      "type": "convention",
+      "path": "resources/conventions/shopify.json",
+      "domain": "ops",
+      "title": "Shopify",
+      "created": "2026-05-02",
+      "updated": "2026-05-02",
+      "tags": [
+        "convention",
+        "shopify"
+      ]
+    },
+    {
+      "id": "tiktok-ads",
+      "type": "convention",
+      "path": "resources/conventions/tiktok-ads.json",
+      "domain": "media",
+      "title": "TikTok Ads",
+      "created": "2026-05-02",
+      "updated": "2026-05-02",
+      "tags": [
+        "ads",
+        "convention",
+        "tiktok"
+      ]
+    },
+    {
+      "id": "triplewhale",
+      "type": "convention",
+      "path": "resources/conventions/triplewhale.json",
+      "domain": "ops",
+      "title": "TripleWhale",
+      "created": "2026-05-02",
+      "updated": "2026-05-02",
+      "tags": [
+        "convention",
+        "triplewhale"
+      ]
+    },
+    {
+      "id": "campaigns-active",
+      "type": "template",
+      "path": "resources/templates/campaigns-active.json",
+      "domain": "media",
+      "title": "campaigns-active",
+      "created": "2026-04-19",
+      "updated": "2026-04-19",
+      "tags": [
+        "active",
+        "campaigns",
+        "template"
+      ]
+    },
+    {
+      "id": "creative-formula",
+      "type": "template",
+      "path": "resources/templates/creative-formula.md",
+      "domain": "creative",
+      "title": "Creative Formula V3 — Formule de décomposition créative",
+      "created": "2026-03-18",
+      "updated": "2026-05-13",
+      "tags": [
+        "creative",
+        "formula",
+        "template"
+      ]
+    },
+    {
+      "id": "hook-formulas",
+      "type": "template",
+      "path": "resources/templates/hook-formulas.md",
+      "domain": "creative",
+      "title": "Hook Formulas",
+      "created": "2026-03-18",
+      "updated": "2026-05-13",
+      "tags": [
+        "formulas",
+        "hook",
+        "template"
+      ]
+    },
+    {
+      "id": "operator-fiche-output",
+      "type": "template",
+      "path": "resources/templates/operator-fiche-output.md",
+      "domain": "general",
+      "title": "Template canonique · Operator fiche output",
+      "created": "2026-05-13",
+      "updated": "2026-05-20",
+      "tags": [
+        "fiche",
+        "operator",
+        "output",
+        "template"
+      ]
+    }
+  ],
   "id_prefixes": {}
 }

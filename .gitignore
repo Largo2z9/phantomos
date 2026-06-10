@@ -9,6 +9,3 @@
 
 # Runtime outputs
 _validation-report.json
-
-# Claude Code session worktrees (local-only)
-.claude/worktrees/

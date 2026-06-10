@@ -1,7 +1,9 @@
 ---
 name: phantom
 description: Cockpit PhantomOS. Sans arg, vue workspace (tous brands + état global). Avec un brand slug, vue détaillée du brand. Read-only.
-version: v2.87.5
+version: v2.89.5
+patch_notes_v2_89_5:
+  - "v2.89.5 · NEW hard rule render-first en tête de commande. Constaté runtime (instance pro migrée, modèles récents) : l'agent collectait les métriques puis substituait le rendu cockpit par un widget AskUserQuestion de navigation, sur /phantom ET /phantom {brand}. La règle verrouille : vue complète en texte AVANT tout, drill footer = texte, question interactive admise uniquement après rendu et si décision réellement bloquante. Backward compat pur (discipline de rendu, zéro changement de modes)."
 patch_notes_v2_87_5:
   - "v2.87.5 (P1 todo-brand + P4 schedules section) · NEW mode todo-brand `/phantom {brand} todo` brand-level proactif (cf `phantom-modes/todo-brand.md`) · 4 blocs canon · Actions + Connectors + Schedules + Atlas completeness. NEW directive cockpit brand `/phantom {brand}` · ajouter section SCHEDULES (à côté de ALERTES + ÉTAT + ACTIONS) listant schedules actifs `brands/{slug}/scheduled.json` + suggestions schedules manquants relevants (mine-voc weekly · trendtrack-enrich-brand weekly · audit-creative-fatigue monthly · brief-day daily · watch-competitors weekly · analyze-perf weekly · trendtrack shop profile monthly). Storage canon · `brands/{slug}/scheduled.json` brand-level avec skill + frequency + next_run_at + trigger_mechanism (CronCreate predictable récurrent OR ScheduleWakeup dynamic /loop monitoring conditionnel) + last_run_at + last_status + rationale. Canon `scheduled-routines.md` R&D level à promouvoir runtime workspace-template (backlog v2.88.0+). Cross-ref memory canon `brand_connectors_onboarding_canon` matrice 7 skills schedulables + 3 triggers proactivité (post-setup brand + cockpit /phantom + brand-todo entry). Enforcement runtime hardcoded backlog v2.88.0+ implementation. Backward compat strict additif (cycle cockpit preserved · seul NEW section schedules additive)."
 ---
@@ -9,6 +11,12 @@ patch_notes_v2_87_5:
 # /phantom, cockpit
 
 Vue synthétique du workspace PhantomOS. Lecture seule, aucune mutation. Read top to bottom before acting.
+
+## Hard rule · render-first (non négociable)
+
+- Chaque mode rend sa VUE COMPLÈTE en texte dans la conversation (sections canon, tableaux ASCII) AVANT toute autre action. Collecter les données ne suffit pas : le livrable de `/phantom` EST le rendu.
+- **NEVER** substituer le rendu par un widget de question interactif (AskUserQuestion) ou un menu. Le drill footer fait partie du rendu, en texte.
+- Une question interactive est admise UNIQUEMENT après le rendu complet, et seulement si une décision opérateur est réellement bloquante. La navigation n'en requiert jamais : l'opérateur navigue par `/phantom {slug}`, `/phantom {slug} {entity}`, etc.
 
 ## Mode detection
 
@@ -40,7 +48,7 @@ Check the user's argument :
 | `{brand} roadmap` | **roadmap-drill** : phases chronologiques + current highlight + priorities |
 | `{brand} funnel` | **funnel-drill** : couverture TOF/MOF/BOF + trous détectés |
 | `{brand} services` | **services-drill** : services/packages business_model=service |
-| `{brand} atlas` | **atlas-overview** : vue d'ensemble atlas brand (synthèse 6 entités + dérivés) |
+| `{brand} atlas` | **atlas-overview** : vue d'ensemble atlas brand (synthèse 7 entités + dérivés) |
 | `doctrine` | **doctrine** : rend doctrine cartographie compositionnelle (méthode + équation V3.1) |
 | `doctrine audiences` | **doctrine-audiences** : framework cartographie audiences (4 questions) |
 | `{brand} audiences` | **audiences-tree** : arbre hiérarchie audiences + chevauchements |
@@ -1149,7 +1157,7 @@ Icône `★` sur la cellule top par row. Légende colonnes (sources d'angle) : a
 
 ## Mode atlas-overview
 
-`/phantom {brand} atlas` rend la vue d'ensemble brand (synthèse 6 entités core + 3 dérivées + historique brand). Pédagogique pour onboarding nouveau opérateur.
+`/phantom {brand} atlas` rend la vue d'ensemble brand (synthèse 7 entités core + 2 dérivées + historique brand). Pédagogique pour onboarding nouveau opérateur.
 
 Lecture (backend, paths agent) : `brands/{brand}/_snapshot.md` + `brand.json` + counts par entité.
 

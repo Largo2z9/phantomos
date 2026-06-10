@@ -29,7 +29,7 @@ No package to install. Everything ships in this repo. Sessions can stop mid-setu
 ## What lives here
 
 - **`CLAUDE.md`** : root agent contract. Auto-loaded every session.
-- **`lexicon.md`** : vocabulary used in this workspace. 13 operator-facing terms.
+- **`lexicon.md`** : the operator-facing vocabulary used in this workspace.
 - **`brands/`** : one folder per brand operated. Encoded knowledge per brand.
 - **`resources/`** : shared library across brands. Frameworks, angles, creative mechanics, platform conventions.
 - **`.skills/skills/`** : executable capabilities the agent triggers on context.

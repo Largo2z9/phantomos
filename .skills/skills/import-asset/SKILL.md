@@ -12,24 +12,6 @@ patch_notes:
   v1.2.0: "v2.51 operator-fiche-output canonique template applied · HR7 Step C.4 présentation candidats Mode C refactor langage plain prose, drop buckets cap-lock catégoriques `BADGES TRUST / BADGES CERTIFICATION / BADGES ORIGINE / MÉTHODES PAIEMENT / FONDS TEXTURES` qui sonnent tech. Plain prose · J'ai trouvé sur ton site · {N_logo} version(s) de ton logo · {N_badge_trust} badge(s) tiers de confiance (Trustpilot, etc.) · etc. L'agent fait le job de catégorisation, présente le résultat sans cap-lock. Cohérent template canonique resources/templates/operator-fiche-output.md."
   v1.1.0: "v2.49 Mode C extract_from_url NEW · scrape brand URL (homepage OR product page) et auto-extract candidats logo + badges + payment_methods + patterns. Workflow 4 sub-steps · curl HTML + grep src=.svg|.png|.webp filter heuristics par type (logo path/class containing 'logo' OR alt='logo' · trust badges 'trustpilot|cert|approved|guarantee' · payment 'payment|stripe|visa|mastercard' · origine 'made_in_|origine_|francais') + download + rasterize SVG via ImageMagick (cairosvg fail macOS native lib OSError) + present candidats par type à operator pour gate validation+import. Pattern stress-testé S55 sur fincutmen.com (Shopify Hydrogen oxygen-v2 theme) · 6 candidats extraits validés workflow approach (2 logos brand SVG variants primary+white + Trustpilot wordmark+stars + payment methods footer + banner hero rejected faux-positif). Bridge naturel snapshot-brand → import-asset Mode C auto-chain optionnel pour nouvelle brand setup complet visuels en 1 flow. Cohérent craft-packshot Step 1 carousel scrape (Mode A · pattern adjacent visual scraping). HR7 NEW dedicated section. False-positive handling documenté · path token suggère semantique pas garantie (banner_francais.png ≠ Made in France badge · operator visual gate Step 5 reste BLOCKER)."
   v1.0.0: "v2.48 ship orchestrator import-asset · pattern symétrique craft-packshot v1.1 sans génération IA · operator drop asset + tag type + validation 5 critères qualité + persist sidecar visual_identity.json schema v1.2 nouveaux slots (logo_canonical + badge_canonical{} + mascotte_canonical + pattern_canonical{}). Bridge compose-creative v1.3+ HR3b layered multi-layer paste. Workflow · drop fichier → asset_type (logo/badge/mascotte/pattern/packshot_variant) → variant si applicable (primary/monochrome/etc pour logo, slug key pour badge/pattern) → validation 5 critères (resolution + format + background + crispness + content match) → operator gate _validated_by_operator: true → persist + bridge downstream skills."
-triggers_fr:
-  - "importe un asset"
-  - "ajoute le logo brand"
-  - "ajoute un badge cert"
-  - "ajoute la mascotte"
-  - "ajoute un pattern background"
-  - "canonise un asset"
-  - "drop asset brand"
-  - "upload asset visuel"
-triggers_en:
-  - "import an asset"
-  - "add brand logo"
-  - "add cert badge"
-  - "add mascotte"
-  - "add background pattern"
-  - "canonize an asset"
-  - "drop brand asset"
-  - "upload visual asset"
 permissions:
   reads: [brand, product, visual_identity]
   writes: [visual_identity_sidecar, asset]
@@ -80,6 +62,8 @@ description: >
   visual_identity.json avec _validated_by_operator gate. Bridge downstream · compose-creative v1.3+
   HR3b layered multi-layer paste consume packshot + logo + badge en couches pour pubs studio
   photographer avec branding complet pixel-exact.
+  FR: "importe un asset", "ajoute le logo brand", "ajoute un badge cert", "ajoute la mascotte", "ajoute un pattern background", "canonise un asset", "drop asset brand", "upload asset visuel".
+  EN: "import an asset", "add brand logo", "add cert badge", "add mascotte", "add background pattern", "canonize an asset", "drop brand asset", "upload visual asset".
 disambiguates_against:
   craft-packshot: "craft-packshot GÉNÈRE un packshot via fal.ai (besoin = brand n'a pas de photo studio). import-asset STORE un asset déjà fourni (logo SVG/PNG, badge cert PNG, mascotte). Si operator a juste besoin de stocker · import-asset. Si génération nécessaire · craft-packshot."
   define-specs: "define-specs encode visual_identity.json fields textuels (label, container, content, distinctive_features). import-asset peuple visual_identity.assets_canonical avec fichiers images."
@@ -94,7 +78,7 @@ consumes:
   - path: resources/schemas/visual_identity.schema.json
     min_version: 1.2.0
 produces_proposals_for:
-  - brands/{slug}/assets/{asset_type}-{slug}-{date}.{ext}
+  - brands/{slug}/asset-library/{asset_type}-{slug}-{date}.{ext}
   - brands/{slug}/products/{slug}/assets/{asset_type}-{slug}-{date}.{ext}
   - brands/{slug}/products/{slug}/visual_identity.json#assets_canonical.{slot}
 patch_notes:
@@ -181,11 +165,11 @@ Mode C · `extract_from_url` (NEW v1.1)
 Determine target path selon scope ·
 
 **Brand-level scope (default pour logo, mascotte, pattern, certain badges)** ·
-- Target · `brands/{slug}/assets/{asset_type}-{variant_or_slug}-{YYYYMMDD}.{ext}`
-- Ex · `brands/glowco/assets/logo-primary-20260513.png`
-- Ex · `brands/glowco/assets/badges/cert-plantes-naturelles-20260513.png`
-- Ex · `brands/glowco/assets/mascotte-primary-20260513.png`
-- Ex · `brands/glowco/assets/patterns/wave-primary-20260513.png`
+- Target · `brands/{slug}/asset-library/{asset_type}-{variant_or_slug}-{YYYYMMDD}.{ext}`
+- Ex · `brands/glowco/asset-library/logo-primary-20260513.png`
+- Ex · `brands/glowco/asset-library/badges/cert-plantes-naturelles-20260513.png`
+- Ex · `brands/glowco/asset-library/mascotte-primary-20260513.png`
+- Ex · `brands/glowco/asset-library/patterns/wave-primary-20260513.png`
 
 **Product-level scope (override produit-spécifique, rare)** ·
 - Target · `brands/{slug}/products/{slug}/assets/{asset_type}-override-{YYYYMMDD}.{ext}`

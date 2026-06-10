@@ -16,82 +16,121 @@ Specialized capabilities of the agent. Never read by the operator, triggered aut
 - **Expert methodology rule** (codified expertise vs improvised action, complexity gate): `docs/system/patterns.md § Skill Philosophy`
 - **Model routing** (subagent spawn decision, cost/latency trade-offs): `docs/system/patterns.md § Model Routing`
 
-## Skills shipped (38)
+## Skills shipped (82)
 
-Grouped by typology. Each typology drives default model + `subagent_safe` + permissions baseline.
+Grouped by typology. Each typology drives default model + `subagent_safe` + permissions baseline. This catalogue is generated from `_manifest.json` + frontmatter descriptions ; after any skill add/rename/edit, run `python3 .skills/build-manifest.py` and regenerate this section.
 
-### Producer (10) — generate fresh artifacts
-
-| Skill | Role | Model | Subagent |
-|---|---|---|---|
-| `snapshot-brand` | Quick scan of a brand or product from a URL | sonnet | yes |
-| `mine-audience` | Mine voice-of-market signals and propose audience enrichments | sonnet | yes |
-| `mine-voc` | Voice of Customer — scrape native reviews, code through 4 lenses, extract verbatim what real customers say about THIS brand | sonnet | yes |
-| `mine-vom` | Voice of Market — scrape competitor reviews + niche forums, surface vernacular, white spaces, sophistication signals | sonnet | yes |
-| `produce-paid-angles` | Generate ranked matrix of paid creative angles per audience, hook verbatim-anchored, scored + clustered | sonnet | yes |
-| `produce-copy-brief` | Produce a copywriter brief for an audience × angle × channel, verbatim-anchored, operator-format-respected | sonnet | yes |
-| `score-product-fit` | Score product-audience fit and flag language gaps | haiku | yes |
-| `watch-competitors` | Watch competitor Meta ads and produce creative intel | sonnet | yes |
-| `audit-meta-account` | Structured audit of a Meta Ads account (API or declarative) | sonnet | yes |
-| `propose-schema-draft` | Sub-skill of scaffold-extension — generate canon-compliant JSON Schema draft | sonnet | yes |
-
-### Curator (12) — read, classify, route, mutate context
+### Producer (29) — generate fresh artifacts
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
-| `ingest-resource` | File a doc / pdf / link / raw note into the right entity, autonomous | sonnet | yes |
-| `query-context` | Search across brand context + shared resources, read-only | haiku | yes |
-| `validate-resources` | Workspace integrity check — orphans, broken refs, schema violations, drift | haiku | yes |
-| `promote-learning` | Promote a brand-local learning into a cross-brand shared rule | sonnet | yes |
-| `migrate-workspace` | Upgrade an existing brand to match the current template version, never deletes data | sonnet | yes |
-| `analyze-extension-intent` | Sub-skill — capture intent for a new extension (3 questions max) | sonnet | yes |
-| `check-existing-coverage` | Sub-skill — pre-build gate, 5-dimension reuse check before scaffolding new | haiku | yes |
-| `validate-naming` | Sub-skill — enforce reserved names, kebab-case, MECE | haiku | yes |
-| `check-cross-refs` | Sub-skill — verify cross-refs resolve before scaffold | haiku | yes |
-| `validate-schema-canon` | Sub-skill — pre-write canon compliance check | haiku | yes |
-| `scaffold-entity-files` | Sub-skill — write schema + README + instance to `brands/custom/` | haiku | yes |
-| `register-and-flag` | Sub-skill — register in `index.json` + add adoption todo | haiku | yes |
+| `analyze-perf` | Deep-dive diagnostic perf paid cross-platform (Meta + Google + TikTok + Shopify + TripleWhale + Klaviyo) | sonnet | yes |
+| `audit-meta-account` | Structured audit of a Meta Ads account (API or declarative), BLOCKER/MAJOR/MINOR findings | sonnet | yes |
+| `cartograph` | Knowledge cartography | sonnet | yes |
+| `compose-creative` | Generate a static/carousel creative from an angle : genome + creative + brief, canon packshot composited | opus | no |
+| `compose-overlay-text` | Producer skill PIL post-gen composite logo SVG canonique + sub-text crisp avec accents francais preserves sur creative produit par… | sonnet | yes |
+| `decompose-ad` | Reverse-engineer any ad (static, carousel, video) into a typed decomposition against the canon registries | opus | yes |
+| `decompose-angle` | Triangulation cross-canon refactor · spec_activated (products/{p}/spec.json#mechanism_id) + pain_ref (audiences/{a}/pain_points/{P… | sonnet | yes |
+| `define-brand-voice` | Produit brand voice chart canonique brand via méthodologie Nielsen Norman 4D (Funny↔Serious · Formal↔Casual · Respectful↔Irreveren… | sonnet | yes |
+| `map-angles` | Map and encode the brand's creative angles (formula Observation × Tension × Reframe × Bridge) | sonnet | no |
+| `map-audiences` | Map and encode the brand's audience tree from existing signals | sonnet | no |
+| `map-benefits` | BREAKING refactor read pattern · pain_points lus depuis sub-audience (`brands/{slug}/audiences/*/pain_points/*.json`) pour evidenc… | sonnet | yes |
+| `map-mechanisms` | BREAKING refactor read pattern · lit pain_points depuis SUB-AUDIENCE (`brands/{slug}/audiences/*/pain_points/*.json`) pour mapping… | sonnet | yes |
+| `map-specs` | Sub-skill atomique cartographie deep enrichment des sub-fields `spec.specs.*` d'un produit (composition structurée, nutrition_fact… | sonnet | yes |
+| `mine-audience` | Mine voice-of-market from Reddit, Trustpilot, and Meta Ads Library for a product+brand pair | sonnet | yes |
+| `mine-voc` | Voice of Customer : scrape native reviews, code through 4 lenses, extract real-customer verbatims | sonnet | yes |
+| `mine-vom` | Voice of Market : scrape competitor reviews + niche forums, surface vernacular and white spaces | sonnet | yes |
+| `produce-copy-brief` | Section pré-runtime ajoutée AVANT Step 0 · expose 6 paramètres décomposés au runtime (audience target · format brief · angle sourc… | sonnet | yes |
+| `produce-decomposition-ecr` | Sub-skill of scaffold-extension Phase 3bis | sonnet | yes |
+| `produce-paid-angles` | Section pré-runtime ajoutée AVANT Step 0 · expose 6 paramètres décomposés au runtime (audience targeted · pains/JTBD source · form… | sonnet | yes |
+| `produce-positioning-canvas` | Produit positioning statement canonique brand · format Geoffrey Moore ("For [target customer] who [statement of need], [product] i… | sonnet | yes |
+| `propose-schema-draft` | Sub-skill of scaffold-extension | sonnet | yes |
+| `recompose-creative` | Recompose a variant from an existing genome along a single declared axis | opus | yes |
+| `scope` | Opérateur de scoping | sonnet | yes |
+| `score-matrix` | Score the angle × audience matrix with weighted coefficients, surface top territories | sonnet | no |
+| `score-product-fit` | Evaluate product-audience fit by comparing spec.json against profile.json | haiku | yes |
+| `snapshot-brand` | Quick scan of a brand or product from a URL, pre-fills the brand at ~60% of Level 1 | sonnet | yes |
+| `trendtrack-enrich-brand` | TrendTrack API live enrichment skill · resolve brand existing via lookup + drill shop profile + sample top ads · stage proposals b… | sonnet | yes |
+| `watch-competitors` | Analyse les publicités Meta des concurrents d'une brand et produit un rapport de veille créative avec les angles, mechanics, et si… | sonnet | yes |
+| `weight-dimensions` | Compute per-brand weighting coefficients consumed by score-matrix | sonnet | no |
 
-### Capturer (2) — persist learnings
-
-| Skill | Role | Model | Subagent |
-|---|---|---|---|
-| `capture-learning` | Note a one-off learning named by the operator, low-friction append | haiku | yes |
-| `learn-from-session` | Silent batch extraction of learnings from the session, end-of-session ritual | sonnet | no |
-
-### Orchestrator (7) — chain multiple skills end-to-end
-
-| Skill | Role | Model | Subagent |
-|---|---|---|---|
-| `setup-brand` | Guided setup of a new brand (Step 0-5) | sonnet | no |
-| `onboard-brand` | End-to-end 4-step onboarding pipeline (setup → snapshot → ingest → validate) | sonnet | no |
-| `deepen-brand-context` | Chain mine-voc → mine-vom → cross-deepening-signals, output cross-signal synthesis | sonnet | no |
-| `study-niche-marketdeepdive` | Long-running niche / market strategic deep-dive (~30-60 min), 4-6 page memo | sonnet | yes |
-| `red-team` | Multi-expert adversarial panel, stress-test on any artifact, zero compliments | sonnet | no |
-| `scaffold-extension` | Scaffold a new custom entity / sidecar / custom skill via 9 sub-skills | sonnet | no |
-| `update-workspace` | Apply one or more PhantomOS release updates to an installed workspace, preserves operator data | sonnet | no |
-
-### Navigator (3) — orient the operator across sessions
+### Curator (18) — read, classify, route, mutate context
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
-| `brief-day` | Session-start orientation, pending validations, next actions | haiku | yes |
-| `resume-session` | Clean resumption after absence from `session-state.md` | haiku | yes |
-| `session-search` | Search narrative memory (SQLite FTS5) for past sessions, decisions, learnings | haiku | yes |
+| `analyze-copy` | Senior copywriter auditor, microscope-level | sonnet | yes |
+| `analyze-extension-intent` | Sub-skill of scaffold-extension | sonnet | yes |
+| `audit-creative-fatigue` | Scan creatives produced/{CRT-NN} brand-side, pull Meta Insights par ad_id, détecte fatigue signaux canon (CTR decay 14-30j · CPM r… | sonnet | yes |
+| `check-cross-refs` | Sub-skill of scaffold-extension | haiku | yes |
+| `check-existing-coverage` | Sub-skill of scaffold-extension | haiku | yes |
+| `encode-batch` | Backend write sub-skill : batches entity mutations for producer skills through the gate | haiku | yes |
+| `ingest-resource` | Ingests raw content (notes, articles, transcripts, existing files, copy-paste), classifies into typed JSON resources OR brand cont… | sonnet | yes |
+| `migrate-workspace` | Migrates an existing brand instance to match a newer template version | sonnet | yes |
+| `promote-learning` | Promotes a brand-specific learning to the shared KB when it proves generic | sonnet | yes |
+| `qc-creative` | Output gate on a RENDERED creative BEFORE any media spend | sonnet | yes |
+| `query-context` | Reads the workspace KB and returns relevant resources for agent consumption | haiku | yes |
+| `register-and-flag` | Sub-skill of scaffold-extension | haiku | yes |
+| `scaffold-entity-files` | Sub-skill of scaffold-extension | haiku | yes |
+| `validate-brand-voice-consistency` | Scan cross-touchpoint brand outputs (paid creatives produced/{CRT-NN}.json copy + organic posts si existing + CRM email sequences … | sonnet | yes |
+| `validate-naming` | Sub-skill of scaffold-extension | haiku | yes |
+| `validate-output-coherence` | Validates an agent output against the brand's facts, tone, and schemas BEFORE it reaches the operator | haiku | yes |
+| `validate-resources` | Audits workspace integrity: shared resources + brand context files | haiku | yes |
+| `validate-schema-canon` | Sub-skill of scaffold-extension | haiku | yes |
 
-### Builder (2) — create new skills / agents
+### Capturer (4) — persist learnings
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
-| `build-agent` | Build a new custom skill with dissection and operator cartography | opus | no |
-| `scaffold-skill-stub` | Sub-skill — write SKILL.md stub to `.skills/skills/custom/` | sonnet | yes |
+| `capture-learning` | Quick append of a single operational learning to learnings.json | haiku | yes |
+| `export-session` | Export a Claude Code conversation (current or past) to a clean markdown transcript stored under _sessions-archive/ | haiku | yes |
+| `import-meta-results` | Brique 5 MINIMAL (réceptacle perf, D#482+) · pull Meta Insights par `lineage.ad_id` pour les creatives déployées (CRT-NN sous batc… | haiku | yes |
+| `learn-from-session` | Extracts and persists knowledge acquired during a session | sonnet | no |
 
-### Sub-skill (2) — internal building blocks, not invoked by operator
+### Orchestrator (22) — chain multiple skills end-to-end
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
-| `cross-deepening-signals` | Invoked by deepen-brand-context — cross-checks VoC + VoM, produces 3-movement synthesis | sonnet | yes |
-| `validate-output-coherence` | Final coherence gate before any output reaches the operator, flags issues without rewriting | haiku | yes |
+| `adapt-from-competitor` | Adapt a decomposed competitor ad (RCV) into a brand variant (CRT), lineage preserved cross-namespace | sonnet | yes |
+| `audit-google-pmax` | Audit complet PMAX (Performance Max) campaigns Google Ads | sonnet | yes |
+| `build-atlas-complete` | Run the full atlas pipeline end-to-end on a brand (10 chained steps) | sonnet | no |
+| `connect-mcp-server` | Guide opérateur dans setup MCP server | sonnet | yes |
+| `connect-source` | Connect an external platform (Meta Ads, Shopify, Klaviyo, GA4, etc.) to PhantomOS | sonnet | no |
+| `craft-packshot` | Produce the canon packshot of a real product asset (never hallucinated) for compositing | sonnet | yes |
+| `creative-brief-composer` | orchestrator cohérence consume frontmatter · chain produce-copy-brief v1.6 + compose-creative v1.6 · les 2 sub-skills lisent désor… | sonnet | no |
+| `cross-deepening-signals` | Sub-skill invoked by deepen-brand-context | sonnet | yes |
+| `deepen-brand-context` | Orchestrates deepening of brand context after snapshot | sonnet | no |
+| `define-specs` | Encode product specs : mechanism, benefits, problems solved, proof, pricing | sonnet | no |
+| `import-archive` |  | sonnet | no |
+| `import-asset` | Import real brand assets (packshots, logos) into the brand asset-library with provenance | sonnet | yes |
+| `onboard-brand` | Full-cycle brand onboarding orchestrator | sonnet | no |
+| `produce-paid-matrix` | Chain produce-paid-angles + weight-dimensions + score-matrix into one ranked paid matrix | sonnet | no |
+| `produce-strategy` | Produce the brand strategy file : annual goals, monthly targets, current focus | sonnet | no |
+| `profile-audience` | Build a full 8-dimension audience profile from mined verbatims | sonnet | no |
+| `red-team` | Multi-expert adversarial audit on any artifact: document, plan, strategy, feed, brief, audit report, skill, workspace structure, c… | sonnet | no |
+| `scaffold-extension` | Orchestrator for building a new extension in PhantomOS at one of three scopes (brand, operator, workspace) | sonnet | no |
+| `setup-brand` | Guided setup of a new brand in the workspace | sonnet | no |
+| `study-niche-marketdeepdive` | Niche / market strategic deep-dive | sonnet | yes |
+| `sync-notion-atlas` | Bi-directional Notion bridge for the brand territory (push, pull, diff modes) | sonnet | no |
+| `update-workspace` | Applies one or more PhantomOS release updates to an installed workspace without losing operator data | sonnet | no |
+
+### Navigator (5) — orient the operator across sessions
+
+| Skill | Role | Model | Subagent |
+|---|---|---|---|
+| `bird` | Vue d'oiseau sur un projet ou une brand active | sonnet | yes |
+| `brief-day` | Session-start orientation briefing | haiku | yes |
+| `resume-session` | Clean resumption after absence | haiku | yes |
+| `routine-perf` | Briefing perf paid quotidien (2-3x/jour) | sonnet | yes |
+| `session-search` | Search the narrative memory index (SQLite FTS5) for past sessions, decisions, learnings, snapshots, and events | haiku | yes |
+
+### Builder (4) — create new skills / agents
+
+| Skill | Role | Model | Subagent |
+|---|---|---|---|
+| `build-agent` | Custom agent architect | opus | no |
+| `correct-skill` | Encodes a correction into an existing `SKILL.md` as a permanent Hard Rule | sonnet | no |
+| `create-skill` | Meta-skill, generates SKILL.md files conformant to the workspace authoring discipline | sonnet | no |
+| `scaffold-skill-stub` | Sub-skill of scaffold-extension | sonnet | yes |
 
 ## Rule
 

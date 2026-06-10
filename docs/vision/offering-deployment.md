@@ -185,7 +185,7 @@ Trigger : framework le framework de provenance écrit (déclenché par 2e opéra
 - **Trois packs internes éprouvés** avant ouverture tiers, pour valider que le format encaisse plusieurs domaines sans cas particulier.
 - **Mécanisme de pricing** : fixed price, abonnement, pay-per-use ; à tester sur les premiers packs internes.
 
-Ce mode rapproche le produit du modèle *vertical AI marketplace* émergent (cf. Menlo Ventures *Beyond Bots* 2025) sans en adopter les contraintes : l'opérateur reste propriétaire de son environnement, les packs sont des extensions, pas des SaaS verticaux fermés.
+Ce mode rapproche le produit du modèle *vertical AI marketplace* émergent sans en adopter les contraintes : l'opérateur reste propriétaire de son environnement, les packs sont des extensions, pas des SaaS verticaux fermés.
 
 ---
 
@@ -193,7 +193,7 @@ Ce mode rapproche le produit du modèle *vertical AI marketplace* émergent (cf.
 
 Trois risques structurants à expliciter pour ne pas les subir.
 
-**Auto-replacement consultant.** Un consultant qui encode sa méthode dans le workspace d'un client lui transmet, après 6 mois d'usage, le moat et la justification budgétaire pour mettre fin au retainer. Mitigation : trois patterns décrits en section 6 (contractual licensing, workspace separation, outcome-based pricing). Aucun n'est enforcé par le tool en ; c'est de la discipline opérateur. Risque stratégique principal pour la cible *agency owner* et *senior consultant*. À adresser frontalement dans la conversation commerciale, pas à cacher.
+**Auto-replacement consultant.** Un consultant qui encode sa méthode dans le workspace d'un client lui transmet, après 6 mois d'usage, le moat et la justification budgétaire pour mettre fin au retainer. Mitigation : trois patterns décrits en section 6 (contractual licensing, workspace separation, outcome-based pricing). Aucun n'est enforcé par l'outil aujourd'hui ; c'est de la discipline opérateur. Risque stratégique principal pour la cible *agency owner* et *senior consultant*. À adresser frontalement dans la conversation commerciale, pas à cacher.
 
 **Commodification du modèle IA sous-jacent.** Anthropic, OpenAI, Google convergent vers des modèles fungibles. Ce n'est **pas un risque pour PhantomOS** : la valeur n'est pas dans le modèle (qui sera commodifié), elle est dans la connaissance structurée et la méthodologie codifiée que l'opérateur accumule dans son workspace. À expliciter dans toute conversation de vente où l'objection *"et si Claude / GPT s'améliore tellement que je n'ai plus besoin de ton outil ?"* émerge. Argument inverse : plus le modèle s'améliore, plus la qualité de l'output dépend de la qualité du contexte, ce que PhantomOS structure.
 
@@ -205,7 +205,7 @@ Trois risques structurants à expliciter pour ne pas les subir.
 
 ## 10. Status
 
-**Draft S46.** Document écrit après validation production live de la doctrine v2.11.0 (S45) et sacralisation de la pitch posture institutionnelle (D#367, S46). Le pricing initial n'est pas arrêté ; les vertical packs futurs ne sont pas signés ; le framework le framework de provenance n'est pas écrit ; la doc `transmissibility-framework.md` n'est pas drafted.
+**Draft S46.** Document écrit après validation production live de la doctrine v2.11.0 (S45) et sacralisation de la pitch posture institutionnelle (D#367, S46). Le pricing initial n'est pas arrêté ; les vertical packs futurs ne sont pas signés ; le framework de provenance n'est pas écrit ; la doc `transmissibility-framework.md` n'est pas drafted.
 
 Cette doc s'enrichit au fur et à mesure que :
 
@@ -221,8 +221,8 @@ Toute évolution se fait par patch additif : chaque section porte la version qui
 ## Sources et inputs
 
 - `vision.md` : postulat fondateur interne, full fat (D#307 Extractibility, D#362 architecture finale 5-doctrines).
-- `manifesto.md` : thèse publique (sources HFS, MIT NANDA, Karpathy, Lütke, Tavel, Shipper, Palantir, Atlan).
-- `prisms.md` : six angles produit pour calibrer les framings commerciaux.
+- `manifesto.md` : thèse publique (first-party : chiffres du moteur uniquement, zéro stat de marché tierce depuis v2.89.1).
+- `prisms.md` : huit angles produit pour calibrer les framings commerciaux.
 - `roadmap.md` : vertical packs future iteration et future (consulting-core, media-buyer-freelance, coach-expert-pack, multi-operator).
 - `fit.md` : best fit / conditional fit / misfit + cost honesty + consultant tension upgraded S46.
 - `decisions.md` : D#307 (Extractibility), D#362 (architecture doctrinale), D#367 (pitch posture sacralisée + suggest-domain-canon).

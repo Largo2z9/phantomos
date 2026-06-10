@@ -19,6 +19,8 @@ description: >
   "ancre le positioning", "définit le positioning brand", "Moore format".
   EN · "produce positioning canvas", "positioning statement", "anchor positioning",
   "define brand positioning", "Moore positioning format".
+  FR: "produis le positionnement", "positioning statement", "formule mon positionnement", "canvas de positionnement".
+  EN: "positioning statement", "produce positioning canvas", "position my brand".
 permissions:
   reads: ["brands/{slug}/brand.json", "brands/{slug}/audiences/", "brands/{slug}/products/", "resources/registries/category-design.md"]
   writes: ["brands/{slug}/brand.json", "brands/{slug}/positioning_canvas.md"]

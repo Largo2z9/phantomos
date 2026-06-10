@@ -11,16 +11,6 @@ patch_notes_v2_87_4:
   - "1.1.0 (v2.87.4 canonical many-to-many enforcement mirror) · NEW HR-OT-CANON-1 mirror sibling compose-creative v1.8.0 · post-gen fix overlay text DOIT être appliqué sur asset dans `creatives/{CRT-NN}/produced/` (pas hors structure) · maintien entry canonical existing · update creative.json#overlay_fixes[] avec timestamp + fix_type + cross-ref operator validation. Closes audit Fincut v2.87.3 finding · fix overlays appliqués hors structure canonical = orphelins. Backward compat strict additif."
 mode: proposed
 reasoning_pattern: matrix-driven
-triggers_fr:
-  - "overlay logo crisp"
-  - "compose post-gen text"
-  - "fix wordmark régression"
-  - "intégrer logo SVG sur visuel"
-triggers_en:
-  - "overlay crisp text"
-  - "post-gen logo composite"
-  - "fix wordmark regression"
-  - "integrate SVG logo on visual"
 permissions:
   reads: [brand, product, creative]
   writes: [creative]
@@ -51,6 +41,8 @@ description: >
   Producer skill PIL post-gen composite logo SVG canonique + sub-text crisp avec accents francais
   preserves sur creative produit par compose-creative. Resout drift wordmark fal.ai + drop accents
   + sub-text flou. Validation wordmark_pattern regex post-composite.
+  FR: "overlay logo crisp", "compose post-gen text", "fix wordmark régression", "intégrer logo SVG sur visuel".
+  EN: "overlay crisp text", "post-gen logo composite", "fix wordmark regression", "integrate SVG logo on visual".
 disambiguates_against:
   compose-creative: "compose-creative genere le visuel via fal.ai. compose-overlay-text intervient APRES pour fix logo + sub-text avec PIL."
   recompose-creative: "recompose-creative cree variants (audience/platform/format). compose-overlay-text fixe la qualite d'un creative existant."

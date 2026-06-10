@@ -18,7 +18,11 @@ Enforces two orthogonal rules:
    autonomously patched build-brand-snapshot.py, fix was correct, method wasn't).
 
 Exemptions:
-- brands/_TEMPLATE/* and brands/_EXAMPLE/* (template authoring is fine)
+- brands/_TEMPLATE/* (scaffold source; template authoring is fine)
+- brands/_EXAMPLE/* is NO LONGER exempt (M3 audit 2026-06-08): it is the read-only
+  canon example, now PROTECTED at runtime so a deployed agent cannot corrupt it.
+  R&D template maintenance runs outside a workspace root (no brands/+resources/ at
+  the cwd), so the hook does not fire there.
 - pure scaffold ops: `cp`, `mkdir`, `git`, `ls`, `find`, `cat`, `head`, `tail`, `grep`
 - read-only inspection
 - non-JSON writes under brand/ (markdown, .gitkeep) — those use append-only md skills
@@ -32,9 +36,21 @@ import sys
 from pathlib import Path
 
 # Paths under workspace_root that require write_to_context discipline.
+# re.IGNORECASE closes the case-bypass (B3 audit 2026-06-08): on case-insensitive
+# filesystems (APFS) `learnings.JSON` and `learnings.json` are the same file; a
+# case-sensitive regex guarded only one.
 PROTECTED_GLOBS = (
-    re.compile(r"(?:^|/)brands/(?!_TEMPLATE|_EXAMPLE)[^/]+/.+\.json$"),
-    re.compile(r"(?:^|/)operator/.+\.json$"),
+    re.compile(r"(?:^|/)brands/(?!_TEMPLATE)[^/]+/.+\.json$", re.IGNORECASE),
+    re.compile(r"(?:^|/)operator/.+\.json$", re.IGNORECASE),
+    # cross-brand expertise libraries (concepts, archetypes, hook-mechanics) — must transit
+    # the gate like brand data (brick 2, D#481 fix for BUG-RESOURCES-UNGUARDED). Broad guard;
+    # the precise allow-list lives in write-to-context.py ALLOWED_PATH_PATTERNS.
+    re.compile(r"(?:^|/)resources/(?:concepts|registries|canon)/.+\.json$", re.IGNORECASE),
+    # Brand Agent Contract = the brand-scoped system prompt. An agent must NOT rewrite
+    # its own rules mid-session (M2 audit 2026-06-08, behavioral self-modification vector).
+    # Scaffold via `cp -r brands/_TEMPLATE brands/{slug}` (dir copy) stays allowed; direct
+    # Edit/Write/redirect of an existing brand CLAUDE.md is blocked.
+    re.compile(r"(?:^|/)brands/(?!_TEMPLATE)[^/]+/CLAUDE\.md$", re.IGNORECASE),
 )
 
 # Workspace infrastructure — never modified by any agent/subagent during a session.
@@ -49,14 +65,24 @@ INFRASTRUCTURE_GLOBS = (
 # Canonical writer exempted from all patterns below.
 WRITE_TO_CONTEXT_RE = re.compile(r"(?:^|[;&|\s])python3?\s+[^\s;&|]*\.skills/write-to-context\.py\b")
 
-# Bash patterns that indicate a write to a JSON path.
+# Bash patterns that indicate a write to a protected path (case-insensitive: B3).
 BASH_WRITE_PATTERNS = (
-    re.compile(r">>?\s*['\"]?([^\s'\";|&]+\.json)"),                  # > foo.json
-    re.compile(r"\btee\s+(?:-a\s+)?['\"]?([^\s'\";|&]+\.json)"),      # tee foo.json
-    re.compile(r"json\.dump\([^)]*open\(['\"]([^'\"]+\.json)"),       # python json.dump
-    re.compile(r"open\(['\"]([^'\"]+\.json)['\"],\s*['\"]w"),         # open(...,'w')
-    re.compile(r"\bsed\s+-i\b[^|]*?\s([^\s'\";|&]+\.json)"),          # sed -i ... foo.json
-    re.compile(r"\bjq\s+[^|]*?\|\s*tee\s+['\"]?([^\s'\";|&]+\.json)"),
+    re.compile(r">>?\s*['\"]?([^\s'\";|&]+\.json)", re.IGNORECASE),                  # > foo.json
+    re.compile(r"\btee\s+(?:-a\s+)?['\"]?([^\s'\";|&]+\.json)", re.IGNORECASE),      # tee foo.json
+    re.compile(r"json\.dump\([^)]*open\(['\"]([^'\"]+\.json)", re.IGNORECASE),       # python json.dump
+    re.compile(r"open\(['\"]([^'\"]+\.json)['\"],\s*['\"]w", re.IGNORECASE),         # open(...,'w')
+    re.compile(r"\bsed\s+-i\b[^|]*?\s([^\s'\";|&]+\.json)", re.IGNORECASE),          # sed -i ... foo.json
+    re.compile(r"\bjq\s+[^|]*?\|\s*tee\s+['\"]?([^\s'\";|&]+\.json)", re.IGNORECASE),
+    # cp / mv / install / ln writing TO a protected target (B2 audit 2026-06-08).
+    # Captures the LAST operand (the dest) only when it ends in .json or is a brand CLAUDE.md.
+    # A directory dest (scaffold `cp -r brands/_TEMPLATE brands/{slug}`) has no such token -> not matched.
+    re.compile(r"(?:^|[;&|]\s*)(?:cp|mv|install|ln)\b[^|&;]*?\s(\S+(?:\.json|/CLAUDE\.md))(?=\s*(?:$|[;&|]))", re.IGNORECASE),
+    # python shutil copy/move/copyfile TO a protected target (2nd arg = dest).
+    re.compile(r"shutil\.(?:copy2?|copyfile|move)\(\s*['\"][^'\"]+['\"]\s*,\s*['\"]([^'\"]+(?:\.json|/CLAUDE\.md))['\"]", re.IGNORECASE),
+    # redirect / tee / sed targeting a brand CLAUDE.md contract (M2).
+    re.compile(r">>?\s*['\"]?([^\s'\";|&]+/CLAUDE\.md)", re.IGNORECASE),
+    re.compile(r"\btee\s+(?:-a\s+)?['\"]?([^\s'\";|&]+/CLAUDE\.md)", re.IGNORECASE),
+    re.compile(r"\bsed\s+-i\b[^|]*?\s([^\s'\";|&]+/CLAUDE\.md)", re.IGNORECASE),
 )
 
 
@@ -99,7 +125,7 @@ def block_msg(path: str, via: str) -> str:
         f"  - If you're scaffolding from template: use `cp -r brands/_TEMPLATE brands/{{slug}}` (allowed).\n"
         f"  - If you're filling a field: route via the relevant skill (setup-brand, snapshot-brand, capture-learning, ingest-resource).\n"
         f"  - If no skill covers your case: surface the gap to the operator instead of hand-editing.\n"
-        f"  - Templates under brands/_TEMPLATE/ and brands/_EXAMPLE/ are exempt and can be edited freely."
+        f"  - brands/_TEMPLATE/ (scaffold source) is exempt. brands/_EXAMPLE/ is the read-only canon example and is now protected (visit it, never write it)."
     )
 
 

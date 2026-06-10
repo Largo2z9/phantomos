@@ -7,6 +7,97 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.89.5] · 2026-06-11
+### Fixed
+- **`update-workspace` 1.2.0 · chemin des manifests corrigé** · la skill pointait `docs/releases/{version}-manifest.json` (préconditions + Step 2 + Related) alors que les manifests vivent à `docs/internal/releases/manifest/` · sur machine fraîche la skill ne trouvait aucun manifest (même drift que les 6 occurrences `updates.md` fermées en v2.89.2, la skill avait été oubliée)
+- **`update-workspace` 1.2.0 · garde anti-piège first-run** · `installation.json` absent ou `null` sur une instance AVEC marques réelles encodées était traité comme fresh install → init-and-exit, **zéro migration appliquée, corruption silencieuse** (données anciennes sous template neuf) · le Step 1 vérifie désormais `brands/` : zéro marque réelle = fresh install (comportement v2.89.2 conservé) · marques présentes = vieille instance sans tracking → STOP, déterminer la version installée avec l'opérateur, puis chaîne normale
+- **`validate-all.py` défensif sur les formes legacy** · les boucles sémantiques profile (`pain_refs`/`benefit_refs`) crashaient en `AttributeError` sur des entrées string pré-v2.0 au lieu de laisser la passe jsonschema reporter le type mismatch · gardes `isinstance(dict)` posées, le gardien ne meurt plus sur une instance ancienne
+### Added
+- **`/phantom` hard rule render-first (v2.89.5)** · constaté runtime sur l'instance pro migrée : les modèles récents collectaient les métriques puis substituaient le rendu cockpit par un widget AskUserQuestion de navigation (sur `/phantom` ET `/phantom {brand}`) · la règle verrouille en tête de commande : vue complète en texte AVANT tout, drill footer = texte, question interactive admise uniquement après rendu complet et si décision réellement bloquante
+### Notes
+- **Source : première migration long-saut d'une instance vivante** (instance pro opérateur, v2.10.1 → v2.89.4, 4 marques · 23 audiences · 181 pains/objections · greffe sur copie fraîche + 5 migrations chaînées + ~200 corrections mécaniques hors-scripts). Les 4 fixes ci-dessus sont les défauts constatés en conditions réelles, le piège first-run étant celui qui aurait silencieusement corrompu l'instance.
+- **Out-of-scope noté au manifest (backlog design)** · couverture des scripts de migration sur le drift pré-v2.42 (script balai OU greffe assistée actée) · exclusion folder-level dans `validate-all` (un thème Shopify dans un sous-dossier de marque génère ~90 CRITICAL de bruit · `.validateignore` vs filtrage par basename d'entité) · baseline de la promesse strict-additive à acter dans `updates.md` (champs requis ajoutés et enums renommés sur le span v2.10 → v2.89)
+
+## [2.89.4] · 2026-06-10
+### Added
+- **`resources/registries/mechanism-families.md`** · SSOT du vocabulaire `mode_of_action` (même pattern que `creative-mechanics-registry` pour la mécanique ad-level) · 11 familles ingestibles CANON héritées de l'enum historique + 4 familles physiques CANDIDATE 1-source (Stepprs : `mechanical_stimulation`, `biomechanical_redistribution`, `shock_absorption`, `friction_grip`) · promotion au 2e signal indépendant, jamais par anticipation · règle « `other` = poubelle surveillée >30% » (précédent : `proof_type other` 26% → 3,5%)
+- **Check `mechanism_other_saturation`** dans `validate-all.py` (MED) · `other` >30% des mécanismes d'une marque (≥3 mécanismes) = une famille manque au registre, pas un produit inclassable
+### Changed
+- **`spec.schema#mode_of_action` dé-hardcodé** · l'enum biaisé ingestibles (cofactor, probiotic, adaptogen...) devient une string libre, le vocabulaire vit en données · ferme la découverte v2.89.3 (violation de l'esprit du test d'extractibilité D#307) · la vitrine retrouve ses valeurs sémantiques réelles au lieu des échappatoires `other`/`structural`
+- **`spec.schema#evidence_level` généralisé en strict-additif** · NEW `regulatory_validated`/`regulatory_partial` (tout régulateur ou organisme de certification, toute géographie) · `efsa_validated`/`efsa_partial` conservés en lecture legacy, écriture `regulatory_*` désormais · l'échelle reste fermée (load-bearing pour le scoring de preuve)
+### Notes
+- Traitement différencié par nature de champ : un **vocabulaire** (ouvert, en données, enrichi par corpus) n'est pas une **échelle** (fermée, comparable, dans le schéma)
+- `validate-all --strict` toujours à zéro · promotion des familles physiques : attend la 2e marque physique réelle
+
+## [2.89.3] · 2026-06-10
+### Fixed
+- **`validate-all.py` réparé (le validateur central ne tournait sur aucune machine fraîche)** · crash Python 3.9 (annotations 3.10+ évaluées au chargement) corrigé par `from __future__ import annotations` · refs `$ref _shared/*.json` non résolues par jsonschema ≥ 4.18 corrigées par un `referencing.Registry` construit depuis `resources/schemas/` (fallback `RefResolver` legacy) · whitelist orphelins alignée canon v2.63+ (`pain_points/`, `objections/`, `frictions/`, `creatives/`, `competitive-intel/`, `asset-library/`, `sources/`, `extensions/`, `visual_identity.json`)
+- **Premier run du gardien réparé : 116 findings accumulés, tous fermés → 0 partout, `--strict` PASS** sur `_EXAMPLE` et `_TEMPLATE`
+- **Vitrine `_EXAMPLE` remise au contrat** · brand.json : meta complète (slug/created/updated), 4 concurrents mappés aux enums (originaux en `*_note`), `products_index` + `audiences_index` peuplés (étaient `null`) · spec.json : ids `BEN-/PRB-/MEC-`, enums mécanismes mappés (+notes), composition/variants/verbatims/chains/fréquences convertis aux formes canon · offers.json : `meta.scope`, `group_id` pattern `GRP-NN`, `product_refs` objets avec quantités réelles · 4 profils workers : `meta.name/slug/entry_door` + `fears` objets typés v2.88 · `*_aware` underscore → hyphen sur les 7 profils
+- **Squelette `_TEMPLATE` aligné** · `_version`/`_schema` au canon réel (brand 2.4, spec 1.11, offer 2.2, profile 2.0 ; labels legacy `L1/L2/L3` retirés), `entry_door: null`, awareness hyphen · le squelette passe le validateur à zéro
+### Changed
+- **Schémas, élargissements strict-additifs** (toute donnée valide avant reste valide) · `_shared/validation-status.json` accepte string OU objet `{state, ...}` (réconcilie la forme courte écrite par les skills et la forme riche avec provenance) · `brand.schema` : `brand_equity_level` et `creative_zone` nullables (squelette), `$comment` admis dans `social_media`, `platforms` accepte `null` (non connecté) et string (URL courte) · `spec.schema` : `hero_image` nullable
+### Notes
+- **Découverte à trancher** : les enums `mode_of_action`/`evidence_level` de `spec.schema` sont biaisés produits ingestibles (cofactor, probiotic, efsa_*) ; un produit physique n'y entre que par les échappatoires. Viole l'esprit du test d'extractibilité (D#307). Décision structurelle opérateur.
+- Candidat Gate 8 du pre-release : `validate-all.py --strict` obligatoire (le gardien était mort sans que rien ne le détecte) · check 13b résolu sans patch (ne contraint que `type:`)
+
+## [2.89.2] · 2026-06-10
+### Added
+- **`resources/scripts/rebuild-index.py`** · régénération idempotente d'`index.json` depuis le filesystem (7 dossiers typés de l'enum, dates git, validation jsonschema, mode `--check` pour gate de release) · ferme la cause racine : le kit était seedé par drops directs, aucune étape release ne régénérait l'index
+- **Section « Two migration locations »** dans `migrations/README.md` · distingue `migrations/` racine (1 script par release, découvert par `/update`) de `operations/migrations/` (schema-bumps données opérateur, référencés par les manifests)
+### Changed
+- **`operator/installation.json`** · `template_version_installed` shippé à `null` (était figé à `2.10.1` depuis v2.10.2 : champ d'état runtime rangé dans la zone template, jamais bumpé en 146 releases, faussait la découverte de migrations sur clone frais) · `update-workspace` Step 1 traite `null` comme first-run (init depuis `_version.json`) · paire atomique
+- **`index.json` régénéré** · 22 ressources indexées (était 0) · routing:1 framework:5 sop:3 quality-spec:1 convention:8 template:4
+- **Canon 7 entités propagé** (suite D#425 v2.77 qui n'avait couvert que CLAUDE.md root + architecture.md) · `_TEMPLATE/CLAUDE.md` (+ ligne Angles), `prisms.md`, `extending.md`, `atlas-brand.md` (angle passe en core, dérivées 3→2), `canon.md` interne, `phantom.md` ×2, `lexicon.md` command · `docs/system/README.md` passe à 28 doctrines (+ bullet `creative-axis-canonicalization-doctrine.md` manquant)
+- **Grammaire skills réparée** · 22 SKILL.md convertis des clés YAML `triggers_fr:/triggers_en:` (jamais parsées → triggers vides au manifest) vers les blocs `FR:`/`EN:` en fin de description · 4 skills operator-facing sans triggers équipés · `encode-batch` retypé `shared`→`curator` (7e typologie hors-canon éliminée) · modes `interactive`/`silent` documentés (`_TEMPLATE` + `how-to-build-skills`) · manifest régénéré (82 skills, 6 typologies propres, 1 seul sans triggers = sub-skill légitime)
+- **`.skills/README.md`** · catalogue « Skills shipped » régénéré 38 → 82 depuis le manifest · **`.skills/INDEX.md`** recadré (cards = noyau v2.33, manifest = SSOT ; « score-matrix (futur) » corrigé, le skill est shippé)
+### Fixed
+- **Vitrine `_EXAMPLE`** · `offers.json` conforme à `offer.schema` (champ `type` requis ajouté aux 7 offres : single ×1, bundle ×6 ; 3 champs `type` hors-schema au niveau group retirés dont `standalone` hors-enum) · snapshot régénéré : `By type: bundle:6, single:1` (était `other:7`, le builder était aligné schéma, les données vitrine non)
+- **Header R&D leaké** retiré de `schema-encoding-doctrine.md` (« Working draft, R&D zone... to be promoted ») · le Gate 1 ne greppe que des chemins, pas les headers
+- **`updates.md`** · 6 occurrences `docs/releases/` → `docs/internal/releases/manifest/` (chemin réel des manifests) · Gate 5 dégénérisé (chemins machine du mainteneur) · convention de nommage `operations/migrations/` alignée sur les scripts réels (`v{version}-{slug}.py`)
+- **`CONTRIBUTING.md`** · URL placeholder → `github.com/Largo2z9/phantomos.git`
+### Notes
+- Investigation cause-racine par item avant tout fix (5 investigateurs parallèles) · zéro patch symptôme
+- Hors lot, signalé : `first-session-example.md` obsolète vs tour v2.90 · sections FR dans `capabilities.md` · `release-manifest/1.0` jamais bumpé · cards INDEX pour les 36 skills post-v2.33 · check 13b à étendre aux 5 modes
+
+## [2.89.1] · 2026-06-09
+### Changed
+- **Passe discours surfaces vision/produit (docs only)** · règle dure posée : zéro statistique de marché tierce sur toute surface externe, chiffres first-party du moteur uniquement (522 ads → registre mécaniques · 82 skills · 146 releases · taux d'outputs mal classifiés 26% → 3,5%)
+- **`docs/vision/manifesto.md` réécrit** (~1150 mots) · ouverture sur la douleur opérateur (re-brief, corrections perdues) au lieu du cours macro · « encoding is not logging » = seul concept porteur, revendiqué en propre (Palantir = analogue d'échelle, plus source du concept) · NEW section « What is proven, what is not » (chiffres first-party + aveu zéro opérateur externe) · NEW principe « the canon belongs to the operator, not the tool » (différenciateur 4, honnête sur le runtime Claude Code) · fenêtre 18 mois remplacée par faits constatés · supprimés : stats MIT 95%/HFS/Menlo/a16z, attribution Huang, citations Atlan, signature Hemingway, sections « Three theses » et « Two contrarian positions », 42 em-dashes
+- **`docs/vision/positioning-pitch.md`** · one-liner resserré sur le wedge paid DTC (« quel qu'il soit » supprimé) + « le pattern est général, la preuve est locale » · constat réécrit (learning gap en diagnostic, mesure moteur 26% → 3,5% en preuve) · kit « une trentaine » → « 82 skills versionnés » · différenciateur indépendance fournisseur reformulé en propriété du format · sources purgées (3 entrées annotées)
+- **`docs/vision/prisms.md` réécrit** · 8 prismes (le titre disait « six angles », l'intro pointait « Prism 6 (Product) » pour le prisme 8) · claim d'usage fabriquée du prisme 6 (« Operators... report ») passée en first-person fondateur + test externe à venir · cadré outil de calibrage interne · règles discours ajoutées en Usage
+### Fixed
+- **3 phrases cassées** dans `roadmap.md` (sujets strippés : « PhantomOS ships with... », « Today the operator performs... », « PhantomOS is single-operator per workspace by design ») + 1 dans `fit.md` (« PhantomOS does not enforce this »)
+- **Cross-ref morte** `fit.md` « see manifesto § 8 » → définition inline du test d'extractibilité + pointeur `docs/system/extending.md`
+- **2 leaks R&D** anonymisés dans `capabilities.md` (scénarios 5 et 8 : « Largo » / « Abyss collectif » → opérateur agency générique)
+- **Compteurs** · README (« 13 operator-facing terms » erroné, supprimé) · `docs/README.md` (« six » → « eight framings ») · em-dashes purgés sur manifesto/prisms/roadmap
+### Notes
+- Doctrine wording complète côté R&D : `vision.md` Annexe F (zéro stat tierce · 1 concept nommé max · catégorie hôte · registre artisan · claims first-person · attaquer des pratiques pas des acteurs · preuve avant discours)
+- Hors release, signalé non corrigé : `guides/first-session-example.md` obsolète vs tour v2.90 · sections FR dans `capabilities.md` · lint copy automatisé en gate (candidat)
+
+## [2.89.0] · 2026-06-07
+### Added
+- **Chaîne de production créative câblée + bibliothèque cross-brand + réconciliation taxo 2-grains** · Phase 0 (gate/guard élargis · stockage par batch scale 10k) + Brique 4 (5 schémas backstop + 5 skills de prod repathés) + réconciliation D#488-491
+- **5 schémas** · `decomposition.schema` (decomposition/1.2 · support-agnostic statique/carousel/vidéo + NEW champ `mecanique` ad-level) · `genome.schema` (genome/1.1 · + `genome_tags.mecanique_id`) · `genome-package.schema` (genome-package/1.2 · contrat A=B + mecanique_id) · `library-pattern.schema` (1.0 · objet-pattern cross-brand) · `produced-asset.schema` (1.0 · sidecar binaire)
+- **Bibliothèque hooks cross-brand** · `registries/hooks/` (16 fiches `library-pattern` promote-ready ≥2 sources + README qui déclare le `hook-mechanics-registry` orphelin) + concept `timeline-result-ladder` + `creative-mechanics-evidence.md`
+- **3 graduations** au `creative-mechanics-registry` · `point-out` (callouts) · `stat-claim` (statistique-choc) · `question-reponse` (Q&A natif)
+- **3 docs** · `cross-brand-curation.md` (garde-fou promotion ≥2 sources indépendantes) · `perf-feedback-loop.md` · `creative-storage.md`
+### Changed
+- **decompose-ad 2.4.0** · modèle 2 NIVEAUX explicite (mécanique AD-LEVEL = le CONCEPT → creative-mechanics-registry, roi de l'IMAGE · vs HOOK = l'accroche → registries/hooks, territoire VIDÉO) · corrige la confusion canon (hook.mechanic_id n'était PAS une projection du registre)
+- **compose-creative · recompose-creative · adapt-from-competitor · import-asset · import-meta-results** · émettent/héritent `genome_tags.mecanique_id` (le forward tague enfin le concept) · import-asset aligné sur `asset-library/`
+- **creative.schema 1.2 → 1.4** · bloc `lineage{}` + `variant_of` CRT|RCV + `performance` ouvert + `lineage.mecanique_ref`
+- **Gate + guard** · `write-to-context` ALLOWED élargi (creatives CRT · competitive-intel RCV · resources concepts/registries/canon · asset-library) · `mutation-guard` PROTECTED += canon
+### Fixed
+- **Round-trip A=B** rétabli (le contrat-source `genome-package` ne portait pas `mecanique_id` → ré-ingestion cassée · vérifié jsonschema)
+- **BUG-RESOURCES-UNGUARDED résiduel** fermé (`resources/canon/` était écrivable mais pas protégé · invariant gate⊆guard rétabli)
+- **Self-versions** alignées (decomposition top 1.2 · creative const→enum 1.3|1.4 · genome/genome-package) + miroir `character_archetype` (dialogue-chat-screenshot · 11=11=11)
+### Notes
+- **Modèle 2-grains acté** · le CONCEPT (image=spatial) × le HOOK (vidéo=temporel) · pont A=B `decomposition.mecanique` ↔ `genome_tags.mecanique_id`
+- **Audit OS 11-agents PASS** · 1 critical fermé + hardening (D#491) · corpus R&D 342 décompos (3 sources indépendantes · hors release)
+- **Backward compat strict additif** · champs optionnels · 0 suppression breaking
+- **Reste hors release (côté A)** · fiches-archétypes (absente) · asset-library producteur (P0) · génération · batchs vidéo à fournir (axe hook/temporel non encore exercé)
+- D#476-491 capturés
+
 ## [2.88.0] · 2026-05-28
 ### Added
 - **Sprint MINOR v2.88.0 · Foundation Creative Strategy workflow** · 4 patches foundation suite session externe Creative Strategy v3 orchestrée 25-27 mai 2026 (4 cycles convergence orchestrateur PhantomOS ↔ session externe)

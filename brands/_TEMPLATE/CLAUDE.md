@@ -41,7 +41,7 @@ Never display tokens in output. Install deps: `pip install requests python-doten
 - **Session relay**: `session-state.md` — rolling activity log, auto-maintained on every write (no manual rotation)
 - **Learnings**: `learnings.json` — append-only operational facts (API workarounds, test results, compliance rules)
 
-## Context DB — 6 Entities
+## Context DB — 7 Entities
 
 | Entity | File | Status |
 |--------|------|--------|
@@ -49,6 +49,7 @@ Never display tokens in output. Install deps: `pip install requests python-doten
 | Products | `products/{slug}/spec.json` | — |
 | Offers | `products/{slug}/offers.json` | — |
 | Audiences | `audiences/{slug}/profile.json` | — |
+| Angles | `angles/{slug}/angle.json` | — |
 | Learnings | `learnings.json` | empty |
 | Strategy | `strategy.json` | empty |
 

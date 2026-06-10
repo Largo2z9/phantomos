@@ -10,7 +10,7 @@ Pas un référentiel statique. Pas un fichier unique. C'est le **concept archite
 
 ## Composants canoniques
 
-L'atlas brand est composé de 6 entités core (mutation gate-protected) :
+L'atlas brand est composé de 7 entités core (mutation gate-protected) :
 
 | Entité | Storage | Fonction |
 |---|---|---|
@@ -18,11 +18,11 @@ L'atlas brand est composé de 6 entités core (mutation gate-protected) :
 | spec | `products/{slug}/spec.json` (1 par produit) | matière produit · mechanisms[] · benefits[] · problems_solved[] · visual_identity |
 | offers | `products/{slug}/offers.json` (1 par produit) | structures commerciales · bundles · pricing |
 | profile | `audiences/{slug}/profile.json` (1 par audience) | 8 dimensions canon V3 + Schwartz double-stage + pain_points 3 niveaux |
+| angle | `angles/{slug}/angle.json` (1 par angle) | axe d'attaque · formule Observation × Tension × Reframe × Bridge · lineage canon |
 | learnings | `learnings.json` | append-only · règles métier capturées |
 | strategy | `strategy.json` | objectifs annuels + targets mensuels + focus courant |
 
-Plus 3 entités dérivées (post-skill outputs) :
-- angles · `angles/{ANG-N}.json` (formula compositionnelle + lineage canon)
+Plus 2 entités dérivées (post-skill outputs) :
 - creatives produced · `produced/{CRT-N}.json` + JPG + brief markdown
 - scoring matrix · `scoring/matrix-{date}.json`
 
@@ -48,7 +48,7 @@ L'atlas brand est navigable via `/phantom` (cockpit principal) :
 
 ## Distinction vs `_snapshot.md`
 
-`_snapshot.md` (1-2KB plaintext digest auto-régénéré) = **résumé lisible** de l'atlas brand. Pas l'atlas lui-même. C'est l'artefact de communication rapide pour le cockpit. L'atlas brand est le concept architectural complet (les 6 entités + dérivés).
+`_snapshot.md` (1-2KB plaintext digest auto-régénéré) = **résumé lisible** de l'atlas brand. Pas l'atlas lui-même. C'est l'artefact de communication rapide pour le cockpit. L'atlas brand est le concept architectural complet (les 7 entités + dérivées).
 
 ## Mécaniques d'enrichissement
 

@@ -1,0 +1,94 @@
+{
+  "pattern_id": "HOK-if-then-conditional",
+  "pattern_type": "hook-mechanic",
+  "name": "Hook Conditionnel Si-Alors",
+  "one_liner": "Le hook pose une CONDITION qui colle au prospect (si tu ressens/cherches/as besoin de X) puis bascule vers la promesse/produit (alors decouvre/recupere Y), ce qui force l'auto-identification et ne retient que les qualifies.",
+  "skeleton": "[SI/QUAND condition_qui_decrit_le_prospect (pain_state | desir | recherche | palliatif_actuel)] -> [ALORS bascule_resolution (decouvre | recupere | echange contre | verifie) -> produit/benefice_teasé]",
+  "slots": [
+    {
+      "name": "condition_prospect",
+      "description": "La clause SI qui decrit l'etat/le besoin/le comportement du prospect cible. C'est le filtre d'auto-identification : seul celui qui se reconnait continue. Peut etre un pain ressenti, un desir aspirationnel, une recherche en cours, ou un palliatif deja utilise.",
+      "examples": [
+        "SI VOUS RESSENTEZ une charge mentale constante, un manque d'energie, des tensions, un sommeil agite",
+        "Si tu as besoin d'ecouteurs pour dormir",
+        "LE bon plan ULTIME si tu es trop stressé au quotidien",
+        "Vous cherchez une methode douce pour favoriser le calme interieur de votre enfant pendant les journees d'ecole chargees ?",
+        "Check your T at home (auto-diagnostic faible friction)"
+      ]
+    },
+    {
+      "name": "operateur_conditionnel",
+      "description": "Le connecteur logique qui articule la condition a la resolution. Explicite (SI...ALORS, si...echange, see if) ou implicite (action-maintenant -> resultat-plus-tard ; question Non/Oui -> Continuez). C'est le pivot de la mecanique.",
+      "examples": [
+        "SI VOUS RESSENTEZ... DECOUVREZ...",
+        "si vous offrez ceci a votre corps (clause SI postposee a la promesse)",
+        "echange ca contre ca",
+        "See if [Rx] can help you...",
+        "Chew today -> See ... in 3-6 months (action -> resultat)"
+      ]
+    },
+    {
+      "name": "resolution_teasee",
+      "description": "La clause ALORS : le produit, le benefice ou le geste de bascule presente comme la reponse a la condition. Souvent reframe (rituel, swap, auto-test) et parfois volontairement teasé (curiosity gap sur 'ceci') pour appeler le clic.",
+      "examples": [
+        "DECOUVREZ votre nouveau rituel de detente (Magnesium + / Gummies Anti-Stress au Safran)",
+        "Retrouvez la qualite de vos nuits",
+        "DECOUVRIR LES GUMMIES DREAM",
+        "boost your T (enclomiphene)",
+        "thicker, fuller hair (hims hair hybrids)"
+      ]
+    }
+  ],
+  "function": "Pre-qualifie l'audience dans le hook lui-meme : la clause conditionnelle agit comme un miroir qui ne capte que le prospect concerné (auto-identification au pain/desir), ce qui augmente la pertinence percue et le scroll-stop sur la bonne cible tout en laissant filer les non-qualifies. La bascule SI->ALORS transforme immediatement la reconnaissance du probleme en direction de solution.",
+  "when_to_use": "Audience problem-aware a solution-aware, en TOFU/MOFU surtout. Optimal quand le pain ou le desir est nommable et partagé (le prospect se reconnait en une ligne) et quand on veut filtrer l'audience froide plutot que parler a tout le monde. Marche aussi en variante quiz/arbre de decision (Non/Oui) pour qualifier, et en variante swap (echange ton palliatif) pour le solution-aware deja equipé d'une alternative.",
+  "promote_status": "promote-ready",
+  "confirming_sources": [
+    {
+      "source": "naali",
+      "vertical": "wellness-supplement",
+      "geo": "FR",
+      "example_rcv_ids": ["RCV-35", "RCV-43", "RCV-44", "RCV-71", "RCV-82", "RCV-87", "RCV-96", "RCV-97", "RCV-100", "RCV-103", "RCV-108"],
+      "realization": "Décliné massivement (11 ads) sur tout le spectre : pain-litany classique 'SI VOUS RESSENTEZ une charge mentale constante, un manque d'energie... DECOUVREZ votre nouveau rituel de detente' (RCV-35) ; promesse a condition postposée 'Retrouvez la qualite de vos nuits... SI VOUS OFFREZ CECI A VOTRE CORPS' avec curiosity gap sur 'ceci' (RCV-43) ; swap 'Si tu as besoin d'ecouteurs pour dormir... Echange ca. Contre ca.' (RCV-44) ; deal conditionnel 'LE bon plan ULTIME si tu es trop stressé au quotidien' (RCV-82) ; arbre de decision quiz 'Vous cherchez une methode douce... ? Non / Oui Continuez' (RCV-97) ; grille ENVIES/BESOIN (RCV-71)."
+    },
+    {
+      "source": "himshers",
+      "vertical": "telehealth-rx",
+      "geo": "US",
+      "example_rcv_ids": ["RCV-145", "RCV-149"],
+      "realization": "Variante auto-diagnostic conditionnel 'Check your T at home. See if enclomiphene can help you boost your T' (RCV-145, faible friction -> mecanisme Rx teasé) et variante action-maintenant/resultat-plus-tard 'Chew today, See thicker, fuller hair in 3-6 months' (RCV-149, la condition est le geste, la resolution est le resultat fenetré). Les deux RCV proviennent de hims uniquement ; aucune ad hers du corpus ne porte la mecanique (hims+hers = UNE factory genrée, comptée 1 source)."
+    }
+  ],
+  "independent_source_count": 2,
+  "vertical_scope": {
+    "origins": ["wellness-supplement", "telehealth-rx"],
+    "breadth": "cross-vertical",
+    "freedom_cursor_note": "Vu en FR wellness-supplement (naali, profond) ET US telehealth-rx (himshers) = cross-vertical + cross-géo, signal robuste. exploit -> sur une marque wellness/supplement, reslot direct du SI-RESSENTEZ pain-litany (emprunt proche, sûr). explore -> oser la variante auto-diagnostic ('verifie ton X chez toi') ou swap ('echange ton palliatif') sur une verticale lointaine (beauty, fitness, équipement), emprunt conscient a surfacer a l'operateur. La mecanique conditionnelle elle-meme est quasi-universelle ; ce sont les habillages (quiz, swap, auto-test) qui portent la couleur sectorielle."
+  },
+  "related_mechanic_ids": [
+    "if-then-conditional-hook",
+    "pain-litany",
+    "solution-direction",
+    "resolution-timeline",
+    "competitor-comparison",
+    "product-reveal"
+  ],
+  "transfer_examples": [
+    {
+      "target": "Stepprs · pieds/circulation",
+      "reslotted": "SI VOUS RESSENTEZ des jambes lourdes en fin de journee, des pieds qui gonflent, des fourmillements le soir... DECOUVREZ votre nouveau rituel circulation (semelles/compression Stepprs)."
+    },
+    {
+      "target": "marque équipement sommeil (swap, mode explore)",
+      "reslotted": "Si tu prends encore des somniferes pour t'endormir... Echange ca. Contre ca. -> [produit], parce que [3-4 criteres coché vs le palliatif barré]."
+    }
+  ],
+  "anti_patterns": [
+    "Condition trop large ('si tu veux etre heureux') : le filtre d'auto-identification ne mord plus, on perd l'effet miroir et la qualification. La force vient d'une condition specifique et reconnaissable en une ligne.",
+    "Quand l'ad EST une offre/promo, le hook conditionnel n'est qu'une amorce et le corps devient une mecanique d'offre : faible valeur narrative reutilisable hors contexte promo (cf RCV-82, seed value flaggée FAIBLE).",
+    "Tease ('ceci' / curiosity gap) sans payoff clair derriere : sur audience sceptique, la condition non résolue rapidement frustre plus qu'elle n'intrigue.",
+    "En telehealth-rx la clause conditionnelle doit cohabiter avec le disclaimer FDA/Rx obligatoire : ne pas laisser la promesse conditionnelle deborder sur du claim non conforme."
+  ],
+  "curation_notes": "promote-ready solide : 2 sources INDÉPENDANTES (naali FR wellness + himshers US telehealth-rx), cross-vertical ET cross-géo. CAVEAT factory-aware (D#485) : les 2 RCV himshers (145, 149) proviennent toutes deux de hims ; hers n'a AUCUNE ad taggée if-then dans le corpus, mais hims+hers = UNE factory donc himshers reste 1 source legitime, pas 2. Source naali tres profonde (11 RCV) avec forte diversité de réalisations (pain-litany, swap, quiz, deal, grille ENVIES/BESOIN) = pas un cluster mono-format. karacare (FR beauty-hair) n'a aucune ad taggée -> 3e source non disponible aujourd'hui. Passerait de cross-vertical a quasi-universal si karacare ou une 3e factory confirmait. Prochain durcissement = perf réelle via feedback loop (la curation ici promeut sur la récurrence cross-source, pas encore sur la perf gagnante)."
+  ,
+  "_schema_version": "library-pattern/1.0"
+}

@@ -1,0 +1,72 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "real-photo-product-studio",
+  "display_name": "Packshot studio produit",
+  "family": "packshot",
+  "typology_st": "spatial",
+  "description": "Packshot studio du produit isole sur fond uni, lumiere douce et controlee, rendu photographique propre facon catalogue ou page produit. A utiliser pour poser le produit comme heros sans distraction de contexte: frame hero d'un carrousel, ouverture d'ad, visuel feature ou comparatif avant/apres. Cherche la credibilite et la lisibilite du produit, pas l'ambiance lifestyle.",
+  "render_recipe": {
+    "prompt_skeleton": "Studio product photograph of {product}, isolated on a {background_color} seamless backdrop, {lighting}, shot on {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}. Sharp accurate label and packaging, true-to-life materials and colors, professional commercial product photography, high detail, no props unless specified.",
+    "slots": [
+      { "name": "product", "description": "Le produit exact a mettre en heros (nom + format packaging: bottle, jar, tube, sachet, box). Decrire materiau et finition si connus (matte, glossy, frosted glass, aluminium)." },
+      { "name": "background_color", "description": "Couleur du fond uni seamless, aligne sur la charte marque (ex 'soft warm beige', 'off-white', 'brand color #F58B64 muted'). Eviter le blanc pur clinique sauf si la DA l'exige." },
+      { "name": "lighting", "description": "Schema lumiere a injecter (voir champ lighting par defaut). Surcharger seulement si la marque a un parti pris fort." },
+      { "name": "camera_lens", "description": "Combo focale + ouverture (voir camera_lens par defaut)." },
+      { "name": "palette_mood", "description": "Ambiance chromatique et tonale alignee charte (voir palette_mood par defaut)." },
+      { "name": "texture_grain", "description": "Niveau de grain / texture photographique (voir texture_grain par defaut)." },
+      { "name": "composition_notes", "description": "Cadrage, position produit, marge, ombre, surface de pose (voir composition_notes par defaut)." }
+    ],
+    "lighting": "Large soft key light (big softbox or scrim) from front-left at 45 degrees, gentle fill from right to lift shadows, subtle rim/edge light to separate product from background, soft graduated falloff. Diffuse, even, no harsh speculars, controlled single soft shadow under the product.",
+    "camera_lens": "85mm to 100mm macro-capable prime, f/8 to f/11 for full product sharpness, low ISO, tripod-locked, eye-level to slight high angle.",
+    "palette_mood": "Clean, calm, premium. Neutral or charte-aligned tones, balanced exposure, natural color accuracy, slightly warm white balance for an inviting (not clinical) feel.",
+    "texture_grain": "Fine, almost invisible photographic grain. Real surface micro-texture on the packaging (condensation, matte paper, brushed metal) preserved, no plastic over-smoothing, no HDR halo.",
+    "composition_notes": "Product centered or on a thirds line, generous negative space for copy overlay, soft contact shadow grounding it, single seamless surface (no visible horizon line unless on a subtle reflective tabletop), 1:1 or 4:5 friendly framing for feed."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio": "4:5",
+      "resolution": "2K",
+      "guidance": "medium-high (favor prompt adherence on label/packaging fidelity)"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Etiquette / packaging illisible ou texte hallucine sur le pack (glyphes inventes, logo deforme): le label doit rester net et coherent",
+    "Materiau au rendu plastique cireux ou sur-lisse: garder la micro-texture reelle (verre, papier, metal, condensation)",
+    "Reflets et ombres physiquement faux: une seule source douce, une ombre de contact coherente, pas d'ombres multiples contradictoires",
+    "Halo HDR / sur-contraste / liseré lumineux artificiel sur les bords du produit",
+    "Fond pas vraiment uni: degrades sales, bandes, artefacts de seamless, vignettage non voulu",
+    "Geometrie du packaging distordue (bouchon de travers, proportions fausses, symetrie cassee sur un objet regulier)",
+    "Couleurs non fideles (la couleur produit / charte derive), banding sur les aplats de fond",
+    "Faux pump/cap/details dupliques ou objets parasites (props non demandes) qui apparaissent dans le frame"
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 5],
+    "pairs_well_with": [
+      "real-photo-macro-detail",
+      "pack-shot-brand-template",
+      "graphic-icons-overlay",
+      "split-screen-comparison",
+      "real-photo-lifestyle"
+    ],
+    "avoid_when": [
+      "La marque vise un territoire raw/UGC agressif (creative_zone haute): un packshot trop propre casse le code natif du feed et sent l'ad",
+      "Le hook repose sur la mise en situation / preuve d'usage: privilegier real-photo-lifestyle ou ugc-selfie-talking",
+      "On veut demontrer un mecanisme interne ou physiologique: passer sur 3d-anatomy ou diagram-medical-2d",
+      "Le produit n'a pas d'identite packaging forte (vrac, service, digital): un studio shot n'a rien a poser"
+    ]
+  },
+  "refs": [
+    "Page produit Shopify premium (frame hero fond uni, ombre douce)",
+    "Ouverture de carrousel ad DTC: packshot heros frame 1 avant les frames lifestyle/preuve"
+  ],
+  "related_mechanic_ids": [
+    "hero-product-isolation",
+    "before-after-frame"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

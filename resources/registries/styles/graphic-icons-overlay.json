@@ -1,0 +1,81 @@
+{
+  "_schema": "style-recipe",
+  "_version": "style-recipe/1.0",
+  "style_id": "graphic-icons-overlay",
+  "display_name": "Overlay icones graphiques",
+  "family": "graphic-overlay",
+  "typology_st": "spatial",
+  "description": "Composition graphique d'icones/pictos lignes ou solides + courts labels texte poses sur un fond uni, un degrade charte ou un packshot produit, facon infographie feature/benefit. Sert a lister 3 a 6 arguments (ingredients, benefices, garanties, USP) de maniere scannable en une frame, sans avoir a filmer une demo. Bon en frame recap d'un carrousel, en visuel 'pourquoi nous', ou en ouverture pedagogique. Cherche la lisibilite et l'autorite informative, pas l'ambiance ni la preuve d'usage.",
+  "render_recipe": {
+    "prompt_skeleton": "Clean flat vector infographic overlay for {product}, {layout} of {icon_count} feature points, each point = a {icon_style} line/solid pictogram paired with a short benefit label, icons rendered in {accent_color} on a {background}, consistent stroke weight and corner radius across all icons, generous spacing, {lighting}, {camera_lens}, {palette_mood}, {texture_grain}, {composition_notes}. Crisp geometric pictograms, uniform icon grid, modern minimal commercial graphic design, sharp legible UI-grade typography.",
+    "slots": [
+      { "name": "product", "description": "Le produit ou la marque que l'overlay decrit (sert a choisir des pictos coherents avec la categorie: drop pour serum, leaf pour clean, shield pour garantie)." },
+      { "name": "layout", "description": "Disposition des points: 'vertical stacked list', 'icon grid 2x2 / 3x2', 'radial ring around a center product cutout', 'horizontal strip / bottom badge bar'. Choisir selon le nombre de points et le ratio." },
+      { "name": "icon_count", "description": "Nombre de feature points (3 a 6 recommande, jamais plus de 6: au-dela ca devient illisible en feed)." },
+      { "name": "icon_style", "description": "Style des pictos: 'thin outline line-icon', 'rounded solid glyph', 'duotone', 'filled badge'. UN seul style sur toute la frame, jamais melanger line et solid." },
+      { "name": "accent_color", "description": "Couleur des icones + accents, alignee charte (ex 'brand coral #F58B64', 'deep green', 'mono charcoal'). Limiter a 1-2 couleurs d'accent." },
+      { "name": "background", "description": "Le fond: 'flat charte color', 'soft brand gradient', 'isolated product packshot with negative space', 'off-white card with subtle shadow'. Doit laisser respirer pictos et texte." },
+      { "name": "lighting", "description": "Quasi nul (rendu plat). Surcharger seulement si le fond est un packshot photo (voir lighting par defaut)." },
+      { "name": "camera_lens", "description": "Front-on, zero perspective pour la partie graphique (voir camera_lens par defaut)." },
+      { "name": "palette_mood", "description": "Ambiance chromatique et tonale alignee charte (voir palette_mood par defaut)." },
+      { "name": "texture_grain", "description": "Niveau de texture (voir texture_grain par defaut, par defaut: aucun, aplats nets)." },
+      { "name": "composition_notes", "description": "Grille, alignement, marges, zone de titre, hierarchie picto/label (voir composition_notes par defaut)." }
+    ],
+    "lighting": "Flat, even, ambient (no directional light, no cast shadows on the graphic layer). If the background is a real product packshot, keep a soft single key on the product only and let the icon/text layer sit perfectly flat on top.",
+    "camera_lens": "Orthographic / front-on, zero perspective distortion on the graphic layer (icons and text face the viewer dead-on, no tilt). Product cutout, if any, shot at eye level.",
+    "palette_mood": "Clean, modern, authoritative, minimal. 1-2 charte accent colors max plus a neutral base, high contrast between text and background, calm and trustworthy, never busy or rainbow.",
+    "texture_grain": "Flat solid fills, no photographic grain, no gradients inside the icons; at most a very subtle drop shadow or soft card elevation. Vector-crisp edges, no blur, no noise.",
+    "composition_notes": "Strict alignment grid: every icon on the same baseline, identical icon bounding-box size, equal gaps between points. Clear title zone at top, label text left-aligned (or centered under icon) and consistent across all points. Generous negative space, 4:5 or 1:1 feed-safe, balanced visual weight, one clear reading path top-to-bottom or left-to-right."
+  },
+  "model_params": {
+    "recommended_endpoint": "fal-ai/nano-banana-pro",
+    "settings": {
+      "aspect_ratio_feed": "4:5",
+      "aspect_ratio_square": "1:1",
+      "resolution": "2K",
+      "guidance": "high (lock layout discipline, icon consistency and legible short labels; this style lives or dies on cleanliness)",
+      "negative_prompt": "mismatched icon styles, mixed line and solid icons, inconsistent stroke weight, hallucinated gibberish text, misspelled labels, warped letters, overcrowded layout, clip-art shadows, skewed perspective, busy rainbow palette, photographic grain on flat fills, blurry edges"
+    }
+  },
+  "anti_ai_guardrails": [
+    "Texte hallucine / gibberish dans les labels: lettres inventees, fautes d'ortho, mots inexistants. C'est LE defaut #1 de ce style. Verifier chaque label au pixel, prevoir de re-poser le texte proprement en post si le modele le massacre.",
+    "Pictos incoherents entre eux: melange line + solid, epaisseurs de trait differentes, rayons de coin qui varient, tailles inegales. Tous les icones doivent partager le meme systeme visuel.",
+    "Icone qui ne veut rien dire / ne matche pas son label: glyphe generique ou hors-sujet colle a cote d'un benefice precis (un engrenage a cote de 'sans paraben').",
+    "Sur-charge: plus de 6 points, labels trop longs, zero respiration, grille saturee, illisible en feed mobile au pouce.",
+    "Geometrie cassee: icones tordus, asymetriques sur un picto cense etre regulier, alignement de travers, baseline qui sautille d'un point a l'autre.",
+    "Faux relief clip-art: ombres portees sales, biseaux 3D, degrades cheap a l'interieur des pictos qui cassent le rendu flat vector propre.",
+    "Perspective parasite: la couche graphique doit etre front-on; tout tilt/3D sur les icones ou le texte trahit le rendu et nuit a la lisibilite.",
+    "Derive de palette: rainbow non charte, contraste texte/fond insuffisant (label clair sur fond clair), accent color hors charte.",
+    "Packshot produit deforme quand il sert de fond: label/packaging halluciné ou geometrie fausse sur le produit cutout (cumuler les guardrails packshot)."
+  ],
+  "da_compat": {
+    "creative_zone_fit": [0, 4],
+    "pairs_well_with": [
+      "real-photo-product-studio",
+      "pack-shot-brand-template",
+      "split-screen-comparison",
+      "brand-motion-graphic",
+      "diagram-medical-2d"
+    ],
+    "avoid_when": [
+      "La marque vise un territoire raw/UGC/native-feed (creative_zone haute): un overlay graphique propre sent l'ad institutionnelle et casse le code natif.",
+      "Le hook repose sur l'emotion, une personne relatable ou une preuve d'usage: l'infographie est froide, passer sur ugc-selfie-talking, real-photo-lifestyle ou real-photo-testimonial-static.",
+      "Frame d'accroche / scroll-stopper en tete d'angle: ce style explique, il n'arrete pas le scroll, le reserver aux frames recap/feature en milieu de carrousel.",
+      "Trop d'arguments a caser (>6 points): ca devient un mur illisible, scinder en plusieurs frames ou hierarchiser.",
+      "Demo d'un mecanisme physiologique ou interne: privilegier diagram-medical-2d ou 3d-anatomy qui montrent vraiment le fonctionnement."
+    ]
+  },
+  "refs": [
+    "Frame recap 'pourquoi nous' / grille de benefices en milieu de carrousel ad DTC (3-6 pictos + labels courts).",
+    "Badge bar de garanties en bas de packshot (livraison, garantie, clean, made in): bande d'icones reassurance.",
+    "Visuel feature-list infographie sur fond charte, ouverture pedagogique d'un angle education."
+  ],
+  "related_mechanic_ids": [
+    "feature-benefit-stacking",
+    "trust-badge-reassurance"
+  ],
+  "promotion": {
+    "status": "watch",
+    "sources": []
+  }
+}

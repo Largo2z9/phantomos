@@ -1,6 +1,6 @@
 ---
 name: encode-batch
-type: shared
+type: curator
 version: "1.0.0"
 recommended_model: haiku
 layer: meta
@@ -130,7 +130,7 @@ Apply the canonical mapping table. The table is the entire mechanical contract o
 | `emotion` | profile.json | `psychology.emotions[]` | append scalar string |
 | `life_moment` | profile.json | `psychology.life_moments[]` | append scalar string |
 | `trigger_event` | profile.json | `decision_process.awareness_trigger` | scalar |
-| `awareness_stage` | profile.json | `market_position.awareness_level` | scalar enum |
+| `awareness_stage` | profile.json | `market_position.awareness_dominant` | scalar enum |
 | `audience_label` | profile.json | `meta.name` | scalar |
 | `audience_gender` | profile.json | `identity.gender` | scalar |
 | `audience_age_range` | profile.json | `identity.age_range` | object {min, max} |

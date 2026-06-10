@@ -1,0 +1,41 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.89.5",
+  "released_at": "2026-06-11",
+  "type": "patch",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 82,
+  "schemas_new": [],
+  "schemas_modified": [],
+  "summary": "Durcissement post-migration reelle. Premiere migration long-saut d'une instance vivante (instance pro operateur, v2.10.1 -> v2.89.4, 4 marques, 23 audiences, 181 pains/objections) : trois defauts constates en conditions reelles sont fermes. (1) update-workspace pointait les manifests a docs/releases/ alors qu'ils vivent a docs/internal/releases/manifest/ (la skill ne trouvait aucun manifest sur machine fraiche). (2) Piege first-run : installation.json absent ou null sur une VIEILLE instance avec marques encodees etait traite comme fresh install -> init-and-exit, zero migration appliquee, corruption silencieuse ; le Step 1 distingue desormais fresh install (zero marque reelle) d'instance ancienne sans tracking (STOP + determination de la version installee avec l'operateur). (3) validate-all.py crashait (AttributeError) sur les formes legacy pre-v2.0 (pain_points/benefits en strings) au lieu de laisser la passe jsonschema les reporter. (4) NEW hard rule render-first dans /phantom : les modeles recents substituaient le rendu cockpit par un widget AskUserQuestion de navigation ; la regle verrouille vue complete en texte d'abord, question interactive uniquement apres rendu et si decision bloquante.",
+  "changes": {
+    "skill": [
+      "~.skills/skills/update-workspace/SKILL.md (1.1.0 -> 1.2.0 · chemin manifests corrige docs/releases/ -> docs/internal/releases/manifest/ en preconditions + Step 2 + Related · Step 1 NEW garde anti-piege first-run : installation.json absent/null + marques reelles presentes = vieille instance sans tracking, jamais init-and-exit, STOP et determiner la version installee avec l'operateur avant la chaine)"
+    ],
+    "validator": [
+      "~resources/scripts/validate-all.py (boucles semantiques profile pain_refs/benefit_refs gardees isinstance(dict) · les entrees string legacy pre-v2.0 ne crashent plus le gardien, la passe jsonschema reporte deja le type mismatch)"
+    ],
+    "command": [
+      "~.claude/commands/phantom.md (v2.87.5 -> v2.89.5 · NEW hard rule render-first en tete : vue complete en texte AVANT tout, NEVER substituer le rendu par AskUserQuestion, drill footer = texte, question interactive admise uniquement apres rendu complet si decision reellement bloquante)"
+    ]
+  },
+  "tests_non_regression": [
+    "validate-all --strict a zero sur _EXAMPLE + _TEMPLATE",
+    "rebuild-index --check in sync",
+    "build-manifest 82 skills",
+    "garde first-run verifiee en conditions reelles sur l'instance pro migree (cas declencheur)"
+  ],
+  "decisions_captured": [],
+  "out_of_scope_noted": [
+    "Couverture des scripts de migration : le drift reel v2.10 -> v2.89 a demande ~200 corrections mecaniques hors-scripts (enums renommes snake->kebab, scope sub-segment/transversal, one_shot/tiered/enriched, benefits/chains strings ere L1, offers legacy sans offer_groups/meta.scope, product_refs strings, ids OFR hors pattern + collisions cross-produits, testimonials objets). Backlog : soit un script de migration balai pre-v2.42, soit acter que les vieilles instances passent par une greffe assistee.",
+    "validate-all : pas d'exclusion folder-level sous brands/{slug}/ (un theme Shopify dans un sous-dossier de travail genere ~90 CRITICAL de bruit de parse). Decision de design a trancher : .validateignore vs filtrage par basename d'entite connue.",
+    "La promesse strict-additive n'a pas tenu sur le span v2.10 -> v2.89 (champs requis ajoutes : offer_groups, meta.scope, entry_door, product_refs · enums renommes). A acter en doctrine updates.md : strict-additive se mesure depuis quelle baseline."
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.89.5",
+    "push (operateur)"
+  ]
+}

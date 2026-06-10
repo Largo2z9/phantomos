@@ -7,9 +7,7 @@ layer: meta
 reasoning_pattern: null
 operator_facing: false
 invocable_by:
-  - audit-meta-global
-  - audit-creatives
-  - brief-ads
+  - audit-meta-account
   - setup-brand
   - snapshot-brand
   - onboard-brand

@@ -1,7 +1,7 @@
 {
   "$comment": "Audience profile — deep psychographic + behavioral context. Factual description of who they are.",
-  "_schema": "brand/L3-audience",
-  "_version": "1.2",
+  "_schema": "profile/2.0",
+  "_version": "2.0",
   "_changelog": {
     "1.2": "S26b: meta.product_fit removed (subjective — belongs in pilotage docs, not neutral receptacle). product_id = provenance only.",
     "1.1": "S26 red-team patches: key_expressions[].sample_size added (frequency needs denominator). pain_points[].awareness_stage + benefits[].awareness_stage added. meta.scope/parent_slug/overlap_with added (audience hierarchy). meta.validation_status added (hypothesis→scaled lifecycle). Tag namespaces enforced (problem:/context:/profession:/awareness:/life_moment:/behavior:). Breaking: key_expressions was already object[] since S26-early."
@@ -72,7 +72,8 @@
       "tags": "Queryable labels with MANDATORY namespaces. Format: '{namespace}:{value}'. Namespaces autorisés : problem: | context: | profession: | awareness: | life_moment: | behavior:. Vocabulaire libre à l'intérieur du namespace. Ex: ['problem:foot-pain', 'context:standing-job', 'profession:nurse', 'awareness:solution_aware'].",
       "audience_type": "primary | secondary | discovered | assumed. 'discovered' = found via VoC mining (not anticipated). 'assumed' = inferred from product logic (not validated).",
       "validation_status": "hypothesis | tested | validated | scaled | fatigued. Factual observable state. hypothesis = pas encore testée en campagne. tested = ad set lancé, résultats non-concluants. validated = CPA/ROAS confirmé viable. scaled = budget significatif alloué. fatigued = performance en déclin. Règle : hypothesis > 30 jours sans test → flag par validate-resources."
-    }
+    },
+    "entry_door": null
   },
   "identity": {
     "description": "",
@@ -236,7 +237,7 @@
         }
       ],
       "emotional_lever": "",
-      "awareness_stage": "solution_aware",
+      "awareness_stage": "solution-aware",
       "_source_meta": {
         "origin": "brand_declared",
         "platform": "",
@@ -273,7 +274,7 @@
     }
   ],
   "market_position": {
-    "awareness_level": "",
+    "awareness_dominant": null,
     "sophistication_override": null,
     "_notes": "Override product-level sophistication if this audience diverges. Null = inherits."
   },
