@@ -1,7 +1,10 @@
 {
-  "_version": "1.2",
+  "_version": "1.3",
   "_schema": "operator-awareness",
   "_field_types": {
+    "function_inferred": "derived",
+    "function_capture_lever": "derived",
+    "function_scope_l2": "derived",
     "tour_status": "stated",
     "tour_entry_door": "stated",
     "tour_last_run": "derived",
@@ -17,6 +20,9 @@
     "first_skill_built": "derived",
     "first_brand_validated": "derived"
   },
+  "function_inferred": false,
+  "function_capture_lever": null,
+  "function_scope_l2": "on",
   "tour_status": "not_started",
   "tour_entry_door": null,
   "tour_last_run": null,

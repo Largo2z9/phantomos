@@ -391,6 +391,7 @@ Le move qui paie · ta poche « beauté de l'intérieur » est non-occupée par 
 - `confidence_floor` (float internal) · propagates worst-case across phases; never surfaced
 - `mcp_layer` (set: facebook-graph, notion, none) · drives Phase 3 source breadth
 - `spectre_mode` (enum: auto / proposed / off) · gouverne le palier Spectre Step 2.5 (carte complète) · décidé au Step 0 depuis `brand.meta.stage` + régime · l'énumération des usages reste TOUJOURS active indépendamment de cette variable
+- `function_scope` (profil dérivé · jumelle de `spectre_mode`) · dimensionne quelles couches DÉRIVÉES s'allument et à quelle profondeur selon le POSTE de l'opérateur · dérivé au Step 0ter depuis `operator/profile.json#identity.function` croisé avec `resources/canon/operator/function-pole-map.json` · **vide → FULL** (comportement actuel exact, backward-compat strict) · ne touche JAMAIS le plancher (L0 + atlas-cœur tronc), qui reste inconditionnel pour toute fonction
 
 **Failure modes**:
 - Phase 1 (setup-brand) aborts mid-flow → persist `brands/{slug}/session-state.md`, allow resume via `resume-session`. Never restart from zero.
@@ -417,6 +418,26 @@ Halt si NEW entity registered sans `consumable_by` field flagué (scaffold-exten
 silent skip · pas error · l'opérateur peut patcher manuellement le scaffold-extension Phase 9 register-and-flag pour ajouter `consumable_by`.
 
 Cross-ref doctrine canon · `docs/system/extension-discovery-doctrine.md` v2.75.0 NEW.
+
+---
+
+### Step 0ter · `function_scope` · le POSTE de l'opérateur dimensionne les couches dérivées (D#52x)
+
+**Lis `operator/profile.json#identity.function` AVANT de lancer le pipeline.** C'est le poste opérationnel de l'opérateur sur CETTE marque (paid / creative / studio / conversion / retention / intelligence / ops / finance / growth · liste, multi-fonction normal), distinct de la RELATION (`identity.profile` solo/agency/...). Si `onboard-brand` te passe déjà `function_scope` au handoff (Step 6), utilise-le · sinon dérive-le ici.
+
+**Dérivation (déterministe, calquée sur `spectre_mode`).** `function` non vide → pour chaque pôle, lis `resources/canon/operator/function-pole-map.json#poles[{pôle}]` · multi-fonction = **union par couche (MAX, off < light < full)**. `function` **vide ou inconnu → `function_scope = FULL`** · le pipeline tourne EXACTEMENT comme aujourd'hui (backward-compat strict · c'est le test de non-régression). Croise avec `brand.meta.stage` (un paid en launch ≠ un paid en scale · la map est un défaut, le stage module la profondeur).
+
+**Ce que `function_scope` conditionne (les SOMMETS uniquement)** ·
+- **Step 2.5 sous-bloc B (Spectre)** · `effective_spectre = max(spectre_mode_depuis_stage, spectre_push_de_la_fonction)`. La fonction COMPOSE, elle n'override jamais · un poste qui consomme l'axe Marché (creative/growth) pousse vers `auto`, les autres laissent le stage décider.
+- **Phase 6 (produce-paid-angles)** · **lis le champ ÉCRIT `operator/awareness.json#function_scope_l2`** (dérivé mécaniquement par le hook `checkpoint-resolver` depuis la fonction × `function-pole-map.json` · tu ne re-dérives PAS la décision en prose, D#520). `off` (intelligence/finance/ops pures · aucune fonction ne consomme la production) → skip produce-paid-angles. `on` (défaut · paid/creative/retention/... OU fonction vide = FULL) → tourne à la cardinalité dérivée.
+- **Phase 7 (score-matrix)** · skippée si `function_scope_l2 = off` (pas d'angles à scorer).
+- **Step 9 close · chantiers** · `pending-validations.md` priorisé par fonction · un tracker voit « brancher tes comptes » en P0 (`L3_data` full), pas « valider les angles » · un paid voit l'inverse. La `connect_priority` du pôle pilote.
+
+**Le PLANCHER ne se conditionne JAMAIS (garde-fou dur).** L0 (identité + produit + offres) et L1 atlas-cœur tronc (`spec.use_cases[]` ≥1 speculative + arbre audiences avec `jtbd` non-vide) tournent pour TOUTE fonction, multiplicateur ≥ light. Un tracker garde le produit et les audiences (sinon ses chiffres sont aveugles), il skip la PRODUCTION pas l'atlas. Phases 0 à 5 sont inconditionnelles.
+
+**Mécanisme, pas prose (D#520 · Master rule).** Le conditionnement ci-dessus est une PRIORISATION rendue par l'orchestrateur, jamais un gate de pré-validation au write. Les verrous réels sont POST-HOC · (1) le plancher est garanti par la postcondition-sur-artefact du Step 9 + le checkpoint avant map-audiences (`use_cases_missing` / `audience_profile_template_clone` dans `validate-all.py` tirent QUELLE QUE SOIT `function_scope`) · (2) le sur-encodage hors-fonction est signalé advisory par `function_layer_drift` (MED) dans `validate-all.py`, jamais empêché. On ne bride jamais le modèle, on rend la priorisation et on vérifie l'empreinte.
+
+**Fonction inférée (`awareness.json#function_inferred = true`).** Si le poste a été inféré du langage (pas déclaré), expose-le en UNE ligne au premier handoff et laisse corriger d'un mot · *« Je pars sur un encodage {fonction} · atlas-cœur + {ce qui s'allume}, je laisse {les cases ouvertes} en réserve. Ça matche ? »*. Jamais un menu des 9 pôles, jamais un questionnaire. `function` vide reste un inconnu-typé-avec-levier, pas un blanc · le pipeline tourne FULL en attendant.
 
 ---
 

@@ -1,0 +1,120 @@
+{
+  "_schema": "operator/function-pole-map",
+  "_version": "1.0",
+  "$comment": "SSOT runtime du routage de l'encodage par la FONCTION de l'operateur. Mappe chaque pole canon vers les couches a allumer + leur profondeur + les axes vifs + les chantiers + ce qu'on branche en priorite. Lu par build-atlas Step 0 pour deriver function_scope (calcule a la porte onboard-brand, passe au handoff). Les 9 poles = la vue flat canon (paid/creative/studio/conversion/retention/intelligence/ops/finance/growth), pas une hierarchie · ils vivent aussi inline dans operator/profile.json#identity.function_options. C'est un DEFAUT greffable, croisable avec brand.meta.stage. function[] vide ou inconnue → FULL (comportement actuel exact, backward-compat strict).",
+
+  "layer_model": {
+    "$comment": "Les couches de l'encodage. PLANCHER = toujours >= light pour TOUTE fonction, jamais eteint (un encodage decontextualise = chiffres aveugles). SOMMETS = presence ET profondeur flexent selon la fonction.",
+    "floor": {
+      "L0_identity": "brand.json + spec.json (mecanismes + benefices) + offers.json",
+      "L1_core_tronc": "spec.use_cases[] (>=1 speculative) + arbre audiences mere->sous-poches avec entry_door + jtbd.primary + >=1 douleur ancree par audience-tronc"
+    },
+    "peaks": {
+      "L1b_spectre": "spectrum.json (carte marche)",
+      "L2_production": "roadmap + angles ranked + copy-briefs + paid-matrix + creatives",
+      "L3_data": "connected-sources.json + audits compte"
+    }
+  },
+
+  "depth_values": {
+    "$comment": "Multiplicateur de profondeur par couche. Le plancher est toujours >= light.",
+    "off": "case-ouverte-avec-levier · jamais creusee · posee en pending-validations.md, jamais un trou silencieux",
+    "light": "tronc / hypothese-confidence-faible depuis le scan",
+    "full": "sourced-dense"
+  },
+
+  "union_rule": "Multi-fonction = union. multiplicateur(couche) = MAX sur toutes les fonctions de function[] (ordre off < light < full). Le spectre se compose : effective_spectre = max(spectre_mode_derive_du_stage, spectre_push_de_la_fonction). Le solo-tout-faire retombe naturellement vers FULL par union (le bon comportement, il a besoin de tout).",
+
+  "stage_cross": "function-pole-map est un DEFAUT. build-atlas croise function_scope avec brand.meta.stage (deja lu par spectre_mode) : un paid en launch n'a pas les memes besoins de profondeur qu'un paid en scale. Le stage module la profondeur autant que la fonction.",
+
+  "fallback_full": {
+    "$comment": "function[] vide ou pole inconnu → ce profil. IDENTIQUE au comportement d'aujourd'hui. Test de non-regression : function vide => encodage inchange.",
+    "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "by_stage", "L2_production": "full", "L3_data": "full"},
+    "connect_priority": [],
+    "open_cases": []
+  },
+
+  "poles": {
+    "paid": {
+      "label": "Acquisition payante",
+      "axes_vifs": ["media", "crea"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "full", "L2_production": "full", "L3_data": "full"},
+      "spectre_push": "auto",
+      "open_cases": ["economics_deep", "funnel_cro"],
+      "connect_priority": ["meta_account"],
+      "chantiers_ref": "pole paid (achat media, structure campagnes, audiences, budgets, creative testing, copy ads, reporting paid)"
+    },
+    "creative": {
+      "label": "Strategie creative + intelligence",
+      "axes_vifs": ["crea", "marche"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "full", "L2_production": "full", "L3_data": "off"},
+      "spectre_push": "auto",
+      "open_cases": ["economics", "funnel", "account_data"],
+      "connect_priority": [],
+      "chantiers_ref": "pole creative (concepts, briefs, testing roadmap, post-mortems, analyse competitive, tagging, fatigue, patterns)"
+    },
+    "studio": {
+      "label": "Production livrables",
+      "axes_vifs": ["crea"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "light", "L1b_spectre": "off", "L2_production": "full", "L3_data": "off"},
+      "spectre_push": "off",
+      "open_cases": ["economics", "media", "funnel", "marche", "account_data"],
+      "connect_priority": [],
+      "chantiers_ref": "pole studio (copy tous canaux, scripts video/UGC, design, AI gen, templates, montage) · consomme l'angle, ne le strategise pas"
+    },
+    "conversion": {
+      "label": "CRO · transformer le trafic en revenu",
+      "axes_vifs": ["funnel", "economics", "crea"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "light", "L2_production": "light", "L3_data": "full"},
+      "spectre_push": "off",
+      "open_cases": ["angle_taxonomy", "marche"],
+      "connect_priority": ["analytics", "store"],
+      "chantiers_ref": "pole conversion (CRO, audit pages, A/B, copy LP/PDP/checkout, offer strategy, pricing) · L1 oriente benefices + objections"
+    },
+    "retention": {
+      "label": "Email / CRM · maximiser la LTV",
+      "axes_vifs": ["funnel", "crea", "economics"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "off", "L2_production": "full", "L3_data": "full"},
+      "spectre_push": "off",
+      "open_cases": ["positionnement_narratif"],
+      "connect_priority": ["esp_crm", "store"],
+      "chantiers_ref": "pole retention (CRM, email, SMS, automations, segmentation, loyalty, lifecycle) · L1 oriente triggers + audience-RFM"
+    },
+    "intelligence": {
+      "label": "Analytics / tracking · comprendre ce qui se passe",
+      "axes_vifs": ["economics", "funnel", "media"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "light", "L1b_spectre": "light", "L2_production": "off", "L3_data": "full"},
+      "spectre_push": "off",
+      "open_cases": ["production_briefs", "angles"],
+      "connect_priority": ["all_accounts", "analytics"],
+      "chantiers_ref": "pole intelligence (analytics cross-channel, attribution, audience analysis, cohort/LTV, forecasting, alertes) · CAS-LIMITE du challenge : L1_core_tronc reste OBLIGATOIRE (light, jamais off) sinon le ROAS est aveugle, on skip la PRODUCTION pas l'atlas"
+    },
+    "ops": {
+      "label": "Supply / ops · faire tourner le business",
+      "axes_vifs": ["economics", "funnel"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "light", "L1b_spectre": "off", "L2_production": "off", "L3_data": "full"},
+      "spectre_push": "off",
+      "open_cases": ["angles", "positionnement"],
+      "connect_priority": ["shopify", "store"],
+      "chantiers_ref": "pole ops (catalogue, supply chain, logistique, fulfillment, service client, tech) · L0 produit FULL (le produit EST son metier)"
+    },
+    "finance": {
+      "label": "P&L · gerer l'argent",
+      "axes_vifs": ["economics"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "light", "L1b_spectre": "off", "L2_production": "off", "L3_data": "full"},
+      "spectre_push": "off",
+      "open_cases": ["all_production", "positionnement"],
+      "connect_priority": ["store", "analytics", "accounting"],
+      "chantiers_ref": "pole finance (P&L, unit economics, marges, forecasting, budget, tresorerie) · L0 pricing central, L3 tous les chiffres"
+    },
+    "growth": {
+      "label": "Strat / growth · diriger le tout",
+      "axes_vifs": ["media", "crea", "funnel", "economics", "marche"],
+      "layers": {"L0_identity": "full", "L1_core_tronc": "full", "L1b_spectre": "full", "L2_production": "light", "L3_data": "light"},
+      "spectre_push": "auto",
+      "open_cases": [],
+      "connect_priority": ["store"],
+      "chantiers_ref": "pole growth (strategie globale, channel mix, roadmap, arbitrages, veille concurrentielle) · les 5 axes au MACRO, tout en resumes + vue d'arbitrage, rien en case-ouverte (lit tout en summary)"
+    }
+  }
+}

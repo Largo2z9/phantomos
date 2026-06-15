@@ -1,0 +1,42 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.93.0",
+  "released_at": "2026-06-15",
+  "type": "MINOR",
+  "summary": "Encodage conditionne par la FONCTION de l'operateur · le poste dimensionne les couches derivees, le plancher reste inconditionnel. Capture mecanique (le hook root la fonction du langage) + routeur function_scope (jumelle de spectre_mode, lit un champ ecrit) + verrou post-hoc function_layer_drift. Arc D#526. Voir CHANGELOG [2.93.0].",
+  "changelog_ref": "CHANGELOG.md#[2.93.0]",
+  "headline": [
+    "Encodage conditionne par fonction (D#526) · le poste (paid/CRO/email/tracking/crea/ops/finance/growth · 9 poles canon · distinct de la relation owner/agency/client) dimensionne les couches DERIVEES · le PLANCHER (identite + produit→mecanisme→benefice→audience) reste inconditionnel pour toute fonction",
+    "NEW resources/canon/operator/function-pole-map.json · SSOT routage pole → couches/multiplicateurs(off-light-full)/axes/connexions/chantiers · union MAX multi-fonction · croisable meta.stage",
+    "Capture mecanique · operator/profile.json v1.1 (identity.function[] 9 poles inline) · checkpoint-resolver.py infere la fonction du langage et la ROOT (idempotent, fail-open · repare le bug 'c'est note' n'ecrit rien) + derive l2_wanted dans awareness.function_scope_l2",
+    "Routeur function_scope (jumelle de spectre_mode) · build-atlas Step 0ter LIT le champ ecrit function_scope_l2 pour skipper la production d'angles si la fonction ne la consomme pas · pas de re-derivation en prose (D#520) · vide → FULL backward-compat strict",
+    "Verrou function_layer_drift MED (validate-all) · sur-encodage hors-poste advisory, jamais bloquant (Master rule) · plancher garanti par les filets existants quelle que soit la fonction",
+    "Doctrine onboarding-setup-flow NEW § la fonction dimensionne les couches derivees (les 5 axes restent la grille)"
+  ],
+  "migrations": [],
+  "schema_changes": [
+    "operator/profile.json 1.0 -> 1.1 (additif · identity.function[] + function_options 9 poles + _field_types stated)",
+    "operator/awareness.json 1.2 -> 1.3 (additif · function_inferred + function_capture_lever + function_scope_l2)"
+  ],
+  "new_files": [
+    "resources/canon/operator/function-pole-map.json (SSOT routage par pole)"
+  ],
+  "skills_count": 85,
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "non_regression": "function vide → function_scope_l2=on → FULL → comportement IDENTIQUE a aujourd'hui (verifie · les filets plancher tirent quelle que soit la fonction, E14 ne tire jamais sur function vide)",
+    "reachability": "CRITICAL 0 / HIGH 0 (7 WARN = dette advisory pre-existante)",
+    "index": "en sync (23/23)",
+    "em_dash_new_content": 0,
+    "smoke_tests": "capture (7 cas · je-fais-le-paid→[paid], multi→[paid,creative], frame-sans-pole/pole-sans-frame→rien, fail-open) · function_layer_drift (5 configs · intelligence/finance→tire, paid/vide/multi-avec-L2→muet) · function_scope_l2 (intelligence/finance→off, paid/vide/multi→on, capture+derive en un prompt)",
+    "adversarial_review": "GO-AVEC-FIX · plancher/backward-compat solides verifies dans le code · le blocker Master rule rejete faux-positif (invocation conditionnelle != gate de write) · un fix applique (routage Phase 6/7 descendu de la prose au code)"
+  },
+  "deferred": [
+    "croisement fin stage × fonction (au-dela du defaut greffable)",
+    "capture de la relation (identity.profile) dans le meme hook (focus de cette release = la fonction)",
+    "consommation active de function_inferred (forcer la confirmation · aujourd'hui affordance)",
+    "gradient fin par-sous-skill (tier d'effort programmable dans mine-voc/produce-paid-angles · les sous-skills n'exposent que de la disclosure)",
+    "gap pre-existant mechanism_missing (spec sans mechanisms ET sans use_cases passe sous tous les filets · use_cases_missing exige mechanisms and not use_cases)",
+    "encoding-integrity.py path-matcher operator (le filet validate-all couvre le post-hoc)"
+  ]
+}

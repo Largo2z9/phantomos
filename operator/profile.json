@@ -1,13 +1,14 @@
 {
   "$comment": "Profil opérateur — contexte macro transversal aux brands. Rempli progressivement via learn-from-session quand l'opérateur laisse tomber une info. Jamais en questionnaire. Tous les champs sont null/[] par défaut.",
   "_schema": "operator/profile",
-  "_version": "1.0",
+  "_version": "1.1",
   "_field_types": {
     "identity.name": "stated",
     "identity.role": "stated",
     "identity.experience_years": "stated",
     "identity.context_macro": "stated",
     "identity.profile": "stated",
+    "identity.function[]": "stated",
     "stack_history[]": "stated",
     "preferences.*": "stated",
     "expectations.*": "stated",
@@ -15,13 +16,15 @@
   },
 
   "identity": {
-    "$comment": "Qui est l'opérateur. Rempli quand il se présente ou le mentionne.",
+    "$comment": "Qui est l'opérateur. Rempli quand il se présente ou le mentionne. Trois champs distincts à ne pas confondre · role = alias humain libre qu'il se donne (ex 'copywriter freelance', texte). profile = sa RELATION à la marque (solo/agency/client/... → module ton + pace). function[] = son/ses POSTE(s) opérationnel(s) canon qui ROUTENT la forme de l'encodage (paid/CRO/tracking/... → quelles couches dérivées s'allument). Multi-fonction = cas normal (liste, union par couche). Vide → encodage FULL (comportement par défaut).",
     "name": null,
     "role": null,
     "experience_years": null,
     "context_macro": null,
     "profile": null,
-    "profile_options": ["solo", "portfolio", "agency", "creator", "early", "dropshipper"]
+    "profile_options": ["solo", "portfolio", "agency", "creator", "early", "dropshipper"],
+    "function": [],
+    "function_options": ["paid", "creative", "studio", "conversion", "retention", "intelligence", "ops", "finance", "growth"]
   },
 
   "stack_history": [

@@ -98,6 +98,7 @@ SEVERITY = {
     "angle_spectrum_untraced": "MED",
     "angle_negative_untraced": "MED",
     "angle_negative_missing": "LOW",
+    "function_layer_drift": "MED",
     "naked_number_unsourced": "LOW",
 
     # Évaporation de profondeur (D#519) · le raisonnement narré qui n'atteint pas l'artefact.
@@ -283,7 +284,35 @@ def classify_file(path: Path) -> str | None:
 
 # ---------- Checks ----------
 
-def check_instance(brand_dir: Path, schemas, expected_versions, report):
+def load_operator_function_ctx(root: Path):
+    """Lit operator/profile.json#identity.function + function-pole-map.json. Retourne
+    {function: [...], l2_wanted: bool}. function vide → l2_wanted True (FULL · pas de drift
+    possible · backward-compat). Map illisible → l2_wanted True (fail-safe · ne tire pas).
+    Workspace-level, lu UNE fois (le poste opérateur ne dépend pas de la marque)."""
+    func = []
+    try:
+        prof = json.loads((root / "operator" / "profile.json").read_text(encoding="utf-8"))
+        func = (prof.get("identity", {}) or {}).get("function") or []
+        if not isinstance(func, list):
+            func = []
+    except Exception:
+        func = []
+    if not func:
+        return {"function": [], "l2_wanted": True}
+    l2_wanted = True
+    try:
+        poles = json.loads((root / "resources" / "canon" / "operator" / "function-pole-map.json").read_text(encoding="utf-8")).get("poles", {}) or {}
+        # union · au moins une fonction consomme la production L2 (light ou full)
+        l2_wanted = any(
+            (poles.get(p, {}).get("layers", {}) or {}).get("L2_production") in ("light", "full")
+            for p in func
+        )
+    except Exception:
+        l2_wanted = True
+    return {"function": func, "l2_wanted": l2_wanted}
+
+
+def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=None):
     """Run all checks for a single brand instance."""
     brand_slug = brand_dir.name
     issues = []
@@ -846,6 +875,23 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "msg": f"{ang_id} a un recadrage (formula.reframe) mais ZÉRO négatif (coordonnée 5) · l'angle affirme une promesse sans déloger l'option en place · nommer l'alternative déplacée (negative.summary + type)",
             })
 
+    # E14 (D#52x) · function_layer_drift · sur-encodage hors-POSTE. Si la fonction de
+    # l'opérateur (operator/profile.json#identity.function) ne consomme AUCUNE production
+    # L2 (intelligence/finance pures · L2_production=off dans function-pole-map.json) mais
+    # que la marque porte une production L2 dense (>=3 angles réels écrits), c'est du
+    # travail produit hors-scope du poste · advisory MED (waste, JAMAIS un blocage · la
+    # priorisation par fonction se signale post-hoc, elle ne se pré-valide pas, Master rule).
+    # function vide → op_ctx l2_wanted=True → ne tire jamais (FULL = backward-compat).
+    if op_ctx and op_ctx.get("function") and not op_ctx.get("l2_wanted") and not brand_slug.startswith("_"):
+        real_angles = [a for a in angles_seen if not a.get("is_skeleton")]
+        if len(real_angles) >= 3:
+            issues.append({
+                "type": "function_layer_drift",
+                "severity": SEVERITY["function_layer_drift"],
+                "file": f"brands/{brand_slug}/angles/",
+                "msg": f"{len(real_angles)} angles produits mais la fonction opérateur ({'+'.join(op_ctx['function'])}) ne consomme pas la production L2 · sur-encodage hors-poste (waste, pas une erreur · cf resources/canon/operator/function-pole-map.json)",
+            })
+
     # 11. E10 (D#518) · nombre marché nu · un nombre marché/concurrent/audience présent
     # SANS marqueur de fiabilité (entrée _extraction sur ce chemin OU market.meta.confidence)
     # entre comme un fait nu (scrapé ≠ fait, D#503). Post-hoc LOW : advisory, jamais un gate
@@ -902,6 +948,7 @@ def main():
     root = Path(args.root).resolve()
     schemas = load_schemas(root)
     expected_versions = load_expected_versions(root)
+    op_ctx = load_operator_function_ctx(root)  # poste opérateur (function_layer_drift · E14)
 
     brands_dir = root / "brands"
     if not brands_dir.exists():
@@ -920,7 +967,7 @@ def main():
         # Skip explicitly excluded buckets (e.g. _ARCHIVE) unless forced
         if brand_dir.name in DEFAULT_EXCLUDED_INSTANCES and not args.include_archive:
             continue
-        check_instance(brand_dir, schemas, expected_versions, report)
+        check_instance(brand_dir, schemas, expected_versions, report, op_ctx)
 
     # Global summary
     total = defaultdict(int)
