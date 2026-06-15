@@ -1,40 +1,44 @@
 {
-  "$comment": "EXEMPLE pédagogique · learnings.json Stepprs · 8 patterns captured via skill trendtrack-enrich-brand v1.0.0 (TrendTrack API live 2026-05-16) · vitrine canon learnings.schema v1.1 + cross-refs canonical PNT/OBJ/ANG/mechanisms/benefits",
-  "_schema": "learnings/1.1",
-  "_version": "1.1",
+  "$comment": "EXEMPLE pédagogique · learnings.json Stepprs · 8 patterns captured via skill trendtrack-enrich-brand v1.0.0 (TrendTrack API live 2026-05-16) · vitrine canon learnings.schema v1.2 reconcilié + cross-refs canonical PNT/OBJ/ANG/mechanisms/benefits",
+  "_schema": "learnings/1.2",
+  "_version": "1.2",
   "_field_types": {
-    "learnings[].learning_id": "stated",
-    "learnings[].formulation": "observed",
-    "learnings[].category": "structured",
-    "learnings[].source": "stated",
-    "learnings[].confidence": "derived",
-    "learnings[].cross_refs.*": "structured",
-    "learnings[].captured_at": "stated"
+    "entries[].id": "stated",
+    "entries[].kind": "structured",
+    "entries[].fact": "observed",
+    "entries[].reasoning": "derived",
+    "entries[].category": "structured",
+    "entries[].source": "stated",
+    "entries[].confidence": "derived",
+    "entries[].cross_refs.*": "structured",
+    "entries[].created_at": "stated"
   },
   "_meta": {
     "is_example": true,
     "example_canon_showcased": [
-      "learnings.json canon v1.1 · 8 patterns observed cross-skills",
+      "learnings.json canon v1.2 · 8 patterns observed cross-skills",
       "trendtrack-enrich-brand v1.0.0 output · 8 patterns Step 4 patterns analysis",
       "cross-refs canonical résolvent (PNT/OBJ/ANG/mechanisms/benefits)",
-      "source canonical 'trendtrack-enrich-brand' + meta tag lineage"
+      "source canonical 'skill_output' (enum) + reasoning porte la lignée trendtrack-enrich-brand"
     ]
   },
   "meta": {
-    "brand_slug": "_EXAMPLE",
+    "brand_slug": "stepprs",
     "status": "complete",
     "validation_status": {"state": "validated"},
     "created": "2026-05-16",
     "updated": "2026-05-16"
   },
-  "learnings": [
+  "entries": [
     {
-      "learning_id": "LRN-0001",
-      "formulation": "Stepprs scaling strategy = 1 hero narrative replicated cross-geo · pas diversifié angles. Top 7 ads spend $146,651 + reach 16M+ via single Michelle testimonial dupliqué DE GB GB GB RO ES IT.",
+      "id": "LRN-0001",
+      "kind": "observation",
+      "fact": "Stepprs scaling strategy = 1 hero narrative replicated cross-geo · pas diversifié angles. Top 7 ads spend $146,651 + reach 16M+ via single Michelle testimonial dupliqué DE GB GB GB RO ES IT.",
+      "reasoning": "Concentration narrative = pari sur 1 proof gagnant dupliqué par geo plutôt que diversification d'angles · réduit le coût de production créa et maximise la fréquence d'un message validé. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 1 narrative diversity ratio) sur les 7 top ads par spend.",
       "category": "creative_strategy",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 1 narrative diversity ratio",
+      "source": "skill_output",
       "confidence": 0.95,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {
         "angle_ids": ["ANG-01"],
         "audience_slugs": ["workers-shifts", "chronic-pain-45"],
@@ -43,12 +47,14 @@
       }
     },
     {
-      "learning_id": "LRN-0002",
-      "formulation": "Audience cross-narrative validated · Michelle testimonial combine plantar fasciitis (chronic-pain-45) + 10-hour shifts work boots (workers-shifts) en single ad copy · audiences théoriquement séparées canon mais combinées paid practice.",
+      "id": "LRN-0002",
+      "kind": "observation",
+      "fact": "Audience cross-narrative validated · Michelle testimonial combine plantar fasciitis (chronic-pain-45) + 10-hour shifts work boots (workers-shifts) en single ad copy · audiences théoriquement séparées canon mais combinées paid practice.",
+      "reasoning": "Fusionner deux douleurs distinctes dans un seul témoignage élargit le bassin d'audience adressable sans multiplier les créas · le pont plantar fasciitis / shifts ouvriers fait porter une même preuve sur deux segments canon séparés. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 3 ads body analysis) sur le copy verbatim des ads.",
       "category": "audience_targeting",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 3 ads body analysis",
+      "source": "skill_output",
       "confidence": 0.9,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {
         "angle_ids": ["ANG-01"],
         "audience_slugs": ["workers-shifts", "chronic-pain-45/plantar-fasciitis-diagnosed"],
@@ -56,62 +62,74 @@
       }
     },
     {
-      "learning_id": "LRN-0003",
-      "formulation": "CTA dominant Stepprs · 'Walk on Clouds Or It's FREE' capture 2 benefits en single phrase · Walking on Air emotional + 90-day money back guarantee risk-free. Variant CTA 'SAVE UP TO 60% TODAY' price-driven secondaire.",
+      "id": "LRN-0003",
+      "kind": "observation",
+      "fact": "CTA dominant Stepprs · 'Walk on Clouds Or It's FREE' capture 2 benefits en single phrase · Walking on Air emotional + 90-day money back guarantee risk-free. Variant CTA 'SAVE UP TO 60% TODAY' price-driven secondaire.",
+      "reasoning": "Empiler bénéfice émotionnel (Walking on Air) et levée de risque (garantie 90j) dans un même CTA réduit la friction d'achat sur un produit où le scepticisme insole est élevé · le CTA prix reste secondaire car la conversion se joue d'abord sur la confiance, pas le discount. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 5 CTA patterns).",
       "category": "cta_pattern",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 5 CTA patterns",
+      "source": "skill_output",
       "confidence": 0.95,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {
         "benefit_refs": ["Walking on Air", "Daily wearability sans friction"],
         "objection_ids": ["OBJ-07"]
       }
     },
     {
-      "learning_id": "LRN-0004",
-      "formulation": "Geo focus paid social Stepprs · EU heavy (DE main · GB IT ES RO Top 5 countries) · pas US prioritaire malgré target_geo annoncé US/UK/EU. Pattern scale via geo duplication single hero ad.",
+      "id": "LRN-0004",
+      "kind": "observation",
+      "fact": "Geo focus paid social Stepprs · EU heavy (DE main · GB IT ES RO Top 5 countries) · pas US prioritaire malgré target_geo annoncé US/UK/EU. Pattern scale via geo duplication single hero ad.",
+      "reasoning": "Le scaling réel se fait par duplication geo de l'ad gagnante sur un cluster UE plutôt que sur le marché US annoncé · signal que les CPM / la concurrence ou la traction produit favorisent l'Europe à ce stade, écart entre target_geo déclaré et exécution effective à surveiller. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 2 geo distribution).",
       "category": "geo_strategy",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 2 geo distribution",
+      "source": "skill_output",
       "confidence": 0.9,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {}
     },
     {
-      "learning_id": "LRN-0005",
-      "formulation": "Targeting demographic broad · 18+ age · gender null (no filter) · pain-based filtering naturel via copy verbatim (plantar fasciitis · 10-hour shifts · work boots). Pas narrow age 45+ comme audience chronic-pain-45 canon suggérerait.",
+      "id": "LRN-0005",
+      "kind": "observation",
+      "fact": "Targeting demographic broad · 18+ age · gender null (no filter) · pain-based filtering naturel via copy verbatim (plantar fasciitis · 10-hour shifts · work boots). Pas narrow age 45+ comme audience chronic-pain-45 canon suggérerait.",
+      "reasoning": "Laisser le targeting large (18+, no gender) et déléguer le filtrage à la douleur nommée dans le copy laisse l'algo trouver les acheteurs · approche broad + self-selection par message, opposée au narrow démographique 45+ que la persona canon laisserait attendre. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 7 targeting demographic).",
       "category": "targeting_strategy",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 7 targeting demographic",
+      "source": "skill_output",
       "confidence": 0.85,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {
         "audience_slugs": ["workers-shifts", "chronic-pain-45"]
       }
     },
     {
-      "learning_id": "LRN-0006",
-      "formulation": "Creative format split image + video balanced (50/50 sur 30 ads sampled) · pas dominance claire. Production split equilibré · test both formats systematically.",
+      "id": "LRN-0006",
+      "kind": "observation",
+      "fact": "Creative format split image + video balanced (50/50 sur 30 ads sampled) · pas dominance claire. Production split equilibré · test both formats systematically.",
+      "reasoning": "Un split image/vidéo 50/50 sans dominance signale un test systématique des deux formats plutôt qu'un pari sur un seul · stratégie de production qui couvre les deux placements et laisse la perf trancher. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 4 creative format split) sur 30 ads échantillonnées.",
       "category": "creative_format",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 4 creative format split",
+      "source": "skill_output",
       "confidence": 0.8,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {}
     },
     {
-      "learning_id": "LRN-0007",
-      "formulation": "Landing pages diversity · 4 variants test funnels rotation · /pages/review-3-1 · /pages/review-3-3 · /pages/review-3-5 · /products/massage. Pattern A/B test pages review-themed advertorial funnel.",
+      "id": "LRN-0007",
+      "kind": "observation",
+      "fact": "Landing pages diversity · 4 variants test funnels rotation · /pages/review-3-1 · /pages/review-3-3 · /pages/review-3-5 · /products/massage. Pattern A/B test pages review-themed advertorial funnel.",
+      "reasoning": "Faire tourner 4 variantes de landing review-themed (advertorial) plutôt qu'une PDP directe indique un funnel construit pour réchauffer via preuve sociale avant la vente · l'A/B test sur des advertorials suggère que la page review convertit mieux que le produit en direct sur ce trafic. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 4 Pattern 6 landing pages diversity).",
       "category": "funnel_strategy",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 4 Pattern 6 landing pages diversity",
+      "source": "skill_output",
       "confidence": 0.9,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {}
     },
     {
-      "learning_id": "LRN-0008",
-      "formulation": "Trustpilot 3.4/5 sur 2127 reviews · réalité plus mitigée que claim site 4.8/5. Validates objection scepticism #1 (OBJ-02 · OBJ-07) fondée · audiences chronic-pain-45 méfiance multi-insoles failed pertinente.",
+      "id": "LRN-0008",
+      "kind": "observation",
+      "fact": "Trustpilot 3.4/5 sur 2127 reviews · réalité plus mitigée que claim site 4.8/5. Validates objection scepticism #1 (OBJ-02 · OBJ-07) fondée · audiences chronic-pain-45 méfiance multi-insoles failed pertinente.",
+      "reasoning": "L'écart entre le 4.8/5 affiché sur le site et le 3.4/5 Trustpilot tiers confirme que l'objection scepticisme (déjà déçu par d'autres insoles) est fondée et doit être adressée frontalement dans le copy · gap de preuve sociale à neutraliser sur une audience chronic-pain-45 méfiante. Observé via TrendTrack (trendtrack-enrich-brand v1.0.0 Step 2 shop profile trustpilot data).",
       "category": "trust_signal",
-      "source": "trendtrack-enrich-brand v1.0.0 · Step 2 shop profile trustpilot data",
+      "source": "skill_output",
       "confidence": 0.95,
-      "captured_at": "2026-05-16T20:00:00Z",
+      "created_at": "2026-05-16T20:00:00Z",
       "cross_refs": {
         "objection_ids": ["OBJ-02", "OBJ-07"]
       }

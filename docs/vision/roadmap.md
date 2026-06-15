@@ -4,15 +4,15 @@ Planned evolutions, prioritized P2 (next) and P3 (later). Shipped history lives 
 
 ---
 
-## Recently shipped (S55, May 2026)
+## Recently shipped
 
-Anchored here for visibility ; full notes in [`../../CHANGELOG.md`](../../CHANGELOG.md). Refs : `decisions.md` D#382, D#383, D#391.
+> **Single source of truth for shipped state** : `_version.json` (template version, 2.90.0 at last release) + [`../../CHANGELOG.md`](../../CHANGELOG.md) for the full log. The S55 entries below are illustrative anchors only ; they are NOT the shipped log and must never be read as "what is or isn't built". This roadmap lists PLANNED evolutions ; when a planned item ships it moves to the CHANGELOG, it never lingers here marked "planned".
 
 - **v2.26.0** · Atlas canon copy foundation. Typed registry of 11 layers × 58 fiches (frameworks, hooks, angles, niveaux-schwartz, archetypes-voix, formules-titres, objections, construction-offre, leads, formats-livrables, persuasion). Sources : Schwartz, Cialdini, Halbert, Sugarman, Hormozi, Carlton, Jung. Storage `resources/canon/copy/{layer}/{tool}.json`, schema `canon-tool/1.0`. D#382.
 - **v2.27.0** · Skills consume + feed canon (living atlas). 4 skills refactored : `produce-paid-angles` (Step 0bis loads canon, Step 11 emits explicit lineage), `produce-copy-brief` (reads angle lineage, brief enriches instead of re-deciding), `mine-voc` (verbatims tagged with canon Schwartz / emotion / objection ids), `learn-from-session` (operator-gated canon promotion via `validations[]` append-only). D#383.
 - **v2.28.0** · Schemas enriched for compositional cartography. `spec.schema.json#mechanisms[]` (mono to many, typed fields target / mode_of_action / time_window / evidence_level / market_sophistication / triggered_by_specs[]). `angle.schema.json` v1.0 created (formula recursive, origin enum 5 values, awareness_movement {in, out}, meta.validation_status cycle). Templates updated.
 - **v2.28.1** · Angle schema v1.1 (10 patches v3.1 from S55 stress test on 23 ads cross-typology). Additive backward-compat fields : `intent` (DR / Brand / Hybrid / B2B_lead_gen), `mecanique` enum 16 values (adds `curiosity_teaser` + `emotional_reframe`), `insight` object (modalité formulé/implicite/absent + status), `seasonality_trigger`, `execution.craft_mode`, `execution.longevity_signal`, `execution.cta` (4-value modality), `_equation_ref` (canonical reference `creative_statique = concept × execution`). D#391.
-- **v2.29.0 (next, planned)** · `creative.schema.json` materialization (concept vs instance vs variant entity, absorbing execution + classification + variant_of) + reconciliation v3 + v3.1 + nomenclature cleanup (audit S55 distinctions : pain_point ≠ tension ≠ insight ≠ JTBD, Mécanique creative ≠ Mechanism spec, atome_irreductible ≠ perceptual_pivot ≠ stop_scroller).
+- **v2.29.0 (shipped, see CHANGELOG)** · `creative.schema.json` materialization (concept vs instance vs variant entity, absorbing execution + classification + variant_of) + reconciliation v3 + v3.1 + nomenclature cleanup (audit S55 distinctions : pain_point ≠ tension ≠ insight ≠ JTBD, Mécanique creative ≠ Mechanism spec, atome_irreductible ≠ perceptual_pivot ≠ stop_scroller).
 
 ---
 
@@ -177,15 +177,13 @@ No public benchmark compares PhantomOS against Claude Projects, ChatGPT Teams, o
 
 **Impact.** Moves the cost argument from structural to empirical. Removes the main commercial objection for operators evaluating adoption.
 
-### Extension layer · `scaffold-extension` orchestrator
+### Extension layer · `scaffold-extension` orchestrator · SHIPPED
 
-The extension layer is specified in `docs/system/extending.md` (custom entities, sidecar schemas, custom skills, external pipelines + three governance rules). Today the operator performs the four scaffolding steps manually. Future iteration ships `scaffold-extension` as a builder orchestrator to collapse the manual path into a guided operator flow.
+The extension layer (`docs/system/extending.md` · custom entities, sidecar schemas, custom skills, external pipelines + three governance rules) is shipped. The `scaffold-extension` orchestrator (v1.3.0) collapses the manual scaffolding path into a guided operator flow, composing single-responsibility sub-skills (intent analysis, registry reuse suggestion, schema drafting, naming validation, cross-reference checking, canon validation, file scaffolding, skill stub, index registration). It is the live proof of the "no ceiling" thesis : the operator, or the agent on their behalf, grows the data model and the capabilities from inside the workspace.
 
-The orchestrator is **not** a single monolithic skill. It composes eight single-responsibility sub-skills, each with a bounded scope : intent analysis, registry reuse suggestion, schema drafting, naming validation, cross-reference checking, canon validation, file scaffolding, and index registration. Full decomposition in `docs/system/extending.md § Future`.
+**Status.** Shipped, built from observed patterns (the adoption gate it once waited on is cleared). Remaining work on this layer is hardening the at-scale guardrails (cross-workspace registry, custom-trigger namespacing, runtime integrity checks), documented in `extending.md § V1 known limits`.
 
-**Adoption gate.** The orchestrator is not built speculatively. Trigger to build: two to three real operators have completed the manual path on real extensions (competitor tracking, financial cohorts, hook libraries, or whatever emerges). The eight sub-skills are codified from observed patterns, not from theory. This is the first live application of the workflow-decomposition methodology.
-
-**Impact.** Removes the friction that currently pushes operators to hack around the workspace instead of extending it cleanly. Preserves the governance rules (schema, index, README) that keep extensions interoperable with the core. Unlocks the promotion path : extensions that prove value across operators can graduate to vertical packs or core.
+**Impact.** Removes the friction that pushed operators to hack around the workspace. Preserves the governance rules (schema, index, README) that keep extensions interoperable with the core. The promotion path (extensions proving value across operators graduate to vertical packs or core) is live.
 
 ### Vertical packs for non-DTC profiles (future+, conditional on demand)
 
@@ -199,7 +197,7 @@ Impact. Opens PhantomOS to operator profiles outside DTC paid once demand from t
 
 ### Multi-operator and client-facing layer (future)
 
-PhantomOS is single-operator per workspace by design. This layer adds the multi-tenant architecture for agency operators running multiple DTC clients in parallel :
+PhantomOS runs single-operator per workspace today. This layer wires the multi-tenant architecture for agency operators running multiple DTC clients in parallel :
 
 - **Role-based access** on the workspace (owner, collaborator, read-only).
 - **Per-client read-only dashboard** for the agency to share encoded state with its client.

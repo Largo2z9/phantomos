@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "genome-package.schema.json",
   "title": "GenomePackage (Workflow A output = Workflow B input)",
-  "description": "Contrat d'interface A->B PhantomOS. Sortie de A (serialiseur cote A 'weave-hooks/A8' PLANIFIE, NON ENCORE CONSTRUIT; aucun skill ne produit encore de genome-package; compose-creative produit aujourd'hui un genome.json apparente via genome.schema) = input de B (production IA = ROUTEUR, pas generateur). PRINCIPE DIRECTEUR v1.1 (recadrage Largo): une pub = DEUX SCRIPTS COUPLES = le SCRIPT COPY (ce qui est DIT) + le SCRIPT VISUEL (ce qui est MONTRE), colles ensemble. C'est le BI-FACE de D#472 (face copy + face craft) rendu first-class. Chaque script porte un tableau frames[]; chaque frame COUPLE explicitement { role, copy_script, visual_script, timing? } -> une seule unite copy+image, jamais des moitiees eparses. UNE seule forme de frame pour les 3 supports: static=1 frame (pas de timing), carousel=2+ frames (cartes ordonnees, swipe, pas de timing), video=2+ frames (plans, chacun avec timing.duration_s). Le support change le NOMBRE de frames + si le timing s'applique (if/then), PAS la forme. Les reglages audio-led (D#476: voice_design_brief, words_per_second, mux_never_shortest=const true, captions_required=const true, unify_grade_grain, master_aspect_ratio, estimated_cost) vivent au niveau script.video_settings. DUAL-VOCAB UNIFIE: la role de chaque frame UTILISE le VOCAB ANALYTIQUE du reverse (20 termes body_arc.beat_type) -> la timeline que B construit EST la signature qui apprend -> une seule histoire de la pub. genome_tags.beat_type_sequence = la projection plate de frames[].role (meme enum, verifiable). COEUR minimal obligatoire = strict necessaire pour que B route (regime + support + route + hook + frames + genome_tags). Enums genome (aspect_ratio, hook mechanic_id, style_id, character_archetype, role/beat_type, awareness, disclaimers) = MIROIR FORWARD exact de video-ad-analysis-v1.0.schema.json (reverse): memes enums des deux cotes -> la perf revenue se rattache au meme espace -> route apprenable -> recalibre la jauge A3. Pont A=B = identite des tags. D#472/473/474/476/477. v1.1.0.",
+  "description": "Contrat d'interface A->B PhantomOS. Sortie de A (serialiseur cote A = weave-hooks (A7-A8), SHIPPE v2.90.0; compose-creative consomme les scripts route_a du paquet) = input de B (production IA = ROUTEUR, pas generateur). PRINCIPE DIRECTEUR v1.1 (recadrage Largo): une pub = DEUX SCRIPTS COUPLES = le SCRIPT COPY (ce qui est DIT) + le SCRIPT VISUEL (ce qui est MONTRE), colles ensemble. C'est le BI-FACE de D#472 (face copy + face craft) rendu first-class. Chaque script porte un tableau frames[]; chaque frame COUPLE explicitement { role, copy_script, visual_script, timing? } -> une seule unite copy+image, jamais des moitiees eparses. UNE seule forme de frame pour les 3 supports: static=1 frame (pas de timing), carousel=2+ frames (cartes ordonnees, swipe, pas de timing), video=2+ frames (plans, chacun avec timing.duration_s). Le support change le NOMBRE de frames + si le timing s'applique (if/then), PAS la forme. Les reglages audio-led (D#476: voice_design_brief, words_per_second, mux_never_shortest=const true, captions_required=const true, unify_grade_grain, master_aspect_ratio, estimated_cost) vivent au niveau script.video_settings. DUAL-VOCAB UNIFIE: la role de chaque frame UTILISE le VOCAB ANALYTIQUE du reverse (20 termes body_arc.beat_type) -> la timeline que B construit EST la signature qui apprend -> une seule histoire de la pub. genome_tags.beat_type_sequence = la projection plate de frames[].role (meme enum, verifiable). COEUR minimal obligatoire = strict necessaire pour que B route (regime + support + route + hook + frames + genome_tags). Enums genome (aspect_ratio, hook mechanic_id, style_id, character_archetype, role/beat_type, awareness, disclaimers) = MIROIR FORWARD exact de video-ad-analysis-v1.0.schema.json (reverse): memes enums des deux cotes -> la perf revenue se rattache au meme espace -> route apprenable -> recalibre la jauge A3. Pont A=B = identite des tags. D#472/473/474/476/477. v1.3.0.",
   "type": "object",
   "version": "1.3.0",
   "required": [
@@ -463,34 +463,7 @@
       "properties": {
         "mechanic_id": {
           "type": "string",
-          "description": "Mirror EXACT reverse script.hook.mechanic_id (hook-mechanics-registry). Identite enum = pont A=B verbal.",
-          "enum": [
-            "paradox-testimonial",
-            "confrontation-rhetorical",
-            "listicle-curiosity",
-            "false-solution-debunking",
-            "authority-demolition",
-            "mechanism-reveal",
-            "resolution-promise",
-            "social-relational-pain",
-            "hidden-secret-framing",
-            "doctor-dialogue",
-            "taboo-signal",
-            "visceral-specific-testimony",
-            "negative-command",
-            "pov-illustrated-humor",
-            "allegory-romance",
-            "macro-graphic-icons",
-            "before-after-timeline",
-            "pricing-anchor",
-            "testimonial-paradox-numeric",
-            "scientific-claim-reveal",
-            "competitor-comparison-explicit",
-            "category-of-one-claim",
-            "if-then-conditional-hook",
-            "rhetorical-shock-question",
-            "other-uncategorized"
-          ]
+          "description": "Mirror EXACT reverse script.hook.mechanic_id. id free-string du registre hook-mechanics-registry (resources/registries/hooks/, SSOT, jamais enum-locké, jamais écrire dans le registre depuis un skill). Identité de la string = pont A=B verbal."
         },
         "hook_text": {
           "type": "string",
@@ -549,34 +522,7 @@
         },
         "mechanic_id": {
           "type": "string",
-          "description": "Reprend hook.mechanic_id. Tag de jointure verbal avec le reverse.",
-          "enum": [
-            "paradox-testimonial",
-            "confrontation-rhetorical",
-            "listicle-curiosity",
-            "false-solution-debunking",
-            "authority-demolition",
-            "mechanism-reveal",
-            "resolution-promise",
-            "social-relational-pain",
-            "hidden-secret-framing",
-            "doctor-dialogue",
-            "taboo-signal",
-            "visceral-specific-testimony",
-            "negative-command",
-            "pov-illustrated-humor",
-            "allegory-romance",
-            "macro-graphic-icons",
-            "before-after-timeline",
-            "pricing-anchor",
-            "testimonial-paradox-numeric",
-            "scientific-claim-reveal",
-            "competitor-comparison-explicit",
-            "category-of-one-claim",
-            "if-then-conditional-hook",
-            "rhetorical-shock-question",
-            "other-uncategorized"
-          ]
+          "description": "Reprend hook.mechanic_id (même string). Tag de jointure verbal avec le reverse. id free-string du registre hook-mechanics-registry (resources/registries/hooks/, SSOT)."
         },
         "mecanique_id": {
           "type": "string",
@@ -677,31 +623,7 @@
     },
     "style_id": {
       "type": "string",
-      "description": "Mirror EXACT reverse visual.styles_observed[].style_id. Le style visuel.",
-      "enum": [
-        "real-photo-lifestyle",
-        "real-photo-testimonial-static",
-        "real-photo-product-studio",
-        "real-photo-macro-detail",
-        "ugc-selfie-talking",
-        "claymation-3d-ai",
-        "illustrated-pov-cartoon",
-        "3d-anatomy-realistic",
-        "3d-anatomy-stylized",
-        "3d-anatomy-xray",
-        "stock-footage-broll",
-        "pack-shot-brand-template",
-        "brand-motion-graphic",
-        "macro-photo-mouth-skin-etc",
-        "graphic-icons-overlay",
-        "split-screen-comparison",
-        "screen-recording-mockup",
-        "diagram-medical-2d",
-        "stop-motion-physical",
-        "ai-generated-realistic-photo",
-        "ai-generated-stylized",
-        "other"
-      ]
+      "description": "Mirror EXACT reverse visual.styles_observed[].style_id. Le style visuel. Free-string adossee au registre registries/styles/ (SSOT semantique, index style-registry.md), MEME doctrine que mecanique_id->creative-mechanics-registry. La valeur DOIT correspondre a une fiche registries/styles/{valeur}.json (validation = la fiche existe, pas valeur-dans-le-menu; warn cote validate-all sur cle hors-registre, jamais hard-fail enum). Une fiche perf-validee (>=2 sources independantes, library-pattern pattern_type 'visual-style') ETEND le vocabulaire. Pont A=B preserve par l'identite de la string entre decompose (reverse) et genere (forward)."
     },
     "lineage": {
       "type": "object",
@@ -715,7 +637,7 @@
         "angle_id": {
           "type": "string",
           "pattern": "^ANG-[0-9]{2,3}$",
-          "description": "Reference angle produit par score-angle (A4, grille 35/25/20/20). Mirror du pattern angle.schema#angle_id (ANG-NN, never reassigned) -> garantit la jointure genome -> brands/{slug}/angles/."
+          "description": "Reference angle produit par produce-paid-angles (A4-A5). Mirror du pattern angle.schema#angle_id (ANG-NN, never reassigned) -> garantit la jointure genome -> brands/{slug}/angles/."
         },
         "ref_ad_id": {
           "type": "string",

@@ -3,8 +3,10 @@
   "$id": "angle.schema.json",
   "title": "Angle (brand-side instance)",
   "description": "Angle = couche stratégique. Stored at brands/{slug}/angles/{ANG-N}.json. Produced by produce-paid-angles (light pass: lineage + meta) and enriched on demand by decompose-angle (deep pass: recursive formula). One file per angle. Many-to-many with audiences (an angle can serve multiple audiences with different mechanics). Une créa peut référencer un angle via creative.context.angle_ref. Évolution v1.1 → v1.2 : 8 champs (intent, mecanique, seasonality_trigger, execution.craft_mode, execution.longevity_signal, execution.cta) migrés vers creative.schema.json (D#391 audit S55). source renommé en origin_axis pour libérer le polysémique. lineage.schwartz_conscience renommé en lineage.awareness_stage pour cohérence avec awareness_movement.",
-  "_schema_version": "angle/1.4",
+  "_schema_version": "angle/1.6",
   "_changelog": {
+    "1.6": "Coordonnée NÉGATIF (D#523) · strict additif : NEW bloc top-level `negative` (l'alternative déplacée · summary + type[competitor|category-belief|status-quo|substitute|diy|do-nothing] + spectrum_cell_ref optionnel + _field_types). C'était la seule des 5 coordonnées de l'angle (entrée/awareness · moteur désir-douleur · source de croyance · NÉGATIF · recadrage) sans maison dans le schéma · les 4 autres existaient déjà (awareness_movement · lineage.pain_ref + formula.tension · lineage.proof_primary + origin_axis · formula.reframe). Le négatif nomme la CIBLE du recadrage · sans lui un angle affirme une promesse sans déloger l'option en place. Optionnel, JAMAIS requis au write (le choix de quoi déplacer = jugement stratégique · trust the model · Master rule). spectrum_cell_ref trace le négatif concurrentiel vers la carte de marché (le pont carte→négatif · le négatif concurrentiel lu en prose mais jamais cartographié, D#522, devient traçable au grain angle). _schema_version enum → [angle/1.3, angle/1.4, angle/1.5, angle/1.6].",
+    "1.5": "Spectre back-ref (D#518) · strict additif : lineage.use_case_ref (^UC-NN) + lineage.spectrum_cell_ref (^SPC-NN | null) · le pont carte→angle pour que la cartographie ne soit pas qu'un amont décoratif (un angle peut tracer vers le use_case et la cellule qu'il exploite, la chaîne Mc→U→A re-vérifiée au grain angle). Optionnels, JAMAIS requis au write (Master rule · pas de pré-validation du choix d'angle). Intégrité post-hoc côté validate-resources quand le ref est présent. _schema_version enum → [angle/1.3, angle/1.4, angle/1.5].",
     "1.4": "C1 onboarding-native (D#500) · strict additif : (a) NEW bloc top-level test_readiness (l'objet angle-de-test = CE bloc + la chaîne EXISTANTE · hook candidat = genome.hook + scripts GSC · format décidé = genome.support · retour perf = meta.test_results + creative.performance via genome_tags.angle_id · n'ajoute QUE : gate d'éligibilité amont eco/policy/claim, force de preuve typée, suggestion de format pré-genome) + definitions.eligibility_gate (status pass/fail/unknown défaut unknown + lever · politique d'échec C1 : jamais inventer) · (b) lineage.schwartz_sophistication enum inline → $ref _shared/sophistication-stage.json (mêmes valeurs, zéro breaking) · (c) meta.test_results[] += creative_ref (^CRT-NN) + script_id (^GSC-NN) · (d) property _schema_version const → enum [angle/1.3, angle/1.4] (pattern backward-compat creative.schema). NE PAS faire : hook_candidates[] (= les scripts GSC), 3e réceptacle perf, duplication awareness/sophistication dans test_readiness, bloc _extraction (objet DERIVED, A3).",
     "1.3": "v2.63 refactor ontologie pure additif · lineage.pain_ref (pattern ^PNT-[0-9]{2,3}$) optional · ref canonical vers pain_points/{PNT-NN}.json top-level collection v2.63 quand lineage.pain_extract dérive d'un pain identifié. lineage.objection_ref (pattern ^OBJ-[0-9]{2,3}$) optional · ref canonical vers objections/{OBJ-NN}.json quand formula.tension dérive d'une objection canonical. legacy lineage.pain_extract (text quote) preserved · pain_ref ajoute la canonical ref sans rupture. Backward compat strict additif.",
     "1.2": "v2.42 versioning cleanup: `_schema_version` field promu en root (format `{name}/{semver}`) pour cohérence cross-schemas. Property `_schema_version` const conservée pour backward compat read mais lecteurs doivent prendre la valeur root. Source canon: PATCH 2A v2.42."
@@ -12,7 +14,7 @@
   "type": "object",
   "required": ["angle_id", "name", "audience_slug", "meta"],
   "properties": {
-    "_schema_version": { "enum": ["angle/1.3", "angle/1.4"], "description": "Backward compat alias of root `_schema_version` (accepte 1.3 legacy + 1.4 courant). New readers SHOULD read the root field." },
+    "_schema_version": { "enum": ["angle/1.3", "angle/1.4", "angle/1.5", "angle/1.6"], "description": "Backward compat alias of root `_schema_version` (accepte 1.3 legacy + 1.4 + 1.5 + 1.6 courant). New readers SHOULD read the root field." },
 
     "_equation_ref": {
       "type": "string",
@@ -58,6 +60,25 @@
       "required": ["in", "out"]
     },
 
+    "negative": {
+      "type": "object",
+      "description": "Coordonnée 4 de l'angle (D#523 · ordre canon entrée·moteur·source·NÉGATIF·recadrage) · l'ALTERNATIVE que l'angle DÉPLACE · ce que l'audience croit, fait ou achète aujourd'hui et contre quoi l'angle argumente. Sans négatif explicite, un angle prêche dans le vide (il affirme une promesse sans déloger l'option en place). Distinct de formula.reframe (le pivot perceptuel) · le négatif nomme la CIBLE du pivot, le reframe est le mouvement. Additif strict, JAMAIS requis au write (le choix de quoi déplacer = jugement stratégique · trust the model · Master rule).",
+      "properties": {
+        "summary": { "type": "string", "description": "Light pass · une ligne · l'alternative déplacée. Ex. 'les semelles en gel qui s'écrasent en 2h', 'ne rien faire et vivre avec la douleur', 'le concurrent qui promet le même résultat sans le mécanisme'." },
+        "type": {
+          "type": "string",
+          "enum": ["competitor", "category-belief", "status-quo", "substitute", "diy", "do-nothing"],
+          "description": "competitor = une marque/produit rival (nommé ou implicite). category-belief = une croyance partagée de la catégorie ('tous les X se valent'). status-quo = l'habitude en place sans produit. substitute = une solution d'une autre catégorie. diy = la solution maison. do-nothing = l'inertie, le renoncement. Le négatif concurrentiel (le mur du Spectre) tombe surtout dans competitor / category-belief."
+        },
+        "spectrum_cell_ref": {
+          "type": ["string", "null"],
+          "pattern": "^SPC-[0-9]{2,4}$",
+          "description": "Optionnel (Spectre back-ref) · la cellule spectrum.json#cells[] dont le négatif concurrentiel (coverage_market, la texture compétitive) source cette alternative déplacée. Le pont carte→négatif · un angle qui déplace une alternative que la carte de marché n'a jamais vue est une hypothèse à flagger, pas un fait. Null toléré (négatif non concurrentiel, ou portfolio mode legacy). Vérifié post-hoc par validate-resources quand présent, JAMAIS au write (Master rule)."
+        },
+        "_field_types": { "type": "object" }
+      }
+    },
+
     "lineage": {
       "type": "object",
       "description": "Flat canon lineage written by produce-paid-angles (v2.27 light pass). References resources/canon/copy/{layer}/{tool}.json entries.",
@@ -81,6 +102,16 @@
           "type": "string",
           "pattern": "^OBJ-[0-9]{2,3}$",
           "description": "v1.3 additif · ref canonical vers objections/{OBJ-NN}.json top-level collection v2.63 quand formula.tension dérive d'une objection canonical (au lieu d'une simple gap observable)."
+        },
+        "use_case_ref": {
+          "type": "string",
+          "pattern": "^UC-[0-9]{2,3}$",
+          "description": "v1.5 additif (Spectre back-ref) · le use_case (spec.use_cases[].use_case_id) que cet angle sert. Le pont carte→angle : un angle qui sert un usage qu'aucun mécanisme n'autorise est une projection, pas un angle (la chaîne Mc→U→A re-checkée au grain angle). Optionnel et additif strict, JAMAIS requis au write (pré-valider le choix stratégique d'angle = interdit, Master rule). Intégrité attrapée post-hoc par validate-resources quand le ref est présent."
+        },
+        "spectrum_cell_ref": {
+          "type": ["string", "null"],
+          "pattern": "^SPC-[0-9]{2,4}$",
+          "description": "v1.5 additif (Spectre back-ref) · la cellule spectrum.json#cells[].cell_id que cet angle exploite. Null toléré (angle hors-cartographie ou portfolio mode legacy). Vérifiée post-hoc uniquement quand présente."
         },
         "proof_primary": { "type": "string" },
         "cta": { "type": "string" }

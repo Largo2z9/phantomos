@@ -188,7 +188,7 @@ If no skill matches, do not invent one. Surface honestly that the requested oper
 
 ## Skill cards (mini-tables d'orientation)
 
-Chaque card situe un skill sur 4 axes : domain · phase · prerequisites · next steps. Les cards couvrent les 46 skills du noyau cartographié en v2.33 ; la liste exhaustive (82 skills) vit dans `_manifest.json`.
+Chaque card situe un skill sur 4 axes : domain · phase · prerequisites · next steps. Les cards couvrent les 46 skills du noyau cartographié en v2.33 ; la liste exhaustive (85 skills) vit dans `_manifest.json`.
 
 ### onboarding
 

@@ -155,14 +155,14 @@ For catalogues: check if same domain prefix exists in `id_prefixes`.
 
 ## Step 3A — Write Shared Resource JSON
 
-1. **Load schema**: `Ressources/schemas/{type}.schema.json`
+1. **Load schema**: `resources/schemas/{type}.schema.json`
 2. **Build JSON** conforming to schema:
    - `meta.created` = today (new) or preserved (enrich)
    - `meta.updated` = today
    - For catalogues: generate IDs using prefix from `index.json.id_prefixes`
    - For SOPs: enforce `steps.length <= 20` (split into sub-SOPs if over — set `meta.parent_sop` on children, `meta.sub_sops[]` on parent)
    - For catalogues with `entries.length > 12`: add tag `[RAMIFY]` — validate will flag
-3. **Write file** to `Ressources/{type}/{slug}.json`
+3. **Write file** to `resources/{type}/{slug}.json`
 4. **Cross-references**: Populate `refs` fields. Update referenced files too.
 
 **Naming conventions**:
@@ -378,7 +378,7 @@ Entry point: Step 2 (already classified)
 Common patterns:
 - New catalogue entry → enrich existing catalogue
 - New routing row → add to existing routing table
-- Generic platform learning (applies to any brand) → `Ressources/conventions/{platform}.json`
+- Generic platform learning (applies to any brand) → `resources/conventions/{platform}.json`
 - Brand-specific operational learning → `brands/{slug}/learnings.json` (append entry with fact, platform, date, source, tags)
 
 ---

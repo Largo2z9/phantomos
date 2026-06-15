@@ -18,14 +18,25 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
+import os
+
 try:
     import yaml
 except ImportError:
+    yaml = None
+
+# Degrade gracefully instead of hard-failing. If PyYAML is missing, a
+# best-effort frontmatter parser keeps newly created skills discoverable in the
+# manifest. The self-evolution loop (an operator scaffolding a new capability)
+# must never break on a missing optional dependency. Set BUILD_MANIFEST_NO_YAML=1
+# to force the fallback (used by the parser-parity test).
+HAVE_YAML = yaml is not None and os.environ.get("BUILD_MANIFEST_NO_YAML") != "1"
+if not HAVE_YAML:
     print(
-        "ERROR: PyYAML required. Install with: pip3 install --user pyyaml",
+        "WARN: PyYAML unavailable, using best-effort frontmatter parser "
+        "(pip3 install --user pyyaml for strict parsing).",
         file=sys.stderr,
     )
-    sys.exit(1)
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILLS_DIR = SCRIPT_DIR / "skills"
@@ -70,6 +81,136 @@ def _preprocess_frontmatter(block):
     return FLOW_SEQ_RE.sub(_quote_flow_items_with_braces, block)
 
 
+def _split_flow(inner):
+    """Split an inline flow-sequence body on commas, respecting quotes."""
+    parts, cur, quote = [], [], None
+    for ch in inner:
+        if quote:
+            cur.append(ch)
+            if ch == quote:
+                quote = None
+        elif ch in ('"', "'"):
+            quote = ch
+            cur.append(ch)
+        elif ch == ",":
+            parts.append("".join(cur))
+            cur = []
+        else:
+            cur.append(ch)
+    if cur:
+        parts.append("".join(cur))
+    return parts
+
+
+def _strip_inline_comment(s):
+    """Remove a trailing ' # ...' YAML comment that sits outside quotes."""
+    quote = None
+    for idx, ch in enumerate(s):
+        if quote:
+            if ch == quote:
+                quote = None
+        elif ch in ('"', "'"):
+            quote = ch
+        elif ch == "#" and (idx == 0 or s[idx - 1] in (" ", "\t")):
+            return s[:idx].rstrip()
+    return s
+
+
+def _fb_scalar(s):
+    s = s.strip()
+    if len(s) >= 2 and ((s[0] == '"' and s[-1] == '"') or (s[0] == "'" and s[-1] == "'")):
+        return s[1:-1]
+    if s in ("true", "True"):
+        return True
+    if s in ("false", "False"):
+        return False
+    if s in ("null", "~", ""):
+        return None
+    return s
+
+
+def _fb_inline_list(s):
+    s = s.strip()
+    if s.startswith("[") and s.endswith("]"):
+        inner = s[1:-1].strip()
+        return [] if not inner else [_fb_scalar(x) for x in _split_flow(inner)]
+    return None
+
+
+def _fallback_parse_frontmatter(block):
+    """Best-effort YAML-subset parser used when PyYAML is unavailable.
+
+    Covers the SKILL.md frontmatter shape build-manifest relies on: top-level
+    scalars, block scalars (>-, |), inline flow lists [a, b], and one level of
+    nested mappings/lists. Not a general YAML parser. Keeps a new skill
+    discoverable (name / type / model / permissions / description+triggers)
+    without the optional PyYAML dependency, so the self-evolution loop survives.
+    """
+    lines = block.split("\n")
+    n = len(lines)
+    data = {}
+    i = 0
+    while i < n:
+        raw = lines[i]
+        if not raw.strip() or raw.lstrip().startswith("#"):
+            i += 1
+            continue
+        indent = len(raw) - len(raw.lstrip())
+        if indent != 0 or ":" not in raw:
+            i += 1
+            continue
+        key, _, rest = raw.partition(":")
+        key = key.strip()
+        rest = _strip_inline_comment(rest.strip())
+        # Block scalar (folded >- / literal |): gather indented continuation.
+        if rest in (">", ">-", ">+", "|", "|-", "|+"):
+            buf = []
+            i += 1
+            while i < n and (not lines[i].strip() or (len(lines[i]) - len(lines[i].lstrip())) > 0):
+                buf.append(lines[i].strip())
+                i += 1
+            data[key] = " ".join(x for x in buf if x).strip()
+            continue
+        inline = _fb_inline_list(rest)
+        if inline is not None:
+            data[key] = inline
+            i += 1
+            continue
+        # Nested mapping/list (key: with nothing after). Parse only the first
+        # child-indent level; deeper structures (e.g. a sub-list under a nested
+        # key) are consumed but skipped, so they never leak into this level.
+        if rest == "":
+            sub, sublist, child_indent = {}, [], None
+            i += 1
+            while i < n:
+                line = lines[i]
+                if not line.strip():
+                    i += 1
+                    continue
+                cur_indent = len(line) - len(line.lstrip())
+                if cur_indent <= indent:
+                    break
+                if child_indent is None:
+                    child_indent = cur_indent
+                if cur_indent > child_indent:
+                    i += 1
+                    continue
+                child = line.strip()
+                if child.startswith("- "):
+                    sublist.append(_fb_scalar(_strip_inline_comment(child[2:])))
+                elif ":" in child:
+                    ck, _, cv = child.partition(":")
+                    cv = _strip_inline_comment(cv.strip())
+                    civ = _fb_inline_list(cv)
+                    sub[ck.strip()] = civ if civ is not None else _fb_scalar(cv)
+                i += 1
+            data[key] = sublist if sublist else sub
+            continue
+        data[key] = _fb_scalar(rest)
+        i += 1
+    return data
+
+
 def parse_frontmatter(text, skill_name=None):
     """Strict YAML parse of frontmatter between --- delimiters.
 
@@ -80,6 +221,9 @@ def parse_frontmatter(text, skill_name=None):
     m = FRONTMATTER_RE.match(text)
     if not m:
         return None
+    if not HAVE_YAML:
+        data = _fallback_parse_frontmatter(m.group(1))
+        return data if isinstance(data, dict) and data else None
     block = _preprocess_frontmatter(m.group(1))
     try:
         data = yaml.safe_load(block)
@@ -239,8 +383,8 @@ def build_manifest():
             "name": fm.get("name", skill_dir.name),
             "type": fm.get("type", "unknown"),
             "model": fm.get("recommended_model", "sonnet"),
-            "subagent_safe": perm.get("subagent_safe", False),
-            "mode": perm.get("mode", "direct"),
+            "subagent_safe": fm.get("subagent_safe", perm.get("subagent_safe", False)),
+            "mode": fm.get("mode", perm.get("mode", "direct")),
             "triggers": extract_triggers(fm.get("description", "")),
             "disambiguates_against": disamb,
             "isolation_scope": fm.get("isolation_scope", "brand_only"),

@@ -4,6 +4,22 @@
 
 ---
 
+## 0. v2.91 · Évolution canon (agnostic-macro · fan 4 verbes · entrée tool-first)
+
+> Bump v2.80.x → v2.91. Cette doctrine évolue sur quatre points sans renier ses acquis (anti-typage HR-OHD-2/8, prose native HR-OHD-9, anti-pavé/anti-amorce HR-OHD-10, anti-survente, ton premium). Les Hard Rules restent en vigueur, HR-OHD-1 amendée comme suit.
+
+**1. Deux altitudes · macro agnostique + kit DTC nommé.** Le "agnostique" canon vise le PROFIL OPÉRATEUR (jamais *"tu fais quoi"*, HR-OHD-2/8), pas le vertical. La doctrine peut donc NOMMER le kit DTC et expliquer en quoi c'en est un, tout en portant un macro plus large · *encoder n'importe quel business une fois, l'agent raisonne dessus* (survit à `produit → prestation → compte → lieu`). Le kit DTC est la démonstration phare, pas le plafond (`capabilities.md` · "the shipped skills are the foundation, not the ceiling"). Nommer DTC n'est pas typer l'opérateur.
+
+**2. Fan 4 verbes = modèle mental d'entrée · 7 territoires = granularité de drill.** L'entrée `/tour` présente d'abord les QUATRE GESTES (comprendre · raisonner · produire · apprendre) comme tri de l'intention. Les 7 territoires capability-mapped (§ 5) restent canon, en granularité de DRILL sous les verbes. **HR-OHD-1 amendée** · le pied d'égalité visuelle s'applique désormais (a) entre les 4 verbes ET (b) entre les 7 territoires au sein du drill. Aucune hiérarchie pré-emptive ni au niveau verbe ni au niveau territoire. La surface d'entrée passe du panorama-7-territoires au fan-4-verbes ; l'exhaustivité et le pied d'égalité restent durs.
+
+**3. Créa = UNE lane (renforce l'anti-survente).** Situer la créa comme une lane dans "produire" SERT le gap historique (l'ancien `/tour` survendait creative/copy · § 2.1 + AP-OHD-2). De-emphasizer la créa est conforme, pas contraire, à HR-OHD-1.
+
+**4. Entrée tool-first / substrat operator-scope (premier rang).** Sous le kit, le workspace est un substrat connecté et organisable · un opérateur peut **centraliser/organiser ses outils** (contacts, prestataires, projets, admin) AVANT, ou SANS, construire un atlas de marque. Entrée légitime de premier rang, pas un usage dégradé (cohérent élasticité scope `phantomos_elastic_scope`). La mécanique d'entrée vit dans `entry-arc-doctrine.md` v2.91 (Porte D · `scaffold:operator`). La connectivité (brancher comptes/outils) est le plancher, jamais exposée en plomberie à l'opérateur (Layer 1/2/3, MCP, env vars = interdits de fuite).
+
+**Backward compat** · strictement additif/réconciliateur. HR-OHD-1 amendée (surface verbe + granularité territoire), toutes les autres HR inchangées. Le panorama-7-territoires legacy reste valide en drill ; l'entrée passe au fan-4-verbes.
+
+---
+
 ## 1. Thèse fondatrice
 
 > L'onboarding PhantomOS est agnostique (pas de typage opérateur à l'entrée) plus holistique (panorama 360° de toutes les capacités sur pied d'égalité) plus EN PROSE CONVERSATIONNELLE NATIVE (pas d'interface ASCII boxes/tableaux/séparateurs structurés · réservée aux slash commands cockpit). L'opérateur découvre l'étendue · se reconnaît dans le panorama · choisit où commencer · sans avoir à se déclarer profil métier · sans interface qui rompt le flow conversationnel.
@@ -447,6 +463,7 @@ Onboarding Holistic Doctrine opère sur 3 couches simultanément du multiplicati
 
 ## Status
 
+- **Canonique v2.91.** Bump v2.80.1 → v2.91 · voir § 0 Évolution canon (agnostic-macro + kit DTC nommé · fan 4 verbes modèle mental d'entrée + 7 territoires granularité drill · HR-OHD-1 amendée · créa une lane · entrée tool-first operator-scope premier rang via `entry-arc-doctrine.md` v2.91). Additif · toutes les autres HR inchangées. Consumer · `/tour` v2.91.1.
 - **Canonique v2.80.1.** Codifie pattern porte d'entrée opérateur PhantomOS agnostique plus holistique plus rendu PROSE CONVERSATIONNELLE NATIVE canon. Bump v2.79.3 → v2.80.1 post-cas test live Largo Sprint v2.80.0 (`/tour` rendu en interface ASCII boxes/tableaux/séparateurs structurés · recadrage opérateur direct *"je ne veux pas d'interface · uniquement pour les commandes slash Phantom · juste des messages natifs"*). Ferme gap structurel *"l'onboarding /tour survend creative/copywriting/brand-strategist · opérateurs hors-profil ne se reconnaissent pas · friction adoption"* (v2.79.3) plus gap *"/tour rendu en interface ASCII confondu avec slash command UI · viole flow conversationnel porte d'entrée"* (v2.80.1) via 7 territoires capability-mapped pied d'égalité en prose native plus 9 Hard Rules canon strict (HR-OHD-1 à HR-OHD-9) plus 9 anti-patterns (AP-OHD-1 à AP-OHD-9) enforcement runtime.
 - **Doctrine sœur** · scope-extension-doctrine.md v2.65 (canon élasticité scope opérateur-driven · racine philosophique) · output-clarity-doctrine.md v2.79.2 (iconographie canon plus headers FR sobres dans slash commands ASCII · pas onboarding prose) · engagement-disclosure-doctrine.md v2.79.3 (disclosure gros skills · paire porte d'entrée) · pattern-detection-triggers.md (smart suggest daemon HR-OHD-6) · voice.md (registre · ton accueil prose native).
 - **Backward compat** · strict additif · v2.80.1 n'override aucune règle existing. HR-OHD-9 plus AP-OHD-9 NEW enrichissent canon sans rétro-casser. `/tour` legacy pre-v2.80.1 conserve rendu ASCII jusqu'à patch · v2.80.1+ refonte prose conversationnelle native canon obligatoire.

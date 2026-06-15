@@ -65,6 +65,7 @@ The agent **never**:
 | **Confirmation theater** | Asks *"is the price 19.90€?"* when the price was scraped from the canonical product page | Show the price as fact, only ask if the source was uncertain |
 | **Scope creep on confirm** | Operator says *"ok"* on attribute A, agent writes A + B + C | Stage exactly what is being confirmed; write only what was staged |
 | **Schema-completeness fetishism** | Refuses to produce output until every field is filled | Produce the best possible answer with what is available, flag the gap inline |
+| **Scraped-as-fact** (D#518) | A scraped count or claim (*"60k clients"*, an on-page review number, a competitor revenue estimate) enters the model as a measured number | `reliability_tier` caps entry confidence by source nature (revealed ≤0.8 · behavioral-soft/verbatim ≤0.5 · structural = hypothesis · declared ≤0.3). A bare number with no measurement procedure stays flagged, never served as fact. Triangulate cross-nature where about to spend. Doctrine · `scrape-as-allocation.md` |
 | **Stack-trace-as-explanation** | When an action fails, agent reports *"`mutation-guard` rejected write to `_field_types` glob mismatch"* | *"I can't write that yet, the kind of field is unclear. Tell me if it's something the brand says, observes, or computes."* |
 | **Validation cascade** | After every operator answer, runs all 8 sub-checks before next question | Run checks at natural breakpoints, surface only blocking issues |
 | **Tunnel vision on encoded canon** | Agent answers a knowledge question with *"not in the workspace canon"* or *"I don't have that reference"* when WebFetch could resolve it in 30 seconds. Operator has to manually push the agent to look it up. | Detect question type (infrastructure vs knowledge). Knowledge → fetch external silently, synthesize, surface expert-grade. Encode if operator validates as load-bearing. |
@@ -170,7 +171,7 @@ CI is the master doctrine. Three sub-corpus extend it without becoming peer doct
 
 ## Sister disciplines
 
-CI states *what* the agent reasons over (the business universe). Four sub-doctrines operationalize CI on different axes:
+CI states *what* the agent reasons over (the business universe). Five sub-doctrines operationalize CI on different axes:
 
 | Doctrine | Territory | File |
 |---|---|---|
@@ -178,6 +179,7 @@ CI states *what* the agent reasons over (the business universe). Four sub-doctri
 | **Canonical Matrix Reasoning (CMR)** | Production mechanism, how to produce 95% quality on intersectional outputs (schema + canon matrix, modulator/cell, cardinality cap, internal scoring). Sub-pattern of CI on intersectional production. | `docs/system/canonical-matrix-reasoning.md` |
 | **Skill Authoring Doctrine (SAD)** | Authoring meta, how skills consuming SED+CMR are created, evolve, compose, fail safely. Includes type taxonomy, frontmatter triad, composition contracts, lifecycle (hooks, Build/Release, updates, provider-agnostic). | `docs/system/skill-authoring-doctrine.md` |
 | **Provenance & Trust Doctrine (PTD)** | Trust, multi-operator authorship, canon-as-product, marketplace skills. Scope-only today, full doctrine deferred to trigger conditions. | `docs/system/provenance-trust-discipline-scope.md` (promoted from R&D zone v2.42, scope-only, graduates to full doctrine on triggers) |
+| **Strategic Diagnostic (SDR)** | Lecture experte multi-levier · le routeur diagnostique le vrai mur (offre / angle / marché) et la chaîne experte le prolonge jusqu'aux audiences dérivées du mécanisme et au verdict tranché (lire la partie avant de décrire la demande). Le corpus de tensions (`docs/doctrine/`) en est la matière. Sans ce maillon, CI produit une synthèse fluide qui décrit la demande au lieu de lire la position. | `docs/doctrine/strategic-diagnostic-doctrine.md` |
 
 Doctrine Governance (promotion / amendment / retraction / conflict resolution among the disciplines), meta-process : `docs/system/doctrine-governance.md`.
 

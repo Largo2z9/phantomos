@@ -81,7 +81,7 @@
 
           "shared": {
             "type": "object",
-            "description": "Attributes inherited by all offers in this group. MERGE RULES: (1) nested objects merge deep — offer.pricing.price overrides group only on 'price' and keeps group 'currency'; (2) arrays replace entirely — offer.payment_options.methods replaces group.shared.payment_options.methods with no union; (3) scalars and booleans override explicitly — offer.subscription.trial.enabled:false overrides a shared true, treating the override as a conscious act. VALIDATION TIMING: the validator MUST resolve merge (shared→offer) BEFORE running JSON Schema validation on each offer. A raw un-merged offer may legitimately omit required fields that live in group.shared — only the resolved offer is checked against the base offer schema. Implementation: see resources/scripts/validate-all.py resolve_offer() step (added post v2.0 bump).",
+            "description": "Attributes inherited by all offers in this group. MERGE RULES: (1) nested objects merge deep · offer.pricing.price overrides group only on 'price' and keeps group 'currency'; (2) arrays replace entirely · offer.payment_options.methods replaces group.shared.payment_options.methods with no union; (3) scalars and booleans override explicitly · offer.subscription.trial.enabled:false overrides a shared true, treating the override as a conscious act. VALIDATION TIMING: the validator MUST resolve merge (shared→offer) BEFORE running JSON Schema validation on each offer. A raw un-merged offer may legitimately omit required fields that live in group.shared · only the resolved offer is checked against the base offer schema. Implementation: see resources/scripts/validate-all.py resolve_offer() step (added post v2.0 bump).",
             "properties": {
 
               "target_audience_id": { "type": ["string", "null"] },
@@ -200,7 +200,7 @@
                     "digital",
                     "service"
                   ],
-                  "description": "v2.0: 10 structural types. Note: hardware bundles (Bruvi, Gozney) = type 'bundle' + tags[hardware] + requires_offer_id on the refill offer. Personalized offers (Care/of, Prose) = type 'subscription' (or 'bundle') + personalization{} pointer. Type describes SHAPE of data, not commercial strategy — use tags[] for the latter."
+                  "description": "v2.0: 10 structural types. Note: hardware bundles (Bruvi, Gozney) = type 'bundle' + tags[hardware] + requires_offer_id on the refill offer. Personalized offers (Care/of, Prose) = type 'subscription' (or 'bundle') + personalization{} pointer. Type describes SHAPE of data, not commercial strategy · use tags[] for the latter."
                 },
 
                 "requires_offer_id": {
@@ -210,7 +210,7 @@
 
                 "product_refs": {
                   "type": "array",
-                  "description": "v2.0: REQUIRED on every offer. Each offer declares its own product_refs explicitly — no inheritance of product_refs from group.shared (avoids ghost-offer bugs). Shared attributes live in offer_groups.shared, but product identity is always explicit per offer.",
+                  "description": "v2.0: REQUIRED on every offer. Each offer declares its own product_refs explicitly · no inheritance of product_refs from group.shared (avoids ghost-offer bugs). Shared attributes live in offer_groups.shared, but product identity is always explicit per offer.",
                   "minItems": 1,
                   "items": {
                     "type": "object",
@@ -475,7 +475,7 @@
 
                 "personalization": {
                   "type": ["object", "null"],
-                  "description": "v2.0 C5: pointer to external personalization logic (quiz, AI selector, profile-based filtering). offers.json only records WHICH mechanism applies — the rules engine lives in profile.json or a future config.json. Null if not personalized.",
+                  "description": "v2.0 C5: pointer to external personalization logic (quiz, AI selector, profile-based filtering). offers.json only records WHICH mechanism applies · the rules engine lives in profile.json or a future config.json. Null if not personalized.",
                   "properties": {
                     "source": { "type": "string", "enum": ["quiz", "ai_selector", "profile_match", "consultation"] },
                     "source_id": { "type": ["string", "null"], "description": "ID of the quiz/selector/consultation flow." },

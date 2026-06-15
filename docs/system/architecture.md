@@ -207,7 +207,8 @@ If exceeded: compress session-state first, then trim reference sections, then ca
 - **Ramification**: Catalogues >12 entries → tag `[RAMIFY]`. SOPs >20 steps → split.
 - **Context DB is facts only**: No strategy in brand entity files. Operational learnings → `learnings.json` (append-only, never delete, archive with `status: "archived"`).
 - **Credentials are gitignored**: `credentials.env` and `credentials_shared.env`. Never commit.
-- **OS files auto-maintained**: status.json, workspace-status.json, session-state.md, promote-backlog.json · rebuilt by skills. Manual edits overwritten.
+- **OS files auto-maintained**: status.json, workspace-status.json, session-state.md · rebuilt by skills. Manual edits overwritten.
+- **promote-backlog.json** · artefact OPTIONNEL, écrit par `validate-resources` Check 12b UNIQUEMENT si un `validate all` cross-brand détecte un candidat. Absent d'un workspace fresh. `promote-learning` gère son absence gracieusement (ne suppose jamais son existence).
 - **Never load `sources/` in context**: Raw file archive. Access only on explicit request.
 - **Never invent resource types**: 7 types are fixed. New type = structural decision + approval.
 - **Never write to `_TEMPLATE/` or `_EXAMPLE/`**: Read-only references.

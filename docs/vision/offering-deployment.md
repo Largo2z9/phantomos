@@ -1,5 +1,7 @@
 # Offering & Deployment
 
+> **Promesse de scope** · un seul point d'entrée pour tout ton travail. Premier étage câblé aujourd'hui = ton acquisition DTC. Le reste s'encode à la demande, le système se construit ses capacités au fil des déploiements.
+
 > Méthodologie commerciale et roadmap de packaging pour PhantomOS. Audience interne (maintainer, futurs collaborateurs) + partenaires commerciaux qui veulent comprendre comment le produit se vend et se déploie. Ce document n'est pas une offre commerciale finalisée : il documente le cadre dans lequel les offres se structurent et la manière dont chaque déploiement client est mené. Il s'enrichit au fur et à mesure que les premiers clients commerciaux signent et que les vertical packs matures.
 
 ---
@@ -10,7 +12,7 @@ Ce document existe pour deux raisons.
 
 D'abord, séparer ce qui relève du **produit** (l'environnement, ses mécaniques, son extensibilité) de ce qui relève de **l'offre commerciale** (comment on package, on tarife, on déploie chez un opérateur). Le produit est documenté ailleurs : `vision.md`, `manifesto.md`, `prisms.md`, `fit.md`, `capabilities.md`. Cette doc traite l'autre versant : la mise en marché.
 
-Ensuite, fournir un référentiel partagé pour quiconque vendrait, déploierait, ou évangéliserait PhantomOS sans avoir vécu chaque arbitrage de design. Un partenaire commercial ou un futur Forward Deployed Operator doit pouvoir lire ce document et comprendre : ce qui est inclus, ce qui ne l'est pas, ce qui se vend séparément, ce qui n'est pas encore packageable, et pourquoi.
+Ensuite, fournir un référentiel partagé pour quiconque vendrait, déploierait, ou évangéliserait PhantomOS sans avoir vécu chaque arbitrage de design. Un partenaire commercial ou un futur Forward Deployed Operator doit pouvoir lire ce document et comprendre : ce qui est câblé aujourd'hui, ce qui se vend séparément, ce qui n'est pas encore outillé mais s'encode quand le signal arrive, et comment chaque capacité se branche.
 
 Le scope est volontairement étroit : méthodologie commerciale + roadmap packaging. Pas de pricing arrêté avant le premier client signé. Pas de doctrine légale (transmissibility framework dépend du framework de provenance, déclenché plus tard). Pas de marketing de surface : c'est l'os de l'offre, pas la couche de communication.
 
@@ -45,7 +47,11 @@ L'offre commerciale en cours de construction au moment où ce document est écri
 - Consultants growth senior dont la valeur dépend d'une méthodologie répétable (craft articulation + outcome-based pricing).
 - Coaches et experts qui productisent une méthode codifiable (pas des créateurs volume).
 
-Ces profils correspondent au best fit documenté dans `fit.md`. Out of scope : agencies enterprise 5-10 personnes (multi-tenant non couvert), founders pré-traction (encoder une thèse non validée densifie sur du faux signal), performance creators distribution-volume (PhantomOS ne couvre pas leur chaîne).
+Ces profils correspondent au best fit documenté dans `fit.md`. Trois cas demandent un cadrage avant d'embarquer :
+
+- **Agencies enterprise 5-10 personnes** · le multi-tenant n'est pas encore câblé. Il s'encode dès qu'un premier client de cette taille déclenche le framework de provenance (séparation des workspaces, license tracking, attribution) : voir section 6.
+- **Founders pré-traction** · c'est un conseil de moment, pas un plafond. Encoder une thèse non validée densifie sur du faux signal. Le bon timing arrive après les premières validations marché : l'environnement les attend et encode la méthode dès qu'elle se stabilise.
+- **Performance creators distribution-volume** · leur chaîne (montage vidéo, veille sociale temps réel) vit aujourd'hui dans les outils natifs (CapCut, Motion). Ce qui se codifie de leur méthode (angles, hooks, registres) s'encode dans le workspace ; le reste s'active quand on branche ces outils via leurs API.
 
 ### Tarification actuelle
 
@@ -133,7 +139,7 @@ Sortie attendue : qualité agency-grade sur les tâches encadrées par les capac
 
 ## 6. Transmissibilité et continuité
 
-Le workspace est transmissible par design. Cette propriété est à double tranchant : elle résout des problèmes business critiques et crée des tensions commerciales nouvelles. Trois patterns opérationnels existent pour la gérer (référence : `fit.md § Consultant tension upgraded S46`).
+Le workspace est transmissible nativement : c'est un dossier de fichiers, il se forke et se transmet. Cette propriété est à double tranchant : elle résout des problèmes business critiques et crée des tensions commerciales nouvelles. Trois patterns opérationnels existent pour la gérer (référence : `fit.md § Consultant tension upgraded S46`).
 
 **Pattern 1 · Contractual licensing.** Le workspace reste propriété du consultant ; le client reçoit une licence d'usage bornée par la mission. Fin du retainer = fin de licence. Ne porte pas de couche de licensing applicative : c'est une discipline contractuelle, à inscrire dans le SOW.
 
@@ -195,7 +201,7 @@ Trois risques structurants à expliciter pour ne pas les subir.
 
 **Auto-replacement consultant.** Un consultant qui encode sa méthode dans le workspace d'un client lui transmet, après 6 mois d'usage, le moat et la justification budgétaire pour mettre fin au retainer. Mitigation : trois patterns décrits en section 6 (contractual licensing, workspace separation, outcome-based pricing). Aucun n'est enforcé par l'outil aujourd'hui ; c'est de la discipline opérateur. Risque stratégique principal pour la cible *agency owner* et *senior consultant*. À adresser frontalement dans la conversation commerciale, pas à cacher.
 
-**Commodification du modèle IA sous-jacent.** Anthropic, OpenAI, Google convergent vers des modèles fungibles. Ce n'est **pas un risque pour PhantomOS** : la valeur n'est pas dans le modèle (qui sera commodifié), elle est dans la connaissance structurée et la méthodologie codifiée que l'opérateur accumule dans son workspace. À expliciter dans toute conversation de vente où l'objection *"et si Claude / GPT s'améliore tellement que je n'ai plus besoin de ton outil ?"* émerge. Argument inverse : plus le modèle s'améliore, plus la qualité de l'output dépend de la qualité du contexte, ce que PhantomOS structure.
+**Commodification du modèle IA sous-jacent.** Anthropic, OpenAI, Google convergent vers des modèles fungibles. Cette commodification **renforce** PhantomOS : la valeur tient dans la connaissance structurée et la méthodologie codifiée que l'opérateur accumule dans son workspace, pas dans le modèle. À expliciter dans toute conversation de vente où l'objection *"et si Claude / GPT s'améliore tellement que je n'ai plus besoin de ton outil ?"* émerge. Argument inverse : plus le modèle s'améliore, plus la qualité de l'output dépend de la qualité du contexte, ce que PhantomOS structure.
 
 **Dépendance Anthropic actuelle.** PhantomOS tourne sur Claude Code. Provider-agnosticisme est un objectif déclaré, mais non vérifié à grande échelle. Risque : changement de pricing Anthropic, changement de policy, ou éviction de Claude Code. Mitigation : architecture conçue pour découpler le runtime de l'agent du contenu encodé (le workspace est un dossier de fichiers, pas une base de données propriétaire). Validation empirique pending (cf. roadmap *empirical token benchmark*).
 
@@ -224,6 +230,6 @@ Toute évolution se fait par patch additif : chaque section porte la version qui
 - `manifesto.md` : thèse publique (first-party : chiffres du moteur uniquement, zéro stat de marché tierce depuis v2.89.1).
 - `prisms.md` : huit angles produit pour calibrer les framings commerciaux.
 - `roadmap.md` : vertical packs future iteration et future (consulting-core, media-buyer-freelance, coach-expert-pack, multi-operator).
-- `fit.md` : best fit / conditional fit / misfit + cost honesty + consultant tension upgraded S46.
+- `fit.md` : best fit / conditional fit / cas à cadrer (timing + outils natifs + multi-tenant à encoder) + cost honesty + consultant tension upgraded S46.
 - `decisions.md` : D#307 (Extractibility), D#362 (architecture doctrinale), D#367 (pitch posture sacralisée + suggest-domain-canon).
 - Memory cross-session : `feedback_phantomos_pitch_posture`.

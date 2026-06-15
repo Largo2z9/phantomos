@@ -139,6 +139,12 @@ ALLOWED_PATH_PATTERNS = [
     # batch = a production run, date-stamped (e.g. 2026-06-06-01) → groups for scale (10k+ creatives,
     # navigable, git-friendly) instead of a flat dir. CRT = our own creatives. The id is claimed by
     # mkdir of the {CRT-NN}/ folder (no central allocator/lock). Brand-scoped → covered by mutation-guard.
+    # v2.90.0 · batch-level artifacts (workflow A : cadrage A3 + contrat A→B)
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/frame\.json$"),
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/genome-package\.json$"),
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/hook-bench\.json$"),
+    # concept candidates derived from top-ranked angles (workflow A : produce-paid-angles run cadré → evaluate-concept gate)
+    re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/concepts/CPT-[0-9]{2,4}\.json$"),
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/creative\.json$"),
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/genome\.json$"),
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/produced/[a-z0-9_-]+\.json$"),
@@ -156,6 +162,8 @@ ALLOWED_PATH_PATTERNS = [
     # asset-library json sidecars (brand-level · binaires .png/.jpg ecrits direct comme produced/).
     # Nom canonique = asset-library/ (aligne genome.schema + produced-asset.schema · D#491). Guard via brands/ glob.
     re.compile(r"^brands/[^/]+/asset-library/[a-z0-9_-]+\.json$"),
+    # spectrum (Spectre, D#502) — carte du terrain produit x marche, singleton par marque.
+    re.compile(r"^brands/[^/]+/spectrum\.json$"),
 ]
 
 
@@ -167,7 +175,7 @@ def check_target_allowed(rel_path: str) -> None:
         f"target path '{rel_path}' is not a known schema file. "
         f"Expected filename among: brand.json, status.json, config.json, "
         f"learnings.json, strategy.json, spec.json, offers.json, profile.json, "
-        f"or *.extensions.json / custom/*.json. "
+        f"spectrum.json, or *.extensions.json / custom/*.json. "
         f"Likely a typo or shell-escaping bug — recheck the --path argument.",
         1,
     )
@@ -370,6 +378,111 @@ def digest(value) -> str:
     ).hexdigest()[:12]
 
 
+# --- P0 brownfield protection (D#520) --------------------------------------
+# write-to-context était AVEUGLE au validation_status : un re-run non-opérateur
+# pouvait écraser ou rétrograder un artefact VALIDÉ (profile/angle/spec/offers),
+# détruisant le travail accumulé. La règle « jamais écraser un validé » vivait en
+# prose dans les SKILL (donc skippable). Voici le plancher mécanique.
+PROTECTED_STATUS = {"validated", "confirmed", "locked", "operator_validated"}
+_VALIDATED_TARGET_RE = re.compile(r"/(?:profile|spec|offers)\.json$|/angles/[^/]+\.json$")
+
+
+def _status_of(doc):
+    if not isinstance(doc, dict):
+        return None
+    return doc.get("validation_status") or (doc.get("meta") or {}).get("validation_status")
+
+
+def check_brownfield(target: Path, rel_file: str, tokens: list, value, source: str) -> None:
+    """Refuse un write non-opérateur qui clobbe ou rétrograde un artefact validé.
+    Attrape le « re-run rabaisse un profil validé » (D#520 · la prose se fait sauter)."""
+    if source == "operator" or not target.exists():
+        return
+    if not _VALIDATED_TARGET_RE.search(rel_file):
+        return
+    try:
+        existing = json.loads(target.read_text() or "null")
+    except Exception:
+        return
+    cur = _status_of(existing)
+    if cur not in PROTECTED_STATUS:
+        return
+
+    def _refuse(what: str) -> None:
+        die(
+            f"brownfield protection — {rel_file} a validation_status '{cur}' (validé). "
+            f"Ce write ({what}) détruirait du travail validé. Enrichis champ par champ "
+            f"(pointer profond, sans toucher validation_status), ou fais confirmer "
+            f"l'écrasement par l'opérateur (--source operator).",
+            1,
+        )
+
+    if not tokens:
+        _refuse("remplacement complet du document")
+    if tokens[-1] == "validation_status":
+        new = value if isinstance(value, str) else None
+        if new and new not in PROTECTED_STATUS:
+            _refuse(f"rétrogradation validation_status -> '{new}'")
+
+
+# --- P0 race d'ID (allocateur séquentiel atomique) -------------------------
+# Le fan-out parallèle (3 sous-agents produce-paid-angles) calculait le même
+# max+1 et écrasait silencieusement des angles · write-to-context n'avait NI lock
+# NI allocateur. On réserve l'id de façon ATOMIQUE (O_EXCL) et on bump sur
+# collision, en patchant le champ id de la valeur. Couvre ANG (angles) + CPT
+# (concepts). CRT/RCV (phase créa, hors onboarding) = même pattern à étendre.
+_SEQID_CREATE_RE = re.compile(
+    r"^(?P<dir>brands/[^/]+/(?:angles|creatives/[a-z0-9-]+/concepts))/"
+    r"(?P<prefix>ANG|CPT)-(?P<num>[0-9]{2,4})\.json$"
+)
+
+
+def _next_free(root: Path, dir_rel: str, prefix: str, start: int) -> int:
+    d = root / dir_rel
+    taken = set()
+    if d.is_dir():
+        idre = re.compile(rf"^{prefix}-([0-9]{{2,4}})\.json$")
+        for f in d.iterdir():
+            mm = idre.match(f.name)
+            if mm:
+                taken.add(int(mm.group(1)))
+    n = start
+    while n in taken:
+        n += 1
+    return n
+
+
+def claim_sequential_id(root: Path, rel_file: str, tokens: list, value, source: str):
+    """Réserve atomiquement un id séquentiel libre pour un create whole-doc.
+    Retourne (rel_file, value) avec l'id bumpé + le champ id de la valeur patché
+    sur collision. No-op pour un set champ-par-champ ou une écriture opérateur."""
+    if source == "operator" or tokens:
+        return rel_file, value
+    m = _SEQID_CREATE_RE.match(rel_file)
+    if not m:
+        return rel_file, value
+    dir_rel, prefix, num = m.group("dir"), m.group("prefix"), int(m.group("num"))
+    width = len(m.group("num"))
+    old_id = f"{prefix}-{num:0{width}d}"
+    n = num
+    for _ in range(100000):
+        n = _next_free(root, dir_rel, prefix, n)
+        new_id = f"{prefix}-{n:0{width}d}"
+        new_abs = root / dir_rel / f"{new_id}.json"
+        new_abs.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            fd = os.open(str(new_abs), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+            os.close(fd)  # placeholder vide réservé · main() écrit le contenu
+        except FileExistsError:
+            n += 1
+            continue
+        if new_id != old_id and isinstance(value, dict) and "id" in value:
+            value = dict(value)
+            value["id"] = new_id
+        return f"{dir_rel}/{new_id}.json", value
+    die("impossible d'allouer un id séquentiel libre (ANG/CPT)", 2)
+
+
 def append_event(root: Path, entry: dict) -> None:
     log_dir = root / ".phantom"
     log_dir.mkdir(exist_ok=True)
@@ -455,6 +568,19 @@ def main() -> None:
 
     tokens = parse_pointer(pointer)
 
+    # P0 race d'ID — réserve atomiquement un id séquentiel libre (ANG/CPT) AVANT
+    # d'écrire · tue l'écrasement silencieux du fan-out parallèle. Peut bumper la
+    # cible (et patcher value.id), d'où la re-résolution juste après.
+    rel_file, value = claim_sequential_id(root, rel_file, tokens, value, args.source)
+    target = (root / rel_file).resolve()
+    try:
+        target.relative_to(root)
+    except ValueError:
+        die(f"target {target} escapes workspace root {root}", 1)
+
+    # P0 brownfield (D#520) — refuse un clobber/downgrade d'un artefact validé.
+    check_brownfield(target, rel_file, tokens, value, args.source)
+
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists():
         try:
@@ -467,9 +593,10 @@ def main() -> None:
     mutated = walk_set(doc, tokens, value) if tokens else value
     target.write_text(json.dumps(mutated, indent=2, ensure_ascii=False) + "\n")
 
+    final_path = rel_file + (f"#{pointer}" if pointer else "")
     event = {
         "ts": datetime.utcnow().isoformat() + "Z",
-        "path": args.path,
+        "path": final_path,
         "op": "append" if tokens and tokens[-1] == "[]" else ("set" if tokens else "replace"),
         "source": args.source,
         "confidence": args.confidence,
@@ -479,7 +606,7 @@ def main() -> None:
     }
     append_event(root, event)
 
-    print(f"[write_to_context] OK {args.path} ({event['op']}, digest={event['value_digest']})")
+    print(f"[write_to_context] OK {final_path} ({event['op']}, digest={event['value_digest']})")
 
 
 if __name__ == "__main__":

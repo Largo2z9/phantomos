@@ -18,7 +18,7 @@
     },
     "type": {
       "const": "sop",
-      "description": "Discriminator — all SOPs declare type=sop."
+      "description": "Discriminator · all SOPs declare type=sop."
     },
     "category": {
       "enum": ["audit", "setup", "hygiene", "diagnostic", "roadmap", "launch", "optimization", "compliance", "reporting"],

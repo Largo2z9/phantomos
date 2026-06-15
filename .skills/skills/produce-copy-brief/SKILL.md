@@ -1,7 +1,7 @@
 ---
 name: produce-copy-brief
 type: producer
-version: "1.7.0"
+version: "1.8.0"
 isolation_scope: brand_only
 layer: production
 recommended_model: sonnet
@@ -24,6 +24,7 @@ consumes:
   - path: docs/doctrine/pain-benefit-chain-doctrine.md
   - path: docs/doctrine/breakthrough-advertising-5-stages.md
 description: >
+  v1.8.0 (v2.90.0 distribution fork environnement-aware) · NEW sous-section "Distribution fork" dans Step 7 close · détection silencieuse de l'outil de centralisation de l'opérateur (cascade canon connected-sources → Ecosystem table → credentials keys → MCP vérifiés) puis proposition fondue dans le next-step (push vers l'outil DÉTECTÉ jamais présumé · question de centralisation posée UNE fois par marque puis mémorisée · fork Route A compose-creative vs Route B export humain/partenaire). Doctrine canon `docs/system/brief-distribution-doctrine.md` NEW v2.90.0. Jamais bloquant pour la livraison du brief. Backward compat strict additif.
   v1.7.0 (v2.79.5 engagement disclosure NIVEAU 0 paramètres décomposés) · Section pré-runtime ajoutée AVANT Step 0 · expose 6 paramètres décomposés au runtime (audience target · format brief · angle source · persuasion structure · proof points · hypothèses figées · biais à éviter) avec POURQUOI chacun + close binaire OK ou ajuste. Cross-ref doctrines `docs/system/decomposition-visibility-doctrine.md` v2.79.5+ + `docs/system/engagement-disclosure-doctrine.md` v2.79.5+. Backward compat strict additif (Steps 0-8 runtime preserved · seul l'amont disclosure change).
   v1.6.0 (v2.64 ontologie sémantique pure · pain_points + objections sub-audience) · Step 1 read encoded data refactor · pain_points lus depuis `audiences/{audience-slug}/pain_points/*.json` (sub-audience NEW v2.64 · owned natif par parent path) · objections lues depuis `audiences/{audience-slug}/objections/*.json` (sub-audience NEW v2.64). Section "Objections to neutralize" du brief cite désormais OBJ-NN canonical IDs depuis sub-audience. Section "Pain to activate" cite PNT-NN canonical sub-audience. Backward compat strict additif · fallback top-level v2.63 + profile sub-fields v1.7 preserved.
   v1.5.0 (v2.63 ontologie pure · pain_points + objections collections top-level) · Step 1 read encoded data refactor · pain_points lus depuis `pain_points/*.json filtered by affected_audiences contains audience_slug` (collection top-level NEW v2.63) · objections lues depuis `objections/*.json filtered idem`. Section "Objections to neutralize" du brief cite désormais OBJ-NN canonical IDs + cross-ref objections collection. Section "Pain to activate" cite PNT-NN canonical + cross-ref pain_points collection. Backward compat lecture profile.pain_points[] + profile.objections[] legacy preserved (pre-v2.63 brands).
@@ -49,11 +50,14 @@ permissions:
   subagent_safe: true
 pipeline:
   preconditions: brand exists with at least one audience profile.json containing pain_points, objections, voice.key_expressions. Ideally mine-voc has run on the audience. If chained from produce-paid-angles, an angle is pre-selected.
-  postconditions: brief artifact in brands/{slug}/briefs/{BRF-NN}.md (frontmatter YAML conforme brief.schema v1.0 + body markdown libre), generation trace in sources/produced-briefs/{date}/, learnings appended if pattern detected, finalize-mutation-batch event emitted. Legacy path produced/copy-briefs/{date}-{audience-slug}-{angle-slug}-{channel}.md deprecated v1.4.0 (lecture backward compat preserved).
+  postconditions: brief artifact in brands/{slug}/briefs/{BRF-NN}.md (frontmatter YAML conforme brief.schema v1.0 + body markdown libre), generation trace in sources/produced-briefs/{date}/, learnings appended if pattern detected, finalize-mutation-batch event emitted, recommended next-step persisted as an idempotent In Progress line in brands/{slug}/todos.md (canonical format, auto-ticked when the downstream skill runs), AND any upstream In Progress line naming this skill auto-ticked on artifact write. Legacy path produced/copy-briefs/{date}-{audience-slug}-{angle-slug}-{channel}.md deprecated v1.4.0 (lecture backward compat preserved).
+patch_notes:
+  v1.8.1: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW Step 8bis · le next-step recommandé du close (Step 7) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`. Double rôle puisque ce producer est aval de produce-paid-angles · (a) il TICK auto (`[x]`) toute ligne In Progress qui le nommait comme skill aval avec la même cible angle/audience, fermant la boucle ouverte en amont · (b) il pose à son tour sa propre ligne next-step (transmission copywriter / compose-creative / brief parallèle). Le next-step in-line du close reste inchangé. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · Steps 0-8 + close + distribution fork préservés."
 disambiguates_against:
   produce-paid-angles: "route to produce-paid-angles when operator wants ANGLE IDEATION (matrice ranked) · produce-copy-brief is the downstream brief generation on a chosen angle"
   ingest-resource: "route to ingest-resource when operator drops a brief reference doc to digest · that's input ingestion, not output generation"
   mine-voc: "route to mine-voc when audience is thin (no verbatims encoded yet) · copy-brief needs verbatim density to anchor hooks credibly"
+  weave-hooks: "weave-hooks produit le paquet structuré machine-lisible du batch (genome-package) · produce-copy-brief produit un brief humain narratif sur UN angle"
 prerequisites:
   - field: angles/{angle_id}.json
     level: L1
@@ -463,6 +467,17 @@ Structure:
 - **File pointer inline:** *"Brief complet dans `produced/copy-briefs/2026-04-25-femmes-30-55-minceur-miroir-meta.md` · 950 mots, prêt à transmettre."* The brief artifact is NEVER pasted twice in the chat · write to file, surface synthesis only (lesson v2.10.0 mini-friction observed live test).
 - **Reasoned next-step proposal per no-orphan-output:** one strong recommendation grounded in operator goal × what was just produced × what is runnable. 1 alternative max if genuinely useful. Never a flat menu, never the same three proposals every time.
 
+### Distribution fork (canon `docs/system/brief-distribution-doctrine.md` · v1.8.0)
+
+Before composing the next-step line, resolve the operator's centralization tool silently · detection cascade canon: `operator/connected-sources.json` + `brands/{slug}/connected-sources.json` (type `crm`/`custom`, capability `write`) → brand `CLAUDE.md` Ecosystem table → `credentials.env` keys → session MCP actually verified, never assumed. Then fold distribution INTO the next-step proposal, 1 line, never a menu:
+
+- **Tool detected and connected** → name it: *"J'envoie le brief dans ton ClickUp, liste Briefs créa ? Il reste dispo dans le workspace de toute façon."* Push only on explicit confirm. The workspace file stays the source of truth after push.
+- **Tool declared but not wired** (Ecosystem table or env key without active connection) → propose the câblage, not the push: *"je peux me brancher à ton Notion et y pousser les prochains briefs, on le câble ?"* (routes to `connect-source`).
+- **Nothing detected, question never asked for this brand** → ONE proactive line at the very end of the close: *"tu centralises tes briefs quelque part : Notion, ClickUp, autre ? je peux m'y brancher"*. Positive answer routes to `connect-source`; negative answer persists `brands/{slug}/config.json#preferences.brief_distribution: "workspace_only"`, never re-asked.
+- **Route fork** · if the operator generates by AI → recommend chaining `compose-creative` on this brief (Route A, gated by `qc-creative` before spend). If a human or partner produces (video, UGC partner, copywriter) → recommend the export push + a short accompanying message ready to transmit (Route B). One defended reco based on format and context, alternative in 1 line.
+
+Never block the brief delivery on any of this · the brief is delivered, pointed, consultable first. Push failure or silence = brief shipped anyway.
+
 Examples of valid next-step formulations:
 
 - *"Le move utile derrière, c'est de transmettre le brief à ton copywriter et de revenir dans 2-3 jours pour que je revoie les drafts qu'il sort. Sinon je peux directement sortir le brief Email parallel sur la même angle pour que le funnel reste cohésif."*
@@ -484,6 +499,39 @@ python3 .skills/finalize-mutation-batch.py --brand-slug {slug}
 Mechanical Python primitive. Inspects every mutation written in this run (Layer A trace, Layer B artifact, optional learnings append), runs structural checks, emits a `coherence_check` event so `turn-end-audit` sees the loop closed.
 
 Exit code 2 = blocking issue → revise before shipping. Exit code 0 with warnings = log them, ship. Non-negotiable, mechanical, not skippable.
+
+---
+
+## Step 8bis · Persist next-step + tick upstream (v1.8.1, additif strict)
+
+Ce skill est aval de `produce-paid-angles` · son artifact ferme une boucle ouverte en amont, et il ouvre lui-même la boucle suivante. Deux gestes légers idempotents, aucun ne bloque la livraison du brief (Step 6 reste la sortie primaire).
+
+Pattern déjà prouvé par `register-and-flag` Step 6 (write idempotent d'une ligne de tracking dans `brands/{slug}/todos.md`).
+
+**Geste A · tick la ligne amont (fermeture de boucle).** Au finalize, scanner `brands/{slug}/todos.md → ## In Progress`. Si une ligne y désigne `produce-copy-brief` comme skill aval avec la même cible (même angle / même audience que ce run · ex `- [ ] produce-copy-brief sur l'angle #2 Ballonnement | P: 1 | E: low | T: 15 min`), basculer la case `[ ]` → `[x]` (puis archivage selon la doctrine todos racine). C'est l'auto-tick que `produce-paid-angles` Step 12ter attend de l'aval. Aucune ligne ne matche → ne rien faire, continuer (silencieux). Jamais de tick manuel · le downstream ferme la boucle de l'upstream.
+
+**Geste B · persister son propre next-step.** Le close (Step 7) recommande un move (transmettre au copywriter et revoir les drafts · ou chaîner `compose-creative` · ou sortir le brief parallèle d'un autre channel). Cette reco vit dans le chat et meurt au prochain tour si rien ne la fixe. Lui donner une trace · une ligne dans `## In Progress` au **format de ligne canonique** ·
+
+```
+- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {durée}
+```
+
+- `Name` · le move A du close verbalisé court (ex `compose-creative sur le brief BRF-04`, `revoir les drafts copywriter dans 2-3 jours`, `produce-copy-brief Email sur la même angle`). Operator-language, nom de skill aval si applicable.
+- `P` · priorité dérivée du contexte · brief prêt à produire en créa IA et stack le permet → `P: 1` · move de relecture différé → `P: 2`.
+- `E` · effort du move aval (low pour un export, med pour compose-creative, high pour un funnel parallèle complet).
+- `T` · ETA aligné `feedback_client_effort_scale` si client-facing (ex `quelques heures`, `2 à 3 jours`).
+
+**Idempotence (dure, comme register-and-flag).** Avant d'écrire, scanner `## In Progress` · si une ligne porte déjà le même `Name`, ne pas dupliquer. Re-run du même brief = zéro nouvelle ligne. Les deux gestes passent par le mutation gate ·
+
+```bash
+python3 .skills/write-to-context.py --path "brands/{slug}/todos.md#in-progress" --value "- [ ] {Name} | P: {n} | E: {level} | T: {eta}" --source agent --mode direct --reason "Persist recommended next-step from produce-copy-brief close (idempotent)"
+```
+
+Si `write-to-context.py` ne route pas le markdown todos, fallback `register-and-flag` (sous-skill curator) · même réceptacle, même idempotence. Ne JAMAIS hand-editer le markdown hors gate.
+
+**Léger, jamais bloquant.** Échec d'un write (gate refuse, fichier absent) → flag interne silencieux, ne casse pas le ship du brief. La trace todo est un bonus de persistance, pas une précondition de livraison.
+
+**Doctrine.** Report des étapes différées et matérialisation des next-steps comme tâches reprenables avec leur levier · `docs/system/onboarding-setup-flow.md` (sections « Exhaustivité offerte, jamais forcée, reportable » et « La persistance est native »). Référencée ici, pas redupliquée.
 
 ---
 

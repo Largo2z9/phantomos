@@ -1,0 +1,71 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.90.0",
+  "released_at": "2026-06-11",
+  "type": "minor",
+  "backward_compat": "strict-additive",
+  "compatible_from": "2.0.0",
+  "skills_count_before": 82,
+  "skills_count_after": 85,
+  "schemas_new": [],
+  "schemas_modified": [
+    "genome-package.schema.json (descriptions seulement : producteur weave-hooks SHIPPE, angle_id reference produce-paid-angles A4-A5, tag version aligne 1.3.0 · zero changement structurel)",
+    "genome.schema.json (description angle_id : score-angle fantome -> produce-paid-angles A4-A5)",
+    "library-pattern.schema.json (description related_mechanic_ids elargie : ids hook-level enum 25 ET mecanique_id ad-level free-string)",
+    "creative.schema.json (descriptions : mentions TBD perf-feedback-loop resolues, tranche v2.90.0)"
+  ],
+  "summary": "OPERATIONNALISATION DU WORKFLOW A CREA-STRAT (D#472-480). La couche GENERATION qui manquait depuis v2.89.0 est cablee : 3 NEW skills (frame-regime gate A3 cadrage+regime · evaluate-concept gate A6 5 checks · weave-hooks A7-A8 producteur du genome-package, le contrat A->B a enfin son serialiseur) + 4 EXTEND (produce-paid-angles 1.12 bibliotheques cross-brand + concepts candidats CPT · compose-creative 1.9.1 resolution du regime · import-meta-results 2.1 boucle perf minimale CLASSER/TRACER/SIGNALER · produce-copy-brief 1.8 + creative-brief-composer 1.4 distribution fork) + 2 NEW doctrines (pre-gate-evaluator annoncee v2.88.0 enfin shippee · brief-distribution environnement-aware : outil de centralisation DETECTE jamais presume) + SOP perf-feedback-loop tranche (plus TBD) + fonction de distance d'emprunt canon dans cross-brand-curation. Trois gates orthogonaux : strategie -> concept -> rendu. Le regime explore/exploit cesse d'etre un levier orphelin : frame-regime le regle, compose le lit, la perf le recalibre. Build par conception -> drafts -> AUDIT ADVERSARIAL 4 lentilles (5 BLOCKERS + 20 MAJOR + 18 MINOR interceptes avant ship, tous corriges) -> re-verification.",
+  "changes": {
+    "skill_added": [
+      "+.skills/skills/frame-regime/SKILL.md (1.0.0 · producer opus · gate A3 : audit matiere, 3 jauges auto, freedom_cursor = 1 - resources_score, mix media propose, forks D#473, ecrit creatives/{batch}/frame.json mode direct)",
+      "+.skills/skills/evaluate-concept/SKILL.md (1.0.0 · curator opus · gate A6 : 5 checks pre-gate-evaluator, budget anti-spin 3 iterations, verdict retourne au caller, persiste dans concepts/CPT-NN.json#evaluation)",
+      "+.skills/skills/weave-hooks/SKILL.md (1.0.0 · producer opus · A7-A8 : incarnation par support bi-face, tissage hooks distance-filtres, fork Route A/B, locks gouvernance, serialise genome-package.json validation jsonschema bloquante + hook-bench.json + event coherence_check)"
+    ],
+    "skill_changed": [
+      "~.skills/skills/produce-paid-angles/SKILL.md (1.11.0 -> 1.12.0 · Step 0quater regime+bibliotheques cross-brand avec distance A6 · dimension mecanique · run cadre : POV x3 + derivation concepts CPT + close chaine · 4 back-refs prefixees brands/{slug}/)",
+      "~.skills/skills/compose-creative/SKILL.md (1.9.0 -> 1.9.1 · resolution regime genome-package -> frame.json -> a froid · jointure bibliotheque via espace d'ids related_mechanic_ids)",
+      "~.skills/skills/import-meta-results/SKILL.md (2.0.0 -> 2.1.0 · Step 3 boucle minimale du SOP perf : CLASSER 4 signaux + verdicts, TRACER learnings, SIGNALER performance.signal, recalibrage a la volee · haiku -> sonnet · HR2/AP-1/close/disambiguates alignes)",
+      "~.skills/skills/produce-copy-brief/SKILL.md (1.7.0 -> 1.8.0 · distribution fork environnement-aware dans le close Step 7)",
+      "~.skills/skills/creative-brief-composer/SKILL.md (1.3.1 -> 1.4.0 · distribution fork dans la synthesis Step 5)",
+      "~.skills/skills/decompose-ad/SKILL.md (genome/1.0 -> genome/1.2 x9 · genome.json ne porte jamais de _schema_version top-level)",
+      "~.skills/skills/qc-creative/SKILL.md (genome_tags.primary_style_id canonique x2 · disambiguates evaluate-concept)",
+      "~.skills/skills/score-matrix/SKILL.md + recompose-creative (disambiguates reciproques frame-regime/evaluate-concept/weave-hooks)"
+    ],
+    "doctrine": [
+      "+docs/system/pre-gate-evaluator-doctrine.md (NEW · les 5 checks du gate A6 · 2 verrous absolus : substitution + ancrage atlas resoluble par encodage · budget anti-spin · annoncee entree CHANGELOG v2.88.0, shippee v2.90.0)",
+      "+docs/system/brief-distribution-doctrine.md (NEW · detection cascade connected-sources -> Ecosystem -> credentials -> MCP verifies · question UNE fois par marque, memorisee brands/{slug}/config.json#preferences.brief_distribution · fork Route A/B fondu dans le close, jamais bloquant)",
+      "~docs/system/creative-axis-canonicalization-doctrine.md (reconciliee v2.90.0 : gate A6 reel, workflow A operationnalise, mentions v2.88.1 datees, receptacle concepts CPT)",
+      "~docs/system/README.md (28 -> 30 doctrines + 2 entrees + annotation CAC)"
+    ],
+    "sop": [
+      "~resources/sops/creative-production/perf-feedback-loop.md (TBD -> TRANCHE · seuils = audit-creative-fatigue Step 3 verbatim · verdicts winner/loser/inconclusive · formule perf_signal unique calculee a la volee (T = test_results actifs, convergence joignable par tag genome) · differe explicite : attribution, cross-plateforme, promotion canon auto, dashboard · audit-creative-fatigue = CLASSER only tant que non migre au layout batch)",
+      "~resources/sops/creative-production/cross-brand-curation.md (NEW section fonction de distance d'emprunt canon v2.90.0 · source unique citee par les 3 skills)"
+    ],
+    "infra": [
+      "~.skills/write-to-context.py (ALLOWED_PATH_PATTERNS +4 : creatives/{batch}/frame.json · genome-package.json · hook-bench.json · concepts/CPT-NN.json)"
+    ],
+    "surfaces": [
+      "~docs/product/capabilities.md (chaine cadrage -> gates + Route A/B + 34 mecaniques)",
+      "~.skills/README.md + .skills/INDEX.md + docs/vision/manifesto.md + docs/vision/positioning-pitch.md (82 -> 85 skills)"
+    ]
+  },
+  "tests_non_regression": [
+    "validate-all --strict a zero sur _EXAMPLE + _TEMPLATE",
+    "rebuild-index --check in sync (22/22)",
+    "build-manifest 85 skills · triggers frame-regime EN=4 sans duplication FR (bug parseur 'RIEN :' corrige)",
+    "audit adversarial 4 lentilles post-build : 5 BLOCKERS + 20 MAJOR + 18 MINOR interceptes et corriges, re-greps de survivance a zero",
+    "coherence chainage spot-checked : rayon_max persiste lu par evaluate-concept (jamais re-derive) · concepts/CPT receptacle unique · prefixes brands/{slug}/ partout"
+  ],
+  "decisions_captured": [],
+  "out_of_scope_noted": [
+    "Bras video : contrat declare dans genome-package, rendu non cable · Route B (export brief humain) = le chemin video assume en attendant · choix endpoint Veo/Runway/Kling a trancher (D#478)",
+    "audit-creative-fatigue : a migrer au layout batch creatives/{batch}/{CRT-NN}/ + lineage.ad_id + permissions learnings/creative pour co-executer TRACER/SIGNALER (dette explicite au SOP)",
+    "Promotion canon automatisee des patterns : reste un acte de curation humaine >= 2 sources independantes · les observations locales (learnings kind observation) nourrissent la curation",
+    "build-manifest.py TRIGGER_EN_RE sans word boundary (root cause du bug 'RIEN :') : fix candidat \\\\b a l'occasion d'un patch infra"
+  ],
+  "post_update_checklist": [
+    "sync 3 repos (largo-kb + phantomos + phantom-os-abyss)",
+    "tag git v2.90.0",
+    "push (operateur)"
+  ]
+}

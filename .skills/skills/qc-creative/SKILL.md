@@ -22,6 +22,8 @@ description: >
   produced-asset#qc and halts if not shippable.
   FR: "controle qualite de la creative" "gate avant spend" "verifie le rendu de l'ad" "qc creative".
   EN: "qc the creative" "output gate before spend" "check the rendered ad" "creative quality gate".
+disambiguates_against:
+  evaluate-concept: "evaluate-concept juge la solidité STRATÉGIQUE d'un concept AVANT production · qc-creative juge le RENDU visuel d'un binaire APRÈS production."
 permissions:
   reads: [brand, product, profile, genome, creative]
   writes: []
@@ -69,7 +71,7 @@ Si `creative_dir` n'a pas de binaire produit (génome seul), le gate retourne `i
 ### Step 1 — Charger la cible (ce que l'ad DEVRAIT être)
 
 Read :
-- `{creative_dir}/genome.json` — l'ADN : `hook`, `frames[]` (copy_script + visual_script), `genome_tags` (mecanique_id, style_id, angle_id, audience_slug), `copy_meta.compliance_disclaimers_required[]`
+- `{creative_dir}/genome.json` — l'ADN : `hook`, `frames[]` (copy_script + visual_script), `genome_tags` (mecanique_id, primary_style_id, angle_id, audience_slug), `copy_meta.compliance_disclaimers_required[]`
 - `{creative_dir}/creative.json` — lignage (variant_of, refs)
 - `brands/{slug}/products/{product_slug}/spec.json#visual_identity` — `assets_canonical` (logo_canonical, packshot_*, badge_*), `color_palette`, `distinctive_features[]` (= la signature produit à vérifier au pixel)
 - `brands/{slug}/brand.json` — `tone_of_voice`, `brand_da` (palette mood, do/don't, `allowed_style_ids`), `proofs` (les seuls claims/chiffres autorisés), `banned_words`
@@ -107,7 +109,7 @@ Comparer le produit visible dans le rendu au `visual_identity.assets_canonical` 
 
 ### Step 6 — Axe 4 · DA
 
-- Cohérence avec `brand_da` (palette mood, grain/texture, do/don't) et avec la fiche du `genome_tags.style_id` (`registries/styles/{style_id}.json` une fois la style-library câblée). Style hors `brand_da.allowed_style_ids` = `warn` (signaler à l'opérateur), incohérence DA franche = `block`.
+- Cohérence avec `brand_da` (palette mood, grain/texture, do/don't) et avec la fiche du `genome_tags.primary_style_id` (`registries/styles/{primary_style_id}.json` une fois la style-library câblée). Style hors `brand_da.allowed_style_ids` = `warn` (signaler à l'opérateur), incohérence DA franche = `block`.
 
 ### Step 7 — Axe 5 · Anti-défaut IA générique
 

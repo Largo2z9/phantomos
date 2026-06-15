@@ -2,6 +2,8 @@
 
 > The public thesis behind PhantomOS. Opinionated, durable, first-party. Extract-ready: direct copy-paste into any external format is authorized. One rule governs this document: no third-party market statistics, no borrowed authority. The only numbers cited are the system's own.
 
+> **One entry point for all of your work.** The first floor is cabled today: your DTC acquisition. The rest encodes on demand, the system builds its own capabilities as you brief them.
+
 ---
 
 ## 1. The problem is not the model
@@ -54,14 +56,14 @@ The implication is honest: deploying PhantomOS is not enough. It must be operate
 
 The thesis takes concrete form for the V1 audience: a DTC paid acquisition operator encodes their audiences, angles, creatives, advertorials, and learnings into a workspace. The agent operates them across every campaign and every brand the operator manages. Re-briefing context, re-writing copy, re-explaining audiences to a freelancer or a junior: billable-hour work that becomes a compounding asset instead.
 
-The same pattern will fit consultants, coaches, media buyers, and knowledge productizers, any operator whose value depends on a repeatable methodology. **The pattern is general, but the proof is local.** DTC paid acquisition is where the canon is mature and the validation immediate, so that is what ships.
+The same pattern fits consultants, coaches, media buyers, and knowledge productizers, any operator whose value depends on a repeatable methodology. **The pattern is general, the first proof is local.** DTC paid acquisition is where the canon is mature today and the validation immediate, so that is the floor that ships cabled. Creative is one lane inside it, not the perimeter. The other lanes encode the same way, the day an operator brings the corrections that feed them.
 
 ## 7. What is proven, what is not
 
 PhantomOS does not ask to be believed on principle. The numbers it ships with are its own:
 
 - A creative mechanics registry distilled from **522 real ads** across 9 brands and 6 niches.
-- **82 versioned skills**, each a typed protocol with explicit permissions, routed through a compiled manifest.
+- **85 versioned skills**, each a typed protocol with explicit permissions, routed through a compiled manifest.
 - **146 versioned releases** between April and June 2026, every mutation gated, every migration reversible.
 - A cross-brand pattern library where **nothing is promoted without at least two independent sources**.
 
@@ -80,7 +82,7 @@ General-purpose AI tools have made real progress on memory, dedicated spaces, an
 
 **Capture by a vertical platform.** Shopify can ship an *AI workspace for merchants* natively integrated. The encoded substrate would become a feature of a vertical SaaS. Mitigation: be established enough to be the open, operator-owned alternative when they ship.
 
-**Capture by a hyperscaler.** Anthropic, OpenAI, or Google can ship vertical workspace templates natively. That is not a contest we enter. Ours is the craft canon, the method, the deployment. If the hyperscaler descends, the path is to be the reference implementation on their stack, and that position is built through presence in their ecosystem, not declared.
+**Capture by a hyperscaler.** Anthropic, OpenAI, or Google can ship vertical workspace templates natively. We do not race them on the runtime, that is not where the value we hold sits. What we hold is the craft canon, the method, the deployment. If the hyperscaler descends, the path is concrete: be the reference implementation on their stack, a position built through presence in their ecosystem, not declared.
 
 **Commoditization of structured knowledge.** If context windows grow large enough and inference good enough, structured encoding could lose its edge over raw dumps. Minority thesis, watched honestly. What ages best in that scenario is the integrity layer (gated mutations, provenance, append-only memory); what ages worst is heavy taxonomy. The architecture is built to thin the second without losing the first.
 

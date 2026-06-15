@@ -22,6 +22,17 @@ Lis-le avant ta première brand · puis reviens-le consulter quand tu te demande
 | 8 | `angles/ANG-*.json` | **Compositional cartography v3.1 · formula OTRB** · Observation + Tension + Reframe + Bridge · lineage (hook · framework · archetype) + compatibility + cross_refs canonical. 7 angles distribués sur 5 origin_axis (audience · product · category · brand · temporal-cultural). |
 | 9 | `roadmap.json` | **4ème arbre canon** · phases timeline + mix axes weighted + production_status + relations cross-entités denormalized. |
 | 10 | `status.json` | Niveau de complétion canon + flag `is_example: true`. |
+| 11 | `todos.md` · `pending-validations.md` · `session-state.md` | **Couche OS du brand (NEW)** · à quoi ressemble la couche tâche, le buffer de validations / enrichissements ambiants et le log d'activité roulant une fois un brand posé. Vitrine du système todo + des surfaces lues par les navigators, absentes de l'exemple jusqu'ici. |
+
+## Couche OS du brand · todo · validations · session (NEW)
+
+La vitrine montre désormais la couche OS du brand, pas seulement le substrat Context DB. Trois fichiers pédagogiques minimaux ·
+
+- `todos.md` · sections canon `In Progress · Backlog · Flags · Blocked · Archive` et format de ligne `- [ ] Name | P: 0-3 | E | T`. Format de référence · `resources/conventions/todos.json`. Sur ta marque, auto-maintenu par les skills écrivains, tu ne l'édites pas à la main.
+- `pending-validations.md` · buffer append-only des micro-validations / enrichissements ambiants (`Context gate · Access gate · Enrichment · Skill candidates`). Ce sont les surfaces lues par les navigators et la cible du crochet de capture de la posture d'investigation (`docs/system/investigation-posture.md § Crochet de capture`).
+- `session-state.md` · log d'activité roulant auto-maintenu au write, lu au démarrage de session pour récupérer le contexte.
+
+Ces trois fichiers sont posés en register pédagogique Stepprs (`is_example: true`, validés par construction, zéro friction live) · ils enseignent le format, pas un travail en attente réel. Doctrine du report des étapes différées · `docs/system/onboarding-setup-flow.md`.
 
 ## Doctrines canon démontrées · mapping fichier → doc
 

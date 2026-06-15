@@ -1,7 +1,7 @@
 ---
 name: creative-brief-composer
 type: orchestrator
-version: "1.3.1"
+version: "1.4.0"
 recommended_model: sonnet
 subagent_safe: false
 mode: proposed
@@ -304,11 +304,17 @@ Operator override possible · *"genre 2 variants sur même hook, 1 sur hook alte
 - `decompose-ad` · reverse-engineer concurrent benchmark sur même angle pour calibrer
 - Itération brief · si signal live faible, ajuster brief upstream avant relancer variants
 
+**Distribution fork (canon `docs/system/brief-distribution-doctrine.md` · v1.4.0)** · avant de rédiger le Close ouvert, résoudre silencieusement l'outil de centralisation de l'opérateur · cascade canon : `operator/connected-sources.json` + `brands/{slug}/connected-sources.json` (type `crm`/`custom`, capability `write`) → table Ecosystem du `CLAUDE.md` brand → clés `credentials.env` → MCP session réellement vérifiés. Intégrer le résultat au Close ouvert, 1 ligne max :
+
+- **Outil détecté et connecté** → l'outil est nommé dans la question macro : *"on envoie en test live ces {N} variants, et j'en profite pour pousser le brief + les rendus dans ton Notion, base Créas ?"*. Push après confirmation explicite uniquement, jamais silencieux. `brands/{slug}/briefs/` + `creatives/` restent la source de vérité après push.
+- **Rien détecté, question jamais posée pour cette brand** → UNE ligne proactive en fin de Close ouvert : *"au passage, tu centralises tes briefs et créas quelque part : Notion, ClickUp, autre ? je peux m'y brancher"*. Réponse positive → `connect-source`. Réponse négative → persist `brands/{slug}/config.json#preferences.brief_distribution: "workspace_only"`, jamais re-posée.
+- **Route B reste ouverte post-pipeline** · le pipeline a déjà matérialisé la Route A (brief → variants gatés). Si un format sort du bras de génération (vidéo tant que le bras vidéo n'est pas câblé, prod partenaire), proposer l'export Route B : brief markdown + push outil + message d'accompagnement court.
+
 **Close ouvert** · UNE question opérateur arbitre ·
 
 > *"On envoie en test live ces {N} variants, ou on raffine d'abord variant {Z}, ou on génère {M} additional variants sur angle alternatif ?"*
 
-**NEVER** clore sur affirmative sans question. **NEVER** menu hardcoded (a)/(b)/(c)/(d). Question rédigée selon contexte specific de la session.
+**NEVER** clore sur affirmative sans question. **NEVER** menu hardcoded (a)/(b)/(c)/(d). Question rédigée selon contexte specific de la session. **NEVER** bloquer la synthesis 5 sections ni la livraison des artifacts sur la distribution. **NEVER** menu d'outils · la proposition de distribution vit dans le Close ouvert, fondue dans la question macro unique.
 
 ---
 

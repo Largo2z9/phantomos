@@ -64,13 +64,15 @@ Format :
 ```json
 {
   "id": "LRN-{NNN}",
+  "kind": "{test_result|workaround|compliance|observation|decision_trace|hypothesis_validated|pattern_promoted|regulatory_signal|competitor_move}",
   "fact": "{le fait en une phrase claire}",
   "reasoning": "{pourquoi c'est vrai, ce qui l'a causé, ce que ça révèle — MANDATORY non-vide}",
   "scope": "{brand|platform|workspace}",
   "platform": "{platform ou null}",
   "type": "{workaround|compliance|behavior|api_rule|test_result}",
+  "created_at": "{ISO date-time}",
   "date": "{YYYY-MM-DD}",
-  "source": "{test|client_call|platform_docs|observation|null}",
+  "source": "{operator|test|client_call|platform_docs|observation}",
   "tags": ["{tag1}", "{tag2}"],
   "status": "active",
   "genericity": "{brand|sector|universal}",
@@ -78,6 +80,8 @@ Format :
   "promoted_to": null
 }
 ```
+
+**Mapping kind ↔ type** · `kind` est l'autorité canon (9-enum, consommée par brief-day/learn-from-session detection). `type` est l'alias dialecte conservé pour compat. Règle rapide : test→`kind:test_result`, contournement→`workaround`, règle plateforme→`compliance`, comportement observé→`observation`. Toujours remplir `created_at` (date-time) ET `date` (court) — validate lit `date` puis fallback `created_at`.
 
 **CRITICAL: `reasoning` field is MANDATORY, non-empty.** This is the **Decision Trace** (see D#308). The `fact` captures WHAT, the `reasoning` captures WHY. Without the why, the learning is just logged data, not codified expertise. **YOU MUST NEVER** write an entry with `reasoning: ""`, `reasoning: null`, or `reasoning: "n/a"`.
 

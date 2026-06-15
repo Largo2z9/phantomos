@@ -293,6 +293,12 @@ L'audience évolue. Le marché change. Les concurrents éduquent (Solution-Aware
 
 **Fix** · re-cartographier 1x par an (refresh complet) ou à chaque shift majeur du marché (entrée nouveau gros concurrent, scandale niche, réglementation).
 
+**Pitfall 8 · Le miroir des avis (biais du survivant).**
+
+Le symétrique exact du Pitfall 6. Là où le Pitfall 6 invente une audience sans la sourcer, celui-ci s'enferme dans la donnée existante · cartographier les audiences depuis les seuls avis, clients actuels, verbatims collectés. Le piège est invisible parce qu'il a l'air rigoureux (« je source tout »). Mais les avis ne contiennent que les déjà-servis · qui a acheté, résolu l'objection prix, cru la promesse. L'audience que le mécanisme du produit pourrait atteindre mais que la marque n'adresse pas encore n'a jamais laissé d'avis · elle est structurellement absente de la donnée. Lire les audiences au miroir des avis reproduit donc le client qu'on a déjà et reste aveugle au marché non capté.
+
+**Fix** · dériver d'abord les audiences candidates depuis le mécanisme et l'usage (quel job le produit peut servir, quel moment, qui vit ce moment), PUIS qualifier. Une audience dérivée-du-mécanisme sans verbatim n'est pas une audience inventée (Pitfall 6) · c'est une hypothèse à confiance faible avec son levier de validation (carte ouverte · `open-map-reasoning.md`). Le seuil de 10+ verbatims du Pitfall 6 reste la barre pour PROMOUVOIR une mère en cœur validé · il ne borne pas l'exploration. Les deux pitfalls se tiennent ensemble · ne pas inventer (sourcer), ne pas s'aveugler (dériver du mécanisme).
+
 ## Checklist applicable · cartographie d'une mère
 
 Pour chaque mère identifiée, valider ·

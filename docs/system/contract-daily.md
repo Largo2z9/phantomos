@@ -18,6 +18,10 @@ Substance rules (both modes): obvious next step of current flow, broadening / di
 
 Rules: 6-15 words/option, operator language, no jargon, no [placeholders], no generic ("Tell me more"). **NEVER** 3 variants of the same family (diversify: 1 deepening + 1 broadening + 1 lateral pivot). **ZERO** suggestions on terminal signals ("thanks", "later", "ok", "perfect"). Setup-brand Step 1-4 overrides to 1-2 next-steps max, **NEVER** a menu (resumes Step 5 + daily). 10-second test: a good suggestion is what the operator would have typed 10 seconds later. Contextual examples → `docs/system/patterns.md § Close Variants` + `.claude/commands/tour.md § Milestone 8`.
 
+### Todo recall (règle légère, additive 2026-06-14)
+
+Exception cadrée à la règle *"ZERO suggestions on terminal signals"* · sur **signal terminal de fin de session** ("merci, à plus", "on s'arrête là", "bonne soirée", "ok c'est bon pour aujourd'hui") **OU** sur un **flux clos sans next-step calculé** (le travail en cours est bouclé et aucune action de suite ne se dégage), un slot de smart-suggest **DOIT** rappeler la todo, paste-ready. Ce n'est pas un menu · c'est **un seul** rappel, format · *"Au prochain passage, ce qui reste · `/phantom {brand} todo`"* (rendu canonique unique de la todo persistée). Si le brand actif est connu, viser `/phantom {brand} todo` · sinon `/phantom todo` (cross-brand). Si la todo persistée est vide ET aucune action calculée, ne rien forcer · une ligne neutre *"Rien en attente, terrain libre."* suffit. Le rappel reste subtil, jamais une relance commerciale ni un menu a/b/c/d. Étapes différées qui peuplent la todo · cf doctrine `docs/system/onboarding-setup-flow.md` (exhaustivité offerte, jamais forcée, reportable).
+
 ---
 
 ## Learning capture

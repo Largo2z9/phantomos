@@ -29,7 +29,7 @@ permissions:
 Champs ·
 - `provider` · vendor de l'API (fal.ai, openai, anthropic, etc.)
 - `endpoint` · path canonical actuel utilisé par skill
-- `model_family` · famille modèle sous-jacent (gemini_3_pro_image, gpt_5, claude_5, etc.)
+- `model_family` · famille modèle sous-jacent (gemini_3_pro_image, gpt_image, claude_opus_4, etc.)
 - `version_check_url` · URL docs vendor pour check latest version (consulté en audit manuel, PAS runtime)
 - `version_canon_date` · date release version utilisée (YYYY-MM) · sert de référence pour audit fraîcheur
 - `replaced_legacy` · endpoint précédent superseded (audit trail)
@@ -69,7 +69,7 @@ Endpoints fal.ai canon · noter version dans path ·
 
 Pattern equivalent autres vendors ·
 - OpenAI · `gpt-image-1` (v1.0 mai 2025) · `gpt-image-2` (à venir 2026)
-- Anthropic · `claude-opus-4-7` (canon mai 2026 · 1M context)
+- Anthropic · `claude-opus-4-8` (canon · 1M context)
 
 ## Application historique
 

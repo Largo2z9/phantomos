@@ -2,6 +2,8 @@
 name: phantom
 description: Cockpit PhantomOS. Sans arg, vue workspace (tous brands + état global). Avec un brand slug, vue détaillée du brand. Read-only.
 version: v2.89.5
+patch_notes_2026_06_14:
+  - "2026-06-14 (BRIQUE 4 · visibilité todo) · ADDITIF strict, aucune logique retirée. (1) Mode todo-brand `/phantom {brand} todo` confirmé rendu canonique UNIQUE de la todo brand · il lit ET rend `brands/{slug}/todos.md` (sections In Progress · Backlog · Flags · Blocked, Archive ignorée) EN PLUS des Actions calculées, des Connectors, Schedules et Atlas completeness déjà canon. NEW sous-section 'Todo persistée' insérée avant Actions, avec mapping sévérité → iconographie canon `⚠ ◐ ·` et Flags rendus read-only (auto-générés validate-resources). (2) NEW exposition de la todo dans le footer drill · mode workspace (ligne `/phantom {slug} todo`) ET mode brand (ligne Drill footer `Todo  /phantom {slug} todo`) pour que la todo persistée soit atteignable en un hop depuis toute vue. Doctrine report étapes différées référencée (`docs/system/onboarding-setup-flow.md`), pas redupliquée. Zéro em-dash."
 patch_notes_v2_89_5:
   - "v2.89.5 · NEW hard rule render-first en tête de commande. Constaté runtime (instance pro migrée, modèles récents) : l'agent collectait les métriques puis substituait le rendu cockpit par un widget AskUserQuestion de navigation, sur /phantom ET /phantom {brand}. La règle verrouille : vue complète en texte AVANT tout, drill footer = texte, question interactive admise uniquement après rendu et si décision réellement bloquante. Backward compat pur (discipline de rendu, zéro changement de modes)."
 patch_notes_v2_87_5:
@@ -44,6 +46,7 @@ Check the user's argument :
 | `{brand} briefs` | **briefs-drill** : DB Briefs créatifs (liste, statut, lien angle source) |
 | `{brand} tests` | **tests-drill** : DB Tests live + résultats observés + verdict winner_proxy |
 | `{brand} matrix` | **matrix-drill** : output `score-matrix` (matrice scorée + top territoires + trous) |
+| `{brand} spectre` | **spectrum-drill** : carte du terrain (use_case × audience × source d'angle · couverture nous × eux · zones blanches qualifiées · cœur de cible · cf `phantom-modes/spectrum-drill.md`) |
 | `{brand} frictions` | **frictions-drill** : table frictions usage par severity + audiences affected (sub-product OWNED) |
 | `{brand} roadmap` | **roadmap-drill** : phases chronologiques + current highlight + priorities |
 | `{brand} funnel` | **funnel-drill** : couverture TOF/MOF/BOF + trous détectés |
@@ -109,6 +112,7 @@ Suggestions automatiques
 {daemon_patterns_or_silence}
 
 Pour explorer un brand · `/phantom <brand_slug>`
+Pour la todo persistée d'un brand · `/phantom <brand_slug> todo`
 Pour les fonctions disponibles · `/skills`
 ```
 
@@ -217,6 +221,7 @@ Vue détaillée d'un brand spécifique. **Page sobre structurée 4 sections (v2.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Drill                /phantom {slug} {audiences | products | strategy}
+  Todo                 /phantom {slug} todo
   Rechercher           /phantom search "<terme>"
   Aide                 /phantom ?
 
@@ -345,18 +350,21 @@ Sources d'extraction (action verbalisée) ·
 
 Anti-pattern strict · skill names exposés ("Lancer mine-voc dès que possible", "Run produce-paid-angles") · backtick + commande paste-ready dans action. Le `/phantom` v2.79.2 verbalise · l'agent route le skill backstage si l'opérateur valide.
 
-### Section 5 · Drill (footer minimaliste, max 3 lignes + légende)
+### Section 5 · Drill (footer minimaliste, max 4 lignes + légende)
 
-Format strict 3 lignes navigation + légende iconographie au pied ·
+Format strict navigation + légende iconographie au pied · la ligne `Todo` (additif 2026-06-14) expose la todo persistée du brand en un hop depuis le cockpit ·
 
 ```
   Drill                /phantom {slug} {audiences | products | strategy}
+  Todo                 /phantom {slug} todo
   Rechercher           /phantom search "<terme>"
   Aide                 /phantom ?
 
   ─────────────────────────────────────────────────────────────────────
   ✓ complet  ◐ partiel  ○ vide  ✗ absent  ⚠ critique
 ```
+
+La ligne `Todo` route vers le rendu canonique UNIQUE de la todo brand (`/phantom {brand} todo`, cf `phantom-modes/todo-brand.md`), seul mode qui lit ET rend `brands/{slug}/todos.md`.
 
 Substitutions selon business_model ·
 - `service` · remplace `products` par `services`
@@ -415,7 +423,7 @@ Section dédiée explicitant comment le rendering brand mode adapte les entités
 
 | business_model | Matière brand | Production créative | Stratégie & ops |
 |---|---|---|---|
-| `DTC` | brand · ligne produits · audiences | angles · pubs Meta · briefs | frictions · roadmap · strategy · learnings · matrix |
+| `DTC` | brand · ligne produits · audiences | angles · pubs Meta · briefs | spectre · frictions · roadmap · strategy · learnings · matrix |
 | `hybrid` | brand · {primary} (réseau cliniques OU showrooms OU agence locale) · ligne produits · audiences 2 layers | angles · pubs Meta · briefs · campagnes locales | idem DTC + opérations terrain |
 | `service` | brand · services/packages · ICPs B2B | angles lead-gen · pipeline deals · case studies | frictions delivery · roadmap services · strategy · learnings · matrix |
 | `subscription` | brand · plans/tiers · audiences (subscribers vs trial) | angles acquisition · churn-fighters · onboarding flows | frictions churn · roadmap features · strategy MRR · learnings · matrix |
@@ -999,6 +1007,10 @@ Exemple :
 
 Si 0 todo (workspace serein) : *"Aucune action urgente en cours. Profiter du calme, ou démarrer un nouveau brand."*
 
+### Distinction `/phantom todo` (cross-brand) vs `/phantom {brand} todo` (rendu canonique brand)
+
+`/phantom todo` (ci-dessus) agrège les next-suggested **calculés** cross-brand · il ne lit pas les fichiers `todos.md` par brand. Le rendu canonique UNIQUE de la todo persistée d'un brand est `/phantom {brand} todo` (mode todo-brand, split `phantom-modes/todo-brand.md`) · c'est le seul mode qui lit ET rend `brands/{slug}/todos.md` (sections In Progress · Backlog · Flags · Blocked) EN PLUS des actions calculées, des connectors, schedules et atlas gaps. Toute demande de "todo du brand" route vers ce mode, jamais vers une re-implémentation locale. Étapes différées qui atterrissent dans la todo · cf doctrine `docs/system/onboarding-setup-flow.md` (exhaustivité offerte, jamais forcée, reportable).
+
 ---
 
 ## Mode help (?)
@@ -1019,7 +1031,8 @@ Navigation
 Utilitaires
   /phantom search "{keyword}"         recherche cross-brand
   /phantom recent [N]                 timeline des N dernières mutations (défaut 10)
-  /phantom todo                       actions cross-brand priorisées
+  /phantom todo                       actions cross-brand priorisées (calculées)
+  /phantom {brand} todo               todo persistée du brand (rendu canonique unique)
   /phantom ?                          cette vue
 
 Référence métier (workspace-level)

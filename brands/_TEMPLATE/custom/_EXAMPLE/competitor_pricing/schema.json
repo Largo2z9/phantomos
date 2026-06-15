@@ -105,6 +105,12 @@
           "source_url": {
             "type": "string",
             "format": "uri"
+          },
+          "reliability": {
+            "type": "string",
+            "enum": ["observed", "estimated"],
+            "default": "observed",
+            "description": "C1.1 additif (D#518) · nature du prix relevé (wrapper anti-nombre-nu, propagé à l'exemplar custom que tout le monde clone). observed = scrapé/vu sur la page (default, honnête pour un prix relevé) · estimated = reconstruit/inféré, jamais servi comme fait nu. Un nombre estimated sans source_url est flaggé post-hoc."
           }
         },
         "additionalProperties": false

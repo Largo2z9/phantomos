@@ -69,7 +69,7 @@ The temporal layer of SED has its own structure. Three memory layers, never mixe
 
 **Strict separation rule**: layers do not mix. An operator preference does not live in a brand JSON. A brand fact does not live in operator memory. A narrative event does not overwrite either. This separation is what makes the workspace forkable, the operator portable, and the audit trail intact.
 
-**Lifecycle of `learnings.json`** · append-only, with `id / status / superseded_by / genericity / promoted_to`. Promotion path: brand-specific learning → cross-brand pattern → canon candidate. Staleness review at >180 days. `promote-backlog.json` tracks candidates.
+**Lifecycle of `learnings.json`** · append-only, with `id / status / superseded_by / genericity / promoted_to`. Promotion path: brand-specific learning → cross-brand pattern → canon candidate. Staleness review at >180 days. `promote-backlog.json` (créé au premier candidat détecté, absent tant qu’aucun) tracks candidates.
 
 **Events log** (`events.jsonl`) · schema includes `actor_id` (operator or agent), `action_type` (mutation / skill_invoked / hook_refused / checkpoint_resolved / etc.), `field_path`, `before`/`after`, timestamp. Read by `session-search`, audited by `turn-end-audit.py`.
 

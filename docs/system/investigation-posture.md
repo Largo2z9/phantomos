@@ -1,3 +1,11 @@
+---
+title: Investigation Posture · Cartographier avant affirmer
+type: doctrine
+patch_notes:
+  - date: 2026-06-14
+    change: "Ajout d'un crochet de capture optionnel en fin de synthèse (§ Crochet de capture). Les items Inconnu / Leviers à haute valeur et les hypothèses Déduit confidence faible / TRÈS faible s'écrivent en write léger vers brands/{slug}/pending-validations.md (§ Enrichment pour le contexte business à surfacer, § Context gate pour les champs inférés à valider), sans dépendre d'un passage ultérieur de learn-from-session. Additif strict : la structure 5 sections et la posture restent inchangées, le crochet est une affordance de persistance native en plus du close ouvert. Aligne sur le pattern d'écriture déjà porté par snapshot-brand / setup-brand. Doctrine de report des étapes différées · docs/system/onboarding-setup-flow.md."
+---
+
 # Investigation Posture · Cartographier avant affirmer
 
 > Doctrine fondamentale v2.54+. Tout output stratégique d'un skill production / curator commence par cartographier le connu, déclare ses hypothèses avec confidence chain explicite, identifie les inconnus, et propose des leviers d'investigation à l'opérateur. JAMAIS affirmer comme un fait ce qui est une hypothèse. JAMAIS conclure sans avoir cartographié. L'opérateur arbitre au macro ce qu'on creuse.
@@ -162,6 +170,30 @@ Reco macro · A + B en premier (45 min total, pose la fondation), C/D si temps a
 ```
 
 L'opérateur dit `A` ou `A+B` ou autre, l'agent enchaîne le drill-down sur l'axe choisi.
+
+### Crochet de capture (optionnel · additif)
+
+> Affordance de persistance native, en plus du close ouvert. Le close ouvert reste la fin canon visible de la synthèse (la question macro). Le crochet est muet côté opérateur · il grave en arrière-plan ce qui mérite d'être repris plus tard, pour que l'investigation ne dépende pas d'un passage ultérieur de `learn-from-session`.
+
+Quand la synthèse pose des inconnues à haute valeur ou des hypothèses sur du sable, ces items s'écrivent en **write léger** vers `brands/{slug}/pending-validations.md` au fil de la synthèse, pas seulement en prose qui s'évapore à la fin du tour. C'est la même règle « inconnus, leviers et étapes différées sont des champs visibles, jamais des trous muets » que la doctrine de report des étapes différées (`docs/system/onboarding-setup-flow.md`, à laquelle on renvoie plutôt que de la rédupliquer).
+
+**Ce qui se capture, et vers quelle surface** ·
+
+| Item de la synthèse | Surface dans `pending-validations.md` | Pourquoi cette surface |
+|---|---|---|
+| Hypothèse `Déduit` confidence `faible` ou `TRÈS faible` qui sert d'appui à un livrable | `§ Context gate` | Champ inféré non validé humainement · soft friction si réutilisé tel quel |
+| `Inconnu` à haute valeur (variable qui décide de la stratégie) | `§ Enrichment` | Contexte business non capté au scan · à surfacer avant de réinventer |
+| `Levier` pré-amorçable rattaché à un Inconnu | `§ Enrichment` (avec le levier en clair sur la ligne) | L'item porte déjà le geste qui le lèverait |
+
+**Forme de la ligne** · un `- [ ]` par item, formulé dans la langue de l'opérateur, tag de source en clair (`(inféré du site)`, `(déduit)`, `(à confirmer côté opérateur)`), jamais les mots-clés `source` / `confidence` / `mode`. Append-only, jamais d'écrasement. C'est exactement le pattern d'écriture que `snapshot-brand` et `setup-brand` portent déjà sur ces deux sections · cette doctrine ne fait que l'étendre à tout output stratégique qui passe par les 5 sections.
+
+**Garde-fous du crochet** ·
+
+- **Optionnel, jamais bloquant.** Pas de brand cible résolu (`_EXAMPLE`, contexte hors marque, question libre) → on saute le write en silence, la synthèse 5 sections reste intacte.
+- **Sélectif, pas un dump.** On ne déverse pas les 5 sections dans le fichier · seuls les items à haute valeur ou à confiance faible y vont. Le reste vit dans la synthèse du tour.
+- **Léger et muet.** L'écriture suit la règle « zéro plomberie visible » · on ne nomme ni le fichier ni les sections à l'écran. La seule trace opérateur-facing reste le close ouvert.
+- **Indépendant de `learn-from-session`.** Le crochet grave au moment de la synthèse · il ne présuppose pas qu'un flush d'apprentissage de fin de session passera. Si `learn-from-session` passe ensuite, il enrichit, il ne remplace pas.
+- **Mutation discipline.** Écriture via le canal d'écriture canon du fichier (append `[ ]` sous la bonne section), jamais d'édition manuelle qui casserait le format des autres sections.
 
 ---
 

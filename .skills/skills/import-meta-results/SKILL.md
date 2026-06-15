@@ -1,11 +1,17 @@
 ---
 name: import-meta-results
 type: capturer
-version: "2.0.0"
-recommended_model: haiku
+version: "2.2.0"
+recommended_model: sonnet
 isolation_scope: brand
 layer: meta
 description: >
+  v2.1.0 (v2.90.0 boucle minimale) · Step 3 TBD remplacé par l'exécution de la boucle
+  CLASSER → TRACER → SIGNALER du SOP perf-feedback-loop.md (tranché, plus TBD) ·
+  writes += learnings.json (kind test_result + observation) + creative.json#performance.signal ·
+  rendu opérateur sobre (N classées · winners/losers · recos variantes · 1 next-step) ·
+  Steps 0-2 pull+land inchangés, réceptacle performance.raw toujours brut ·
+  recommended_model haiku → sonnet (la classification 3a-3c raisonne sur seuils + génome).
   Brique 5 MINIMAL (réceptacle perf, D#482+) · pull Meta Insights par
   `lineage.ad_id` pour les creatives déployées (CRT-NN sous batch) · LAND le blob
   perf BRUT dans `creative.json#performance.raw` (+ performance.ad_id +
@@ -20,8 +26,9 @@ description: >
   EN: "import Meta results", "import ad perf", "land perf", "pull meta insights",
       "pull results by ad_id".
 permissions:
-  reads: ["brands/{slug}/creatives/*/*/creative.json"]
-  writes: ["brands/{slug}/creatives/*/*/creative.json"]
+  reads: ["brands/{slug}/creatives/*/*/creative.json", "brands/{slug}/strategy.json",
+          "brands/{slug}/learnings.json", "resources/concepts/", "resources/registries/hooks/"]
+  writes: ["brands/{slug}/creatives/*/*/creative.json", "brands/{slug}/learnings.json"]
   mode: silent
   subagent_safe: true
 extension_hooks:
@@ -31,8 +38,9 @@ disambiguates_against:
      vs import-meta-results · pull data brut + land dans performance.raw sans diagnostic ni analyse"
   - "learn-from-session · capture learnings session-end full conversation scan
      vs import-meta-results · pull Meta runtime continuous par ad_id ciblé, land brut"
-  - "audit-creative-fatigue · curator scan fatigue creative-level avec reco
-     vs import-meta-results · capturer pull data brut land dans le réceptacle perf"
+  - "audit-creative-fatigue · même classification (SOP perf-feedback-loop partagé), mais
+     audit-creative-fatigue = scan dédié interactive avec output 5 sections
+     vs import-meta-results · capturer silent, classification au fil de l'import, rendu 5 lignes max"
   - "routine-perf · briefing perf quotidien navigator output operator-facing
      vs import-meta-results · capturer silent land perf brute dans creative.json sans output verbose"
 pipeline:
@@ -45,25 +53,26 @@ pipeline:
     Pour chaque créa déployée : blob perf BRUT landé dans creative.json#performance.raw,
     + performance.ad_id (miroir lineage.ad_id) + performance.imported_at (date-time now).
     Aucune métrique re-modélisée (réceptacle ouvert additionalProperties).
-    L'analyse fine (promotion canon, validations[], decay, recalibrage régime) reste DIFFÉRÉE
-    (chantier perf-feedback-loop.md), gatée derrière une note 'TBD analyse fine'.
+    Boucle minimale Step 3 exécutée (SOP perf-feedback-loop) : verdicts tranchés tracés dans
+    learnings.json (kind test_result + observation), performance.signal écrit sur chaque créa
+    classée. Le différé (attribution, cross-plateforme, promotion canon auto) reste différé.
 ---
 
 # Skill: import-meta-results
 
 Capturer silent qui pull Meta Insights par `lineage.ad_id` pour les creatives déployées brand-side, puis LAND le blob perf BRUT dans `creative.json#performance.raw`. Brique 5 MINIMAL : on POSE le réceptacle, pas l'intelligence. La perf doit ATTERRIR + être JOIGNABLE (le signal « qu'est-ce qui a marché » se joint déjà aux `genome_tags` du dossier — on JOINT, on ne re-modélise pas). Layer meta, mode silent (pas de verbose output operator-facing).
 
-**Le job runtime de ce skill en brique 5 = PULL + LAND.** Tout le reste (analyse fine, promotion canon, recalibrage régime, sémantique par plateforme, attribution) est un **CHANTIER DOCTRINE SÉPARÉ et DIFFÉRÉ** : `resources/sops/creative-production/perf-feedback-loop.md`. Ne PAS essayer de rendre ce skill intelligent maintenant.
+**Le job runtime de ce skill = PULL + LAND + boucle minimale (v2.1.0).** Le Step 3 exécute la boucle CLASSER → TRACER → SIGNALER du SOP `resources/sops/creative-production/perf-feedback-loop.md` (tranché v2.90.0). Tout le reste (attribution, sémantique cross-plateforme, promotion canon automatisée, dashboard) reste DIFFÉRÉ, liste explicite dans le SOP. Ne PAS déborder la boucle minimale.
 
 ## Expert methodology
 
 **Canonical expert persona**: plombier du réceptacle perf · pull la donnée brute, la pose là où elle est joignable. Daemon silent, pas analyst, pas curator.
 
-**Framework**: 2-step pipeline minimal (list créas déployées → pull Insights → land brut). Pas de cross-réf canon-tools, pas de classification outcome, pas de compute promotion. Ce sont des chantiers différés.
+**Framework**: 3-step pipeline (list créas déployées → pull Insights → land brut → boucle minimale CLASSER/TRACER/SIGNALER selon le SOP). Pas de cross-réf canon-tools, pas de promotion canon : différés.
 
 **Matrix** (applied per creative): *créa déployée × ad_id × blob perf brut landé dans performance.raw*.
 
-**Codified reference**: `resources/schemas/creative.schema.json` (creative/1.4 · `lineage.ad_id` pattern-locké `plateforme_NNN` = clé de jointure, `performance` ouvert avec `performance.raw`), `resources/conventions/creative-storage.md` (forme batch `creatives/{batch}/{CRT-NN}/`), `resources/conventions/meta-ads.json` (Insights endpoints), `resources/sops/creative-production/perf-feedback-loop.md` (le marqueur du chantier différé : ce qui est posé vs ce qui reste à construire).
+**Codified reference**: `resources/schemas/creative.schema.json` (creative/1.4 · `lineage.ad_id` pattern-locké `plateforme_NNN` = clé de jointure, `performance` ouvert avec `performance.raw`), `resources/conventions/creative-storage.md` (forme batch `creatives/{batch}/{CRT-NN}/`), `resources/conventions/meta-ads.json` (Insights endpoints), `resources/sops/creative-production/perf-feedback-loop.md` (le SOP tranché v2.90.0 : seuils, verdicts, formule de jauge · et la liste de ce qui reste différé).
 
 ---
 
@@ -144,32 +153,37 @@ Construire le patch perf par créa ·
 
 ---
 
-## Step 3 · DIFFÉRÉ · l'analyse fine (CHANTIER perf-feedback-loop.md · TBD)
+## Step 3 · Boucle minimale · CLASSER + TRACER + SIGNALER (SOP perf-feedback-loop tranché · v2.1.0)
 
-> **TBD analyse fine.** Cette section décrit l'intelligence qui RESTE à construire. Elle n'est PAS exécutée par ce skill en brique 5. Elle est GATÉE derrière ce marqueur et ne doit JAMAIS faire échouer le run sur des champs absents. Le job runtime ici = PULL + LAND (Steps 1-2). Référence chantier : `resources/sops/creative-production/perf-feedback-loop.md`.
+> Exécuté APRÈS le land Step 2, pour chaque créa dont `performance.raw` vient d'atterrir. La logique canonique (seuils, verdicts, formats d'entrée, formule de jauge) vit dans `resources/sops/creative-production/perf-feedback-loop.md` · ce step l'EXÉCUTE, il ne la redéfinit pas. Sous-lecture du SOP obligatoire au premier run de session.
 
-Ce qui était précédemment câblé en dur dans ce skill (classification outcome success/neutral/failed/fatigued, cross-réf canon-tools, append `validations[]`, decay v2.37, threshold N≥3 brands auto-promote candidate, persist learnings.json) reposait sur des champs (`formula_used`, `framework_used`, `archetype_used`, `hook_used`, `objection_used`, `cta_used`, `meta.deployed_at`) qui **n'existent pas** dans `creative.schema`. C'était la cause de la boucle morte. **Désactivé**, repoussé au chantier doctrine.
+**3a · CLASSER.** Pour chaque créa avec perf fraîche · dériver les 4 signaux canon (CTR decay, CPM rise WoW, frequency saturation, ROAS decay · seuils EXACTS `audit-creative-fatigue` Step 3, jamais improvisés) + l'outcome fatigue (fresh/stable/warning/critical, table days_running + cross-signal logic) + le verdict winner/loser/inconclusive (target ROAS lu `strategy.json#annual_goals[]` kpi_metric ROAS actif · volume minimal spend ≥ 100€ ET days_running ≥ 7). Les slopes exigent du daily : si le blob Step 2 est lifetime agrégé, re-pull `date_preset=last_30d&time_increment=1` sur les créas éligibles (même endpoint, même rate limit), sinon verdict inconclusive · JAMAIS inventer un signal depuis un agrégat. Target ROAS absent → axe winner inconclusive + flag opérateur 1 ligne, une fois par run.
 
-La logique reste documentée ci-dessous comme cahier des charges du chantier — riche, préservé, mais **NON exécuté** (pas de write, pas de fail sur champs absents) tant que perf-feedback-loop.md n'est pas tranché.
+**3b · TRACER.** Pour chaque verdict TRANCHÉ (winner ou loser · inconclusive ne s'écrit pas) · append `learnings.json#entries[]` via `write_to_context` · `kind: test_result`, `fact` = le QUOI chiffré, `context` = le POURQUOI signaux (OBLIGATOIRE, entrée refusée sans), `cross_refs.creative_ids[]`, `test_result_data {roas, ctr, spend_eur, days_running, winner_proxy, fatigue_signal}`, `validation_status: tested`, `source: test_capture`. Append-only strict · re-classification = nouvelle entrée + `superseded_by` sur l'ancienne. Si winner ET `genome_tags` joignable à un pattern de bibliothèque (`resources/concepts/`, `registries/hooks/` via `related_mechanic_ids`) → entrée `kind: observation` en plus (pont curation · **JAMAIS write `resources/`**, promotion = humaine ≥ 2 sources, cf SOP).
 
-Le chantier (par perf-feedback-loop.md, « RESTE à construire ») ·
+**3c · SIGNALER.** Écrire `creatives/{batch}/{CRT-NN}/creative.json#/performance/signal` via `write_to_context` (mode direct) · `{outcome, verdict, classified_at, variant_axis_reco}` · mapping canon : CTR decay → `hook_swap` · CPM rise → `background_swap` · freq > 4.0 → `audience_swap` · compound → séquentiel hook puis background · winner sain → `null`. `performance.raw` et `snapshots[]` restent intouchés.
 
-1. **Sémantique par plateforme** — Meta / TikTok / Snapchat : métriques + seuils différents. Quelle métrique = quel signal (CTR, hold-rate, ROAS, CPA, thumb-stop, days_running). Normalisation cross-plateforme.
-2. **Gagnant / perdant / « ça coupe »** — seuils de décision, par rapport à quelle baseline (marque, batch, benchmark). (Ancienne table outcome `purchase_roas >= target_stage` → success, etc. : à re-trancher ici, pas en dur dans le capturer.)
-3. **Recalibrage régime explore/exploit** — comment la perf met à jour la jauge `perf_signal` (A3) → prochain régime + curseur sectoriel.
-4. **Promotion canon (3e signal)** — quel principe abstrait se promeut vers la banque de concepts quand N créas convergentes gagnent. Le signal « qu'est-ce qui a marché » se JOINT aux `genome_tags` du dossier (mécanique / style / structure) déjà présents — on JOINT, on ne re-modélise pas. La règle exacte (ex N≥3, decay, validations[], cross-réf canon-tools) = ICI, pas dans le pull.
-5. **Attribution** — multi-touch, fenêtre, multi-plateforme. Sujet en soi.
-6. **Dashboard** — couche au-dessus, lit le même réceptacle (vue opérateur).
+**3d · Recalibrage (rien à écrire).** La jauge `perf_signal` se calcule à la volée par ses consumers (formule canonique du SOP · none/early/established · consommée par frame-regime au gate A3). Si le run vient de la faire basculer (ex 3e verdict tranché avec convergence), le mentionner en 1 mot dans le rendu, en langage clair.
 
-**Principe directeur (perf-feedback-loop.md)** · data-vs-logique : le réceptacle est GÉNÉRIQUE (la donnée, posée par ce skill), l'analyse est SPÉCIFIQUE (la logique, dans des skills/doctrines à écrire). Ne PAS figer l'ontologie des métriques dans le schéma ni dans ce capturer.
+**3e · Signal de saturation du cœur (Spectre · D#506).** Conditions, toutes calculables à la volée (pas d'état persistant à détecter, canon « pas de fichier d'état ») · `perf_signal == established` (état COURANT, pas une détection de transition « vient de basculer ») ET `brand.json#/meta/stage ≠ launch` ET pas de `spectrum.json` frais (absent OU `refreshed_at` de plus de 90 jours, TTL canon) ET le signal `core_saturated` n'est PAS déjà dans le buffer pattern-detection pour cette marque (**dédupe** · sans ça il se re-poserait à chaque run une fois `established`). Si les 4 sont remplies, alors JUGEMENT de l'agent (sémantique, pas un champ pré-calculé · cf Master rule) · le mur dominant est-il le **MARCHÉ** ? (lire `strategic-diagnostic-doctrine` · un winner qui s'essouffle peut être un mur ANGLE et pas MARCHÉ · ne pas confondre cœur prouvé et marché ouvert). Si oui → poser `{type: core_saturated, brand, suggest: spectre}` dans le buffer, surfacé via le protocole Background (intégrer ou différer), JAMAIS silencieux. C'est le déclencheur n°3 du Spectre · le système propose la carte au bon moment. Si le mur est OFFRE ou ANGLE → ne PAS suggérer le Spectre (route le diagnostic, pas la carte).
+
+**Rendu opérateur (sobre · remplace le close terse Step 4 quand Step 3 a tranché au moins 1 verdict)** ·
+
+> *"Perf à jour sur 7 créas. 2 gagnantes (CRT-04, CRT-09 · au-dessus de ton objectif de rentabilité), 1 en fatigue critique (CRT-12 · l'accroche et le visuel s'usent, je recommande une variante d'accroche d'abord), 4 sans verdict (pas encore assez de volume). Assez de tests tranchés maintenant pour orienter le prochain batch sur ce qui gagne. Je prépare la variante d'accroche de CRT-12 pour validation ?"*
+
+Cap 5 lignes. Chiffres seulement si l'opérateur drille. JAMAIS de field paths, de noms de skills, de jargon (`variant_axis`, `winner_proxy`) en surface · accroche, visuel, audience, objectif de rentabilité. UN next-step contextuel unique, jamais de menu.
+
+**Reste différé (liste explicite, vit dans le SOP)** · sémantique normalisée cross-plateforme · attribution multi-touch · promotion canon automatisée · dashboard · decay automatique des validations. **NEVER** déborder la boucle minimale depuis ce skill.
 
 ---
 
 ## Step 4 · Close silent
 
-Une fois le land terminé, close terse (mode silent canon) ·
+Fallback quand Step 3 n'a RIEN tranché (0 créa classifiable · volume insuffisant partout) · close terse (mode silent canon) ·
 
-> *"Import done · {N} créas déployées, perf brute landée dans performance.raw. L'analyse (gagnant/perdant, promotion canon) reste un chantier séparé (perf-feedback-loop.md)."*
+> *"Import done · {N} créas déployées, perf brute landée. Aucun verdict tranchable encore (volume insuffisant), je re-classerai au prochain import."*
+
+Sinon le rendu opérateur du Step 3 fait office de close.
 
 Log activity entry `session-state.md` · `"import-meta-results run · {N} créas, perf landée, analyse fine différée"`.
 
@@ -178,7 +192,7 @@ Log activity entry `session-state.md` · `"import-meta-results run · {N} créas
 ## Hard Rules
 
 - **HR1** · Step 0 bridge proactif canon v2.77 MANDATORY · jamais skip access check. Default proactif (a) connect-mcp-server, fallback (b) skip propre (capturer silent, pas blocker).
-- **HR2** · Brique 5 = POSER le réceptacle, PAS l'intelligence. Le job runtime = PULL + LAND. **NEVER** essayer de classer, scorer, promouvoir, recalibrer un régime ou cross-réf canon ici. Ces chantiers sont DIFFÉRÉS (perf-feedback-loop.md).
+- **HR2** · Le job runtime = PULL + LAND + boucle minimale Step 3 (classer/tracer/signaler selon le SOP perf-feedback-loop, tranché v2.90.0). **NEVER** au-delà : pas de promotion canon, pas d'attribution, pas de normalisation cross-plateforme, pas de write `resources/`, pas de fichier d'état perf_signal (chantiers différés, liste explicite dans le SOP).
 - **HR3** · Scan forme batch · lire `brands/{slug}/creatives/*/*/creative.json` (= `creatives/{batch}/{CRT-NN}/`). **NEVER** lire l'ancien dossier plat `creatives/produced/` (supprimé brique 3).
 - **HR4** · Clé de jointure = `lineage.ad_id` (pattern-locké `^(facebook|tiktok|snapchat|google)_[0-9]+$`). **NEVER** lire `meta.ad_id` (inexistant). Filtre éligibilité = `lineage.ad_id` non-null, et RIEN d'autre.
 - **HR5** · Filtre relâché (fix boucle morte) · **NEVER** exiger `meta.deployed_at` ni les canon-tools (`formula_used`/`framework_used`/`archetype_used`/`hook_used`/`objection_used`/`cta_used`) — ils n'existent pas dans `creative.schema`. **NEVER** faire échouer un run sur l'absence de ces champs.
@@ -193,7 +207,7 @@ Log activity entry `session-state.md` · `"import-meta-results run · {N} créas
 
 ## Anti-patterns
 
-- **AP-1 · Rendre le skill intelligent maintenant** · agent classe outcome, calcule promotion canon, recalibre régime, cross-réf canon-tools en brique 5. Anti-pattern HR2 BANNI. Pattern canon · PULL + LAND seulement, analyse fine différée (perf-feedback-loop.md).
+- **AP-1 · Déborder la boucle minimale** · agent promeut un pattern vers `resources/`, improvise un seuil hors SOP, écrit un fichier d'état perf_signal, normalise cross-plateforme ou tente une attribution. Anti-pattern HR2 BANNI. Pattern canon · PULL + LAND + boucle minimale Step 3 (seuils du SOP uniquement), le reste différé.
 - **AP-2 · Lire l'ancien dossier plat** · agent scanne `creatives/produced/` (supprimé). Anti-pattern HR3 BANNI. Pattern canon · forme batch `creatives/*/*/creative.json`.
 - **AP-3 · Lire meta.ad_id** · agent cherche la clé de jointure dans `meta.ad_id` (inexistant). Anti-pattern HR4 BANNI. Pattern canon · `lineage.ad_id` pattern-locké.
 - **AP-4 · Filtre rigide boucle morte** · agent exige `meta.deployed_at` ou les canon-tools (`formula_used` etc.) absents du schéma → rien ne matche jamais → boucle morte. Anti-pattern HR5 BANNI. Pattern canon · filtre simple `lineage.ad_id` non-null.
@@ -208,7 +222,7 @@ Log activity entry `session-state.md` · `"import-meta-results run · {N} créas
 
 ## Cross-refs
 
-- `resources/sops/creative-production/perf-feedback-loop.md` · **LE MARQUEUR DU CHANTIER DIFFÉRÉ** · ce qui est POSÉ (réceptacle, brique 5) vs ce qui RESTE à construire (analyse fine : sémantique par plateforme, gagnant/perdant, recalibrage régime, promotion canon, attribution, dashboard). Référence obligatoire avant toute tentative d'analyse.
+- `resources/sops/creative-production/perf-feedback-loop.md` · **LE SOP TRANCHÉ (v2.90.0)** · seuils, verdicts, formats d'entrée learnings, formule de jauge perf_signal = la logique canonique que le Step 3 exécute. Porte aussi la liste explicite de ce qui RESTE différé (sémantique cross-plateforme, attribution, promotion canon automatisée, dashboard). Sous-lecture obligatoire au premier run de session.
 - `resources/schemas/creative.schema.json` · creative/1.4 · `lineage.ad_id` (clé de jointure pattern-locké `plateforme_NNN`) + `performance` ouvert (`performance.raw`, `performance.ad_id`, `performance.imported_at`, `performance.snapshots[]`) = réceptacle générique SANS ontologie.
 - `resources/conventions/creative-storage.md` · forme batch `brands/{slug}/creatives/{batch}/{CRT-NN}/creative.json` (D#481) · allocation id par mkdir atomique · id de stockage (CRT-NN) séparé de la clé de join perf (ad_id externe).
 - `resources/conventions/meta-ads.json` · Insights endpoints + rate limits + learned_rules.

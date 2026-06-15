@@ -1,0 +1,45 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.92.0",
+  "released_at": "2026-06-15",
+  "type": "MINOR",
+  "summary": "L'OS montre son travail (beat de restitution + rendu visuel) + garanties dans le code (hook encoding-integrity) + l'angle redefini en 5 coordonnees avec la coordonnee NEGATIF cablee + sprint base saine (5 defauts silencieux fermes). Arc D#517-525. Voir CHANGELOG [2.92.0] pour le detail.",
+  "changelog_ref": "CHANGELOG.md#[2.92.0]",
+  "headline": [
+    "Le beat de restitution (D#521-522) · render-beat.py deterministe (decision-d'abord · verdict + second ordre · prudent-avec-cause · CTA /phantom tease · temporalite + mode orchestre/standalone) cable sur les 5 phases d'onboarding via build-atlas v1.18.0 + hook beat-emit.py · doctrine SSOT restitution-beat · fin de la double compression (la meteo)",
+    "Rendu visuel (D#521) · render-schema.py · 4 SVG deterministes (2x2 position · heatmap usage x audience avec zone-blanche vs non-observe · relations Mc->U->A->Angle · sankey force-de-preuve) · couleur = sens pas sequence",
+    "Garanties dans le code (D#520) · hook encoding-integrity.py (PostToolUse) relit l'artefact ecrit et auto-corrige en vol si degenere · le virage de categorie · garanties -> code, raisonnement -> prose",
+    "Garde-fou de profondeur re-pose a CHAQUE frontiere de gate (D#519) · un run qui pause avant le close ne declenchait jamais le filet terminal",
+    "L'angle redefini (D#523) · pari falsifiable sur le chemin de croyance le plus court · 5 coordonnees (entree/awareness · moteur desir-douleur · source de croyance · NEGATIF · recadrage) · couche SELECTION au-dessus de la composition OTRB · doctrine angle-strategy",
+    "Coordonnee NEGATIF cablee (D#525) · schema angle/1.6 (bloc negative) + filets post-hoc validate-all (angle_negative_untraced MED · angle_negative_missing LOW advisory) + contrat d'ecriture produce-paid-angles v1.13.0",
+    "Sprint base saine (D#524) · 5 P0 fermes dans le code · race d'ID (claim O_EXCL) + brownfield (protege le valide) dans write-to-context · tour idempotence (hook session-awareness.py) · path-drift status.json (3 gates de reprise reanimes) · define-specs decrochage (filet benefits_missing + routage build-atlas)"
+  ],
+  "migrations": [],
+  "schema_changes": [
+    "angle.schema.json 1.5 -> 1.6 (additif · NEW bloc top-level negative · enum _schema_version etendu · backward-compat)"
+  ],
+  "new_files": [
+    "docs/doctrine/angle-strategy-doctrine.md (couche selection de l'angle · 5 coordonnees)",
+    "docs/system/restitution-beat-doctrine.md (SSOT du beat · decision-d'abord + modalite suit le contenu + les deux registres)",
+    ".skills/render-beat.py (beat de restitution deterministe)",
+    ".skills/render-schema.py (4 SVG deterministes)",
+    ".claude/hooks/beat-emit.py (PostToolUse/Task · garantit l'emission du beat)",
+    ".claude/hooks/encoding-integrity.py (PostToolUse/Bash · auto-correction en vol)",
+    ".claude/hooks/session-awareness.py (SessionStart · maintient awareness.json)"
+  ],
+  "skills_count": 85,
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "reachability": "CRITICAL 0 / HIGH 0 (7 WARN = dette advisory pre-existante · doctrines pointant des skills futurs/renommes)",
+    "doctrine_coherence_audit": "GO (workflow 4 lentilles · zero contradiction bloquante · verrous lexicaux D#523 tenus · Master rule respectee · hierarchie inseree pas rivale)",
+    "template_leakage": "operator-facing surface clean · 2 traces souples pre-existantes en couche mainteneur (creative-formula sandbox · schema-encoding narrative R&D->canon) hors scope de ce run",
+    "em_dash_new_content": 0,
+    "post_hoc_nets_smoke_tested": "benefits_missing · angle_negative_untraced · angle_negative_missing (firent sur le degenere, muets sur skeleton/_EXAMPLE)"
+  },
+  "deferred": [
+    "les deux boucles vivantes de l'angle (D#523) · (A) performance paid (statut angle + preuve pattern · dormante sans spend) · (B) decouverte (decompose-ad -> pattern -> bibliotheque CPT cross-marque)",
+    "mode espace-d'angles-candidats explicite de produce-paid-angles (le cartesien interne existe deja · la formalisation reste a faire)",
+    "residu scope-gate · marqueur ecrit de portee qui survit a une reprise (non batit · point de vigilance pour le test runtime · durcir seulement si la portee derive)",
+    "alignement langage-de-plafond + traces sandbox des doctrines internes docs/system (hygiene non-bloquante, pre-existante)"
+  ]
+}

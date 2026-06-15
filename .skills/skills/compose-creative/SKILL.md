@@ -1,6 +1,8 @@
 ---
 name: compose-creative
-version: 1.9.0
+version: 1.9.1
+patch_notes_v2_90_0:
+  - "1.9.1 (v2.90.0 câblage workflow A) · HR2 history-aware : ordre de résolution du régime explicité · (1) creatives/{batch}/genome-package.json#regime si le script provient du contrat A→B (weave-hooks) · (2) creatives/{batch}/frame.json#regime si le batch est cadré (frame-regime) · (3) à froid avec freedom_cursor_note 'uncadré'. Ferme le levier orphelin : compose savait LIRE le régime, rien ne le produisait · frame-regime et weave-hooks le produisent désormais. Backward compat strict (le fallback 3 = comportement v1.9.0)."
 patch_notes_v2_87_4:
   - "1.8.0 (v2.87.4 canonical many-to-many enforcement) · NEW HR-CC-CANON-1 · enforcement entry canonical `brands/{slug}/creatives/{batch}/{CRT-NN}/` OBLIGATOIRE post-génération (forme batch · Brique 4 étape B repath · {batch}=run date-stampé). Anti-pattern banned · sauver asset JPG/PNG standalone hors structure canonical (e.g. `visual-identity/creative_ANG-01_*.jpg` orphelin). Toute génération DOIT créer · (1) `creatives/{batch}/{CRT-NN}/genome.json` (ADN · genome/1.2) + `creatives/{batch}/{CRT-NN}/creative.json` (lignage · creative.schema v1.3) avec lineage populated (angle_ref + audience_ref + product_ref + mechanism_ref + concept_ref) + tags populated (concept + creative + variant + mécanique narrative typed) + cross-refs many-to-many activés. (2) asset JPG sauvé dans `creatives/{batch}/{CRT-NN}/produced/{slug}.jpg` AVEC son sidecar `produced/{slug}.json` (produced-asset/1.0 · pas hors structure, pas d'orphelin). (3) brief copy markdown S55 fiche v5 dans `creatives/{batch}/{CRT-NN}/brief.md`. Closes audit Fincut session v2.87.3 finding · compose-creative générait visuel sans entry canonical · perte traçabilité + pas de tableau composition + pas de base de données imbriquée many-to-many. NOTE v2.87.4 cette règle restait phantom (déclarée ici, jamais exécutée body) · MATÉRIALISÉE en section `## HR-CC-CANON-1` exécutable par Brique 4 étape B (v1.9.0). NOTE Notion bridge auto-wire creatives DEFERRED v2.88.0+ · skill `sync-creatives-to-notion` pas encore shipped (sync-notion-atlas v2.0.1 territoire-only canon respecté · creatives = production layer skill séparé). Backlog mainteneur."
 patch_notes_brick4_step_b:
@@ -17,6 +19,7 @@ operator_facing: true
 reasoning_pattern: matrix-driven
 matrix_mode: composing
 patch_notes:
+  v1.9.2: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW section `## HR5bis · Persist next-step + tick upstream` (entre HR-CC-CANON-1 et HR6) · le next-step recommandé du close (HR6) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`. Double rôle puisque ce producer est aval de produce-copy-brief / produce-paid-angles · (a) TICK auto (`[x]`) toute ligne In Progress qui nommait compose-creative comme skill aval avec la même cible angle/audience/brief, fermant la boucle amont · (b) pose à son tour sa propre ligne next-step (tester sur Meta · décliner variants · qc-creative gate). Le soft offer in-line de HR6 reste inchangé. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · HR1-HR7 + HR-CC-CANON-1 + close préservés."
   v1.7.0: "v2.79.5 engagement disclosure NIVEAU 0 paramètres décomposés · Section pré-runtime ajoutée AVANT HR1 (detect input mode) · expose 6 paramètres décomposés au runtime (brief source · mécanique creative · variants visuels · hook variants · packshot/asset · hypothèses figées · biais à éviter) avec POURQUOI chacun + close binaire OK ou ajuste. Cross-ref doctrines `docs/system/decomposition-visibility-doctrine.md` v2.79.5+ + `docs/system/engagement-disclosure-doctrine.md` v2.79.5+. Backward compat strict additif (HR1-HR7 runtime preserved · seul l'amont disclosure change)."
   v1.6.0: "v2.64 ontologie sémantique pure pain_points + objections sub-audience · HR2 CONTEXTE refactor · `context.pain_point` lookup canonical `audiences/{audience_slug}/pain_points/{PNT-NN}.json` (sub-audience NEW v2.64 · owned natif par parent path). HR5 persist · creative.json#context.pain_point_ref stage PNT-NN canonical (lookup chain sub-audience d'abord). Backward compat strict additif · fallback top-level v2.63 + profile sub-fields v1.7 preserved. Cohérent ontologie sémantique cross-skill (produce-paid-angles v1.10 + produce-copy-brief v1.6 + decompose-angle v1.2 idem refactor)."
   v1.5.0: "v2.63 ontologie pure pain_points + objections collections top-level · HR2 CONTEXTE refactor · `context.pain_point` lookup canonique `pain_points/{PNT-NN}.json` filtered by affected_audiences contains audience_slug (au lieu de profile.problem_map[idx] legacy sub-field). HR5 persist · creative.json#context.pain_point_ref stage PNT-NN canonical (au lieu de pain_extract text legacy seul). Backward compat lecture profile.pain_points[] preserved (pre-v2.63 brands · skip canonical ref, fallback pain text inline). Cohérent ontologie pure cross-skill (produce-paid-angles v1.9 + produce-copy-brief v1.5 + decompose-angle v1.1 idem refactor)."
@@ -54,6 +57,7 @@ disambiguates_against:
   produce-paid-angles: "produce-paid-angles produit des ANGLES (stratégie textuelle). compose-creative produit la CRÉA finale (visuel + brief copy)."
   produce-copy-brief: "produce-copy-brief écrit un BRIEF copy. compose-creative orchestre brief + visuel ensemble."
   recompose-creative: "recompose-creative ADAPTE une créa existante (variant). compose-creative produit ex nihilo."
+  weave-hooks: "weave-hooks prépare le paquet multi-scripts du batch (contrat A→B) en amont · compose-creative produit le binaire d'UN CRT."
 consumes:
   - path: brands/{slug}/angles/{angle_id}.json
     min_version: 1.2.0
@@ -89,7 +93,7 @@ consumes:
     min_version: 1.0.0
   - path: resources/concepts/*.json
     min_version: 1.0.0
-    note: "NEW history-aware · patterns concept promus (library-pattern). Sur freedom_cursor=exploit, piocher un pattern promote-ready matchant le mecanique_id choisi (via related_mechanic_ids) au lieu de composer à froid."
+    note: "NEW history-aware · patterns concept promus (library-pattern). Sur freedom_cursor=exploit, piocher un pattern promote-ready matchant le mecanique_id choisi, via l'espace d'ids déclaré par related_mechanic_ids (hook-level enum ET mecanique_id ad-level · cf description élargie library-pattern.schema), au lieu de composer à froid."
   - path: resources/registries/hooks/*.json
     min_version: 1.0.0
     note: "NEW history-aware · patterns hook promus cross-brand (surtout vidéo). EN PLUS de canon/copy/hooks (archétypes de copy), distinct."
@@ -315,8 +319,8 @@ Operator peut ajouter `composite_mode` au input · `full_regen` (default · pipe
 
 Assembler l'ADN (genome.schema · genome/1.2 · genome.json) + le lignage (creative.schema · creative/1.4 · creative.json) selon NOYAU × CONTEXTE × MODIFIEURS. Le NOYAU (mécanique × format × stop_scroller × ton) projette dans `genome.json` ; le CONTEXTE/MODIFIEURS (refs, intent_mix, execution, performance) dans `creative.json`. La persist split est détaillée HR5.
 
-**History-aware (NEW · pioche vs froid) :** lire `regime.freedom_cursor` (genome-package · explore↔exploit).
-- **exploit** (cursor bas) · pour le `mecanique_id` AD-level choisi, chercher un pattern PROMU (`resources/concepts/*.json` = `library-pattern` avec `promotion.status: promote-ready`) qui le matche via `related_mechanic_ids`. Si trouvé, injecter son `skeleton`/`slots` comme base · composer SUR l'historique qui a marché cross-brand, pas à froid. Idem côté hook si vidéo (`registries/hooks/*.json`).
+**History-aware (NEW · pioche vs froid) :** lire `regime.freedom_cursor` (explore↔exploit). Ordre de résolution v2.90.0 : (1) `creatives/{batch}/genome-package.json#regime` si le script en provient (produit par weave-hooks, contrat A→B) · (2) sinon `creatives/{batch}/frame.json#regime` si le batch est cadré (produit par frame-regime) · (3) sinon composer à froid avec `freedom_cursor_note: "uncadré"`.
+- **exploit** (cursor bas) · pour le `mecanique_id` AD-level choisi, chercher un pattern PROMU (`resources/concepts/*.json` = `library-pattern` avec `promotion.status: promote-ready`) qui le matche via l'espace d'ids déclaré par `related_mechanic_ids` (hook-level enum ET mecanique_id ad-level · cf description élargie library-pattern.schema · le pattern déclare lui-même les ids des deux espaces qu'il couvre, jamais de match mécanique d'un free-string ad-level contre l'enum hook). Si trouvé, injecter son `skeleton`/`slots` comme base · composer SUR l'historique qui a marché cross-brand, pas à froid. Idem côté hook si vidéo (`registries/hooks/*.json`). NB : `primary_style_id` se joint via le style-registry, pas via `related_mechanic_ids`.
 - **explore** (cursor haut) · autoriser un reslot novateur (pattern d'une autre verticale, ou mécanique moins évidente), et le SURFACER à l'opérateur comme pari assumé.
 - Aucun pattern promu disponible · composer à froid (comportement actuel), `freedom_cursor_note` consigné.
 
@@ -935,6 +939,39 @@ JAMAIS sauver un asset JPG/PNG standalone hors structure (e.g. `visual-identity/
 
 ---
 
+## HR5bis · Persist next-step + tick upstream (v1.9.2, additif strict)
+
+Ce skill est aval de `produce-copy-brief` et `produce-paid-angles` · son artifact ferme une boucle ouverte en amont, et il ouvre lui-même la boucle suivante. Deux gestes légers idempotents, exécutés après HR5 (persist split OK) et avant HR6 (output). Aucun ne bloque la livraison de la créa · le binaire + la fiche restent la sortie primaire.
+
+Pattern déjà prouvé par `register-and-flag` Step 6 (write idempotent d'une ligne de tracking dans `brands/{slug}/todos.md`).
+
+**Geste A · tick la ligne amont (fermeture de boucle).** Scanner `brands/{slug}/todos.md → ## In Progress`. Si une ligne y désigne `compose-creative` comme skill aval avec la même cible (même brief BRF-NN / même angle ANG-NN / même audience que ce run · ex `- [ ] compose-creative sur le brief BRF-04 | P: 1 | E: med | T: quelques heures`), basculer la case `[ ]` → `[x]` (puis archivage selon la doctrine todos racine). C'est l'auto-tick que `produce-copy-brief` Step 8bis et `produce-paid-angles` Step 12ter attendent de l'aval. Aucune ligne ne matche → ne rien faire, continuer (silencieux). Jamais de tick manuel.
+
+**Geste B · persister son propre next-step.** Le close (HR6) recommande un move (tester sur Meta · décliner la créa en variants · passer le gate qc-creative avant spend). Cette reco vit dans le chat et meurt au prochain tour si rien ne la fixe. Lui donner une trace · une ligne dans `## In Progress` au **format de ligne canonique** ·
+
+```
+- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {durée}
+```
+
+- `Name` · le soft offer du close verbalisé court, sans nommer de skill interne en surface opérateur MAIS nom de skill aval recevable dans la ligne todo (réceptacle backstage, pas surface). Ex `tester la créa CRT-12 sur Meta audience principale`, `décliner CRT-12 en 2 variants hook`, `qc-creative gate avant spend sur CRT-12`.
+- `P` · priorité dérivée · créa qc-PASS prête au spend → `P: 1` · déclinaison optionnelle → `P: 2`.
+- `E` · effort du move aval (low pour un lancement test, med pour une déclinaison, high pour un batch complet).
+- `T` · ETA aligné `feedback_client_effort_scale` si client-facing (ex `quelques heures`, `demi-journée`).
+
+**Idempotence (dure, comme register-and-flag).** Avant d'écrire, scanner `## In Progress` · si une ligne porte déjà le même `Name`, ne pas dupliquer. Re-run de la même créa = zéro nouvelle ligne. Les deux gestes passent par le mutation gate ·
+
+```bash
+python3 .skills/write-to-context.py --path "brands/{slug}/todos.md#in-progress" --value "- [ ] {Name} | P: {n} | E: {level} | T: {eta}" --source agent --mode direct --reason "Persist recommended next-step from compose-creative close (idempotent)"
+```
+
+Si `write-to-context.py` ne route pas le markdown todos, fallback `register-and-flag` (sous-skill curator) · même réceptacle, même idempotence. Ne JAMAIS hand-editer le markdown todos hors gate (cohérent HR7 anti-pattern 4 · `.json` par le gate · ici le `.md` todos passe aussi par le canal canonique, pas Edit/Write direct).
+
+**Léger, jamais bloquant.** Échec d'un write (gate refuse, fichier absent) → flag interne silencieux, ne casse pas le ship de la créa. La trace todo est un bonus de persistance, pas une précondition.
+
+**Doctrine.** Report des étapes différées et matérialisation des next-steps comme tâches reprenables avec leur levier · `docs/system/onboarding-setup-flow.md` (sections « Exhaustivité offerte, jamais forcée, reportable » et « La persistance est native »). Référencée ici, pas redupliquée.
+
+---
+
 ## HR6 · Output operator-facing
 
 Render fiche markdown selon format S55 fiche v5 forward (template ci-dessous). Vocabulaire opérateur uniquement, pas plumbing. Pas `intent_mix: {primary: DR}`, dire `Type de campagne : direct response`. Pas `overlay_density: 0.6`, dire `Cadrage : hook + claim layered sur packshot`.
@@ -985,7 +1022,7 @@ Réf canonique · `resources/templates/operator-fiche-output.md`. Header plain l
 Format             {plain · ex "carrousel · 4:5 · français" ou "image statique · 1:1 · anglais"}
 Accroche visuelle  {description scène en prose · 1-2 lignes}
 Accroche texte     "{verbatim hook · max 8 mots}"
-Corps              {description body · 1 ligne · ou — si pas de body}
+Corps              {description body · 1 ligne · ou vide si pas de body}
 Bouton             "{verbatim CTA}"
 Branding           {plain · ex "Logo en bas à droite · photo officielle du produit centrée"}
 Photo générée      ouvre dans Preview · open {path} (= creatives/{batch}/{CRT-NN}/produced/{slug}.jpg)

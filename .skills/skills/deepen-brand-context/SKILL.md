@@ -52,7 +52,7 @@ Hard line per onboard-brand precedent: this skill does not re-implement what the
 Verify brand state:
 
 ```bash
-cat brands/{slug}/state/status.json
+cat brands/{slug}/status.json
 ls brands/{slug}/audiences/
 cat brands/{slug}/spec.json | head -20
 ```
@@ -115,7 +115,7 @@ Expected return:
 
 Operator-facing line:
 
-> *"Je passe au market — concurrents, vocabulaire, white-spaces. ~25 min."*
+> *"Je passe au market · concurrents, vocabulaire, white-spaces. ~25 min."*
 
 ## Step 3 — Delegate cross-deepening-signals
 

@@ -1,10 +1,10 @@
 ---
 name: validate-resources
 type: curator
-version: "1.3.0"
+version: "1.4.0"
 isolation_scope: workspace_global
 layer: meta
-patch_notes: "v2.42 · HR-21 + Check 21 audience cartography hierarchy enforcement runtime (v2.39 doctrine matérialisée). v2.42 PATCH 5 · Check 13c isolation_scope enforcement updated (default brand_only auto, gate AskUserQuestion, justification workspace_global) + Check 13d layer frontmatter enforcement (enum 1/2/3, layer 1 MCP, layer 2 APIs+credentials, layer 3 shipped infra). Infrastructure curator workspace_global justifié · valide tous skills cross-brand pour intégrité runtime."
+patch_notes: "v2.93 · D#518 · NEW checks post-hoc Spectre/fraîcheur (check 11) · (a) trace angle→carte · angle.lineage.use_case_ref/spectrum_cell_ref (si présents) doivent résoudre vers spec.use_cases[]/spectrum cells · intégrité quand présent, jamais forcé (Master rule) · double validate-all.py angle_spectrum_untraced. (b) pont watch-competitors→coverage_market · cellule avec coverage_market != unknown sans evidence behavioral observée/inférée = MINOR (couverture affirmée sans signal). (c) horloge de fraîcheur (check 11b-bis) · reliability_tier/velocity_tier dans leurs enums + extracted_at date-time sur les evidence spectrum, validés seulement quand présents (la fraîcheur est un curseur, pas un gate par absence). v2.42 · HR-21 + Check 21 audience cartography hierarchy enforcement runtime. v2.42 PATCH 5 · Check 13c isolation_scope + Check 13d layer frontmatter enforcement. Infrastructure curator workspace_global justifié · valide tous skills cross-brand pour intégrité runtime."
 recommended_model: haiku
 reasoning_pattern: null
 description: >
@@ -38,7 +38,7 @@ Résultats en langage courant. Pas de codes de check, pas de noms de fichiers. "
 # Skill: Validate Resources
 
 Garbage collection + integrity checks for the full workspace.
-Covers both `Ressources/` (shared KB) and `brands/` (context DB + OS).
+Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 
 ---
 
@@ -46,7 +46,7 @@ Covers both `Ressources/` (shared KB) and `brands/` (context DB + OS).
 
 ### 1. Index ↔ Filesystem Sync
 
-- Scan all `.json` files in `Ressources/{type}/` folders
+- Scan all `.json` files in `resources/{type}/` folders
 - Compare against `index.json.resources[]`
 - Flag: **orphan files** (on disk, not in index)
 - Flag: **ghost entries** (in index, file missing)
@@ -54,7 +54,8 @@ Covers both `Ressources/` (shared KB) and `brands/` (context DB + OS).
 
 ### 2. Schema Validation
 
-- For each resource JSON, validate against `Ressources/schemas/{type}.schema.json`
+- For each resource JSON, validate against `resources/schemas/{type}.schema.json`
+- Per-brand entity files map to their schema by filename : `brand.json`→brand, `spec.json`→spec, `offers.json`→offer, `profile.json`→profile, `strategy.json`→strategy, `learnings.json`→learnings, `status.json`→status, **`spectrum.json`→spectrum (Spectre, D#502)**, `sources/voc/**/*.jsonl` records→voc-verbatim (par ligne, post-schema only).
 - Flag: **schema violations** (missing required, wrong types, pattern mismatches)
 - **Report only**
 
@@ -128,6 +129,10 @@ Covers both `Ressources/` (shared KB) and `brands/` (context DB + OS).
 - `profile.benefits[].ref` → must exist in `spec.benefits[].benefit_id` (iterate array)
 - `offers.offer_groups[].offers[].product_refs[].slug` → must exist in `brand.products_index[].slug` (v2 schema — offers are NESTED under `offer_groups[]`, each offer has `product_refs[]`; legacy `offers.meta.product_slug` is v1.x only)
 - `profile.meta.product_id` (if set) → must match a product slug in `products/`
+- **Spectre (D#502/D#503)** · `spectrum.cells[].use_case_ref` → must exist in `spec.use_cases[].use_case_id` · `spectrum.cells[].audience_ref` (if set) → must match a slug under `audiences/` · `spectrum.core_cell_ref` (if set) → must match a `cells[].cell_id` in the same file · `spec.use_cases[].mechanism_refs[]` → must exist in `spec.mechanisms[].mechanism_id` (le pont Mc → U → A vérifiable).
+- **Spectre trace angle→carte (D#518)** · `angle.lineage.use_case_ref` (si présent) → must exist in `spec.use_cases[].use_case_id` (et donc, transitivement, tracer à un `mechanism_refs[]` · un angle dont l'usage n'est porté par aucun mécanisme est une projection, pas un angle) · `angle.lineage.spectrum_cell_ref` (si présent) → must match a `cells[].cell_id` dans le `spectrum.json` de la même marque. Intégrité QUAND le ref est présent, jamais forcé (cf garde-fou mécanique correspondant dans `resources/scripts/validate-all.py` · `angle_spectrum_untraced` MED).
+- **Spectre integrity post-hoc (D#503, intégrité pas pré-validation)** · `spectrum.cells[]` avec `status: validated` ET `evidence: []` vide → flag **MAJOR : cellule validée sans aucune preuve** (la validation par procuration exige au moins un signal · attrape l'erreur persistante, ne pré-valide pas le raisonnement). Idem `coverage_self: blank` non qualifié et sans `lever` → flag MINOR (zone blanche orpheline).
+- **Pont watch-competitors → coverage_market (D#518)** · `spectrum.cells[]` avec `coverage_market != "unknown"` MAIS aucun `evidence[]` de nature `behavioral` taguée `_source: observed|inferred` → flag **MINOR : couverture concurrente affirmée sans signal** (la cellule prétend lire le terrain adverse sans preuve · garde le pont honnête sans pré-valider le matching de cellule). Rappel : `strategic_position` reste `null` tant que `coverage_market == "unknown"`.
 - Flag: **broken cross-refs**
 - **Report only** (data loss risk)
 
@@ -150,6 +155,7 @@ Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x p
 - Sur les porteurs canon (brand, spec, offer, profile, pain_points, objections · liste fermée C1) : chaque entrée de la root map `_extraction` valide contre `_shared/extraction-provenance.json` (extraction_method dans l'enum, extraction_confidence 0-1, extracted_at date-time)
 - Les clés de `_extraction` = globs ou chemins valides (mêmes règles que `_field_types` : pas de clé orpheline vers un champ inexistant)
 - **`extraction_method: "absent"` SANS `lever` = FAIL** (politique d'échec C1 : une brique introuvable porte son levier, jamais inventée)
+- **Horloge de fraîcheur (C1.1 · D#518)** · si `reliability_tier` présent → dans l'enum [revealed, behavioral-soft, verbatim, structural, declared] · si `velocity_tier` présent → dans l'enum [static, slow, drift, weekly, live] · sur `spectrum.cells[].evidence[].extracted_at` (si présent) → date-time valide. Ces champs sont optionnels (additif strict), validés seulement quand présents · ils ne déclenchent jamais un FAIL par absence (la fraîcheur est un curseur, pas un gate).
 - HR field-types C1 : tout champ de `offer.economics_proxy` et `angle.test_readiness.eligibility.overall` doit être tagué `derived` dans `_field_types` · sinon flag **MAJOR : derived non tagué**
 - Sans ce check, `_extraction` existe mais n'est jamais validé (échec silencieux)
 - **Report only**
@@ -158,7 +164,7 @@ Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x p
 
 - Scan `learnings.json.entries[]` dans chaque brand
 - Détecter contradictions : si deux entries ont >60% tag overlap + dates différentes + facts sémantiquement opposés → marquer l'ancienne comme `status: "superseded"`, `superseded_by: "{newer_id}"`
-- Cross-brand : si mode all-brands, détecter learnings similaires (même platform + >60% tag overlap) dans 2+ brands → ajouter au `promote-backlog.json`
+- Cross-brand : si mode all-brands, détecter learnings similaires (même platform + >60% tag overlap) dans 2+ brands → ajouter au `promote-backlog.json` (créer le fichier s’il n’existe pas encore)
   - Candidat structure :
     ```json
     {
@@ -182,7 +188,7 @@ Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x p
   Tri suggéré : garder toutes les entries < 180 jours + les entries avec tags platform/compliance quel que soit l'âge.
   ```
   Ne jamais archiver automatiquement — décision opérateur uniquement.
-- **Auto-fix** : marquer les contradictions. Écrire `promote-backlog.json`.
+- **Auto-fix** : marquer les contradictions. Écrire `promote-backlog.json` (créer le fichier s’il n’existe pas encore).
 
 ### 11c. Learnings Index Rebuild
 
@@ -603,7 +609,7 @@ Append report to CHANGELOG.md.
 
 **CHANGELOG.md rotation** : après append, compter le nombre d'entrées `## v` dans CHANGELOG.md.
 - Si ≤ 50 → rien à faire.
-- Si > 50 → déplacer les entrées les plus anciennes (au-delà de 50) dans `CHANGELOG_archive.md` (append en bas, jamais supprimer). Conserver les 50 plus récentes dans CHANGELOG.md. Signaler : "CHANGELOG archivé — {N} entrées déplacées vers CHANGELOG_archive.md."
+- Si > 50 → déplacer les entrées les plus anciennes (au-delà de 50) dans `CHANGELOG_archive.md` (append en bas, jamais supprimer). Conserver les 50 plus récentes dans CHANGELOG.md. Signaler : "CHANGELOG archivé · {N} entrées déplacées vers CHANGELOG_archive.md."
 
 ---
 

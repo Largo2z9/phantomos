@@ -163,7 +163,7 @@ Cross-ref doctrine canon · `docs/system/extension-discovery-doctrine.md` v2.75.
 Verify brand state silently · ne narre pas le scan.
 
 ```bash
-cat brands/{slug}/state/status.json
+cat brands/{slug}/status.json
 ls brands/{slug}/audiences/
 ls brands/{slug}/angles/ 2>/dev/null || echo "no angles yet"
 cat brands/{slug}/spec.json | head -20

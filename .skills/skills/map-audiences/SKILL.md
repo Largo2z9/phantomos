@@ -1,7 +1,12 @@
 ---
 name: map-audiences
 type: producer
-version: 1.3.1
+version: 1.6.0
+patch_notes_c4:
+  - "1.6.0 (D#519 · plancher expert du scaffold + anti-template-clone) · le scaffold light-pass était SOUS le plancher doctrine · la règle 'Tout le reste null' laissait psychology/decision_process/market_position vides, donc le nœud audience tombait à une liste démographique plate (régression onday · actifs-fatigue resté octet-pour-octet le template, slug example-audience). FIX · (a) plancher expert PAR NŒUD posé EN HYPOTHÈSE dès le light-pass (jtbd.primary motivation-first + jtbd.context + decision_process.awareness_trigger + market_position.awareness_dominant), tous dérivables du mécanisme+catégorie SANS verbatim, donc 'pas encore la voix client' ne les excuse pas · pain_points/voice/objections restent déférés à mine-voc (ceux-là exigent vraiment du VoC). (b) Q3 · le stade DOMINANT se pose en hypothèse depuis la maturité catégorie, seule la distribution chiffrée reste null. (c) RÈGLE DURE · jamais écrire un profile.json slug=example-audience dans un dossier réel · sur un write gated, flusher .workflow.json#pending.summary dans le scaffold avant de rendre la main (sinon le raisonnement reste piégé dans le pending). Filet post-hoc · audience_profile_template_clone (validate-all.py). Additif strict, zéro em-dash."
+  - "1.5.0 (D#518 · garde-fou use_cases réel) · le soft signal F1 'un use_cases[] sans speculative est une exploration avortée' pointe désormais le garde-fou MÉCANIQUE qui le double · la postcondition orchestrateur build-atlas-complete inspecte l'artefact écrit (use_cases ≥1 speculative + spectrum.json existe) quelle que soit la porte qui l'a produit, et validate-all.py flague post-hoc (use_cases_no_speculative) un array sans speculative. Le tier speculative reste le livrable de valeur. Aligne la prose F1 sur le verrou réel (postcondition + post-hoc), jamais une pré-validation au write (Master rule). Additif strict, zéro em-dash."
+  - "1.4.1 (D#514 · profondeur d'exploration) · F1 garde-fou anti-sous-exploration · ne pas s'arrêter aux usages évidents, générer au moins 2-3 adjacent/speculative (les non-évidents · moment d'usage daté, segment non servi comme périménopause ou axe intestin-cerveau) · un use_cases tout-evident = exploration avortée, F2 retombe sur les tiers du même acheteur in-market. Observé run onday · 4 use_cases zéro speculative → audiences non servies jamais sorties. Renforce le quota launch déjà prévu en v1.4.0 (qui était sauté au runtime). Additif strict."
+  - "1.4.0 (Spectre C4 · D#502/D#503/D#506) · NEW mode spectre (flag d'invocation, défaut absent = comportement v1.3.1 strictement inchangé, rétrocompat stricte). F1 énumère les usages depuis spec.mechanisms[] (génératif Mc→U) et écrit spec.use_cases[] (UC-NN, status evident/adjacent/speculative, mechanism_refs[] typés MEC-NN, _source). F2 dérive les audiences motivation-first PAR usage en audience_type probe (validation_status hypothesis, motivation obligatoire, démo dérivée optionnelle). Cap 5 audiences relâché SOUS FLAG mode spectre UNIQUEMENT (la carte est exhaustive et gratuite, D#502 · cap intact en mode normal et pour la production). Stage-aware : launch → quota adjacent/speculative relevé, scale/mature → evident d'abord (lit brand.meta.stage). Élargit le scope d'écriture vers products/{slug}/spec.json#use_cases (chaîne canon, intention déclarée spec.schema). Backward compat strict additif."
 patch_notes_c1:
   - "1.3.1 (C1 onboarding-native D#500) · GATE VALIDATION ÉTENDU · refus de passer une audience à validation_status: validated SANS : entry_door résolu (non-null) + jtbd.primary + (decision_process.awareness_trigger OU psychology.life_moments non vides) + market_position.awareness_dominant (RENAME C1 profile/2.3, ex awareness_level) + confidence_chain populated. Pattern exact du gate dream_scenario_narrative v2.87.4 · AUCUN required ajouté au schema (backward compat) · enforcement par le skill, pas par jsonschema. + audience_type enum += probe (segment à 1 indice = sonde, pas une audience opérable · promu quand confidence_chain.verbatim_count >= 5 · motivation OBLIGATOIRE, démographie dérivée optionnelle, cf D2 canon onboarding)."
 patch_notes_v2_87_4:
@@ -40,6 +45,8 @@ consumes:
   - brands/{slug}/pain_points/*.json (legacy v2.63 backward compat read fallback · top-level collection avec affected_audiences[])
   - brands/{slug}/objections/*.json (legacy v2.63 backward compat read fallback · top-level collection avec affected_audiences[])
   - brands/{slug}/products/*/spec.json (cross-ref applies_to_products binding)
+  - brands/{slug}/products/*/spec.json#/mechanisms[] (mode spectre · MEC-NN, pont génératif Mc→U→A)
+  - brands/{slug}/brand.json#/meta/stage (mode spectre · curseur explore/exploit stage-aware)
   - resources/schemas/profile.schema.json (target v1.7 read backward compat · v2.0 BREAKING write skip)
   - resources/canon/copy/niveaux-schwartz/* (awareness stages canon · Schwartz double-stage)
   - resources/canon/copy/archetypes-voix/* (archetypes canon · informe persona_archetype hypothesis)
@@ -51,9 +58,10 @@ consumes:
   - path: docs/system/operator-vocabulary-translation.md
 produces_proposals_for:
   - brands/{slug}/audiences/{audience_slug}/profile.json (light pass scaffold · meta + identity light)
+  - brands/{slug}/products/{slug}/spec.json#/use_cases[] (mode spectre · énumération usages génératifs, append-only)
 permissions:
   reads: [brands/, resources/, docs/]
-  writes: [brands/{slug}/audiences/{slug}/profile.json via write_to_context]
+  writes: [brands/{slug}/audiences/{slug}/profile.json via write_to_context, brands/{slug}/products/{slug}/spec.json#/use_cases via write_to_context (mode spectre)]
   emits_events: [audience_cartography_proposal_created, audience_cartography_validated]
 pipeline:
   preconditions:
@@ -119,6 +127,40 @@ Output state map + confidence_chain[] init.
 
 Cross-ref doctrine · `docs/system/dependency-resolution-protocol.md`.
 
+### Step 0bis · Détection du mode (normal vs spectre)
+
+map-audiences a deux modes. **Mode normal** (défaut, comportement v1.3.x strictement inchangé) · cartographie le portfolio d'audiences via les 4 questions. **Mode spectre** · s'active si le skill est invoqué avec le flag mode spectre (par `build-atlas-complete` palier spectre, par `/phantom {brand} spectre`, ou sur demande opérateur explicite « cartographie le terrain / le spectre des usages »). En mode spectre, le skill exécute d'abord **F1** (énumération des usages depuis le mécanisme) puis applique le framework **par usage** (**F2**), avec les deltas ci-dessous.
+
+**Précondition mode spectre · `spec.mechanisms[]` non vide** (le pont génératif Mc→U a besoin du mécanisme). Si vide → **invoquer `map-mechanisms` d'abord** (inline OU déjà fait par l'orchestrateur build-atlas Step 2.5 sous-bloc A), PAS seulement « recommander » · sans mécanisme, F1 n'a pas d'amont et la chaîne meurt. JAMAIS inventer d'usages.
+
+**Précondition d'écriture (gate `confirmed_products`)** · le write sur `products/{slug}/spec.json` est gaté par le checkpoint `confirmed_products` (write-to-context). Dans le flux build-atlas, c'est résolu (le produit est confirmé au Gate Intermédiaire 1). En invocation STANDALONE (`/phantom {brand} spectre` sur une marque brownfield), si le produit n'est pas dans `confirmed_products` → le write `die()`. Dans ce cas, lancer `stage-proposal confirmed_products --product-slug {slug}` d'abord, ne pas retry à l'identique.
+
+### Mode spectre · F1 énumération des usages, F2 audiences par usage
+
+(s'exécute uniquement en mode spectre, en amont et autour de Step 1)
+
+**F1 · Énumérer les usages depuis le mécanisme (Mc → U).** Lire `spec.mechanisms[].mechanism_id` + `spec.problems_solved[]` + seed optionnel `specs.target_suitability.use_cases[]` (qui SEED, ne remplace pas le nœud stratégique). Énumérer génétiquement TOUS les jobs que le mécanisme peut servir, y compris adjacents et non-évidents (c'est là que naissent les marchés non vus). Trois statuts :
+- **evident** · déjà servi/communiqué par la marque
+- **adjacent** · même mécanisme, autre situation ou audience
+- **speculative** · marché non vu, hypothèse à qualifier · reste hypothèse tant que rien ne la confirme, JAMAIS asserté comme fait (D#503)
+
+**Garde-fou anti-sous-exploration (D#514).** F1 ne s'arrête PAS aux usages évidents. Un F1 qui ne sort que des `evident` (1:1 avec les audiences déjà visibles sur le site) n'a PAS exploré · générer au moins 2-3 usages `adjacent`/`speculative`, les non-évidents qu'un scan des avis ne contiendrait jamais (un moment d'usage daté · le segment que la marque ne sert pas encore · périménopause, axe intestin-cerveau, le moment précis de la journée). Le tier `speculative` EST le livrable de valeur · sans lui, la dérivation d'audiences (F2) retombe sur les tiers évidents du même acheteur in-market. Observé au run onday · 4 use_cases tous evident/adjacent, zéro speculative → les audiences non servies jamais sorties, retour au quasi-miroir. Un `spec.use_cases[]` sans aucun `speculative` est un signal d'exploration avortée · garde-fou mécanique correspondant (D#518) · la postcondition orchestrateur `build-atlas-complete` inspecte l'artefact écrit (use_cases avec ≥1 speculative + `spectrum.json` existe) quelle que soit la porte qui l'a produit, et `resources/scripts/validate-all.py` flague post-hoc (`use_cases_no_speculative`) un array sans speculative.
+
+Écrire chaque usage dans `spec.use_cases[]`. **Clés EXACTES** (`use_case_id` est `required`, ne pas le deviner) ·
+```json
+{"use_case_id":"UC-NN","label":"{le job côté client}","mechanism_refs":["MEC-NN"],"mechanism_hint":"{texte libre SI le mécanisme n'est pas encore en MEC-NN · jamais inventer un MEC-NN}","status":"evident|adjacent|speculative","_source":"observed|inferred|declared"}
+```
+**Mécanique d'écriture** · `use_cases[]` est un array, donc `write_to_context` refuse `--mode proposed` sur un array · écrire élément par élément en `--mode direct` avec `--path "brands/{slug}/products/{p}/spec.json#/use_cases/-"` (le `/-` append en fin d'array). Le `_source` de l'usage (dans la valeur) est distinct de l'arg `--source` du writer.
+
+**F2 · Dériver les audiences PAR usage (U → A).** Pour chaque usage de F1, appliquer le framework 4 questions de Step 1 scopé à CET usage, avec ces deltas vs le mode normal :
+- `meta.audience_type: probe` (sonde, pas audience opérable · promue à 5 verbatims, cf C1) · `validation_status: hypothesis`
+- **motivation OBLIGATOIRE** (situation déclenchante, tension, alternative rejetée) · démographie dérivée optionnelle
+- `meta.primary_splitting_axis = use_case` forcé par construction (le Q5 est tranché d'office)
+- Q1 `entry_door` reste requis (Invariant 5)
+- **stage-aware** (lit `brand.json#/meta/stage`) · `launch` → quota d'usages adjacent/speculative relevé (exploration dominante, carte au crayon assumée) · `scale`/`mature` → evident d'abord
+
+Le plafond de 5 audiences est relâché **en mode spectre uniquement** (la carte est exhaustive et gratuite, D#502) · il reste intact en mode normal et pour la production aval.
+
 ### Step 1 · Application framework 4 questions canon
 
 Le skill applique strictement les 4 questions canon (`docs/doctrine/audience-cartography-framework.md`) en mode batch (toutes les audiences cartographiées en une passe, pas une par une comme `profile-audience`).
@@ -158,7 +200,7 @@ product-awareness · unaware → problem → solution → product → most-aware
 emotional-maturity · niant → résigné → en recherche → combatif → acceptant
 ```
 
-Note pour Layer A trace · stade Schwartz sera assigné en deep pass par `profile-audience` quand mining verbatim aura tourné. map-audiences laisse `psychology.awareness_stage_*` null en scaffold.
+Note pour Layer A trace · la DISTRIBUTION chiffrée de conscience par audience (mesurée) est assignée en deep pass par `profile-audience` quand le mining verbatim a tourné. MAIS le stade DOMINANT se POSE en hypothèse dès le scaffold (D#519) depuis la maturité catégorie (`market_position.awareness_dominant`) · ça se dérive du marché sans verbatim. Seule la distribution chiffrée `psychology.awareness_stage_*` reste null en light pass.
 
 #### Q4 · Chevauchements cousins (v1.2.0 v2.64 ontologie sémantique pure · cross-audience semantic similarity)
 
@@ -227,11 +269,24 @@ meta.audience_type     → "primary" | "secondary" | "discovered" | "assumed"
 meta.applies_to_products → array product slugs si cross-product check Step 3 trigger
 meta.tags              → namespace-prefixed tags depuis sector brand (e.g. "problem:hair-loss", "context:post-pregnancy")
 identity.description   → 1-line description audience (inférée depuis sector + market context brand.json)
-identity.gender        → male | female | all (only si explicit brand.json target)
-identity.age_range     → {min, max} (only si explicit brand.json target audience)
+identity.gender        → male | female | all (only si explicit brand.json target · démo DÉRIVÉE, jamais le nœud primaire)
+identity.age_range     → {min, max} (only si explicit brand.json target audience · idem, optionnel)
 ```
 
-**Tout le reste null** jusqu'à drill deep · `pain_points[]`, `psychology.*`, `voice.key_expressions[]`, `objections[]`, `benefits[]`, `behavior.*`, `decision_process.*` restent vides en scaffold light pass. Ces fields appartiennent à `profile-audience` (synthesis 8 dimensions) et `mine-voc` (verbatim mining).
+**Plancher expert par nœud (D#519 · motivation-first, dérivable du mécanisme SANS verbatim).** Le scaffold light pass NE se limite PAS à `meta` + `identity` (un nœud démographique plat = la régression onday). Il POSE EN HYPOTHÈSE (confiance faible, `validation_status: hypothesis`, flaggé) les champs experts que le mécanisme + la catégorie suffisent à dériver, AVANT tout mining ·
+
+```
+psychology.jtbd.primary            → le JOB (motivation d'abord) dérivé du use_case servi · jamais une démo
+psychology.jtbd.context            → la situation déclenchante + l'alternative rejetée (le contexte du job)
+decision_process.awareness_trigger → le moment/déclencheur qui ouvre le besoin
+market_position.awareness_dominant → le stade de conscience DOMINANT posé en hypothèse depuis la maturité catégorie (la distribution chiffrée reste null)
+```
+
+Un nœud sans `jtbd.primary` + `entry_door` + `awareness_trigger` + `awareness_dominant` est SOUS le plancher doctrine (`docs/doctrine/audiences-cartography-doctrine.md` principes 1-2) · ce sont des hypothèses DÉRIVÉES, pas du VoC, donc « pas encore la voix client » ne les excuse pas.
+
+**Restent déférés** (ceux-là exigent vraiment du VoC) · `pain_points[]`, `voice.key_expressions[]`, `objections[]`, `benefits[]` appartiennent à `profile-audience` + `mine-voc`. Jamais null EN BLOC pour autant · poser les hypothèses experts ci-dessus.
+
+**Règle dure (D#519 · le profil porte le raisonnement, pas le template).** NE JAMAIS écrire un `profile.json` dont `meta.slug` reste `example-audience` / `meta.name` reste `Example Audience` dans un dossier non-`_example`. Sur un write gated/pausé, FLUSHER `.workflow.json#pending.summary` (le raisonnement validé, gelé dans le buffer du gate) dans le light pass AVANT de rendre la main · sinon le raisonnement narré reste piégé dans le pending et l'artefact reste un template vide (observé run onday · `actifs-fatigue` octet-pour-octet le template). Filet post-hoc · `audience_profile_template_clone` dans `resources/scripts/validate-all.py`.
 
 ### Step 3 · Cross-link audiences ↔ products
 
@@ -382,6 +437,42 @@ Mécanique. Inspecte mutations Step 6, runs structural checks, emit `audience_ca
 
 Exit code 2 = blocking issue → revise avant ship. Exit code 0 warnings = log, ship.
 
+### Step 8 · Déposer le beat de restitution des audiences (D#520)
+
+L'arbre est POSÉ (audiences mères + sous-poches écrites, `entry_door` + `jtbd.primary` + `awareness_trigger` + `awareness_dominant` remplis au plancher D#519, batch finalisé). Avant de rendre la main, dépose le registre de CE QUE TU VIENS DE TRANCHER pendant que ton contexte est frais. Doctrine SSOT · `docs/system/restitution-beat-doctrine.md` (contrat payload, règles décision-d'abord, richesse second-ordre, temporalité + mode, table phase→vue + phase→forward-look). NE résume PAS l'arbre en une phrase · tu déposes le beat, le code le rend (anti double-compression · le raisonnement meurt quand on le compresse ici puis qu'on demande au fil de le re-broder).
+
+Écris (`Write` · c'est sous `.phantom/`, hors `brands/`, donc hors gate mutation · ne passe PAS par `write-to-context`) le fichier `.phantom/beats/{slug}/audiences.json` :
+
+```bash
+Write → .phantom/beats/{slug}/audiences.json
+```
+
+**Params de cette phase** (le reste du contrat vit dans la doctrine, ne le re-duplique pas) ·
+- `phase` · `"audiences"`
+- vue rendue par le code · `/phantom {slug} audiences` (le renderer l'appose paste-ready · ne mets PAS de chemin dans `tease`)
+- forward-look apposé par le code · « je croise mécanisme et audiences en carte de marché (le spectre) »
+
+**Le contenu, calibré audiences** (richesse = le second ordre, cf doctrine règle 2) ·
+- `verdict` · la lecture tranchée de l'arbre, une ligne · QUELLE mère est le vrai wedge (celle qui porte l'éco), laquelle reste hypothèse. Pas « N audiences posées ».
+- `read` · le second ordre · POURQUOI cette mère porte (la porte d'entrée × le job × la maturité catégorie qui la rend activable maintenant), et ce que la poche spéculative OUVRE (le segment non servi que le mécanisme atteint mais que les avis ne nomment jamais · le lane que personne n'occupe encore).
+- `analyzed` / `found` · les déductions saillantes par mère (entry_door dominante, axe de découpage retenu et pourquoi il maximise la variance copy, chevauchements cousins révélés) · amorce grasse possible.
+- `rejected` · les découpages écartés avec leur raison (axe démographie écarté au profit de l'usage, micro reclassé en variation copy faute de 3/3) · le rejet est le travail le plus défendable.
+- `encoded` · les artefacts posés · N mères + M sous-poches, plancher expert hypothèse par nœud.
+- `confidence` · la confiance AVEC sa cause · les audiences à confiance faible nomment leur cause ET l'étape qui les lèvera (« hypothèse dérivée du mécanisme, pas encore de voix client · la voix-client la tranchera »). La confiance forte vit dans le verdict, on ne la liste pas seule.
+- `basis` · la largeur · combien d'audiences, sourcées comment (sector + market context brand.json + usages du mécanisme · zéro verbatim à ce stade, c'est assumé).
+- `tease` · la valeur DANS la vue audiences · ce que l'opérateur va voir de tranché ou d'inattendu (l'arbre mère/poches, le wedge éco lisible d'un coup d'œil) · une invitation, pas un chemin.
+
+Champ vide = omis, jamais inventé. Le renderer réorganise en décision-d'abord (verdict + read, le raisonnement qui flue, puis « Ce sur quoi je reste prudent » avec la cause, puis « Lu · », puis le CTA `/phantom`), tu déposes les champs.
+
+### Step 9 · Émettre le beat (standalone uniquement · réutilise le signal de mode)
+
+Même signal orchestré-vs-standalone que Step 0bis (mode spectre) · invoqué par `build-atlas-complete` (palier Phase 3) = ORCHESTRÉ · invoqué par l'opérateur seul ou via `/phantom {slug}` = STANDALONE.
+
+- **Orchestré** · NE rends rien · tu as déposé le payload, c'est l'orchestrateur qui émet le beat (il exécute `render-beat.py --phase audiences` quand map-audiences lui rend la main, présente la sortie telle quelle, et relie vers le Gate 2). Tu rends juste la main.
+- **Standalone** · émets toi-même le beat · `python3 .skills/render-beat.py --brand {slug} --phase audiences --mode standalone` et présente sa sortie TELLE QUELLE (NE re-narre pas, NE re-résume pas). En standalone le renderer propose la suite (« Prochaine étape · je croise mécanisme et audiences en carte de marché. Je lance ? ») · la proactivité vient de là.
+
+**Filet** · si `render-beat` rend du vide (payload absent), retombe sur la synthèse Step 5 (5 sections investigation-posture) en prose · ne laisse JAMAIS un trou à la place de la phase. Le hook `beat-emit` rappelle mécaniquement un payload frais non-émis.
+
 ## Hard rules globales
 
 - **Doctrine audience-cartography 3 niveaux respect** · jamais niveau 4+. Invariant 1 canon enforce.
@@ -391,7 +482,7 @@ Exit code 2 = blocking issue → revise avant ship. Exit code 0 warnings = log, 
 - **JAMAIS exposer `validation_status: hypothesis`, `meta.parent_slug`, `meta.entry_door` bruts** en surface operator. Reformuler en langage métier (porte d'entrée, audience mère, hypothèse à valider).
 - **JAMAIS nommer skill** (`mine-voc`, `profile-audience`, `produce-paid-angles`) en surface operator. Routing silencieux post-arbitrage opérateur.
 - **JAMAIS scaffold audience folder si Section 1 Observé vide AND operator skip Q1** · refuse write, surface gap, suggest `snapshot-brand` d'abord OR ingest brief operator.
-- **Cap 5 audiences max scaffold par run** · au-delà, dilue cartographie et viole Pareto canon (80% revenue brand = 2-3 audiences activées). Surface flag si >5 candidates détectées, suggest priorisation operator.
+- **Cap 5 audiences max scaffold par run** · au-delà, dilue cartographie et viole Pareto canon (80% revenue brand = 2-3 audiences activées). Surface flag si >5 candidates détectées, suggest priorisation operator. **SAUF mode spectre** · la carte est exhaustive et gratuite (D#502), le cap est relâché · il reste intact en mode normal ET pour les artefacts opérables (la production aval garde le Pareto).
 - **DRGFP L3 gate strict** · brand.json absent OR sector vide → refuse + reco `snapshot-brand`. Pas de freestyle cartography sans base brand encodée.
 
 ## Anti-patterns

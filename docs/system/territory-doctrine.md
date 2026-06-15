@@ -198,7 +198,7 @@ Le territoire ne bouge pas. Production rythme daily ·
 name: produce-paid-angles
 type: producer
 layer: territoire
-recommended_model: claude-sonnet-4-5
+recommended_model: claude-sonnet-4-6
 subagent_safe: true
 ---
 ```

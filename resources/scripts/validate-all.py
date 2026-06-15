@@ -87,6 +87,23 @@ SEVERITY = {
     "offers_cycle": "HIGH",
     "offers_dangling_requires": "MED",
     "mechanism_other_saturation": "MED",
+    "style_other_saturation": "MED",
+    "mecanique_other_saturation": "MED",
+    "beat_type_other_saturation": "MED",
+
+    # Spectre / fraîcheur post-hoc (D#518) · intégrité, jamais pré-validation (Master rule).
+    # MED/LOW pour rester sous le gate dur (CRITICAL+HIGH==0) ; promouvoir en HIGH
+    # seulement après avoir seedé _EXAMPLE avec la donnée conforme.
+    "use_cases_no_speculative": "MED",
+    "angle_spectrum_untraced": "MED",
+    "angle_negative_untraced": "MED",
+    "angle_negative_missing": "LOW",
+    "naked_number_unsourced": "LOW",
+
+    # Évaporation de profondeur (D#519) · le raisonnement narré qui n'atteint pas l'artefact.
+    "use_cases_missing": "MED",
+    "benefits_missing": "MED",
+    "audience_profile_template_clone": "MED",
 }
 
 
@@ -313,6 +330,17 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
     specs_by_product = {}   # product_slug -> {"problem_ids": set, "benefit_ids": set}
     profiles_by_audience = {}  # audience_slug -> {"pain_refs": set, "benefit_refs": set, "product_id": str|None, "parent_slug": str|None}
 
+    # Saturation accumulators for A=B bridge tags (decomposition.json under competitive-intel/).
+    # 'other' saturation on any of these signals a MISSING family in its registry,
+    # not an unclassifiable ad. Same doctrine as mechanism_other_saturation (check 9).
+    decomp_tags = {"style_id": [], "mecanique_id": [], "beat_type": []}
+
+    # Spectre trace accumulators (D#518). angle back-refs + spectrum cell use_case_refs.
+    # Both files are None-classified by classify_file, harvested in the walk like decomp_tags.
+    angles_seen = []            # list of dicts (rel, use_case_ref, angle_id, negative_cell_ref, has_reframe, has_negative, is_skeleton)
+    spectrum_use_case_refs = set()
+    spectrum_cell_ids = set()   # cell_id de chaque cellule spectrum.json (trace negative.spectrum_cell_ref · D#523)
+
     for jf in brand_dir.rglob("*.json"):
         rel = jf.relative_to(brand_dir.parent.parent.parent)
         kind = classify_file(jf)
@@ -326,6 +354,44 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "msg": err,
             })
             continue
+
+        # Saturation tag harvest — decomposition.json (reverse benchmark) carries the
+        # A=B bridge enums style_id / mecanique_id / beat_type. classify_file returns
+        # None for it, so collect here before the orphan branch.
+        if jf.name == "decomposition.json" and "competitive-intel" in jf.parts:
+            for s in (data.get("visual", {}) or {}).get("styles_observed", []) or []:
+                if s.get("style_id"):
+                    decomp_tags["style_id"].append(s["style_id"])
+            mid = (data.get("mecanique", {}) or {}).get("mecanique_id")
+            if mid:
+                decomp_tags["mecanique_id"].append(mid)
+            for b in (data.get("script", {}) or {}).get("body_arc", []) or []:
+                if b.get("beat_type"):
+                    decomp_tags["beat_type"].append(b["beat_type"])
+
+        # Spectre trace harvest (D#518) · spectrum.json cells + angle back-refs.
+        # classify_file returns None for both, so collect here before the orphan branch.
+        if jf.name == "spectrum.json":
+            for c in data.get("cells", []) or []:
+                uc = c.get("use_case_ref")
+                if uc:
+                    spectrum_use_case_refs.add(uc)
+                cid = c.get("cell_id")
+                if cid:
+                    spectrum_cell_ids.add(cid)
+        if "angles" in jf.parts and (jf.name.startswith("ANG") or jf.name == "angle.json"):
+            lineage = data.get("lineage", {}) or {}
+            negative = data.get("negative", {}) or {}
+            reframe = (data.get("formula", {}) or {}).get("reframe", {}) or {}
+            angles_seen.append({
+                "rel": str(rel),
+                "use_case_ref": lineage.get("use_case_ref"),
+                "angle_id": data.get("angle_id") or jf.stem,
+                "negative_cell_ref": negative.get("spectrum_cell_ref"),
+                "has_reframe": bool(reframe.get("summary") or reframe.get("perceptual_pivot")),
+                "has_negative": bool(negative.get("summary") or negative.get("type")),
+                "is_skeleton": brand_dir.name.startswith("_"),
+            })
 
         if kind is None:
             # orphan non-core file (config, strategy, status, learnings, etc)
@@ -427,6 +493,53 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "file": str(rel),
             }
 
+            # E7 (D#518) · use_cases présents mais aucun speculative = carte d'expansion
+            # sans hypothèse (la chaîne Mc→U→A s'est arrêtée à l'évident, le Spectre est
+            # avorté). Post-hoc MED, _EXAMPLE-safe (use_cases absent → ne tire pas).
+            # Le vrai verrou des DEUX portes (scan + phase 3) = la postcondition
+            # orchestrateur build-atlas, qui inspecte l'artefact écrit quelle que soit
+            # la porte. Ici = le filet post-hoc qui attrape l'artefact dégénéré.
+            use_cases = data.get("use_cases", []) or []
+            if not is_skeleton and not brand_slug.startswith("_") and use_cases and not any(
+                (u or {}).get("status") == "speculative" for u in use_cases
+            ):
+                issues.append({
+                    "type": "use_cases_no_speculative",
+                    "severity": SEVERITY["use_cases_no_speculative"],
+                    "file": str(rel),
+                    "msg": "spec.use_cases[] présent mais aucun status=speculative · la carte d'expansion n'a pas d'hypothèse (D#502 Mc→U→A) ; ajouter un usage spéculatif ou flagger le spectre incomplet",
+                })
+
+            # E7-bis (D#519) · l'angle mort du cas VIDE. use_cases_no_speculative ne tire
+            # que sur une carte mince (présente sans speculative) ; il est aveugle au cas
+            # « pas de carte du tout », qui est l'échec dominant quand le run pause avant le
+            # Close (le pont mécanisme→usage narré dans le fil mais jamais persisté). Un
+            # produit assez riche pour avoir des mécanismes mais ZÉRO use_cases = le pont
+            # n'a pas été écrit. _EXAMPLE/skeleton exclus comme au-dessus.
+            mechanisms = data.get("mechanisms") or []
+            if not is_skeleton and not brand_slug.startswith("_") and mechanisms and not use_cases:
+                issues.append({
+                    "type": "use_cases_missing",
+                    "severity": SEVERITY["use_cases_missing"],
+                    "file": str(rel),
+                    "msg": "spec a des mechanisms[] mais ZÉRO use_cases[] · le pont mécanisme→usage n'a jamais été écrit (carte vide, pire qu'une carte mince) ; la cartographie d'audiences retombe sur le miroir des avis",
+                })
+
+            # define-specs décrochage (sprint base-saine) · la décompo produit profonde
+            # (l'orchestrateur define-specs chaîne map-mechanisms + map-benefits + map-specs ·
+            # bénéfices 3 couches functional/emotional/identity) n'est jamais atteinte par
+            # l'onboarding · snapshot hand-roll une passe mince. Un produit avec des mécanismes
+            # mais ZÉRO benefits[] = la chaîne bénéfice n'a jamais été écrite → le pont Mc→U→A
+            # part pauvre (l'atlas « marche » mais creux). Filet post-hoc, _EXAMPLE/skeleton exclus.
+            benefits = data.get("benefits") or []
+            if not is_skeleton and not brand_slug.startswith("_") and mechanisms and not benefits:
+                issues.append({
+                    "type": "benefits_missing",
+                    "severity": SEVERITY["benefits_missing"],
+                    "file": str(rel),
+                    "msg": "spec a des mechanisms[] mais ZÉRO benefits[] · la décompo produit profonde (define-specs / map-benefits) n'a jamais tourné, snapshot a hand-rollé une passe mince ; la chaîne bénéfice 3 couches manque et le pont mécanisme→usage part pauvre",
+                })
+
         if kind == "offers":
             parent_slug = jf.parent.name
             is_skeleton = parent_slug.startswith("_")
@@ -494,6 +607,25 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "parent_slug": data.get("meta", {}).get("parent_slug"),
                 "file": str(rel),
             }
+
+            # FIX 4 (D#519) · profil-clone-du-template. Le split narrate-puis-écris laisse un
+            # `cp -r _example` brut dans un dossier audience RÉEL (run onday · actifs-fatigue
+            # = octet pour octet le template, slug resté example-audience) pendant que le vrai
+            # raisonnement reste gelé dans .workflow.json#pending. Aucun guard existant ne
+            # l'attrapait (validate-all ne checkait que dangling-refs + cohérence index/dossier).
+            meta_aud = data.get("meta", {}) or {}
+            jtbd_primary = str(((data.get("psychology", {}) or {}).get("jtbd", {}) or {}).get("primary") or "")
+            ident_desc = str((data.get("identity", {}) or {}).get("description") or "")
+            is_clone = meta_aud.get("slug") == "example-audience" or (
+                not meta_aud.get("entry_door") and not jtbd_primary.strip() and not ident_desc.strip()
+            )
+            if not audience_slug.startswith("_") and not brand_slug.startswith("_") and is_clone:
+                issues.append({
+                    "type": "audience_profile_template_clone",
+                    "severity": SEVERITY["audience_profile_template_clone"],
+                    "file": str(rel),
+                    "msg": f"audiences/{audience_slug}/profile.json est le template dégénéré (slug=example-audience, ou entry_door+jtbd.primary+identity.description tous vides) · le raisonnement narré n'a jamais atteint l'artefact (split narrate-puis-écris, D#519)",
+                })
 
     # Duplicate offer_ids
     for oid, locs in offer_ids.items():
@@ -642,19 +774,108 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report):
                 "msg": f"meta.parent_slug='{parent}' does not match any known audience",
             })
 
-    # 9. mode_of_action 'other' saturation — signals a missing family in the
-    # registry, not an unclassifiable product. SSOT: resources/registries/mechanism-families.md
-    all_modes = []
-    for ps, meta in specs_by_product.items():
-        all_modes += meta.get("mech_modes", [])
-    if len(all_modes) >= 3:
-        n_other = all_modes.count("other")
-        if n_other / len(all_modes) > 0.30:
+    # 9. 'other' saturation — a high share of 'other' signals a MISSING family in
+    # the backing registry, not an unclassifiable item. Generalised guardrail: same
+    # threshold across every registry-backed axis. Replaces the single hardcoded
+    # mode_of_action check. Each axis points at its own SSOT registry.
+    # (axis_label, samples, issue_type, registry_path, other_token)
+    saturation_axes = [
+        ("mode_of_action",
+         [m for meta in specs_by_product.values() for m in meta.get("mech_modes", [])],
+         "mechanism_other_saturation",
+         "resources/registries/mechanism-families.md", "other"),
+        ("style_id", decomp_tags["style_id"],
+         "style_other_saturation",
+         "resources/registries/style-registry.md", "other"),
+        ("mecanique_id", decomp_tags["mecanique_id"],
+         "mecanique_other_saturation",
+         "resources/registries/creative-mechanics-registry.md", "other"),
+        ("beat_type", decomp_tags["beat_type"],
+         "beat_type_other_saturation",
+         "resources/registries/beat-registry.md", "other"),
+    ]
+    for axis_label, samples, issue_type, registry_path, other_token in saturation_axes:
+        if len(samples) >= 3:
+            n_other = samples.count(other_token)
+            if n_other / len(samples) > 0.30:
+                issues.append({
+                    "type": issue_type,
+                    "severity": SEVERITY[issue_type],
+                    "msg": f"{axis_label}='{other_token}' on {n_other}/{len(samples)} (>30%) — a family is missing: promote it in {registry_path} instead of defaulting to '{other_token}'",
+                })
+
+    # 10. E8 (D#518) · Spectre trace · un angle qui DÉCLARE un lineage.use_case_ref
+    # (back-ref optionnel) doit tracer vers une cellule du spectrum (usage porté par le
+    # terrain cartographié). Intégrité post-hoc QUAND le ref est présent · jamais forcer
+    # sa présence (pré-valider le choix d'angle = interdit, Master rule). _EXAMPLE-safe :
+    # ses angles n'ont pas encore de use_case_ref → ne tire pas.
+    for a in angles_seen:
+        ang_rel, ang_id = a["rel"], a["angle_id"]
+        uc_ref = a["use_case_ref"]
+        if uc_ref and uc_ref not in spectrum_use_case_refs:
             issues.append({
-                "type": "mechanism_other_saturation",
-                "severity": SEVERITY["mechanism_other_saturation"],
-                "msg": f"mode_of_action='other' on {n_other}/{len(all_modes)} mechanisms (>30%) — a family is missing: promote it in resources/registries/mechanism-families.md instead of defaulting to 'other'",
+                "type": "angle_spectrum_untraced",
+                "severity": SEVERITY["angle_spectrum_untraced"],
+                "file": ang_rel,
+                "msg": f"{ang_id}.lineage.use_case_ref='{uc_ref}' ne trace vers aucune cellule spectrum.json · l'angle flotte hors carte (D#502/D#518)",
             })
+
+        # E12 (D#523) · le pont carte→négatif. La coordonnée negative.spectrum_cell_ref
+        # (le négatif concurrentiel sourcé du Spectre) doit tracer vers une cellule réelle.
+        # Intégrité post-hoc QUAND le ref est présent · jamais forcer sa présence (Master rule).
+        ncell = a["negative_cell_ref"]
+        if ncell and ncell not in spectrum_cell_ids:
+            issues.append({
+                "type": "angle_negative_untraced",
+                "severity": SEVERITY["angle_negative_untraced"],
+                "file": ang_rel,
+                "msg": f"{ang_id}.negative.spectrum_cell_ref='{ncell}' ne trace vers aucune cellule spectrum.json · le négatif concurrentiel déplace une alternative que la carte de marché n'a jamais vue (D#523)",
+            })
+
+        # E13 (D#523) · advisory awareness+négatif systématisé. Un angle qui a ARTICULÉ son
+        # recadrage (formula.reframe rempli) sans nommer le NÉGATIF qu'il déplace prêche dans
+        # le vide · le reframe est le pivot, le négatif en est la cible (les deux vont en paire).
+        # LOW = advisory pur, jamais bloquant (le choix de quoi déplacer = jugement stratégique,
+        # trust the model · Master rule) · ne tire que sur un angle déjà travaillé, jamais sur
+        # une coquille light-pass nue, jamais sur _EXAMPLE.
+        if not a["is_skeleton"] and a["has_reframe"] and not a["has_negative"]:
+            issues.append({
+                "type": "angle_negative_missing",
+                "severity": SEVERITY["angle_negative_missing"],
+                "file": ang_rel,
+                "msg": f"{ang_id} a un recadrage (formula.reframe) mais ZÉRO négatif (coordonnée 5) · l'angle affirme une promesse sans déloger l'option en place · nommer l'alternative déplacée (negative.summary + type)",
+            })
+
+    # 11. E10 (D#518) · nombre marché nu · un nombre marché/concurrent/audience présent
+    # SANS marqueur de fiabilité (entrée _extraction sur ce chemin OU market.meta.confidence)
+    # entre comme un fait nu (scrapé ≠ fait, D#503). Post-hoc LOW : advisory, jamais un gate
+    # (la prose/sémantique se fait confiance, Master rule). Le seuil de fiabilité réel se
+    # pose côté skill (snapshot reliability_tier) ; ici = le filet qui rend le nu visible.
+    # Scope = les nombres marché INFÉRÉS (le hasard "60k clients" : taille de marché,
+    # revenu concurrent estimé). Pas awareness_distribution (split normalisé auto-labellé)
+    # ni proofs.total_customers (déclaré opérateur, couvert par reliability_tier=declared
+    # côté skill). Garde le filet net et _EXAMPLE-safe (ces deux nombres sont null).
+    market = (brand_data or {}).get("market", {}) or {}
+    extraction_map = (brand_data or {}).get("_extraction") or {}
+    if not isinstance(extraction_map, dict):
+        extraction_map = {}
+    has_market_conf = (market.get("meta", {}) or {}).get("confidence") is not None
+    def _has_prov(path_key):
+        return has_market_conf or any(path_key in k for k in extraction_map)
+    naked = []
+    mo = market.get("market_overview", {}) or {}
+    if mo.get("size_estimate") is not None and not _has_prov("size_estimate"):
+        naked.append("market_overview.size_estimate")
+    for i, c in enumerate(market.get("competitors", []) or []):
+        if c.get("estimated_monthly_revenue") is not None and not _has_prov("estimated_monthly_revenue"):
+            naked.append(f"competitors[{i}].estimated_monthly_revenue")
+    for fld in naked:
+        issues.append({
+            "type": "naked_number_unsourced",
+            "severity": SEVERITY["naked_number_unsourced"],
+            "file": str((brand_dir / "brand.json").relative_to(brand_dir.parent.parent.parent)),
+            "msg": f"market.{fld} = nombre sans marqueur de fiabilité (_extraction ou market.meta.confidence) · scrapé ≠ fait (D#503/D#518)",
+        })
 
     # Count severity
     counts = defaultdict(int)

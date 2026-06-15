@@ -1,6 +1,6 @@
 # Style Registry · index de la style-library
 
-> SSOT-index des fiches-style (`registries/styles/{style_id}.json`, schema `style-recipe/1.0`). Backing du tag `genome_tags.primary_style_id` (enum 22, miroir A=B genome.schema <-> decomposition.schema). Jumeau de `creative-mechanics-registry.md` mais pour le STYLE VISUEL/VIDEO. CONSOMME par compose/recompose/adapt (render_recipe -> prompt) et par qc-creative (Axe 4 DA via da_compat). Unifie visuel+video (`model_params.video_params` pour les styles temporels). NE definit aucun style_id (l'enum reste SSOT cote genome/decomposition).
+> SSOT-index des fiches-style (`registries/styles/{style_id}.json`, schema `style-recipe/1.0`). Backing du tag `genome_tags.primary_style_id` (enum 22, miroir A=B genome.schema <-> decomposition.schema). Jumeau de `creative-mechanics-registry.md` mais pour le STYLE VISUEL/VIDEO. CONSOMME par compose/recompose/adapt (render_recipe -> prompt) et par qc-creative (Axe 4 DA via da_compat). Unifie visuel+video (`model_params.video_params` pour les styles temporels). SSOT semantique du style_id (meme doctrine que creative-mechanics-registry pour mecanique_id) : l'enum style_id cote genome/decomposition/genome-package est un snapshot DERIVE de cet index (sync rebuild-index), pas l'inverse. Une fiche perf-validee (>=2 sources independantes) etend le vocabulaire.
 
 **22 fiches · couverture enum 22/22.**
 

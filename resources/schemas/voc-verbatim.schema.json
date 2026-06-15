@@ -2,8 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "VOC Verbatim (Layer A record)",
   "description": "Codification du record jsonl Layer A défini en prose dans .skills/skills/mine-voc/SKILL.md Step 2-3. PAS une entité nouvelle : le home voix-client reste le couple Layer A jsonl + routing Layer B (pain_points, objections, spec, profile). Storage : brands/{slug}/sources/voc/{run-date}/{platform}.jsonl, 1 ligne = 1 record. Jamais auto-loadé (audit substrate). Les jsonl pre-schema restent valides en l'état, pas de validation rétroactive.",
-  "_schema_version": "voc-verbatim/1.0",
-  "_changelog": { "1.0": "C1 · codification du record Layer A + verbatim_id stable VOC-NN pour pointage Layer B + provenance mécanique inline." },
+  "_schema_version": "voc-verbatim/1.1",
+  "_changelog": {
+    "1.1": "Spectre / amendement évidence (D#503) · strict additif : +relation (our-customer | competitor-customer | category-prospect) et +moment (pre-purchase | post-purchase | usage). La matière de l'INTERPRÉTATION CONTEXTUELLE : un 'trop cher' post-achat (déception valeur) ≠ pré-achat (barrière d'entrée) · la VoC de NOS clients (our-customer) renforce le cœur, la VoM (competitor-customer / category-prospect) ouvre les marchés adjacents et capte les objections des non-clients. Le verbatim n'est pas une vérité absolue : la fréquence mesure la facilité d'articulation, pas le poids décisionnel (D#503).",
+    "1.0": "C1 · codification du record Layer A + verbatim_id stable VOC-NN pour pointage Layer B + provenance mécanique inline."
+  },
   "type": "object",
   "required": ["verbatim_id", "platform", "source_ref", "captured_at", "text", "product_slug", "language"],
   "properties": {
@@ -17,6 +20,16 @@
     "product_slug": { "type": "string", "pattern": "^[a-z0-9-]*$" },
     "language": { "type": "string" },
     "username_anonymized": { "type": ["string", "null"] },
+    "relation": {
+      "type": ["string", "null"],
+      "enum": ["our-customer", "competitor-customer", "category-prospect", null],
+      "description": "Spectre (D#503) · relation de l'auteur à la marque. our-customer = VoC (renforce le cœur, biais du survivant : ne contient que les acheteurs) · competitor-customer / category-prospect = VoM (ouvre les marchés adjacents, capte les objections des non-clients). Null = inconnu/non tagué."
+    },
+    "moment": {
+      "type": ["string", "null"],
+      "enum": ["pre-purchase", "post-purchase", "usage", null],
+      "description": "Spectre (D#503) · moment d'élicitation. pre-purchase (barrière d'entrée) ≠ post-purchase (déception/satisfaction valeur) ≠ usage (vécu produit). Conditionne l'interprétation : mêmes mots, sens différents selon le moment."
+    },
     "coding": {
       "type": "object",
       "description": "4 lentilles canon resources/frameworks/voc-coding.md.",

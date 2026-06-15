@@ -32,7 +32,7 @@ def load_json(path):
 
 def short(s, n=120):
     if not s:
-        return "—"
+        return " · "
     s = str(s).replace("\n", " ").strip()
     return s if len(s) <= n else s[: n - 1] + "…"
 
@@ -59,7 +59,7 @@ def build_snapshot(brand_dir):
     brand = load_json(brand_dir / "brand.json") or {}
     strategy = load_json(brand_dir / "strategy.json") or {}
 
-    lines = [f"# {slug} — snapshot", ""]
+    lines = [f"# {slug} · snapshot", ""]
 
     # Identity
     identity = unwrap(brand.get("identity", {})) or {}
@@ -87,15 +87,30 @@ def build_snapshot(brand_dir):
                     "name": unwrap(pid.get("product_name")) or unwrap(pid.get("name")) or p.name,
                     "price": unwrap(pricing.get("price_display")) or unwrap(pricing.get("base_price")) or unwrap(pricing.get("price")),
                     "hero": bool(unwrap(pid.get("hero")) or unwrap(pid.get("is_hero"))),
+                    "use_cases": unwrap_list(spec.get("use_cases")) or [],
                 })
     lines.append(f"## Products ({len(products)})")
     for p in products[:10]:
         hero_mark = " ★" if p["hero"] else ""
-        price = f" — {p['price']}" if p["price"] else ""
+        price = f" · {p['price']}" if p["price"] else ""
         lines.append(f"- {p['slug']}{hero_mark}{price}")
     if len(products) > 10:
         lines.append(f"- … +{len(products) - 10} more")
     lines.append("")
+
+    # Use cases (Spectre · le nœud stratégique Mc → U)
+    all_use_cases = [uc for p in products for uc in p["use_cases"] if isinstance(uc, dict)]
+    if all_use_cases:
+        by_status = {}
+        for uc in all_use_cases:
+            st = unwrap(uc.get("status")) or "?"
+            by_status[st] = by_status.get(st, 0) + 1
+        lines.append(f"## Cas d'usage ({len(all_use_cases)})")
+        lines.append("- Par statut: " + ", ".join(f"{k}:{v}" for k, v in sorted(by_status.items())))
+        labels = [short(unwrap(uc.get("label")), 50) for uc in all_use_cases[:8] if unwrap(uc.get("label"))]
+        if labels:
+            lines.append("- " + " · ".join(labels))
+        lines.append("")
 
     # Audiences
     audiences_dir = brand_dir / "audiences"
@@ -105,13 +120,14 @@ def build_snapshot(brand_dir):
             if a.is_dir() and not a.name.startswith("_"):
                 profile = load_json(a / "profile.json") or {}
                 pid = unwrap(profile.get("identity", {})) or {}
+                pmeta = unwrap(profile.get("meta", {})) or {}
                 psychology = unwrap(profile.get("psychology", {})) or {}
                 pains = unwrap_list(psychology.get("pain_points")) or unwrap_list(profile.get("pain_points"))
-                label = unwrap(pid.get("label")) or unwrap(pid.get("name")) or a.name
+                label = unwrap(pmeta.get("name")) or unwrap(pid.get("label")) or unwrap(pid.get("name")) or a.name
                 audiences.append({
                     "slug": a.name,
                     "label": label if isinstance(label, str) else a.name,
-                    "primary": bool(unwrap(pid.get("primary")) or unwrap(pid.get("is_primary"))),
+                    "primary": (unwrap(pmeta.get("audience_type")) == "primary") or bool(unwrap(pid.get("primary")) or unwrap(pid.get("is_primary"))),
                     "pains": [
                         (unwrap(p.get("label")) or unwrap(p.get("formulation")) or "")
                         if isinstance(p, dict) else str(p)
@@ -127,6 +143,40 @@ def build_snapshot(brand_dir):
     if len(audiences) > 6:
         lines.append(f"- … +{len(audiences) - 6} more")
     lines.append("")
+
+    # Spectre (la carte du terrain produit × marché · M1)
+    spectrum = load_json(brand_dir / "spectrum.json")
+    if spectrum:
+        cells = unwrap_list(spectrum.get("cells")) or []
+        cov, blank_qual = {}, {}
+        core = unwrap(spectrum.get("core_cell_ref"))  # canonical top-level field
+        for c in cells:
+            if not isinstance(c, dict):
+                continue
+            cs = unwrap(c.get("coverage_self")) or "?"
+            cov[cs] = cov.get(cs, 0) + 1
+            if cs == "blank":
+                bq = unwrap(c.get("blank_qualification")) or "unqualified"
+                blank_qual[bq] = blank_qual.get(bq, 0) + 1
+            if not core and c.get("is_core"):  # fallback if core_cell_ref absent
+                core = unwrap(c.get("cell_id"))
+        lines.append(f"## Spectre ({len(cells)} cellules)")
+        if cov:
+            lines.append("- Couverture: " + ", ".join(f"{k}:{v}" for k, v in sorted(cov.items())))
+        if blank_qual:
+            lines.append("- Zones blanches: " + ", ".join(f"{k}:{v}" for k, v in sorted(blank_qual.items())))
+        if core:
+            lines.append(f"- Cœur de cible: {core}")
+        meta_bits = []
+        stage = unwrap(spectrum.get("stage_at_build"))
+        refreshed = unwrap(spectrum.get("refreshed_at"))
+        if stage:
+            meta_bits.append(f"stade {stage}")
+        if refreshed:
+            meta_bits.append(f"refresh {short(refreshed, 19)}")
+        if meta_bits:
+            lines.append("- " + " · ".join(meta_bits))
+        lines.append("")
 
     # Offers
     offers_count = 0

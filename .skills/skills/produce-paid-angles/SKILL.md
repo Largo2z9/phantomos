@@ -1,7 +1,7 @@
 ---
 name: produce-paid-angles
 type: producer
-version: "1.11.0"
+version: "1.13.0"
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -32,14 +32,23 @@ consumes:
     min_version: 1.0.0
   - path: resources/canon/copy/heuristiques-persuasion/*
     min_version: 1.0.0
-  - path: resources/canon/copy/_shared/awareness-stage.json
+  - path: resources/schemas/_shared/awareness-stage.json
     min_version: 1.0.0
+  - path: resources/registries/creative-mechanics-registry.md
+    min_version: 1.0.0
+  - path: resources/registries/hooks/*
+    min_version: 1.0.0
+  - path: resources/concepts/*
+    min_version: 1.0.0
+  - path: docs/doctrine/angle-strategy-doctrine.md
   - path: docs/doctrine/angle-anatomy-doctrine.md
   - path: docs/doctrine/hooks-method-doctrine.md
   - path: docs/doctrine/breakthrough-advertising-5-stages.md
   - path: docs/doctrine/objections-mapping-doctrine.md
   - path: docs/doctrine/audiences-cartography-doctrine.md
 description: >
+  v1.13.0 (D#523 · coordonnée NÉGATIF câblée au contrat d'écriture) · le squelette d'angle écrit inclut désormais la 5e coordonnée `negative` (l'alternative déplacée · summary + type[competitor|category-belief|status-quo|substitute|diy|do-nothing] + spectrum_cell_ref optionnel vers le négatif concurrentiel du Spectre) · _schema_version write bumpé angle/1.3→angle/1.6. Filets post-hoc dans validate-all (advisory LOW `angle_negative_missing` si reframe sans négatif · intégrité MED `angle_negative_untraced` si spectrum_cell_ref présent ne résout pas) · jamais un gate au write (Master rule). Les 4 autres coordonnées existaient déjà au contrat (origin_axis · awareness_movement · lineage.pain_ref+formula.tension · formula.reframe). consumes angle-strategy-doctrine déjà déclaré. Backward compat strict additif.
+  v1.12.0 (v2.90.0 câblage workflow A · bibliothèques cross-brand + régime) · NEW Step 0quater : lecture du cadrage de batch `creatives/{batch}/frame.json` si présent (régime explore/exploit + rayon sectoriel, produit par frame-regime) + chargement des bibliothèques cross-brand (creative-mechanics-registry 34 mécaniques · registries/hooks patterns promote-ready · resources/concepts) avec filtre de distance verticale rayon_max(freedom_cursor) et surfaçage des emprunts (pari conscient, jamais silencieux). Step 3 : NEW dimension candidate `mecanique` (concept ad-level du registre). Step 9 : si batch cadré, chaque angle top-ranked porte 3 perspectives POV (fondateur/client/expert tiers, A5). Close : chaînage workflow A (evaluate-concept → weave-hooks) quand le batch est cadré. Sans frame.json, comportement v1.11 inchangé (backward compat strict additif).
   v1.11.0 (v2.79.5 engagement disclosure NIVEAU 0 paramètres décomposés) · Section pré-runtime ajoutée AVANT Step 0 · expose 6 paramètres décomposés au runtime (audience targeted · pains/JTBD source · formula angles OTRB · couches pain-benefit-chain · hypothèses figées · biais à éviter) avec POURQUOI chacun + close binaire OK ou ajuste. Cross-ref doctrines `docs/system/decomposition-visibility-doctrine.md` v2.79.5+ + `docs/system/engagement-disclosure-doctrine.md` v2.79.5+. Backward compat strict additif (Steps 0-12 runtime preserved · seul l'amont disclosure change).
   v1.10.0 (v2.64 ontologie sémantique pure · pain_points + objections sub-audience) · Step 1 read encoded data refactor · pain_points lus depuis `audiences/{audience_slug}/pain_points/*.json` (sub-audience NEW v2.64 · owned natif par parent path) · objections lues depuis `audiences/{audience_slug}/objections/*.json` (sub-audience NEW v2.64). Step 11bis back-refs P4/P5 stages canonical refs `audiences/{audience_slug}/objections/{OBJ-NN}.json#response_counter` + `audiences/{audience_slug}/pain_points/{PNT-NN}.json#derived_angle_refs`. angle.schema v1.3 lineage.pain_ref + objection_ref · skill populate désormais PNT-NN + OBJ-NN refs canonical sub-audience. Backward compat strict additif · fallback transparent top-level v2.63 + profile sub-fields legacy v1.7 preserved.
   v1.9.0 (v2.63 ontologie pure · pain_points + objections collections top-level) · Step 1 read encoded data refactor · pain_points lus depuis `pain_points/*.json filtered by affected_audiences contains audience_slug` (collection top-level NEW v2.63) · objections lues depuis `objections/*.json filtered idem` (collection top-level NEW v2.63). Step 11bis back-refs P4/P5 stages canonical refs `objections/{OBJ-NN}.json#response_counter` et `pain_points/{PNT-NN}.json#derived_angle_refs` (au lieu de profile.json#/objections/{idx} sub-fields legacy). angle.schema v1.3 lineage.pain_ref + objection_ref · skill populate désormais PNT-NN + OBJ-NN refs canonical en bonus de pain_extract text legacy. Backward compat lecture profile.pain_points[] + profile.objections[] legacy preserved (pre-v2.63 brands).
@@ -68,7 +77,9 @@ permissions:
   subagent_safe: true
 pipeline:
   preconditions: brand exists with at least one audience profile.json containing pain_points, objections, voice.key_expressions. Ideally mine-voc has run on the audience.
-  postconditions: ranked angles artifact in produced/paid-angles/, scoring trace in sources/produced-angles/, learnings appended if pattern detected, finalize-mutation-batch event emitted.
+  postconditions: ranked angles artifact in produced/paid-angles/, scoring trace in sources/produced-angles/, learnings appended if pattern detected, finalize-mutation-batch event emitted, recommended next-step persisted as an idempotent In Progress line in brands/{slug}/todos.md (canonical format, auto-ticked when the downstream skill runs).
+patch_notes:
+  v1.12.1: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW Step 12ter · le next-step recommandé du close (Step 9) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`, tické auto (`[x]`) quand le skill aval nommé produit son artifact. Le next-step in-line du close reste inchangé · il ne meurt plus dans le chat, il a un réceptacle persistant. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · Steps 0-12 + close + finalize préservés."
 disambiguates_against:
   produce-copy-brief: "route to produce-copy-brief when operator wants a full copywriter brief on ONE chosen angle (audience + angle + channel structured doc) · produce-paid-angles is the upstream ideation step"
   mine-voc: "route to mine-voc when audience profile is thin (no verbatims encoded yet) · paid-angles needs verbatim density to score, must capture first"
@@ -223,12 +234,31 @@ Read-only access aux fichiers `resources/canon/copy/{layer}/{tool}.json`. Couche
 - `frameworks` (AIDA, PAS, BAB, QUEST, FAB, 4Ps) : squelette structurel
 - `hooks` (curiosity-gap, contrarian, stat-choc, avant-apres, question-callout, confession) : ouverture
 - `angles` (mecanisme-unique, identite, retour-en-arriere, ennemi-commun, status-shift, contre-intuitif) : axe narratif
-- `niveaux-schwartz` (conscience, sophistication) : grille de pertinence · les 5 stages conscience canoniques sont définis dans `resources/canon/copy/_shared/awareness-stage.json` ($ref partagé v2.29.0), consommés via le field name `awareness_stage` (le terme Schwartz reste valide en surface opérateur, mais le field canonique est `awareness_stage`)
+- `niveaux-schwartz` (conscience, sophistication) : grille de pertinence · les 5 stages conscience canoniques sont définis dans `resources/schemas/_shared/awareness-stage.json` ($ref partagé v2.29.0), consommés via le field name `awareness_stage` (le terme Schwartz reste valide en surface opérateur, mais le field canonique est `awareness_stage`)
 - `archetypes-voix` (caregiver, sage, rebelle, amante, heros, homme-ordinaire) : registre
 
 Pour chaque outil canon lu, garder en mémoire : `id, when_works[], when_avoid[], combines_with{}`. Ces contraintes filtrent quels outils sont compatibles avec le contexte audience résolu en Step 0/1.
 
 **Lecture batch.** `python3 .skills/phantom-canon.py copy {layer}` retourne la liste des outils d'une couche. Itérer pour charger les couches utilisées. Cache en mémoire pour la durée du run.
+
+---
+
+## Step 0quater · Régime + bibliothèques cross-brand (v1.12.0 · workflow A)
+
+**Cadrage de batch.** Chercher le `frame.json` le plus récent sous `brands/{slug}/creatives/{batch}/frame.json` (ou celui passé en input par l'orchestrateur). S'il existe et date de moins de 7 jours :
+
+- Lire `regime` (mode + freedom_cursor) et `rayon_max`. Le régime gouverne la PROVENANCE des angles : exploit = coller à la matière prouvée (atlas + patterns promus), explore = autoriser la re-dérivation depuis la banque de concepts.
+- Le run devient un run cadré : l'output le mentionne en une ligne ("batch cadré en {mode}, curseur {x}") et le close chaîne vers le workflow A (voir Step 9).
+
+S'il n'existe pas : run autonome, comportement identique aux versions antérieures. Ne JAMAIS exiger un cadrage pour produire des angles (la skill reste utilisable seule), mais si l'opérateur enchaîne visiblement vers de la production (demande un batch, des créas), proposer frame-regime en next-step.
+
+**Bibliothèques cross-brand (lues dans tous les cas, filtrées par le rayon si cadré) :**
+
+- `resources/registries/creative-mechanics-registry.md` · les 34 mécaniques ad-level (le CONCEPT, roi de l'image). Chaque angle candidat est mappé à sa mécanique dominante (`mecanique_id`), ce qui rend l'angle joignable au génome et à la perf en aval.
+- `resources/registries/hooks/*.json` · patterns hook promote-ready (library-pattern, multi-source). En exploit : prioriser les patterns à `promotion.status: promote-ready` qui matchent la mécanique. En explore : ouvrir aux patterns watch avec flag.
+- `resources/concepts/*.json` · banque de concepts (principes abstraits). Plancher de l'explore : on ne part JAMAIS d'une page blanche.
+
+**Distance sectorielle (rayon, D#480).** Fonction de distance unique, définie dans `resources/sops/creative-production/cross-brand-curation.md` (source canonique de la fonction) : distance(item, marque) = 0 si la verticale de la marque ∈ `item.vertical_scope.origins` OU (`item.vertical_scope.breadth == "universal"` ET `item.promote_status == "promote-ready"`) · 1 si une origin est une verticale VOISINE de la marque · 2 sinon. Filtrer : distance <= rayon_max, lu depuis `frame.json#rayon_max` (persisté, jamais re-dérivé · 0 exploit, 1 balanced, 2 explore · rayon 2 par défaut si run non cadré, MAIS tout emprunt distance > 0 est alors surfacé). Chaque emprunt retenu est taggé `vertical_distance` + `distance_note` et SURFACÉ dans l'output opérateur comme pari conscient, jamais silencieux.
 
 ---
 
@@ -290,6 +320,7 @@ Not a fixed list. The selection adapts to what is encoded densely on this brand.
 - `product.proof.type` (when `proofs.*` carries 2+ varied types · single-proof brand locks this dimension to dominant proof, no axis variation)
 - `offer.urgency` or `offer.type` (when operator query is offer-led · *"angles pour la promo BFCM"* boosts these into active set)
 - `brand.market.vernacular` (when VoM has run, raises hook quality)
+- `mecanique` (v1.12.0 · concept ad-level du creative-mechanics-registry · active quand le run est cadré par un frame.json OU quand l'opérateur vise explicitement de la production créa · chaque cellule porte alors un `mecanique_id` candidat, joignable au génome et à la perf en aval)
 
 **Hard cap: 5 dimensions max.** Beyond 5, cartesian explodes (5×4×3×3×2 = 360 cells) and signal dilutes per scoring framework anti-pattern. The agent picks the 4-5 highest-density dimensions for THIS brand and THIS query, never defaults to a fixed list.
 
@@ -452,6 +483,12 @@ Format close canonique v2.54 ·
 
 L'opérateur arbitre · l'agent enchaîne le drill-down sur l'axe choisi (silencieusement vers mine-voc OR produce-copy-brief OR autre selon choix).
 
+**Run cadré (v1.12.0 · frame.json présent)** · trois ajouts au rendu, rien d'autre ne change ·
+
+1. **Perspectives POV (A5)** · chaque angle top-ranked porte 3 incarnations narratives : fondateur (parole de marque), client (témoignage première personne), expert tiers (autorité neutre). Même angle, trois voix · jamais présentées comme trois angles distincts. Une ligne par POV sous l'angle dans la table.
+2. **Dérivation des concepts candidats (réceptacle gate concepts)** · regrouper les angles top-ranked par principe abstrait : un concept = un principe détaché de la formulation. Chaque concept candidat porte `{concept_id: "CPT-NN", principle, angle_refs[], applicable_mechanics (mecanique_id du creative-mechanics-registry), vertical_scope hérité des emprunts, status: "candidate"}` · 2 à 4 concepts par batch typique. Allocation `CPT-NN` = scan du max existant dans `brands/{slug}/creatives/{batch}/concepts/` + 1. Écrire chaque concept via `python3 .skills/write-to-context.py --path "brands/{slug}/creatives/{batch}/concepts/CPT-NN.json" --value '{concept JSON}' --mode direct --source agent --reason "Concept candidate derived from top-ranked angles (run cadré)"`. Ces fichiers sont le réceptacle unique que le gate concepts (evaluate-concept) évalue ensuite · les verdicts sont retournés au flux appelant qui les persiste dans chaque fichier CPT (champ `evaluation`).
+3. **Close chaîné workflow A** · le close drill-down propose en option A' la suite du flux cadré : *"le batch est cadré en {mode} · la suite naturelle, c'est le gate concepts puis le tissage des scripts"* (verbalisé métier, l'agent route vers evaluate-concept, qui juge les `concepts/CPT-NN.json` écrits au point 2, puis weave-hooks). Les emprunts cross-verticale retenus (distance > 0) sont rappelés dans le close comme paris à arbitrer au gate.
+
 ---
 
 ## Step 10 · Layer A scoring trace
@@ -540,7 +577,7 @@ En surface opérateur (rendu human-readable), le terme *Schwartz* reste recevabl
 
 ```json
 {
-  "_schema_version": "angle/1.3",
+  "_schema_version": "angle/1.6",
   "angle_id": "ANG-NN",
   "name": "...",
   "audience_slug": "...",
@@ -563,12 +600,15 @@ En surface opérateur (rendu human-readable), le terme *Schwartz* reste recevabl
     "claim_confidence": "forte | moyenne | faible | TRÈS faible"
   },
   "formula": { "observation": {}, "tension": {}, "reframe": {}, "bridge": {} },
+  "negative": { "summary": "l'alternative déplacée (1 ligne)", "type": "competitor | category-belief | status-quo | substitute | diy | do-nothing", "spectrum_cell_ref": "SPC-NN | null (le négatif concurrentiel sourcé du Spectre)" },
   "insight": { "modalite": "formulé | implicite | absent", "status": "déduit | validé | incertain", "formulation": "..." },
   "meta": { "validation_status": "hypothesis", "created": "YYYY-MM-DD" }
 }
 ```
 
 Les 3 fields `derived_from_audience_confidence`, `derived_from_brand_confidence`, `claim_confidence` (v2.54 doctrine investigation-posture) permettent au downstream `/phantom {brand_slug} angles ANG-NN` de rendre l'angle avec sa fiabilité héritée explicite, et à `produce-copy-brief` d'hériter à son tour la confidence chain dans le brief créa downstream.
+
+**NEW v1.13.0 · coordonnée NÉGATIF (D#523).** Un angle est un pari sur le chemin de croyance le plus court, défini par 5 coordonnées dans l'ordre canon · (1) l'entrée (`awareness_movement`), (2) le moteur désir-douleur (`lineage.pain_ref` + `formula.tension`), (3) la source de croyance (`lineage.proof_primary` + `origin_axis`), (4) le NÉGATIF (`negative` · l'alternative que l'angle déplace), (5) le RECADRAGE (`formula.reframe`). Le négatif nomme la CIBLE du recadrage · sans lui, l'angle affirme une promesse sans déloger l'option en place (le concurrent, la croyance de catégorie, le statu quo, le renoncement). Le peupler dès le light pass (`summary` + `type`) · le négatif concurrentiel vient souvent d'une cellule du Spectre, traçable via `negative.spectrum_cell_ref` (le pont carte→négatif · cf `docs/doctrine/angle-strategy-doctrine.md`). Filet · `validate-all` advise en LOW un angle qui a un reframe SANS négatif (`angle_negative_missing`) et vérifie post-hoc en MED qu'un `spectrum_cell_ref` présent résout (`angle_negative_untraced`) · JAMAIS un gate au write (le choix de quoi déplacer = jugement stratégique, trust the model · Master rule).
 
 **NEW v1.9.0 · pain_ref + objection_ref canonical population.** Lors de l'écriture `angles/{ANG-NN}.json` v1.3, si la cellule top a un `pain_id` (PNT-NN) ou `objection_id` (OBJ-NN) mappable depuis Step 1 collections top-level read · populer `lineage.pain_ref` + `lineage.objection_ref` avec les canonical IDs. Sinon (cellule formula-derived, ou pre-v2.63 brand avec lecture fallback profile sub-fields), laisser null + garder `pain_extract` text legacy comme fallback. Cohérent triangulation cross-canon avec downstream (`decompose-angle` v1.1+ peut désormais re-triangulate atom-level depuis canonical refs).
 
@@ -595,7 +635,7 @@ Quand `produce-paid-angles` génère un angle qui exploite une objection (via `f
 Pour chaque angle ranked dans le top output (5 par défaut, jusqu'à 7), si la cellule a un `objection_id` (OBJ-NN) mappable à `audiences/{a_slug}/objections/*.json` ·
 
 ```bash
-python3 .skills/write-to-context.py --path "audiences/{a_slug}/objections/{OBJ-NN}.json#/response_counter" --value "{angle.formula.reframe.text}" --source agent --confidence 0.8 --mode proposed --reason "Back-ref auto from produce-paid-angles run"
+python3 .skills/write-to-context.py --path "brands/{slug}/audiences/{a_slug}/objections/{OBJ-NN}.json#/response_counter" --value "{angle.formula.reframe.text}" --source agent --confidence 0.8 --mode proposed --reason "Back-ref auto from produce-paid-angles run"
 ```
 
 Le `response_counter` rend la fiche objection opérable downstream · l'opérateur qui drill `audiences/{a_slug}/objections/{OBJ-NN}` voit non seulement la formulation mais aussi la neutralization formula que les angles ont déjà cristallisée. Évite re-générer un counter from scratch pour `produce-copy-brief` ou objection-handling email flows.
@@ -611,13 +651,13 @@ Pour la même objection traitée par un angle, append `derived_angle_refs[]` ave
 **Stage append-only objections sub-audience** ·
 
 ```bash
-python3 .skills/write-to-context.py --path "audiences/{a_slug}/objections/{OBJ-NN}.json#/derived_angle_refs" --value '["ANG-{NN}"]' --source agent --confidence 1.0 --mode proposed --reason "Back-ref ANG-NN derivation"
+python3 .skills/write-to-context.py --path "brands/{slug}/audiences/{a_slug}/objections/{OBJ-NN}.json#/derived_angle_refs" --value '["ANG-{NN}"]' --source agent --confidence 1.0 --mode proposed --reason "Back-ref ANG-NN derivation"
 ```
 
 **v1.10.0 · pain_points.derived_angle_refs[] back-ref sub-audience** · si l'angle a `lineage.pain_ref` populé avec un PNT-NN canonical (Step 11 angle.json v1.3 write), append symétrique sur la fiche pain sub-audience ·
 
 ```bash
-python3 .skills/write-to-context.py --path "audiences/{a_slug}/pain_points/{PNT-NN}.json#/derived_angle_refs" --value '["ANG-{NN}"]' --source agent --confidence 1.0 --mode proposed --reason "Back-ref ANG-NN pain source"
+python3 .skills/write-to-context.py --path "brands/{slug}/audiences/{a_slug}/pain_points/{PNT-NN}.json#/derived_angle_refs" --value '["ANG-{NN}"]' --source agent --confidence 1.0 --mode proposed --reason "Back-ref ANG-NN pain source"
 ```
 
 Si pain est observation source de l'angle (formula.observation.phenomenon ancré sur un PNT-NN canonical), le back-ref permet à la fiche pain de remonter tous les angles construits sur ce pain. Symétrie complète audience↔pain↔objection↔angle graph navigable.
@@ -635,7 +675,7 @@ Quand l'opérateur trigger pivot audience via l'encart v1.7.0 (Step 11 artifact 
 Pour chaque angle dans le ranked output qui matche aussi une audience autre que la source (semantic match sur pain dominant + verbatim convergence), stage ·
 
 ```bash
-python3 .skills/write-to-context.py --path "angles/{ANG-NN}.json#/compatibility" --value '[{"audience_slug":"{other_aud}","fit":"yes","notes":"..."}]' --source agent --confidence 0.7 --mode proposed --reason "Cross-audience pivot persist"
+python3 .skills/write-to-context.py --path "brands/{slug}/angles/{ANG-NN}.json#/compatibility" --value '[{"audience_slug":"{other_aud}","fit":"yes","notes":"..."}]' --source agent --confidence 0.7 --mode proposed --reason "Cross-audience pivot persist"
 ```
 
 Schema entry `compatibility[]` ·
@@ -671,6 +711,74 @@ python3 .skills/finalize-mutation-batch.py --brand-slug {slug}
 Mechanical Python primitive. Inspects every mutation written in this run (Layer A trace, Layer B artifact, optional learnings append), runs structural checks, emits a `coherence_check` event so `turn-end-audit` sees the loop closed.
 
 Exit code 2 = blocking issue → revise before shipping. Exit code 0 with warnings = log them, ship. **Non-negotiable, mechanical, not skippable.**
+
+---
+
+## Step 12ter · Persist the recommended next-step (v1.12.1, additif strict)
+
+Le close drill-down (Step 9) propose un next-step en clair · il vit dans la réponse conversationnelle. Mais une reco qui ne vit que dans le chat meurt au prochain tour. Ce step lui donne une **trace persistante** · une ligne dans la todo de la brand, sans rien retirer du close in-line, qui reste tel quel.
+
+Pattern déjà prouvé par `register-and-flag` Step 6 (write idempotent d'une ligne de tracking dans `brands/{slug}/todos.md`). On le réapplique au next-step produit.
+
+**Geste** · après Step 12 (finalize OK), écrire une ligne unique dans `brands/{slug}/todos.md → ## In Progress` au **format de ligne canonique** ·
+
+```
+- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {durée}
+```
+
+- `Name` · le next-step recommandé verbalisé court, dérivé du move A du close (ex `produce-copy-brief sur l'angle #2 Ballonnement`, `mine-voc pour upgrade audience source avant scale`). Operator-language, pas de slug pur sauf nom de skill aval.
+- `P` · priorité dérivée de la confiance · claim_confidence majoritairement `forte` et reco = production downstream → `P: 1` · reco = upgrade substrat (mine-voc) parce que corpus thin → `P: 1` aussi (bloquant qualité) · reco secondaire / variant → `P: 2`.
+- `E` · effort du skill aval (low pour un brief ciblé, med pour un mine-voc, high pour un re-mining large).
+- `T` · ETA verbalisé du skill aval (ex `15 min`, `demi-journée`), aligné `feedback_client_effort_scale` si client-facing.
+
+**Idempotence (dure, comme register-and-flag).** Avant d'écrire, scanner `## In Progress` · si une ligne porte déjà le même `Name` (même skill aval + même cible), **ne pas dupliquer**. Re-run du même skill sur la même brand/audience = zéro nouvelle ligne. Le write passe par le mutation gate ·
+
+```bash
+python3 .skills/write-to-context.py --path "brands/{slug}/todos.md#in-progress" --value "- [ ] {Name} | P: {n} | E: {level} | T: {eta}" --source agent --mode direct --reason "Persist recommended next-step from produce-paid-angles close (idempotent)"
+```
+
+Si `write-to-context.py` ne route pas le markdown todos, fallback `register-and-flag` (sous-skill curator) en lui passant l'entry · même réceptacle, même idempotence. Ne JAMAIS hand-editer le markdown hors gate.
+
+**Auto-tick aval.** La ligne est cochée `[x]` automatiquement quand le skill aval nommé tourne et produit son artifact · `produce-copy-brief` (et tout producer aval) lit `## In Progress` à son finalize, matche une ligne dont le `Name` le désigne comme skill aval avec la même cible (angle/audience), et la bascule `[x]` (archivée selon la doctrine todos racine). Pas de tick manuel · le downstream ferme la boucle. Si aucune ligne ne matche, le downstream ne crée rien et continue (silencieux).
+
+**Léger, jamais bloquant.** Échec du write (gate refuse, fichier absent) → flag interne silencieux, ne casse pas le ship des angles. Le livrable Layer B (Step 11) et le close restent la sortie primaire · la trace todo est un bonus de persistance, pas une précondition.
+
+**Doctrine.** Report des étapes différées et matérialisation des next-steps comme tâches reprenables avec leur levier · `docs/system/onboarding-setup-flow.md` (sections « Exhaustivité offerte, jamais forcée, reportable » et « La persistance est native »). Référencée ici, pas redupliquée.
+
+---
+
+## Step 12quater · Déposer le beat de restitution des angles (D#520)
+
+Le set d'angles vient d'être posé (`angles/{ANG-NN}.json` lignés, back-refs tissés, todo persistée). Avant de rendre la main, **dépose le registre de ce run pendant que ton contexte est frais** · la lecture experte du set (lequel gagne, sur quel mécanisme, lequel est fragile et pourquoi) meurt si on la compresse en une phrase ici puis qu'on demande au fil de la re-broder. C'est de la matière de restitution, pas de la donnée de marque.
+
+**Doctrine SSOT (contrat payload, règles décision-d'abord, richesse second-ordre, temporalité, mode) ·** `docs/system/restitution-beat-doctrine.md`. NE redéplie PAS le contrat JSON ici · lis la doctrine pour la forme, ce step ne porte que les params de la phase `angles`.
+
+**Écris** (`Write` direct · c'est sous `.phantom/`, hors `brands/`, donc hors gate mutation · ne transite PAS par `write-to-context`) le fichier `.phantom/beats/{slug}/angles.json`. Params de cette phase ·
+
+- `"phase": "angles"`. Le renderer mappe seul · vue `/phantom {slug} matrix`, forward-look « je score la matrice et je sors les axes prioritaires » (table doctrine). Tu ne mets ni chemin ni commande dans le payload, le code les appose.
+- **`verdict`** · la lecture top-line du SET, tranchée, une ligne · lequel angle gagne et pourquoi en une frappe (le plus ancré sur de vrais verbatims, ou le plus différenciant si le corpus est mince). Pas « 5 angles produits » (météo), mais le verdict de matrice.
+- **`read`** · 2-3 phrases de second ordre · POURQUOI cet angle gagne · sur quel mécanisme/insight il mord, ce que ça implique pour le test (budget calibré vs scale direct), et **le nerf** · la tension qui sépare le top 2 du reste. Densité d'insight, pas longueur.
+- **`found` / `analyzed`** · les faits saillants du run (clusters de verbatims dominants, awareness stage joué, objection neutralisée la plus saillante) et leur conséquence (ce que la convergence des avis dit du vrai levier d'achat). Amorce grasse possible (`**la thèse.** le pourquoi`).
+- **`rejected`** · les angles ou cellules écartés AVEC leur raison défendable (cellule formula-derived sans ancrage écartée du top, awareness stage en colonne « avoid » filtré, doublon clusterisé). Le travail de rejet est le plus invisible et le plus défendable · ne le jette pas.
+- **`confidence`** · les angles à confiance faible AVEC leur cause RÉELLE · héritée de l'audience source (« audience portée en hypothèse, zéro mining → angles `TRÈS faible`, à tester pas à scaler ») ou de la brand. Un angle formula-derived n'est pas faible pour la même raison qu'un angle dérivé d'une audience non-validée · nomme laquelle. Les items prudents pointent l'étape qui les lèvera (« la voix-client lève cette confiance audience avant scale »).
+- **`encoded`** · les artefacts posés (N angles lignés brand-side, back-refs objection/pain tissés, todo next-step) · pour le record.
+- **`basis`** · une ligne sobre · le substrat lu (verbatims/objections/pains consommés, awareness distribution, canon copy) · rendue « Lu · ... ». Si le corpus était mince, dis-le ici (c'est la cause de la confiance, pas un caveat).
+- **`tease`** · l'accroche · la valeur DANS la matrice (la lecture croisée angle × confiance × placement, ou l'angle surprise qui ressort). PAS de chemin · le renderer appose `/phantom {slug} matrix` et choisit la vue selon la phase.
+
+Champ vide = omis, jamais inventé. Le renderer réorganise en **décision-d'abord** (verdict + read d'abord, puis le raisonnement qui flue, puis « Ce sur quoi je reste prudent », puis basis, puis le CTA) · tu déposes les champs, le code décide la forme. La confiance **forte** ne s'affiche pas seule, elle vit dans le verdict.
+
+**Émission selon le mode (réutilise le signal orchestré-vs-standalone du skill).** Même signal que pour le `frame.json` passé en input par l'orchestrateur (Step 0quater) et le close chaîné ·
+
+- **Orchestré** (produce-paid-angles invoqué par `build-atlas-complete` Phase 6 · audience/batch passés par le chairman) · tu te contentes d'écrire le payload, tu **n'émets pas**. L'orchestrateur rend le beat (`render-beat.py`) à sa frontière de phase. Tu rends la main.
+- **Standalone** (l'opérateur a tapé « trouve les angles pour {audience} {brand} » directement) · après le Write, **émets toi-même** ·
+
+  ```bash
+  python3 .skills/render-beat.py --brand {slug} --phase angles --mode standalone
+  ```
+
+  Présente sa sortie **telle quelle** (NE re-narre pas, NE re-résume pas). En standalone le renderer PROPOSE la suite (« je score la matrice et je sors les axes prioritaires · je lance ? ») · la proactivité vient de là, elle remplace le close drill-down générique par le forward-look de la phase. Le hook `beat-emit` est le filet · si un payload frais reste non-émis, il le pousse.
+
+**Léger, jamais bloquant.** Échec du Write ou du render (pas de payload, render vide) → retombe sur le close drill-down en prose (Step 9), ne laisse JAMAIS un trou à la place de la phase. Le livrable Layer B (Step 11) reste la sortie primaire · le beat est la restitution experte par-dessus, pas une précondition du ship.
 
 ---
 
@@ -758,7 +866,7 @@ Focus modifiers are operator-facing additions (the operator can say *"angles pai
 - `.skills/write-to-context.py` · canonical mutation channel for any write to `learnings.json` if a pattern is detected during the run.
 - `docs/system/contextual-intelligence.md` · master doctrine. No orphan output rule, contextual reasoning, anti-patterns.
 - `docs/system/voice.md` · voice canon, register, banned phrases.
-- `resources/canon/copy/_shared/awareness-stage.json` · `$ref` partagé v2.29.0, 5 stages Schwartz canoniques. Source unique consommée par `lineage.awareness_stage` dans `angle.schema.json` v1.2.
+- `resources/schemas/_shared/awareness-stage.json` · `$ref` partagé v2.29.0, 5 stages Schwartz canoniques. Source unique consommée par `lineage.awareness_stage` dans `angle.schema.json` v1.2.
 - `resources/schemas/angle.schema.json` (v1.2) · schema cible persistance brand-side. Renommages : `source` devient `origin_axis`, `lineage.schwartz_conscience` devient `lineage.awareness_stage`. 8 fields migrés vers creative.
 - `resources/schemas/creative.schema.json` (v1.1, NEW) · 7ème entité brand. Absorbe `intent`, `mecanique`, `seasonality_trigger`, `execution.*`, classification, `variant_of`. Si production créa instance complète, écrire ici (skill `compose-creative` v2.31+ ou direct).
 - v2.29.0 manifest + D#391 · refacto angle/creative split, gouvernance schemas.

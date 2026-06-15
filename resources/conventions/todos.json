@@ -1,0 +1,115 @@
+{
+  "_schema": "convention",
+  "_version": "1.0",
+  "_kind": "internal_file_format",
+  "_field_types": {
+    "meta.*": "structured",
+    "line_format.*": "structured",
+    "sections[].*": "structured",
+    "writer_skills[]": "observed",
+    "rules[]": "structured"
+  },
+  "$comment": "Format canonique de la couche tâche (brands/{slug}/todos.md). Convention interne, pas une API externe. Référencée par les skills écrivains (ceux qui ajoutent ou archivent des lignes de todo). Ne pas confondre avec pending-validations.md (buffer de micro-validations / enrichissements ambiants) ni avec session-state.md (log d'activité roulant).",
+  "meta": {
+    "file": "brands/{slug}/todos.md",
+    "scope": "per-brand task layer",
+    "category": "workspace",
+    "surfaced_by": [
+      "FIRST ACTION mini todo au démarrage (CLAUDE.md root, In Progress puis Backlog, cap 3)",
+      "/phantom {brand} todo (rendu cockpit complet)"
+    ],
+    "append_only_archive": true,
+    "last_updated": "2026-06-14"
+  },
+  "line_format": {
+    "pattern": "- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {duration}",
+    "minimal": "- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {duration}",
+    "fields": {
+      "checkbox": {
+        "open": "- [ ]",
+        "done": "- [x]",
+        "note": "Une ligne cochée [x] migre vers ## Archive, jamais supprimée."
+      },
+      "Name": {
+        "required": true,
+        "note": "Verbe d'action + objet, langue de l'opérateur. Pas de jargon interne, pas de chemins."
+      },
+      "P": {
+        "required": true,
+        "enum": [0, 1, 2, 3],
+        "note": "Priorité. P:0 = bloquant / critique, P:3 = nice-to-have. P0/P1 modifiés localement → sync cockpit."
+      },
+      "E": {
+        "required": true,
+        "enum": ["low", "med", "high"],
+        "note": "Effort estimé."
+      },
+      "T": {
+        "required": true,
+        "note": "Durée estimée, formulée en clair (ex: 10min, 1h, 2 à 3 jours). Jamais de tiret séparateur dans la durée."
+      }
+    },
+    "optional_suffixes": {
+      "note": "Suffixes additifs tolérés derrière le coeur P|E|T, séparés par | , quand un skill a l'info. Ne jamais les rendre obligatoires.",
+      "examples": [
+        "| Blocks Level 1",
+        "| Resources: {link}",
+        "| Levier: {geste qui lèverait l'item}"
+      ]
+    }
+  },
+  "sections": [
+    {
+      "name": "In Progress",
+      "order": 1,
+      "purpose": "Tâches activement engagées. Première source du mini todo au démarrage."
+    },
+    {
+      "name": "Backlog",
+      "order": 2,
+      "purpose": "Tâches identifiées non engagées. Deuxième source du mini todo. Les étapes d'enrichissement différées atterrissent ici avec leur levier."
+    },
+    {
+      "name": "Flags",
+      "order": 3,
+      "purpose": "Auto-généré par validate-resources. Ne pas éditer à la main. Les flags se résolvent automatiquement quand l'issue sous-jacente est corrigée."
+    },
+    {
+      "name": "Blocked",
+      "order": 4,
+      "purpose": "Tâches bloquées par une dépendance externe (accès, validation opérateur, livrable amont)."
+    },
+    {
+      "name": "Archive",
+      "order": 5,
+      "purpose": "Lignes cochées [x] déplacées ici avec date de résolution. Append-only, jamais purgé. Historique cross-session."
+    }
+  ],
+  "section_enum": ["In Progress", "Backlog", "Flags", "Blocked", "Archive"],
+  "writer_skills": [
+    "setup-brand",
+    "snapshot-brand",
+    "build-atlas-complete",
+    "learn-from-session",
+    "promote-learning",
+    "validate-resources"
+  ],
+  "rules": [
+    "Sections dans l'ordre canon · In Progress → Backlog → Flags → Blocked → Archive.",
+    "Done = [x] → migré vers Archive immédiatement, jamais supprimé.",
+    "P0/P1 modifiés localement → resync le cockpit.",
+    "## Flags est auto-géré par validate-resources · aucun skill ni l'opérateur ne l'édite à la main.",
+    "Langue de l'opérateur sur le Name et le T · zéro chemin, zéro nom de fichier, zéro nom de skill dans la ligne.",
+    "Zéro tiret séparateur dans la copy (durées en clair, séparateur point médian ou virgule).",
+    "Le pied de fichier 'Open: N | Blocked: N | Last sync: {date}' se met à jour au write, jamais à la main."
+  ],
+  "cross_refs": {
+    "template": "brands/_TEMPLATE/todos.md",
+    "example": "brands/_EXAMPLE/todos.md",
+    "deferred_steps_doctrine": "docs/system/onboarding-setup-flow.md",
+    "sibling_surfaces": {
+      "pending-validations.md": "buffer de micro-validations / enrichissements ambiants (Context gate · Access gate · Enrichment · Skill candidates)",
+      "session-state.md": "log d'activité roulant auto-maintenu au write"
+    }
+  }
+}

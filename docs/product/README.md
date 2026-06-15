@@ -4,11 +4,11 @@ Operator-facing documentation. How to use PhantomOS, what it can do, how to get 
 
 ## Files
 
-- **`getting-started.md`** — quickstart. First brand booted, first skill run, first context captured.
-- **`capabilities.md`** — what PhantomOS can do today. Mapped to skills.
-- **`fit.md`** — honest audit of who PhantomOS is for, who it isn't, when to adopt. Sweet spots, conditional fits, misfits, discipline requirements.
-- **`guides/`** — task-oriented how-tos. Each guide solves one concrete operator problem end-to-end.
-  - `guides/first-session-example.md` — textual transcript of a first PhantomOS session, turn by turn.
+- **`getting-started.md`** · quickstart. First brand booted, first skill run, first context captured.
+- **`capabilities.md`** · what PhantomOS can do today. Mapped to skills.
+- **`fit.md`** · honest read on where the kit is wired today, where it encodes on demand, and when to adopt. Best fits, conditional fits, timing by profile, discipline requirements.
+- **`guides/`** · task-oriented how-tos. Each guide solves one concrete operator problem end-to-end.
+  - `guides/first-session-example.md` · textual transcript of a first PhantomOS session, turn by turn.
 
 ## Who this is for
 

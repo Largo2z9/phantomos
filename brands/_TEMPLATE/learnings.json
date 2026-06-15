@@ -24,11 +24,19 @@
     "entries[].*": "structured",
     "entries": "structured"
   },
+  "meta": {
+    "brand_slug": "{slug}",
+    "total_entries": 0,
+    "append_only": true
+  },
   "_notes": {
+    "entries[].kind": "AUTORITE classification (enum canon 9: test_result | workaround | compliance | observation | decision_trace | hypothesis_validated | pattern_promoted | regulatory_signal | competitor_move)",
+    "entries[].type": "alias dialecte-skills toléré (workaround | compliance | behavior | api_rule | test_result) — préférer kind à l'écriture",
+    "entries[].reasoning": "MANDATORY non-vide à l'écriture skill — le WHY (Decision Trace D#308)",
     "entries[].scope": "brand | platform | workspace — détermine où le learning s'applique",
-    "entries[].type": "workaround | compliance | behavior | api_rule — détermine comment l'agent l'utilise",
     "entries[].platform": "meta | shopify | google | ga4 | klaviyo | etc — requis si scope=platform",
-    "entries[].status": "active | on-hold | obsolete | closed-wontretry | closed-success",
+    "entries[].created_at": "AUTORITE temporelle (date-time). `date` (YYYY-MM-DD) = alias court toléré",
+    "entries[].status": "active | on-hold | obsolete | closed-wontretry | closed-success | superseded | archived",
     "entries[].genericity": "brand | sector | universal — portée du learning"
   },
   "entries": []

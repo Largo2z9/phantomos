@@ -36,9 +36,21 @@ PLATFORM_ALIASES = {
     "claude_ai_Notion": "notion",
 }
 
-# Internal tooling exempt from convention enforcement.
+# Internal tooling exempt from convention enforcement (matched on raw server name).
 PLATFORM_EXEMPT = {
     "plugin_vercel-plugin_vercel",
+}
+
+# Organizational / workspace / comms tools, exempt by RESOLVED slug. The guard
+# disciplines DATA platforms (Meta, Shopify, GA4… where reading the API convention
+# before a call is a real safeguard). It does NOT gate organizational tools : their
+# first call would otherwise fail-closed for lack of a shipped convention and break
+# the tool-first onboarding entry (Porte D · "organise tes outils"). Connecting one
+# is handled by connect-mcp-server, not by the doc-read discipline. Matched on the
+# resolved slug so any MCP that maps to one of these is covered, whatever its name.
+PLATFORM_EXEMPT_SLUGS = {
+    "notion", "clickup", "google-drive", "gmail", "slack",
+    "google-calendar", "excalidraw", "youtube",
 }
 
 DOC_CHECK_MAX_AGE_DAYS = 90
@@ -63,7 +75,10 @@ def resolve_platform(tool_name: str) -> str | None:
     raw = m.group(1)
     if raw in PLATFORM_EXEMPT:
         return None
-    return PLATFORM_ALIASES.get(raw, raw).lower()
+    platform = PLATFORM_ALIASES.get(raw, raw).lower()
+    if platform in PLATFORM_EXEMPT_SLUGS:
+        return None
+    return platform
 
 
 def block(msg: str) -> None:

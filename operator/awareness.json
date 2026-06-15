@@ -1,5 +1,5 @@
 {
-  "_version": "1.1",
+  "_version": "1.2",
   "_schema": "operator-awareness",
   "_field_types": {
     "tour_status": "stated",
@@ -12,6 +12,7 @@
     "first_deliverable_built": "derived",
     "first_deliverable_skill": "derived",
     "first_deliverable_validated_corrections": "derived",
+    "first_operator_extension_built": "derived",
     "first_skill_offered": "derived",
     "first_skill_built": "derived",
     "first_brand_validated": "derived"
@@ -26,6 +27,7 @@
   "first_deliverable_built": null,
   "first_deliverable_skill": null,
   "first_deliverable_validated_corrections": 0,
+  "first_operator_extension_built": null,
   "first_skill_offered": 0,
   "first_skill_built": null,
   "first_brand_validated": false

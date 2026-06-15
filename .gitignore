@@ -9,3 +9,9 @@
 
 # Runtime outputs
 _validation-report.json
+
+# Python bytecode (hooks et .skills/*.py · régénéré à l'exécution, jamais versionné)
+__pycache__/
+**/__pycache__/
+*.pyc
+**/*.pyc

@@ -15,11 +15,11 @@
 | Support roi | image **et** vidéo | vidéo (temporel) |
 | Sur un statique | **le tag ROI** | souvent absent → `other-uncategorized`, **ne pas forcer** |
 
-## Couverture · enum `hook.mechanic_id` (25) → fiche
+## Couverture · `hook.mechanic_id` (free-string, registre SSOT) → fiche
 
 **Avec fiche `library-pattern` (promote-ready · ≥2 sources indépendantes) — 16 :**
 
-| enum `hook.mechanic_id` | fiche |
+| `hook.mechanic_id` (registre) | fiche |
 |---|---|
 | `resolution-promise` | `resolution-promise-effortless.json` |
 | `before-after-timeline` | `before-after-timeline.json` |

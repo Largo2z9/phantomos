@@ -16,11 +16,11 @@ Specialized capabilities of the agent. Never read by the operator, triggered aut
 - **Expert methodology rule** (codified expertise vs improvised action, complexity gate): `docs/system/patterns.md § Skill Philosophy`
 - **Model routing** (subagent spawn decision, cost/latency trade-offs): `docs/system/patterns.md § Model Routing`
 
-## Skills shipped (82)
+## Skills shipped (85)
 
 Grouped by typology. Each typology drives default model + `subagent_safe` + permissions baseline. This catalogue is generated from `_manifest.json` + frontmatter descriptions ; after any skill add/rename/edit, run `python3 .skills/build-manifest.py` and regenerate this section.
 
-### Producer (29) — generate fresh artifacts
+### Producer (31) — generate fresh artifacts
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -32,6 +32,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `decompose-ad` | Reverse-engineer any ad (static, carousel, video) into a typed decomposition against the canon registries | opus | yes |
 | `decompose-angle` | Triangulation cross-canon refactor · spec_activated (products/{p}/spec.json#mechanism_id) + pain_ref (audiences/{a}/pain_points/{P… | sonnet | yes |
 | `define-brand-voice` | Produit brand voice chart canonique brand via méthodologie Nielsen Norman 4D (Funny↔Serious · Formal↔Casual · Respectful↔Irreveren… | sonnet | yes |
+| `frame-regime` | Frame a creative production engagement (A1-A3) : material gauges, freedom cursor, rayon sectoriel, writes the batch frame.json | opus | no |
 | `map-angles` | Map and encode the brand's creative angles (formula Observation × Tension × Reframe × Bridge) | sonnet | no |
 | `map-audiences` | Map and encode the brand's audience tree from existing signals | sonnet | no |
 | `map-benefits` | BREAKING refactor read pattern · pain_points lus depuis sub-audience (`brands/{slug}/audiences/*/pain_points/*.json`) pour evidenc… | sonnet | yes |
@@ -52,9 +53,10 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `snapshot-brand` | Quick scan of a brand or product from a URL, pre-fills the brand at ~60% of Level 1 | sonnet | yes |
 | `trendtrack-enrich-brand` | TrendTrack API live enrichment skill · resolve brand existing via lookup + drill shop profile + sample top ads · stage proposals b… | sonnet | yes |
 | `watch-competitors` | Analyse les publicités Meta des concurrents d'une brand et produit un rapport de veille créative avec les angles, mechanics, et si… | sonnet | yes |
+| `weave-hooks` | Weave approved concepts into the genome-package (A7-A8) : bi-face scripts per support, serialized contract Workflow A → Workflow B | opus | no |
 | `weight-dimensions` | Compute per-brand weighting coefficients consumed by score-matrix | sonnet | no |
 
-### Curator (18) — read, classify, route, mutate context
+### Curator (19) — read, classify, route, mutate context
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -64,6 +66,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `check-cross-refs` | Sub-skill of scaffold-extension | haiku | yes |
 | `check-existing-coverage` | Sub-skill of scaffold-extension | haiku | yes |
 | `encode-batch` | Backend write sub-skill : batches entity mutations for producer skills through the gate | haiku | yes |
+| `evaluate-concept` | Gate A6 : binary strategic verdict per concept candidate before any production (5 canon checks) | opus | yes |
 | `ingest-resource` | Ingests raw content (notes, articles, transcripts, existing files, copy-paste), classifies into typed JSON resources OR brand cont… | sonnet | yes |
 | `migrate-workspace` | Migrates an existing brand instance to match a newer template version | sonnet | yes |
 | `promote-learning` | Promotes a brand-specific learning to the shared KB when it proves generic | sonnet | yes |

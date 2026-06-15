@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spectrum.schema.json",
+  "title": "Spectrum (carte du terrain produit × marché)",
+  "description": "La carte EXHAUSTIVE et NON priorisée du terrain jouable pour l'acquisition (Spectre, D#502). Singleton par marque : brands/{slug}/spectrum.json. Substrat vivant, distinct de la PRODUCTION (roadmap.json, matrice committée) et de la PRIORISATION (score-matrix, top-N daté). Produit par map-angles mode spectre (croisement use_case × audience × source d'angle), seedé par map-audiences mode spectre (énumération des usages depuis spec.mechanisms[]). Une cellule peut être déduite (hypothèse taguée, légitime, D#503) ; elle ne devient claim opérable qu'après le gate de promotion (vom-mining test 3 parts). DOCTRINE : exhaustif dans la carte (gratuit, raisonnement), sélectif dans le spend (la priorisation est un autre objet). La carte n'engage RIEN, ne cible RIEN, elle montre l'étendue du jouable et les trous. Anti-feuille-de-route : le remplissage est stage-aware et à profondeur adaptative, jamais un déroulé en checklist.",
+  "_schema_version": "spectrum/1.0",
+  "_changelog": {
+    "1.0": "Spectre C1 (D#502/D#503) · NEW. Cellules use_case × audience × origin_axis · double couverture nous × eux (matrice D#502) · évidence TYPÉE par cellule (behavioral/voc/vom/structural/cultural + force + provenance · D#503, le verbatim n'a plus le monopole) · cœur de cible marqué (is_core + core_cell_ref · principe 8 D#502) · qualification des zones blanches (opportunity/cemetery/desert · signal 4 D#502) · politique d'échec (lever nommé, jamais inventé · D#11). Vocabulaire 100% réutilisé : origin_axis (angle.schema), _source (roadmap/profile), validation-status, awareness-stage, sophistication-stage. Aucune nouvelle ontologie. ENFORCEMENT (Master rule mécanique/sémantique) : le schéma DÉCRIT l'intention (les règles anti-fabrication en description sont de la doctrine, pas des contraintes · pré-valider le raisonnement du modèle = interdit). La discipline est garantie côté SKILL (map-angles mode spectre, au write) et attrapée post-hoc par validate-resources (check 11 · status validated sans evidence = MAJOR · zone blanche orpheline = MINOR). C'est une intégrité post-hoc (erreur persistante), pas une pré-validation."
+  },
+  "type": "object",
+  "required": ["brand_slug", "refreshed_at", "cells"],
+  "$defs": {
+    "evidence_item": {
+      "type": "object",
+      "required": ["evidence_type", "_source"],
+      "description": "Une preuve typée à l'appui d'une cellule (D#503 · la preuve se matche à la question). evidence_type dit la NATURE : behavioral (spend concurrent durable, volume de recherche, notre perf · roi sur 'la demande existe-t-elle') · voc (verbatim de NOS clients · roi sur le wording, biais du survivant ailleurs) · vom (avis concurrents / conversations catégorie · roi sur les objections des non-clients et les marchés adjacents) · structural (raisonnement mécanisme→job · légitime au listing, hypothèse jusqu'à confirmation) · cultural (moment, trend, saisonnalité). La pondération par question est faite par le scoring (skill), PAS ici : la carte ADMET tous les types à égalité de droit.",
+      "properties": {
+        "evidence_type": { "type": "string", "enum": ["behavioral", "voc", "vom", "structural", "cultural"] },
+        "force": { "type": "string", "enum": ["strong", "moderate", "weak"], "description": "Force du signal dans sa catégorie. Ex behavioral : une ad adverse à 8 mois = strong, une ad récente = weak." },
+        "_source": { "type": "string", "enum": ["observed", "inferred", "declared"], "description": "Provenance épistémique. inferred = légitime et tagué (D#503), JAMAIS fabriqué/maquillé en fait." },
+        "ref": { "type": ["string", "null"], "description": "Pointeur vers la source : ^VOC-[0-9]{2,5} (verbatim), un id/URL d'ad concurrente, une note de volume de recherche, un mechanism_id pour structural." },
+        "extracted_at": { "type": "string", "format": "date-time", "description": "C1.1 additif (D#518) · horodatage de capture de cette preuve, l'ancre de décroissance de fraîcheur (cf _shared/extraction-provenance.json velocity_tiers, behavioral = weekly). Rend la force calculable par l'âge comme la description de force le promet. Pour une preuve behavioral, c'est la LONGÉVITÉ du signal (durée de diffusion d'une ad adverse) qui nourrit la force, pas la seule date de capture." },
+        "note": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "$comment": { "type": "string" },
+    "brand_slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "refreshed_at": { "type": "string", "format": "date-time" },
+    "stage_at_build": {
+      "type": ["string", "null"],
+      "enum": ["launch", "growth", "scale", "mature", "decline", null],
+      "description": "Le brand.meta.stage au moment du build · trace pourquoi la carte penche exploration ou exploitation."
+    },
+    "regime": {
+      "type": ["string", "null"],
+      "enum": ["explore-dominant", "balanced", "exploit-dominant", null],
+      "description": "Curseur explore/exploit retenu (dérivé du stade + atlas_richness, frame-regime). launch/atlas vide → explore-dominant (quota de cellules adjacentes/spéculatives relevé)."
+    },
+    "core_cell_ref": {
+      "type": ["string", "null"],
+      "pattern": "^SPC-[0-9]{2,4}$",
+      "description": "Le cœur de cible · LA cellule centre de gravité (principe 8 D#502). L'exploration sert ce cœur, ne le remplace jamais. Null tolérable en lancement pur (pas encore de cœur prouvé)."
+    },
+    "_field_types": { "type": "object", "additionalProperties": { "type": "string" } },
+    "_notes": { "type": "string" },
+    "cells": {
+      "type": "array",
+      "description": "Une cellule = une intersection du terrain. Exhaustif au listing (caps de production relaxés ici, ils restent intacts pour audiences/ et angles/).",
+      "items": {
+        "type": "object",
+        "required": ["cell_id", "use_case_ref", "origin_axis", "coverage_self"],
+        "properties": {
+          "cell_id": { "type": "string", "pattern": "^SPC-[0-9]{2,4}$" },
+          "use_case_ref": { "type": "string", "pattern": "^UC-[0-9]{2,3}$", "description": "Le job servi (spec.use_cases[])." },
+          "audience_ref": { "type": ["string", "null"], "description": "Slug d'audience (profile.json) ou null si la cellule est encore au grain usage (pas encore splittée en audiences)." },
+          "origin_axis": {
+            "type": "string",
+            "enum": ["audience-derived", "product-derived", "category-derived", "brand-derived", "temporal-cultural"],
+            "description": "La source d'angle (réutilise angle.schema.origin_axis). Le 3e axe du croisement."
+          },
+          "awareness": { "anyOf": [ { "$ref": "_shared/awareness-stage.json" }, { "type": "null" } ], "description": "Stade de conscience visé par cette cellule (optionnel)." },
+          "sophistication": { "anyOf": [ { "$ref": "_shared/sophistication-stage.json" }, { "type": "null" } ], "description": "Stade de sophistication marché de cette cellule (optionnel)." },
+          "coverage_self": {
+            "type": "string",
+            "enum": ["covered", "partial", "blank"],
+            "description": "Notre couverture · est-ce qu'on adresse déjà cette cellule (ads, positionnement) ?"
+          },
+          "coverage_market": {
+            "type": "string",
+            "enum": ["covered", "partial", "blank", "unknown"],
+            "default": "unknown",
+            "description": "Couverture concurrente (matrice nous × eux, D#502). Alimentée par watch-competitors Step 7 (pont câblé D#518) : le skill matche un signal concurrentiel vers la cellule par (audience_ref + awareness + origin_axis), écrit coverage_market + une evidence_item behavioral observée/inférée. unknown = pas encore observé (le pont garde la cellule à unknown + un lever si la couverture n'a pas pu être lue, jamais une valeur fabriquée)."
+          },
+          "strategic_position": {
+            "type": ["string", "null"],
+            "enum": ["battlefield", "our-advantage", "proxy-validated", "whitespace", null],
+            "description": "DERIVED (taguer derived dans _field_types) du couple coverage_self × coverage_market. nous+eux=battlefield · nous seul=our-advantage · eux seul=proxy-validated (validation par procuration) · ni l'un ni l'autre=whitespace. DOIT rester null tant que coverage_market=unknown (une zone n'est pas un whitespace tant que la couverture concurrente n'est pas observée · D#502 : zone blanche ≠ opportunité). Garanti côté skill."
+          },
+          "saturation": {
+            "type": ["string", "null"],
+            "enum": ["fresh", "warming", "saturated", "unknown", null],
+            "description": "Saturation de l'espace d'angles de cette cellule (seed map-mechanisms market_sophistication + agrégat validation-status des angles). saturated → éviter ou contrarier."
+          },
+          "status": {
+            "$ref": "_shared/validation-status.json",
+            "description": "Cycle de vie de la cellule : hypothesis (déduite, pas testée) → tested → validated (prouvée par le spend) → scaled → fatigued. Une cellule structural/inferred démarre hypothesis."
+          },
+          "is_core": { "type": "boolean", "default": false, "description": "Cette cellule fait-elle partie du cœur de cible (principe 8 D#502)." },
+          "blank_qualification": {
+            "type": "string",
+            "enum": ["opportunity", "cemetery", "desert", "unqualified"],
+            "default": "unqualified",
+            "description": "Pour les zones blanches (coverage_self/market = blank), la qualification du silence (signal 4 D#502) : opportunity (demande réelle + claim jouable + éco tient) · cemetery (testé et mort, ou mur réglementaire) · desert (pas de demande). Défaut unqualified : une zone blanche n'est PAS une opportunité tant qu'elle n'est pas qualifiée."
+          },
+          "lever": {
+            "type": ["string", "null"],
+            "description": "Politique d'échec (D#11/D#503) · si la cellule est unknown/blank/non qualifiée, le levier NOMMÉ pour la résoudre (mine-voc, watch-competitors, un test). Jamais inventer la donnée à la place."
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/evidence_item" },
+            "description": "Les preuves typées à l'appui (D#503). Une cellule peut tenir sur du behavioral seul (spend concurrent) sans aucun verbatim : c'est légitime. Une cellule sans AUCUNE évidence est une pure projection (status hypothesis + lever obligatoire)."
+          },
+          "_notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

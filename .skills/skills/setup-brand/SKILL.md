@@ -1,7 +1,7 @@
 ---
 name: setup-brand
 type: orchestrator
-version: "2.2.0"
+version: "2.3.0"
 patch_notes_v2_87_5:
   - "2.2.0 (v2.87.5 connectors onboarding + branching choice 3 voies post-URL) · NEW Phase 'Connectez vos outils' obligatoire post-URL pasted ou post-snapshot-brand · matrice 7 catégories canon ranked ROI/effort (Paid platforms · Analytics · Lifecycle · Attribution · Spy tools · CMS/production · Workspace tools via MCP claude natif privilégié) + chain `connect-source` par sélection + trade-off MCP natif (mono-auth solo) vs clé API per brand (multi-account agence). NEW branching choice canon 3 voies via AskUserQuestion post-scrape URL réussi · A 'Approfondir l'analyse maintenant' → chain build-atlas-complete · B 'Connecter mes outils d'abord' → NEW Phase Connectez vos outils · C 'Faire les deux en séquence' (recommandé canon B-puis-A pour atlas sourced) default. Cross-ref memory canon `brand_connectors_onboarding_canon` matrice 7 catégories complète. Enforcement runtime hardcoded backlog v2.88.0+. Backward compat strict additif."
 isolation_scope: brand_only
@@ -440,7 +440,11 @@ Then proceed to Step 4e (demo-value context synthesis below).
 
 ### What we specifically do here (post-scrape / post-setup)
 
-1. **Context synthesis** (operator language, **4-6 sentences of prose, no block format, no enumeration, no field list**). Use the schemas filled by snapshot-brand as analytical vocabulary: name what this brand really is in market terms, who buys and why with the trigger and sophistication signal, what the offer architecture suggests about positioning, and the 1-2 things you noticed the operator likely did not (gaps between brand-stated and observation-based fields, surprises). Flag inferred fields inline with *"(à valider)"* / *"(to validate)"* tags, never as a separate "missing fields" list. Run BEFORE sending:
+1. **Context synthesis** (operator language, **4-6 sentences of prose, no block format, no enumeration, no field list**). Use the schemas filled by snapshot-brand as analytical vocabulary: name what this brand really is in market terms, who buys and why with the trigger and sophistication signal, what the offer architecture suggests about positioning, and the 1-2 things you noticed the operator likely did not (gaps between brand-stated and observation-based fields, surprises). Flag inferred fields inline with *"(à valider)"* / *"(to validate)"* tags, never as a separate "missing fields" list.
+
+   **Stade de marque (C3 · D#506, silencieux, pas une question).** Inférer `brand.meta.stage` depuis les signaux scrapés, JAMAIS le demander : pas de preuve client / pas d'historique / une seule offre simple → `launch` · traction visible (avis, total_customers, ancienneté) + gamme qui s'étoffe → `growth` · volume de preuve élevé + catalogue large + positionnement installé → `scale`/`mature`. C'est une déduction, donc écrire en `--source agent --confidence 0.6 --mode proposed` et flag `(à valider)` inline + `pending-validations.md`. Si l'opérateur a donné un signal explicite de stade au Step 1 (« je lance », « on fait déjà X par mois ») → `--source operator --confidence 1.0`, pas d'inférence. Ce stade pilote ensuite le curseur explore/exploit du Spectre (build-atlas Step 2.5) · un fallback `brand_equity_level` + richesse atlas existe si le champ reste vide, donc l'inférence est un confort, pas un bloquant.
+
+   Run BEFORE sending:
 
    ```bash
    python3 .skills/finalize-mutation-batch.py --brand-slug {slug}

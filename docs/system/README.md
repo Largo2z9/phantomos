@@ -1,8 +1,21 @@
 # docs/system · index doctrines canon
 
-Index navigable des 28 doctrines canon shipped PhantomOS pour skill-authors et contributeurs. CLAUDE.md root pointe ici pour la liste exhaustive · runtime LLM n'a pas besoin de cet inventaire en contexte.
+Index navigable des 30 doctrines canon shipped PhantomOS pour skill-authors et contributeurs. CLAUDE.md root pointe ici pour la liste exhaustive · runtime LLM n'a pas besoin de cet inventaire en contexte.
 
 Pour les docs architecture (spec technique · contrats · patterns · cookbook · extending) cf section finale.
+
+---
+
+## Univers de maîtrise · carte opérateur-facing
+
+Couche opérateur-facing posée au-dessus des doctrines team ci-dessous. Point d'entrée pour comprendre l'univers PhantomOS et l'explorer. Registre expert et pédagogique, zéro jargon interne.
+
+- **La carte de l'univers** · `universe-cartography.md` · le SSOT navigable · le modèle est le moteur, l'univers est le réceptacle et la méthode · 7 territoires (thèse · encodage · raisonnement · production · apprentissage · extension · governance transverse) avec conviction + traduction opérateur, et par où driller
+- **La méthode et l'extension** · `orchestration-arc.md` · le modèle route, délègue et fabrique ; PhantomOS fournit la matière, la méthode encodée et le cadre d'extension additive
+- **Doctrine de portabilité** · `portability-doctrine.md` · le zéro lock-in comme propriété structurelle · capture friction-zéro → traces typées → exploitable, transformable, migrable, sans permission d'un fournisseur
+- **Les quatre catégories d'agents** · `agent-categories.md` · contexte / analyse / production / optimisation · séparation stricte · qui touche tes données et qui n'y touche pas
+- **Doctrine du drill dynamique** · `dynamic-drill-doctrine.md` · ouverture sémantique à la volée · recombine breakdown, phantom, scope, about, lexicon · render-first, jamais de cul-de-sac
+- **Doctrine de l'onboarding setup** · `onboarding-setup-flow.md` · le pipeline 10 phases de « Encoder ma marque » · atlas vivant, ordre de dépendance, deux gestes partout, scraping enrichissable, checkpoints encodables, exhaustivité offerte et reportable
 
 ---
 
@@ -12,6 +25,13 @@ Contextual Intelligence est la doctrine racine. Toutes les autres doctrines la s
 
 - **Contextual Intelligence** · `contextual-intelligence.md` · master doctrine · two-tier rule (mechanical strict · semantic trust) · décisive test gate addition · invocation skill canon vs prose freestyle · No orphan output canon
 
+## Diagnostic stratégique & corpus de tensions (docs/doctrine/)
+
+Opérationnalise CI sur l'axe « lire la partie avant de décrire la demande » (sister discipline SDR). Le routeur diagnostique le vrai mur, la chaîne experte prolonge jusqu'aux audiences dérivées et au verdict.
+
+- **Strategic Diagnostic (le routeur + la chaîne experte)** · `docs/doctrine/strategic-diagnostic-doctrine.md` · diagnostique le mur dominant (offre / angle / marché), sélectionne les tensions vivantes, puis la chaîne experte (position → négatif → audiences-du-mécanisme → priorité-éco → verdict · cinq maillons, chacun ferme le suivant)
+- **Le corpus de tensions** · `docs/doctrine/` (25 fichiers · corpus ouvert D#505) · une tension par doctrine (premier-prix vs premium, désir vs douleur, focus vs gamme, acquisition vs rétention, auto-liquidant vs pari LTV, créer vs capturer la demande, etc.) plus les socles `competitive-reading-doctrine` (matrice nous × eux, le négatif) et `breakthrough-advertising-5-stages` (sophistication). Le routeur route vers la famille, jamais une liste figée
+
 ## Operational system
 
 - **Operational System Doctrine** (v2.71) · `operational-system-doctrine.md` · doctrine mère 5 couches · ECR × Règles × Templates × Métriques × Rituels · pattern racine pour tout système opérationnel encodé PhantomOS
@@ -20,7 +40,8 @@ Contextual Intelligence est la doctrine racine. Toutes les autres doctrines la s
 ## Cartographie & substrate
 
 - **Compositional Cartography** (v3.1) · `compositional-cartography.md` · équation LIVRABLE = NOYAU × CONTEXTE × MODIFIEURS · 4 arbres + matrice + modulateurs · implémentation domaine-spécifique de CMR au créatif
-- **Creative Axis Canonicalization Doctrine** (v2.88.0) · `creative-axis-canonicalization-doctrine.md` · hiérarchie créative 4 niveaux (brand promise → big idea → axe créatif → créa instance) + mapping workflow A ↔ équation v3.1
+- **Creative Axis Canonicalization Doctrine** (v2.88.0 · réconciliée v2.90.0) · `creative-axis-canonicalization-doctrine.md` · hiérarchie créative 4 niveaux (brand promise → big idea → axe créatif → créa instance) + mapping workflow A ↔ équation v3.1
+- **Pre-Gate Evaluator Doctrine** (v2.90.0) · `pre-gate-evaluator-doctrine.md` · gate concepts A6 · 5 checks · budget anti-spin
 - **Canonical Matrix Reasoning** · `canonical-matrix-reasoning.md` · schema + canon matrix = cohérence output 95% · cardinality cap · internal scoring · modulator/cell
 - **Audiences Cartography** (v2.64) · `audience-cartography.md` · parent/enfants sémantique pure · 4 mouvements + 3 axes · hand-off pédagogique vers mine-voc
 - **Pain Benefit Chain** (v2.79.4) · `pain-benefit-chain.md` · functional · identity · emotional · aspirational · chaînage canonique douleur/bénéfice pour audience et copy
@@ -42,6 +63,7 @@ Contextual Intelligence est la doctrine racine. Toutes les autres doctrines la s
 
 - **Update Distribution Doctrine** (v2.80.0) · `update-distribution-doctrine.md` · pattern mise à jour opérateur-facing · preserve operator state · migrations versionnées · backup + rollback canon
 - **Notion Bridge Doctrine** (v2.57+) · `notion-bridge-doctrine.md` · bidirectionnel pull/push · PhantomOS source de vérité · Notion miroir consultable opérateur
+- **Brief Distribution Doctrine** (v2.90.0) · `brief-distribution-doctrine.md` · fork Route A/B + routage vers l'outil de centralisation détecté, jamais présumé
 
 ## Routing & skill invocation
 

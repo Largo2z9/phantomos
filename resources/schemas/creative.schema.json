@@ -9,7 +9,7 @@
     "1.3": "Brique 4 etape A: description repathee batch + variant_of elargi CRT|RCV + bloc lineage{} + retrait ADN migres vers genome.json (stop_scroller/ton/mecanique/format/copy_visual_cursor/atome_irreductible). concept_id reste SSOT groupage. additionalProperties permissif -> retrait non-breaking.",
     "1.3.1": "creative_id pattern {2,3}->{2,4} : cohérence avec le gate + genome GSC + brique 3 (scale 10k, CRT-NN au-delà de 999).",
     "1.3.2": "+ lineage.adaptation_axes[] (brique 4 étape E : capture du multi-axe d'adapt sans casser le contrat single de variant_axis).",
-    "1.4.0": "Brique 5 (réceptacle perf minimal) : lineage.ad_id pattern-locké plateforme_NNN (clé de jointure) + performance ouvert (additionalProperties, blob raw, snapshots) = réceptacle générique SANS ontologie de métriques prédéfinie. L'analyse fine = chantier doctrine séparé (perf-feedback-loop.md TBD).",
+    "1.4.0": "Brique 5 (réceptacle perf minimal) : lineage.ad_id pattern-locké plateforme_NNN (clé de jointure) + performance ouvert (additionalProperties, blob raw, snapshots) = réceptacle générique SANS ontologie de métriques prédéfinie. L'analyse fine = chantier doctrine séparé, tranché v2.90.0 · voir resources/sops/creative-production/perf-feedback-loop.md.",
     "1.4.1": "C1 onboarding-native (D#500) · strict additif, changelog-only bump (l'enum version accepte déjà 1.4) : context.proof[] += strength ($ref _shared/proof-strength.json · force typée de la couche de preuve, hiérarchie canon demonstration > quantified-result > review-volume > isolated-testimonial > bare-claim)."
   },
   "type": "object",
@@ -442,7 +442,7 @@
     },
     "performance": {
       "type": "object",
-      "description": "RÉCEPTACLE PERF OUVERT (brique 5 minimal, D#482+). Avale les métriques brutes de n'importe quelle plateforme SANS ontologie prédéfinie (additionalProperties ouvert). Joint à la créa par lineage.ad_id ; le signal 'qu'est-ce qui a marché' vit déjà dans genome_tags (mécanique/style/structure), on le JOINT, on ne le re-modélise pas. ⚠️ L'ANALYSE FINE (gagnant/perdant, seuils de coupe, recalibrage du régime explore/exploit, promotion canon) = CHANTIER DOCTRINE SÉPARÉ, voir resources/sops/creative-production/perf-feedback-loop.md (TBD). Ici on POSE le réceptacle, pas l'intelligence. Champs legacy préservés.",
+      "description": "RÉCEPTACLE PERF OUVERT (brique 5 minimal, D#482+). Avale les métriques brutes de n'importe quelle plateforme SANS ontologie prédéfinie (additionalProperties ouvert). Joint à la créa par lineage.ad_id ; le signal 'qu'est-ce qui a marché' vit déjà dans genome_tags (mécanique/style/structure), on le JOINT, on ne le re-modélise pas. ⚠️ L'ANALYSE FINE (gagnant/perdant, seuils de coupe, recalibrage du régime explore/exploit, promotion canon) = CHANTIER DOCTRINE SÉPARÉ, tranché v2.90.0 · voir resources/sops/creative-production/perf-feedback-loop.md. Ici on POSE le réceptacle, pas l'intelligence. Champs legacy préservés.",
       "properties": {
         "longevity_signal": {
           "type": "object",
@@ -549,7 +549,7 @@
         "raw": {
           "type": "object",
           "additionalProperties": true,
-          "description": "Blob perf BRUT tel que ramené (impressions/spend/ctr/roas/cpa/hold-rate... selon la plateforme). NON re-modélisé — l'ontologie fine est un chantier doctrine séparé."
+          "description": "Blob perf BRUT tel que ramené (impressions/spend/ctr/roas/cpa/hold-rate... selon la plateforme). NON re-modélisé · l'ontologie fine est un chantier doctrine séparé."
         },
         "snapshots": {
           "type": "array",

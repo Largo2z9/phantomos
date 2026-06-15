@@ -1,13 +1,16 @@
 ---
 name: snapshot-brand
 type: producer
-version: "1.5.1"
+version: "1.8.0"
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
 reasoning_pattern: null
 operator_facing: true
 patch_notes:
+  v1.8.0: "v2.93 · D#518 · scrape = allocation sous contrainte câblé dans la porte d'entrée (doctrine NEW docs/system/scrape-as-allocation.md). (1) Step 1.5 · l'ENJEU capté AVANT la recon (la décision qui paie, pas la couverture du site) · les pré-amorces DEVIENNENT le plan de fetch (chacune nomme le fetch ciblé qui la résoudrait), elles ne sont plus un appendice du rapport · le Spectre dirige le fetch, il ne le couronne pas. (2) Step 2 · NEW bloc 'Conditions d'arrêt du fetch' · 4 stops par rendement (confiance-cible · saturation · inconnu non-tranchable typé-avec-levier · budget épuisé) qui tempèrent le 'always crawl'. (3) Step 2 review-triangulation généralisée en posture 'scrapé ≠ fait' · reliability_tier plafonne la confiance d'entrée par nature de source, un nombre sans procédé de mesure n'entre jamais nu (garde-fou mécanique correspondant · naked_number_unsourced dans validate-all.py). (4) Step 7 Section 3 · persistance des inconnus IN SITU à chaque pas (au moment où ils surgissent), la Section agrège, elle n'invente pas. La dent use_cases de la v1.7.0 ('maintainer à venir') est désormais réelle · postcondition orchestrateur sur l'artefact + filet post-hoc validate-all, PAS un gate write-to-context (pré-validation interdite, Master rule). Backward compat strict additif. Zéro em-dash."
+  v1.7.0: "v2.92 · D#517 · Step 5 DÉGRADÉ EN SONDE (le bug racine du pré-emptage des audiences corrigé). Au scan, Step 5 ne construit PLUS l'arbre validé (mère → sous-poches, découpe, gate audience_q1q4_answered, scaffolding des dossiers) · il rend une SONDE · Movement 1 (observations brutes neutres) + au plus une à deux mères-hypothèses CLAIM en prose (validation_status hypothesis), puis passe la main. Les Movements 2-3 (découpages, hiérarchie, scaffolding) sont REPORTÉS en phase 3 (map-audiences), STRICTEMENT APRÈS le pont mécanisme→usage (build-atlas Step 2.5) · les vraies audiences se dérivent des jobs (use_cases dont spéculatifs), pas du miroir du claim. Généralise le comportement du thin-page fallback à TOUT scan. Aligné aux 4 endroits où vivait 'construire l'arbre' (contrat doctrinal + règle dure + marqueurs Movement 2 et 3) anti-fix-à-moitié. Garde-fou mécanique correspondant (maintainer, à venir) · la dent use_cases[] côté write-to-context s'applique AUSSI à cette porte. Backward compat · la spec des movements reste comme référence du COMMENT, exécutée en phase 3. Zéro em-dash."
+  v1.6.0: "v2.91 recon & cadrage du chantier · NEW Step 1.5 (entre Step 1 URL+hero et Step 2 scrape) · photo de devanture plafonnée 4 requêtes / 60s (nav + sitemap + products.json count, réutilise les lectures déjà mandatées · aucune PDP ouverte, aucun review tagué), classe l'archétype de cartographie via le classifieur Step 2bis appelé en avance de phase (mono-héros ≤~8 · catalogue resserré ~8-40 · gros catalogue >~40 · edge marketplace), dimensionne la stratégie de scan + ETA, rend un RAPPORT DE RECON (archétype, héros candidat, volume, plan, axes joignables, 2-4 pré-amorces inconnus-typés). Cadrage orchestré · piloté par un orchestrateur, la recon est rendue D'ABORD (stop après Step 1.5, return report), l'orchestrateur la déplie en clair + gate 'valide le chantier', puis re-spawn pour le deep scan dimensionné · standalone, la recon enchaîne directement sur le scan avec la stratégie dimensionnée. Résout la contradiction Step 2 onboard-brand (l'inférence visible = raisonnement chairman SUR le rapport, pas re-dérivation inline du scan). Opérationnalise open-map-reasoning D#508 + câblage 5-axes D#509 à la porte d'entrée. Backward compat strict additif · Steps 2-7 préservés, la recon ne fait que réordonner l'usage des fetch déjà présents et conditionner la profondeur du scan."
   v1.5.1: "v2.81.1 decomposition visibility NIVEAU LIVE · NEW section `Niveau LIVE · raisonnement thinking aloud pendant exécution` placée AVANT le workflow Step 0. Action snapshot-brand classée LOURDE · NIVEAU LIVE narratif étendu obligatoire pendant exécution · pas seulement disclosure pré-engagement amont et matrices Decomposition Visibility post-exec aval. Pattern canon · 2 niveaux abstraction obligatoires (macro contexte boutique + micro produit many-to-many phrasé spec → mécanisme → bénéfice → pain → audience en prose narrative sobre). Pose pair senior expert thinking aloud · audit temps réel par l'opérateur plus pédagogie posture experte indissociables. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 (NIVEAU LIVE obligatoire actions lourdes) + AP-DVD-11 (opacité pendant action lourde = bug invalid). Backward compat strict additif · cycle runtime préservé · seul thinking aloud ajouté pendant exec."
   v1.5.0: "v2.78.2 decomposition visibility discipline · NEW Phase output Decomposition Visibility matricielle obligatoire APRÈS 5 sections investigation-posture (vs replace · additif strict). 4 niveaux canon · NIVEAU 1 décomposition produit (specs · mécanismes · bénéfices 3 couches functional/emotional/identity) · NIVEAU 2 many-to-many pain × audience matrix ASCII si ≥2 pains AND ≥2 audiences · NIVEAU 3 positionnement filtre par stage business (early/growth/scale) · NIVEAU 4 méthode pédagogique verbale obligatoire. 5 NEW HR · Phase Decomposition obligatoire · 4 niveaux skip = invalid · many-to-many matrix si signaux · stage business filter si ARR signals · méthode pédagogique verbatim canon. 3 NEW AP · synthèse prose-only sans Decomposition Visibility · many-to-many implicite · 3 niveaux au lieu de 4. Cross-refs · docs/system/decomposition-visibility-doctrine.md v2.78.2 canon racine + pain-benefit-chain.md (functional · emotional · identity 3 couches). Cohérent sister skills patches parallèles v2.78.2 · build-atlas-complete + profile-audience + define-specs. Backward compat strict additif · existing Phase output + 5 sections IP preserved."
   v1.4.1: "v2.69.1 hard rules UX live captés session-précédente · No anticipatory output identity pre-scrape (anti-hallucination CI · violation Stepprs grip socks hallucination) · No defaults inferred workspace fresh premier contact (transparency canon · explicit confirm) · URL intake proactive chain scrape async parallèle setup Q&A (Proactive multi-skill deployment canon CLAUDE.md root) · Sitemap discovery before fetch pages devinées (anti-404 silent · navigation crawl fallback). Backward compat strict additif · 4 NEW HR ajoutées section Hard Rules existing · zero override behavior · canon CI + investigation-posture cross-refs renforcés."
@@ -18,6 +21,7 @@ patch_notes:
   v1.3.0: "v2.58 coverage extend · 4 sub-steps additifs strict pour combler orphans audit v2.57. (1) Step 7 sub-step · compute brand.brand_equity_level enum (low/medium/high) depuis heuristique financials.monthly_revenue + proofs.press_mentions + market.sophistication, stage via mutation gate confidence 0.6. (2) Step 7 sub-step · init brand.creative_zone {min, max, dominant, _observed_on_n_creatives:0} depuis identity.brand_personality + tone_of_voice.register + sector heuristique, stage confidence 0.5 (incrémenté ultérieurement par decompose-ad cumul). (3) Step 2/3 HTML scraping extend · scanner spec.sustainability.eco_claims[] + certifications[] + packaging_type (confidence 0.7 si claim explicit PDP, 0.4 si déduit visuellement). (4) Step 4 offers extraction · auto-calc spec.pricing.price_per_unit (value=price÷pack_quantity, unit depuis specs.weight/volume/package_quantity, currency depuis pricing.currency, confidence 0.9 calcul mathématique direct). Backward compat strict · Steps 0-7 existing intacts, sub-steps additifs uniquement. Closes 4 orphans audit v2.57."
   v1.3.1: "v2.61 doctrine consume · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (breakthrough-advertising-5-stages, audiences-cartography). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts."
 description: >
+  v1.6.0 (v2.91 recon & cadrage) · NEW Step 1.5 recon · photo de devanture plafonnée (4 requêtes / 60s) qui classe l'archétype de cartographie (mono-héros · catalogue resserré · gros catalogue · edge marketplace), dimensionne le scan, et rend un rapport de recon que l'orchestrateur déplie en clair avant le gate "valide le chantier". Résout la contradiction Step 2 onboard-brand (inférence visible = raisonnement SUR le rapport, pas re-dérivation inline). Backward compat strict additif.
   v1.5.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section Niveau LIVE thinking aloud obligatoire pendant exécution. Action LOURDE · narratif étendu 2 niveaux abstraction (macro contexte boutique + micro produit many-to-many phrasé spec → mécanisme → bénéfice → pain → audience en prose). Pose pair senior expert · audit temps réel + pédagogie indissociables. Cross-ref `decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 + AP-DVD-11. Backward compat strict additif (cycle runtime préservé).
   v1.5.0 (v2.78.2 decomposition visibility) · Phase output NEW section Decomposition Visibility matricielle obligatoire APRÈS 5 sections IP · 4 niveaux canon (décomposition produit specs/mécanismes/bénéfices 3 couches · many-to-many pain × audience matrix · stage business filter · méthode pédagogique verbale). Additif strict · existing Phase output preserved.
   v1.4.0 (v2.68 progressive cartography refactor) · Phase 1 macro confirmation light (3-5 lignes produit+offer+positionning · gate binaire valide/corrige) puis Phase 2 drilling autonome (drill PDP details + reviews verbatims tagged + funnel signals · synthesis 5 sections investigation-posture). Drop 4 closed questions about audience anti-pattern · drill-down autonome reviews + verbatims tagged remplace Q&A audience.
@@ -176,6 +180,41 @@ After detection, stage the proposal BEFORE asking the operator. The stage call r
 
 ---
 
+## Step 1.5 · Recon & cadrage du chantier (v1.6.0 NEW)
+
+**Avant de creuser, on dimensionne.** Le scan profond n'est pas le même travail sur un mono-produit en abonnement et sur un catalogue 200 références. La recon est une PHOTO de devanture, pas un second scan · elle classe l'archétype, propose une stratégie de scan dimensionnée, et rend un RAPPORT que l'orchestrateur déplie en clair (l'inférence visible se fait SUR ce rapport, pas en re-dérivant le scan brut).
+
+**L'enjeu d'abord (D#518).** Avant de dimensionner, poser ce que ce scan doit TRANCHER · la décision qui paie, la question de l'opérateur (cf `docs/doctrine/strategic-diagnostic-doctrine.md` · où la marque veut aller, où ça coince). « Pertinent » se mesure contre cet enjeu, jamais contre la couverture du site. Le scan est une **allocation d'effort sous contrainte** (doctrine · `docs/system/scrape-as-allocation.md`), pas un crawl exhaustif · on fetch là où la réduction d'incertitude sur la décision est haute, on s'arrête quand elle tombe.
+
+**Plafond dur · 4 requêtes, 60 secondes.** La recon ne réutilise QUE des lectures déjà mandatées · nav HTML (Step 1 hero detection), `/sitemap.xml` ou `/robots.txt` (HR-v1.4.1-NEW-4), `{base}/products.json?limit=50` (count + continuation token), indices homepage déjà dans le HTML. Elle n'ouvre AUCUNE PDP, ne tague AUCUN review, ne fetch aucune collection entière. Une 5e requête ou un dépassement 60s = elle a glissé dans le deep scan · violation.
+
+**Classification (réutilise le classifieur Step 2bis, en avance de phase).** Calcule `products_detected / subscription_signals / marketplace_signals` sur les signaux légers (cf Step 2bis table de sourcing) et mappe en archétype de cartographie. Ce calcul early sert au CADRAGE uniquement · l'écriture canonique de `brand.json#identity.business_model` reste au Step 2bis post-scrape (ne pas dupliquer le write ici).
+
+| Archétype | Bascule (`products_detected`) | Stratégie de scan (conditionne Steps 2-7) | ETA |
+|---|---|---|---|
+| **Mono-héros** | ≤ ~8, ou 1 héros nav dominant | scan PROFOND sur le héros · PDP complète + reviews tagged + funnel signals · décompo NIVEAU 1-2 dense post-scan sur 1 produit | 12-18 min |
+| **Catalogue resserré** | ~8 à ~40 · collections nav lisibles | héros profond + cartographie de la GAMME en surface (rôles hero/secondaires/entries via pricing × densité reviews) · pas de drill par SKU | 18-25 min |
+| **Gros catalogue / Shopping** | > ~40 (plafond canon ~200 = échantillon Step 1) | par COLLECTIONS, zéro énumération · héros demandé à l'opérateur si nav ambiguë | 20-30 min |
+| **Edge · marketplace** | `marketplace_signals` truthy | la recon S'ARRÊTE à la photo · pas de héros cohérent à encoder · pose le périmètre en inconnu typé, demande quel vendor/segment encoder | 8-12 min |
+
+**Le rapport de recon (artefact rendu) ·**
+
+```
+RECON · {url} · {durée}
+  Archétype       · {mono-héros | catalogue-resserré | gros-catalogue | marketplace} (products_detected={N} · subscription={bool} · marketplace={bool})
+  Héros candidat  · {nom · url} (source nav HTML)  OU  "ambigu · à confirmer"
+  Volume gamme    · {N produits · M collections}
+  Plan proposé    · scan {profond héros | gamme surface | échantillon collections}
+  Axes joignables · créa ✓ · marché ◐ public · éco ○ branchement · funnel ○ branchement · média ○ compte
+  Pré-amorces     · {2 à 4 inconnus typés, hypothèse déjà remplie}
+```
+
+**Pré-amorces (les inconnus à fort levier, hypothèse déjà posée · cf Step 7 Leviers).** La recon pré-remplit 2 à 4 questions que seul l'opérateur tranche · vrai héros économique (la structure du site peut mentir sur le produit moteur), vraie raison d'achat (hypothèse sourcée des avis, pas un blanc), gamme ou segment hors-site, contrainte économique ou compliance (marge, abonnement, stock, réglementaire · structurellement invisibles au scan). Jamais un blanc renvoyé · toujours une lecture à confirmer ou corriger (canon open-map · le manque devient une lecture, pas un trou). **Les pré-amorces ne sont pas qu'un appendice du rapport · elles DEVIENNENT le plan du scan profond (D#518)** · chaque pré-amorce nomme le fetch ciblé qui la résoudrait. Le Spectre (carte mécanisme→usage) dirige le fetch vers les zones blanches, il ne le couronne pas à la fin · doctrine `docs/system/scrape-as-allocation.md`.
+
+**Cadrage orchestré vs standalone.** Quand snapshot-brand est piloté par un orchestrateur (onboard-brand / build-atlas-complete) · la recon est rendue D'ABORD et la skill S'ARRÊTE après ce Step 1.5 (return le rapport) · l'orchestrateur la déplie en clair, fait valider le chantier (gate « valide le chantier »), PUIS re-spawn snapshot-brand pour le deep scan (Steps 2-7) dimensionné à l'archétype validé. En standalone (l'opérateur a collé l'URL directement) · la recon enchaîne sur le deep scan avec la stratégie dimensionnée, sans gate intermédiaire (l'URL collée vaut validation du périmètre).
+
+---
+
 ## Step 2 · Platform detection + scraping
 
 **Shopify detection** (in this order):
@@ -220,6 +259,12 @@ Even if Shopify JSON returns the data, read the product page HTML to capture wha
 | Payment methods | Footer or ATC zone | brand.json · market confirmation |
 
 ⚠️ **WebFetch limit**: WebFetch returns only static HTML. Front-end apps (quantity breaks, review widgets) are rendered via JavaScript after load, invisible to WebFetch. If these elements are suspected but not visible in HTML → note `[app-rendered · requires Chrome capture]` and continue. Never invent unconfirmed price tiers.
+
+**Conditions d'arrêt du fetch (D#518 · rendement, pas couverture).** Le scan profond n'est pas « tout lire » · c'est lire jusqu'à ce que le rendement tombe. On arrête dès qu'UNE est vraie (doctrine `docs/system/scrape-as-allocation.md`) ·
+1. **Confiance-cible atteinte pour l'enjeu** · la décision qui paie est déjà tranchable, une PDP de plus ne la change pas.
+2. **Saturation** · les nouvelles lectures répètent les mêmes signaux (mêmes proofs, mêmes objections).
+3. **Inconnu non-tranchable-par-scrape** · structurellement invisible au scan (marge, abonnement réel, contrainte compliance) · le TYPER avec son levier (zéro fetch de plus), ne pas s'acharner.
+4. **Budget d'attention épuisé** · le plafond dimensionné par l'archétype (Step 1.5) est atteint · le reste part en inconnu typé, pas en sur-crawl.
 
 **Sustainability signals scraping (v1.3.0 NEW · v2.58)**
 
@@ -270,6 +315,8 @@ Si zéro signal sustainability détecté → ne pas stage (laisser fields null, 
 | Trustpilot | `trustpilot.com/review/{domain}` | Independent verified reviews |
 
 Rule: always note all 3 in `_snapshot.reviews_sources`. Never use the highest number without noting its source, the on-page number may come from an app with imported reviews (unverified). Significant gap between sources = flag `[review_source_conflict]` in `_snapshot`.
+
+**Posture générale · scrapé ≠ fait (D#518 · D6).** La triangulation des reviews est un cas d'une règle plus large · toute valeur scrapée porte un `reliability_tier` qui PLAFONNE sa confiance d'entrée par nature de source (doctrine `docs/system/scrape-as-allocation.md`, germe `resources/schemas/_shared/extraction-provenance.json`) · revealed/back-end ≤0.8 · behavioral-soft (volume, spend inféré) ≤0.5 · verbatim ≤0.5 · structural = hypothèse · declared (claim marque) ≤0.3. **Un chiffre sans procédé de mesure (« 60k clients ») n'entre jamais comme nombre nu** · il porte son marqueur ou reste hypothèse (garde-fou mécanique correspondant · `naked_number_unsourced` dans `resources/scripts/validate-all.py`). Là où on s'apprête à faire payer, trianguler cross-nature (≥2 natures dont une revealed/verbatim).
 
 **Confidence score calculation** after scraping:
 ```
@@ -577,7 +624,9 @@ Price scraping always in a known context. The API returns the base currency (USD
 
 ## Step 5 · Audience cartography (4 movements)
 
-**Doctrinal contract.** Read `docs/system/audience-cartography.md` before authoring or modifying this step. Step 5 runs four operator-facing movements in order: (1) raw observations, (2) cartography axes, (3) hierarchy mère/sous-audiences, (4) hand-off pédagogique vers `mine-voc`. Single-axis classification or flat audience output is a regression to form-fill and a violation of contextual intelligence doctrine.
+**Doctrinal contract (v1.7.0 · D#517 · SONDE, pas carte).** Read `docs/system/audience-cartography.md`. Au scan, Step 5 produit une **SONDE D'AUDIENCE** · une lecture grossière, dérivée du CLAIM (ce que la page dit), au plus une à deux mères-hypothèses, pour valider le territoire et donner à l'opérateur un truc à corriger. **Il ne construit PAS l'arbre validé** (mère → sous-poches, découpe par porte d'entrée, test de splitting, scaffolding des dossiers). Cette carte STRUCTURÉE appartient à `map-audiences` en phase 3, STRICTEMENT APRÈS le pont mécanisme→usage (`build-atlas-complete` Step 2.5) · les vraies audiences se dérivent des JOBS (`spec.use_cases[]`, dont les spéculatifs = le marché non vu), pas du miroir du claim. Construire l'arbre ici = le bug du pré-emptage · il fige les audiences sur les déjà-servis avant que les usages aient fait émerger le marché non vu.
+
+**Règle dure (D#517) · le scan ne grave pas d'arbre.** Au scan on rend · Movement 1 (observations brutes, neutre) + au plus une à deux **mères-hypothèses CLAIM en prose** (`validation_status: hypothesis`), puis on passe la main. Les Movements 2-3 (découpages alternatifs, hiérarchie mère/sous-poches, gate `audience_q1q4_answered`, scaffolding des dossiers) sont **REPORTÉS en phase 3** (`map-audiences`, après le pont 2.5) · ils ne tournent PAS au scan. C'est exactement le comportement du thin-page fallback ci-dessous · on le généralise à TOUT scan, pas seulement la page maigre. Garde-fou mécanique correspondant (maintainer) · la dent `use_cases[]` (≥1 `speculative`) côté `write-to-context` s'applique AUSSI à cette porte, pas seulement à la phase 3, sinon un agent littéral re-construit l'arbre ici.
 
 The agent does NOT extract `pain_points[]`, `psychology.beliefs_limiting[]`, `voice.key_expressions[]` from the product page. Those fields belong to `mine-voc` verbatim. snapshot-brand fills only the cartography skeleton listed in `audience-cartography.md § Field-level contract`.
 
@@ -600,6 +649,8 @@ If the page is thin, say so plainly:
 Movement 1 is **never skipped**. Empty observations are a valid output, and more useful than a fabricated profile.
 
 ### Movement 2 · Découpages possibles (operator-facing)
+
+> ⚠ **REPORTÉ EN PHASE 3 (D#517).** Au scan, on ne déroule PAS ce mouvement · les découpages alternatifs se travaillent dans `map-audiences` (phase 3), après que le pont mécanisme→usage a fait émerger les jobs spéculatifs. Au scan, on se contente d'une mère-hypothèse CLAIM (cf thin-page fallback, généralisé). La spec ci-dessous reste la référence du COMMENT, mais elle s'exécute en phase 3, pas ici.
 
 Propose 2 to 3 alternative ways to slice the audience. Always mark one as the default hypothesis with a one-line rationale tied to a Movement 1 observation. Always invite override. **Operator-facing language**: "manières de découper", "découpages", "axes". Never "cartography axes".
 
@@ -624,6 +675,8 @@ Operator-facing format example:
 Wait for the operator's choice before Movement 3.
 
 ### Movement 3 · Hierarchy proposée (operator-facing)
+
+> ⚠ **REPORTÉ EN PHASE 3 (D#517).** La construction de l'arbre validé (mère → sous-poches), le gate `audience_q1q4_answered` et le scaffolding des dossiers d'audiences vivent dans `map-audiences` (phase 3), APRÈS le pont 2.5 · jamais au scan. Le scan ne grave aucun dossier d'audience. La spec ci-dessous est la référence du COMMENT, exécutée en phase 3.
 
 Once the operator picks an axis, propose 2 to 3 **groupes principaux** with 1 to 3 **sous-groupes** each. Skill-author terms: mother audiences and sub-audiences. **Operator-facing terms**: "groupe principal" et "sous-groupe", or just "groupe" et "sous". Never "mother audience", never `meta.parent_slug`, never "validation_status: hypothesis".
 
@@ -872,6 +925,8 @@ Format example (FR · canonique v2.54) ·
 ### Section 3 · Inconnu (variables non observables)
 
 Explicit list of variables critiques pour la stratégie qui ne peuvent pas être levées depuis le scan initial. Pas de deviner ces variables. Liste explicite.
+
+**Persistance in situ (D#518 · D5).** Un inconnu porteur + son levier ne s'écrit pas SEULEMENT ici au close · il se note AU MOMENT OÙ IL SURGIT pendant le scan (chaque pré-amorce non résolue, chaque condition d'arrêt 3 déclenchée · cf `docs/system/scrape-as-allocation.md`). Cette Section AGRÈGE des inconnus déjà repérés en cours de route, elle ne les invente pas à la fin. La carte garde son fond visible tout du long, pas seulement dans la synthèse finale.
 
 Format example (FR · canonique v2.54) ·
 
@@ -1141,6 +1196,32 @@ Once saved, run three silent post-writes before talking:
    Reads `_field_types`, inspects every mutation written in this run, runs structural checks (unmapped paths, manual derived writes, tone misclassification, missing entity files), emits a `coherence_check` event so `turn-end-audit` sees the loop closed.
 
    Exit code 2 = blocking issue → revise before shipping the summary. Exit code 0 with warnings = log them, ship. **Non-negotiable, mechanical, not skippable.**
+
+4. **Déposer le beat de restitution du scan (D#520).** Doctrine SSOT · `docs/system/restitution-beat-doctrine.md` (contrat, règles décision-d'abord, richesse, temporalité, mode). Écris (`Write` · c'est sous `.phantom/`, hors `brands/`, donc hors gate mutation) le fichier `.phantom/beats/{slug}/scan.json` qui capture CE QUE TU VIENS DE FAIRE pendant que ton contexte est frais. C'est la matière que l'orchestrateur RENDRA à l'opérateur · tu ne résumes pas en une phrase, tu déposes le registre (anti double-compression · le raisonnement meurt quand on le compresse ici puis qu'on demande au fil de le re-broder). Forme ·
+
+   ```json
+   {
+     "phase": "scan",
+     "verdict": "<lecture experte top-line, tranchée, une ligne>",
+     "read":     "<2-3 phrases de lecture experte · le pourquoi, en prose · le report ouvre en prose avant les bullets>",
+     "found":    ["<sources lues + faits bruts saillants>"],
+     "blocked":  [{"source": "<ex · Trustpilot>", "reason": "<ex · 403, fallback forums>"}],
+     "analyzed": ["<déductions, recoupements, ce que le site dit vraiment>"],
+     "rejected": [{"what": "<piste écartée>", "why": "<la raison, défendable>"}],
+     "encoded":  ["<artefacts posés · spec, offres, positionnement>"],
+     "confidence": [{"claim": "<assertion>", "level": "forte|moyenne|faible", "reason": "<la VRAIE cause · une source bloquée n'est pas une audience faible>"}],
+     "basis":    "<une ligne sobre · les sources lues, la largeur du travail · rendue en « Lu · ... »>",
+     "tease": "<une ligne qui tease la valeur DANS la vue · ce qu'il va voir de surprenant ou utile · une invitation · NE mets pas de chemin, le code ajoute la commande paste-ready et choisit la vue selon la phase>"
+   }
+   ```
+
+   **Le renderer réorganise en décision-d'abord** (pas dans l'ordre du process) · ouverture `verdict` + `read`, puis le raisonnement qui flue (`analyzed` + `found` + `rejected`), puis **Ce sur quoi je reste prudent** (`blocked` + confiance non-forte, avec leur cause), puis `basis` (« Lu · »), puis le CTA `tease`. La confiance **forte** n'est pas affichée séparément, elle vit dans le verdict (on flague l'incertain, on ne caveat pas ce dont on est sûr). Tu déposes les champs, le code décide la forme.
+
+   **Format report (cf Shape of Key) · prose + bullets + `/phantom`.** Le `verdict` + `read` ouvrent en prose, puis les listes se rendent en bullets. Chaque entrée de `found` / `analyzed` / `encoded` peut porter une **amorce grasse** suivie de sa justification (`**la thèse.** le pourquoi en clair`).
+
+   **Richesse · le second ordre, pas le constat.** `read` et `analyzed` ne s'arrêtent pas au fait, ils déroulent sa **conséquence** · l'implication économique (« business d'abonnement → pilotage à la LTV → CAC acceptable plus haut → mais tout ride sur la rétention M2 »), la texture concurrentielle (pourquoi le lane est libre, ce qu'il coûte, à quoi il est fragile), et **le nerf** (la tension non-évidente qui décide tout). C'est la densité d'insight qui fait l'expert 360, pas la longueur. Registre **sharp, pair-expert, jamais météo** · chaque rejet porte sa raison (le travail de rejet est le plus défendable et le plus invisible), chaque confiance porte SA cause.
+
+   **CTA · `tease` propose, le code exécute.** Le `tease` est l'accroche (la valeur dans la vue) · le renderer y appose la commande `/phantom {slug} {vue}` paste-ready et **choisit la vue selon la phase** (au scan, la décompo produit `products`, PAS le spectre qui n'existe pas encore). Champ vide = omis, jamais inventé. C'est un état système (restitution), pas de la donnée de marque · il ne transite pas par `write-to-context`, et un hook (`beat-emit`) garantit qu'il sera montré.
 
 Then propose enrichment without waiting:
 

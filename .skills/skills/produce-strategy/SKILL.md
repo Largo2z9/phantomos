@@ -51,8 +51,11 @@ pipeline:
     - strategy.json proposal staged via .skills/stage-proposal.py mode=proposed
     - annual_goals (3-5 GOAL-NN) + current_focus Q{n}-{year} + constraints CST-NN encodés
     - synthesis 5 sections investigation-posture délivrée
+    - recommended next-step (levier prioritaire du Close ouvert) persisté en ligne In Progress idempotente dans brands/{slug}/todos.md (format canonique, tiché auto quand le skill levier aval tourne)
     - finalize-mutation-batch event emitted post-acceptance
     - snapshot rebuilt
+patch_notes:
+  v1.0.2: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW Step 6bis · le levier prioritaire du Close ouvert (Step 6 · section Leviers) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`, tichée auto (`[x]`) quand le skill levier aval nommé tourne (ex test paid, mine-voc retention, produce-strategy --mode=update). Le Close ouvert in-line + les 5 sections investigation-posture restent inchangés · le levier ne meurt plus dans le chat, il a un réceptacle persistant. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · Steps 0-7 + synthesis + guardrails préservés."
 disambiguates_against:
   setup-brand: "setup-brand cadrage léger initial du brand (identity + product + audience first cut). produce-strategy = cadrage stratégique deep, Q&A reviewable, 3-5 GOAL-NN + current_focus trimestriel. Invoke produce-strategy après que setup-brand a livré la structure."
   build-atlas-complete: "build-atlas-complete orchestre le pipeline complet 9 phases (specs + audiences + angles + briefs + créas). produce-strategy peut être invoqué EN sous-skill du build-atlas-complete, OU standalone pour rafraîchir le focus trimestriel sur une brand déjà cartographiée."
@@ -87,7 +90,7 @@ Parle comme un partenaire stratégique senior qui cadre un focus avec un opérat
 Verify brand state silently · ne narre pas le scan.
 
 ```bash
-cat brands/{slug}/state/status.json 2>/dev/null
+cat brands/{slug}/status.json 2>/dev/null
 ls brands/{slug}/audiences/
 ls brands/{slug}/products/
 cat brands/{slug}/strategy.json 2>/dev/null | head -30
@@ -230,6 +233,41 @@ Or ·
 > *"Tu pars sur le déploiement test Q{n} comme cadré, ou tu veux qu'on stress-test une contrainte (compliance, stock) avant de lock le focus ?"*
 
 **NEVER** orphan close. **NEVER** flat menu. **NEVER** more than one question.
+
+---
+
+## Step 6bis · Persist le levier prioritaire (v1.0.2, additif strict)
+
+La section Leviers (Step 6) et le Close ouvert proposent un prochain mouvement · ils vivent dans la synthèse conversationnelle. Mais un levier qui ne vit que dans le chat meurt au prochain tour. Ce step lui donne une **trace persistante** · une ligne dans la todo de la brand, sans rien retirer des 5 sections ni du Close ouvert, qui restent tels quels.
+
+Pattern déjà prouvé par `register-and-flag` Step 6 (write idempotent d'une ligne de tracking dans `brands/{slug}/todos.md`).
+
+**Geste** · après la synthèse (Step 6), écrire une ligne unique dans `brands/{slug}/todos.md → ## In Progress` au **format de ligne canonique** ·
+
+```
+- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {durée}
+```
+
+- `Name` · le levier prioritaire de la section Leviers verbalisé court (ex `test paid Meta sur top channel pour valider l'allocation Q{n}`, `mine-voc retention pour valider l'acquisition_focus`, `produce-strategy --mode=update mi-Q{n} si signal divergent`). Operator-language, nom de skill levier aval recevable dans la ligne (réceptacle backstage).
+- `P` · priorité dérivée du cadrage · levier qui débloque le déploiement du focus Q{n} → `P: 1` · levier de validation différé / refine mi-trimestre → `P: 2`.
+- `E` · effort du levier aval (low pour un lancement test, med pour un mine-voc ciblé, high pour un refresh stratégie complet).
+- `T` · ETA aligné `feedback_client_effort_scale` si client-facing (ex `quelques heures`, `plusieurs jours`).
+
+**Un seul levier persisté par run** · le prioritaire (celui que le Close ouvert met en avant). Les autres leviers restent listés dans la section Leviers, non dupliqués en todo (anti-bruit · la todo porte le mouvement, pas l'inventaire).
+
+**Idempotence (dure, comme register-and-flag).** Avant d'écrire, scanner `## In Progress` · si une ligne porte déjà le même `Name`, ne pas dupliquer. Re-run / refresh du focus sur la même brand = zéro nouvelle ligne tant que le levier prioritaire est identique. Le write passe par le mutation gate ·
+
+```bash
+python3 .skills/write-to-context.py --path "brands/{slug}/todos.md#in-progress" --value "- [ ] {Name} | P: {n} | E: {level} | T: {eta}" --source operator --mode direct --reason "Persist prioritized levier from produce-strategy Close ouvert (idempotent)"
+```
+
+Si `write-to-context.py` ne route pas le markdown todos, fallback `register-and-flag` (sous-skill curator) · même réceptacle, même idempotence. Cohérent avec la guardrail anti hand-edit de ce skill (Step 5) · jamais d'`Edit`/`Write` direct, tout passe par le canal canonique.
+
+**Auto-tick aval.** La ligne est cochée `[x]` automatiquement quand le skill levier nommé tourne et produit son artifact (le test paid lancé, le mine-voc retention terminé, le refresh stratégie staged) · le downstream lit `## In Progress` à son finalize, matche une ligne dont le `Name` le désigne avec la même cible brand/focus, et la bascule `[x]` (archivée selon la doctrine todos racine). Pas de tick manuel. Si aucune ligne ne matche, le downstream ne crée rien et continue (silencieux).
+
+**Léger, jamais bloquant.** Échec du write (gate refuse, fichier absent) → flag interne silencieux, ne casse pas le ship de la strategy proposal. La trace todo est un bonus de persistance, pas une précondition.
+
+**Doctrine.** Report des étapes différées et matérialisation des leviers comme tâches reprenables · `docs/system/onboarding-setup-flow.md` (sections « Exhaustivité offerte, jamais forcée, reportable » et « La persistance est native »). Référencée ici, pas redupliquée.
 
 ---
 

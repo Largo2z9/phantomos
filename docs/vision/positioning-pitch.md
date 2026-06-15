@@ -6,7 +6,9 @@
 
 ## Ce que c'est
 
-PhantomOS est un environnement de travail local pour opérateurs paid DTC : la marque, les audiences, les angles et les apprentissages encodés dans des fichiers structurés et versionnés que l'opérateur possède, opérés par un agent IA. Le produit n'est pas une bibliothèque de contenu spécialisé. Le produit est **l'environnement lui-même** : les disciplines d'encodage des données, la mécanique de raisonnement de l'agent, l'extensibilité par l'utilisateur, et la persistance de la connaissance entre les sessions.
+**Un seul point d'entrée pour tout ton travail.** Le premier étage câblé aujourd'hui, c'est ton acquisition DTC. Le reste s'encode à la demande, et le système se construit ses capacités au fil de l'usage.
+
+PhantomOS est un environnement de travail local pour opérateurs paid DTC : la marque, les audiences, les angles et les apprentissages encodés dans des fichiers structurés et versionnés que l'opérateur possède, opérés par un agent IA. Au-delà du contenu qu'il embarque, le produit est **l'environnement lui-même** : les disciplines d'encodage des données, la mécanique de raisonnement de l'agent, l'extensibilité par l'utilisateur, et la persistance de la connaissance entre les sessions.
 
 Le pattern est général, la preuve est locale : la même architecture peut encoder d'autres métiers, mais c'est sur le DTC paid que le système est livré, outillé et validé.
 
@@ -58,11 +60,11 @@ Cette doctrine évite l'écueil classique des outils d'encodage qui imposent un 
 
 Pour rendre le système immédiatement utilisable et démontrer ce que peut produire un environnement bien rempli, PhantomOS est livré avec un kit initial constitué de :
 
-- 82 skills versionnés couvrant les principales tâches d'un opérateur travaillant dans le marketing direct et l'e-commerce DTC : encodage initial d'une marque, extraction de la voix client, production de briefs publicitaires, audit de scripts existants, scoring d'offres, analyse de performance, génération de rapports clients,
+- 85 skills versionnés couvrant les principales tâches d'un opérateur travaillant dans le marketing direct et l'e-commerce DTC : encodage initial d'une marque, extraction de la voix client, production de briefs publicitaires, audit de scripts existants, scoring d'offres, analyse de performance, génération de rapports clients,
 - une bibliothèque de référence en copywriting et persuasion, regroupant les principes établis sur plusieurs décennies par les auteurs de référence du domaine, structurés sous forme de variables exploitables par l'agent,
 - des registres et frameworks transverses qui permettent à l'agent de raisonner sur des combinaisons d'angles, d'audiences, de canaux et de leviers psychologiques.
 
-**Le kit livré cible exclusivement le DTC paid acquisition.** Il permet à un opérateur DTC paid de démarrer immédiatement avec une production opérationnelle (angles, creatives, audiences, advertorials, audits setup). La plateforme reste extensible : un opérateur dans un autre métier peut créer son propre kit via custom encoding, mais ce n'est pas le scope commercial actuel.
+**Le kit livré, c'est la démonstration phare, et il porte sur le DTC paid acquisition.** Il permet à un opérateur DTC paid de démarrer immédiatement avec une production opérationnelle (angles, creatives, audiences, advertorials, audits setup). C'est le premier étage câblé, pas un plafond : la plateforme est extensible, et un opérateur dans un autre métier encode son propre kit via custom encoding quand il branche son domaine.
 
 ## Ce que le système permet de faire
 
@@ -78,7 +80,7 @@ Les usages possibles dépendent du métier encodé et des skills disponibles. Su
 
 Au-delà de ces usages, l'opérateur peut construire des workflows propres à son process (par exemple un audit hebdomadaire client en quatre étapes) qu'il déclenche en une commande.
 
-Le système est conçu pour que ces capacités s'étendent par ajout, jamais par remplacement. Un opérateur qui couvre un domaine non couvert par le kit initial développe ses propres skills, dépose ses propres ressources, et le système les intègre.
+Le système est conçu pour que ces capacités s'étendent par ajout, jamais par remplacement. Un domaine que le kit initial ne porte pas encore s'encode : l'opérateur développe ses propres skills, dépose ses propres ressources, et le système les intègre, c'est exactement le geste par lequel il se construit ses capacités.
 
 ## Pour qui le système est conçu
 
@@ -93,7 +95,9 @@ Profils en fit direct :
 - les solo-opérateurs DTC paid qui passent l'essentiel de leur temps sur Meta, TikTok, Google Ads,
 - les opérateurs portfolio gérant plusieurs marques DTC en propre ou en equity.
 
-Profils hors périmètre : fondateurs pré-traction du jour zéro au mois trois (encoder des hypothèses non validées dégrade le système), info-products et services B2B (autre métier, autre stack), agences focalisées sur le social organic ou la distribution de volume créateur, agences enterprise multi-tenant (non couvert).
+Sur le timing, un seul vrai conseil de moment : le fondateur pré-traction, du jour zéro au mois trois, a intérêt à attendre. Encoder des hypothèses encore non validées est prématuré, le système amplifie ce qu'on lui donne, et avant le premier signal il n'y a rien de stable à amplifier. C'est un conseil de moment, pas un plafond produit : dès qu'un signal se confirme, il y a matière à encoder.
+
+Les autres profils relèvent simplement de capacités pas encore câblées par défaut, qui s'activent quand on les branche. Info-products et services B2B vivent dans une autre stack métier : ça s'encode, en déposant les entités, registres et skills propres au domaine. Le social organic et la distribution de volume créateur vivent aujourd'hui dans les outils natifs (CapCut, Motion, les plateformes de veille temps réel) ; le jour où un opérateur veut en faire une lane du workspace, ça se câble. Le multi-tenant enterprise n'est pas encore outillé non plus : l'architecture en fichiers possédés le permet, c'est une couche de gestion d'accès et de tenancy à encoder quand le besoin se présente.
 
 ## Ce qui distingue le système
 
@@ -124,7 +128,7 @@ Cette transformation rejoint la bascule documentée du marché vers la facturati
 
 ## Vision
 
-PhantomOS livre actuellement un kit complet pour le DTC paid acquisition, là où la méthodologie de référence est mature, la demande pour l'industrialisation du travail intellectuel forte, et le terrain de validation immédiat. La plateforme reste extensible : un opérateur dans un autre métier peut créer son propre encodage custom, mais ce n'est pas le scope commercial actuel. Les vertical packs pour d'autres domaines (consulting, coaching, media buying autres canaux, etc.) restent en roadmap future+, conditionnés à une demande client réelle.
+PhantomOS livre actuellement un kit complet pour le DTC paid acquisition, là où la méthodologie de référence est mature, la demande pour l'industrialisation du travail intellectuel forte, et le terrain de validation immédiat. C'est le premier étage câblé, le point d'entrée par lequel le système prouve sa mécanique. La plateforme est extensible par construction : un opérateur dans un autre métier encode son propre canon custom quand il branche son domaine. Les vertical packs prêts à l'emploi pour d'autres terrains (consulting, coaching, media buying autres canaux, etc.) s'encodent à la demande et arrivent en roadmap au fil de la demande client réelle.
 
 L'enjeu de fond est la transformation d'un talent humain rare en un système exploitable, composable et accumulable. Le niveau de qualité devient une propriété de l'environnement de travail, et non plus seulement de l'individu qui l'opère. C'est cette transformation que PhantomOS rend opérationnelle.
 

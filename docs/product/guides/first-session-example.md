@@ -1,10 +1,10 @@
-# First session — concrete example
+# First session · concrete example
 
 A textual walkthrough of what a first PhantomOS session actually looks like. No screenshots yet; this is the transcript version. Every line starting with `>` is operator input; every indented block is the agent's response.
 
 The example uses a fictional skincare brand named *Glowco* with one hero product (*Crème Éclat*) and one audience segment (*Femmes 40-55 ans*). Replace with your own.
 
-## Turn 1 — Landing in an empty workspace
+## Turn 1 · Landing in an empty workspace
 
 > *hey*
 
@@ -19,7 +19,7 @@ The example uses a fictional skincare brand named *Glowco* with one hero product
 
 The agent waits. The operator picks (3).
 
-## Turn 2 — Short narrative + chairman close
+## Turn 2 · Short narrative + chairman close
 
 > *3*
 
@@ -34,21 +34,21 @@ The agent waits. The operator picks (3).
     (c) Challenge the philosophy. Why I work like this.
     (d) Other. Tell me.
 
-## Turn 3 — Async setup via URL
+## Turn 3 · Async setup via URL
 
-> *a — solo, https://glowco.com*
+> *a · solo, https://glowco.com*
 
     OK, solo. I'll launch the scan on https://glowco.com in the background. 3 to 5 minutes. Meanwhile, ask me anything or challenge a point. I'm here.
 
 The agent launches the `snapshot-brand` skill as a subagent and stays conversational. The operator might ask a question, test another capability, or simply wait. Three minutes later the snapshot-brand returns.
 
-## Turn 4 — Snapshot returns
+## Turn 4 · Snapshot returns
 
     I have your brand pre-filled from the site. Identity detected: Glowco, premium skincare, FR-first. Hero product: Crème Éclat (89 €, anti-aging). Visible audience: women 40-55 with sensitive skin. Two active offers: single unit, 3-month cure at -10%.
 
     Want to validate what's right together and complete what's missing ? 3 to 5 min.
 
-## Turn 5 — Validation loop
+## Turn 5 · Validation loop
 
 > *yes*
 
@@ -60,7 +60,7 @@ The operator answers. The agent records the change, confirms in plain language, 
 
 After three or four turns, the agent closes validation and proposes the Build chantiers.
 
-## Turn 8 — Build chantiers close
+## Turn 8 · Build chantiers close
 
     Context is set to about 60%. Before we ship a deliverable, three chantiers to arbitrate:
 
@@ -69,7 +69,7 @@ After three or four turns, the agent closes validation and proposes the Build ch
     (c) Surface past learnings if you have any.
     (d) Other. Tell me.
 
-## Turn 9 — First real deliverable
+## Turn 9 · First real deliverable
 
 > *(d) generate 3 ad hooks for the 40-55 audience*
 
@@ -95,8 +95,8 @@ The operator reads, corrects. The correction gets captured as a reasoning record
 
 ## What the workspace now contains
 
-After this session, `brands/glowco/` holds a validated brand entity, one product spec, one audience profile, two offers, and one captured reasoning record in `learnings.json`. Level 1 is complete — the agent can produce calibrated output on demand. Level 2 and 3 fill over time as the operator works.
+After this session, `brands/glowco/` holds a validated brand entity, one product spec, one audience profile, two offers, and one captured reasoning record in `learnings.json`. Level 1 is complete · the agent can produce calibrated output on demand. Level 2 and 3 fill over time as the operator works.
 
 ---
 
-*This example is representative, not prescriptive. Your first session may branch differently — the agent adapts to your comfort level, your profile, and the information you drop in the first message.*
+*This example is representative, not prescriptive. Your first session may branch differently · the agent adapts to your comfort level, your profile, and the information you drop in the first message.*

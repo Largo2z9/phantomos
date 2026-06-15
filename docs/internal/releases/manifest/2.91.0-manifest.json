@@ -1,0 +1,41 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.91.0",
+  "released_at": "2026-06-13",
+  "type": "MINOR",
+  "summary": "Refonte onboarding (vision sans-plafond) + reconciliations de schema (learnings + taxonomies creatives) + deverrouillage creatif vague 1. Voir CHANGELOG [2.91.0] pour le detail.",
+  "changelog_ref": "CHANGELOG.md#[2.91.0]",
+  "headline": [
+    "Onboarding refondu vision sans-plafond (tour file v2.92.0) · fan 4 verbes (crea = une lane) · registre JARVIS · essentiels-en-fond sur bypass · routing de cadrage · entree tool-first Porte D · scope 3 etats de maturite",
+    "Doctrines parentes onboarding-holistic + entry-arc bumpees v2.91 · awareness.json v1.1 -> v1.2 (first_operator_extension_built)",
+    "Cascade docs vision-align (fit/capabilities/positioning-pitch/manifesto/offering-deployment) · purge du langage de plafond -> formule deux-temps",
+    "roadmap truth-lock (scaffold-extension declare shippe)",
+    "Reconciliation schema learnings 1.1 -> 1.2 (3 dialectes) · _EXAMPLE migre · dead-trigger repare (proposition des une marque + backlog cree a l'ecriture)",
+    "Deverrouillage creatif vague 1 : style_id + hook.mechanic_id enum-ferme -> free-string + registre vivant (4 schemas) · alarme de saturation portee · round-trip A=B verifie",
+    "Cablage : build-manifest fallback regex · convention-guard exempte outils d'organisation · build-agent disambiguates_against · fix chemins"
+  ],
+  "migrations": [
+    "operations/migrations/v2.91-awareness-operator-extension.py (awareness.json v1.1 -> v1.2)"
+  ],
+  "schema_changes": [
+    "learnings.schema.json 1.1 -> 1.2 (additif, backward-compat)",
+    "genome.schema.json / genome-package.schema.json / decomposition.schema.json / style-recipe.schema.json : style_id + hook.mechanic_id enum -> free-string (registre = SSOT)"
+  ],
+  "skills_count": 85,
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "dry_run_pitch_equals_runtime": "SHIP (chaque porte/bypass/livrable du tour route vers un skill shippe · 3 doctrines aux versions citees · _EXAMPLE en place · zero reference morte)",
+    "plafond_operator_commercial_surfaces": 0,
+    "em_dash_operator_surfaces": 0,
+    "roundtrip_A_B_creative": "verifie (valeur de style neuve valide cote decompose ET genere)"
+  },
+  "deferred": [
+    "beat_type (vague 2 · creer beat-registry d'abord)",
+    "validation fiche-existe par-ecriture (au 1er genome reel)",
+    "daemon cross-session + auto-promotion (skill_completed event, operator/session-state.md buffer, validations[] fill)",
+    "pipe d'enrichissement telephone",
+    "moteur de savoir via scope (cartographie de demande a profondeur reglable)",
+    "verticaux non-DTC",
+    "alignement langage-de-plafond des doctrines internes docs/system (hygiene non-bloquante)"
+  ]
+}

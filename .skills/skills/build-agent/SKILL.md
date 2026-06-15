@@ -10,9 +10,13 @@ description: >
   (Context Engine, MCP, existing skills, workspace knowledge), designs the full
   architecture (1 or N agents), generates SKILL.md files directly executable in
   the workspace.
-  FR: "construis-moi un agent", "crée un skill", "je veux un agent qui",
-  "build un outil qui", "j'ai besoin d'un agent pour", "crée-moi quelque chose qui".
-  EN: "build an agent", "create a skill", "I want an agent that", "build a tool that".
+  FR: "construis-moi un agent", "je veux un agent qui", "build un outil qui",
+  "j'ai besoin d'un agent pour", "construis-moi un système qui".
+  EN: "build an agent", "I want an agent that", "build a tool that", "build a system that".
+disambiguates_against:
+  create-skill: "build-agent assemble un agent runtime (multi-skill + binding marque) depuis un intent flou. create-skill écrit un seul SKILL.md depuis un skill nommé. 'crée un skill' route create-skill; 'construis-moi un agent / un système qui' route build-agent."
+  scaffold-extension: "scaffold-extension fait grandir le MODÈLE DE DONNÉES (entité custom, sidecar, schéma) pour un nouveau domaine à encoder. build-agent construit de nouvelles CAPACITÉS (skills/agents qui raisonnent ou produisent). Stocker/structurer une nouvelle donnée route scaffold-extension; un nouveau comportement route build-agent."
+  connect-source: "connect-source branche un compte/API externe que l'opérateur utilise déjà (Meta, Shopify, un outil MCP). build-agent construit une capacité interne. 'branche mon compte X' route connect-source; 'construis un agent qui' route build-agent."
 permissions:
   reads: [brand]
   writes: []
@@ -55,7 +59,7 @@ When the dissection in Step 2b concludes that the intent maps to a **simple exte
 - Intent output is *"operator wants to track X over time"* or *"operator wants to store Y structurally"* or *"operator wants Z field enrichment on existing brand"* → **scaffold-extension scope**.
 - Intent output is *"operator wants a multi-skill workflow with data flow between steps"* or *"operator wants a methodology agent with judgment loops"* → **build-agent scope** (handle internally).
 
-When delegating, `build-agent` invokes `scaffold-extension` by surfacing the routing to the operator: *"Ton besoin rentre dans un pattern spécialisé — je passe la main au builder dédié, il va t'accompagner en neuf étapes. Je reviens après si on a des briques complémentaires à construire."* After `scaffold-extension` completes, `build-agent` either ends the session or continues with any remaining mission scope.
+When delegating, `build-agent` invokes `scaffold-extension` by surfacing the routing to the operator: *"Ton besoin rentre dans un pattern spécialisé · je passe la main au builder dédié, il va t'accompagner en neuf étapes. Je reviens après si on a des briques complémentaires à construire."* After `scaffold-extension` completes, `build-agent` either ends the session or continues with any remaining mission scope.
 
 This delegation keeps each orchestrator narrow and composable. `scaffold-extension` owns the extension canonical path with its nine sub-skills; `build-agent` owns the generic architecture and delegates when the path is a known pattern.
 

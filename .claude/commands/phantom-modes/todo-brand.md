@@ -1,6 +1,15 @@
 ## Mode todo-brand · `/phantom {brand} todo` (canon v2.87.5+ P1)
 
+> **Note additive 2026-06-14 (BRIQUE 4 · visibilité todo).** Ce mode est le rendu canonique UNIQUE de la todo d'un brand · seul mode qui **lit ET rend** `brands/{slug}/todos.md` (sections In Progress · Backlog · Flags · Blocked, Archive ignorée) EN PLUS des Actions calculées, Connectors, Schedules et Atlas completeness déjà canon. NEW sous-section *Todo persistée* (ci-dessous) insérée avant le bloc Actions. Aucune logique retirée. Doctrine report des étapes différées · `docs/system/onboarding-setup-flow.md`.
+
 `/phantom {brand} todo` rend la liste des actions actives + dette workspace pour UNE brand spécifique (vs `/phantom todo` cross-brand workspace-level). Vue brand-level brand-todo proactif (P3 canon v2.87.5+ · maximiser contexte plateformes connectées + schedules actifs/manquants).
+
+### Sources à lire (read-only)
+
+1. `brands/{slug}/todos.md` → sections `In Progress`, `Backlog`, `Flags`, `Blocked` (ignorer `Archive` et la ligne de compteur de pied). Source de la sous-section *Todo persistée*.
+2. `brands/{slug}/status.json#connectors_state` → état connectors.
+3. `brands/{slug}/scheduled.json` → schedules actifs (canon v2.87.5+ P4).
+4. `brands/{slug}/_snapshot.md` + counts par entité → Actions calculées + Atlas completeness gaps.
 
 ### Header breadcrumb
 
@@ -10,7 +19,30 @@ workspace > {brand} > todo
 {N} actions actives · {M} schedules · {K} connectors
 ```
 
-### Sections canon · 4 blocs
+### Sections canon · 5 blocs (Todo persistée additive 2026-06-14 + 4 blocs existants)
+
+**Todo persistée** (additif 2026-06-14 · lecture directe de `brands/{slug}/todos.md`) · rend les items écrits dans le fichier, par section, avant les actions calculées. C'est ce qui rend ce mode canonique et unique · la todo persistée n'est rendue nulle part ailleurs.
+
+```
+Todo persistée
+
+In Progress ({N})
+  ◐ {item In Progress 1}
+  ◐ {item In Progress 2}
+
+Backlog ({N})
+  · {item Backlog 1}
+  · {item Backlog 2}
+
+Flags ({N})       auto-générés · read-only
+  ⚠ {flag 1}
+  ⚠ {flag 2}
+
+Blocked ({N})
+  ⚠ {item Blocked 1}   bloqué par · {raison si présente}
+```
+
+Mapping sévérité → iconographie canon · `In Progress` → `◐` · `Backlog` → `·` · `Flags` → `⚠` (auto-générés par validate-resources, jamais éditer à la main, mention `auto-générés · read-only`) · `Blocked` → `⚠`. Cap 5 items par section (top par ordre du fichier). Si une section est vide, la skip (pas de ligne creuse). Si les 4 sections sont vides, rendre une seule ligne · *"Todo persistée vide · rien d'écrit pour l'instant."* puis enchaîner sur les Actions calculées. Les items sont rendus tels qu'écrits (déjà en langue opérateur dans le fichier) · ne pas exposer de path. Étapes différées du setup atterrissent ici via `pending-validations` → todo, cf `docs/system/onboarding-setup-flow.md`.
 
 **Actions** (top 5 max · priority_icon canon `⚠` `◐` `·`) ·
 ```

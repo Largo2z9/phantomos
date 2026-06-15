@@ -1,7 +1,7 @@
 {
   "_version": "1.0",
-  "_generated_at": "2026-06-10T23:02:37Z",
-  "_count": 82,
+  "_generated_at": "2026-06-15T12:16:40Z",
+  "_count": 85,
   "skills": [
     {
       "name": "adapt-from-competitor",
@@ -276,20 +276,23 @@
       "triggers": {
         "fr": [
           "construis-moi un agent",
-          "crée un skill",
           "je veux un agent qui",
           "build un outil qui",
           "j'ai besoin d'un agent pour",
-          "crée-moi quelque chose qui"
+          "construis-moi un système qui"
         ],
         "en": [
           "build an agent",
-          "create a skill",
           "I want an agent that",
-          "build a tool that"
+          "build a tool that",
+          "build a system that"
         ]
       },
-      "disambiguates_against": {},
+      "disambiguates_against": {
+        "create-skill": "build-agent assemble un agent runtime (multi-skill + binding marque) depuis un intent flou. create-skill écrit un seul SKILL.md depuis un skill nommé. 'crée un skill' route create-skill; 'construis-moi un agent / un système qui' route build-agent.",
+        "scaffold-extension": "scaffold-extension fait grandir le MODÈLE DE DONNÉES (entité custom, sidecar, schéma) pour un nouveau domaine à encoder. build-agent construit de nouvelles CAPACITÉS (skills/agents qui raisonnent ou produisent). Stocker/structurer une nouvelle donnée route scaffold-extension; un nouveau comportement route build-agent.",
+        "connect-source": "connect-source branche un compte/API externe que l'opérateur utilise déjà (Meta, Shopify, un outil MCP). build-agent construit une capacité interne. 'branche mon compte X' route connect-source; 'construis un agent qui' route build-agent."
+      },
       "isolation_scope": "brand_only",
       "layer": "meta",
       "path": ".skills/skills/build-agent/SKILL.md"
@@ -299,7 +302,7 @@
       "type": "orchestrator",
       "model": "sonnet",
       "subagent_safe": false,
-      "mode": "direct",
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "génère l'atlas complet de {brand}",
@@ -443,8 +446,8 @@
       "name": "compose-creative",
       "type": "producer",
       "model": "opus",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "compose une créa",
@@ -464,7 +467,8 @@
         "decompose-ad": "decompose-ad fait du REVERSE (analyse ad existante). compose-creative fait du FORWARD (génère depuis brief).",
         "produce-paid-angles": "produce-paid-angles produit des ANGLES (stratégie textuelle). compose-creative produit la CRÉA finale (visuel + brief copy).",
         "produce-copy-brief": "produce-copy-brief écrit un BRIEF copy. compose-creative orchestre brief + visuel ensemble.",
-        "recompose-creative": "recompose-creative ADAPTE une créa existante (variant). compose-creative produit ex nihilo."
+        "recompose-creative": "recompose-creative ADAPTE une créa existante (variant). compose-creative produit ex nihilo.",
+        "weave-hooks": "weave-hooks prépare le paquet multi-scripts du batch (contrat A→B) en amont · compose-creative produit le binaire d'UN CRT."
       },
       "isolation_scope": "brand_only",
       "layer": "production",
@@ -533,7 +537,7 @@
       "type": "orchestrator",
       "model": "sonnet",
       "subagent_safe": false,
-      "mode": "direct",
+      "mode": "interactive",
       "triggers": {
         "fr": [
           "connecte meta ads",
@@ -833,8 +837,8 @@
       "name": "define-specs",
       "type": "orchestrator",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "définis les specs",
@@ -889,6 +893,33 @@
       "path": ".skills/skills/encode-batch/SKILL.md"
     },
     {
+      "name": "evaluate-concept",
+      "type": "curator",
+      "model": "opus",
+      "subagent_safe": true,
+      "mode": "none",
+      "triggers": {
+        "fr": [
+          "évalue les concepts",
+          "ces concepts tiennent ?",
+          "gate concepts",
+          "valide les concepts avant prod"
+        ],
+        "en": [
+          "evaluate concepts",
+          "concept gate",
+          "are these concepts solid"
+        ]
+      },
+      "disambiguates_against": {
+        "qc-creative": "qc-creative juge le RENDU visuel d'un binaire produit (vision read, fidélité produit, typo, compliance) · evaluate-concept juge la SOLIDITÉ STRATÉGIQUE d'un concept AVANT toute production. Concept écrit sans pixel → ici. Binaire rendu → qc-creative.",
+        "score-matrix": "score-matrix priorise des territoires (ranking comparatif, scoring pondéré) · evaluate-concept rend un verdict binaire par concept candidat (passe ou ne passe pas, raison nommée). Prioriser → score-matrix. Gater → ici."
+      },
+      "isolation_scope": "brand_only",
+      "layer": "meta",
+      "path": ".skills/skills/evaluate-concept/SKILL.md"
+    },
+    {
       "name": "export-session",
       "type": "capturer",
       "model": "haiku",
@@ -915,11 +946,41 @@
       "path": ".skills/skills/export-session/SKILL.md"
     },
     {
+      "name": "frame-regime",
+      "type": "producer",
+      "model": "opus",
+      "subagent_safe": false,
+      "mode": "direct",
+      "triggers": {
+        "fr": [
+          "cadre la créa",
+          "on lance un batch créa",
+          "quel régime créatif",
+          "cadrage avant production",
+          "prépare le terrain créa"
+        ],
+        "en": [
+          "frame the creative work",
+          "set the creative regime",
+          "creative framing",
+          "scope the batch"
+        ]
+      },
+      "disambiguates_against": {
+        "score-matrix": "score-matrix priorise des territoires d'angles existants · frame-regime cadre un ENGAGEMENT de production : régime + format + plan, AVANT toute génération",
+        "produce-paid-angles": "produce-paid-angles génère les angles · frame-regime décide DANS QUEL RÉGIME on les génère et les consomme",
+        "setup-brand": "setup-brand encode la marque · frame-regime suppose la marque encodée"
+      },
+      "isolation_scope": "brand_only",
+      "layer": "territoire",
+      "path": ".skills/skills/frame-regime/SKILL.md"
+    },
+    {
       "name": "import-archive",
       "type": "orchestrator",
       "model": "sonnet",
       "subagent_safe": false,
-      "mode": "proposed",
+      "mode": "interactive",
       "triggers": {
         "fr": [
           "importe ce dossier",
@@ -986,7 +1047,7 @@
     {
       "name": "import-meta-results",
       "type": "capturer",
-      "model": "haiku",
+      "model": "sonnet",
       "subagent_safe": true,
       "mode": "silent",
       "triggers": {
@@ -1078,8 +1139,8 @@
       "name": "map-angles",
       "type": "producer",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "map-angles {brand}",
@@ -1102,8 +1163,8 @@
       "name": "map-audiences",
       "type": "producer",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "map-audiences {brand}",
@@ -1382,7 +1443,8 @@
       "disambiguates_against": {
         "produce-paid-angles": "route to produce-paid-angles when operator wants ANGLE IDEATION (matrice ranked) · produce-copy-brief is the downstream brief generation on a chosen angle",
         "ingest-resource": "route to ingest-resource when operator drops a brief reference doc to digest · that's input ingestion, not output generation",
-        "mine-voc": "route to mine-voc when audience is thin (no verbatims encoded yet) · copy-brief needs verbatim density to anchor hooks credibly"
+        "mine-voc": "route to mine-voc when audience is thin (no verbatims encoded yet) · copy-brief needs verbatim density to anchor hooks credibly",
+        "weave-hooks": "weave-hooks produit le paquet structuré machine-lisible du batch (genome-package) · produce-copy-brief produit un brief humain narratif sur UN angle"
       },
       "isolation_scope": "brand_only",
       "layer": "production",
@@ -1441,7 +1503,7 @@
       "type": "orchestrator",
       "model": "sonnet",
       "subagent_safe": false,
-      "mode": "direct",
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "matrice paid pour {brand}",
@@ -1498,7 +1560,7 @@
       "type": "orchestrator",
       "model": "sonnet",
       "subagent_safe": false,
-      "mode": "direct",
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "pose le focus Q{n} de {brand}",
@@ -1532,8 +1594,8 @@
       "name": "profile-audience",
       "type": "orchestrator",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "profil audience",
@@ -1626,7 +1688,9 @@
           "creative quality gate"
         ]
       },
-      "disambiguates_against": {},
+      "disambiguates_against": {
+        "evaluate-concept": "evaluate-concept juge la solidité STRATÉGIQUE d'un concept AVANT production · qc-creative juge le RENDU visuel d'un binaire APRÈS production."
+      },
       "isolation_scope": "brand_only",
       "layer": "meta",
       "path": ".skills/skills/qc-creative/SKILL.md"
@@ -1696,7 +1760,8 @@
       "disambiguates_against": {
         "compose-creative": "compose-creative crée ex nihilo depuis brand intelligence + angle. recompose-creative ADAPTE un creative existant (1 dimension change, concept core préservé).",
         "decompose-ad": "decompose-ad analyse une ad EXTERNE (reverse-engineering benchmark concurrent). recompose-creative adapte une créa INTERNE (mode internal_production, source CRT-NN déjà persisté sous creatives/{batch}/{CRT-NN}/).",
-        "produce-paid-angles": "produce-paid-angles produit un nouveau ANGLE (forward generation depuis brand intelligence). recompose-creative garde l'angle, change autre dimension (audience/platform/format/hook/visual)."
+        "produce-paid-angles": "produce-paid-angles produit un nouveau ANGLE (forward generation depuis brand intelligence). recompose-creative garde l'angle, change autre dimension (audience/platform/format/hook/visual).",
+        "weave-hooks": "weave-hooks incarne des concepts NEUFS en scripts (amont) · recompose-creative décline une créa EXISTANTE en variantes (aval)"
       },
       "isolation_scope": "brand_only",
       "layer": "production",
@@ -1944,8 +2009,8 @@
       "name": "score-matrix",
       "type": "producer",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "score la matrice",
@@ -2357,11 +2422,40 @@
       "path": ".skills/skills/watch-competitors/SKILL.md"
     },
     {
+      "name": "weave-hooks",
+      "type": "producer",
+      "model": "opus",
+      "subagent_safe": false,
+      "mode": "direct",
+      "triggers": {
+        "fr": [
+          "tisse les hooks",
+          "prépare le paquet de prod",
+          "génome du batch",
+          "sérialise les scripts",
+          "des concepts aux scripts"
+        ],
+        "en": [
+          "weave hooks",
+          "build the genome package",
+          "concepts to scripts"
+        ]
+      },
+      "disambiguates_against": {
+        "compose-creative": "compose-creative PRODUIT le binaire d'un CRT depuis un brief/angle (génération + gate qc-creative) · weave-hooks prépare le PAQUET multi-scripts du batch, en AMONT de compose · si l'opérateur veut une créa rendue maintenant sur un angle précis, route compose-creative · s'il veut transformer les concepts approuvés du batch en scripts machine-lisibles, c'est ici",
+        "produce-copy-brief": "produce-copy-brief sort un brief HUMAIN narratif sur UN angle choisi (doc structuré pour copywriter) · weave-hooks sort un paquet STRUCTURÉ machine-lisible multi-scripts (contrat A→B validé jsonschema) · brief lisible par un humain vs paquet routable par B",
+        "recompose-creative": "recompose-creative DÉCLINE une créa EXISTANTE en variantes (swap hook, swap style, post-prod) · weave-hooks incarne des concepts NEUFS qui n'ont encore aucun script · si la créa existe déjà et qu'on veut des variantes, route recompose"
+      },
+      "isolation_scope": "brand_only",
+      "layer": "production",
+      "path": ".skills/skills/weave-hooks/SKILL.md"
+    },
+    {
       "name": "weight-dimensions",
       "type": "producer",
       "model": "sonnet",
-      "subagent_safe": false,
-      "mode": "direct",
+      "subagent_safe": true,
+      "mode": "proposed",
       "triggers": {
         "fr": [
           "pondère les dimensions",

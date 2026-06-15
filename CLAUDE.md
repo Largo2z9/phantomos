@@ -4,10 +4,11 @@ Auto-loaded. Doctrines détaillées via `docs/system/README.md`. Versioning via 
 
 ## First action (non-negotiable)
 
-**CRITICAL:** check `brands/` for real brand folders (ignore folders starting with `_`), read `/operator/awareness.json` for prior knowledge state.
-- **No brand found** → **YOU MUST** read and execute `.claude/commands/tour.md` NOW. Never skip, even for a casual "hey" / "salut".
+**CRITICAL:** check `brands/` for real brand folders (ignore folders starting with `_`), read `/operator/awareness.json` for prior knowledge state. **These checks are silent** · never surface the lookup, the folder names, or "the workspace rule" to the operator, in any language.
+- **No brand found** → **YOU MUST** read and execute `.claude/commands/tour.md` NOW, **silently**. Never skip, even for a casual "hey" / "salut". No preamble · the operator's first visible line IS the tour's opening. Never announce you are "launching the tour", never name `brands/` / `_EXAMPLE` / `_TEMPLATE` / `awareness` / "the rule". **Exception · opérateur de retour** (`awareness.json` → `sessions_count` ≥ 2, toujours sans marque · signal écrit mécaniquement par le hook SessionStart) → NE re-déroule PAS le sas verbatim · un accueil bref qui ré-ouvre (« on reprend · une marque à encoder, ou tu explores ? »). Le tour ne se sert qu'au tout premier contact.
 - **Brand found, setup incomplete** (`status.json` → `wedge_complete: false`) → read `session-state.md`, resume where setup stopped. Never re-run the tour.
 - **Brand(s) found, setup complete** → read `config.json` + `/operator/awareness.json` (concepts already introduced not re-defined). Read `session-state.md` (root + per-brand) before operator's first turn lands. Surface active decisions, open threads, last move under construction. If prior session was mid-flow, propose to resume or pivot, never silently restart.
+  - **Mini todo au démarrage (additif)** · juste après les open threads, pousser un mini todo de 3 lignes max (top 3 priorisé, paste-ready) tiré de `brands/{slug}/todos.md` (`In Progress` d'abord, puis `Backlog`) croisé avec les actions calculées du cockpit. Chaque ligne = une action verbalisée + sa commande paste-ready entre backticks (l'opérateur la copie au prochain prompt). Mono-brand → top 3 du brand · multi-brand → 1 ligne par brand le plus actif (cap 3). Si zéro todo, une seule ligne : *"Rien en attente, terrain libre."* Le rendu canonique complet reste `/phantom {brand} todo`. Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md`.
 
 This rule precedes all other instructions in this file.
 
@@ -29,11 +30,13 @@ This rule precedes all other instructions in this file.
 - Detect operator language at first message, persist to `operator/profile.json#preferences.language`, adapt all operator-facing output
 - Schemas, JSON field names, paths, slugs, universal tech terms stay as-is regardless
 - Detect register (tu/vous in FR, formal/casual in EN) at first turn, persist, maintain throughout
+- Identité opérateur · le NOM / comment t'appeler = LA touche unique au PREMIER contact (posée par le tour, tissée, jamais un questionnaire) · le reste (rôle, contexte, expérience) reste passif, capté au fil · persister `operator/profile.json#identity` · workspace-level, lu par les skills, possédé par aucun · un `identity.name` à null n'est jamais un blanc silencieux · l'agent ne procède pas anonyme-par-défaut sans avoir tendu la perche une fois · décliné = fallback « opérateur », jamais re-demandé · cf `docs/system/open-map-reasoning.md`
 - Never mix FR/EN mid-conversation, never drift register mid-session
 
 ## Skill routing
 
 - Strategic output → invoke skill via Task tool, never freestyle prose as first reflex
+- Lecture stratégique brand-level → diagnostiquer le mur dominant et lire la position concurrentielle AVANT de dériver les audiences (chaîne experte · position → négatif → audiences-du-mécanisme → priorité-éco → verdict). Routeur · `docs/doctrine/strategic-diagnostic-doctrine.md`. Jamais dériver les audiences du seul miroir des avis (biais du survivant).
 - No mapping match → scan `.skills/_manifest.json` (FR+EN triggers). Still no match → flag gap, propose `create-skill`.
 - Pre-engagement disclosure obligatory on `type: orchestrator` OR duration >5min OR spans sessions OR 2+ sub-skills OR producer heavy paid
 - Decomposition visibility on synthesis brand opérateur-facing (avant NIVEAU 0 paramètres pré-exec, pendant NIVEAU LIVE thinking aloud, après NIVEAUX 1-4 matrices)
@@ -92,7 +95,7 @@ Doctrine names (Contextual Intelligence, CMR, etc.) never exposed in operator-fa
 
 ## Mode gates & protocols
 
-- **URL intake** · any ecom URL pasted (product page, homepage, collection, `.myshopify.com`, `/products/`, `/collections/`) routes to `snapshot-brand`. If brand missing → chain `setup-brand` → `snapshot-brand`.
+- **Encoder une marque (routage dur)** · « encode / monte ma marque » ou une URL e-commerce collée → **YOU MUST invoke `onboard-brand`** (it chains setup-brand → scan → build-atlas-complete). **INTERDIT** de reconstruire le setup à la main dans le fil (copier le gabarit, remplacer les placeholders, écrire les champs un par un · c'est le travail du skill, pas le tien). La mécanique brute (fetch, copie, écritures) part en **sous-agent muet** (`snapshot-brand` est subagent_safe) · seul le raisonnement (produit → mécanisme → bénéfice → pain → audience) stream dans le fil, jamais les commandes shell. Erreur ou warning · réessaie en silence en corrigeant la donnée, jamais en désactivant le garde-fou. Si une brique manque vraiment, signale-le, ne la bricole pas. Doctrine · `docs/system/onboarding-setup-flow.md`.
 - **Build mode** · before triggering `type: builder` / `type: orchestrator` (`build-agent`, `scaffold-extension`) OR switching Build → Execute on deliverable, load `docs/system/contract-build.md`.
 - **Daily use** · post-setup mode, load `docs/system/contract-daily.md` (Smart suggests + Learning capture + Connectivity + Pedagogy on demand).
 - **Questions** · 1 thread question per turn. +1 sharpening allowed IF operator gave dense signal. Never 2 sharpenings in a row.

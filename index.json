@@ -1,16 +1,16 @@
 {
   "$schema": "index.schema.json",
   "version": "1.0.0",
-  "last_updated": "2026-06-10T07:06:34+00:00",
+  "last_updated": "2026-06-15T12:33:50+00:00",
   "stats": {
-    "total_resources": 22,
+    "total_resources": 23,
     "by_type": {
       "catalogue": 0,
       "routing": 1,
       "framework": 5,
       "sop": 3,
       "quality-spec": 1,
-      "convention": 8,
+      "convention": 9,
       "template": 4
     }
   },
@@ -126,7 +126,7 @@
       "domain": "creative",
       "title": "SOP · Curation cross-brand (corpus → bibliothèques partagées)",
       "created": "2026-06-07",
-      "updated": "2026-06-07",
+      "updated": "2026-06-11",
       "tags": [
         "brand",
         "cross",
@@ -140,16 +140,16 @@
       "type": "sop",
       "path": "resources/sops/creative-production/perf-feedback-loop.md",
       "domain": "creative",
-      "title": "Perf feedback loop — l'analyse fine (CHANTIER, TBD)",
+      "title": "Perf feedback loop · la boucle minimale (CLASSER → TRACER → SIGNALER → RECALIBRER)",
       "created": "2026-06-07",
-      "updated": "2026-06-07",
+      "updated": "2026-06-11",
       "tags": [
         "feedback",
         "loop",
         "perf",
         "sop"
       ],
-      "step_count": null
+      "step_count": 5
     },
     {
       "id": "hook-quality-spec",
@@ -259,6 +259,19 @@
         "ads",
         "convention",
         "tiktok"
+      ]
+    },
+    {
+      "id": "todos",
+      "type": "convention",
+      "path": "resources/conventions/todos.json",
+      "domain": "general",
+      "title": "todos",
+      "created": "2026-06-15",
+      "updated": "2026-06-15",
+      "tags": [
+        "convention",
+        "todos"
       ]
     },
     {

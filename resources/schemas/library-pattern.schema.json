@@ -131,7 +131,7 @@
     "related_mechanic_ids": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "Le PONT vers le génome · les enums decomposition.schema (hook.mechanic_id, beat_type, proof_type) que ce pattern instancie. Ex ['resolution-promise', 'resolution-timeline', 'timeline-specific-result']."
+      "description": "Le PONT vers le génome · ids joignables des deux espaces · hook-level (enum 25 decomposition.schema : hook.mechanic_id, beat_type, proof_type) ET ad-level (mecanique_id free-string du creative-mechanics-registry). Ex ['resolution-promise', 'resolution-timeline', 'timeline-specific-result']."
     },
     "transfer_examples": {
       "type": "array",

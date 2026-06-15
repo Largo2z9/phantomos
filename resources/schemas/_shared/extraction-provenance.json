@@ -23,6 +23,16 @@
       "default": 90,
       "description": "Fraîcheur (politique d'échec/fraîcheur D11). Précédents canon : canon-tool.validations[].decay_ttl_days (90) et skill-prerequisites.freshness_ttl_days. Overrides indicatifs en _meta."
     },
+    "reliability_tier": {
+      "type": "string",
+      "enum": ["revealed", "behavioral-soft", "verbatim", "structural", "declared"],
+      "description": "C1.1 additif · maillon-0 de la chaîne de confiance par NATURE de source (scrapé ≠ fait). Plafond INDICATIF de la confiance d'entrée (le min de la chaîne fait le reste, garanti côté skill, jamais une contrainte schéma) : revealed (donnée du compte/back-end, comportement observé) ≤0.8 · behavioral-soft (volume de recherche, spend concurrent inféré) ≤0.5 · verbatim (VoC/VoM cité) ≤0.5 · structural (raisonnement mécanisme→job) = hypothèse, démarre non-prouvé · declared (claim marque non vérifiable) ≤0.3. Orthogonal à extraction_confidence (fiabilité du PROCÉDÉ) : un procédé fiable sur une source déclarative reste plafonné par sa nature. Un nombre sans procédé de mesure ('60k clients') n'entre jamais comme nombre nu."
+    },
+    "velocity_tier": {
+      "type": "string",
+      "enum": ["static", "slow", "drift", "weekly", "live"],
+      "description": "C1.1 additif · classe de volatilité de la brique, pilote la décroissance de fraîcheur (cf _meta.velocity_tiers). static = claim/mécanisme (demi-vie longue) · slow = VoC/profil · drift = sophistication marché · weekly = pubs concurrentes · live = perf compte. Fraîcheur = curseur exp(-Δt/demi-vie), pas un booléen. Refresh = max(décroissance, déclencheur d'état), jamais calendaire-ou-jamais."
+    },
     "lever": {
       "type": ["string", "null"],
       "description": "Levier nommé pour lever l'absence (skill, source, action). Jamais inventer la donnée."
@@ -31,7 +41,15 @@
   "if": { "properties": { "extraction_method": { "const": "absent" } }, "required": ["extraction_method"] },
   "then": { "required": ["lever"] },
   "_meta": {
-    "orthogonality": "_field_types = épistémique · _extraction = mécanique · validation-state / confidence_chain = confiance d'inférence",
-    "ttl_hints": { "offers/pricing": 30, "spec": 90, "voc": 180, "brand": 90 }
+    "orthogonality": "_field_types = épistémique · _extraction = mécanique (procédé + fraîcheur + nature de source) · validation-state / confidence_chain = confiance d'inférence",
+    "ttl_hints": { "offers/pricing": 30, "spec": 90, "voc": 180, "brand": 90 },
+    "velocity_tiers": {
+      "_doc": "C1.1 · modèle de décroissance par velocity_tier. half_life_days = la demi-vie de la courbe exp(-Δt/half_life). reliability(Δt) = reliability_tier_ceiling × exp(-Δt/half_life). La longévité d'une pub adverse NOURRIT sa fraîcheur (une ad à 8 mois = strong, récente = weak) · ne pas confondre ancienneté de la BRIQUE et durabilité du SIGNAL.",
+      "static": { "half_life_days": 270, "ttl_days": 365 },
+      "slow": { "half_life_days": 120, "ttl_days": 180 },
+      "drift": { "half_life_days": 60, "ttl_days": 90 },
+      "weekly": { "half_life_days": 14, "ttl_days": 21 },
+      "live": { "half_life_days": 2, "ttl_days": 3 }
+    }
   }
 }

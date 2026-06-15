@@ -1,6 +1,6 @@
 ---
 name: score-matrix
-version: 1.2.1
+version: 1.2.2
 type: producer
 isolation_scope: brand_only
 layer: territoire
@@ -15,7 +15,10 @@ extension_hooks:
 disambiguates_against:
   - weight-dimensions: "weight-dimensions calcule pondérations dimensions audience → angle (input). score-matrix CONSOMME ces weights pour scoring final matrice."
   - produce-paid-angles: "produce-paid-angles produit des angles individuels. score-matrix priorise les COMBINAISONS audience × angle."
+  - frame-regime: "frame-regime cadre un engagement de production (régime + format) AVANT génération · score-matrix priorise des territoires d'angles existants."
+  - evaluate-concept: "evaluate-concept rend un verdict binaire par concept candidat · score-matrix score une matrice de territoires."
 patch_notes:
+  v1.2.2: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW HR7bis · l'action recommandée du close (HR7 · ligne `→ Action recommandée`) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`, tichée auto (`[x]`) quand le skill aval nommé tourne (produce-copy-brief sur le top territoire validé · produce-paid-angles sur un trou détecté). La matrice ASCII (HR7) + la ligne action in-line restent inchangées · l'action ne meurt plus dans le chat, elle a un réceptacle persistant. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · HR0-HR8 + Step 0 DRGFP + formule canon + matrice + close préservés."
   v1.2.1: "v2.81.1 decomposition visibility NIVEAU LIVE · NEW section `Niveau LIVE · raisonnement thinking aloud pendant exécution` insérée AVANT Step 0 DRGFP Manifest Registry Scan (au début Hard Rules). Action LOURDE classification (matrice Sub-cluster × Source d'angle · formule canon Impact × 3 + Vitesse × 2 + Signal × 1 · modulateurs brand × stage business × compatibility rules · top 3-5 territoires output). NIVEAU LIVE narratif étendu obligatoire pendant exécution · 2 niveaux abstraction obligatoires (macro contexte priorisation portfolio brand + micro top-3 territoires phrasé pourquoi en prose narrative sobre). Pose pair senior strategic director thinking aloud · audit temps réel par l'opérateur entre cellules scorées + pédagogie posture experte indissociables. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 (NIVEAU LIVE obligatoire actions lourdes) + AP-DVD-11 (opacité pendant action lourde = bug invalid). Backward compat strict additif · cycle runtime préservé (Step 0 DRGFP + formule canon + matrice scoring + top territoires + close preserved)."
 description: >
   v1.2.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section Niveau LIVE thinking aloud obligatoire pendant exécution (au début Hard Rules avant Step 0 DRGFP). Action LOURDE · narratif étendu 2 niveaux abstraction (macro contexte priorisation portfolio brand + micro top-3 territoires phrasé pourquoi en prose). Pose pair senior strategic director · audit temps réel + pédagogie indissociables. Cross-ref `decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 + AP-DVD-11. Backward compat strict additif (cycle runtime préservé).
@@ -38,7 +41,7 @@ permissions:
   emits_events: [matrix_scored, territories_prioritized]
 pipeline:
   preconditions: ["audiences populées avec dimension_weights", "angles compatibles disponibles", "brand modulateurs disponibles ou défauts"]
-  postconditions: ["matrice scorée Sub-cluster × Source d'angle", "top 3-5 territoires identifiés", "trous identifiés pour exploration"]
+  postconditions: ["matrice scorée Sub-cluster × Source d'angle", "top 3-5 territoires identifiés", "trous identifiés pour exploration", "action recommandée du close persistée en ligne In Progress idempotente dans brands/{slug}/todos.md (format canonique, tichée auto quand le skill aval tourne)"]
 prerequisites:
   - field: audiences/*/dimension_weights.json
     level: L1
@@ -258,6 +261,39 @@ TROUS DÉTECTÉS (compatibles mais aucun angle)
 ```
 
 Marquer 🔥 sur top 1 par ligne. `0` sur cellules vierges. Aucun em-dash dans tout le rendu (substituer par `·`, virgule, deux-points).
+
+### HR7bis · Persist l'action recommandée (v1.2.2, additif strict)
+
+La ligne `→ Action recommandée` du rendu HR7 propose un prochain mouvement (tester le top 1 via produce-copy-brief · explorer un trou via produce-paid-angles). Elle vit dans la matrice rendue à l'écran. Mais une action qui ne vit que dans le chat meurt au prochain tour. Ce step lui donne une **trace persistante** · une ligne dans la todo de la brand, sans rien retirer de la matrice ASCII ni de la ligne action, qui restent tels quels.
+
+Pattern déjà prouvé par `register-and-flag` Step 6 (write idempotent d'une ligne de tracking dans `brands/{slug}/todos.md`).
+
+**Geste** · après le rendu HR7 (et le persist HR6 du matrix-{date}.json), écrire une ligne unique dans `brands/{slug}/todos.md → ## In Progress` au **format de ligne canonique** ·
+
+```
+- [ ] {Name} | P: {0-3} | E: {low|med|high} | T: {durée}
+```
+
+- `Name` · l'action recommandée verbalisée court depuis le top territoire ou le trou prioritaire (ex `produce-copy-brief sur le top territoire {sub_cluster} × {source}`, `produce-paid-angles sur le trou {sub_cluster} × {source}`). Operator-language + nom de skill aval recevable dans la ligne (réceptacle backstage).
+- `P` · priorité dérivée du scoring · action sur le top 1 territoire (score_dynamique le plus haut) → `P: 1` · exploration d'un trou secondaire → `P: 2`.
+- `E` · effort du skill aval (low pour un brief ciblé, med pour une matrice d'angles sur un trou).
+- `T` · ETA verbalisé du skill aval (ex `15 min`, `quelques heures`), aligné `feedback_client_effort_scale` si client-facing.
+
+**Un seul next-step persisté par run** · le prioritaire (le top 1 territoire, ou le trou le plus structurant si l'action recommandée pointe vers l'exploration). Les autres territoires et trous restent listés dans HR5/HR7, non dupliqués en todo (anti-bruit · la todo porte le mouvement, pas l'inventaire complet).
+
+**Idempotence (dure, comme register-and-flag).** Avant d'écrire, scanner `## In Progress` · si une ligne porte déjà le même `Name` (même skill aval + même territoire/trou cible), ne pas dupliquer. Re-scoring de la même brand qui ressort le même top = zéro nouvelle ligne. Le write passe par le mutation gate (cohérent HR8 anti-pattern · jamais éditer le JSON ni le markdown directement) ·
+
+```bash
+python3 .skills/write-to-context.py --path "brands/{slug}/todos.md#in-progress" --value "- [ ] {Name} | P: {n} | E: {level} | T: {eta}" --source agent --mode direct --reason "Persist action recommandée from score-matrix close (idempotent)"
+```
+
+Si `write-to-context.py` ne route pas le markdown todos, fallback `register-and-flag` (sous-skill curator) · même réceptacle, même idempotence. Ne JAMAIS hand-editer le markdown todos hors gate.
+
+**Auto-tick aval.** La ligne est cochée `[x]` automatiquement quand le skill aval nommé tourne et produit son artifact · `produce-copy-brief` (Step 8bis) et `produce-paid-angles` (Step 12ter) lisent `## In Progress` à leur finalize, matchent une ligne dont le `Name` les désigne comme skill aval avec le même territoire/trou cible, et la basculent `[x]` (archivée selon la doctrine todos racine). Pas de tick manuel · le downstream ferme la boucle. Si aucune ligne ne matche, le downstream ne crée rien et continue (silencieux).
+
+**Léger, jamais bloquant.** Échec du write (gate refuse, fichier absent) → flag interne silencieux, ne casse pas le ship de la matrice. La trace todo est un bonus de persistance, pas une précondition.
+
+**Doctrine.** Report des étapes différées et matérialisation des next-steps comme tâches reprenables avec leur levier · `docs/system/onboarding-setup-flow.md` (sections « Exhaustivité offerte, jamais forcée, reportable » et « La persistance est native »). Référencée ici, pas redupliquée.
 
 ### HR8 · Anti-patterns
 

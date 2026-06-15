@@ -35,6 +35,32 @@ Chaque pattern porte ses **verticales d'origine** + une **largeur** (`mono-verti
 
 Un pattern `universal` (vu cross-vertical ET cross-géo, ex le timeline-ladder) est le plus sûr à emprunter partout. Un pattern `mono-vertical` (ex le Rx-as-differentiator du telehealth) ne se reslotte qu'en mode explore assumé.
 
+## Fonction de distance d'emprunt (canon v2.90.0)
+
+LA définition unique de la distance d'emprunt. C'est désormais LA source citée par `produce-paid-angles`, `evaluate-concept` et `weave-hooks` : ces consommateurs la citent, jamais ne la redéfinissent.
+
+**Formule** ·
+
+```
+distance(item, marque) =
+  0  si verticale de la marque ∈ item.vertical_scope.origins
+     OU (item.vertical_scope.breadth == "universal" ET item.promote_status == "promote-ready")
+  1  si une origin de item.vertical_scope.origins est une verticale VOISINE de la marque
+  2  sinon
+```
+
+Le terme `cross_vertical_proven` n'existe dans aucun schéma : sa traduction canonique est la combinaison `breadth == "universal"` + `promote_status == "promote-ready"` (deuxième branche du cas distance 0).
+
+**Rayon autorisé** · `rayon_max` se lit dans `brands/{slug}/creatives/{batch}/frame.json#rayon_max` (persisté par frame-regime, jamais re-dérivé par les consommateurs) :
+
+| regime.mode | rayon_max |
+|---|---|
+| exploit | 0 |
+| balanced | 1 |
+| explore | 2 |
+
+**Règle de surfaçage** · tout emprunt distance > 0 est un pari conscient surfacé à l'opérateur (origine, raison de transfert, risque), même quand le rayon l'autorise largement. Distance hors rayon = rejet sauf override tracé.
+
 ## Le pont vers le génome (`related_mechanic_ids`)
 
 Chaque pattern liste les enums `decomposition.schema` (= `genome.schema`) qu'il instancie (`hook.mechanic_id`, `beat_type`, `proof_type`). C'est ce qui permet aux skills côté A de **générer** un génome qui porte le pattern, et de retrouver un pattern depuis un génome. Pattern ↔ mécanique = many-to-many.

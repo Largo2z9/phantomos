@@ -48,6 +48,12 @@ This is what turns a series of micro-frictions into a learning, a series of cros
 | **Strategic reversal** | A previous session decision is contradicted by current session direction. The contradiction may be intentional (new info) or accidental (forgotten context). | `{type: decision_reversal, prior_decision_id, new_direction, surface_to_operator: bool}` |
 | **Encoded fact drift** | A field encoded in `brand.json` is contradicted by what the operator says in conversation. | `{type: encoded_fact_drift, field_path, encoded_value, operator_value}` |
 
+### Lifecycle / growth signals
+
+| Signal | Trigger | Buffer entry |
+|---|---|---|
+| **Core saturated (Spectre · D#506)** | `import-meta-results` détecte `perf_signal == established` (état courant) ET `brand.meta.stage ≠ launch` ET pas de `spectrum.json` frais (absent ou `refreshed_at` > 90j) ET le signal pas déjà dans le buffer pour cette marque (dédupe) ET, jugement agent, le mur dominant est le MARCHÉ (`strategic-diagnostic-doctrine` · ne pas confondre cœur prouvé et mur ANGLE). Le cœur sature, il est temps de cartographier où aller ensuite. | `{type: core_saturated, brand, suggest: spectre}` |
+
 ---
 
 ## Batch and surface protocol
@@ -60,6 +66,7 @@ This is what turns a series of micro-frictions into a learning, a series of cros
 - **≥3 same-type signals within 7 days across sessions** → escalate to `correct-skill` [backlog, not shipped] candidate. Agent flags to operator briefly (*"j'ai noté que [pattern] revient · tu veux qu'on encode une règle ?"*) and waits for confirm.
 - **1 signal of `decision_reversal` type** → surface immediately (single occurrence is high-cost). Operator decides if intentional or accidental.
 - **1 signal of `encoded_fact_drift` type** → surface immediately with framed options (*"the brand.json says X, you just said Y. Update the brand or keep the conversational version local ?"*).
+- **1 signal of `core_saturated` type** → surface immediately (single high-value · le moment d'ouvrir le Spectre est passager). Proposer la carte via le protocole Background (*"ton cœur sature, je peux cartographier où aller ensuite · on lance ?"*), integrate-or-defer. JAMAIS suggérer si le mur est OFFRE/ANGLE (route le diagnostic).
 
 **Where the buffer lives.** In-session : agent's working memory. Cross-session : appended to `operator/session-state.md § Pattern buffer` as `[YYYY-MM-DD] {type}: {summary}`. `learn-from-session` reads this section at next batch fire and decides which signals graduate.
 

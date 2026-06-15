@@ -8,7 +8,7 @@ recommended_model: haiku
 reasoning_pattern: null
 description: >
   Reads the workspace KB and returns relevant resources for agent consumption.
-  Covers shared resources (Ressources/), single brand context (brands/{slug}/),
+  Covers shared resources (resources/), single brand context (brands/{slug}/),
   and cross-brand queries (all brands).
   Read-only — never modifies files.
   FR: "trouve" "cherche" "donne-moi" "montre-moi" "qu'est-ce qu'on a sur" "quels frameworks" "quel routing pour" "contexte brand" "compare brands" "toutes les brands" "cross-brand".
@@ -198,7 +198,7 @@ Retourner les ressources dans un format exploitable directement par l'agent cons
 ### Pour shared resources :
 ```
 [QUERY RESULT — {type}: {slug}]
-Source: Ressources/{type}/{slug}.json
+Source: resources/{type}/{slug}.json
 Domain: {domain} | Tags: {tags}
 Relevance: {score}/{max_possible}
 

@@ -37,6 +37,7 @@ disambiguates_against:
   compose-creative: "compose-creative crée ex nihilo depuis brand intelligence + angle. recompose-creative ADAPTE un creative existant (1 dimension change, concept core préservé)."
   decompose-ad: "decompose-ad analyse une ad EXTERNE (reverse-engineering benchmark concurrent). recompose-creative adapte une créa INTERNE (mode internal_production, source CRT-NN déjà persisté sous creatives/{batch}/{CRT-NN}/)."
   produce-paid-angles: "produce-paid-angles produit un nouveau ANGLE (forward generation depuis brand intelligence). recompose-creative garde l'angle, change autre dimension (audience/platform/format/hook/visual)."
+  weave-hooks: "weave-hooks incarne des concepts NEUFS en scripts (amont) · recompose-creative décline une créa EXISTANTE en variantes (aval)"
 consumes:
   - path: brands/{slug}/creatives/{batch}/{CRT-NN}/creative.json
     min_version: 1.3.0

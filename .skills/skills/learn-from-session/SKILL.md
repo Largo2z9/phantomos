@@ -360,15 +360,19 @@ Scoped learnings — tied to the brand, platform, or account. Route to `brands/{
 ```json
 {
   "id": "LRN-{counter}",
+  "kind": "{test_result|workaround|compliance|observation|decision_trace|hypothesis_validated|pattern_promoted|regulatory_signal|competitor_move}",
+  "created_at": "{ISO date-time}",
   "date": "YYYY-MM-DD",
   "fact": "{1-line factual WHAT}",
   "reasoning": "{WHY it's true, what caused it, what it reveals — MANDATORY non-empty}",
   "platform": "{meta | shopify | klaviyo | google | none}",
   "tags": ["tag1", "tag2"],
-  "source": "{conversation summary or 'session-{date}'}",
+  "source": "{operator | agent | skill_output | test_capture}",
   "status": "active"
 }
 ```
+
+**`kind` is the canonical classification** (9-enum, consumed by detection daemons). `source` uses the canon enum (operator/agent/skill_output/test_capture). For `category:"system_friction"` runtime-pattern learnings (see Hard Rules), set `kind:"observation"` + `category:"system_friction"`. Always write both `created_at` (date-time) and `date` (short) — validate reads `date` then falls back to `created_at`.
 
 **CRITICAL: `reasoning` is MANDATORY.** This is the **Decision Trace** (see D#308 + docs/system/architecture.md § Canonical vocabulary). `fact` = WHAT happened, `reasoning` = WHY it happened. **YOU MUST NEVER** write `reasoning: ""`, `reasoning: null`, or generic fillers ("n/a", "observed", "noted"). If the operator's session context doesn't yield a clear why, push back during flush recap: *"Le fait #N je l'ai capturé, mais je n'ai pas le pourquoi. Qu'est-ce qui l'a causé ?"*. Degraded mode only if operator explicitly skips: `reasoning: "[captured without rationale — revisit on first application]"`.
 

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "decomposition.schema.json",
-  "title": "Decomposition (reverse analysis of ONE ad — competitor benchmark or internal QC)",
+  "title": "Decomposition (reverse analysis of ONE ad · competitor benchmark or internal QC)",
   "description": "DECOMPOSITION d'UNE ad (reverse). Vit a brands/{slug}/competitive-intel/{batch}/{RCV-NN}/decomposition.json (benchmark concurrent) OU sert le QC interne. Miroir reverse du genome-package (forward). audio+edit optionnels (support-agnostic).",
   "type": "object",
   "version": "1.3.0",
@@ -247,34 +247,7 @@
           "properties": {
             "mechanic_id": {
               "type": "string",
-              "description": "Référence à hook-mechanics-registry (NEW canon) · ~25-40 mécaniques canonisées · à raffiner cross-N",
-              "enum": [
-                "paradox-testimonial",
-                "confrontation-rhetorical",
-                "listicle-curiosity",
-                "false-solution-debunking",
-                "authority-demolition",
-                "mechanism-reveal",
-                "resolution-promise",
-                "social-relational-pain",
-                "hidden-secret-framing",
-                "doctor-dialogue",
-                "taboo-signal",
-                "visceral-specific-testimony",
-                "negative-command",
-                "pov-illustrated-humor",
-                "allegory-romance",
-                "macro-graphic-icons",
-                "before-after-timeline",
-                "pricing-anchor",
-                "testimonial-paradox-numeric",
-                "scientific-claim-reveal",
-                "competitor-comparison-explicit",
-                "category-of-one-claim",
-                "if-then-conditional-hook",
-                "rhetorical-shock-question",
-                "other-uncategorized"
-              ]
+              "description": "id du registre hook-mechanics-registry (resources/registries/hooks/) par id free-string (SSOT, jamais enum-locké, jamais écrire dans le registre depuis un skill). Identité de la string = pont A=B verbal avec le forward (genome.hook.mechanic_id). 'other-uncategorized' si aucune mécanique ne fitte (ne jamais forcer un hook sur un statique). 25 ids canonisés à date, registre vivant extensible cross-N."
             },
             "hook_text_first_15_words": {
               "type": "string"
@@ -544,30 +517,7 @@
             "properties": {
               "style_id": {
                 "type": "string",
-                "enum": [
-                  "real-photo-lifestyle",
-                  "real-photo-testimonial-static",
-                  "real-photo-product-studio",
-                  "real-photo-macro-detail",
-                  "ugc-selfie-talking",
-                  "claymation-3d-ai",
-                  "illustrated-pov-cartoon",
-                  "3d-anatomy-realistic",
-                  "3d-anatomy-stylized",
-                  "3d-anatomy-xray",
-                  "stock-footage-broll",
-                  "pack-shot-brand-template",
-                  "brand-motion-graphic",
-                  "macro-photo-mouth-skin-etc",
-                  "graphic-icons-overlay",
-                  "split-screen-comparison",
-                  "screen-recording-mockup",
-                  "diagram-medical-2d",
-                  "stop-motion-physical",
-                  "ai-generated-realistic-photo",
-                  "ai-generated-stylized",
-                  "other"
-                ]
+                "description": "Le style visuel observe. Free-string adossee au registre registries/styles/ (SSOT semantique, index style-registry.md), MEME doctrine que mecanique_id->creative-mechanics-registry. La valeur DOIT correspondre a une fiche registries/styles/{valeur}.json (validation = la fiche existe, pas valeur-dans-le-menu; warn cote validate-all sur cle hors-registre, jamais hard-fail enum). Pont A=B preserve par l'identite de la string entre decompose (reverse) et genere (forward)."
               },
               "palette_description": {
                 "type": "string",

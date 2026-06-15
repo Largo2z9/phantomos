@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "style-recipe.schema.json",
   "title": "Style Recipe (backing SSOT for genome_tags.primary_style_id)",
-  "description": "Backing du tag style_id (1ere classe SANS backing avant ce schema, jumeau exact de la mecanique pre-registry). Une fiche par valeur de l'enum style_id (22, miroir A=B genome.schema <-> decomposition.schema). Vit a resources/registries/styles/{style_id}.json, indexe par resources/registries/style-registry.md (jumeau de creative-mechanics-registry.md). CONSOMME par compose/recompose/adapt (render_recipe -> prompt + model_params + anti_ai_guardrails) et par qc-creative Axe 4 (da_compat). UNIFIE visuel+video des le depart: bloc model_params.video_params pour les styles temporels. NE definit AUCUN nouveau style_id (l'enum reste SSOT cote genome/decomposition); ce schema lui ADOSSE une recette. v1.0 baseline.",
+  "description": "Backing du tag style_id (1ere classe SANS backing avant ce schema, jumeau exact de la mecanique pre-registry). Une fiche par valeur de l'enum style_id (22, miroir A=B genome.schema <-> decomposition.schema). Vit a resources/registries/styles/{style_id}.json, indexe par resources/registries/style-registry.md (jumeau de creative-mechanics-registry.md). CONSOMME par compose/recompose/adapt (render_recipe -> prompt + model_params + anti_ai_guardrails) et par qc-creative Axe 4 (da_compat). UNIFIE visuel+video des le depart: bloc model_params.video_params pour les styles temporels. Ce schema EST le backing canonique du style_id : la style-library (ces fiches) est la SSOT semantique, l'enum style_id de genome/decomposition/genome-package est un snapshot DERIVE de cet ensemble de fiches (sync via rebuild-index). Ajouter une fiche perf-validee ETEND le vocabulaire (promotion library-pattern 'visual-style'). v1.0 baseline.",
   "_schema_version": "style-recipe/1.0",
   "_changelog": {
     "1.0": "Baseline. Backing du tag primary_style_id. Aligne sur l'enum 22 de genome.schema/decomposition.schema. Champs: family, typology_st, render_recipe (prompt skeleton + slots), model_params (+ video_params), anti_ai_guardrails, da_compat, refs, related_mechanic_ids, promotion. Promotion via library-pattern pattern_type 'visual-style' (>=2 sources independantes)."
@@ -23,31 +23,7 @@
     "_version": { "type": "string", "description": "OPTIONNEL additif. Alias lisible de _schema_version." },
     "style_id": {
       "type": "string",
-      "description": "L'une des 22 valeurs de l'enum SSOT (genome.schema primary_style_id = decomposition.schema style_id). NE PAS en creer de nouvelle.",
-      "enum": [
-        "real-photo-lifestyle",
-        "real-photo-testimonial-static",
-        "real-photo-product-studio",
-        "real-photo-macro-detail",
-        "ugc-selfie-talking",
-        "claymation-3d-ai",
-        "illustrated-pov-cartoon",
-        "3d-anatomy-realistic",
-        "3d-anatomy-stylized",
-        "3d-anatomy-xray",
-        "stock-footage-broll",
-        "pack-shot-brand-template",
-        "brand-motion-graphic",
-        "macro-photo-mouth-skin-etc",
-        "graphic-icons-overlay",
-        "split-screen-comparison",
-        "screen-recording-mockup",
-        "diagram-medical-2d",
-        "stop-motion-physical",
-        "ai-generated-realistic-photo",
-        "ai-generated-stylized",
-        "other"
-      ]
+      "description": "Cle de style = identifiant de CETTE fiche, qui DOIT etre le nom de fichier registries/styles/{style_id}.json. Free-string (enum RELACHE, vague 1): la style-library est la SSOT semantique, MEME doctrine que creative-mechanics-registry pour mecanique_id. Plus de snapshot enum derive: ajouter une fiche perf-validee (>=2 sources independantes, library-pattern pattern_type 'visual-style') suffit a ETENDRE le vocabulaire. Validation cote instances = la fiche existe (warn validate-all sur cle hors-registre, comme mechanism_other_saturation), pas un menu ferme."
     },
     "display_name": { "type": "string", "description": "Nom humain court (ex 'Photo lifestyle reelle')." },
     "family": {

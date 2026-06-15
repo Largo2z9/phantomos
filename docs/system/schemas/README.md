@@ -14,11 +14,13 @@ Chaque schema sous `resources/schemas/*.schema.json` a une doc dédiée ici qui 
 
 | Entité | Schema | Doc | Statut |
 |---|---|---|---|
-| brand | brand.schema.json | [brand.md](brand.md) | brand/2.4 (+ `brand_da` v2.89) |
-| spec (produit) | spec.schema.json | [spec.md](spec.md) | v1.11 |
-| profile (audience) | profile.schema.json | [profile.md](profile.md) | active |
-| offer | offer.schema.json | [offer.md](offer.md) | v2.0 DRAFT |
-| angle | angle.schema.json | [angle.md](angle.md) | angle/1.3 |
+| brand | brand.schema.json | [brand.md](brand.md) | brand/2.6 (+ `brand_da` v2.89 · `meta.stage` rôle Spectre) |
+| spec (produit) | spec.schema.json | [spec.md](spec.md) | spec/1.13 (+ `use_cases[]` 1ère classe Spectre) |
+| profile (audience) | profile.schema.json | [profile.md](profile.md) | profile/2.3 |
+| offer | offer.schema.json | [offer.md](offer.md) | offer/2.3 |
+| angle | angle.schema.json | [angle.md](angle.md) | angle/1.4 |
+| spectrum (carte terrain) | spectrum.schema.json | TODO | spectrum/1.0 · NEW Spectre (D#502) · singleton `brands/{slug}/spectrum.json` |
+| voc-verbatim (record Layer A) | voc-verbatim.schema.json | TODO | voc-verbatim/1.1 (+ `relation`/`moment` D#503) |
 | sop | sop.schema.json | TODO P2 | docs à venir |
 | canon-tool | canon-tool.schema.json | TODO P2 | docs à venir |
 | connected-sources | connected-sources.schema.json | TODO P2 | docs à venir |
@@ -38,11 +40,14 @@ Chaque schema sous `resources/schemas/*.schema.json` a une doc dédiée ici qui 
 ## Graphe de dépendances
 
 ```
-brand
+brand (meta.stage → curseur explore/exploit du Spectre)
   ├── spec (produit)
-  │   └── offer (offre par produit)
-  ├── profile (audience)
-  │   └── compatible avec → angle
+  │   ├── offer (offre par produit)
+  │   └── use_cases[] (jobs · Mc → U → A) ──┐
+  ├── profile (audience) ───────────────────┤
+  │   └── compatible avec → angle           │
+  ├── spectrum (carte terrain) ◄────────────┘ cellules use_case × audience × source
+  │       (couverture nous × eux · évidence typée · cœur de cible)
   └── angle (couche stratégique)
       ├── lineage → resources/canon/copy/{layer}/{tool}.json
       └── compatible avec → creative

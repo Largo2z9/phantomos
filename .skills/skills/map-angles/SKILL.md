@@ -1,7 +1,7 @@
 ---
 name: map-angles
 type: producer
-version: 1.0.2
+version: 1.1.0
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -12,6 +12,7 @@ patch_notes:
   - "1.0.0 (S55 · v2.58 · D#386 canon) · NEW atomique cartography. Extraction OR refonte produce-paid-angles · scaffold portfolio angles brand-wide (light pass formula + lineage canon) sans deep production matrix scoring. Invocable séparément pour refresh cartographie angles sans relancer le full pipeline produce-paid-angles. Cross-product audience × axis origin cartographié, scaffold N angles light pass avec lineage canon obligatoire. Cross-ref D#386."
   - "1.0.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (angle-anatomy, breakthrough-advertising-5-stages, audiences-cartography). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts."
   - "1.0.2 (v2.80 Sprint A · audit canon brand strategist) · archetype_canon_id enum 6 → 12 valeurs Mark+Pearson canon complet. Ship 6 NEW archetypes (innocent, explorer, magician, jester, ruler, creator) qui rejoignent les 6 existing (caregiver, sage, rebelle, amante, heros, homme-ordinaire). Refus mapping client réels résolu · cartographie peut maintenant attribuer le bon archetype quelle que soit la catégorie (luxe ruler, outdoor explorer, FMCG fun jester, tech magician, artisanat creator, mass-market innocent)."
+  - "1.1.0 (Spectre C5 · D#502/D#503) · NEW mode spectre (flag d'invocation, défaut absent = portfolio v1.0.2 strictement inchangé, rétrocompat stricte). Croisement 3 axes use_case × audience × origin_axis (vs 2 axes en portfolio). Les cellules faibles deviennent des ZONES BLANCHES flaggées (coverage_self blank + lever nommé + blank_qualification unqualified) au lieu de skip+log. Évidence TYPÉE par cellule (behavioral/voc/vom/structural/cultural + force + _source, D#503) + saturation (seed map-mechanisms). Cap 8-15 relâché SOUS FLAG mode spectre uniquement. Écrit le singleton brands/{slug}/spectrum.json (spectrum.schema v1.0, brownfield-merge par cell_id, jamais écraser une cellule validated), PAS N angles ANG-NN. Rend la carte (Observé/Déduit/Inconnu/Leviers/Close + cœur de cible), pas le top-3 angles. Précondition : spec.use_cases[] non vide (map-audiences mode spectre d'abord). Backward compat strict additif."
 archetype_canon_id_enum:
   - innocent
   - sage
@@ -41,13 +42,17 @@ consumes:
   - brands/{slug}/products/*/spec.json (mechanism + benefits pour formula.bridge)
   - brands/{slug}/brand.json (origin_axis brand-derived · tone of voice · positioning)
   - brands/{slug}/angles/*.json (existing angles brand pour merge/duplicate avoid)
+  - brands/{slug}/products/*/spec.json#/use_cases[] (mode spectre · UC-NN, axe externe du croisement 3D)
+  - brands/{slug}/brand.json#/meta/stage (mode spectre · stage_at_build du spectrum)
+  - brands/{slug}/spectrum.json (mode spectre · brownfield merge, ne pas écraser cellules validated)
+  - resources/schemas/spectrum.schema.json (mode spectre · contrat de la carte)
   - resources/schemas/angle.schema.json (target v1.2)
   - resources/canon/copy/hooks/* (hook_canon_id lineage obligatoire)
   - resources/canon/copy/angles/* (angle_canon_id lineage obligatoire)
   - resources/canon/copy/frameworks/* (framework_canon_id lineage obligatoire)
   - resources/canon/copy/archetypes-voix/* (archetype_canon_id lineage obligatoire)
   - resources/canon/copy/niveaux-schwartz/* (awareness_stage canon Schwartz)
-  - resources/canon/copy/_shared/awareness-stage.json (5 stages canon $ref shared)
+  - resources/schemas/_shared/awareness-stage.json (5 stages canon $ref shared)
   - docs/system/compositional-cartography.md (canon doctrine formula 4 components)
   - docs/system/canonical-matrix-reasoning.md (canon CMR · canon × audience cross-product)
   - path: docs/doctrine/angle-anatomy-doctrine.md
@@ -55,9 +60,10 @@ consumes:
   - path: docs/doctrine/audiences-cartography-doctrine.md
 produces_proposals_for:
   - brands/{slug}/angles/{ANG-NN}.json (light pass scaffold · formula text + lineage canon + meta hypothesis)
+  - brands/{slug}/spectrum.json (mode spectre · la carte · cells use_case × audience × origin_axis)
 permissions:
   reads: [brands/, resources/, docs/]
-  writes: [brands/{slug}/angles/{ANG-NN}.json via write_to_context]
+  writes: [brands/{slug}/angles/{ANG-NN}.json via write_to_context, brands/{slug}/spectrum.json via write_to_context (mode spectre)]
   emits_events: [angle_cartography_proposal_created, angle_cartography_validated]
 pipeline:
   preconditions:
@@ -158,6 +164,64 @@ Load chaque `audiences/*/profile.json` cartographiée brand. Extract :
 - `psychology.jtbd.emotional_driver` (si encodé · informe archetype_canon_id mapping)
 
 Si audience `validation_status: hypothesis` (light pass map-audiences sans mining) → propagation confidence `TRÈS faible` ou `faible` sur angles dérivés. Confidence chain hérité doctrine `confidence-propagation.md`.
+
+### Détection du mode (portfolio vs spectre)
+
+map-angles a deux modes. **Mode portfolio** (défaut, comportement v1.0.2 strictement inchangé) · scaffold N angles ANG-NN depuis le cross-product audience × origin_axis. **Mode spectre** · s'active si invoqué avec le flag mode spectre (par `build-atlas-complete` palier spectre, par `/phantom {brand} spectre`, ou demande opérateur « cartographie le terrain / le spectre »). En mode spectre, le skill ne scaffold PAS d'angles · il croise en 3D, écrit la carte `spectrum.json`, et rend la carte. **Précondition mode spectre** · `spec.use_cases[]` non vide → sinon refuse + reco `map-audiences` mode spectre d'abord (le pont Mc→U doit avoir tourné).
+
+### Mode spectre · la carte du terrain (overlay de Step 2 et 3)
+
+(s'exécute uniquement en mode spectre · remplace le scaffold d'angles par l'écriture de la carte)
+
+**Croisement 3D.** Le cross-product de Step 2 passe de 2 axes (audience × origin_axis) à 3 axes · `use_case × audience × origin_axis`. `use_case` (UC-NN de `spec.use_cases[]`) est l'axe externe, on itère par usage. Le mode portfolio garde son 2-axes intact.
+
+**Cellules faibles → zones blanches (pas skip).** Là où le portfolio fait skip+log d'une cellule faible, le mode spectre ÉMET la cellule en `coverage_self: blank` + `lever` nommé + `blank_qualification: unqualified`. Une zone vide n'est pas jetée, elle est cartographiée comme terrain libre à qualifier (D#502). Le skip+log reste pour le portfolio.
+
+**Évidence typée + saturation par cellule.** Chaque cellule porte `evidence[]` typée (behavioral/voc/vom/structural/cultural + force + `_source`, D#503 · le verbatim n'a pas le monopole) et `saturation` (seed depuis map-mechanisms market_sophistication).
+
+**Écriture · le singleton `spectrum.json` (PAS N angles).** Le mode spectre écrit `brands/{slug}/spectrum.json` (spectrum.schema v1.0), pas N fichiers ANG-NN.
+
+Champs par cellule (clés EXACTES, `use_case_ref` lit `spec.use_cases[].use_case_id`) ·
+```json
+{"cell_id":"SPC-NN","use_case_ref":"UC-NN","audience_ref":"{slug ou null si grain usage}","origin_axis":"{enum}","coverage_self":"covered|partial|blank","coverage_market":"unknown","strategic_position":null,"saturation":"{fresh|warming|saturated|unknown ou null}","status":"hypothesis","is_core":false,"blank_qualification":"opportunity|cemetery|desert|unqualified","lever":"{nommé si unknown/blank/hypothesis}","evidence":[{"evidence_type":"behavioral|voc|vom|structural|cultural","force":"strong|moderate|weak","_source":"observed|inferred|declared","ref":"...","note":"..."}]}
+```
+Règles · `coverage_market: "unknown"` en dur (pont watch-competitors différé · NE PAS fabriquer) · `strategic_position: null` tant que coverage_market unknown (règle schema, garantie skill) · `status: "hypothesis"` si pas d'evidence · `lever` obligatoire sur toute cellule unknown/blank/hypothesis (jamais inventer, D#503) · `blank_qualification` posé sur les cellules blank. Top-level · `brand_slug`, `refreshed_at` (timestamp du run, RÉ-estampillé à chaque écriture), `stage_at_build` (← `brand.json#/meta/stage`, null si absent), `regime`, `core_cell_ref` (le `cell_id` du cœur · le snapshot lit ce champ, pas la boucle is_core).
+
+**Écriture mécanique (read → merge → write, JAMAIS un write naïf qui écrase).**
+1. Lire le `spectrum.json` existant s'il existe (`load_json`).
+2. Fusionner par `cell_id` · pour chaque cellule entrante, si une cellule de même `cell_id` existe avec `status: validated` (ou scaled), PRÉSERVER l'existante telle quelle (ne pas la régresser à hypothesis). Sinon, la nouvelle remplace.
+3. Écrire le document fusionné en **`--mode direct`** (un singleton complet, PAS un champ stampable · le whole-file `proposed` est refusé par le writer) · `write_to_context --path "brands/{slug}/spectrum.json" --mode direct --source agent --confidence 0.6`. Ré-estampiller `refreshed_at`.
+
+**Déposer le beat de restitution du spectre (D#520).** Doctrine SSOT · `docs/system/restitution-beat-doctrine.md` (contrat payload, règles décision-d'abord, richesse second-ordre, temporalité, mode, table phase→vue). Une fois `spectrum.json` écrit et fusionné, pendant que ton contexte est frais, écris (`Write` · c'est sous `.phantom/`, hors `brands/`, donc **hors gate mutation** · ne passe PAS par `write-to-context`) le fichier `.phantom/beats/{slug}/spectrum.json` (le payload du beat, PAS le `spectrum.json` métier · noter le chemin `.phantom/beats/`). C'est la matière que `build-atlas-complete` RENDRA à l'opérateur · tu ne compresses pas la carte en une phrase météo, tu déposes la lecture du terrain (anti double-compression · le raisonnement meurt quand on l'écrase ici puis qu'on demande au fil de le re-broder). Le contenu vise le **second ordre** (l'implication, la tension, le négatif concurrentiel · cf doctrine règle 2), pas le constat plat. `phase: "spectrum"`. Forme ·
+
+   ```json
+   {
+     "phase": "spectrum",
+     "verdict": "<la lecture de la carte, une ligne tranchée · où on tient (cœur de cible · cellules covered), où c'est libre face aux concurrents (zones blanches qualifiées opportunity)>",
+     "read":     "<2-3 phrases · le second ordre · QUELLE zone blanche est la plus rentable et POURQUOI (croisement saturation faible × usage à fort pull × audience non servie), et le négatif concurrentiel (le lane que personne ne tient, ce qu'il coûte d'y aller, sa fragilité)>",
+     "analyzed": ["<recoupements use_case × audience × origin_axis · ex « l'usage UC-NN concentre N cellules covered mais l'usage adjacent reste vierge → terrain de croissance, pas le cœur historique »>"],
+     "found":    ["<faits saillants de la carte · cellules covered, le cœur de cible marqué (core_cell_ref), les zones blanches opportunity comptées>"],
+     "rejected": [{"what": "<territoire cimetière · cellule qualifiée cemetery>", "why": "<la raison · saturé v5, usage sans pull réel, audience absente · défendable>"}],
+     "confidence": [{"claim": "<assertion sur une cellule ou une zone>", "level": "forte|moyenne|faible", "reason": "<la VRAIE cause · une evidence structural/inferred n'est pas une cellule à confiance forte>"}],
+     "blocked":  [{"source": "<ex · couverture concurrente>", "reason": "<coverage_market unknown en dur · le pont watch-competitors n'a pas tourné · à lever par watch-competitors>"}],
+     "encoded":  ["<artefacts posés · spectrum.json · N cellules · M zones blanches qualifiées · cœur marqué>"],
+     "basis":    "<une ligne sobre · les usages croisés, les audiences cartographiées, l'évidence typée lue · rendue « Lu · ... »>",
+     "tease": "<une ligne qui tease la valeur DANS la carte · l'étendue du jouable, la zone blanche qui saute aux yeux · NE mets pas de chemin, le code ajoute la commande paste-ready et choisit la vue (spectre) selon la phase>"
+   }
+   ```
+
+   **Décision-d'abord, le code décide la forme.** Tu déposes les champs, `render-beat.py` réorganise en · ouverture `verdict` + `read`, puis le raisonnement qui flue (`analyzed` + `found` + `rejected`), puis **Ce sur quoi je reste prudent** (`blocked` + confiance non-forte, avec leur cause · la couverture concurrente non vérifiée va ici, avec son levier `watch-competitors`), puis `basis`, puis le CTA `tease`. La confiance **forte** n'est pas affichée seule, elle vit dans le verdict (on flague l'incertain, on ne caveat pas ce dont on est sûr). Les items `prudent` pointent l'étape qui les lèvera (la couverture marché reste `unknown` en dur tant que `watch-competitors` n'a pas tourné · le dire, ne pas fabriquer).
+
+   **Richesse · le négatif concurrentiel et le nerf.** `read` et `analyzed` ne s'arrêtent pas à « telle cellule est blanche » · ils déroulent la **conséquence** · quelle zone blanche est la plus rentable et pourquoi (le croisement usage à fort pull × audience non servie × saturation faible), le lane que personne ne tient et ce qu'il coûte d'y aller, sa fragilité. Chaque territoire cimetière (`rejected`) porte sa raison (le rejet est le travail le plus défendable et le plus invisible). C'est la densité d'insight qui fait l'expert 360, pas la longueur. Registre **sharp, pair-expert, jamais météo**.
+
+   **CTA + temporalité (le code décide la vue, pas le modèle).** Le `tease` est l'accroche (la valeur dans la carte) · `render-beat.py` y appose la commande `/phantom {slug} spectre` paste-ready (table `PHASE_VIEW` · phase `spectrum` → vue `spectre`) et signale le cap forward-look « j'écris les angles d'attaque, un par territoire » (table `PHASE_NEXT`). Champ vide = omis, jamais inventé. C'est un état système (restitution), pas de la donnée de marque · il ne transite pas par `write-to-context`, et le hook `beat-emit` garantit qu'il sera montré si l'orchestrateur l'oublie.
+
+   **Émission selon le mode (réutilise le signal orchestré-vs-standalone déjà détecté).** Le skill connaît déjà sa porte d'entrée (cf « Détection du mode » · invoqué par `build-atlas-complete` palier spectre = **orchestré** · invoqué par `/phantom {brand} spectre` ou demande opérateur = **standalone**).
+   - **Orchestré** · NE rends PAS le beat toi-même · contente-toi d'écrire le payload, `build-atlas-complete` l'émet (`render-beat.py --mode orchestrated`) et présente sa sortie telle quelle. Tu peux t'arrêter là (le rendu opérateur ci-dessous est porté par l'orchestrateur).
+   - **Standalone** · le skill est arrivé seul, il émet AUSSI son beat · `python3 .skills/render-beat.py --brand {slug} --phase spectrum --mode standalone`, et présente sa sortie **telle quelle** (NE re-narre pas, NE re-résume pas). En standalone le renderer PROPOSE la suite (« Prochaine étape · j'écris les angles d'attaque, un par territoire. Je lance ? »).
+   - **Filet** · si `render-beat` rend du vide (pas de payload trouvé), retomber sur le rendu opérateur en prose ci-dessous · ne JAMAIS laisser un trou à la place de la phase.
+
+**Rendu opérateur · la carte (pas le top-3 angles).** L'output est la carte (table lisible des cellules par couverture + zones blanches qualifiées + cœur de cible marqué), en posture d'investigation (Observé / Déduit / Inconnu / Leviers / Close ouvert). La priorisation (top-3) reste un objet séparé (score-matrix) · la carte montre l'étendue du jouable, elle ne décide pas le spend (D#502).
 
 ### Step 2 · Cross-product audience × origin_axis canon
 
@@ -403,7 +467,7 @@ Exit code 2 = blocking issue → revise avant ship. Exit code 0 warnings = log, 
 - **JAMAIS exposer field path interne** · `lineage.hook_canon_id`, `formula.observation.summary`, `meta.validation_status`, `origin_axis` brut en surface operator. Reformuler en langage métier (axe narratif, observation, archetype voix, hypothèse à valider, depuis audience/produit/catégorie/brand/moment).
 - **JAMAIS nommer skill** (`mine-voc`, `produce-paid-angles`, `decompose-angle`, `produce-copy-brief`) en surface operator. Routing silencieux post-arbitrage opérateur.
 - **DRGFP L3 gate strict** · audiences/ vide → refuse + reco `map-audiences` d'abord (cross-product requiert audiences cartographiées). Canon copy dormant → fail-safe (master doctrine).
-- **Cap 8-15 angles scaffold par run** · cross-product N audiences × 5 origin_axes peut exploser. Filter selon viability cell + canon compatibility + Pareto canon (top opportunities qualitatives). Au-delà 15 dilue cartographie.
+- **Cap 8-15 angles scaffold par run** · cross-product N audiences × 5 origin_axes peut exploser. Filter selon viability cell + canon compatibility + Pareto canon (top opportunities qualitatives). Au-delà 15 dilue cartographie. **SAUF mode spectre** · la carte est exhaustive (D#502), le cap est relâché · il reste intact en mode portfolio.
 - **Awareness movement playability** · `awareness_movement.in` ≤ `audience.awareness_dominant`. Si `in > out` flag MAJOR (régresse · erreur ou re-funnel deliberate).
 
 ## Anti-patterns
@@ -414,7 +478,7 @@ Exit code 2 = blocking issue → revise avant ship. Exit code 0 warnings = log, 
 - **AP-4** · halluciner archetype ou hook sans canon mapping (viole master doctrine PhantomOS reasons over a business universe).
 - **AP-5** · close affirmatif post-cartographie (*"angles saved, what next?"*) · banni canon investigation-posture.
 - **AP-6** · audience source confidence chain ignoré · angle confidence default `forte` alors qu'audience `hypothesis` (viole algèbre conservative).
-- **AP-7** · cap >15 angles · viole Pareto canon (top opportunities should be 3-5 priority).
+- **AP-7** · cap >15 angles · viole Pareto canon (top opportunities should be 3-5 priority). **Mode portfolio uniquement** · ne s'applique pas au mode spectre (carte exhaustive par design).
 - **AP-8** · deep atoms scaffold (phenomenon, source, sample_size) en map-angles · scope creep `decompose-angle`.
 - **AP-9** · scoring 5-lens framework appliqué · scope creep `produce-paid-angles` (cluster filter + cap rank + verbatim density check). map-angles est cartography light, pas production deep.
 - **AP-10** · default origin_axis `audience-derived` silencieusement · attribution doit être contextuelle (5 axes canon).
@@ -507,7 +571,7 @@ Mon avis · {reco macro adaptive selon état audience source + deadline}.
 - `resources/canon/copy/frameworks/*` · lineage framework_canon_id obligatoire
 - `resources/canon/copy/archetypes-voix/*` · lineage archetype_canon_id obligatoire
 - `resources/canon/copy/niveaux-schwartz/*` · awareness_stage canon Schwartz
-- `resources/canon/copy/_shared/awareness-stage.json` · $ref shared 5 stages canon
+- `resources/schemas/_shared/awareness-stage.json` · $ref shared 5 stages canon
 - `.skills/skills/map-audiences/SKILL.md` · upstream cartography audience source (D#386 sister atomique)
 - `.skills/skills/produce-paid-angles/SKILL.md` · deep scoring matrice paid (downstream consumer · scoring + ranks)
 - `.skills/skills/decompose-angle/SKILL.md` · deep atoms verbatim-sourced (downstream consumer · formula atoms)

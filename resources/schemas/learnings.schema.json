@@ -3,8 +3,9 @@
   "$id": "learnings.schema.json",
   "title": "Learnings (append-only brand log)",
   "description": "Brand-wide append-only learnings log. Singleton brands/{slug}/learnings.json. Entries by kind (test_result, workaround, compliance, observation, decision_trace, hypothesis_validated, pattern_promoted). v1.0 baseline shipped v2.58. Used by learn-from-session + capture-learning + brief-day Trigger pattern detection.",
-  "_schema_version": "learnings/1.1",
+  "_schema_version": "learnings/1.2",
   "_changelog": {
+    "1.2": "Reconciliation 3-dialectes (additif pur). entries[].items gagne: reasoning, date(alias YYYY-MM-DD), scope, platform, type(alias classif), category, tags, status, genericity, see_also, confidence, promoted_to, promoted_date. source enum etendu (union canon + capture-learning). cross_refs gagne mechanism_refs[]+benefit_refs[]. `kind` reste l'autorite de classification (type=alias tolere). `created_at` reste l'autorite temporelle (date=alias tolere, validate lit date puis fallback created_at). Aucun champ rendu required: brands pre-v1.2 valident toujours. Aligne le contrat sur ce que capture-learning/learn-from-session/promote-learning ecrivent reellement.",
     "1.1": "v2.63 refactor ontologie pure additif · entries[].cross_refs.pain_point_ids[] + objection_ids[] arrays ajoutés (cross-refs canonical vers pain_points/{PNT-NN}.json + objections/{OBJ-NN}.json top-level collections v2.63). Preserve friction_ids[] + angle_ids[] + audience_slugs[] + product_slugs[] + brief_ids[] + creative_ids[] existants. Permet pattern detection cross-entity (learn-from-session Trigger 8) sur ontologie 3 collections sub-tensions séparées. Backward compat strict additif.",
     "1.0": "v2.58 baseline. Append-only entries with kind/fact/created_at/source. Validation_status per entry. Cross_refs canonical vers other entities (angles, audiences, products, frictions, briefs)."
   },
@@ -73,7 +74,9 @@
                 "description": "v1.1 additif · cross-refs canonical vers objections/{OBJ-NN}.json top-level collection v2.63."
               },
               "brief_ids": { "type": "array", "items": { "type": "string" } },
-              "creative_ids": { "type": "array", "items": { "type": "string" } }
+              "creative_ids": { "type": "array", "items": { "type": "string" } },
+              "mechanism_refs": { "type": "array", "items": { "type": "string" }, "description": "v1.2 additif · ponts vers mecanismes produit (spec.mechanisms[].mechanism_id ou label). Utilise par _EXAMPLE patterns creative." },
+              "benefit_refs": { "type": "array", "items": { "type": "string" }, "description": "v1.2 additif · ponts vers benefices (spec.benefits[].benefit_id ou label). Utilise par _EXAMPLE patterns CTA." }
             }
           },
           "test_result_data": {
@@ -103,8 +106,22 @@
           },
           "source": {
             "type": "string",
-            "enum": ["operator", "agent", "skill_output", "test_capture"]
+            "enum": ["operator", "agent", "skill_output", "test_capture", "test", "client_call", "platform_docs", "observation"],
+            "description": "v1.2 union des 2 dialectes · canon (operator/agent/skill_output/test_capture) + capture-learning (test/client_call/platform_docs/observation). Additif pur."
           },
+          "reasoning": { "type": "string", "description": "v1.2 additif · Decision Trace (D#308) · le WHY derriere le fact. capture-learning + learn-from-session l'exigent MANDATORY non-vide a l'ecriture. Non-required au schema pour backward-compat des entries pre-v1.2." },
+          "scope": { "type": "string", "enum": ["brand", "platform", "workspace"], "description": "v1.2 additif · portee d'application (capture-learning + validate Check 11c index)." },
+          "platform": { "type": ["string", "null"], "description": "v1.2 additif · meta|shopify|google|ga4|klaviyo|... requis si scope=platform." },
+          "type": { "type": "string", "enum": ["workaround", "compliance", "behavior", "api_rule", "test_result"], "description": "v1.2 additif · alias de classification dialecte-skills (capture-learning). `kind` reste l'autorite canon 9-enum ; `type` est tolere pour ne pas casser les skills existants." },
+          "category": { "type": "string", "description": "v1.2 additif · classe libre (ex: system_friction de learn-from-session HR runtime patterns)." },
+          "tags": { "type": "array", "items": { "type": "string" }, "description": "v1.2 additif · tags d'inference (capture-learning + validate + promote-learning marqueur promoted:)." },
+          "status": { "type": "string", "enum": ["active", "on-hold", "obsolete", "closed-wontretry", "closed-success", "superseded", "archived"], "description": "v1.2 additif · cycle de vie du learning (distinct de validation_status qui est le cycle de test). Ecrit par capture-learning a la creation (active) et par validate Check 12b (superseded/archived)." },
+          "genericity": { "type": "string", "enum": ["brand", "sector", "universal"], "description": "v1.2 additif · portee de generalisation (capture-learning + validate Check 12b cross-brand detection + promote-learning Step 2)." },
+          "see_also": { "type": "array", "items": { "type": "string", "pattern": "^LRN-[0-9]{3,5}$" }, "description": "v1.2 additif · pointeurs vers learnings voisins (dedup learn-from-session)." },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1, "description": "v1.2 additif · confidence du pattern (utilise par _EXAMPLE + learn-from-session Trigger 9 gate >=0.7)." },
+          "promoted_to": { "type": "string", "description": "v1.2 additif · path resources/ KB partagee si promu via promote-learning (distinct de promoted_canon_path qui vise resources/canon/copy/)." },
+          "promoted_date": { "type": "string", "format": "date", "description": "v1.2 additif · date de promotion KB partagee (promote-learning Step 5)." },
+          "date": { "type": "string", "format": "date", "description": "v1.2 additif · alias temporel court (YYYY-MM-DD) ecrit par les skills. `created_at` (date-time) reste l'autorite canon ; validate Check 10 lit `date` en priorite avec fallback created_at." },
           "created_at": { "type": "string", "format": "date-time" }
         }
       }
