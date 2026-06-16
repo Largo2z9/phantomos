@@ -7,6 +7,18 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.95.0] · 2026-06-16
+### Changed
+- **Dégraissage · purge du changelog de tout le canon** (Phase 2 de l'optim) · 460 lignes retirées (334 de `patch_notes` en frontmatter, 126 de sections `## Changelog` / `## 0 Évolution` dans les corps) sur 44 fichiers (skills + doctrines + commandes). Le changelog vit dans CHANGELOG.md, plus chargé à chaque invocation. **Preuve de non-régression** · le manifest rebuilt reste identique (timestamp à part), le routeur n'a jamais lu les patch_notes. Le gain est en tokens chargés à chaque run · `build-atlas` passe de 162 à 92 lignes de frontmatter, ~45K tokens de changelog toujours-chargés en moins sur la couche skills · plus rapide ET les vraies règles plus saillantes (le levier anti-over-prescribing du champ)
+
+### Added
+- **Garde anti-re-accrétion** · `build-manifest.py --strict` refuse désormais tout `patch_notes` qui revient en frontmatter de skill (testé · fire sur réinjection). L'accrétion étant la maladie, le garde empêche la dette de repousser
+
+### Notes
+- **Méthode** · audit read-only « quoi couper » (7 agents, 6 dimensions · doctrines / skills / commandes / DRY / Bitter-Lesson) qui a chiffré ~600-900 lignes sûres + ~2000-3000 avec les merges · 2 faux-positifs de ses propres agents corrigés en synthèse (l'em-dash a bien un gate via turn-end-audit, le « contradiction » phantom.md est réconciliable)
+- **Différé** · les stanzas de version dans le champ `description` (chirurgie sémantique par fichier) · les merges structurels needs-review (audience-cartography 4→2, voice split-brain 2→1, extension 3→1, familles map-* et mine-*, -13 à -17 entrées routeur, -4 à -6 doctrines) · le tier Bitter-Lesson test-puis-coupe (decomposition-visibility 668L, les templates NIVEAU LIVE, le contrat mutation re-prosé) qui demande un test runtime avant de couper · ces scaffolds encodent de vrais échecs passés et vivent en partie dans le code, jamais à l'aveugle
+- **Gates** · validate-all --strict 0/0/0/0 · reachability CRITICAL/HIGH 0/0 · eval 6/6 · index sync · em-dash 0 (hors détecteur) · manifest prouvé identique
+
 ## [2.94.0] · 2026-06-16
 ### Added
 - **L'instrument de qualité · `evals/`** · le système mesure désormais si un rendu TRANCHE ou fait la météo, pas seulement si le JSON résout. Rubriques typées par artefact (close / angle / diagnostic · cadre uniforme + registre) + proxies déterministes stdlib (le plancher cheap) + juge LLM asymétrique-et-bouclé (PASS terse / FAIL diagnostics complets + mode d'échec nommé + `rewrite_hint` + `repaired_verdict`) + taxonomie d'échecs error-analysis-first + score d'alignement par artefact (la métrique de régression au swap de modèle) + bandeau seed-only honnête + filet advisory sur les beats. C'était le manque #1 · l'altitude experte n'était mesurée par rien

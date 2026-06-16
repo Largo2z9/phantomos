@@ -4,7 +4,6 @@ type: capturer
 version: "1.1.0"
 isolation_scope: workspace_global
 layer: meta
-patch_notes: "v2.42 PATCH 5 · Trigger 9 ajouté · promote learning to canon validation (bridge learnings.json brand-side → validations[] atlas vivant cross-brand). Operator-gate AskUserQuestion. Ferme bridge compound learning end-to-end. Capturer workspace_global justifié · peut promouvoir learning brand vers atlas vivant cross-brand après operator gate."
 recommended_model: sonnet
 reasoning_pattern: null
 description: >

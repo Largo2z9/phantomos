@@ -242,7 +242,3 @@ Structure:
 - **Related:** if fit score suggests repositioning, hand off to copy-writer or product team (out of scope)
 
 ---
-
-## Changelog
-
-- **1.0.0** (2026-04-13) · Initial spec. Read → Analyze → Optional Propose pattern. Analysis first, mutation secondary.

@@ -189,7 +189,3 @@ Verbatims collected: {N}
 - **Version conflict:** if running `mine-audience@v0.x` and `v1.0` in parallel, they write different event_ids (safe, no collision)
 
 ---
-
-## Changelog
-
-- **1.0.0** (2026-04-13) · Initial spec. Collect → Analyze → Propose pattern. Proposal mode enforced.

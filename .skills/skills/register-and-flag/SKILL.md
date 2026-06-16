@@ -22,8 +22,6 @@ permissions:
 pipeline:
   preconditions: files scaffolded (Phase 7), optional skill stub created (Phase 8)
   postconditions: extension registered, adoption todo flagged, post-write validate-resources auto-triggered
-patch_notes:
-  v1.1.0: "v2.75.0 route writes vers NEW canon `{scope}/_extensions.json` scope-routed (brand `brands/{slug}/_extensions.json` · operator `operator/_extensions.json` · workspace `resources/_extensions.json`) · pas `index.json → extensions[]` legacy. NEW field `consumable_by` enum (orchestrateurs production v2.75.0) accepté en input · idempotent · backward compat lire les deux pendant transition (NEW pattern primary · legacy `index.json#extensions` lu en fallback si registry NEW absent). Cross-ref doctrine canon `extension-discovery-doctrine.md` v2.75.0 NEW. Pattern canon EXTEND > SIBLING · skill existing étendu pas NEW frère."
 ---
 
 # Skill: Register and Flag

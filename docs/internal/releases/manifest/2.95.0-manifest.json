@@ -1,0 +1,39 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.95.0",
+  "released_at": "2026-06-16",
+  "type": "MINOR",
+  "summary": "Degraissage · purge du changelog de tout le canon (460 lignes, le gros gain en tokens charges a chaque invocation) + garde anti-re-accretion. Le noyau prouve-sur de l'audit 'quoi couper'. Manifest prouve identique = zero changement de comportement. Voir CHANGELOG [2.95.0].",
+  "changelog_ref": "CHANGELOG.md#[2.95.0]",
+  "headline": [
+    "DEGRAISSAGE · purge du changelog · 460 lignes retirees (334 patch_notes en frontmatter + 126 sections ## Changelog et ## 0 Evolution dans les corps) sur 44 fichiers (skills + doctrines + commandes) · le changelog vit dans CHANGELOG.md, plus charge a chaque invocation",
+    "PREUVE DE NON-REGRESSION · le manifest rebuilt reste IDENTIQUE (timestamp a part) · le routeur n'a jamais lu les patch_notes (build-manifest les stripait deja) · seul le read runtime du fichier entier les trainait",
+    "LE GAIN EST EN TOKENS · build-atlas passe de 162 a 92 lignes de frontmatter (37KB avant le corps) · ~45K tokens de changelog toujours-charges en moins sur la couche skills · plus rapide ET les vraies regles plus saillantes (anti-over-prescribing)",
+    "GARDE ANTI-RE-ACCRETION · build-manifest.py --strict refuse desormais tout patch_notes qui revient en frontmatter (teste · fire sur reinjection) · l'accretion EST la maladie",
+    "METHODE · audit read-only 'quoi couper' 7 agents 6 dimensions (doctrines/skills/commandes/DRY/Bitter-Lesson) · ~600-900 lignes sures chiffrees + ~2000-3000 avec les merges · 2 faux-positifs des agents corriges en synthese"
+  ],
+  "migrations": [],
+  "schema_changes": [],
+  "new_files": [],
+  "changed_files": [
+    "44 fichiers .md (.skills/skills/* + docs/system/* + docs/doctrine/* + .claude/commands/*) · patch_notes frontmatter et sections changelog retirees",
+    ".skills/build-manifest.py (garde anti-re-accretion patch_notes, --strict)",
+    ".skills/_manifest.json (rebuild · contenu identique, timestamp seul)"
+  ],
+  "skills_count": 85,
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "reachability": "CRITICAL 0 / HIGH 0 (7 WARN = dette advisory pre-existante)",
+    "eval": "6/6 goldens discrimines",
+    "non_regression_proof": "manifest rebuilt apres purge = identique (diff timestamp-only verifie) · le routeur n'extrayait jamais les patch_notes",
+    "anti_re_accretion_guard": "teste · build-manifest --strict fire sur un patch_notes reinjecte (brief-day), exit 1",
+    "em_dash": "0 hors le detecteur turn-end-audit.py (intentionnel)",
+    "index": "en sync 23/23"
+  },
+  "deferred": [
+    "Stanzas de version dans le champ description (chirurgie semantique par fichier, ~115L)",
+    "Merges structurels needs-review · audience-cartography 4->2, voice split-brain 2->1, extension 3->1, familles map-* 5->1 et mine-* 3->1, 9 sous-skills scaffold en phases · -13 a -17 entrees routeur, -4 a -6 doctrines, ~1500-2800 lignes",
+    "Tier Bitter-Lesson test-puis-coupe · decomposition-visibility 668L, templates NIVEAU LIVE re-colles ~16-21 skills, contrat mutation re-prose 57 skills, investigation-posture · demande un test runtime AVANT de couper, jamais a l'aveugle (ces scaffolds encodent de vrais echecs passes et vivent en partie dans le code)",
+    "Reste de Phase 2 · cabler les validateurs en SubagentStop scope + PreToolUse avant map-audiences"
+  ]
+}

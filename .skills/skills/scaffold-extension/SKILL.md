@@ -3,8 +3,6 @@ name: scaffold-extension
 type: orchestrator
 version: "1.3.0"
 recommended_model: sonnet
-patch_notes:
-  v1.3.0: "v2.75.0 Phase 9 register-and-flag enrichie · NEW consumable_by field auto-detection · scaffold-extension v1.3.0+ register NEW entity avec liste enum orchestrateurs production consommables (creative-brief-composer · score-matrix · produce-paid-matrix · build-atlas-complete) selon entity_type + scope + data_shape · operator validation gate AskUserQuestion accept OR adjust manually. Cross-ref doctrine canon extension-discovery-doctrine.md v2.75.0 NEW. Backward compat strict additif · consumable_by champ optional · legacy v1.2.0 NEW entities sans consumable_by still registered mais pas auto-discovery (manual patch nécessaire si consumption later)."
 layer: meta
 reasoning_pattern: null
 description: >

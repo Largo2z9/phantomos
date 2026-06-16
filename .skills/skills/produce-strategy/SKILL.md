@@ -54,8 +54,6 @@ pipeline:
     - recommended next-step (levier prioritaire du Close ouvert) persisté en ligne In Progress idempotente dans brands/{slug}/todos.md (format canonique, tiché auto quand le skill levier aval tourne)
     - finalize-mutation-batch event emitted post-acceptance
     - snapshot rebuilt
-patch_notes:
-  v1.0.2: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW Step 6bis · le levier prioritaire du Close ouvert (Step 6 · section Leviers) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`, tichée auto (`[x]`) quand le skill levier aval nommé tourne (ex test paid, mine-voc retention, produce-strategy --mode=update). Le Close ouvert in-line + les 5 sections investigation-posture restent inchangés · le levier ne meurt plus dans le chat, il a un réceptacle persistant. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · Steps 0-7 + synthesis + guardrails préservés."
 disambiguates_against:
   setup-brand: "setup-brand cadrage léger initial du brand (identity + product + audience first cut). produce-strategy = cadrage stratégique deep, Q&A reviewable, 3-5 GOAL-NN + current_focus trimestriel. Invoke produce-strategy après que setup-brand a livré la structure."
   build-atlas-complete: "build-atlas-complete orchestre le pipeline complet 9 phases (specs + audiences + angles + briefs + créas). produce-strategy peut être invoqué EN sous-skill du build-atlas-complete, OU standalone pour rafraîchir le focus trimestriel sur une brand déjà cartographiée."
@@ -352,13 +350,3 @@ Then AskUserQuestion · *Go / J'ai juste 1-2 dimensions à update (mode update) 
 - `docs/system/schema-encoding-doctrine.md` · §13 v2.58 entry strategy v1.0 NEW
 
 ---
-
-## Patch notes
-
-### v1.0.0 (v2.58 ship)
-
-- NEW orchestrator · ferme le gap "cadrage stratégique brand" canon (avant v2.58, freestyle prose risque sur les outputs annual_goals + current_focus).
-- Pair avec NEW schema `resources/schemas/strategy.schema.json` v1.0 (canon entity activée).
-- Pipeline 7 steps · DRGFP gates · cartographie silencieuse avant chaque proposition · stage via mutation gate mode=proposed · synthesis finale 5 sections investigation-posture.
-- Disambiguation contre `setup-brand` (cadrage initial light), `build-atlas-complete` (full pipeline orchestrator), `produce-paid-matrix` (exécution paid), `brief-day` (briefing operational).
-- Subagent_safe: false · operator gates conversationnels mid-pipeline, jamais async.

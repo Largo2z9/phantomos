@@ -6,8 +6,6 @@ isolation_scope: brand_only
 layer: production
 recommended_model: sonnet
 reasoning_pattern: null
-patch_notes:
-  v1.1.1: "v2.81.1 decomposition visibility NIVEAU LIVE · NEW section `Niveau LIVE · raisonnement thinking aloud pendant exécution` insérée AVANT Step 0 Gate access check (au début après Expert methodology). Action LOURDE classification (5-block diagnostic + API multi-endpoints + cross-reference benchmarks + score matrices output). NIVEAU LIVE narratif étendu obligatoire pendant exécution · 2 niveaux abstraction obligatoires (macro état compte santé + micro score matrices par bloc audité phrasé en prose narrative sobre). Pose pair senior media buyer thinking aloud · audit temps réel par l'opérateur entre blocs audités + pédagogie posture experte indissociables. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 (NIVEAU LIVE obligatoire actions lourdes) + AP-DVD-11 (opacité pendant action lourde = bug invalid). Backward compat strict additif · cycle runtime préservé (Step 0 Gate + Steps 1A/1B + 5 blocs diagnostic preserved)."
 description: >
   v1.1.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section Niveau LIVE thinking aloud obligatoire pendant exécution (entre Expert methodology et Step 0). Action LOURDE · narratif étendu 2 niveaux abstraction (macro état compte santé + micro score matrices par bloc audité phrasé en prose). Pose pair senior media buyer expert · audit temps réel + pédagogie indissociables. Cross-ref `decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 + AP-DVD-11. Backward compat strict additif (cycle runtime préservé).
   Structured audit of a Meta Ads account setup. Two modes: API-driven (default when

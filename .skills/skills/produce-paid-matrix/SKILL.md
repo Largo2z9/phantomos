@@ -482,41 +482,6 @@ The matrice paid sur une fashion brand DTC (différent vertical) surface différ
 
 ---
 
-## Patch notes
-
-### v1.3.0 (v2.75.0 NEW extension_hooks · 2026-05-16)
-
-- **NEW frontmatter field `extension_hooks`** · liste enum entity types acceptés (`audience_entity`, `angle_entity`, `territory_entity`) · permet manifest registry scan Step 0 DRGFP enrichi.
-- **NEW Step 0 DRGFP Manifest Registry Scan** · pre-flight discovery NEW entities scaffolded via scaffold-extension v1.2.0+ avec `consumable_by` matching ce skill, consommées automatiquement runtime · output enrichi lineage extension dans frame.
-- **Step 0 legacy renommé Step 0bis** · Pre-flight DRGFP gates existing pipeline preserved · pas de logique modifiée.
-- **Backward compat strict additif** · `extension_hooks` optional · default empty · legacy v2.74.x comportement hard-coded canon entities preserved · silent skip si NEW entity registered sans `consumable_by` field (pas error).
-- **Cross-ref doctrine canon NEW** · `docs/system/extension-discovery-doctrine.md` v2.75.0 + `scaffold-extension` v1.2.0+ Phase 9 register-and-flag (upstream registry).
-
-### v1.2.0 (v2.64 ontologie sémantique pure · 2026-05-14)
-
-- **Cohérence consume frontmatter** · chain produce-paid-angles v1.10 + weight-dimensions + score-matrix lit désormais `audiences/{audience_slug}/pain_points/*.json` + `audiences/{audience_slug}/objections/*.json` sub-audience canonical (owned natif par parent path). Frontmatter consumes: enrichi avec paths NEW sub-audience + legacy top-level v2.63 marqués fallback.
-- **Synthesis Section 2 enrichi** · territoires top-3 rationale peut référencer pain_points/objections canonical IDs sub-audience (PNT-NN + OBJ-NN) dans rationale (si angles ranked ont lineage.pain_ref + objection_ref populés produce-paid-angles v1.10+).
-- **Backward compat strict additif** · fallback top-level v2.63 + profile sub-fields v1.7 preserved · sub-skills route silently selon disponibilité sub-audience / top-level / profile.
-- **Pas de modification logique propre orchestrator** · Step 0-5 pipeline inchangé, juste cohérence frontmatter + sub-skills versions bumped consistent.
-
-### v1.1.0 (v2.63 ontologie pure · 2026-05-14)
-
-- **Cohérence consume frontmatter** · chain produce-paid-angles v1.9 + weight-dimensions + score-matrix lit désormais `pain_points/*.json` + `objections/*.json` collections top-level (au lieu de profile.json sub-fields legacy). Frontmatter consumes: enrichi avec 2 paths NEW.
-- **Synthesis Section 2 enrichi** · territoires top-3 rationale peut référencer pain_points/objections canonical IDs (PNT-NN + OBJ-NN) dans rationale (si angles ranked ont lineage.pain_ref + objection_ref populés produce-paid-angles v1.9+). Surface enrichit traçabilité opérateur drill-down.
-- **Backward compat strict** · pre-v2.63 brands (legacy profile sub-fields) route fallback transparent · sub-skills route silently selon disponibilité collections top-level vs profile sub-fields.
-- **Pas de modification logique propre orchestrator** · Step 0-5 pipeline inchangé, juste cohérence frontmatter + sub-skills versions bumped consistent.
-
-### v1.0.0 (v2.56 ship · 2026-05-12)
-
-- **Résolution gap orchestration Scenario 1 audit Phase 1** · canon v2.55 "pitch DTC paid sur brand X" sans orchestrator dédié, freestyle prose risqué. Skill new chain les 3 producers (angles → weights → matrice) avec synthesis finale 5 sections investigation-posture.
-- **Cardinalité top-3 audiences cap** · respect doctrine compositional-cartography (≤ 5 audiences, marge sécurité Step 2 + 3).
-- **Anti-pattern BCG CMR §7** · scoring numérique brut JAMAIS surfacé operator, stars qualitatives ★★★★☆ ou tier qualitatif. Audit trail interne `matrix-{date}.json` préservé.
-- **Confidence chain explicit MANDATORY** · héritée sub-skills (audience × brand × anchor → MIN per `docs/system/confidence-propagation.md`). Surface explicit dans Déduit Section 2.
-- **Backward compat strict additif** · produce-paid-angles, weight-dimensions, score-matrix restent invocables directement (disambiguates_against documente quand router solo).
-- **Skill routing canon v2.55** · cohérent CLAUDE.md root règle "Skill routing systémique" · l'agent invoke ce skill pour Scenario 1 plutôt que freestyle prose.
-
----
-
 ## Cross-references
 
 - `docs/system/investigation-posture.md` · doctrine canon v2.54+ · 5 sections obligatoires (Observé · Déduit · Inconnu · Leviers · Close ouvert) · confidence chain explicit · drill-down macro · opérateur arbitre.

@@ -26,21 +26,6 @@ permissions:
 pipeline:
   preconditions: operator has expressed intent to build an extension
   postconditions: structured intent object (optionally enriched with ECR decomposition tree) returned to orchestrator
-patch_notes:
-  - version: "2.0.0"
-    date: "2026-05-16"
-    summary: >
-      Intègre la méthodologie ECR (Équation Compositionnelle Récursive) canonisée v2.71
-      dans operational-system-doctrine.md. Avant de retourner l'intent object, le skill
-      applique 5 étapes runtime · (1) test d'éligibilité 3 critères · (2) identifier l'atome
-      de sortie · (3) triptyque universel Pourquoi × Quoi × Comment + 4 patterns canon ·
-      (4) décomposer chaque phase en 3-5 sous-variables MECE · (5) décomposer
-      récursivement jusqu'aux atomes mesurables. Output enrichi avec ecr_decomposition.
-      Backward compat · si test d'éligibilité fail (HR-ECR-1), retombe sur capture v1.0.0
-      (Kind · Scope · Attributes seuls). Ajoute 5 hard rules HR-ECR-1 à HR-ECR-5.
-  - version: "1.0.0"
-    date: "2026-04-19"
-    summary: Capture initiale intent extension · Kind · Scope · Attributes (3 dimensions).
 ---
 
 # Skill: Analyze Extension Intent

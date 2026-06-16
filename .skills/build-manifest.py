@@ -432,7 +432,26 @@ def build_manifest():
               f"({sorted(allowed)}):", file=sys.stderr)
         for name, model in offenders:
             print(f"  - {name}: recommended_model={model!r}", file=sys.stderr)
-    return offenders
+
+    # De-bloat guard (anti re-accretion): no patch_notes / version-history in skill
+    # frontmatter. Changelog lives in CHANGELOG.md; patch_notes in a SKILL.md is
+    # always-loaded bloat the router never reads (the manifest never extracted it).
+    # Flag any that creep back so the de-bloat cannot silently regrow.
+    pn_offenders = []
+    for skill_dir in sorted(SKILLS_DIR.iterdir()):
+        sf = skill_dir / "SKILL.md"
+        if not sf.is_file():
+            continue
+        m = FRONTMATTER_RE.match(sf.read_text(encoding="utf-8"))
+        if m and re.search(r"^patch_notes", m.group(1), re.M):
+            pn_offenders.append(skill_dir.name)
+    if pn_offenders:
+        print(f"WARN: {len(pn_offenders)} skill(s) carry patch_notes in frontmatter "
+              f"(changelog belongs in CHANGELOG.md, not always-loaded context):", file=sys.stderr)
+        for n in pn_offenders:
+            print(f"  - {n}", file=sys.stderr)
+
+    return offenders + [(n, "patch_notes-in-frontmatter") for n in pn_offenders]
 
 
 if __name__ == "__main__":

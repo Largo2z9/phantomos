@@ -8,8 +8,6 @@ version: 1.0.0
 recommended_model: sonnet
 subagent_safe: false
 mode: interactive
-patch_notes:
-  v1.0.0: "v2.81 NEW · orchestrator drop dossier vrac mixed-content · détecte type fichier par fichier · chain skill spécialisé correspondant (ingest-resource text · import-asset visuels · connect-source APIs si config files · sync-notion-atlas si Notion exports · craft-packshot si packshot images) · présente synthèse opérateur pour validation gate · sourcing tag 'import bulk · {timestamp}' obligatoire pour validation par brand downstream (canon HR-EAD-8 entry-arc-doctrine.md v2.81.0). Cohérent canon NIVEAU 0 paramètres décomposés engagement-disclosure-discipline v2.79.5 + decomposition-visibility-discipline v2.79.5+. Porte C onboarding multi-entry · import existant matière préexistante."
 description: >
   v1.0.0 (v2.81). Orchestrator skill pour onboarding porte C (import existant)
   bulk · drop dossier vrac mixed-content sans avoir à invoquer chaque skill

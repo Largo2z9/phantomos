@@ -4,7 +4,6 @@ type: curator
 version: "1.4.0"
 isolation_scope: workspace_global
 layer: meta
-patch_notes: "v2.93 · D#518 · NEW checks post-hoc Spectre/fraîcheur (check 11) · (a) trace angle→carte · angle.lineage.use_case_ref/spectrum_cell_ref (si présents) doivent résoudre vers spec.use_cases[]/spectrum cells · intégrité quand présent, jamais forcé (Master rule) · double validate-all.py angle_spectrum_untraced. (b) pont watch-competitors→coverage_market · cellule avec coverage_market != unknown sans evidence behavioral observée/inférée = MINOR (couverture affirmée sans signal). (c) horloge de fraîcheur (check 11b-bis) · reliability_tier/velocity_tier dans leurs enums + extracted_at date-time sur les evidence spectrum, validés seulement quand présents (la fraîcheur est un curseur, pas un gate par absence). v2.42 · HR-21 + Check 21 audience cartography hierarchy enforcement runtime. v2.42 PATCH 5 · Check 13c isolation_scope + Check 13d layer frontmatter enforcement. Infrastructure curator workspace_global justifié · valide tous skills cross-brand pour intégrité runtime."
 recommended_model: haiku
 reasoning_pattern: null
 description: >

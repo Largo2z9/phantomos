@@ -8,11 +8,6 @@ recommended_model: sonnet
 subagent_safe: true
 mode: proposed
 operator_facing: true
-patch_notes:
-  - "1.0.0 (S55 · v2.58 · D#386 canon) · NEW atomique cartography. Extraction OR refonte produce-paid-angles · scaffold portfolio angles brand-wide (light pass formula + lineage canon) sans deep production matrix scoring. Invocable séparément pour refresh cartographie angles sans relancer le full pipeline produce-paid-angles. Cross-product audience × axis origin cartographié, scaffold N angles light pass avec lineage canon obligatoire. Cross-ref D#386."
-  - "1.0.1 (v2.61 doctrine consume) · consumes: enrichi avec refs docs/doctrine/ NEW v2.60 (angle-anatomy, breakthrough-advertising-5-stages, audiences-cartography). Skill peut consume ces doctrines canon pour informer production sans dépendre schemas exacts."
-  - "1.0.2 (v2.80 Sprint A · audit canon brand strategist) · archetype_canon_id enum 6 → 12 valeurs Mark+Pearson canon complet. Ship 6 NEW archetypes (innocent, explorer, magician, jester, ruler, creator) qui rejoignent les 6 existing (caregiver, sage, rebelle, amante, heros, homme-ordinaire). Refus mapping client réels résolu · cartographie peut maintenant attribuer le bon archetype quelle que soit la catégorie (luxe ruler, outdoor explorer, FMCG fun jester, tech magician, artisanat creator, mass-market innocent)."
-  - "1.1.0 (Spectre C5 · D#502/D#503) · NEW mode spectre (flag d'invocation, défaut absent = portfolio v1.0.2 strictement inchangé, rétrocompat stricte). Croisement 3 axes use_case × audience × origin_axis (vs 2 axes en portfolio). Les cellules faibles deviennent des ZONES BLANCHES flaggées (coverage_self blank + lever nommé + blank_qualification unqualified) au lieu de skip+log. Évidence TYPÉE par cellule (behavioral/voc/vom/structural/cultural + force + _source, D#503) + saturation (seed map-mechanisms). Cap 8-15 relâché SOUS FLAG mode spectre uniquement. Écrit le singleton brands/{slug}/spectrum.json (spectrum.schema v1.0, brownfield-merge par cell_id, jamais écraser une cellule validated), PAS N angles ANG-NN. Rend la carte (Observé/Déduit/Inconnu/Leviers/Close + cœur de cible), pas le top-3 angles. Précondition : spec.use_cases[] non vide (map-audiences mode spectre d'abord). Backward compat strict additif."
 archetype_canon_id_enum:
   - innocent
   - sage

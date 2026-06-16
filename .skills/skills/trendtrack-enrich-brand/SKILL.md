@@ -2,10 +2,6 @@
 name: trendtrack-enrich-brand
 type: producer
 version: "1.1.0"
-patch_notes_v2_87_4:
-  - "1.1.0 (v2.87.4 doctrines propagation canon · dette documentée) · Skill orchestrator heavy 3 steps (lookup + shop profile + 3 ads queries) ~5-8 min runtime DOIT exposer disclosure pré-engagement canon EDD v2.79.5+ (Plan + ETA + Démarche + Paramètres décomposés NIVEAU 0 + Confirmation binaire) AVANT exécution + thinking aloud NIVEAU LIVE DVD v2.81.1+ pendant Steps lookup et ads queries. Audit Fincut session v2.87.3 finding · lancé direct sans disclosure préalable · pattern systémique cross-skills heavy non-propagation doctrines. Cross-ref `docs/system/engagement-disclosure-doctrine.md` v2.79.5+ + `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11. Enforcement runtime hardcoded Steps EDD + NIVEAU LIVE markers · backlog v2.87.5+ implementation. Backward compat strict additif."
-patch_notes_v2_87_6:
-  - "1.1.0 (v2.87.6 SUBSTRATE sprint · enforcement runtime maintien dette) · Sprint substrate canon · refresh atlas Stepprs deep desire chain v2.87.4 (chronic-pain-45 grand-parent narrative canon · workers-shifts conjoint Friday evening narrative canon) + NEW section walkthrough Porte A many-to-many `tour.md` Anatomie de la structure (rendu post-build-atlas-complete Stepprs). Impact ce skill · consume atlas Stepprs refreshed si invoqué démo pédagogique (rare · skill cible brand opérateur real). Enforcement runtime hardcoded EDD Steps + NIVEAU LIVE markers · statut dette inchangé v2.87.4 documentée · v2.87.6 maintien backlog v2.88.0+ implementation (pattern miroir v2.87.5 · scope chirurgical patch_notes vs refonte massive runtime). Backward compat strict additif."
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -13,8 +9,6 @@ subagent_safe: true
 mode: proposed
 operator_facing: true
 reasoning_pattern: null
-patch_notes:
-  v1.0.0: "v2.69 NEW skill canonical · TrendTrack API live enrichment brand existing · resolve via /v1/lookup → /v1/shops/{shopId} → /v1/ads?pageId={pageId} chain · stage proposals brand.json (year_founded · social_media · proofs.trustpilot · financials.monthly_visits · market.categories) + learnings.json (scaling patterns observed · ads winner verbatims sample · creative format split · geo distribution · spend concentration). Pattern reproductible cross spy tools sources futures (Foreplay · Atria · Meta Ad Library) via NEW skill mirror sync-{tool}-enrich-brand pattern. Cross-ref D#391 (TrendTrack token canon) + D#408 (R&D Market Intelligence Layer pattern reproductible)."
 description: >
   TrendTrack API live enrichment skill · resolve brand existing via lookup + drill shop profile + sample top ads · stage proposals brand.json + learnings.json. Layer territoire · enrichit substrat stable brand depuis intelligence externe TrendTrack. Pattern reproductible cross spy tools sources (R&D Market Intelligence Layer D#408). Skill canonical Layer 2 (API direct via curl Bash OU MCP TrendTrack si configuré côté opérateur Layer 1).
   Pré-requis · credentials_shared.env TRENDTRACK_API_KEY OR MCP TrendTrack actif (verify via claude mcp list).

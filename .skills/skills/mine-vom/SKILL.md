@@ -342,9 +342,3 @@ The focus parameter does not change the four-lens coding pass · all lenses are 
 - **`.skills/stage-proposal.py`** · proposal staging primitive used in Step 1 competitor integrity check.
 - **`docs/system/contextual-intelligence.md`** · master doctrine. Read before designing any extension. The form-fill failure mode (filling `market.*` fields instead of producing synthesis) is the anti-pattern this skill polices in itself.
 - **`docs/system/voice.md`** · voice canon. Read before editing operator-facing strings.
-
-## Changelog
-
-- **1.0.0** · Initial spec. Four-lens coding consumes `vom-mining.md`. Pre-step competitor integrity check. Step 0 first-party ask non-negotiable. Step 7 synthesis follows snapshot Step 7 canon strictly. Step 9 finalize-mutation-batch mandatory. Five `--focus` modes ship at v1.
-- **1.0.1** · Vernacular source rule explicit · reject tokens surfacing only on brand-controlled surfaces. Stage 5 default skepticism encoded.
-- **1.1.0** (v2.58 coverage extend) · Step 8 routing étendu pour combler 4 orphans audit v2.57. P3 · `brand.market.awareness_distribution` write-side (5 stages canoniques Schwartz, floats sommant à 1.0, computed depuis theme-tagged awareness weighted by recurrence). P4 · `brand.market.regulatory` write-side objet complet (`constraints[]` + `certifications_required[]` + `advertising_restrictions[]`, depuis verbatims regulatory / legal / compliance mining). P5 · `brand.seasonality` write-side NEW field (`peak_periods[]` + `trough_periods[]` + `notes`, depuis temporal patterns niche). P6 · `spec.competitive_comparison[]` write-side NEW field per produit (feature-by-feature vs top-3 competitors avec delta observé). Backward compat strict (additif only).

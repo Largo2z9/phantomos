@@ -12,22 +12,6 @@ status: shipped
 
 ---
 
-## 0. v2.91 · Évolution canon (entrée tool-first operator-scope · fan 4 verbes)
-
-> Bump v2.81.0 → v2.91.0. Additif. Les 4 portes MECE, les canons Vincent runtime, le ton premium, les first 30 minutes et les 8 HR-EAD restent en vigueur. Évolution sur deux points + un garde-fou.
-
-**1. Porte D sert enfin le profil tool-first / non-marque.** § 1 et § 2.1 NOMMENT déjà le profil (*"base centralisée multi-sujets"*, *"opérateur vocal pur veut décharger sa tête sans setup formel"*) mais les 4 portes le renvoyaient toutes vers un atlas de marque (Porte D ne bifurquait que vers A/B/C). **Corrigé** · la Porte D bifurque désormais aussi vers `scaffold:operator` quand l'opérateur exprime une intention d'organisation NON-MARQUE (*"mes contacts"*, *"organiser mes prestataires"*, *"suivre mon admin"*, *"centraliser mes outils"*, *"décharger ma tête"*, *"mes projets perso"*). Le substrat operator-scope (custom entities `operator/extensions/`, skill `scaffold-extension`) est shipped · il a maintenant une entrée.
-
-**2. First deliverable non-marque (équivalent en dignité).** Le chemin tool-first produit un livrable concret encadré équivalent à l'atlas · scaffolder et peupler une première extension opérateur via `scaffold-extension` (~10 min, validation point par point). **HR-EAD-3 étendue** · le first deliverable peut être un atlas de marque OU une extension opérateur. **HR-EAD-7 étendue** · Porte D wire aussi `scaffold-extension` (operator-scope) en plus des suggestions A/B/C. Awareness · `first_operator_extension_built` (miroir `first_brand_validated`, awareness.json v1.2).
-
-**3. Garde-fou positionnement.** Le kit DTC reste la démonstration phare. L'agent recommande TOUJOURS le kit DTC en default si signal e-com (Expert Relay · une reco forte), mais ne masque jamais la sortie substrat. L'entrée tool-first est une porte parmi N, pas le pitch principal (cohérent ton premium · ne pas diluer le positionnement DTC).
-
-**Connectivité** · brancher comptes/outils est le plancher (substrat). Jamais exposer la plomberie (Layer 1/2/3, MCP server, env vars) à l'opérateur · cadrer en *"branche ton compte"* / *"ça s'active quand tu déposes tes accès"*, honnêteté sur ce qui n'est pas branché live d'office (cohérent HR-EAD-6 ton premium · anti liste-de-manques).
-
-**Backward compat** · strictement additif. Aucune des 4 portes existantes modifiée dans son rôle marque · Porte D élargie, HR-EAD-3/7 étendues, reste inchangé.
-
----
-
 ## 1. Thèse fondatrice
 
 > L'opérateur arrive avec un contexte hétérogène (vierge · marque isolée · corpus structuré ailleurs · APIs branchées · base centralisée multi-sujets). 4 portes MECE canonisent ces contextes en arcs d'entrée distincts. Multi-entry tuilé visuellement équivalent débloque adoption pour profils non-creative.

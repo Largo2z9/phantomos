@@ -1,11 +1,6 @@
 ---
 title: Investigation Posture · Cartographier avant affirmer
 type: doctrine
-patch_notes:
-  - date: 2026-06-15
-    change: "Reconciliation du close avec le master contextual-intelligence (conflit de doctrines leve). La Section 5 n'est plus 'une question macro rendue a l'operateur' mais un verdict de move defendu selon la trichotomie affirme / ouvre / gate. AP-5 reecrit · l'anti-pattern n'est plus 'close affirmatif' (affirmer le move est desormais voulu) mais 'close qui ne tranche pas le move' (proceed-question mecanique OU menu d'axes weather-report). La rigueur des Sections 1-4 reste entiere · ce qu'on affirme c'est le MOVE, jamais une hypothese comme un fait. Renvoie au master (close trichotomy). Re-test consumers · snapshot-brand, profile-audience, produce-paid-angles, brief-day, build-atlas-complete, onboard-brand. Mesure · evals/ rubric close."
-  - date: 2026-06-14
-    change: "Ajout d'un crochet de capture optionnel en fin de synthèse (§ Crochet de capture). Les items Inconnu / Leviers à haute valeur et les hypothèses Déduit confidence faible / TRÈS faible s'écrivent en write léger vers brands/{slug}/pending-validations.md (§ Enrichment pour le contexte business à surfacer, § Context gate pour les champs inférés à valider), sans dépendre d'un passage ultérieur de learn-from-session. Additif strict : la structure 5 sections et la posture restent inchangées, le crochet est une affordance de persistance native en plus du close ouvert. Aligne sur le pattern d'écriture déjà porté par snapshot-brand / setup-brand. Doctrine de report des étapes différées · docs/system/onboarding-setup-flow.md."
 ---
 
 # Investigation Posture · Cartographier avant affirmer

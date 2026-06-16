@@ -675,16 +675,3 @@ Then AskUserQuestion · *Go / Update spot mode (1-2 axes à ajuster seulement) /
 - `.skills/build-brand-snapshot.py` · snapshot rebuild post-mutation Step 6c
 
 ---
-
-## Patch notes
-
-### v1.0.0 (v2.80 ship)
-
-- NEW producer · ferme le gap "tone of voice framework absent" flag P0 critical Sprint A bis brand strategist senior audit (`tone_of_voice.style` string libre + `register` 4 enum n'était pas un framework operational).
-- Pair avec sister Sprint v2.80 skills · `produce-positioning-canvas` (anchor positioning identity) + `validate-brand-voice-consistency` (audit cross-touchpoint drift post-shipped). Triangle canon brand foundation upstream produce-paid-angles + produce-copy-brief.
-- Pipeline 6 steps · Step 0 gate access + bridge proactif canon v2.77 (AskUserQuestion 2 options si substrat incomplet) · Step 1 compositional cartography 4D axes Nielsen Norman scoring -5/+5 + rationale per axe · Step 2 synthesis voice chart table + cohérence cross-axes scan · Step 3 do/don't lexique produce sourcé canonical (audiences key_expressions + pain_metaphors + brand_personality + banned_words existing) · Step 4 sample sentences per touchpoint 4 minimum (paid headline + organic caption + CRM email subject+body + UI microcopy button+tooltip+error) · Step 5 synthesis 5 sections investigation-posture (Observé · Déduit · Inconnu · Leviers · Close ouvert) · Step 6 persist mutation gate brand.json#/tone_of_voice extension + brand_voice_chart.md standalone + snapshot rebuild.
-- 10 Hard Rules canon strict (HR1 investigation-posture · HR2 4D scoring · HR3 do/don't sourcing · HR4 4 touchpoints min · HR5 cross-axes cohérence · HR6 mutation gate · HR7 bridge proactif v2.77 · HR8 language match · HR9 brand isolation · HR10 snapshot rebuild).
-- 7 anti-patterns explicit (AP-1 voice vague · AP-2 single touchpoint · AP-3 lexique inventé · AP-4 mute sans gate · AP-5 cross-touchpoint contradiction · AP-6 form-fill questionnaire · AP-7 hand-off sans .md standalone).
-- Disambiguation contre · `snapshot-brand` (extraction passive vs workshop méthodique) · `produce-positioning-canvas` (positioning identity vs voice tonality) · `validate-brand-voice-consistency` (scan post-write vs produce upstream) · `setup-brand` (cadrage initial light vs anchoring profond).
-- Subagent_safe: true · Sonnet recommended. Layer production. Isolation brand.
-- Cross-refs canon · investigation-posture · skill-routing-discipline · audience-cartography · contextual-intelligence · CMR · scope-extension-discipline · brand.schema.json · audience.schema.json.

@@ -28,8 +28,6 @@ pipeline:
 disambiguates_against:
   connect-source: "connect-source links an external platform (API/SDK) to PhantomOS as a runtime data source for skills (Layer 2). connect-mcp-server registers an MCP server at the Claude Code level (Layer 1), which then exposes tools to the session agent."
   onboard-brand: "onboard-brand builds a brand workspace inside PhantomOS. connect-mcp-server wires connectivity outside the brand layer."
-patch_notes:
-  - "1.0.0 · v2.42 · ship Layer 1 MCP onboarding skill (gap audit scope 9 v2.41)"
 ---
 
 # connect-mcp-server, orchestrator

@@ -446,15 +446,3 @@ Update `brands/{slug}/status.json` ·
 - `.skills/build-brand-snapshot.py` · snapshot rebuild post-mutation
 
 ---
-
-## Patch notes
-
-### v1.0.0 (v2.80 ship)
-
-- NEW producer canonical · ferme P0 critical gap audit Sprint A bis brand strategist senior · positioning canvas skill manquant avant v2.80.
-- Pair avec extension `brand.schema.json#/positioning` field `positioning_statement` (Moore format compose complet) en patch coordonné Sprint v2.80 (additif backward compat strict).
-- Pipeline 6 steps · Step 0 bridge proactif canon v2.77 (gate access + AskUserQuestion options) · Step 1 cartographie compositional 4 axes (target · need · category · differentiation) · Step 2 compose 3-5 Moore candidates + score 4 lentilles · Step 3 category narrative Trout-Ries/Lochhead · Step 4 distinctive assets register Ehrenberg-Bass · Step 5 synthesis investigation-posture 5 sections · Step 6 persist via mutation gate.
-- Canon matrices consumed · Geoffrey Moore positioning format · Trout & Ries category leadership · Lochhead Play Bigger · Ehrenberg-Bass distinctive assets · Christensen JTBD · canon pain-benefit-chain.
-- Disambiguation contre `setup-brand` (bootstrap initial light) · `snapshot-brand` (extraction factuelle URL) · `produce-strategy` (business strategy goals distinct scope).
-- subagent_safe · true (sonnet model) · invocation via Task tool autorisée pour parallèle build-atlas-complete orchestrator downstream.
-- Backward compat · skills v2.79 et antérieurs zéro impact · NEW skill additif strict.

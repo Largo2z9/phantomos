@@ -7,8 +7,6 @@ layer: territoire
 recommended_model: sonnet
 reasoning_pattern: null
 operator_facing: true
-patch_notes:
-  v1.0.0: "v2.58 NEW · D#386 canon S55 mappers atomiques. Sub-skill atomique deep enrichment spec.specs.* (composition, materials, variants, nutrition_facts, posology, contraindications, origin, production_method, preparation, external_databases, target_suitability, durability, perishability). Extraction depuis logique snapshot-brand spec section + ingestion ad-hoc (PDF founder, fiche technique). Distinct snapshot-brand qui couvre light pass identity/composition basique. map-specs deep-dive sub-fields canon-driven (INCI, Open Food Facts, EFSA refs)."
 description: >
   v1.0.0 (v2.58 D#386 NEW) · Sub-skill atomique cartographie deep enrichment des sub-fields `spec.specs.*` d'un produit (composition structurée, nutrition_facts, posology, contraindications, origin, production_method, preparation, external_databases, target_suitability, durability, perishability). Distinct de snapshot-brand qui fait le light pass surface · map-specs drill-down sub-field par sub-field, canon-driven (INCI cosmétique, Open Food Facts food, EFSA supplements), invocable séparément par l'opérateur pour creuser/refresh la fiche technique sans relancer le full snapshot.
   FR · "map-specs {product}", "creuse les specs de {product}", "approfondis specs produit", "détaille la composition".

@@ -7,8 +7,6 @@ operator_facing: false
 isolation_scope: brand_only
 layer: production
 version: 1.1.0
-patch_notes_v2_87_4:
-  - "1.1.0 (v2.87.4 canonical many-to-many enforcement mirror) · NEW HR-OT-CANON-1 mirror sibling compose-creative v1.8.0 · post-gen fix overlay text DOIT être appliqué sur asset dans `creatives/{CRT-NN}/produced/` (pas hors structure) · maintien entry canonical existing · update creative.json#overlay_fixes[] avec timestamp + fix_type + cross-ref operator validation. Closes audit Fincut v2.87.3 finding · fix overlays appliqués hors structure canonical = orphelins. Backward compat strict additif."
 mode: proposed
 reasoning_pattern: matrix-driven
 permissions:
@@ -64,9 +62,6 @@ consumes:
 produces_proposals_for:
   - brands/{slug}/products/{slug}/produced/{creative_id}-overlay-{timestamp}.jpg
   - brands/{slug}/products/{slug}/produced/{creative_id}.json
-patch_notes:
-  v1.0.1: "v2.51 operator-fiche-output canonique template applied · footer + close refactor langage métier. Step 7 close drop `Wordmark canon valide` → `logo nickel et lisible` (langue opérateur, drop doctrine name leak `canon`). Drop menu `Next · tester live, ou adapter variants pour autre audience, ou refaire si tu vois un detail` → soft offer 1 ligne max · *Si tu veux, on peut la tester en live*. Cohérent template canonique resources/templates/operator-fiche-output.md footer rule (1 reco soft offer max, jamais menu, jamais nommer skill `recompose-creative` en surface)."
-  v1.0.0: "v2.43 ship skill PIL post-gen composite resout 3 frictions runtime fal.ai (wordmark regression caractere par caractere, drop accents francais sub-text, badges trust flous). Composite logo SVG vectoriel via cairosvg + sub-text TrueType UTF-8 preserve. Validation wordmark_pattern regex OCR/SSIM. Complete compose-creative HR3.4 retry policy existing, ne remplace pas."
 ---
 
 # Skill: compose-overlay-text
