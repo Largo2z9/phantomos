@@ -666,7 +666,7 @@ Vue lisible profile · chaque audience portée comme hypothèse avec confidence 
 
 **L'out honnête.** Quand le substrat ne porte pas encore de move, nomme la SEULE inconnue bloquante plus le chemin pour la lever · c'est un move, pas une dérobade. Inventer un verdict pour faire décisif est l'échec.
 
-**Self-critique avant de surfacer le close** · relis-le contre affirme / ouvre / gate · est-ce qu'il décide un move défendu, ou est-ce qu'il décrit-et-rend une question ? Si weather report (état + liste d'inconnues + menu d'axes), réécris en verdict de move avant d'émettre.
+**Self-critique avant de surfacer le close** · relis-le contre affirme / ouvre / gate · est-ce qu'il décide un move défendu, ou est-ce qu'il montre l'état sans le lire puis rend une question passive ? Si weather report (faits montrés mais pas lus + un menu passif rendu · montrer les faits est bon, le ratage c'est l'absence de lecture plus le hand-off), réécris en verdict de move avant d'émettre.
 
 **Exemplar** · few-shot sharp vs mushy · `resources/canon/exemplars/close.md` (le sharp affirme le move dominant et porte l'inconnue lui-même · le mushy tend quatre devoirs et un menu).
 
@@ -905,7 +905,7 @@ Le move · je pars sur {audience dominante} comme socle des angles, c'est elle q
 **Hard rules template** ·
 - Chaque dimension porte sa confidence par défaut quand pas de mining.
 - Anti-pattern · présenter `[2] Problem map · Pain principal · "Je perds mes cheveux"` comme un fait alors que zéro verbatim n'a été récupéré. Toujours signaler "inféré" + indicateurs sources + à valider.
-- Anti-pattern · weather report en close (décrire l'état + lister les inconnues + tendre un menu d'axes / *"lequel veux-tu creuser ?"*) → BANNI. Le close affirme un move défendu (affirme / ouvre / gate) · le drill-down A/B/C reste un REDIRECT opérateur, pas le close par défaut.
+- Anti-pattern · weather report en close (montrer l'état SANS le lire puis tendre une question passive / *"lequel veux-tu creuser ?"*) → BANNI · montrer les faits et lister les inconnues est BON, c'est l'absence de lecture plus le hand-off passif qui plante. Le close affirme un move défendu (affirme / ouvre / gate) · le drill-down A/B/C reste un REDIRECT opérateur, pas le close par défaut.
 
 ## Cross-references
 

@@ -1109,7 +1109,7 @@ Si `brand_personality` + `tone_of_voice` tous deux null (brand fresh post-setup 
 > *Redirect affordance (if you'd rather steer the priority yourself) · "I've got {N} axes ready ({names}), tell me which one."*
 
 **Hard rules Section 5** ·
-- Close = verdict de move (affirme défaut · ouvre porté soi-même · gate au plus 1 question bloquante). Le bulletin météo (décrire l'état, lister les inconnus, tendre un menu d'axes / « lequel veux-tu creuser ? ») est BANNI · une question qui n'est pas un gate est OUVERTE, pas posée.
+- Close = verdict de move (affirme défaut · ouvre porté soi-même · gate au plus 1 question bloquante). Le bulletin météo (montrer l'état SANS le lire puis tendre une question passive / « lequel veux-tu creuser ? ») est BANNI · montrer les faits et lister les inconnus est BON, c'est l'absence de lecture plus le hand-off passif qui plante · une question qui n'est pas un gate est OUVERTE, pas posée.
 - On affirme le MOVE, jamais une hypothèse comme un fait · le move s'appuie sur le Déduit qui porte sa confidence (AP-1 / AP-2 tiennent).
 - Le menu d'axes priorisés reste disponible UNIQUEMENT comme affordance de redirect si l'opérateur choisit de piloter · jamais comme close par défaut.
 - Exemplar de référence (sharp vs mushy) · `resources/canon/exemplars/close.md`.

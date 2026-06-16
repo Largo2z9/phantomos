@@ -7,6 +7,17 @@ Détails étendus par release · `docs/internal/releases/manifest/{version}-mani
 Archive narrative Largo · `docs/internal/project-journal.md`.
 Doctrine canon · `docs/system/changelog-doctrine.md` (v2.83.0+).
 
+## [2.95.1] · 2026-06-17
+### Fixed
+- **Cohérence du close · re-alignement des skills sur la doctrine raffinée de la météo.** Vérification cross-étages demandée par Largo (le system prompt `CLAUDE.md` · les fichiers de connaissance doctrines+skills · la tuyauterie hooks). **Drift trouvé et corrigé** · la définition de « météo » avait été raffinée en 2.94.0 (`CLAUDE.md` + `contextual-intelligence` + `investigation-posture` + l'exemplar + la rubrique · montrer les faits est BON, le ratage c'est l'absence de lecture experte PLUS le hand-off passif), mais 4 lignes dans 3 skills (`brief-day` L193, `snapshot-brand` L1112, `profile-audience` L669+L908) bannissaient encore « décrire l'état + lister les inconnues » comme le ratage. Contradiction interne LIVE depuis 2.94.0, maintenant fermée · le ratage c'est l'absence de lecture plus le hand-off passif, pas le fait de montrer l'état
+
+### Notes
+- **Vérification cross-étages** · étage 1 system prompt `CLAUDE.md` = refiné ✓ · étage 3 connaissance (les 2 doctrines + exemplar + rubrique) = refiné ✓ · étage 3 les 6 skills producteurs = maintenant alignés ✓ · étage 2 tuyauterie = audité
+- **État de la tuyauterie (audité, pas modifié)** · câblés au runtime via `settings.json` · `beat-emit`, `checkpoint-resolver`, `encoding-integrity`, `mutation-guard`, `turn-end-audit` (le détecteur em-dash) · PAS câblés runtime (release/manuel, le trou Phase 2 connu) · les nets `validate-all`, `audit-substrate`, `eval-runner`. Le close reste **sans gate dur runtime**, ce qui est correct (Master rule · sémantique = jamais pré-valider · filet post-hoc seulement · auto-critique en vol côté prose + eval/beat-scan au release)
+- **Preuve de non-régression** · manifest rebuilt identique (timestamp à part) · ces lignes vivent dans le corps des skills, le routeur ne les lit pas
+- **Différé** · Phase 2 câblage runtime (`validate-all --brand` scopé en SubagentStop + PreToolUse avant `map-audiences`), gate derrière le test runtime Largo · calibration empirique (~20 ratings dans `evals/ratings.jsonl`)
+- **Gates** · validate-all 0/0/0/0 · reachability CRITICAL/HIGH 0/0 · eval 6/6 · manifest prouvé identique · em-dash 0 (hors détecteur)
+
 ## [2.95.0] · 2026-06-16
 ### Changed
 - **Dégraissage · purge du changelog de tout le canon** (Phase 2 de l'optim) · 460 lignes retirées (334 de `patch_notes` en frontmatter, 126 de sections `## Changelog` / `## 0 Évolution` dans les corps) sur 44 fichiers (skills + doctrines + commandes). Le changelog vit dans CHANGELOG.md, plus chargé à chaque invocation. **Preuve de non-régression** · le manifest rebuilt reste identique (timestamp à part), le routeur n'a jamais lu les patch_notes. Le gain est en tokens chargés à chaque run · `build-atlas` passe de 162 à 92 lignes de frontmatter, ~45K tokens de changelog toujours-chargés en moins sur la couche skills · plus rapide ET les vraies règles plus saillantes (le levier anti-over-prescribing du champ)

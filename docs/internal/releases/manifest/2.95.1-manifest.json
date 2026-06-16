@@ -1,0 +1,39 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.95.1",
+  "released_at": "2026-06-17",
+  "type": "PATCH",
+  "summary": "Coherence du close · re-alignement des skills producteurs sur la doctrine raffinee de la meteo. Verification cross-etages demandee par Largo (system prompt CLAUDE.md / fichiers de connaissance doctrines+skills / tuyauterie hooks). Drift trouve et corrige · 4 lignes dans 3 skills bannissaient encore 'decrire l'etat + lister les inconnues' comme le ratage, contredisant la doctrine 2.94.0 (montrer les faits est BON · la meteo = s'arreter aux faits SANS lecture + question passive). Manifest prouve identique = zero changement de routage. Voir CHANGELOG [2.95.1].",
+  "changelog_ref": "CHANGELOG.md#[2.95.1]",
+  "headline": [
+    "DRIFT DE COHERENCE CORRIGE · la definition de 'meteo' raffinee en 2.94.0 (CLAUDE.md + contextual-intelligence + investigation-posture + exemplar + rubrique · montrer les faits est BON, le ratage c'est l'absence de lecture experte PLUS le hand-off passif) n'avait pas ete propagee a 4 lignes dans 3 skills (brief-day L193, snapshot-brand L1112, profile-audience L669+L908) qui bannissaient encore 'decrire l'etat + lister les inconnues' · contradiction interne LIVE depuis 2.94.0, maintenant fermee",
+    "VERIFICATION CROSS-ETAGES (la demande de Largo) · etage 1 system prompt CLAUDE.md = refine OK · etage 3 connaissance (les 2 doctrines + exemplar + rubrique) = refine OK · etage 3 les 6 skills producteurs = maintenant alignes · etage 2 tuyauterie = audite (etat rapporte ci-dessous)",
+    "PREUVE DE NON-REGRESSION · manifest rebuilt IDENTIQUE (timestamp a part) · ces lignes vivent dans le corps des skills, le routeur ne les lit pas · seul le read runtime du fichier les surface au modele",
+    "ETAT DE LA TUYAUTERIE (audite, pas modifie) · cables au runtime via settings.json · beat-emit, checkpoint-resolver, encoding-integrity, mutation-guard, turn-end-audit (le detecteur em-dash) · PAS cables runtime (release/manuel, le trou Phase 2 connu) · les nets validate-all, audit-substrate, eval-runner · le close reste SANS gate dur runtime, ce qui est CORRECT (Master rule · semantique = jamais pre-valider · filet post-hoc seulement · auto-critique en vol cote prose + eval/beat-scan au release)",
+    "DIFFERE (Phase 2, post-test-runtime) · cabler validate-all --brand scope en SubagentStop + un PreToolUse avant map-audiences · jamais a l'aveugle avant le test runtime Largo"
+  ],
+  "migrations": [],
+  "schema_changes": [],
+  "new_files": [],
+  "changed_files": [
+    ".skills/skills/brief-day/SKILL.md (L193 · meteo re-cadree · montrer/lister est bon, le ratage c'est l'absence de lecture + hand-off passif)",
+    ".skills/skills/snapshot-brand/SKILL.md (L1112 · idem)",
+    ".skills/skills/profile-audience/SKILL.md (L669 + L908 · idem, x2)",
+    "_version.json + CHANGELOG.md + ce manifest"
+  ],
+  "skills_count": 85,
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "reachability": "CRITICAL 0 / HIGH 0",
+    "eval": "6/6 goldens discrimines",
+    "non_regression_proof": "manifest rebuilt apres edit = identique (diff timestamp-only verifie) · les lignes editees sont du corps de skill, hors extraction routeur",
+    "coherence_check": "0 contradiction residuelle · grep 'decrire l'etat + lister = meteo' = 0 sur les 51 skills · les 3 skills portent desormais 'montrer les faits est bon'",
+    "em_dash": "0 hors le detecteur turn-end-audit.py (intentionnel)"
+  },
+  "deferred": [
+    "Phase 2 cablage runtime · validate-all --brand scope en SubagentStop conditionnel + PreToolUse avant map-audiences (gate derriere le test runtime Largo)",
+    "Merges structurels needs-review (audience-cartography 4->2, voice 2->1, extension 3->1, familles map-* et mine-*)",
+    "Tier Bitter-Lesson test-puis-coupe (decomposition-visibility, templates NIVEAU LIVE, contrat mutation re-prose)",
+    "Calibration empirique · slot ~20 ratings Largo dans evals/ratings.jsonl (rempli par le test runtime)"
+  ]
+}

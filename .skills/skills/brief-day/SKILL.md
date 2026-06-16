@@ -190,7 +190,7 @@ Banque sharp vs mushy du close (à imiter / à fuir) · `resources/canon/exempla
 - **NEVER** injonction dans l'État brand (`tu dois`, `il faut`, `complete ceci`, `manque ceci`). Soft offer indirecte uniquement · "récupérable depuis ton site" (= hint passif), "Pour creuser X, on peut faire Y" (= drill-down option v2.54).
 - **NEVER** plus de 2 items dans la sous-section À explorer si pertinent. Si rien à signaler, drop entièrement la sous-section.
 - **NEVER** wording "À noter" (v2.51 ←) · toujours "À explorer si pertinent" (v2.54+) en wording cohérent doctrine investigation-posture.
-- **NEVER** close en bulletin météo · décrire l'état, lister les inconnues, puis repasser un menu d'axes (*"Other actions ?"*, *"Anything else ?"*, *"lequel veux-tu creuser ?"*) · BANNI. Le close affirme un move défendu (mécanique Step 3). Drill-down macro dispo en redirect si l'opérateur veut arbitrer, jamais comme close par défaut.
+- **NEVER** close en bulletin météo · montrer l'état SANS le lire puis tendre une question passive (*"Other actions ?"*, *"Anything else ?"*, *"lequel veux-tu creuser ?"*) · BANNI. Montrer les faits et lister les inconnues est BON · le ratage c'est l'absence de lecture experte plus le hand-off passif. Le close affirme un move défendu (mécanique Step 3). Drill-down macro dispo en redirect si l'opérateur veut arbitrer, jamais comme close par défaut.
 - **NEVER** présenter items déduits comme observés. Si "audiences inférées non-validées", suffixer `(déduit)` explicite. Anti-pattern AP-1 doctrine BANNI · affirmer une hypothèse comme un fait, même en cartographie d'état.
 
 ## Edge cases
