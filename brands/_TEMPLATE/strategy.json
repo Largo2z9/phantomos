@@ -1,5 +1,5 @@
 {
-  "$comment": "Brand roadmap and targets. Updated monthly. Facts only — no opinions or recommendations.",
+  "$comment": "Brand roadmap and targets. Updated monthly. Facts only · no opinions or recommendations.",
   "_version": "1.1",
   "_field_types": {
     "annual_goals[].metric": "observed",
@@ -33,7 +33,7 @@
   "constraints": [],
 
   "pacing": {
-    "$comment": "Budget pacing — filled by pilotage skill or manually. Updated weekly.",
+    "$comment": "Budget pacing · filled by pilotage skill or manually. Updated weekly.",
     "period": "monthly",
     "planned_spend": null,
     "actual_spend": null,

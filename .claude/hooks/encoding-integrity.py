@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PostToolUse hook (matcher Bash) — encoding-integrity gate (D#519).
+PostToolUse hook (matcher Bash) · encoding-integrity gate (D#519).
 
 THE CATEGORY SHIFT · les garanties d'encodage vivent dans le CODE, pas dans la
 prose SKILL.md. Tout l'arc D#512-519 a montré que les checkpoints en prose se

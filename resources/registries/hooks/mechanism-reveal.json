@@ -63,14 +63,14 @@
       "vertical": "telehealth-rx",
       "geo": "US",
       "example_rcv_ids": ["RCV-177", "RCV-196", "RCV-134"],
-      "realization": "Réalisation hook-level chez hers RCV-177 : '1 minoxidil gummy/day for thicker, fuller hair' — la posologie + l'actif Rx (minoxidil) posés comme promesse d'ouverture, piliers 'Minoxidil AN INGREDIENT TO REGROW HAIR IN 3-6 MONTHS* / Biotin TO SUPPORT IT'. La même factory réutilise mechanism-reveal au niveau beat ailleurs (hims RCV-134 nomme la molécule Rx 'with enclomiphene' comme différenciateur ; hers RCV-196 matérialise les biomarqueurs mesurés). hims + hers = UNE seule factory créative genrée (D#485), comptée comme 1 source."
+      "realization": "Réalisation hook-level chez hers RCV-177 : '1 minoxidil gummy/day for thicker, fuller hair' · la posologie + l'actif Rx (minoxidil) posés comme promesse d'ouverture, piliers 'Minoxidil AN INGREDIENT TO REGROW HAIR IN 3-6 MONTHS* / Biotin TO SUPPORT IT'. La même factory réutilise mechanism-reveal au niveau beat ailleurs (hims RCV-134 nomme la molécule Rx 'with enclomiphene' comme différenciateur ; hers RCV-196 matérialise les biomarqueurs mesurés). hims + hers = UNE seule factory créative genrée (D#485), comptée comme 1 source."
     }
   ],
   "independent_source_count": 2,
   "vertical_scope": {
     "origins": ["wellness-supplement", "telehealth-rx"],
     "breadth": "cross-vertical",
-    "freedom_cursor_note": "Confirmé cross-vertical (supplément FR + télésanté US) ET cross-géo, donc emprunt relativement sûr partout où un actif/ingrédient identifiable existe. exploit = rester dans une catégorie à actif nommable (supplément, skincare actif, télésanté) et nommer l'ingrédient + dose de la marque opérée. explore = reslotter vers une catégorie sans 'actif chimique' évident (ex appareil, vêtement technique) en transposant 'mécanisme' à un composant fonctionnel chiffré (matériau, technologie, pression) — emprunt conscient à surfacer à l'opérateur."
+    "freedom_cursor_note": "Confirmé cross-vertical (supplément FR + télésanté US) ET cross-géo, donc emprunt relativement sûr partout où un actif/ingrédient identifiable existe. exploit = rester dans une catégorie à actif nommable (supplément, skincare actif, télésanté) et nommer l'ingrédient + dose de la marque opérée. explore = reslotter vers une catégorie sans 'actif chimique' évident (ex appareil, vêtement technique) en transposant 'mécanisme' à un composant fonctionnel chiffré (matériau, technologie, pression) · emprunt conscient à surfacer à l'opérateur."
   },
   "related_mechanic_ids": [
     "mechanism-reveal",
@@ -90,11 +90,11 @@
     }
   ],
   "anti_patterns": [
-    "Audience unaware / problem-aware : ouvrir sur un actif technique avant d'avoir établi le problème tombe à plat (le spectateur ne sait pas encore pourquoi il devrait s'en soucier) — préférer un hook problème/tension d'abord.",
+    "Audience unaware / problem-aware : ouvrir sur un actif technique avant d'avoir établi le problème tombe à plat (le spectateur ne sait pas encore pourquoi il devrait s'en soucier) · préférer un hook problème/tension d'abord.",
     "Actif non différenciant ou commodité (ex 'vitamine C') : nommer un ingrédient banal ne crédibilise rien et gâche la première seconde.",
     "Dose/source inventée ou non vérifiable : le pouvoir du pattern vient de la spécificité réelle ; un chiffre creux ou faux annule la crédibilité et expose côté compliance (surtout télésanté Rx / allégations santé).",
     "Empilement de jargon sans bénéfice relié : nommer 4 actifs sans le 'pour [bénéfice]' transforme le hook en fiche technique illisible."
   ],
-  "curation_notes": "Promotion sur RÉCURRENCE cross-source (signal perf réelle = futur, via feedback-loop). 2 sources INDÉPENDANTES factory-aware (naali + himshers ; hims+hers = 1 factory miroir D#485) -> promote-ready. CAVEAT clustering : karacare (FR · beauty-hair, batch 2026-06-07-01, RCV-01/02/04) porte mechanism-reveal UNIQUEMENT au niveau beat_type (jamais hook.mechanic_id) — ne compte donc PAS comme source confirmante pour cette HOOK-mechanic (mais montre que la mécanique vit aussi en milieu d'ad, transversale). naali = source la plus dense (3 réalisations hook-level distinctes : association d'actifs, équation A+B=produit, analogie de source). himshers n'a qu'1 réalisation strictement hook-level (RCV-177) mais la factory réutilise le move en beat sur plusieurs ads -> source solide mais à surveiller pour confirmer la robustesse hook-level. Passe à 3 sources si une 3e factory indépendante adopte mechanism-reveal AU NIVEAU HOOK.",
+  "curation_notes": "Promotion sur RÉCURRENCE cross-source (signal perf réelle = futur, via feedback-loop). 2 sources INDÉPENDANTES factory-aware (naali + himshers ; hims+hers = 1 factory miroir D#485) -> promote-ready. CAVEAT clustering : karacare (FR · beauty-hair, batch 2026-06-07-01, RCV-01/02/04) porte mechanism-reveal UNIQUEMENT au niveau beat_type (jamais hook.mechanic_id) · ne compte donc PAS comme source confirmante pour cette HOOK-mechanic (mais montre que la mécanique vit aussi en milieu d'ad, transversale). naali = source la plus dense (3 réalisations hook-level distinctes : association d'actifs, équation A+B=produit, analogie de source). himshers n'a qu'1 réalisation strictement hook-level (RCV-177) mais la factory réutilise le move en beat sur plusieurs ads -> source solide mais à surveiller pour confirmer la robustesse hook-level. Passe à 3 sources si une 3e factory indépendante adopte mechanism-reveal AU NIVEAU HOOK.",
   "_schema_version": "library-pattern/1.0"
 }

@@ -1,6 +1,6 @@
 # Proof Registry
 
-> **TYPE:** Taxonomie — registre vivant
+> **TYPE:** Taxonomie · registre vivant
 > **CONSOMMÉ PAR:** hooks-generator, script-writer, brief-generator, creative-strategist, pattern-extractor
 > **SOURCE:** Retro-engineering 522 créas statiques (10 batches, 9 brands, 6 niches)
 > **DÉPEND DE:** `templates/creative-formula.md` (§5.3)
@@ -20,16 +20,16 @@
 ## Format fiche
 
 ```
-### [#] [ID] — [Nom]
+### [#] [ID] · [Nom]
 - **Force:** faible | moyenne | forte | maximale
 - **Définition:** [prose, 1-2 phrases]
 - **Curseur min:** [number]
-- **Objection levée:** [phrase courte — ce que ça prouve]
+- **Objection levée:** [phrase courte · ce que ça prouve]
 - **Angles:** [array]
-- **Stack avec:** [array — proof types souvent empilés avec]
-- **Awareness:** [array — awareness levels où pertinent]
-- **Conditions:** [array — tags]
-- **Anti-conditions:** [array — tags]
+- **Stack avec:** [array · proof types souvent empilés avec]
+- **Awareness:** [array · awareness levels où pertinent]
+- **Conditions:** [array · tags]
+- **Anti-conditions:** [array · tags]
 - **Piège:** [prose, 1 phrase]
 - **Batches:** [array]
 ```
@@ -38,7 +38,7 @@
 
 ## Fiches (force croissante)
 
-### 1. risk-reversal — Garantie / Remboursement
+### 1. risk-reversal · Garantie / Remboursement
 
 - **Force:** faible
 - **Définition:** Le prospect ne prend aucun risque financier. La marque absorbe le risque (remboursement, essai gratuit, retour).
@@ -54,7 +54,7 @@
 
 ---
 
-### 2. badge-tech — Badge Technologique
+### 2. badge-tech · Badge Technologique
 
 - **Force:** faible
 - **Définition:** Certification, compatibilité, ou standard tech reconnu. Badge tiers crédible (Apple, USB-C, CE) comme shortcut de confiance.
@@ -70,7 +70,7 @@
 
 ---
 
-### 3. best-seller-badge — Badge Best-Seller
+### 3. best-seller-badge · Badge Best-Seller
 
 - **Force:** moyenne
 - **Définition:** Indicateur de popularité : "best-seller", "#1 en [catégorie]". Bandwagon effect.
@@ -86,10 +86,10 @@
 
 ---
 
-### 4. social-proof-number — Preuve Sociale Chiffrée
+### 4. social-proof-number · Preuve Sociale Chiffrée
 
 - **Force:** moyenne
-- **Définition:** Nombre quantifiant l'adoption — clients, avis, communauté, produits vendus. Volume = proxy qualité.
+- **Définition:** Nombre quantifiant l'adoption · clients, avis, communauté, produits vendus. Volume = proxy qualité.
 - **Curseur min:** 4
 - **Objection levée:** "N personnes ont déjà fait confiance."
 - **Angles:** [community, security, transformation]
@@ -102,7 +102,7 @@
 
 ---
 
-### 5. customer-review — Avis Client Authentique
+### 5. customer-review · Avis Client Authentique
 
 - **Force:** moyenne-forte
 - **Définition:** Verbatim client réel + étoiles et/ou source vérifiable (Trustpilot, Google). Voix client > voix marque.
@@ -113,12 +113,12 @@
 - **Awareness:** [problem_aware, solution_aware, product_aware]
 - **Conditions:** [avis_specifiques_pas_generiques, source_verifiable, avis_raconte_transformation]
 - **Anti-conditions:** [avis_generiques, avis_fake, source_non_verifiable]
-- **Piège:** Avis trop parfait = semble fake. Garder les imperfections de langage — c'est l'authenticité.
+- **Piège:** Avis trop parfait = semble fake. Garder les imperfections de langage · c'est l'authenticité.
 - **Batches:** [B01, B08]
 
 ---
 
-### 6. press-logos — Logos Presse
+### 6. press-logos · Logos Presse
 
 - **Force:** forte
 - **Définition:** Logos médias reconnus comme preuve de couverture. Transfert d'autorité du média vers le produit.
@@ -134,7 +134,7 @@
 
 ---
 
-### 7. claim-science — Claim Scientifique Non Attribué
+### 7. claim-science · Claim Scientifique Non Attribué
 
 - **Force:** forte
 - **Définition:** Affirmation scientifique sans attribution : "clinically proven", "testé dermatologiquement". Aura scientifique sans source.
@@ -150,12 +150,12 @@
 
 ---
 
-### 8. cost-calculator — Démonstration Mathématique
+### 8. cost-calculator · Démonstration Mathématique
 
 - **Force:** forte
-- **Définition:** Calcul explicite montrant économie/valeur — prix barré, coût/jour, comparaison annuelle. Le chiffre persuade.
+- **Définition:** Calcul explicite montrant économie/valeur · prix barré, coût/jour, comparaison annuelle. Le chiffre persuade.
 - **Curseur min:** 7
-- **Objection levée:** "Fais le calcul toi-même — objectivement un bon deal."
+- **Objection levée:** "Fais le calcul toi-même · objectivement un bon deal."
 - **Angles:** [price-value, efficiency, parasitic-positioning]
 - **Stack avec:** [risk-reversal, social-proof-number, parasitic-positioning]
 - **Awareness:** [product_aware, most_aware]
@@ -166,7 +166,7 @@
 
 ---
 
-### 9. celebrity-endorsement — Endorsement Célébrité
+### 9. celebrity-endorsement · Endorsement Célébrité
 
 - **Force:** forte
 - **Définition:** Personnalité connue recommande/utilise le produit. Capital confiance/admiration transféré au produit.
@@ -177,15 +177,15 @@
 - **Awareness:** [solution_aware, product_aware, most_aware]
 - **Conditions:** [association_authentique, audience_admire, endorsement_reel]
 - **Anti-conditions:** [association_artificielle, celebrite_controversee, audience_sceptique_endorsement, budget_insuffisant]
-- **Piège:** Celebrity fatigue — 15 endorsements = 0 crédibilité. Exclusivité catégorielle renforce. Demi-vie courte.
+- **Piège:** Celebrity fatigue · 15 endorsements = 0 crédibilité. Exclusivité catégorielle renforce. Demi-vie courte.
 - **Batches:** [B04, B05]
 
 ---
 
-### 10. press-quote — Citation Presse Verbatim
+### 10. press-quote · Citation Presse Verbatim
 
 - **Force:** très forte
-- **Définition:** Citation complète d'un article, mot pour mot. Plus fort que logos seuls — le contenu éditorial spécifique crédibilise.
+- **Définition:** Citation complète d'un article, mot pour mot. Plus fort que logos seuls · le contenu éditorial spécifique crédibilise.
 - **Curseur min:** 7
 - **Objection levée:** "Un journaliste a écrit EXACTEMENT ça."
 - **Angles:** [expertise, security, innovation]
@@ -198,7 +198,7 @@
 
 ---
 
-### 11. parasitic-positioning — Positionnement Parasitaire
+### 11. parasitic-positioning · Positionnement Parasitaire
 
 - **Force:** très forte
 - **Définition:** Se positionner comme alternative/generic d'un category leader connu. Le référent fait le travail d'éducation.
@@ -214,10 +214,10 @@
 
 ---
 
-### 12. clinical-trial — Essai Clinique Attribué
+### 12. clinical-trial · Essai Clinique Attribué
 
 - **Force:** maximale
-- **Définition:** Essai clinique spécifique avec attribution — institut, méthodologie, statistique. Preuve scientifique la plus forte en créa.
+- **Définition:** Essai clinique spécifique avec attribution · institut, méthodologie, statistique. Preuve scientifique la plus forte en créa.
 - **Curseur min:** 7
 - **Objection levée:** "[Institut crédible] a prouvé que ça marche, avec des chiffres."
 - **Angles:** [expertise, security, innovation, efficiency]
@@ -230,12 +230,12 @@
 
 ---
 
-### 13. sponsoring-disclosure — Disclosure Partenariat
+### 13. sponsoring-disclosure · Disclosure Partenariat
 
 - **Force:** maximale (paradoxale)
 - **Définition:** Mention explicite contenu sponsorisé. Paradoxe : la transparence renforce la crédibilité au lieu de la détruire.
 - **Curseur min:** 5
-- **Objection levée:** "On est transparent — si on le montre, c'est qu'on est confiant."
+- **Objection levée:** "On est transparent · si on le montre, c'est qu'on est confiant."
 - **Angles:** [security, community, expertise]
 - **Stack avec:** [customer-review, social-proof-number]
 - **Awareness:** [problem_aware, solution_aware, product_aware]
@@ -246,7 +246,7 @@
 
 ---
 
-### 14. regulatory-disclaimer — Disclaimer Réglementaire
+### 14. regulatory-disclaimer · Disclaimer Réglementaire
 
 - **Force:** maximale (paradoxale)
 - **Définition:** Mention légale obligatoire (FDA, "Rx required", "Results not typical"). La contrainte légale peut renforcer la perception de sérieux.
@@ -296,4 +296,4 @@
 
 ---
 
-*Dernière mise à jour : 2026-03-17 (Session 11 — 14 fiches taggées, hiérarchisées)*
+*Dernière mise à jour : 2026-03-17 (Session 11 · 14 fiches taggées, hiérarchisées)*

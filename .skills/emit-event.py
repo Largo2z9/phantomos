@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Thin primitive — append a structured event to the workspace audit trail.
+Thin primitive · append a structured event to the workspace audit trail.
 
 Used by sub-skills (validate-output-coherence, validate-resources, ...) that
 need to record they ran without going through the mutation pipeline (which is
@@ -16,8 +16,8 @@ Usage:
         --payload '{"brand_slug":"acme","ok":true,"warnings":1,"blocking":0}'
 
 Exit codes:
-    0 — event appended
-    1 — bad args or workspace root not found
+    0 · event appended
+    1 · bad args or workspace root not found
 """
 from __future__ import annotations
 

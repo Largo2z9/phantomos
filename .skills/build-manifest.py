@@ -41,9 +41,29 @@ if not HAVE_YAML:
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILLS_DIR = SCRIPT_DIR / "skills"
 OUTPUT = SCRIPT_DIR / "_manifest.json"
+MATRIX = SCRIPT_DIR.parent / "resources" / "canon" / "model-provider-matrix.json"
 
 # v2.42+ jargon bank generation
 WORKSPACE_ROOT = SCRIPT_DIR.parent
+
+
+def load_allowed_aliases():
+    """Read the durable model tiers from the provider matrix (fail-open).
+
+    The matrix (resources/canon/model-provider-matrix.json) is the single source
+    of truth for which logical model aliases exist. A skill whose recommended_model
+    is not in this set is a typo or a stale pin. Validation happens at BUILD time,
+    never at runtime (model-versioning-canon.md v2.46 dropped the runtime check on
+    purpose). If the matrix is missing or unreadable, fall back to the canonical
+    default so the self-evolution loop never breaks on an absent file.
+    """
+    default = {"opus", "sonnet", "haiku"}
+    try:
+        data = json.loads(MATRIX.read_text(encoding="utf-8"))
+        aliases = set(data.get("allowed_aliases") or [])
+        return aliases or default
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return default
 JARGON_SOURCE = WORKSPACE_ROOT / "docs" / "system" / "operator-vocabulary-translation.md"
 JARGON_OUTPUT = SCRIPT_DIR / "_jargon_bank.json"
 
@@ -267,7 +287,7 @@ def _split_variants(cell):
     if not text:
         return []
     # Normalize separators: middle dot · is canonical, comma is fallback.
-    # Some rows use ` · ` and others use `,` — handle both.
+    # Some rows use ` · ` and others use `,` · handle both.
     parts = []
     for chunk in text.split("·"):
         for piece in chunk.split(","):
@@ -402,7 +422,22 @@ def build_manifest():
     OUTPUT.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote {OUTPUT} with {len(entries)} skills")
 
+    # Durability check (build-time, not runtime): every skill must name a model tier
+    # that exists in the provider matrix. A stray value is a typo or a stale pin that
+    # would route a skill to nothing. Returns the offenders so a release gate can fail.
+    allowed = load_allowed_aliases()
+    offenders = [(e["name"], e["model"]) for e in entries if e["model"] not in allowed]
+    if offenders:
+        print(f"WARN: {len(offenders)} skill(s) name a model outside the provider matrix "
+              f"({sorted(allowed)}):", file=sys.stderr)
+        for name, model in offenders:
+            print(f"  - {name}: recommended_model={model!r}", file=sys.stderr)
+    return offenders
+
 
 if __name__ == "__main__":
-    build_manifest()
+    offenders = build_manifest()
     build_jargon_bank()
+    # --strict turns the model-tier check into a release gate (exit 1 on any offender).
+    if "--strict" in sys.argv and offenders:
+        sys.exit(1)

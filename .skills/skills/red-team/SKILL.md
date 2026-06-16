@@ -47,7 +47,7 @@ Adapt to the operator's language (detected or in `/operator/profile.json → pre
 
 ---
 
-## Phase 0 — Scope + panel composition
+## Phase 0 · Scope + panel composition
 
 Before any analysis, ask 2-3 short questions using `AskUserQuestion` tool (load via `ToolSearch(select:AskUserQuestion)` if not loaded):
 
@@ -84,10 +84,10 @@ From the answers, compose 5-6 experts. Each expert = **business role** (domain-s
 🔴 Red Team panel composed:
 
 Expert 1: [Business role]
-  → Prism: [Cognitive prism] — [one sentence on what they specifically look at]
+  → Prism: [Cognitive prism] · [one sentence on what they specifically look at]
 
 Expert 2: [Business role]
-  → Prism: [Cognitive prism] — [one sentence]
+  → Prism: [Cognitive prism] · [one sentence]
 
 [...]
 ```
@@ -100,7 +100,7 @@ Wait for validation. If operator wants adjustments (add/remove expert, change pr
 
 ---
 
-## Phase 0.5 — Assumption Audit (silent)
+## Phase 0.5 · Assumption Audit (silent)
 
 Before launching Phase 1, identify 3-5 **implicit assumptions** of the project silently. These are NOT shown to the operator. They guide expert focus.
 
@@ -110,7 +110,7 @@ Examples of implicit assumptions: "the market exists and is big enough", "the te
 
 ---
 
-## Phase 1 — Solo analysis
+## Phase 1 · Solo analysis
 
 Each expert produces their analysis independently.
 
@@ -135,9 +135,9 @@ The confidence score distinguishes issues grounded in hard data (8-10) from intu
 ```
 ── Expert [N]: [Role] / Prism [Prism] ──
 
-1. [What — one punchy sentence]
+1. [What · one punchy sentence]
    Impact: [Quantified or concrete, not vague]
-   Confidence: [X/10] — [what would change my mind]
+   Confidence: [X/10] · [what would change my mind]
    Piste: [Specific action]
 
 2. [...]
@@ -147,16 +147,16 @@ The confidence score distinguishes issues grounded in hard data (8-10) from intu
 
 ---
 
-## Phase 2 — Cross-talk
+## Phase 2 · Cross-talk
 
 The most important phase. This is what differentiates a red-team from a problem list.
 
 Each expert reacts to 1-2 points raised by others. Reaction types:
 
-- **🔗 I confirm** — "Expert X's observation on [point] strengthens my issue #[N] because..."
-- **⚡ I contradict** — "I disagree with Expert X on [point] because..."
-- **➕ I amplify** — "Expert X's point is worse than stated because..."
-- **💡 I advise** — "On Expert X's point, I'd recommend..."
+- **🔗 I confirm** · "Expert X's observation on [point] strengthens my issue #[N] because..."
+- **⚡ I contradict** · "I disagree with Expert X on [point] because..."
+- **➕ I amplify** · "Expert X's point is worse than stated because..."
+- **💡 I advise** · "On Expert X's point, I'd recommend..."
 
 ### Cross-talk rules
 
@@ -169,15 +169,15 @@ Each expert reacts to 1-2 points raised by others. Reaction types:
 ```
 ── Cross-talk ──
 
-[Expert N — Role] → [reaction type] [Expert M — Role]
-"[Reaction in 2-3 sentences max — direct, no politeness]"
+[Expert N · Role] → [reaction type] [Expert M · Role]
+"[Reaction in 2-3 sentences max · direct, no politeness]"
 
 [...]
 ```
 
 ---
 
-## Phase 3 — Chairman verdict
+## Phase 3 · Chairman verdict
 
 You resume the Chairman role. You synthesize AND you rule. The Chairman is not a secretary, they are a decider.
 
@@ -189,7 +189,7 @@ Problems raised by 2+ experts from different angles. These are absolute prioriti
 
 Disagreements between experts. Present both sides and rule: give your opinion on who is probably right, why, and in what context the other would be right. **The Chairman does not stay neutral, they arbitrate.**
 
-### 3. Final verdict — "What to do Mvitatone morning"
+### 3. Final verdict · "What to do Mvitatone morning"
 
 Ranking of max 5 priority actions, ordered by severity:
 
@@ -213,7 +213,7 @@ One sentence on what the panel didn't find problematic (reassure the operator on
 
 ---
 
-## Phase 4 — Archive + propagate (automatic)
+## Phase 4 · Archive + propagate (automatic)
 
 After the operator sees the verdict:
 

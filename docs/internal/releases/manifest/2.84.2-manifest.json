@@ -35,7 +35,7 @@
       "AP-VD-6 zéro nom doctrine canon leaké surface opérateur · grep 'DRGFP|confidence-propagation|atlas-canon-copy|territory-discipline|creative-formula|atlas-brand|dependency-resolution-protocol' retourne 0 occurrence",
       "P1 précision dense · termes canon utilisés une fois · pas redéfinition",
       "P3 phrases courtes · zéro 'par ailleurs/en effet/il convient de noter'",
-      "Em-dash zéro · grep '—' retourne 0",
+      "Em-dash zéro · grep '·' retourne 0",
       "Casse · minuscules par défaut sauf noms propres (Schwartz, Christensen, Mark+Pearson absents · KSM-66 exemple technique)",
       "AP-VD-8 EXCLU (registre opérateur préservé) · 'vous' et 'votre marque' utilisés · cohérent scope (b)",
       "Versioning inline retiré · zéro v2.X.X · zéro S55 · zéro audit Sxx"

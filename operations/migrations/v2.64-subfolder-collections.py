@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-v2.64-subfolder-collections.py — BREAKING migration · ontologie sémantique pure.
+v2.64-subfolder-collections.py · BREAKING migration · ontologie sémantique pure.
 
 Refactor v2.63 top-level collections → v2.64 sub-audience / sub-product location.
 Sémantique pure · pain_point + objection = expression audience-specific (sub-audience).

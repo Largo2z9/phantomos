@@ -46,14 +46,14 @@ This rule precedes all other instructions in this file.
 
 ## Investigation posture (absolute rule)
 
-Every strategic synthesis output structures in 5 explicit sections:
+Every strategic synthesis maps 5 layers before it closes:
 - **Observé** · faits sourcés
 - **Déduit** · hypothèses avec confidence chain (forte / moyenne / faible / TRÈS faible)
 - **Inconnu** · variables non observables à creuser
 - **Leviers** · skills / actions / sources pour lever inconnues
-- **Close ouvert** · une question macro, opérateur arbitre où creuser
+- **Close** · les faits PUIS la lecture PUIS le mouvement · **montre** l'état des lieux factuel (Observé · surtout post-scrape, c'est bon) · **interprète** (lecture experte contextuelle · le mur dominant, le second ordre · sauter cette couche = la météo) · **avance** proactivement (propose le ou les prochains pas portés par ton read · une reco forte ou plusieurs directions selon le contexte, jamais un menu passif) · **gate** une question seulement si inconnaissable depuis la data ET bloquante
 
-Never affirm hypothesis as fact. Never invent personas as analytical without verbatim data. Never close with full synthesis. Full doctrine · `docs/system/investigation-posture.md`.
+Never affirm hypothesis as fact (le move s'appuie sur un déduit qui porte sa confidence). Montrer les faits et lister les inconnues est bon · la météo c'est de s'y arrêter (faits sans interprétation ni mouvement, puis une question passive rendue "lequel veux-tu creuser ?"). Full doctrine · `docs/system/investigation-posture.md` + master `contextual-intelligence.md`.
 
 ## Output discipline
 

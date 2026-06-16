@@ -24,7 +24,7 @@ One paragraph describing the skill's purpose, scope, and relationship to other s
 
 ---
 
-## Step 1 — {First step name}
+## Step 1 · {First step name}
 
 Describe what the agent does in this step. Be specific about:
 - What to read
@@ -33,7 +33,7 @@ Describe what the agent does in this step. Be specific about:
 
 ---
 
-## Step 2 — {Second step name}
+## Step 2 · {Second step name}
 
 Continue with subsequent steps. Each step should be self-contained and actionable.
 
@@ -50,9 +50,9 @@ Include field placeholders with {curly braces}.
 
 ## Hard Rules
 
-- **Rule 1** — hard constraint the agent must never violate
-- **Rule 2** — another hard constraint
-- **Never [X]** — format as imperatives
+- **Rule 1** · hard constraint the agent must never violate
+- **Rule 2** · another hard constraint
+- **Never [X]** · format as imperatives
 
 ---
 
@@ -79,6 +79,6 @@ Include field placeholders with {curly braces}.
 - Core skills (shipped with template) are in `.skills/skills/`
 - Custom skills should go in `.skills/skills/` alongside core skills
 - If two skills have overlapping triggers, make triggers more specific to avoid ambiguity
-- Hard rules are the agent's guardrails — they override all other instructions in the skill
+- Hard rules are the agent's guardrails · they override all other instructions in the skill
 - Steps should be numbered and sequential
 - Output format should be copyable/parseable by consuming agents

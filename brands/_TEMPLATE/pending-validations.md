@@ -1,4 +1,4 @@
-# Pending validations — {brand-name}
+# Pending validations · {brand-name}
 
 > Ambient buffer of micro validation / enrichment tasks for this brand.
 > The agent surfaces these items in smart suggests (b)/(d) when relevant, without forcing.
@@ -6,7 +6,7 @@
 
 ---
 
-## Context gate — inferred fields to review
+## Context gate · inferred fields to review
 
 *Fields set by inference (scrape, deduction) that have not been humanly validated yet. Blocks dependent deliverables (soft friction: the agent flags if used without validation).*
 
@@ -18,7 +18,7 @@
 
 ---
 
-## Access gate — platform access to configure
+## Access gate · platform access to configure
 
 *Tokens missing, required by planned or relevant skills for the brand. Setup flow documented in `resources/conventions/{platform}.json` after first config.*
 
@@ -30,7 +30,7 @@
 
 ---
 
-## Enrichment — past learnings to surface
+## Enrichment · past learnings to surface
 
 *Business context / history not captured at scrape. Without it, deliverables will reinvent things already tested.*
 
@@ -42,7 +42,7 @@
 
 ---
 
-## Skill candidates — tasks to convert into reusable plans
+## Skill candidates · tasks to convert into reusable plans
 
 *Tasks detected as long or recurring, candidates to become documented skills rather than one-shot runs.*
 

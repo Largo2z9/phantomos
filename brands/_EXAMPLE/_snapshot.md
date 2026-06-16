@@ -1,14 +1,14 @@
-# _EXAMPLE — snapshot
+# _EXAMPLE · snapshot
 
 ## Identity
 - Name: Stepprs
-- Tagline: —
-- Sector: —
+- Tagline: ·
+- Sector: ·
 - Language: en
 - Tone essentials: casual
 
 ## Products (1)
-- massage-insoles — 27.0
+- massage-insoles · 27.0
 
 ## Audiences (2)
 - chronic-pain-45: chronic-pain-45

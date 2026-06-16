@@ -30,8 +30,8 @@ Verifies that every cross-reference declared in the draft schema points to a rea
 
 Given the draft schema's `cross_refs` array (e.g. `"product_slug → brands/{slug}/products/{product_slug}/spec.json"`):
 
-1. **Parse each cross_ref** — extract the source field, the target core entity type, and the target path pattern.
-2. **Walk the brand workspace** — for each declared target, verify the referenced path pattern can resolve on at least one existing entity.
+1. **Parse each cross_ref** · extract the source field, the target core entity type, and the target path pattern.
+2. **Walk the brand workspace** · for each declared target, verify the referenced path pattern can resolve on at least one existing entity.
 3. **Resolution outcomes** :
    - All refs resolve → return OK to orchestrator.
    - One ref resolves to zero entities (e.g. brand has no products yet but schema references `product_slug`) → return WARNING. Operator can proceed (the schema is future-proof) but no instance can be populated until the target exists.
@@ -53,5 +53,5 @@ Given the draft schema's `cross_refs` array (e.g. `"product_slug → brands/{slu
 ## Hard rules
 
 - Never modify the schema here. Only flag.
-- Do not resolve `null` or optional refs as errors — schema may declare an optional ref.
-- Runtime rot (target renamed later) is not detected here — that's a known V1 limit, runtime check is on the roadmap.
+- Do not resolve `null` or optional refs as errors · schema may declare an optional ref.
+- Runtime rot (target renamed later) is not detected here · that's a known V1 limit, runtime check is on the roadmap.

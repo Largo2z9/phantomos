@@ -3,8 +3,8 @@
   "version": "2.7.1",
   "released_at": "2026-04-24",
   "compatible_from": "2.0.0",
-  "theme": "P0 patches from v2.7.0 audit — coherence loop + REFINE category + canonical _field_types doc",
-  "summary": "Three P0 patches surfaced by the v2.7.0 fresh-instance audit. (1) Close the coherence_check event loop so the sub-skill emits an event the turn-end hook can verify. (2) Add a REFINE category to checkpoint-resolver with franglais matching patterns. (3) Ship a canonical reference for _field_types — the four-value tag (observed | stated | derived | structured) was cited in 8+ skills and CLAUDE.md but had no dedicated doc, leading to drift on edge cases (tone_of_voice as observed vs stated, benefit chains as structured vs observed).",
+  "theme": "P0 patches from v2.7.0 audit · coherence loop + REFINE category + canonical _field_types doc",
+  "summary": "Three P0 patches surfaced by the v2.7.0 fresh-instance audit. (1) Close the coherence_check event loop so the sub-skill emits an event the turn-end hook can verify. (2) Add a REFINE category to checkpoint-resolver with franglais matching patterns. (3) Ship a canonical reference for _field_types · the four-value tag (observed | stated | derived | structured) was cited in 8+ skills and CLAUDE.md but had no dedicated doc, leading to drift on edge cases (tone_of_voice as observed vs stated, benefit chains as structured vs observed).",
   "changes": [
     {"path": "docs/system/field-types.md", "kind": "new", "reason": "Canonical reference for the four field-type tags. Binary decision test per type, decisive examples, 5 hard rules (no manual derived, tag exactly once, precision > globs, structured requires framework ref, unmapped writes refused)."},
     {"path": "docs/system/architecture.md", "kind": "edit", "reason": "Cross-ref to field-types.md from the Field Type System section."},
@@ -21,6 +21,6 @@
   ],
   "caught_by": "v2.7.0 fresh-instance audit (3 P0 findings logged at end of S36).",
   "known_gaps": [
-    "Patch P0 #1 (coherence loop closure) shipped here as a soft prescription — proven half-fix in v2.7.2 stress test, walked back to a mechanical Python primitive."
+    "Patch P0 #1 (coherence loop closure) shipped here as a soft prescription · proven half-fix in v2.7.2 stress test, walked back to a mechanical Python primitive."
   ]
 }

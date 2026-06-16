@@ -25,7 +25,7 @@
       "META_PAGE_ID",
       "META_INSTAGRAM_USER_ID"
     ],
-    "loading_pattern": "from dotenv import load_dotenv; import os\nload_dotenv(os.path.join(BRAND_PATH, 'credentials.env'))\n# One shared token across brands — only META_AD_ACCOUNT_ID changes per brand.",
+    "loading_pattern": "from dotenv import load_dotenv; import os\nload_dotenv(os.path.join(BRAND_PATH, 'credentials.env'))\n# One shared token across brands · only META_AD_ACCOUNT_ID changes per brand.",
     "shared_token_note": "Un seul token Meta partagé entre toutes les brands. Seul META_AD_ACCOUNT_ID change."
   },
   "operations": [
@@ -55,7 +55,7 @@
       "description": "Upload an image asset",
       "endpoint_or_method": "POST /{ad_account_id}/adimages",
       "example": "bytes={base64_content}",
-      "notes": "Response contains hash — save to JSON immediately."
+      "notes": "Response contains hash · save to JSON immediately."
     }
   ],
   "naming_conventions": {
@@ -86,16 +86,16 @@
     "Endpoint /ads d'un adset peut avoir du caching → vérifier par IDs individuels."
   ],
   "learned_rules": [
-    "call_to_actions OBLIGATOIRE dans asset_feed_spec — sans = erreur subcode 1487664.",
+    "call_to_actions OBLIGATOIRE dans asset_feed_spec · sans = erreur subcode 1487664.",
     "call_to_action_label OBLIGATOIRE dans chaque asset_customization_rule si call_to_actions présent.",
-    "Minimum 2 règles dans asset_customization_rules — 1 seule = erreur subcode 2446428.",
+    "Minimum 2 règles dans asset_customization_rules · 1 seule = erreur subcode 2446428.",
     "omnichannel_link_spec est top-level du creative, PAS dans asset_feed_spec.",
     "ad_formats: utiliser AUTOMATIC_FORMAT (pas SINGLE_IMAGE) avec asset_customization_rules.",
-    "optimization_type: PLACEMENT (pas REGULAR) pour multi-format — REGULAR limite à 1 ad par adset.",
+    "optimization_type: PLACEMENT (pas REGULAR) pour multi-format · REGULAR limite à 1 ad par adset.",
     "Supprimer degrees_of_freedom_spec.creative_features_spec.standard_enhancements (deprecated).",
     "Supprimer image_crops format 191x100 (deprecated). Utiliser 100x100.",
-    "Utiliser instagram_user_id (pas instagram_actor_id — deprecated).",
-    "object_story_spec: {page_id, instagram_user_id} uniquement — pas de video_data/link_data (erreur 1815166).",
+    "Utiliser instagram_user_id (pas instagram_actor_id · deprecated).",
+    "object_story_spec: {page_id, instagram_user_id} uniquement · pas de video_data/link_data (erreur 1815166).",
     "Rate limiting: ~100k pts/h + 40 pts par ad active. Sleep 0.5s entre créations. Erreur code 17/subcode 2446079 = throttled.",
     "Méthode: avant de créer un creative inconnu, GET les ads existantes qui marchent pour reverse-engineer la structure."
   ]

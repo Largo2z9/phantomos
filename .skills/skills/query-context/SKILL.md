@@ -10,7 +10,7 @@ description: >
   Reads the workspace KB and returns relevant resources for agent consumption.
   Covers shared resources (resources/), single brand context (brands/{slug}/),
   and cross-brand queries (all brands).
-  Read-only — never modifies files.
+  Read-only · never modifies files.
   FR: "trouve" "cherche" "donne-moi" "montre-moi" "qu'est-ce qu'on a sur" "quels frameworks" "quel routing pour" "contexte brand" "compare brands" "toutes les brands" "cross-brand".
   EN: "find" "get" "what do we have on" "show me" "lookup" "fetch context" "compare brands" "which brands have" "across all brands".
 permissions:
@@ -20,7 +20,7 @@ permissions:
   subagent_safe: true
 pipeline:
   preconditions: ingest-resource must have run at least once (index.json populated)
-  postconditions: none — read-only
+  postconditions: none · read-only
 ---
 
 ## Tone
@@ -35,7 +35,7 @@ Ne modifie rien. Ne crée rien. Ne logge pas dans CHANGELOG.
 
 ---
 
-## Step 1 — Parse Intent
+## Step 1 · Parse Intent
 
 Extraire de l'input :
 
@@ -56,7 +56,7 @@ Extraire de l'input :
 
 ---
 
-## Step 2A — Lookup Shared KB
+## Step 2A · Lookup Shared KB
 
 1. **Lire `index.json`**
 2. **Filtrer par type** si spécifié (utiliser `stats.by_type` d'abord pour vérifier que le type existe)
@@ -72,11 +72,11 @@ Extraire de l'input :
 
 ---
 
-## Step 2B — Lookup Brand Context
+## Step 2B · Lookup Brand Context
 
-1. **Identifier `brand_slug`** — depuis l'intent ou demander une seule fois si ambigu
+1. **Identifier `brand_slug`** · depuis l'intent ou demander une seule fois si ambigu
 2. **Lire `brands/{slug}/status.json`** pour état de complétude
-3. **Pour toute query sur les learnings** — utiliser l'index en priorité :
+3. **Pour toute query sur les learnings** · utiliser l'index en priorité :
    - Lire `brands/{slug}/learnings-index.json` (léger)
    - Filtrer par `scope`, `platform`, `type`, `tags` selon l'intent
    - Charger uniquement les entrées `learnings.json` dont les IDs matchent
@@ -93,11 +93,11 @@ Extraire de l'input :
 | Audience, psychologie, objections, douleurs | `audiences/{slug}/profile.json` |
 | Vue complète brand (brief, onboarding) | `brand.json` + spec(s) + profile(s) principaux |
 
-4. **Si status.json indique `completeness = empty` ou `draft`** sur l'entité demandée → signaler à l'agent appelant : "Entité {entity} incomplète ({status}) — données partielles."
+4. **Si status.json indique `completeness = empty` ou `draft`** sur l'entité demandée → signaler à l'agent appelant : "Entité {entity} incomplète ({status}) · données partielles."
 
 ---
 
-## Step 2C — Cross-Brand Query (scope = all_brands)
+## Step 2C · Cross-Brand Query (scope = all_brands)
 
 Scan all brands and return aggregated or comparative results.
 
@@ -108,7 +108,7 @@ Scan all brands and return aggregated or comparative results.
 
 ### Query Types
 
-**Filter query** — "quelles brands ont X ?"
+**Filter query** · "quelles brands ont X ?"
 Extract the filter condition from the intent. Scan the target field across all brands.
 
 | Intent pattern | Target field | Condition |
@@ -124,7 +124,7 @@ Extract the filter condition from the intent. Scan the target field across all b
 
 For unrecognized patterns: read the relevant entity from each brand, apply the condition, return matches.
 
-**Compare query** — "compare X vs Y"
+**Compare query** · "compare X vs Y"
 1. Parse brand slugs from intent (2-5 brands max)
 2. Read same entities from each brand
 3. Return side-by-side comparison table
@@ -137,7 +137,7 @@ Default comparison dimensions (if no specific dimension requested):
 - Product count, audience count
 - `status.json.wedge_complete`, context level (Tier 1/2/3)
 
-**Aggregate query** — "résumé cross-brand", "portfolio overview"
+**Aggregate query** · "résumé cross-brand", "portfolio overview"
 1. Read all brands' `status.json` + `brand.json` (meta + financials only)
 2. Return aggregated view:
    - Total brands, brands by stage, brands by vertical
@@ -145,11 +145,11 @@ Default comparison dimensions (if no specific dimension requested):
    - Completeness distribution (how many Tier 1/2/3)
    - Stale brands count
 
-### Output Format — Cross-brand
+### Output Format · Cross-brand
 
 **Filter result:**
 ```
-[QUERY RESULT — cross-brand filter]
+[QUERY RESULT · cross-brand filter]
 Filter: {condition}
 Matches: {N}/{total brands}
 
@@ -163,7 +163,7 @@ No match: {slugs that didn't match}
 
 **Compare result:**
 ```
-[QUERY RESULT — compare: {brand1} vs {brand2}]
+[QUERY RESULT · compare: {brand1} vs {brand2}]
 
 | Dimension | {brand1} | {brand2} |
 |-----------|----------|----------|
@@ -177,10 +177,10 @@ No match: {slugs that didn't match}
 
 **Aggregate result:**
 ```
-[QUERY RESULT — portfolio overview]
+[QUERY RESULT · portfolio overview]
 Brands: {N} total | {N} active | {N} paused
 Context: {N} Tier 1 | {N} Tier 2 | {N} Tier 3
-Revenue: {min}€ — {max}€ (avg {avg}€)
+Revenue: {min}€ · {max}€ (avg {avg}€)
 Health: {N} stale | {N} incomplete wedge
 ```
 
@@ -191,13 +191,13 @@ Health: {N} stale | {N} incomplete wedge
 
 ---
 
-## Step 3 — Format Response
+## Step 3 · Format Response
 
 Retourner les ressources dans un format exploitable directement par l'agent consumer :
 
 ### Pour shared resources :
 ```
-[QUERY RESULT — {type}: {slug}]
+[QUERY RESULT · {type}: {slug}]
 Source: resources/{type}/{slug}.json
 Domain: {domain} | Tags: {tags}
 Relevance: {score}/{max_possible}
@@ -208,7 +208,7 @@ Relevance: {score}/{max_possible}
 
 ### Pour brand context :
 ```
-[QUERY RESULT — brand context: {brand_slug}]
+[QUERY RESULT · brand context: {brand_slug}]
 Entity: {entity type} | Completeness: {status}
 
 {contenu JSON de l'entité}
@@ -217,7 +217,7 @@ Entity: {entity type} | Completeness: {status}
 
 ### Si aucun résultat :
 ```
-[QUERY — no match]
+[QUERY · no match]
 Intent: {intent parsé}
 Searched: {types/domains/brands cherchés}
 Closest: {slug du plus proche avec score} (score trop bas pour être retourné)
@@ -258,7 +258,7 @@ Suggestion: run ingest-resource to add relevant content.
 
 ---
 
-## MCP Interface — external agents
+## MCP Interface · external agents
 
 query-context can be exposed as an MCP server tool for external agents (custom agents, n8n workflows, dashboards).
 
@@ -337,7 +337,7 @@ When implemented, the MCP server config lives in the workspace root:
 
 - The MCP server wraps Steps 1-3 of this skill into a programmatic tool
 - Same scoring logic, same hard rules (read-only, max results, no interpolation)
-- Returns JSON (not formatted text) — MCP consumers parse JSON directly
+- Returns JSON (not formatted text) · MCP consumers parse JSON directly
 - No auth layer in V1 (local-only assumption). V2: API key or workspace token.
 - Rate limiting: 60 calls/minute per workspace (prevent runaway agents)
 - The workspace path is resolved from `WORKSPACE_ROOT` env var
@@ -352,13 +352,13 @@ See `.skills/mcp/README.md` for setup instructions.
 
 ## Hard Rules
 
-- **Read-only** — aucune écriture, aucune modification
-- **Jamais de CHANGELOG** — les queries ne laissent pas de trace
-- **Max 3 ressources retournées** (5 via MCP) — qualité > quantité. Si l'agent a besoin de plus, relancer avec un intent plus précis
-- **Toujours inclure le path source** dans la réponse — l'agent consumer peut aller chercher plus si besoin
-- **Ne pas interpoler ni synthétiser** le contenu des ressources — retourner le JSON tel quel, l'interprétation appartient à l'agent consumer
+- **Read-only** · aucune écriture, aucune modification
+- **Jamais de CHANGELOG** · les queries ne laissent pas de trace
+- **Max 3 ressources retournées** (5 via MCP) · qualité > quantité. Si l'agent a besoin de plus, relancer avec un intent plus précis
+- **Toujours inclure le path source** dans la réponse · l'agent consumer peut aller chercher plus si besoin
+- **Ne pas interpoler ni synthétiser** le contenu des ressources · retourner le JSON tel quel, l'interprétation appartient à l'agent consumer
 - **Si brand incomplète**, signaler mais retourner quand même ce qui existe
-- **MCP = same logic** — the MCP interface exposes the exact same query engine, not a separate implementation
-- **Cross-brand max 20 brands** — beyond that, suggest filtering first to avoid performance degradation
-- **Cross-brand reads meta first** — for >10 brands, only read status.json + brand.json meta/financials, then drill into matching brands
-- **Never expose cross-brand data to restricted brands** — if a brand has restricted flag in config, skip it in cross-brand results
+- **MCP = same logic** · the MCP interface exposes the exact same query engine, not a separate implementation
+- **Cross-brand max 20 brands** · beyond that, suggest filtering first to avoid performance degradation
+- **Cross-brand reads meta first** · for >10 brands, only read status.json + brand.json meta/financials, then drill into matching brands
+- **Never expose cross-brand data to restricted brands** · if a brand has restricted flag in config, skip it in cross-brand results

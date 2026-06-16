@@ -39,7 +39,7 @@
     "observed": "Scraped literally from the source (web page, API response, customer voice). High confidence.",
     "stated": "Declared by the operator or an authoritative source. Authoritative confidence within scope.",
     "structured": "Computed by deterministic function over observed/stated inputs. Reproducible.",
-    "derived": "Inferred by model reasoning over inputs. Hypothesis confidence — must be validated before treating as canonical."
+    "derived": "Inferred by model reasoning over inputs. Hypothesis confidence · must be validated before treating as canonical."
   },
 
   "operator_facing_translation": {

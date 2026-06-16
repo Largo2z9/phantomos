@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-v2.63-pain-objection-collections.py — BREAKING migration · refactor ontologie pure.
+v2.63-pain-objection-collections.py · BREAKING migration · refactor ontologie pure.
 
 Closes ontologie inconsistance pre-v2.63 (friction top-level depuis v2.56 mais
 pain_points + objections sub-fields legacy v1.7 dans profile.schema). Parité

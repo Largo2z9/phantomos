@@ -35,19 +35,19 @@ Un learning brand naît dans `learnings.json`. S'il s'avère générique (applic
 
 ---
 
-## Step 1 — Identify the Learning
+## Step 1 · Identify the Learning
 
 Trois entry points possibles :
 
-### A — Opérateur pointe un learning spécifique
+### A · Opérateur pointe un learning spécifique
 L'opérateur dit "promote ce learning" + référence (texte, index, ou description).
 → Lire `brands/{slug}/learnings.json`, trouver l'entrée correspondante.
 
-### B — Agent détecte un candidat de promotion (1 marque suffit)
-Lors d'un ingest ou validate, l'agent remarque un learning à forte généricité (`genericity: sector|universal`) OU un pattern récurrent. UNE seule marque suffit pour PROPOSER — l'agent propose, l'opérateur arbitre. La récurrence cross-brand (2+ brands) renforce le signal mais n'est pas un prérequis.
+### B · Agent détecte un candidat de promotion (1 marque suffit)
+Lors d'un ingest ou validate, l'agent remarque un learning à forte généricité (`genericity: sector|universal`) OU un pattern récurrent. UNE seule marque suffit pour PROPOSER · l'agent propose, l'opérateur arbitre. La récurrence cross-brand (2+ brands) renforce le signal mais n'est pas un prérequis.
 → Lister le/les learning(s) candidat(s), proposer la promotion. L'opérateur tranche.
 
-### C — Depuis le promote-backlog.json (si présent)
+### C · Depuis le promote-backlog.json (si présent)
 L'opérateur dit "quels learnings sont prêts à promouvoir ?" ou "promote backlog".
 → `promote-backlog.json` est un artefact OPTIONNEL, écrit par `validate-resources` Check 12b UNIQUEMENT si un run `validate all` (cross-brand) a détecté un candidat. Il N'EXISTE PAS sur un workspace fresh.
 → Si le fichier existe : lire → présenter les candidats ordonnés par priorité → l'opérateur choisit.
@@ -66,7 +66,7 @@ Learning candidat :
 
 ---
 
-## Step 2 — Evaluate Genericity
+## Step 2 · Evaluate Genericity
 
 Le learning est-il brand-specific ou générique ?
 
@@ -85,7 +85,7 @@ Le learning est-il brand-specific ou générique ?
 
 ---
 
-## Step 3 — Route to Shared Resource
+## Step 3 · Route to Shared Resource
 
 Déterminer la destination dans `resources/` :
 
@@ -101,7 +101,7 @@ Déterminer la destination dans `resources/` :
 
 ---
 
-## Step 4 — Write to KB (via ingest-resource)
+## Step 4 · Write to KB (via ingest-resource)
 
 Ne pas écrire directement. Appeler **ingest-resource** avec le learning reformulé :
 
@@ -116,9 +116,9 @@ Ne pas écrire directement. Appeler **ingest-resource** avec le learning reformu
 
 ---
 
-## Step 5 — Mark Learning as Promoted
+## Step 5 · Mark Learning as Promoted
 
-Dans `brands/{slug}/learnings.json`, marquer l'entrée promue. `promoted_to` + `promoted_date` sont schema-legal (learnings/1.2) et visent la KB partagée `resources/` (distinct de `promoted_to_canon` + `promoted_canon_path` qui visent `resources/canon/copy/`). Append via write-to-context (jamais éditer en place — créer le marquage selon la discipline append-only de la skill) :
+Dans `brands/{slug}/learnings.json`, marquer l'entrée promue. `promoted_to` + `promoted_date` sont schema-legal (learnings/1.2) et visent la KB partagée `resources/` (distinct de `promoted_to_canon` + `promoted_canon_path` qui visent `resources/canon/copy/`). Append via write-to-context (jamais éditer en place · créer le marquage selon la discipline append-only de la skill) :
 
 ```json
 {
@@ -133,7 +133,7 @@ Le learning reste dans `learnings.json` (append-only, jamais supprimé). Le tag 
 
 ---
 
-## Step 6 — Summary Output
+## Step 6 · Summary Output
 
 ```
 📤 Learning promu vers la KB partagée
@@ -166,10 +166,10 @@ L'opérateur décide ensuite de promouvoir ou non.
 
 ## Hard Rules
 
-- **Jamais supprimer** un learning de `learnings.json` — append-only. Marquer comme promu, jamais effacer.
-- **Jamais promouvoir un learning brand-specific** — le test de généricité (Step 2) doit passer.
-- **Toujours passer par ingest-resource** pour écrire dans la KB — ne pas écrire directement.
-- **Toujours demander confirmation** avant de promouvoir — sauf si l'opérateur a explicitement dit "promote".
-- **Toujours tagger la source** — `promoted_from` + `promotion_date` dans la ressource KB, `promoted_to` dans le learning.
-- **Un learning = une promotion** — si un learning contient plusieurs insights, splitter en promotions séparées.
-- **Après chaque promotion, retirer le candidat de promote-backlog.json _si le fichier existe_.** Ne jamais échouer si le backlog est absent (workspace fresh, ou aucun `validate all` lancé) — le backlog est un artefact optionnel, pas un prérequis.
+- **Jamais supprimer** un learning de `learnings.json` · append-only. Marquer comme promu, jamais effacer.
+- **Jamais promouvoir un learning brand-specific** · le test de généricité (Step 2) doit passer.
+- **Toujours passer par ingest-resource** pour écrire dans la KB · ne pas écrire directement.
+- **Toujours demander confirmation** avant de promouvoir · sauf si l'opérateur a explicitement dit "promote".
+- **Toujours tagger la source** · `promoted_from` + `promotion_date` dans la ressource KB, `promoted_to` dans le learning.
+- **Un learning = une promotion** · si un learning contient plusieurs insights, splitter en promotions séparées.
+- **Après chaque promotion, retirer le candidat de promote-backlog.json _si le fichier existe_.** Ne jamais échouer si le backlog est absent (workspace fresh, ou aucun `validate all` lancé) · le backlog est un artefact optionnel, pas un prérequis.

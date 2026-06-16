@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-write_to_context — canonical mutation gateway for brands/ and operator/ JSON.
+write_to_context · canonical mutation gateway for brands/ and operator/ JSON.
 
 The ONLY sanctioned writer for protected JSON files (enforced by mutation-guard
 PreToolUse hook). Skills MUST route every mutation through this script.
@@ -120,7 +120,7 @@ def scan_value(value) -> list:
 
 
 # Whitelist of allowed target files. Any write to a path not matching one of
-# these is blocked — protects against shell-escaping typos that would otherwise
+# these is blocked · protects against shell-escaping typos that would otherwise
 # create garbage files (e.g. `profile.jsonontrainte-sante`) because the script
 # silently mkdir+touch any path it's given.
 ALLOWED_PATH_PATTERNS = [
@@ -148,21 +148,21 @@ ALLOWED_PATH_PATTERNS = [
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/creative\.json$"),
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/genome\.json$"),
     re.compile(r"^brands/[^/]+/creatives/[a-z0-9-]+/CRT-[0-9]{2,4}/produced/[a-z0-9_-]+\.json$"),
-    # decomposed competitor ads — SEPARATE root (competitive-intel) + SEPARATE id namespace (RCV).
+    # decomposed competitor ads · SEPARATE root (competitive-intel) + SEPARATE id namespace (RCV).
     re.compile(r"^brands/[^/]+/competitive-intel/[a-z0-9-]+/RCV-[0-9]{2,4}/decomposition\.json$"),
     # benchmark ref-image sidecar manifest (symmetric with CRT produced/, brick 4 step D).
     re.compile(r"^brands/[^/]+/competitive-intel/[a-z0-9-]+/RCV-[0-9]{2,4}/produced/[a-z0-9_-]+\.json$"),
     re.compile(r"^operator/[^/]+\.json$"),
-    # canon validations (v2.26.0+) — append-only validations[] from learn-from-session promotion.
+    # canon validations (v2.26.0+) · append-only validations[] from learn-from-session promotion.
     re.compile(r"^resources/canon/[a-z-]+/[a-z-]+/[a-z0-9-]+\.json$"),
-    # cross-brand expertise libraries (brick 2, D#481) — guarded by mutation-guard PROTECTED_GLOBS.
+    # cross-brand expertise libraries (brick 2, D#481) · guarded by mutation-guard PROTECTED_GLOBS.
     # Filenames = lowercase-dash slug (the structured ID like CONCEPT-NN lives inside the file).
     re.compile(r"^resources/concepts/[a-z0-9-]+\.json$"),
     re.compile(r"^resources/registries/[a-z-]+/[a-z0-9-]+\.json$"),
     # asset-library json sidecars (brand-level · binaires .png/.jpg ecrits direct comme produced/).
     # Nom canonique = asset-library/ (aligne genome.schema + produced-asset.schema · D#491). Guard via brands/ glob.
     re.compile(r"^brands/[^/]+/asset-library/[a-z0-9_-]+\.json$"),
-    # spectrum (Spectre, D#502) — carte du terrain produit x marche, singleton par marque.
+    # spectrum (Spectre, D#502) · carte du terrain produit x marche, singleton par marque.
     re.compile(r"^brands/[^/]+/spectrum\.json$"),
 ]
 
@@ -176,7 +176,7 @@ def check_target_allowed(rel_path: str) -> None:
         f"Expected filename among: brand.json, status.json, config.json, "
         f"learnings.json, strategy.json, spec.json, offers.json, profile.json, "
         f"spectrum.json, or *.extensions.json / custom/*.json. "
-        f"Likely a typo or shell-escaping bug — recheck the --path argument.",
+        f"Likely a typo or shell-escaping bug · recheck the --path argument.",
         1,
     )
 
@@ -204,12 +204,12 @@ def _gate_message(brand: str, checkpoint: str, slug: str | None, rel_path: str, 
         f'--summary "{{plain-language proposal: what you detected, why you propose it}}"'
     )
     return (
-        f"workflow gate — {reason}\n"
+        f"workflow gate · {reason}\n"
         f"  target: {rel_path}\n"
         f"  checkpoint required: {checkpoint}"
         + (f" (product={slug})" if slug else "")
         + f"\n\n"
-        f"NEXT ACTION — stage a proposal, then wait for the operator's reply:\n"
+        f"NEXT ACTION · stage a proposal, then wait for the operator's reply:\n"
         f"  {cmd}\n\n"
         f"The checkpoint-resolver hook promotes the checkpoint from the operator's "
         f"next message. Do not write, retry, or bypass until the operator answers."
@@ -354,14 +354,14 @@ def walk_set(doc, tokens: list, value):
 
 def wrap_proposed(value, source: str, confidence: float) -> dict:
     """mode=proposed stamps metadata *in place* on a dict value. It is intentionally
-    rejected on scalars and arrays — wrapping them in {_value: ..., _proposed: true}
+    rejected on scalars and arrays · wrapping them in {_value: ..., _proposed: true}
     corrupts downstream consumers (they see an object where they expect a scalar
     or list). Agents writing scalars/arrays should use mode=direct; the source
     and confidence are already preserved in the event log."""
     if not isinstance(value, dict):
         die(
             "mode=proposed requires --value to be a JSON object. "
-            "Scalars and arrays cannot be wrapped — they corrupt consumers. "
+            "Scalars and arrays cannot be wrapped · they corrupt consumers. "
             "Use --mode direct; source and confidence still recorded in the event log.",
             1,
         )
@@ -410,7 +410,7 @@ def check_brownfield(target: Path, rel_file: str, tokens: list, value, source: s
 
     def _refuse(what: str) -> None:
         die(
-            f"brownfield protection — {rel_file} a validation_status '{cur}' (validé). "
+            f"brownfield protection · {rel_file} a validation_status '{cur}' (validé). "
             f"Ce write ({what}) détruirait du travail validé. Enrichis champ par champ "
             f"(pointer profond, sans toucher validation_status), ou fais confirmer "
             f"l'écrasement par l'opérateur (--source operator).",
@@ -568,7 +568,7 @@ def main() -> None:
 
     tokens = parse_pointer(pointer)
 
-    # P0 race d'ID — réserve atomiquement un id séquentiel libre (ANG/CPT) AVANT
+    # P0 race d'ID · réserve atomiquement un id séquentiel libre (ANG/CPT) AVANT
     # d'écrire · tue l'écrasement silencieux du fan-out parallèle. Peut bumper la
     # cible (et patcher value.id), d'où la re-résolution juste après.
     rel_file, value = claim_sequential_id(root, rel_file, tokens, value, args.source)
@@ -578,7 +578,7 @@ def main() -> None:
     except ValueError:
         die(f"target {target} escapes workspace root {root}", 1)
 
-    # P0 brownfield (D#520) — refuse un clobber/downgrade d'un artefact validé.
+    # P0 brownfield (D#520) · refuse un clobber/downgrade d'un artefact validé.
     check_brownfield(target, rel_file, tokens, value, args.source)
 
     target.parent.mkdir(parents=True, exist_ok=True)

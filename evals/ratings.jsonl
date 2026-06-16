@@ -1,0 +1,15 @@
+# Operator calibration ratings. One JSON object per line.
+# Schema: {"case": "<golden stem or run id>", "artifact": "close|angle|diagnostic", "operator_rating": "good|bad", "note": "..."}
+# Purpose: this is what keeps the cheap proxies and the LLM judge honest. The judge is
+# calibrated against Largo's own good/bad calls, not the other way round. When proxy or
+# judge disagrees with a rating here, the rubric wording gets fixed, not the rating.
+#
+# SEEDED below with the six authored goldens (their intended labels) so the harness runs
+# end-to-end today. SLOT: Largo adds ~20 real ratings from actual runs (paste a close he
+# liked / hated, label it) to move calibration from authored to empirical.
+{"case": "close-sharp", "artifact": "close", "operator_rating": "good", "note": "tranche sur le move, garde la chaine de confiance, une seule question bloquante"}
+{"case": "close-mushy", "artifact": "close", "operator_rating": "bad", "note": "decrit + menu A/B/C/D + me refile 4 questions, la meteo"}
+{"case": "angle-sharp", "artifact": "angle", "operator_rating": "good", "note": "ennemi nomme, mecanisme konjac, prend position"}
+{"case": "angle-mushy", "artifact": "angle", "operator_rating": "bad", "note": "truisme wellness, marche pour n'importe quelle marque"}
+{"case": "diagnostic-sharp", "artifact": "diagnostic", "operator_rating": "good", "note": "un mur dominant, position avant audiences, confidence partout"}
+{"case": "diagnostic-mushy", "artifact": "diagnostic", "operator_rating": "bad", "note": "checklist a plat, personas du miroir des avis"}

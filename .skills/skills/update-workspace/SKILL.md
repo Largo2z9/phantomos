@@ -78,7 +78,7 @@ Operator says *"update"*, *"mets à jour"*, *"applique la nouvelle version"*, or
 
 ## Method
 
-### Step 1 — Detect versions
+### Step 1 · Detect versions
 
 Read:
 - `_version.json → template_version` (the target/latest)
@@ -92,31 +92,31 @@ If versions match → *"Tu es déjà à jour en {version}. Rien à faire."* → 
 
 If installed < target → continue.
 
-### Step 2 — Build the update chain
+### Step 2 · Build the update chain
 
 List every manifest at `docs/internal/releases/manifest/{version}-manifest.json` where `from_version >= installed` and `to_version <= target`. Sort by `to_version` ascending. This is the chain of updates to apply in order.
 
 If any manifest in the chain has `breaking: true` or `requires_confirmation: true` → present the list to the operator with summaries and explicit confirm via `AskUserQuestion`. Otherwise proceed silently.
 
-### Step 3 — Apply each manifest in order
+### Step 3 · Apply each manifest in order
 
 For each manifest in the chain, walk `changes[]` and apply per type:
 
-**`doc-change` / `doc-added`** — overwrite/create the template file. Safe. No operator data touched.
+**`doc-change` / `doc-added`** · overwrite/create the template file. Safe. No operator data touched.
 
-**`infra-change` / `infra-added`** — overwrite/create the script. Run the `post_step` if declared (e.g. rebuild manifest, rebuild snapshots).
+**`infra-change` / `infra-added`** · overwrite/create the script. Run the `post_step` if declared (e.g. rebuild manifest, rebuild snapshots).
 
-**`skill-added`** — copy the new SKILL.md folder into `.skills/skills/`. Regenerate `.skills/_manifest.json`.
+**`skill-added`** · copy the new SKILL.md folder into `.skills/skills/`. Regenerate `.skills/_manifest.json`.
 
-**`skill-renamed`** — rename the folder, update the frontmatter `name:`, regenerate manifest. Keep old name as alias in the manifest's `aliases_to_keep` if provided.
+**`skill-renamed`** · rename the folder, update the frontmatter `name:`, regenerate manifest. Keep old name as alias in the manifest's `aliases_to_keep` if provided.
 
-**`skill-removed`** — flag to operator, propose alternative if declared. Move old folder to `.skills/skills/_archive/`. Update manifest.
+**`skill-removed`** · flag to operator, propose alternative if declared. Move old folder to `.skills/skills/_archive/`. Update manifest.
 
-**`schema-bump`** — DO NOT apply directly. Delegate to `migrate-workspace` via Task tool with the migration script path, from/to schema versions, and affected files glob. Collect migration report.
+**`schema-bump`** · DO NOT apply directly. Delegate to `migrate-workspace` via Task tool with the migration script path, from/to schema versions, and affected files glob. Collect migration report.
 
-**`breaking`** — surface the full `notes` field to the operator, get explicit confirm, then apply as above.
+**`breaking`** · surface the full `notes` field to the operator, get explicit confirm, then apply as above.
 
-### Step 4 — Post-update
+### Step 4 · Post-update
 
 For each applied manifest, append an entry to `/operator/installation.json → history[]`:
 
@@ -135,7 +135,7 @@ Update `template_version_installed` to the target.
 
 Run the final manifest's `post_update_checklist` (typically: rebuild manifest, rebuild snapshots, run validate-resources).
 
-### Step 5 — Surface to operator
+### Step 5 · Surface to operator
 
 Plain-language recap:
 

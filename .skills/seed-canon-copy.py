@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-seed-canon-copy — one-shot seeder for resources/canon/copy/{layer}/{tool}.json.
+seed-canon-copy · one-shot seeder for resources/canon/copy/{layer}/{tool}.json.
 
 Writes the v1 canon copy atlas: 11 layers, ~70 tools. Idempotent: skips files
 that already exist (use --force to overwrite). Run once after v2.26.0.

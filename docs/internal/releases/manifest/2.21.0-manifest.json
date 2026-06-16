@@ -25,7 +25,7 @@
       "action": "patched",
       "files": [".claude/commands/phantom.md"],
       "section": "Next suggested (workspace + brand modes)",
-      "rationale": "NEXT SUGGESTED was conversational ('Lancer mine-voc dès que possible'). Operator had to re-formulate the suggestion into a runnable prompt, friction. Now every line is paste-ready: → Tape : `lance mine-voc sur karacare` (7 audiences en hypothèse, aucun verbatim encore). The single back-tick wrap is a visual contract — what's inside the back-ticks is what the operator pastes back into the next prompt and the agent picks it up. Zero re-formulation cost."
+      "rationale": "NEXT SUGGESTED was conversational ('Lancer mine-voc dès que possible'). Operator had to re-formulate the suggestion into a runnable prompt, friction. Now every line is paste-ready: → Tape : `lance mine-voc sur karacare` (7 audiences en hypothèse, aucun verbatim encore). The single back-tick wrap is a visual contract · what's inside the back-ticks is what the operator pastes back into the next prompt and the agent picks it up. Zero re-formulation cost."
     },
     {
       "category": "commands",

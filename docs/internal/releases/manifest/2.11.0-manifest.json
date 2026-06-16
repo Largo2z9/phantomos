@@ -10,17 +10,17 @@
     {
       "type": "doc-added",
       "path": "docs/system/canonical-matrix-reasoning.md",
-      "summary": "CMR doctrine v0.2 — production mechanism for intersectional outputs. Schema + canon matrix + modulator/cell + cardinality cap + internal scoring. Three modes (coding / generating / pipeline) + hybrid. 13 invariants + 14 anti-patterns + decision-aid + breakthrough mode opt-in §10bis. Sub-pattern of execution of CI on intersectional production."
+      "summary": "CMR doctrine v0.2 · production mechanism for intersectional outputs. Schema + canon matrix + modulator/cell + cardinality cap + internal scoring. Three modes (coding / generating / pipeline) + hybrid. 13 invariants + 14 anti-patterns + decision-aid + breakthrough mode opt-in §10bis. Sub-pattern of execution of CI on intersectional production."
     },
     {
       "type": "doc-added",
       "path": "docs/system/schema-encoding-doctrine.md",
-      "summary": "SED doctrine v0.1 — substrate sub-doctrine. Consolidates 11 previously-scattered sub-disciplines (mutation rule, _field_types, _version semver, sourcing tags, triangulation, validation runtime, append-only conventions, snapshot/manifest regen, conventions plateforme, extension layer, memory & observability). Two layers: spatial encoding (entities/fields/schemas) + temporal encoding (events/learnings/awareness). Prerequisite of CMR."
+      "summary": "SED doctrine v0.1 · substrate sub-doctrine. Consolidates 11 previously-scattered sub-disciplines (mutation rule, _field_types, _version semver, sourcing tags, triangulation, validation runtime, append-only conventions, snapshot/manifest regen, conventions plateforme, extension layer, memory & observability). Two layers: spatial encoding (entities/fields/schemas) + temporal encoding (events/learnings/awareness). Prerequisite of CMR."
     },
     {
       "type": "doc-added",
       "path": "docs/system/skill-authoring-doctrine.md",
-      "summary": "SAD doctrine v0.1 — meta-discipline above SED + CMR. Consolidates 5 skill-* docs + patterns.md skill sections. Three layers (single skill authoring + skill composition + system lifecycle). Three new rules: frontmatter triad CMR-compliance machine-verifiable, Skill Composition Contract, Failure doctrine with invariant-violation hook routing to capture-learning."
+      "summary": "SAD doctrine v0.1 · meta-discipline above SED + CMR. Consolidates 5 skill-* docs + patterns.md skill sections. Three layers (single skill authoring + skill composition + system lifecycle). Three new rules: frontmatter triad CMR-compliance machine-verifiable, Skill Composition Contract, Failure doctrine with invariant-violation hook routing to capture-learning."
     },
     {
       "type": "doc-added",
@@ -93,7 +93,7 @@
       "type": "doc-patched",
       "path": "shared-resources/copywriting-canon/frameworks/angles-biases-matrix.md",
       "version": "0.1.0 -> 1.1.0",
-      "summary": "Verbatim anchor obligatoire par cellule (voc_id brand-side OR derived skill-author OR breakthrough mode opt-in 1 slot max). Corrélations axes Status/Belonging/Insider documentées explicitement (non-MECE flagué) — variations Identity-as-distinction, pas angles distincts."
+      "summary": "Verbatim anchor obligatoire par cellule (voc_id brand-side OR derived skill-author OR breakthrough mode opt-in 1 slot max). Corrélations axes Status/Belonging/Insider documentées explicitement (non-MECE flagué) · variations Identity-as-distinction, pas angles distincts."
     },
     {
       "type": "infra",
@@ -103,14 +103,14 @@
     {
       "type": "research-archive",
       "path": "_archive/research-stale-2026-04-26/",
-      "summary": "Batch archive of ~22 stale research/ docs (onboarding stress tests, offers v2.0 batch, profile v2.0 proposal, calibration cabaia, overnight reports, legacy specs). README explains context. Append-only — no permanent deletion."
+      "summary": "Batch archive of ~22 stale research/ docs (onboarding stress tests, offers v2.0 batch, profile v2.0 proposal, calibration cabaia, overnight reports, legacy specs). README explains context. Append-only · no permanent deletion."
     }
   ],
   "breaking_changes": [],
   "migration_required": false,
   "consumer_re_test_list": [
     "skills consuming pattern-schema.json or compatibility-rules.json (analyze-copy, future audit skills)",
-    "skills consuming paid-angle-scoring.md (paid-angles weights moved to JSON — verify resolver)"
+    "skills consuming paid-angle-scoring.md (paid-angles weights moved to JSON · verify resolver)"
   ],
   "next_release_candidates": [
     "Phase 2.5 mass tag reasoning_pattern: null on 49 non-CMR skills (cosmetic, scriptable)",

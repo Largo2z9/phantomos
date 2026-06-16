@@ -6,7 +6,7 @@
   "summary": "Systemic enforcement layer. Two PreToolUse hooks (convention-guard on MCP calls, mutation-guard on brand/operator writes) and the canonical write_to_context implementation. Closes the gap between Markdown rules and machine-enforced behavior.",
   "breaking": true,
   "requires_confirmation": true,
-  "notes": "Breaking for workspaces that had scripts or skills hand-editing brands/*.json or operator/*.json. After install, any such bypass is blocked. Run validate-resources on every brand post-update to surface lingering issues. MCP calls on platforms without a conventions/{platform}.json file will also be blocked on first call — scaffold the convention from resources/conventions/_TEMPLATE.json or disable the hook temporarily.",
+  "notes": "Breaking for workspaces that had scripts or skills hand-editing brands/*.json or operator/*.json. After install, any such bypass is blocked. Run validate-resources on every brand post-update to surface lingering issues. MCP calls on platforms without a conventions/{platform}.json file will also be blocked on first call · scaffold the convention from resources/conventions/_TEMPLATE.json or disable the hook temporarily.",
   "changes": [
     {
       "type": "infra-added",

@@ -8,8 +8,8 @@ This section documents the architecture, governance, and internal disciplines th
 
 ## What's here
 
-- **`canon.md`** — the canonical reference for internal vocabularies and design decisions locked into this workspace.
-- **`releases/`** — technical release manifests, schema migrations, breaking changes, and dependency updates for contributors integrating new versions.
+- **`canon.md`** · the canonical reference for internal vocabularies and design decisions locked into this workspace.
+- **`releases/`** · technical release manifests, schema migrations, breaking changes, and dependency updates for contributors integrating new versions.
 
 ## For contributors
 

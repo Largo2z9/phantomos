@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-phantom-canon — read the canon atlas structure for /phantom canon mode.
+phantom-canon · read the canon atlas structure for /phantom canon mode.
 
 Usage:
     python3 .skills/phantom-canon.py                   # list atlases (v2.26: only 'copy')

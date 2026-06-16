@@ -52,7 +52,7 @@
       "vertical": "wellness-supplement",
       "geo": "FR",
       "example_rcv_ids": ["RCV-17", "RCV-42", "RCV-45", "RCV-48", "RCV-94", "RCV-105"],
-      "realization": "Deux realisations : (1) ingredient-hero reframe — 'La tomate, comme vous ne l'avez JAMAIS VUE. Melatonine vegetale issue de la tomate' (RCV-17), l'ingredient banal devient un mecanisme proprietaire ; (2) format-nom — 'La gummy 2-en-1 : dormir plus vite, dormir plus profondement' / 'supergummies' (RCV-42), 'Le duo IMBATTABLE contre la fatigue et le stress' (RCV-105). Le produit est pose comme une categorie a part, jamais en comparaison directe."
+      "realization": "Deux realisations : (1) ingredient-hero reframe · 'La tomate, comme vous ne l'avez JAMAIS VUE. Melatonine vegetale issue de la tomate' (RCV-17), l'ingredient banal devient un mecanisme proprietaire ; (2) format-nom · 'La gummy 2-en-1 : dormir plus vite, dormir plus profondement' / 'supergummies' (RCV-42), 'Le duo IMBATTABLE contre la fatigue et le stress' (RCV-105). Le produit est pose comme une categorie a part, jamais en comparaison directe."
     },
     {
       "source": "karacare",
@@ -87,7 +87,7 @@
   "transfer_examples": [
     {
       "target": "Stepprs · pieds / circulation",
-      "reslotted": "Variante format-nom proprietaire : 'Le 3-en-1 jambes legeres : compression + drainage + recuperation' — un format-categorie invente qui sort la chaussette de la comparaison avec les bas de contention classiques. Variante ingredient-hero : 'La menthe poivree, comme vous ne l'avez jamais portee -> micro-encapsulation menthol active a chaque pas'."
+      "reslotted": "Variante format-nom proprietaire : 'Le 3-en-1 jambes legeres : compression + drainage + recuperation' · un format-categorie invente qui sort la chaussette de la comparaison avec les bas de contention classiques. Variante ingredient-hero : 'La menthe poivree, comme vous ne l'avez jamais portee -> micro-encapsulation menthol active a chaque pas'."
     },
     {
       "target": "Marque cafe fonctionnel · energie sans crash",
@@ -97,9 +97,9 @@
   "anti_patterns": [
     "Inventer un nom-categorie SANS substance reelle derriere (pas de combo reel, pas d'ingredient sourcable, pas de molecule) : le marche flaire le vernis marketing, le reframe sonne creux et le claim-categorie devient un risque compliance non couvert.",
     "Empiler le nom-categorie SUR une guerre de features chiffrees dans la meme ad : ca re-ouvre la comparaison qu'on voulait fermer. Le category-of-one fonctionne en FERMANT la comparaison, pas en la gagnant.",
-    "Unaware / problem-aware froid : si l'audience ne connait pas encore le probleme, un nom-categorie abstrait ('sex chews', 'supergummies') ne resonne pas — il faut d'abord agiter le pain. Le pattern vise solution-aware et au-dela.",
+    "Unaware / problem-aware froid : si l'audience ne connait pas encore le probleme, un nom-categorie abstrait ('sex chews', 'supergummies') ne resonne pas · il faut d'abord agiter le pain. Le pattern vise solution-aware et au-dela.",
     "Reslot aveugle de la variante telehealth Rx ('needs Rx', 'Generic for X') hors telehealth : la legitimite vient de la prescription reelle ; sans elle le 'Rx-as-category' est vide. Mono-vertical sur cette sous-variante meme si le pattern parent est universal."
   ],
-  "curation_notes": "Promu sur 3 sources independantes (naali / karacare / himshers), 3 verticales, 2 geos : un des patterns les plus surs du corpus, status promote-ready solide. CAVEAT PROVENANCE majeur : seules naali (6 RCV) et himshers (22 RCV) portent le pattern dans le mechanic_id STRUCTURE 'category-of-one-claim' ; karacare l'atteste uniquement en prose (proof_text de RCV-05, hook encode resolution-promise). Le compte reste >=2 meme en ecartant karacare (naali + himshers = 2 sources independantes), donc la promotion tient quoi qu'il arrive ; karacare renforce mais ne porte pas seul. Deux dialectes a tracker separement : ingredient-hero reframe (FR/supplement, naali) vs format-nom proprietaire (US/telehealth, himshers) — meme job de persuasion, ancre differente. Ce qui RENFORCERAIT : (1) un 3e signal perf reel via la feedback loop (lequel des deux dialectes convertit le mieux par verticale) ; (2) re-tagger karacare RCV-05 avec le mechanic_id structure pour solidifier l'attestation ; (3) chercher la variante format-nom hors telehealth (un naali 'supergummies' va dans ce sens) pour confirmer que le dialecte US-telehealth se transfere bien en FR-supplement.",
+  "curation_notes": "Promu sur 3 sources independantes (naali / karacare / himshers), 3 verticales, 2 geos : un des patterns les plus surs du corpus, status promote-ready solide. CAVEAT PROVENANCE majeur : seules naali (6 RCV) et himshers (22 RCV) portent le pattern dans le mechanic_id STRUCTURE 'category-of-one-claim' ; karacare l'atteste uniquement en prose (proof_text de RCV-05, hook encode resolution-promise). Le compte reste >=2 meme en ecartant karacare (naali + himshers = 2 sources independantes), donc la promotion tient quoi qu'il arrive ; karacare renforce mais ne porte pas seul. Deux dialectes a tracker separement : ingredient-hero reframe (FR/supplement, naali) vs format-nom proprietaire (US/telehealth, himshers) · meme job de persuasion, ancre differente. Ce qui RENFORCERAIT : (1) un 3e signal perf reel via la feedback loop (lequel des deux dialectes convertit le mieux par verticale) ; (2) re-tagger karacare RCV-05 avec le mechanic_id structure pour solidifier l'attestation ; (3) chercher la variante format-nom hors telehealth (un naali 'supergummies' va dans ce sens) pour confirmer que le dialecte US-telehealth se transfere bien en FR-supplement.",
   "_schema_version": "library-pattern/1.0"
 }

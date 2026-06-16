@@ -1,6 +1,6 @@
 # Creative Mechanics Registry
 
-> **TYPE:** Taxonomie — registre vivant
+> **TYPE:** Taxonomie · registre vivant
 > **CONSOMMÉ PAR:** hooks-generator, script-writer, brief-generator, creative-strategist, pattern-extractor
 > **SOURCE:** Retro-engineering 522 créas (10 batches, 9 brands, 6 niches) + stress test S55 (23 ads, mai 2026)
 > **DÉPEND DE:** `templates/creative-formula.md` (§5.1)
@@ -15,7 +15,7 @@
 ## Format fiche
 
 ```
-### [ID] — [Nom]
+### [ID] · [Nom]
 - **Définition:** [prose, 1-2 phrases]
 - **Curseur:** [min, max]
 - **Mode:** CONCEPT | TEMPLATE | ASSET
@@ -23,14 +23,14 @@
 - **Typology_st:** spatial | temporel                    ← NEW v2.88.0
 - **Temporal_subtype:** dialogique | démonstratif |       ← NEW v2.88.0 (optionnel · si temporel)
                         narratif | pédagogique
-- **Angles:** [array — ref angle-registry.md]
-- **Proofs:** [array — ref proof-registry.md]
-- **Awareness:** [array — awareness levels compatibles]
-- **Conditions:** [array — tags de contexte requis]
-- **Anti-conditions:** [array — red flags, ne pas utiliser si]
-- **Variantes:** [array — sous-types si applicable]
-- **Template signals:** [array — éléments visuels/textuels non-persuasifs. TEMPLATE/ASSET only, optionnel]
-- **Piège:** [prose, 1 phrase — erreur courante]
+- **Angles:** [array · ref angle-registry.md]
+- **Proofs:** [array · ref proof-registry.md]
+- **Awareness:** [array · awareness levels compatibles]
+- **Conditions:** [array · tags de contexte requis]
+- **Anti-conditions:** [array · red flags, ne pas utiliser si]
+- **Variantes:** [array · sous-types si applicable]
+- **Template signals:** [array · éléments visuels/textuels non-persuasifs. TEMPLATE/ASSET only, optionnel]
+- **Piège:** [prose, 1 phrase · erreur courante]
 - **Batches:** [array]
 ```
 
@@ -50,7 +50,7 @@
 
 ## Claim Niches (curseur 5-10)
 
-### versus — Comparaison
+### versus · Comparaison
 
 - **Définition:** Confrontation directe produit vs concurrent, workaround, ou statu quo. La comparaison EST le concept.
 - **Curseur:** [6, 10]
@@ -67,7 +67,7 @@
 
 ---
 
-### diagnostic — Quiz / Symptom Check
+### diagnostic · Quiz / Symptom Check
 
 - **Définition:** Créa qui simule ou invite à un diagnostic personnalisé. CTA = "faire le test". L'engagement via la personnalisation.
 - **Curseur:** [5, 8]
@@ -84,7 +84,7 @@
 
 ---
 
-### ugc — User Generated Content
+### ugc · User Generated Content
 
 - **Définition:** Contenu généré (ou simulé) par l'utilisateur comme device principal. L'authenticité perçue EST le mécanisme de persuasion.
 - **Curseur:** [4, 9]
@@ -103,7 +103,7 @@
 
 ---
 
-### celebrity — Celebrity Endorsement
+### celebrity · Celebrity Endorsement
 
 - **Définition:** Personnalité connue recommande/utilise le produit. Capital de notoriété transféré au produit.
 - **Curseur:** [5, 9]
@@ -115,12 +115,12 @@
 - **Conditions:** [association_authentique, audience_admire_personne, celebrity_effect_superieur_product_first]
 - **Anti-conditions:** [association_artificielle, budget_droits_insuffisant, audience_sceptique_endorsement]
 - **Variantes:** [endorsement_direct, co_creation, investment_ownership, mention_passive]
-- **Piège:** Celebrity fatigue — une célébrité qui endorse 15 marques perd en crédibilité. Exclusivité catégorielle renforce.
+- **Piège:** Celebrity fatigue · une célébrité qui endorse 15 marques perd en crédibilité. Exclusivité catégorielle renforce.
 - **Batches:** [B04, B05]
 
 ---
 
-### launch-narrative — Annonce / Upgrade
+### launch-narrative · Annonce / Upgrade
 
 - **Définition:** Annonce nouveau produit ou upgrade. La nouveauté + la narration "pourquoi maintenant" = le device.
 - **Curseur:** [5, 8]
@@ -132,14 +132,14 @@
 - **Conditions:** [lancement_reel, upgrade_substantiel, audience_existante_a_reactiver]
 - **Anti-conditions:** [fausse_nouveaute, audience_unaware_ne_connait_pas_v1]
 - **Variantes:** [launch_produit, upgrade_v1_v2, extension_gamme, restock]
-- **Piège:** Sans vraie nouveauté, le "NEW" badge est du bruit — l'audience détecte.
+- **Piège:** Sans vraie nouveauté, le "NEW" badge est du bruit · l'audience détecte.
 - **Batches:** [B01, B02, B04, B05, B08]
 
 ---
 
-### offer-breakdown — Déballage de l'Offre
+### offer-breakdown · Déballage de l'Offre
 
-- **Définition:** Décomposition structurée de l'offre — chaque élément nommé, valorisé. Perception de valeur par accumulation.
+- **Définition:** Décomposition structurée de l'offre · chaque élément nommé, valorisé. Perception de valeur par accumulation.
 - **Curseur:** [6, 9]
 - **Mode:** CONCEPT
 - **Stop scroller:** hook_dominant
@@ -154,7 +154,7 @@
 
 ---
 
-### before-after — Contraste Avant/Après
+### before-after · Contraste Avant/Après
 
 - **Définition:** Juxtaposition état "avant" (douleur) et état "après" (résultat). Le contraste visuel ou textuel EST la persuasion.
 - **Curseur:** [5, 9]
@@ -166,14 +166,14 @@
 - **Conditions:** [resultat_visible, ecart_avant_apres_dramatique, preuve_reelle]
 - **Anti-conditions:** [resultat_invisible_abstrait, risque_reglementaire_ba, plateforme_interdit_ba]
 - **Variantes:** [ba_visuel_2_photos, ba_emotionnel_2_etats, ba_3_plus_etapes, ba_textuel]
-- **Piège:** Meta health ads restreint les BA visuels — vérifier les policies avant.
+- **Piège:** Meta health ads restreint les BA visuels · vérifier les policies avant.
 - **Batches:** [B02, B03, B09]
 
 ---
 
-### testimonial-quote — Citation Client Brand
+### testimonial-quote · Citation Client Brand
 
-- **Définition:** Verbatim client dans un design brand. Hybride UGC/brand — voix authentique, packaging contrôlé.
+- **Définition:** Verbatim client dans un design brand. Hybride UGC/brand · voix authentique, packaging contrôlé.
 - **Curseur:** [6, 8]
 - **Mode:** CONCEPT
 - **Stop scroller:** hook_dominant
@@ -188,7 +188,7 @@
 
 ---
 
-### cost-calculator — Démonstration Mathématique
+### cost-calculator · Démonstration Mathématique
 
 - **Définition:** La créa fait le calcul pour le prospect. Preuve par les chiffres que le deal est objectivement supérieur.
 - **Curseur:** [7, 10]
@@ -200,12 +200,12 @@
 - **Conditions:** [cout_objectivement_inferieur, calcul_simple_verifiable, audience_rationnelle]
 - **Anti-conditions:** [calcul_trompeur, audience_desire_driven, positionnement_premium]
 - **Variantes:** [savings_annuels, cout_par_jour, comparaison_panier, breakdown_vrai_cout]
-- **Piège:** Le calcul doit résister à 5 secondes de réflexion critique — sinon l'effet se retourne.
+- **Piège:** Le calcul doit résister à 5 secondes de réflexion critique · sinon l'effet se retourne.
 - **Batches:** [B05]
 
 ---
 
-### analogie — Bridge Externe
+### analogie · Bridge Externe
 
 - **Définition:** Élément externe surprenant bridgé vers le produit. Pattern interrupt par l'incongru, puis pont logique.
 - **Curseur:** [6, 9]
@@ -222,7 +222,7 @@
 
 ---
 
-### trending-fake-natif — Contenu Pseudo-Natif
+### trending-fake-natif · Contenu Pseudo-Natif
 
 - **Définition:** Créa qui mime un format organique (Notes, story, Google, tweet) pour bypass les ad filters mentaux.
 - **Curseur:** [4, 8]
@@ -234,14 +234,14 @@
 - **Conditions:** [audience_ad_fatigued, message_integre_naturellement, format_pas_surexploite]
 - **Anti-conditions:** [format_grille, message_force_dans_format, risque_confusion_brand]
 - **Variantes:** [format_app, format_social, format_trend_meme, format_editorial, format_search, format_whiteboard]
-- **Piège:** Les formats fake natif se grillent vite — durée de vie courte. Renouveler régulièrement.
+- **Piège:** Les formats fake natif se grillent vite · durée de vie courte. Renouveler régulièrement.
 - **Batches:** [B01, B02, B05, B06, B08]
 
 → Sous-types détaillés : voir `creative-formula.md` §5.6
 
 ---
 
-### direct-benefit — Bénéfice Brut
+### direct-benefit · Bénéfice Brut
 
 - **Définition:** Le bénéfice produit EST le concept entier. 2-5 mots, zéro device. Minimalisme textuel comme arme.
 - **Curseur:** [8, 10]
@@ -253,12 +253,12 @@
 - **Conditions:** [benefice_universellement_compris, marche_mature, zero_education_requise]
 - **Anti-conditions:** [benefice_necessite_explication, audience_unaware, benefice_nuance]
 - **Variantes:** [benefice_seul, benefice_plus_visual, benefice_plus_prix]
-- **Piège:** Fonctionne uniquement si le bénéfice est instantanément compris — sinon ça tombe à plat.
+- **Piège:** Fonctionne uniquement si le bénéfice est instantanément compris · sinon ça tombe à plat.
 - **Batches:** [B09]
 
 ---
 
-### press-quote — Citation Presse
+### press-quote · Citation Presse
 
 - **Définition:** Citation presse verbatim = concept créatif entier. La crédibilité du média porte la persuasion.
 - **Curseur:** [7, 10]
@@ -275,7 +275,7 @@
 
 ---
 
-### format-menu — Menu de Formats Produit
+### format-menu · Menu de Formats Produit
 
 - **Définition:** Présentation des options format/variant comme un menu. Auto-segmentation de l'audience par le choix.
 - **Curseur:** [6, 8]
@@ -292,7 +292,7 @@
 
 ---
 
-### price-primary — Prix comme Concept
+### price-primary · Prix comme Concept
 
 - **Définition:** Le prix EST la créa entière. Le chiffre seul porte le message. Arme ultime pour audiences price-driven.
 - **Curseur:** [8, 10]
@@ -309,7 +309,7 @@
 
 ---
 
-### diagnostic-service — Diagnostic comme Produit
+### diagnostic-service · Diagnostic comme Produit
 
 - **Définition:** Le produit vendu = un test/screening, pas un traitement. Vend l'acte de savoir, pas l'acte de soigner.
 - **Curseur:** [7, 9]
@@ -326,7 +326,7 @@
 
 ---
 
-### founder-chat — Conversation Fondateur-Client
+### founder-chat · Conversation Fondateur-Client
 
 - **Définition:** Créa simulant une conversation (DM, iMessage) entre fondateur et client. Intimité du format + transparence = persuasion.
 - **Curseur:** [6, 8]
@@ -338,12 +338,12 @@
 - **Conditions:** [fondateur_personal_brand, audience_valorise_proximite, marche_dtc]
 - **Anti-conditions:** [fondateur_invisible, grand_groupe_corporate, intimite_forcee]
 - **Variantes:** [dm_instagram, imessage, whatsapp, email_screenshot]
-- **Piège:** L'intimité simulée doit être crédible — si le fondateur n'a aucune présence publique, ça sonne faux.
+- **Piège:** L'intimité simulée doit être crédible · si le fondateur n'a aucune présence publique, ça sonne faux.
 - **Batches:** [B08]
 
 ---
 
-### recipe-instructions — Mode d'Emploi comme Ad
+### recipe-instructions · Mode d'Emploi comme Ad
 
 - **Définition:** Mode d'emploi, recette, ou rituel d'utilisation présenté comme créa. Montre la simplicité/le plaisir d'usage.
 - **Curseur:** [5, 7]
@@ -360,7 +360,7 @@
 
 ---
 
-### bundle-duo — Regroupement Structuré
+### bundle-duo · Regroupement Structuré
 
 - **Définition:** 2+ produits regroupés avec structure narrative (jour/nuit, him/her). Complémentarité racontée comme système.
 - **Curseur:** [5, 8]
@@ -379,7 +379,7 @@
 
 ## Visual Niches (curseur 0-4)
 
-### category-showcase — Vitrine Catégorie
+### category-showcase · Vitrine Catégorie
 
 - **Définition:** Template : photo modèle + titre catégorie + badge attribut. Navigation produit, pas persuasion.
 - **Curseur:** [2, 3]
@@ -397,7 +397,7 @@
 
 ---
 
-### collection — Univers Thématique
+### collection · Univers Thématique
 
 - **Définition:** Univers créatif (nom + palette + motifs) justifiant N produits. Cohérence esthétique = désir par immersion.
 - **Curseur:** [1, 3]
@@ -409,12 +409,12 @@
 - **Conditions:** [marque_lifestyle_drops_reguliers, univers_visuel_fort, audience_achete_esthetique]
 - **Anti-conditions:** [marque_sans_identite_visuelle, produit_utilitaire, audience_rationnelle]
 - **Variantes:** [collection_saisonniere, collab_co_brand, thematique_motif]
-- **Piège:** Sans identité visuelle forte, la collection ressemble à un catalogue — pas à un univers.
+- **Piège:** Sans identité visuelle forte, la collection ressemble à un catalogue · pas à un univers.
 - **Batches:** [B06]
 
 ---
 
-### season-campaign — Campagne Saisonnière
+### season-campaign · Campagne Saisonnière
 
 - **Définition:** Photo contexte saisonnier + slogan saison + CTA. Le moment calendaire comme déclencheur d'achat.
 - **Curseur:** [2, 4]
@@ -427,12 +427,12 @@
 - **Conditions:** [produit_saisonnier, moment_calendaire_fort, image_contexte_declenche_besoin]
 - **Anti-conditions:** [produit_evergreen_sans_saison, saison_pretexte_faible]
 - **Variantes:** [saison_pure, moment_rentree_holidays, meteo]
-- **Piège:** La saisonnalité doit être réelle — forcer un lien saison/produit = pub générique.
+- **Piège:** La saisonnalité doit être réelle · forcer un lien saison/produit = pub générique.
 - **Batches:** [B06]
 
 ---
 
-### loyalty-campaign — Campagne Fidélité
+### loyalty-campaign · Campagne Fidélité
 
 - **Définition:** Photo + nom campagne fidélité + prix club. Exclusivité du prix réservé aux membres.
 - **Curseur:** [2, 3]
@@ -450,7 +450,7 @@
 
 ---
 
-### guide-listicle — Guide / Checklist
+### guide-listicle · Guide / Checklist
 
 - **Définition:** Titre éditorial + checklist/listicle. Format éditorial qui attire par l'utilité, pas la vente directe.
 - **Curseur:** [3, 5]
@@ -468,7 +468,7 @@
 
 ---
 
-### packshot-solo — Packshot Studio
+### packshot-solo · Packshot Studio
 
 - **Définition:** 1 modèle, fond studio, produit porté, logo seul. Zéro texte. L'image parle seule.
 - **Curseur:** [0, 1]
@@ -480,12 +480,12 @@
 - **Conditions:** [brand_forte_equity_visuelle, dpa_daba, retargeting]
 - **Anti-conditions:** [brand_inconnue, objectif_acquisition_cold]
 - **Variantes:** [portrait, full_body, flat_lay]
-- **Piège:** Sur brand inconnue, le visual seul ne communique rien — il faut au minimum un hook textuel.
+- **Piège:** Sur brand inconnue, le visual seul ne communique rien · il faut au minimum un hook textuel.
 - **Batches:** [B07]
 
 ---
 
-### packshot-contextuel — Packshot en Contexte
+### packshot-contextuel · Packshot en Contexte
 
 - **Définition:** 1 modèle en contexte d'usage (gym, outdoor, bureau), produit porté, logo seul. Le contexte remplace le copy.
 - **Curseur:** [0, 1]
@@ -502,7 +502,7 @@
 
 ---
 
-### squad-group — Groupe / Communauté
+### squad-group · Groupe / Communauté
 
 - **Définition:** 3-5 modèles ensemble, diversité visible. La communauté comme message : "tu as ta place ici."
 - **Curseur:** [0, 2]
@@ -514,12 +514,12 @@
 - **Conditions:** [positionnement_inclusif, image_groupe_renforce_brand, campagne_branding]
 - **Anti-conditions:** [segment_narrow, objectif_conversion_directe]
 - **Variantes:** [studio_fond_uni, lifestyle_exterieur, action_sport]
-- **Piège:** Le groupe dilue le ciblage — si la brand vise un segment narrow, la diversité brouille le message.
+- **Piège:** Le groupe dilue le ciblage · si la brand vise un segment narrow, la diversité brouille le message.
 - **Batches:** [B07]
 
 ---
 
-### ugc-selfie — Selfie Authentique
+### ugc-selfie · Selfie Authentique
 
 - **Définition:** Selfie miroir, format smartphone, zéro texte/branding. Le format brut = le message. L'anti-pub comme pub.
 - **Curseur:** [0, 1]
@@ -706,35 +706,35 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 | ugc | temporel | narratif | testimonial first-person récit · le déroulement IS le device |
 | celebrity | **variable** | narratif (si temporel) | spatial en static (endorsement card), temporel-narratif en vidéo (récit célébrité) |
 | launch-narrative | temporel | narratif | annonce avec narration "pourquoi maintenant" · arc temporel obligatoire |
-| offer-breakdown | spatial | — | déballage structuré · layout statique souvent · composition fixe |
+| offer-breakdown | spatial | · | déballage structuré · layout statique souvent · composition fixe |
 | before-after | **variable** | démonstratif (si temporel) | spatial en static (juxtaposition 2 photos), temporel-démonstratif en vidéo 3+ étapes |
-| testimonial-quote | spatial | — | verbatim encadré dans design brand · composition fixe |
-| cost-calculator | spatial | — | démonstration mathématique chiffres · composition figée |
+| testimonial-quote | spatial | · | verbatim encadré dans design brand · composition fixe |
+| cost-calculator | spatial | · | démonstration mathématique chiffres · composition figée |
 | analogie | temporel | pédagogique | bridge externe expliqué · vulgarise via analogie |
-| trending-fake-natif | spatial | — | mime format organique statique (Notes, story screenshot, search) |
-| direct-benefit | spatial | — | le bénéfice EST le concept · 2-5 mots fixes |
-| press-quote | spatial | — | citation presse verbatim encadrée |
-| format-menu | spatial | — | présentation des options layout statique |
-| price-primary | spatial | — | le prix EST la créa · composition figée |
+| trending-fake-natif | spatial | · | mime format organique statique (Notes, story screenshot, search) |
+| direct-benefit | spatial | · | le bénéfice EST le concept · 2-5 mots fixes |
+| press-quote | spatial | · | citation presse verbatim encadrée |
+| format-menu | spatial | · | présentation des options layout statique |
+| price-primary | spatial | · | le prix EST la créa · composition figée |
 | diagnostic-service | temporel | dialogique | produit = test/screening · process conversationnel |
 | founder-chat | temporel | dialogique | conversation simulée fondateur-client · 2 voix échange |
 | recipe-instructions | temporel | pédagogique | mode d'emploi steps · vulgarisation séquentielle |
-| bundle-duo | spatial | — | regroupement structuré his/her ou jour/nuit · composition fixe |
-| curiosity_teaser | spatial | — | hook accusateur + visuel-preuve · payoff externalisé (swipe) |
+| bundle-duo | spatial | · | regroupement structuré his/her ou jour/nuit · composition fixe |
+| curiosity_teaser | spatial | · | hook accusateur + visuel-preuve · payoff externalisé (swipe) |
 | emotional_reframe | temporel | narratif | ladder de futurs possibles · arc temporel projection identitaire |
-| meme_cultural | spatial | — | référence culturelle visuelle fixe |
+| meme_cultural | spatial | · | référence culturelle visuelle fixe |
 | educational_diagram | temporel | pédagogique | vulgarise mécanisme complexe via schéma déroulé |
-| product_focus | spatial | — | hero shot produit fixe · composition figée |
+| product_focus | spatial | · | hero shot produit fixe · composition figée |
 | education_pain_loop | temporel | pédagogique | éducation problème sans CTA · vulgarisation séquentielle |
-| category-showcase | spatial | — | template navigation produit · layout statique |
-| collection | spatial | — | univers thématique fixe |
-| season-campaign | spatial | — | photo contexte saisonnier + slogan · composition figée |
-| loyalty-campaign | spatial | — | template prix club · layout statique |
+| category-showcase | spatial | · | template navigation produit · layout statique |
+| collection | spatial | · | univers thématique fixe |
+| season-campaign | spatial | · | photo contexte saisonnier + slogan · composition figée |
+| loyalty-campaign | spatial | · | template prix club · layout statique |
 | guide-listicle | temporel | pédagogique | checklist explicative · vulgarisation séquentielle |
-| packshot-solo | spatial | — | photo modèle studio fixe |
-| packshot-contextuel | spatial | — | photo modèle en contexte usage fixe |
-| squad-group | spatial | — | 3-5 modèles ensemble · composition statique |
-| ugc-selfie | spatial | — | selfie miroir fixe · format brut |
+| packshot-solo | spatial | · | photo modèle studio fixe |
+| packshot-contextuel | spatial | · | photo modèle en contexte usage fixe |
+| squad-group | spatial | · | 3-5 modèles ensemble · composition statique |
+| ugc-selfie | spatial | · | selfie miroir fixe · format brut |
 
 ### Statistiques v2.88.0
 
@@ -765,7 +765,7 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 
 > 3 mécaniques **statiques** graduées depuis le corpus de référence (342 ads · 95% mappaient déjà sur les fiches existantes · ces 3 étaient les seuls vrais `other`). Validées par Largo (call expert). Chaque agent a confirmé l'absence de doublon avec les fiches existantes. Cross-réf `creative-mechanics-evidence.md`.
 
-### point-out — Callout / Point-Out
+### point-out · Callout / Point-Out
 
 - **Définition:** Features, bénéfices, ingrédients ou réassurances reliés visuellement à un packshot par des lignes, flèches, puces ou cartouches qui pointent des zones précises du produit. Le device EST le pointage spatial : annoter le produit pour valoriser ses attributs sans narration.
 - **Curseur:** [3, 6]
@@ -782,7 +782,7 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 - **Piège:** Au-delà de 4-5 callouts le packshot devient illisible et le scroll tue l'attention avant la lecture des labels.
 - **Batches:** [_reference-strideup] · RCV-276 (Tediber linge), RCV-277 (Patyka gommage), RCV-278 (Maison Matine parfum), RCV-282 (Cabaia sac), RCV-284 (Saye sneakers), RCV-285 (Kosbiotic complément) · marques observées : Tediber, Patyka, Maison Matine, Cabaia, Saye, Kosbiotic
 
-### stat-claim — Statistique-Choc
+### stat-claim · Statistique-Choc
 - **Définition:** Un pourcentage ou une statistique frappante posé comme accroche-concept dominante ("91% des femmes…"). Le chiffre seul, monumentalisé en jauge/numéral géant, EST le device. Distinct de `cost-calculator` (math d'un deal, prix), `educational_diagram` (schéma d'un mécanisme), `education_pain_loop` (stat révélatrice de pain, audience à éveiller, sans produit) : ici la stat est une preuve d'efficacité positive ancrée sur audience aware, résolue en frame vers un produit.
 - **Curseur:** [5, 8]
 - **Mode:** CONCEPT
@@ -795,12 +795,12 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 - **Anti-conditions:** [stat_invraisemblable_non_sourcee, audience_unaware, chiffre_fade_sans_surprise, claim_non_compliant_categorie_reglementee]
 - **Variantes:** [pct_efficacite_dominant, stat_en_jauge_arc, stat_conditionnelle_after_X, stat_audience_majoritaire]
 - **Template signals:** [numeral_geant, jauge_arc_pourcentage, fleche_annotee_vers_produit, disclaimer_compliance_footer, frame_conditionnel_after_X]
-- **Piège:** Une stat trop ronde ou non sourcée déclenche le réflexe sceptique au lieu de la confiance — et en catégorie réglementée (santé), le claim non couvert par un disclaimer est une bombe compliance.
+- **Piège:** Une stat trop ronde ou non sourcée déclenche le réflexe sceptique au lieu de la confiance · et en catégorie réglementée (santé), le claim non couvert par un disclaimer est une bombe compliance.
 - **Batches:** [_reference-strideup, RCV-182 (hers), RCV-192 (hers)] · marques observées : hers (telehealth femmes US · mental health / Balance Blend Rx)
 
-### question-reponse — Question-Réponse
+### question-reponse · Question-Réponse
 
-- **Définition:** Format Q&A natif (sticker "question" Instagram) qui fait surgir une objection consommateur et y répond en frame avec un bénéfice/preuve. L'objection-répondue EST le device — pas une vraie question ouverte, mais une objection levée immédiatement.
+- **Définition:** Format Q&A natif (sticker "question" Instagram) qui fait surgir une objection consommateur et y répond en frame avec un bénéfice/preuve. L'objection-répondue EST le device · pas une vraie question ouverte, mais une objection levée immédiatement.
 - **Curseur:** [5, 8]
 - **Mode:** TEMPLATE
 - **Stop scroller:** co_dominant
@@ -812,5 +812,5 @@ Les 15 mécaniques marquées PROPOSED issues du F5 Sandbox Batch (2026-04-10) on
 - **Anti-conditions:** [audience_unaware_sans_objection_formee, reponse_floue_non_demontrable, objection_inventee_artificielle, produit_zero_friction]
 - **Variantes:** [objection_efficacite_preuve_clinique, objection_compatibilite_mecanisme, objection_logistique_abonnement, sticker_vos_questions_multi]
 - **Template signals:** [sticker_question_natif_IG, bandeau_question_couleur_accent, encart_reponse_blanc, label_vos_questions, photo_lifestyle_ou_packshot_fond]
-- **Piège:** Une objection inventée ou répondue de façon vague sonne comme du faux-natif marketing — il faut une vraie objection récurrente et une réponse démontrable en une phrase.
+- **Piège:** Une objection inventée ou répondue de façon vague sonne comme du faux-natif marketing · il faut une vraie objection récurrente et une réponse démontrable en une phrase.
 - **Batches:** [_reference-strideup] (RCV-456 Pomponne · RCV-457 Bloon · RCV-458 Tidoo · marques observées : Pomponne mascara, Bloon Paris, Tidoo)

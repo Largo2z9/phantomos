@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-PreToolUse hook — external tool convention guard.
+PreToolUse hook · external tool convention guard.
 
 Intercepts calls to external MCP servers (notion, supabase, shopify, meta-ads…)
 and blocks them unless the matching resources/conventions/{platform}.json exists
 and has a recent _doc_check.last_doc_read.
 
-Fail-open on unmapped tool names — only enforces on known external platforms.
+Fail-open on unmapped tool names · only enforces on known external platforms.
 Fail-closed on missing/stale convention for a known platform.
 """
 from __future__ import annotations
@@ -107,7 +107,7 @@ def main() -> None:
     cwd = Path(payload.get("cwd") or os.getcwd())
     root = find_workspace_root(cwd)
     if root is None:
-        # Not inside a PhantomOS workspace — don't enforce.
+        # Not inside a PhantomOS workspace · don't enforce.
         allow()
         return
 
@@ -122,14 +122,14 @@ def main() -> None:
             f"  2. Fill meta.platform, access.method, _doc_check.doc_source_urls\n"
             f"  3. Set _doc_check.last_doc_read to today after reading the official doc\n"
             f"  4. Retry the tool call\n\n"
-            f"Rule source: workspace-template/CLAUDE.md § KB — ALWAYS read "
+            f"Rule source: workspace-template/CLAUDE.md § KB · ALWAYS read "
             f"resources/conventions/{{platform}}.json before any external tool/API call."
         )
 
     try:
         conv = json.loads(conv_path.read_text())
     except Exception as e:
-        block(f"[convention-guard] BLOCKED — {conv_path.name} is not valid JSON: {e}")
+        block(f"[convention-guard] BLOCKED · {conv_path.name} is not valid JSON: {e}")
 
     doc_check = conv.get("_doc_check") or {}
     last_read = doc_check.get("last_doc_read")
@@ -145,14 +145,14 @@ def main() -> None:
         last_dt = datetime.strptime(last_read, "%Y-%m-%d")
     except Exception:
         block(
-            f"[convention-guard] BLOCKED — _doc_check.last_doc_read has invalid format "
+            f"[convention-guard] BLOCKED · _doc_check.last_doc_read has invalid format "
             f"({last_read!r}). Expected YYYY-MM-DD."
         )
 
     age = datetime.utcnow() - last_dt
     if age > timedelta(days=DOC_CHECK_MAX_AGE_DAYS):
         block(
-            f"[convention-guard] BLOCKED — {platform}.json doc is stale "
+            f"[convention-guard] BLOCKED · {platform}.json doc is stale "
             f"(last read {last_read}, {age.days}d ago, max {DOC_CHECK_MAX_AGE_DAYS}d).\n"
             f"Re-read the official doc, update _doc_check.last_doc_read, retry."
         )

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-phantom-search — cross-brand keyword search across context entities.
+phantom-search · cross-brand keyword search across context entities.
 
 Searches case-insensitively across:
   - brands/{slug}/brand.json (meta.name, identity, positioning, tone fields)

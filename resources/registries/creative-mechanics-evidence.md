@@ -1,4 +1,4 @@
-# Creative Mechanics — Evidence Index (corpus de référence)
+# Creative Mechanics · Evidence Index (corpus de référence)
 
 > Companion de `creative-mechanics-registry.md`. Auto-dérivé du corpus `_reference` (342 ads décortiquées + taguées par concept · D#489).
 

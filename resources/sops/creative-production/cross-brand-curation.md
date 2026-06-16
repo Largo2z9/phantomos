@@ -86,6 +86,6 @@ Chaque pattern liste les enums `decomposition.schema` (= `genome.schema`) qu'il 
 
 ## À durcir plus tard (flaggé, pas construit · anti-over-eng)
 
-- **Normalisation ingrédient** avant clustering (accents/casse/source · « Magnésium » vs « Magnesium », 30 variantes de « mélatonine végétale ») — sinon le clustering par ingrédient casse.
+- **Normalisation ingrédient** avant clustering (accents/casse/source · « Magnésium » vs « Magnesium », 30 variantes de « mélatonine végétale ») · sinon le clustering par ingrédient casse.
 - **3e signal = perf réelle.** La curation actuelle promeut sur la RÉCURRENCE cross-source. Le signal le plus fort (la perf gagnante réelle) viendra de la feedback loop (`perf-feedback-loop.md`) quand des créas produites auront tourné. Un pattern `promote-ready` + confirmé gagnant en perf = canon.
 - **Skill `curate-pattern`** automatisée (clustering + comptage factory-aware + draft de l'objet) = chantier futur.

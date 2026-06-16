@@ -3,7 +3,7 @@
   "version": "2.6.19",
   "released_at": "2026-04-23",
   "compatible_from": "2.0.0",
-  "theme": "hygiene — language drift",
+  "theme": "hygiene · language drift",
   "summary": "FR → EN rewrite of 3 system docs + 3 SKILL.md sections authored during v2.6.17–18. Template is EN-baseline per voice.md; operator-facing translation happens at runtime. No behavior change.",
   "changes": [
     {

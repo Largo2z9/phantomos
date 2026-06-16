@@ -1,7 +1,7 @@
 ---
 name: onboard-brand
 type: orchestrator
-version: "1.3.1"
+version: "1.4.1"
 recommended_model: sonnet
 layer: territoire
 reasoning_pattern: null
@@ -31,6 +31,15 @@ disambiguates_against:
   setup-brand: "route to setup-brand when operator wants only the initial structure/identity, not the full 4-step pipeline"
   snapshot-brand: "route to snapshot-brand when operator wants just URL scraping on an already-configured brand (not a full onboarding)"
 patch_notes:
+  - date: "2026-06-16"
+    change: >
+      Refondation du close (Step 5) sur le principe expert-prompting · forme dé-prescrite (trichotomie pointée, plus re-collée), le move recommandé est PRODUIT en faisant tourner la chaîne diagnostic sur le substrat encodé (strategic-diagnostic-doctrine.md), out honnête ajouté, close net plus court.
+  - date: "2026-06-16"
+    change: >
+      Réconciliation du close (Step 5) à la posture amendée affirme/ouvre/gate · le close
+      Build chantiers affirme LE chantier recommandé par défaut (menu 4 options conservé en
+      drill-down de redirection), self-critique anti-bulletin-météo + citation exemplar
+      ajoutées, surface territoire Step 2 alignée, trichotomie pointée vers la doctrine SSOT.
   - date: "2026-06-14"
     change: >
       Correction d'altitude de la calibration opérateur (D#516, corrige D#515).
@@ -205,7 +214,7 @@ Fast-track (`disclosure_preference: silent` OU `auto_validate_after_n_brands`) �
 
 **Quand le deep scan (spawn #2) revient**, surface la **synthèse structurée** que snapshot-brand a rendue (5 sections investigation-posture + décomposition NIVEAU 1-4 post-scan), pas une prose libre, pas un recap "1-2 lignes". La validation du territoire produit se fait sur cette carte RICHE (le gate territoire), pas sur la photo de recon · c'est là que la décomposition produit NIVEAU 1 s'affiche, sur données scrapées, jamais sur la recon amont.
 
-Puis propose la suite · valider/corriger le territoire, ou filer aux chantiers que je pose après la passe de cohérence.
+Puis tranche la suite en affirmant · recommande le prochain pas que tu poserais sur ce territoire (poser les chantiers après la passe de cohérence, le plus souvent), défendu en une ligne. Valider/corriger le territoire reste ouvert comme redirection si l'opérateur veut reprendre la carte, ce n'est pas une question rendue. Jamais un menu d'axes à choisir.
 
 The integrity check (validate-resources) runs silently in parallel · no need to announce it as a discrete milestone. Surface only if it returns blocking issues.
 
@@ -245,6 +254,8 @@ Always run, even if Phases 2-3 skipped. Subagent:
 
 **CRITICAL**: **NEVER** propose deliverables here. This is a Build close, not an Execute close.
 
+Banque few-shot (close tranché vs mou) avant de rédiger · `resources/canon/exemplars/close.md`.
+
 Read operator profile from `operator/profile.json → identity.profile`. Pick the variant from `docs/system/patterns.md § Close Variants`:
 - solo-brand-live
 - early-founder
@@ -252,7 +263,9 @@ Read operator profile from `operator/profile.json → identity.profile`. Pick th
 - agency-portfolio
 - dropshipper (default to solo-brand-live variant if not explicitly templated)
 
-Render the 4-option close via AskUserQuestion, adapted to the profile.
+Le close par défaut AFFIRME un move, il ne le pioche pas dans une liste · il le PRODUIT en faisant tourner la chaîne diagnostic sur le substrat encodé (position → négatif → audience-du-mécanisme → priorité éco → verdict · `docs/doctrine/strategic-diagnostic-doctrine.md`). Recommande LE chantier que ce read désigne, défendu en une ligne. Les 3 chantiers du profil + Autre (`docs/system/patterns.md § Close Variants`) sont un drill-down de redirection, jamais le close par défaut. Ouvre toi-même l'inconnu (comment tu le lèves, part faisable), gate au plus 1 question si elle est indéterminable depuis le scan ET bloquante. Posture close · `docs/system/investigation-posture.md` + `docs/system/contextual-intelligence.md` (pointer, ne pas re-coller la doctrine).
+
+Out honnête · si le substrat ne porte pas encore de move, nomme l'UNIQUE inconnu bloquant et le chemin pour le lever (c'est un move, pas un cop-out · inventer un verdict pour faire décidé = la faute). Relis-le avant de rendre · tranche-t-il sur un chantier défendu, ou rend-il une question (« lequel veux-tu creuser ? » = météo) ? Si météo, réécris en move affirmé.
 
 Then trigger learn-from-session batch (posture adaptive, operational/ship register likely for this orchestrator): brief the operator on what was shipped across the 4 phases, 5-7 bullets max, close with "1 arbitrage" (usually the Build chantier pick) or "All applied, RAS".
 

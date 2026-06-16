@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ensure-memory-fresh — rebuild .phantom/memory.db iff any indexed source is
+ensure-memory-fresh · rebuild .phantom/memory.db iff any indexed source is
 newer than the DB (or the DB is missing). Idempotent and cheap: if nothing
 changed, it prints `fresh` and returns immediately.
 

@@ -1,7 +1,7 @@
 ---
 name: brief-day
 type: navigator
-version: "1.2.0"
+version: "1.3.1"
 recommended_model: haiku
 layer: production
 reasoning_pattern: null
@@ -23,6 +23,8 @@ patch_notes:
   v1.0.0: "v2.39 ship navigator briefing. Read silencieux status.json + pending-validations + todos + learnings + profile + session-state cross-brands · classify health/needs-call/flags/next · output exécutif 5-7 bullets max + AskUserQuestion close. Anti-pattern strict · jamais propose Producer/Orchestrator skill sans demande explicite, jamais file paths/D# en surface, jamais brief >10 bullets quel que soit complexité portfolio."
   v1.1.0: "v2.51 enrichment · État brand info système 3 niveaux descriptif (pull-not-push cohérent v2.50). Section État brand structurée Identité (setup-once · setup brand + audiences) / Inventaire (produits avec spec+photo officielle + assets brand-level logo/badge/mascotte/pattern) / Atlas vivant (angles testés + campagnes encodées par usage terrain). Chaque item · label langage métier opérateur (photo officielle pas packshot, brand pas slug) + état OK/pas encore renseigné + hint passif si pertinent (récupérable depuis ton site / à drop manuellement / se construit au fil des campagnes). Sous-section optionnelle À noter max 2 items gaps fort impact downstream · drop si brand en très bon état. Strict no · pourcentage, level N, completion %, capability menu, jamais nommer skills (craft-packshot, import-asset), jamais flags techniques (_canonical, _validated_by_operator). Posture descriptive neutre · opérateur lit, comprend, décide. Bridge schema visual_identity v1.2 nouveaux slots (assets_canonical · logo_canonical + badge_canonical + mascotte_canonical + pattern_canonical)."
   v1.2.0: "v2.54 investigation posture mode allégé · chaque item de l'État brand 3 niveaux signale sa nature observé directement (data Supabase / scan brand.json sourced) vs déduit (inférence partielle agent sur l'état). Sous-section optionnelle réécrite À explorer si pertinent (max 2 items, drill-down options Pour creuser X on peut faire Y) au lieu de À noter qui pouvait sonner injonctif. Close macro · UNE question Sur quoi veux-tu te focus aujourd'hui ? · opérateur arbitre. Préserve format 3 niveaux v2.51. Refacto uniquement posture · ajouter confidence observé/déduit + reformuler À noter en À explorer si pertinent + close drill-down macro. Cross-ref docs/system/investigation-posture.md."
+  v1.3.0: "Close reconcilié au posture amendé · le close AFFIRME un move défendu (affirme / ouvre / gate) au lieu de rendre une question macro, drill-down macro conservé en redirect opérateur, self-critique + exemplar close.md ajoutés au close step."
+  v1.3.1: "Close refondé sur l'expert-prompting · forme re-collée (trichotomie) trimée en pointeur doctrine, close invoque la chaîne diagnostique sur le substrat encodé, out honnête ajouté, net plus court."
 ---
 
 # Skill: brief-day
@@ -37,7 +39,7 @@ Posture adapted to context: if multi-brand operator (portfolio / agency) → por
 
 ---
 
-## Step 1 — Scan workspace state (silent)
+## Step 1 · Scan workspace state (silent)
 
 Read in parallel, no operator visibility:
 
@@ -58,20 +60,20 @@ Read in parallel, no operator visibility:
 "Calendrier non branché · `connecte mes outils` quand tu veux l'agenda dedans"
 **Si MCP supabase absent** · même pattern · degraded mode + 1 ligne proactive.
 
-## Step 2 — Classify what matters (silent)
+## Step 2 · Classify what matters (silent)
 
 Bucket detected signals:
 
-- **Brand health**: 1 line per brand — name, completeness level, days since last activity, flag count
+- **Brand health**: 1 line per brand · name, completeness level, days since last activity, flag count
 - **Needs your call**: items in pending-validations marked critical or blocking (gate access missing on skills operator asked for, inferred audience not yet validated before planned deliverable, etc.)
 - **Flags across portfolio**: cross-brand patterns (e.g. 3 brands missing Meta credentials, 2 brands with learnings_stale flag)
 - **Next action suggestions** (2-3 max, ranked by impact)
 
-## Step 2bis — Compose État brand · info système (silent, then surface · v2.54 posture investigation allégée)
+## Step 2bis · Compose État brand · info système (silent, then surface · v2.54 posture investigation allégée)
 
 **Quand surface.** Si l'opérateur a une seule brand active OU est focalisé sur une brand (last activity < 7 jours, ou brand explicitement mentionnée). Sinon, prefer le format portfolio multi-brands de Step 3 standard et garde l'état brand pour drill explicite.
 
-**Doctrinal contract v2.54.** brief-day est un cas particulier · c'est de l'**état descriptif** (cartographie de ce qui est rempli vs vide), pas de la synthèse stratégique. La doctrine investigation-posture s'applique en mode allégé · chaque item signale sa nature (observé directement vs déduit), la sous-section "À noter" devient "À explorer si pertinent" (drill-down options, pas injonction), close macro UNE question.
+**Doctrinal contract v2.54.** brief-day est un cas particulier · c'est de l'**état descriptif** (cartographie de ce qui est rempli vs vide), pas de la synthèse stratégique. La doctrine investigation-posture s'applique en mode allégé · chaque item signale sa nature (observé directement vs déduit), la sous-section "À noter" devient "À explorer si pertinent" (drill-down options, pas injonction), et le close affirme un move défendu plutôt que de rendre une question macro (mécanique du close en Step 3).
 
 **Posture observé / déduit par item** ·
 - `observé directement` (data Supabase status.json, scan brand.json sourcé, audience_index Supabase, learnings.json structurés) → item présenté tel quel, pas de flag explicite (default · le système est sourced).
@@ -79,14 +81,14 @@ Bucket detected signals:
 
 **Hiérarchie 3 niveaux** (ordre canonique, jamais inversé) ·
 
-### Niveau 1 — Identité brand (setup-once)
+### Niveau 1 · Identité brand (setup-once)
 
 Ce qui définit qui est la brand. Setup une fois, stable ensuite.
 
 - **Setup** · "complet" (si `wedge_complete: true`) OR "partiel" (si `draft`/`partial`) OR "pas encore engagé" (si `empty`) · observé directement (status.json sourced)
 - **Audiences** · "N mappées (1 mère, N-1 sous-audiences)" si `audiences_index` populé. Sinon "pas encore mappées · se construit avec setup-brand". Si certaines audiences sont `validation_status: hypothesis` → ajouter `(N audiences encore en hypothèse · déduit, pas validées terrain)`.
 
-### Niveau 2 — Inventaire produits & assets (ajouts continus)
+### Niveau 2 · Inventaire produits & assets (ajouts continus)
 
 Ce dont la brand dispose pour produire des créa. Bouge avec chaque ajout.
 
@@ -100,14 +102,14 @@ Ce dont la brand dispose pour produire des créa. Bouge avec chaque ajout.
   - **Mascotte** · "OK" si présente, "pas applicable" si brand n'a pas de mascotte selon identité (default), "pas encore renseignée (déduit · si brand a mascotte récurrente)" si brand a mascotte récurrente mais slot vide
   - **Patterns** · "N renseignés" si `pattern_canonical{}` non-vide. Sinon "pas encore renseignés"
 
-### Niveau 3 — Atlas vivant (earned par usage)
+### Niveau 3 · Atlas vivant (earned par usage)
 
 Ce que la brand a appris en lançant des campagnes. Se construit avec le temps, pas avec setup.
 
 - **Angles testés** · "N hypothèses · K validés terrain" si `angles/` populé OR `learnings.json` contient angle_hypothesis entries (observé · learnings.json sourced). Sinon "0 angles encodés · se construit au fil des campagnes".
 - **Campagnes lancées** · "N résultats encodés" si `learnings.json` contient campaign_result entries (observé). Sinon "0 résultats encodés · se construit au fil des campagnes".
 
-### Sous-section optionnelle — "À explorer si pertinent" (v2.54 remplace "À noter")
+### Sous-section optionnelle · "À explorer si pertinent" (v2.54 remplace "À noter")
 
 Max **2 items** courts, drill-down options pour gaps fort impact downstream. Posture · drill-down options à arbitrer par l'opérateur, jamais injonction. Drop entièrement si brand en très bon état OU si rien d'actionnable.
 
@@ -120,7 +122,7 @@ Format canonique v2.54 (drill-down option · "Pour creuser X, on peut faire Y") 
 
 **Jamais** dépasser 2 items. **Jamais** nommer skill en surface (`craft-packshot`, `import-asset`, `setup-brand`, `mine-voc`, etc.). **Jamais** flag technique (`_canonical`, `_validated_by_operator`, `audiences_index`). **Jamais** injonction (`tu dois`, `il faut`, `complete ceci`). **Jamais** "À noter" en wording (v2.51 ←) · toujours "À explorer si pertinent" en wording v2.54.
 
-## Step 3 — Deliver the brief
+## Step 3 · Deliver the brief
 
 **ALWAYS** in executive format. 5-7 bullets max for portfolio summary. **NEVER** dump raw data. Si focus mono-brand ou single-brand workspace, surface l'État brand 3 niveaux composé en Step 2bis à la place du Portfolio health.
 
@@ -168,17 +170,21 @@ Format canonique v2.54 (drill-down option · "Pour creuser X, on peut faire Y") 
 >   - Pour préparer tes prochaines pubs Glow Boost avec produit pixel-exact, on peut récupérer la photo depuis ton site ou tu drop manuellement.
 >   - Pour passer tes audiences d'hypothèse à validées avant de produire des angles paid, on peut lancer une écoute clients réelle (~8-12 min).
 >
-> Sur quoi veux-tu te focus aujourd'hui ?
+> Le levier qui paie en premier · côté Glow Boost la preuve manque (photo officielle absente, audiences encore en hypothèse), et la lecture la plus probable c'est que la vente se perd sur le doute avant l'acquisition. Je récupère la photo officielle depuis ton site pour préparer les visuels, et je lance l'écoute clients en parallèle pour figer les audiences avant de produire. Tu veux pivoter sur une autre brand, dis-le.
 
-**ALWAYS** close avec UNE question macro drill-down (v2.54 investigation posture · anti-pattern AP-5 BANNI · close affirmatif qui ferme la conversation). Format canonique ·
+**ALWAYS** clore par un verdict de move défendu, pas une question macro rendue. Le move n'est pas prescrit par une forme · il SORT du raisonnement sur le substrat encodé · fais tourner la chaîne diagnostique sur ce que la brand a encodé (position → négatif → audience-du-mécanisme → priorité-éco → verdict, `docs/doctrine/strategic-diagnostic-doctrine.md`) et le prochain levier qui paie tombe de là, défendu en une ligne, appuyé sur un déduit qui porte sa confidence, jamais sur un fait inventé. Posture du close (affirme / ouvre / gate, à ne pas re-coller ici) · `docs/system/investigation-posture.md` + master `docs/system/contextual-intelligence.md`.
 
-> Sur quoi veux-tu te focus aujourd'hui ?
+**L'out honnête est un move, pas un aveu** · si la data ne porte pas encore de verdict, nomme l'UNIQUE inconnu qui bloque + le chemin exact pour le lever (cf out exemplar). Inventer un verdict pour paraître décisif est le seul échec.
 
-Use `AskUserQuestion` tool pour smart suggests si pertinent · load via `ToolSearch(select:AskUserQuestion)` if not loaded. Options proposées dérivées de l'état brand observé · ex pour Glowco au-dessus · *"Photo officielle Glow Boost / Écoute clients audiences / Switch brand / Autre"*. Anti-pattern · jamais options génériques pre-templated, toujours adaptive selon état observé.
+**Avant de surfacer le close, relis-le** · tranche-t-il un move défendu, ou décrit-il l'état puis repasse une question (le bulletin météo) ? Si météo, réécris-le.
+
+Le drill-down macro reste une **affordance de redirect**, pas le close par défaut · si l'opérateur veut arbitrer, `AskUserQuestion` (load via `ToolSearch(select:AskUserQuestion)`) avec options dérivées de l'état observé, jamais pre-templated.
+
+Banque sharp vs mushy du close (à imiter / à fuir) · `resources/canon/exemplars/close.md`.
 
 ---
 
-## Step 4 — What this skill NEVER does
+## Step 4 · What this skill NEVER does
 
 - **NEVER** propose to run a Producer or Orchestrator skill without explicit operator request. Daily-brief orients, doesn't commit.
 - **NEVER** expose file paths, field names, routing destinations, D# numbers.
@@ -190,7 +196,7 @@ Use `AskUserQuestion` tool pour smart suggests si pertinent · load via `ToolSea
 - **NEVER** injonction dans l'État brand (`tu dois`, `il faut`, `complete ceci`, `manque ceci`). Soft offer indirecte uniquement · "récupérable depuis ton site" (= hint passif), "Pour creuser X, on peut faire Y" (= drill-down option v2.54).
 - **NEVER** plus de 2 items dans la sous-section À explorer si pertinent. Si rien à signaler, drop entièrement la sous-section.
 - **NEVER** wording "À noter" (v2.51 ←) · toujours "À explorer si pertinent" (v2.54+) en wording cohérent doctrine investigation-posture.
-- **NEVER** close affirmatif qui ferme la conversation (*"Other actions ?"*, *"Anything else ?"*, *"Validate Northsense audience or move on?"*) · anti-pattern AP-5 doctrine investigation-posture BANNI. Toujours close macro UNE question · *"Sur quoi veux-tu te focus aujourd'hui ?"* + AskUserQuestion adaptive options.
+- **NEVER** close en bulletin météo · décrire l'état, lister les inconnues, puis repasser un menu d'axes (*"Other actions ?"*, *"Anything else ?"*, *"lequel veux-tu creuser ?"*) · BANNI. Le close affirme un move défendu (mécanique Step 3). Drill-down macro dispo en redirect si l'opérateur veut arbitrer, jamais comme close par défaut.
 - **NEVER** présenter items déduits comme observés. Si "audiences inférées non-validées", suffixer `(déduit)` explicite. Anti-pattern AP-1 doctrine BANNI · affirmer une hypothèse comme un fait, même en cartographie d'état.
 
 ## Edge cases
@@ -206,7 +212,7 @@ Use `AskUserQuestion` tool pour smart suggests si pertinent · load via `ToolSea
 
 ## Cross-refs
 
-- `docs/system/investigation-posture.md` (v2.54 doctrine canon) · cartographier avant affirmer · mode allégé pour brief-day · état descriptif observé / déduit · "À explorer si pertinent" remplace "À noter" · close macro UNE question.
+- `docs/system/investigation-posture.md` (v2.54 doctrine canon) · cartographier avant affirmer · mode allégé pour brief-day · état descriptif observé / déduit · "À explorer si pertinent" remplace "À noter" · close = verdict de move défendu (affirme / ouvre / gate), drill-down macro en redirect opérateur.
 - `docs/system/contextual-intelligence.md` · master doctrine, no orphan output, jargon zéro en surface.
 - `docs/system/operator-vocabulary-translation.md` · canonical translations interne → operator-facing.
 - `resources/schemas/visual_identity.schema.json` v1.2 · slots assets_canonical (logo, badges, mascotte, patterns).

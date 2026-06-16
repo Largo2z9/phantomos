@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-v2.42-canon-tool-v11.py — Patch 1A migration · canon-tool v1.0 → v1.1.
+v2.42-canon-tool-v11.py · Patch 1A migration · canon-tool v1.0 → v1.1.
 
 Closes drift identified in audit 10 scopes v2.41 · canon-tool.schema.json spec'd v1.1 (v2.37+)
 but 58/58 fiches resources/canon/copy/**/*.json still _schema: "canon-tool/1.0".

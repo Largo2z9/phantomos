@@ -33,7 +33,7 @@ Pre-build analysis gate. Prevents the proliferation of redundant custom entities
 
 Given the intent object from scaffold-extension Phase 1 (class, shape, population, cross_refs, proposed_name, scope), run the five-dimension check in this order.
 
-### Dimension 1 — Core entity coverage
+### Dimension 1 · Core entity coverage
 
 Can the data fit into one of the six core entities (`brand`, `product spec`, `offers`, `profile`, `learnings`, `strategy`) without modification?
 
@@ -43,7 +43,7 @@ Can the data fit into one of the six core entities (`brand`, `product spec`, `of
 
 Example: operator says *"je veux tracker les apprentissages sur Meta pixel"*. This is already covered by `learnings.json` with `scope: "platform"`, `platform: "meta"`. Route to `capture-learning`, no extension needed.
 
-### Dimension 2 — Existing sidecar on the active brand
+### Dimension 2 · Existing sidecar on the active brand
 
 Does a `{entity}.extensions.json` already exist on the active brand that covers the concept?
 
@@ -53,7 +53,7 @@ Does a `{entity}.extensions.json` already exist on the active brand that covers 
 
 Example: operator wants to add `supplier_lead_time_days` to brand, but `brand.extensions.json` already exists with this field. Route to `.skills/write-to-context.py` on the existing sidecar.
 
-### Dimension 3 — Existing custom entity on the active brand
+### Dimension 3 · Existing custom entity on the active brand
 
 Does a `brands/{slug}/custom/{type}/` already exist that matches the intent's type or semantics?
 
@@ -63,19 +63,19 @@ Does a `brands/{slug}/custom/{type}/` already exist that matches the intent's ty
 
 Example: operator wants to track competitor pricing, but `brands/{slug}/custom/competitor_pricing/` already exists. Propose adding new instances rather than creating a parallel entity.
 
-### Dimension 4 — Custom entity on sibling brands (cross-portfolio)
+### Dimension 4 · Custom entity on sibling brands (cross-portfolio)
 
 Does a similar custom entity exist on **another brand** in this workspace?
 
 - Read `index.json → extensions[]`.
 - Filter entries with matching or convergent `type` name or cross_ref pattern.
 - If found, **stop here** and surface two options to the operator:
-  - *Reuse the existing pattern* — copy the schema from the sibling brand, adapt instances locally. Preserves cross-brand consistency.
-  - *Promote the pattern to shared resource* — if it exists on 3+ brands with convergent schemas, it's a promotion candidate (see `docs/system/extending.md § Promotion threshold`).
+  - *Reuse the existing pattern* · copy the schema from the sibling brand, adapt instances locally. Preserves cross-brand consistency.
+  - *Promote the pattern to shared resource* · if it exists on 3+ brands with convergent schemas, it's a promotion candidate (see `docs/system/extending.md § Promotion threshold`).
 
 Example: operator on `brand-B` wants to track competitor pricing. Already exists on `brand-A` with identical schema. Propose reuse.
 
-### Dimension 5 — Shared resources coverage
+### Dimension 5 · Shared resources coverage
 
 Can the concept be represented using an existing shared resource (`resources/registries/`, `resources/routing/`, `resources/frameworks/`, `resources/templates/`)?
 
@@ -105,7 +105,7 @@ Example: operator wants a library of creative angles. Already exists as `resourc
 
 ## Hard rules
 
-- Always walk all five dimensions, even if an early match is found — multiple matches may exist, operator sees the full landscape.
+- Always walk all five dimensions, even if an early match is found · multiple matches may exist, operator sees the full landscape.
 - Never silently route. The operator sees the matched target and confirms or overrides.
 - Cross-brand reuse proposals require explicit operator opt-in. Do not auto-copy schemas across brands.
 - Shared resources match requires semantic overlap, not just lexical. A field named `angle` is not the same as `angle-registry` unless the intent is about tagging by angle type.

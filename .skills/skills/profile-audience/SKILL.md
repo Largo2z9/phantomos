@@ -1,7 +1,9 @@
 ---
 name: profile-audience
-version: 1.9.0
+version: 1.10.1
 patch_notes:
+  - "1.10.1 (close refound expert-prompting) · HR8 close refondé sur le substrat · la trichotomie re-pastée + le template inline cèdent à une invocation de la chaîne diagnostique sur l'encodé (`strategic-diagnostic-doctrine.md`) + pointeurs posture (`investigation-posture.md` + `contextual-intelligence.md`) + exemplar (`resources/canon/exemplars/close.md`) + une ligne pour l'out honnête · self-critique conservée · net plus court. Backward compat strict (HR6 + matrice visibility + template legacy + drill-down REDIRECT préservés)."
+  - "1.10.0 (close reconcile verdict-on-move) · le close affirme un move (affirme / ouvre / gate per `docs/system/investigation-posture.md` + master `contextual-intelligence.md`) au lieu d'imposer UNE question macro drill-down · le drill-down A/B/C reste dispo comme REDIRECT opérateur, pas comme close par défaut · self-critique + exemplar `resources/canon/exemplars/close.md` câblés au close step HR8 · AP-5 (ban close affirmatif) retiré, remplacé par le bannissement du weather report. Backward compat strict additif (5 dimensions + matrice visibility + template legacy préservés)."
   - "1.9.0 (v2.87.4 deep desire chain gate canon) · NEW Hard Rule HR-DD-1 · gate obligatoire pre-validation audience · psychology.dream_scenario_narrative (object · narrative 2 phrases + target_recipient + context_setting + social_payoff) + psychology.confidence_chain (object · sourcing_method enum + verbatim_count + blocked_sources + confidence_level + caveat) DOIVENT être populated AVANT write profile.json validation_status='validated'. Refuse anti-pattern systémique audit Fincut v2.87.3 · audience encoding reste au pain layer fonctionnel sans descente racine Schwartz/Kern (e.g. 'valoriser corps' sans target_recipient='plaire partenaires/pairs/etc.'). Profile schema v2.0 → v2.1 (psychology.dream_scenario_narrative + psychology.confidence_chain NEW). Backward compat strict additif lecture v2.0 préservée. Cross-ref `docs/system/investigation-posture.md` v2.79.3+ (confidence chain canon) + `docs/system/territory-doctrine.md` (substrate stable psychographique). Anti-pattern · rendre profile.json sans dream_scenario_narrative.target_recipient explicite = refuse gate."
   - "1.8.1 (v2.81.1 decomposition visibility NIVEAU LIVE) · NEW section `Niveau LIVE · raisonnement thinking aloud pendant exécution` insérée APRÈS HR0ter disclosure NIVEAU 0 v2.79.5 et AVANT Step 0bis prerequisite check. Action LOURDE classification (synthèse audience 8 dimensions canon V3 · cross-validation Schwartz double-stage · staging pain_points + objections sub-audience canonical · ~8 min selon densité mining). NIVEAU LIVE narratif étendu obligatoire pendant exécution · 2 niveaux abstraction obligatoires (macro contexte audience sub-cluster + micro pain-benefit-chain phrasé en prose narrative sobre). Pose pair senior expert thinking aloud · audit temps réel par l'opérateur entre dimensions encodées + pédagogie posture experte indissociables. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.81.1+ HR-DVD-11 (NIVEAU LIVE obligatoire actions lourdes) + AP-DVD-11 (opacité pendant action lourde = bug invalid). Backward compat strict additif · cycle runtime préservé (HR0ter NIVEAU 0 + Step 0bis-0ter + 8 dimensions encoding + Audience Visibility Matriciel post-exec preserved)."
   - "1.8.0 (v2.79.5 decomposition visibility NIVEAU 0) · NEW section `Engagement disclosure pré-runtime v2.79.5+` AVANT Step 0bis prerequisite check · 6 paramètres décomposés contextualisés (Audience source · Dimensions cartographier · Sources data · Granularité output · Hypothèses figées · Biais à éviter · POURQUOI explicit chacun · raisonnement métier expert visible AVANT synthèse). Exemple concret canonisé in-line. ATTENDS confirmation explicite paramètres AVANT lancement profile synthesis. HR0ter canon ajouté. Court-circuit autorisé UNIQUEMENT si `operator/profile.json#preferences.disclosure_preference: silent` OR `--no-disclosure` explicit. Cross-ref `docs/system/decomposition-visibility-doctrine.md` v2.79.5+ NIVEAU 0 + `docs/system/engagement-disclosure-doctrine.md` v2.79.5 Paramètres décomposés. Backward compat strict additif · cycle runtime préservé."
@@ -545,11 +547,11 @@ Pour CHAQUE audience proposée, structure obligatoire (anti-pattern · persona a
 - **Validation requise** · {ce qui doit être fait pour upgrader à `forte` · ex "mine-voc sur Trustpilot + analytics audience"}
 - **Anti-pattern à respecter** · si confidence `TRÈS faible`, flag explicite "OBLIGATOIREMENT à valider via mining client réel avant utilisation stratégique (décision budget / brief créa / positioning)"
 
-Demander macro arbitrage :
+Clôturer sur un verdict de move, pas sur une question rendue (affirme / ouvre / gate per `docs/system/investigation-posture.md` + master `contextual-intelligence.md`). Affirmer le prochain move défendu en une ligne, porter l'inconnue soi-même, ne gater qu'au plus une question si elle est inconnaissable depuis la data ET bloquante pour le prochain pas qui paie ·
 
-> Voici les audiences structurées en hypothèses. Confidence chain visible par audience. Pour passer ces audiences de hypothèse `TRÈS faible` ou `faible` à `validée` · veux-tu lancer une écoute clients réelle maintenant (~8-12 min de mining sur Trustpilot + forums niche pour récupérer les vrais verbatims) ou tu valides intuitivement et on continue, en sachant que ce qui sera produit downstream (angles, brief créa) portera cette confidence-là ?
+> Ces audiences tiennent en hypothèse, confidence visible par audience. Le move · je verrouille {audience dominante} comme socle des angles parce que c'est elle qui porte le pain le plus chargé et le plus sourcé. Là où je manque de terrain (confidence faible sur {audience secondaire}), je récupère les vrais verbatims en parallèle (écoute clients courte sur les avis et forums niche), je te ramène ça sans que tu aies à creuser, et je réévalue la confidence dessus. Si tu as déjà des avis exportés ou des retours clients sous la main, balance-les moi en deux phrases et j'intègre, sinon j'avance sur le socle et on durcit après.
 
-L'opérateur arbitre · `lance écoute clients` → trigger mine-voc silencieusement OR `valide et continue` → préserver les audiences en hypothèse + propager confidence chain downstream.
+Le drill-down A/B/C (lancer l'écoute maintenant · valider intuitivement · injecter de la data existante) reste disponible comme REDIRECT si l'opérateur veut explicitement piloter l'arbitrage, mais le close par défaut affirme le move, il ne rend pas le choix sur le bureau. Routage silencieux après bascule opérateur (jamais nommer le skill de mining en surface).
 
 ### HR7 · Persist via mutation gate
 
@@ -670,23 +672,19 @@ Les `behavior.*` enrichissent ·
 
 **Surface operator** · ces sub-fields restent INTERNES (jamais exposés bruts en surface HR6/HR8). L'opérateur voit l'audience structurée en 8 dimensions + close drill-down macro. Les sub-fields servent les skills downstream qui les liront via le profile.json schema-conforme.
 
-### HR8 · Output operator-facing (close drill-down macro, v2.54+)
+### HR8 · Output operator-facing (close verdict-on-move, v1.10.0+)
 
 Vue lisible profile · chaque audience portée comme hypothèse avec confidence chain explicite per HR6 refactor.
 
-**Close obligatoire · UNE question macro drill-down** (anti-pattern AP-5 doctrine · close affirmatif qui ferme la conversation `Je passe au next step ?` → BANNI).
+**Close · move dérivé du substrat encodé.** La lecture qui porte le close n'est pas prescrite ici, elle se PRODUIT en faisant tourner la chaîne diagnostique sur ce qui est encodé (position → négatif → audience-du-mécanisme → priorité-éco → verdict · `docs/doctrine/strategic-diagnostic-doctrine.md`). Le move sort de cette lecture croisée, pas d'une checklist de forme. Posture du close (faits PUIS lecture PUIS mouvement, jamais le weather report) · `docs/system/investigation-posture.md` + master `contextual-intelligence.md` · ne pas re-décrire la trichotomie ici.
 
-Format close canonique v2.54 ·
+**L'out honnête.** Quand le substrat ne porte pas encore de move, nomme la SEULE inconnue bloquante plus le chemin pour la lever · c'est un move, pas une dérobade. Inventer un verdict pour faire décisif est l'échec.
 
-> Pour passer ces audiences de hypothèse `TRÈS faible` à validée terrain, ce qui débloque la suite (angles paid, brief créa) avec une fondation sourcée ·
->
-> A · Lance l'écoute clients maintenant ({~8-12 min} sur Trustpilot + forums niche · récupère les vrais verbatims · upgrade confidence à `moyenne` ou `forte` selon densité corpus)
-> B · Valide intuitivement et on continue · ce qui sera produit downstream (angles, brief créa) portera la confidence `TRÈS faible` héritée (à tester avec budget calibré, pas all-in)
-> C · Tu m'injectes des données existantes que t'as déjà (reviews exportées, analytics audience, retours SAV) en 1-2 phrases denses, je les intègre et on re-évalue confidence
->
-> Mon avis · {recommandation macro adaptive · si verbatim_density < 3 → A en premier critique pour fondation downstream · sinon B valide si confidence `moyenne` déjà sur l'audience}.
+**Self-critique avant de surfacer le close** · relis-le contre affirme / ouvre / gate · est-ce qu'il décide un move défendu, ou est-ce qu'il décrit-et-rend une question ? Si weather report (état + liste d'inconnues + menu d'axes), réécris en verdict de move avant d'émettre.
 
-L'opérateur arbitre macro. Pas de menu décoratif, UNE question avec reco.
+**Exemplar** · few-shot sharp vs mushy · `resources/canon/exemplars/close.md` (le sharp affirme le move dominant et porte l'inconnue lui-même · le mushy tend quatre devoirs et un menu).
+
+Le drill-down A/B/C (lancer l'écoute maintenant · valider intuitivement · injecter de la data existante) reste un REDIRECT si l'opérateur veut piloter l'arbitrage lui-même · ce n'est pas le close par défaut.
 
 **Anti-patterns surface operator** ·
 - JAMAIS exposer `confidence` comme un nombre (0.6, 0.4) en surface. Qualitatifs uniquement (`TRÈS faible / faible / moyenne / forte`).
@@ -696,7 +694,7 @@ L'opérateur arbitre macro. Pas de menu décoratif, UNE question avec reco.
 
 ### HR10 · NEW Output section `Audience Visibility Matriciel` obligatoire (v2.78.2 decomposition visibility)
 
-Après encoding 8 dimensions canon V3 (HR3) + 5 sections IP (Observé · Déduit · Inconnu · Leviers · Close ouvert per `docs/system/investigation-posture.md`), présenter OBLIGATOIREMENT vue matricielle canon `decomposition-visibility-discipline` v2.78.2.
+Après encoding 8 dimensions canon V3 (HR3) + 5 sections IP (Observé · Déduit · Inconnu · Leviers · Close = verdict de move défendu, affirme / ouvre / gate per `docs/system/investigation-posture.md`), présenter OBLIGATOIREMENT vue matricielle canon `decomposition-visibility-discipline` v2.78.2.
 
 L'opérateur ne doit jamais voir l'encoding 8 dimensions sans la synthèse matricielle finale. Encoding silent sans visibilité = AP10 banni.
 
@@ -911,21 +909,17 @@ Validation requise · {ce qui doit être fait pour upgrader · ex "mine-voc Trus
 
 ─────────────────────────────────────────────
 
-Close · UNE question macro drill-down
+Close · verdict de move défendu (affirme / ouvre / gate)
 
-Pour upgrader cette audience de hypothèse {confidence actuelle} à validée terrain ·
+Le move · je pars sur {audience dominante} comme socle des angles, c'est elle qui porte le pain le plus chargé et le mieux sourcé. Là où la confidence est `{actuelle}` faible, je récupère les vrais verbatims en parallèle (écoute clients courte sur avis + forums niche), je te ramène ça sans que tu aies à creuser, et je durcis la confidence dessus. Si tu as déjà des avis exportés ou des retours clients, deux phrases et j'intègre · sinon j'avance sur le socle et on chiffrera après.
 
-A · Lance l'écoute clients (~8-12 min · mining Trustpilot + forums · récupère verbatims réels · upgrade à `moyenne` ou `forte`)
-B · Valide intuitivement et continue · downstream porte confidence `{actuelle}` héritée
-C · Injecte data existante (reviews exportées, analytics, retours SAV · 1-2 phrases denses)
-
-Mon avis · {reco macro adaptive selon verbatim_density actuelle}.
+(Drill-down A/B/C dispo en REDIRECT si l'opérateur veut piloter l'arbitrage · lancer l'écoute maintenant · valider intuitivement · injecter de la data existante. Le close par défaut affirme le move.)
 ```
 
 **Hard rules template** ·
 - Chaque dimension porte sa confidence par défaut quand pas de mining.
 - Anti-pattern · présenter `[2] Problem map · Pain principal · "Je perds mes cheveux"` comme un fait alors que zéro verbatim n'a été récupéré. Toujours signaler "inféré" + indicateurs sources + à valider.
-- Anti-pattern · close affirmatif (*"Tu valides en bloc ?"*) → BANNI. Toujours close drill-down macro avec UNE question A/B/C + reco.
+- Anti-pattern · weather report en close (décrire l'état + lister les inconnues + tendre un menu d'axes / *"lequel veux-tu creuser ?"*) → BANNI. Le close affirme un move défendu (affirme / ouvre / gate) · le drill-down A/B/C reste un REDIRECT opérateur, pas le close par défaut.
 
 ## Cross-references
 

@@ -60,7 +60,7 @@ pipeline:
 
 # Skill: import-meta-results
 
-Capturer silent qui pull Meta Insights par `lineage.ad_id` pour les creatives déployées brand-side, puis LAND le blob perf BRUT dans `creative.json#performance.raw`. Brique 5 MINIMAL : on POSE le réceptacle, pas l'intelligence. La perf doit ATTERRIR + être JOIGNABLE (le signal « qu'est-ce qui a marché » se joint déjà aux `genome_tags` du dossier — on JOINT, on ne re-modélise pas). Layer meta, mode silent (pas de verbose output operator-facing).
+Capturer silent qui pull Meta Insights par `lineage.ad_id` pour les creatives déployées brand-side, puis LAND le blob perf BRUT dans `creative.json#performance.raw`. Brique 5 MINIMAL : on POSE le réceptacle, pas l'intelligence. La perf doit ATTERRIR + être JOIGNABLE (le signal « qu'est-ce qui a marché » se joint déjà aux `genome_tags` du dossier · on JOINT, on ne re-modélise pas). Layer meta, mode silent (pas de verbose output operator-facing).
 
 **Le job runtime de ce skill = PULL + LAND + boucle minimale (v2.1.0).** Le Step 3 exécute la boucle CLASSER → TRACER → SIGNALER du SOP `resources/sops/creative-production/perf-feedback-loop.md` (tranché v2.90.0). Tout le reste (attribution, sémantique cross-plateforme, promotion canon automatisée, dashboard) reste DIFFÉRÉ, liste explicite dans le SOP. Ne PAS déborder la boucle minimale.
 
@@ -109,7 +109,7 @@ Pour chaque `creative.json` ·
 2. **Filter (simple, brique 5 minimal)** · ne garder que les créas avec ·
    - `lineage.ad_id` non-null (= déployée Meta, clé de jointure renseignée, format pattern-locké `^(facebook|tiktok|snapchat|google)_[0-9]+$`).
 
-   C'est le SEUL critère. **NE PAS** exiger `meta.deployed_at`, `meta.ad_id`, ni les champs canon-tools (`formula_used`, `framework_used`, `archetype_used`, `hook_used`, `objection_used`, `cta_used`) — ils n'existent PAS dans `creative.schema`. Le filtre rigide d'avant était le bug de la boucle morte (rien ne matchait jamais). Relâché : a un `lineage.ad_id` non-null = éligible.
+   C'est le SEUL critère. **NE PAS** exiger `meta.deployed_at`, `meta.ad_id`, ni les champs canon-tools (`formula_used`, `framework_used`, `archetype_used`, `hook_used`, `objection_used`, `cta_used`) · ils n'existent PAS dans `creative.schema`. Le filtre rigide d'avant était le bug de la boucle morte (rien ne matchait jamais). Relâché : a un `lineage.ad_id` non-null = éligible.
 3. Buffer · liste `[{creative_id, ad_id: lineage.ad_id, path: "creatives/{batch}/{CRT-NN}/creative.json"}]`.
 
 Si zéro créa éligible (aucune n'a de `lineage.ad_id`) → close silent · log à `session-state.md` activity log entry `"import-meta-results run · 0 créa déployée (aucun lineage.ad_id renseigné)"`. Pas de output operator-facing verbose (mode silent canon).
@@ -126,7 +126,7 @@ Endpoint · `GET /{ad_id_numeric}/insights`
 
 Params · `fields=spend,impressions,clicks,ctr,cpm,frequency,actions,cost_per_action_type,purchase_roas&date_preset=lifetime`
 
-**LAND le brut, ne re-modélise PAS.** Le réceptacle `performance` est OUVERT (additionalProperties, blob `performance.raw`). On y dépose la perf telle que ramenée — impressions / spend / ctr / roas / cpa / hold-rate... selon la plateforme — SANS construire une ontologie de métriques. Quelle métrique = quel signal, normalisation cross-plateforme, seuils : tout ça est le chantier différé (perf-feedback-loop.md).
+**LAND le brut, ne re-modélise PAS.** Le réceptacle `performance` est OUVERT (additionalProperties, blob `performance.raw`). On y dépose la perf telle que ramenée · impressions / spend / ctr / roas / cpa / hold-rate... selon la plateforme · SANS construire une ontologie de métriques. Quelle métrique = quel signal, normalisation cross-plateforme, seuils : tout ça est le chantier différé (perf-feedback-loop.md).
 
 Construire le patch perf par créa ·
 
@@ -195,7 +195,7 @@ Log activity entry `session-state.md` · `"import-meta-results run · {N} créas
 - **HR2** · Le job runtime = PULL + LAND + boucle minimale Step 3 (classer/tracer/signaler selon le SOP perf-feedback-loop, tranché v2.90.0). **NEVER** au-delà : pas de promotion canon, pas d'attribution, pas de normalisation cross-plateforme, pas de write `resources/`, pas de fichier d'état perf_signal (chantiers différés, liste explicite dans le SOP).
 - **HR3** · Scan forme batch · lire `brands/{slug}/creatives/*/*/creative.json` (= `creatives/{batch}/{CRT-NN}/`). **NEVER** lire l'ancien dossier plat `creatives/produced/` (supprimé brique 3).
 - **HR4** · Clé de jointure = `lineage.ad_id` (pattern-locké `^(facebook|tiktok|snapchat|google)_[0-9]+$`). **NEVER** lire `meta.ad_id` (inexistant). Filtre éligibilité = `lineage.ad_id` non-null, et RIEN d'autre.
-- **HR5** · Filtre relâché (fix boucle morte) · **NEVER** exiger `meta.deployed_at` ni les canon-tools (`formula_used`/`framework_used`/`archetype_used`/`hook_used`/`objection_used`/`cta_used`) — ils n'existent pas dans `creative.schema`. **NEVER** faire échouer un run sur l'absence de ces champs.
+- **HR5** · Filtre relâché (fix boucle morte) · **NEVER** exiger `meta.deployed_at` ni les canon-tools (`formula_used`/`framework_used`/`archetype_used`/`hook_used`/`objection_used`/`cta_used`) · ils n'existent pas dans `creative.schema`. **NEVER** faire échouer un run sur l'absence de ces champs.
 - **HR6** · Land brut dans le réceptacle OUVERT · écrire le blob perf dans `creative.json#performance.raw` (+ `performance.ad_id` + `performance.imported_at`). **NEVER** re-modéliser les métriques, **NEVER** figer une ontologie de métriques (additionalProperties ouvert préservé).
 - **HR7** · Append-only sur l'historique · push l'ancien `performance.raw` dans `performance.snapshots[]` avant écrasement si on veut la trace temporelle. **NEVER** effacer un snapshot existant.
 - **HR8** · Write via `write_to_context` strict · **NEVER** Edit/Write direct sur `.json` files (mutation rule canon). Mode `direct` (capturer pas proposal flow), field_path `creatives/{batch}/{CRT-NN}/creative.json#/performance`.

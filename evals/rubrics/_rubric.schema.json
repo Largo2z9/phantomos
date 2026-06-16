@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "evals/rubrics/_rubric.schema.json",
+  "title": "Quality rubric",
+  "description": "Uniform frame for a per-artifact quality rubric. One rubric per artifact type (close, angle, diagnostic, ...). The frame is shared (this schema); the content is typed (one file per artifact). This is the function-pole-map pattern generalised to evaluation: same skeleton, typed entries. The judge (judge.md) scores the criteria; proxies.py scores the deterministic floor declared in `proxies`.",
+  "type": "object",
+  "required": ["artifact", "version", "definition", "target", "criteria", "proxies"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "type": "string",
+      "description": "The artifact this rubric scores. Matches the golden frontmatter `artifact` and the judge invocation."
+    },
+    "version": {"type": "string"},
+    "definition": {
+      "type": "string",
+      "description": "One sentence: what this artifact is, where it surfaces."
+    },
+    "target": {
+      "type": "string",
+      "description": "The posture this artifact must hit. The single most important field: it is the standard the judge measures against and the doctrine the build aligns to."
+    },
+    "supersedes": {
+      "type": "string",
+      "description": "Optional: doctrine text this rubric's target intentionally moves beyond, pending a doctrine amendment. Names the dependency so the repo never silently contradicts itself."
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 2,
+      "description": "Weighted, semantic criteria scored 0..1 by the judge. Weights sum to ~1.0.",
+      "items": {
+        "type": "object",
+        "required": ["id", "weight", "pass", "fail"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "pass": {"type": "string", "description": "What a passing artifact does."},
+          "fail": {"type": "string", "description": "The concrete failure mode this criterion guards against."}
+        }
+      }
+    },
+    "proxies": {
+      "type": "array",
+      "description": "Deterministic checks from proxies.py wired to this artifact. Each fires past `threshold` and pushes the verdict sharp (+weight) or mushy (-weight). The cheap floor under the judge, not a gate.",
+      "items": {
+        "type": "object",
+        "required": ["name", "direction", "weight"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string", "description": "A key in proxies.CHECKS."},
+          "direction": {"type": "string", "enum": ["sharp", "mushy"]},
+          "weight": {"type": "number"},
+          "threshold": {"type": "number", "description": "Signal value at/above which the check fires. Default 1."}
+        }
+      }
+    }
+  }
+}

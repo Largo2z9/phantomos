@@ -21,8 +21,8 @@
     "Manifest regenerated, triggers field non-empty for all 4 patched skills",
     "phantom-stress sync"
   ],
-  "caught_by": "Manifest review post-v2.9.0 — 4 skills had empty trigger arrays.",
+  "caught_by": "Manifest review post-v2.9.0 · 4 skills had empty trigger arrays.",
   "known_gaps": [
-    "Manifest builder regex format (FR:/EN:) is implicit — not enforced by validate-resources. A future hardening could refuse SKILL.md with non-conformant trigger format."
+    "Manifest builder regex format (FR:/EN:) is implicit · not enforced by validate-resources. A future hardening could refuse SKILL.md with non-conformant trigger format."
   ]
 }

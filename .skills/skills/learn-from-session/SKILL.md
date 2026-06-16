@@ -11,8 +11,8 @@ description: >
   Extracts and persists knowledge acquired during a session. Scans the conversation,
   identifies what was learned/decided/corrected, and routes to the right files.
   Two trigger modes:
-  1. EXPLICIT — FR: "learn" "session close" "persist" "fin de session" "enregistre ce qu'on a fait" "save session" "mets à jour les docs" "persiste les learnings". EN: "learn" "session close" "persist" "save what we learned" "end of session" "wrap up".
-  2. PROACTIVE — The agent detects ≥1 learning signal during the session (operator correction, API workaround, strategic decision, compliance rule) and proposes unprompted: "I've noted some things to persist. Want me to save them?" If confirmed → run this skill.
+  1. EXPLICIT · FR: "learn" "session close" "persist" "fin de session" "enregistre ce qu'on a fait" "save session" "mets à jour les docs" "persiste les learnings". EN: "learn" "session close" "persist" "save what we learned" "end of session" "wrap up".
+  2. PROACTIVE · The agent detects ≥1 learning signal during the session (operator correction, API workaround, strategic decision, compliance rule) and proposes unprompted: "I've noted some things to persist. Want me to save them?" If confirmed → run this skill.
 permissions:
   reads: [brand, product, profile, learning, strategy]
   writes: [learning]
@@ -35,7 +35,7 @@ Responsibility: scan full conversation → extract persistable elements → clas
 
 ---
 
-## CRITICAL: Executive briefing posture — adapted to session context
+## CRITICAL: Executive briefing posture · adapted to session context
 
 **YOU MUST** present the flush recap to the operator in a **superior-to-decider briefing format**. The operator is the decider, you are the operational lead reporting up. They do not want the technical inventory of what you captured, they want to know what changes and whether any decision needs their arbitrage.
 
@@ -60,8 +60,8 @@ Posture drives register and priorities. A CTO says *"1 tech arbitrage: activate 
   - ✅ *"Template switched to EN, agent adapts at runtime (done). Model routing ready to activate (1 prerequisite to test). Rest: applied, RAS."*
 - **NEVER expose** file paths, skill names, field names, D# numbers, routing destinations, enum values, JSON shapes in the briefing. Those write silently to the right files.
 - **ALWAYS close with one of two formats**:
-  - *"1 arbitrage to make: [concise question]. OK?"* — when one decision needs the operator. **PREFER `AskUserQuestion` tool** (load via `ToolSearch(select:AskUserQuestion)` if not loaded) to render the arbitrage as native clickable options (e.g. *Ship now / Wait / Discuss*). Fallback to plain question if tool unavailable.
-  - *"All applied, RAS."* — when everything is mechanical, no decision needed. No tool needed.
+  - *"1 arbitrage to make: [concise question]. OK?"* · when one decision needs the operator. **PREFER `AskUserQuestion` tool** (load via `ToolSearch(select:AskUserQuestion)` if not loaded) to render the arbitrage as native clickable options (e.g. *Ship now / Wait / Discuss*). Fallback to plain question if tool unavailable.
+  - *"All applied, RAS."* · when everything is mechanical, no decision needed. No tool needed.
 - **NEVER** ask the operator to validate the routing plan (destinations, files, format). They trust the system. Write silently after the briefing is acknowledged.
 - **Tone**: the superior reporting up. Direct, zero jargon, zero details below the decision level. Match the register to the posture detected.
 
@@ -73,27 +73,27 @@ This rule **overrides** any "detailed recap with plain-language fact list" patte
 
 ---
 
-## Triggers — batch mode, not incremental
+## Triggers · batch mode, not incremental
 
 **Critical principle**: the agent **captures continuously** in session memory, but **only proposes persistence at specific triggers**. Not every turn, that pollutes.
 
-### Trigger 1 — End of structuring Step
+### Trigger 1 · End of structuring Step
 End of setup-brand Step 5 (workspace tour, operator has seen value) or after first real deliverable produced (audit done, brief delivered, diag completed). Not at Step 4, which is only a Build chantier switch.
 
-### Trigger 2 — Every 3-5 turns of dense conversation
+### Trigger 2 · Every 3-5 turns of dense conversation
 During an active work session (ingest, audit, brief, production), track the number of turns since last flush. At turn 3-5, check: *are there at least 2 valuable learnings in the buffer?* If yes, propose. If no, wait.
 
-### Trigger 3 — End of session (terminal signal)
+### Trigger 3 · End of session (terminal signal)
 The operator says *"later", "ok thanks", "I'm out", "tomorrow"*, visibly closes the terminal (short message without question). If buffer not empty → propose a final flush.
 
-### Trigger 4 — Explicit request
+### Trigger 4 · Explicit request
 Verbal triggers: *"learn", "save", "enregistre", "fin de session", "persist", "save session", "session close"*.
 EN: *"learn", "save what we learned", "session close", "persist"*.
 
-### Trigger 5 — Minimal auto-persist (anti-loss on crash)
-Every 5 turns, write a rolling line to `session-state.md` Activity Log with the 2-3 latest captured facts, even without confirmation. It's read-minimal, not structured learnings — allows recovery on brutal closure.
+### Trigger 5 · Minimal auto-persist (anti-loss on crash)
+Every 5 turns, write a rolling line to `session-state.md` Activity Log with the 2-3 latest captured facts, even without confirmation. It's read-minimal, not structured learnings · allows recovery on brutal closure.
 
-### Trigger 6 — CLAUDE.md size check on every batch flush
+### Trigger 6 · CLAUDE.md size check on every batch flush
 At every batch flush (Trigger 1 to 4), measure the size of root `CLAUDE.md` and of each active `brands/{slug}/CLAUDE.md`. Budgets: root ≤ 220 lines, brand ≤ 100 lines. If a file exceeds, add ONE line at the end of the flush recap: *"ℹ CLAUDE.md at {N} lines (budget 220), manual review recommended."* No auto-split, no structured proposal. Just a flag for the operator to arbitrate later. See `docs/system/agent-contracts.md § Size Policy` for the pre-write guardrail.
 
 ### Trigger 8 · Smart-suggest daemon (v2.34+)
@@ -231,7 +231,7 @@ Field_path target · `resources/canon/copy/{layer}/{tool}.json#/validations[]` (
 - Ne JAMAIS bypass schema canon-tool/1.1 validation (mutation gate enforce)
 - Ne JAMAIS spam · si operator répond (c) 2+ fois sur même learning, archiver learning entry avec tag `promote_skipped`
 
-## Flush format — recap before writing
+## Flush format · recap before writing
 
 When a trigger fires, **before writing**, the agent shows a plain-language recap:
 
@@ -249,7 +249,7 @@ The operator can:
 - *"Not now"* / *"Skip"* → buffer preserved, propose at next trigger
 - *"Stop tracking"* → deactivate tracking for the session (rule set in `/operator/profile.json → preferences.tracking: "off"`)
 
-## Critical distinction — where it goes
+## Critical distinction · where it goes
 
 Each buffer entry must be **routed to the right file** based on what it concerns:
 
@@ -260,7 +260,7 @@ Each buffer entry must be **routed to the right file** based on what it concerns
 | Structural brand correction (tone, positioning, audience objection) | `brands/{slug}/brand.json` or `profile.json` direct (via ingest-resource) |
 | Strategic decision | `session-state.md → Active Decisions` |
 | Product friction / workflow bug | `todos.md → ## Flags` |
-| **Canon validation** (v2.26.0+) — tool canon validé/fatigué en prod sur ce brand | `resources/canon/copy/{layer}/{tool}.json#/validations[]` (append) |
+| **Canon validation** (v2.26.0+) · tool canon validé/fatigué en prod sur ce brand | `resources/canon/copy/{layer}/{tool}.json#/validations[]` (append) |
 
 **Never mix**: an operator info does not go into brand.learnings, a brand fact does not go into operator/profile. Cross-contamination = structural bug.
 
@@ -337,7 +337,7 @@ Empêche atlas canon copy d'absorber des winners anciens devenus obsolètes (red
 
 ---
 
-## Step 1 — Receive & Scan Conversation (explicit trigger mode)
+## Step 1 · Receive & Scan Conversation (explicit trigger mode)
 
 User triggers skill with: "learn", "fin de session", "persist", "save session", "enregistre ce qu'on a fait", "session close", etc.
 
@@ -350,11 +350,11 @@ Agent scans ENTIRE conversation (from start to present) and extracts:
 
 ---
 
-## Step 2 — Classify & Route
+## Step 2 · Classify & Route
 
 ### Category: Factual Learnings
 
-Scoped learnings — tied to the brand, platform, or account. Route to `brands/{slug}/learnings.json`.
+Scoped learnings · tied to the brand, platform, or account. Route to `brands/{slug}/learnings.json`.
 
 **Entry structure** (append to `entries[]`):
 ```json
@@ -364,7 +364,7 @@ Scoped learnings — tied to the brand, platform, or account. Route to `brands/{
   "created_at": "{ISO date-time}",
   "date": "YYYY-MM-DD",
   "fact": "{1-line factual WHAT}",
-  "reasoning": "{WHY it's true, what caused it, what it reveals — MANDATORY non-empty}",
+  "reasoning": "{WHY it's true, what caused it, what it reveals · MANDATORY non-empty}",
   "platform": "{meta | shopify | klaviyo | google | none}",
   "tags": ["tag1", "tag2"],
   "source": "{operator | agent | skill_output | test_capture}",
@@ -372,20 +372,20 @@ Scoped learnings — tied to the brand, platform, or account. Route to `brands/{
 }
 ```
 
-**`kind` is the canonical classification** (9-enum, consumed by detection daemons). `source` uses the canon enum (operator/agent/skill_output/test_capture). For `category:"system_friction"` runtime-pattern learnings (see Hard Rules), set `kind:"observation"` + `category:"system_friction"`. Always write both `created_at` (date-time) and `date` (short) — validate reads `date` then falls back to `created_at`.
+**`kind` is the canonical classification** (9-enum, consumed by detection daemons). `source` uses the canon enum (operator/agent/skill_output/test_capture). For `category:"system_friction"` runtime-pattern learnings (see Hard Rules), set `kind:"observation"` + `category:"system_friction"`. Always write both `created_at` (date-time) and `date` (short) · validate reads `date` then falls back to `created_at`.
 
-**CRITICAL: `reasoning` is MANDATORY.** This is the **Decision Trace** (see D#308 + docs/system/architecture.md § Canonical vocabulary). `fact` = WHAT happened, `reasoning` = WHY it happened. **YOU MUST NEVER** write `reasoning: ""`, `reasoning: null`, or generic fillers ("n/a", "observed", "noted"). If the operator's session context doesn't yield a clear why, push back during flush recap: *"Le fait #N je l'ai capturé, mais je n'ai pas le pourquoi. Qu'est-ce qui l'a causé ?"*. Degraded mode only if operator explicitly skips: `reasoning: "[captured without rationale — revisit on first application]"`.
+**CRITICAL: `reasoning` is MANDATORY.** This is the **Decision Trace** (see D#308 + docs/system/architecture.md § Canonical vocabulary). `fact` = WHAT happened, `reasoning` = WHY it happened. **YOU MUST NEVER** write `reasoning: ""`, `reasoning: null`, or generic fillers ("n/a", "observed", "noted"). If the operator's session context doesn't yield a clear why, push back during flush recap: *"Le fait #N je l'ai capturé, mais je n'ai pas le pourquoi. Qu'est-ce qui l'a causé ?"*. Degraded mode only if operator explicitly skips: `reasoning: "[captured without rationale · revisit on first application]"`.
 
 Examples:
 - ❌ `fact: "Meta pixel triggers 2s delay on iOS Safari"`, `reasoning: ""`
-- ✅ `fact: "Meta pixel triggers 2s delay on iOS Safari"`, `reasoning: "Account-specific bug, not global — same pixel code works on 3 other brands without delay. Likely related to this account's Business Manager region or app approvals. Reported to Meta support, waiting on ticket response."`
-- ✅ `fact: "Retinol cream @ 30€+ encounters 18% more objections than @ 25€"`, `reasoning: "Price bracket crossed a perceptual threshold — 25€ positioned as accessible premium vs 30€ perceived as mass-pharma territory. Confirmed across 4 creative variants, same copy, only price differed."`
+- ✅ `fact: "Meta pixel triggers 2s delay on iOS Safari"`, `reasoning: "Account-specific bug, not global · same pixel code works on 3 other brands without delay. Likely related to this account's Business Manager region or app approvals. Reported to Meta support, waiting on ticket response."`
+- ✅ `fact: "Retinol cream @ 30€+ encounters 18% more objections than @ 25€"`, `reasoning: "Price bracket crossed a perceptual threshold · 25€ positioned as accessible premium vs 30€ perceived as mass-pharma territory. Confirmed across 4 creative variants, same copy, only price differed."`
 
 Route via **ingest-resource** (Step 3B, learnings.json) if >3 entries to add. If single entry, append directly + update status.json.last_activity.
 
 ### Category: Structural Decisions
 
-Key decisions made this session — move from activity log to Active Decisions in session-state.md.
+Key decisions made this session · move from activity log to Active Decisions in session-state.md.
 
 **Format in session-state.md Active Decisions**:
 ```
@@ -393,10 +393,10 @@ Key decisions made this session — move from activity log to Active Decisions i
 ```
 
 Examples:
-- `- Audience main: femmes-40-55 (problem_aware) — highest purchase intent signal | date: 2026-04-03`
+- `- Audience main: femmes-40-55 (problem_aware) · highest purchase intent signal | date: 2026-04-03`
 - `- Never say "rejuvenate": DGCCRF rule, tested with legal | date: 2026-04-03`
 
-**No API call needed** — direct append to `session-state.md` Active Decisions section.
+**No API call needed** · direct append to `session-state.md` Active Decisions section.
 
 ### Category: Strategic Corrections
 
@@ -455,15 +455,15 @@ Signals: what they expect from PhantomOS, what they structurally hate.
 - *"I hate tools that ask 15 questions before producing anything"* → `anti_patterns_perso[]`
 - *"No third-party cloud for my data, non-negotiable"* → `expectations.deal_breakers`
 
-**Write mechanism**: via ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)` to `/operator/profile.json → {section}.{field}`. Mode `proposed` — the operator validates before write. This validation is quick (*"Noted for your profile: you tried Lindy and dropped it. OK?"*), not a long recap.
+**Write mechanism**: via ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)` to `/operator/profile.json → {section}.{field}`. Mode `proposed` · the operator validates before write. This validation is quick (*"Noted for your profile: you tried Lindy and dropped it. OK?"*), not a long recap.
 
-**NEVER** route these signals to `brands/{slug}/learnings.json` — they concern the operator, not the brand. Cross-contamination = structural bug.
+**NEVER** route these signals to `brands/{slug}/learnings.json` · they concern the operator, not the brand. Cross-contamination = structural bug.
 
 ---
 
 ### Category: Brand-specific Preferences (scoped to one brand)
 
-If the signal concerns *one specific brand* (e.g. *"for brand X, I use a more corporate tone, different from my other brands"*), write to `brands/{slug}/config.json → operator_preferences_for_this_brand`. Rare — most operator preferences are cross-cutting and go to `/operator/profile.json`.
+If the signal concerns *one specific brand* (e.g. *"for brand X, I use a more corporate tone, different from my other brands"*), write to `brands/{slug}/config.json → operator_preferences_for_this_brand`. Rare · most operator preferences are cross-cutting and go to `/operator/profile.json`.
 
 **Threshold**: only write when a pattern is observed ≥3 times in a session. One-off signals don't qualify.
 
@@ -477,21 +477,21 @@ Unresolved questions, blocked work, next actions. Add to `session-state.md` → 
 
 **Format**:
 ```
-- {Thread}: {status (pending | blocked | in_progress)} — {next action}
+- {Thread}: {status (pending | blocked | in_progress)} · {next action}
 ```
 
 Examples:
-- `- offers.json creation for creme-eclat: pending — blocked on marketing decision`
-- `- 2nd audience (femmes-25-35): in_progress — segment research underway`
+- `- offers.json creation for creme-eclat: pending · blocked on marketing decision`
+- `- 2nd audience (femmes-25-35): in_progress · segment research underway`
 
-**Resolved threads** — mark `[RESOLVED {YYYY-MM-DD}]` instead of deleting:
+**Resolved threads** · mark `[RESOLVED {YYYY-MM-DD}]` instead of deleting:
 ```
-- [RESOLVED 2026-04-03] Old thread title — resolved by doing X
+- [RESOLVED 2026-04-03] Old thread title · resolved by doing X
 ```
 
 ---
 
-## Concrete examples — routing by signal
+## Concrete examples · routing by signal
 
 Real examples of signals detected in session and their exact destination:
 
@@ -508,7 +508,7 @@ Real examples of signals detected in session and their exact destination:
 | Agent generated an incorrect UTM, operator corrects the format | Convention learned | `resources/conventions/{platform}.json → learned_rules[]` OR `learnings.json` if brand-specific |
 | "We tested pain vs desire angle, desire wins 2:1 on our audience" | Factual learning (test result) | `learnings.json` tags: ["creative-testing", "angle", "results"] |
 
-**Ambiguous case — decision rule:**
+**Ambiguous case · decision rule:**
 - General API limitation (affects all accounts) → `learnings.json` + tag `promote_candidate` for future promotion into shared convention
 - Account-specific limitation (config, access tier) → `learnings.json` without promote tag
 - Operator preference (style, format) → `config.json → operator`
@@ -516,7 +516,7 @@ Real examples of signals detected in session and their exact destination:
 
 ---
 
-## Step 3 — Execution Paths
+## Step 3 · Execution Paths
 
 ### Path A: Factual Learnings → ingest-resource
 
@@ -554,7 +554,7 @@ If positioning, tone, or strategy changed:
 
 ---
 
-## Step 4 — Novice Education (First Call Only)
+## Step 4 · Novice Education (First Call Only)
 
 If this is the brand's first learn-from-session call:
 
@@ -578,12 +578,12 @@ Show once per brand, then suppress on subsequent calls.
 
 ---
 
-## Step 5 — Output Summary + Validate Handoff
+## Step 5 · Output Summary + Validate Handoff
 
 After execution, display structured summary to user:
 
 ```
-Session captured — {brand}
+Session captured · {brand}
 
 {N} item(s) persisted:
 
@@ -619,21 +619,21 @@ Want me to validate the workspace now?
   OK. Launch "validate" when you're ready, ideally before the next session.
   ```
 
-**Effort/value ratio**: validate after learn = 30 seconds, zero friction. Best moment — operator is already in closing mode, and validate runs CHANGELOG rotation + learnings index rebuild + todos flags in a single pass.
+**Effort/value ratio**: validate after learn = 30 seconds, zero friction. Best moment · operator is already in closing mode, and validate runs CHANGELOG rotation + learnings index rebuild + todos flags in a single pass.
 
 ---
 
 ## Enrichment candidate detection
 
-At session close, beyond persisting facts, surface potential system improvements detected during the session. Three classes of candidates. Never auto-create — detection suggests, operator decides.
+At session close, beyond persisting facts, surface potential system improvements detected during the session. Three classes of candidates. Never auto-create · detection suggests, operator decides.
 
-### Class A — Skill candidates
+### Class A · Skill candidates
 
 Scan the session transcript for :
 
-- **Repeated tasks** — same type of request executed ≥ 2 times in the session (e.g., "generate a hook for X" then "generate a hook for Y"). → Candidate lightweight skill.
-- **Multi-step workflows** — recurring sequence ("check X, compare to Y, generate Z"). → Candidate heavy skill with SOP + orchestrator.
-- **Cross-brand workflows** — same action on multiple brands in the same session. → Candidate workspace-level skill.
+- **Repeated tasks** · same type of request executed ≥ 2 times in the session (e.g., "generate a hook for X" then "generate a hook for Y"). → Candidate lightweight skill.
+- **Multi-step workflows** · recurring sequence ("check X, compare to Y, generate Z"). → Candidate heavy skill with SOP + orchestrator.
+- **Cross-brand workflows** · same action on multiple brands in the same session. → Candidate workspace-level skill.
 
 Surface at close :
 
@@ -649,25 +649,25 @@ Scaffold now, later, or never?
 
 Operator confirms → trigger `build-agent`. Defer → log in `todos.md` with rationale. Never silently.
 
-### Class B — SOP / doc enrichment candidates
+### Class B · SOP / doc enrichment candidates
 
 Scan for knowledge-dense exchanges :
 
-- **Business patterns explained** — operator explained a pattern, gave concrete examples, critiqued an approach → candidate enrichment of reasoning layer in an existing SOP, OR new entry in a framework/guide.
-- **Edge cases discussed** — operator surfaced an edge case not currently documented → candidate addition to relevant SOP reasoning layer.
-- **Tactical tips** — operator shared a hack / shortcut / heuristic → candidate entry in a guide or catalogue.
+- **Business patterns explained** · operator explained a pattern, gave concrete examples, critiqued an approach → candidate enrichment of reasoning layer in an existing SOP, OR new entry in a framework/guide.
+- **Edge cases discussed** · operator surfaced an edge case not currently documented → candidate addition to relevant SOP reasoning layer.
+- **Tactical tips** · operator shared a hack / shortcut / heuristic → candidate entry in a guide or catalogue.
 
 Example :
 
 ```
 We discussed that the Northsense Spring Days GWP only works if AOV is above
-the threshold — business insight that would enrich
+the threshold · business insight that would enrich
 `audit-meta-global.md § Layer 4 reasoning`.
 
 Add now, propose as todo, or nothing?
 ```
 
-### Class C — Convention / rule promotion candidates
+### Class C · Convention / rule promotion candidates
 
 Scan for learnings that transcend the single brand :
 
@@ -686,7 +686,7 @@ Promote now, or wait for a 2nd occurrence on another brand?
 
 ### Protocol
 
-- Surface AT MOST 3 candidates per class per session close — don't spam.
+- Surface AT MOST 3 candidates per class per session close · don't spam.
 - Each candidate = 1 line hook + route to decision.
 - Default answer space: `yes / no / later`. Never open-ended.
 - On refusal or defer → log in `todos.md` with rationale so pattern doesn't disappear.
@@ -696,15 +696,15 @@ Promote now, or wait for a 2nd occurrence on another brand?
 
 ## Hard Rules
 
-- **Dedup before appending** — before adding a new learning to learnings.json, scan existing `entries[].fact` for semantic overlap (same platform + same behavior described). If match found → skip, do not add duplicate. If similar but different nuance → add with a `see_also: ["LRN-XX"]` pointer. Never create two entries saying the same thing.
-- **Never delete learnings or decisions** — only archive (mark status: "superseded" for learnings, prepend [RESOLVED] for threads)
-- **Always scan full conversation** — don't just look at recent messages
-- **Classify semantically, not syntactically** — user may not say "this is a learning" explicitly. You infer.
-- **Respect _field_types** — never inject strategy into brand.json context fields
-- **Route via ingest-resource for shared resource changes** — maintain integrity
-- **Direct write only for session-state.md updates** — those are append-only logs
-- **Novice education once per brand** — suppress on repeat calls
-- **Always show what was learned** — summary is mandatory, not optional
-- **If conflict detected** (two opposing facts/decisions), surface to user: "Decision X contradicts Y. Which version is correct?" — wait for clarification before writing
-- **Log runtime patterns observed during the session** — beyond business facts, capture *agent-side frictions* (recurring tool errors, schema enum rejections, hook refusals self-corrected, doctrine drift detected) as `category: "system_friction"` learnings when ≥2 occurrences in the session. Example: enum classifier `--source system` rejected 2× → log as `LRN-{n} category:system_friction fact:"agent attempted --source=system, classifier strict on agent/import/inference/operator/scrape, self-corrected to agent. If pattern persists across sessions, propose enum extension."`. These learnings feed system-wide doctrine maintenance, not brand-specific copy. Persisted at workspace-level if cross-brand pattern, brand-level if brand-specific.
-- **Append session journal entry to `operator/session-state.md`** when session produced significant artifacts (any `produced/*` file written, ≥2 learnings persisted, or operator confirmed strategic decision). Format: `## YYYY-MM-DD · {brand_slug or "cross-brand"}` heading + 3 sentences max — what was the session goal, what was produced, what's the next thread to pick up. Append-only, never edit prior entries. This is the *operator's navigation across sessions* — different from learnings (facts) and decisions (locked choices).
+- **Dedup before appending** · before adding a new learning to learnings.json, scan existing `entries[].fact` for semantic overlap (same platform + same behavior described). If match found → skip, do not add duplicate. If similar but different nuance → add with a `see_also: ["LRN-XX"]` pointer. Never create two entries saying the same thing.
+- **Never delete learnings or decisions** · only archive (mark status: "superseded" for learnings, prepend [RESOLVED] for threads)
+- **Always scan full conversation** · don't just look at recent messages
+- **Classify semantically, not syntactically** · user may not say "this is a learning" explicitly. You infer.
+- **Respect _field_types** · never inject strategy into brand.json context fields
+- **Route via ingest-resource for shared resource changes** · maintain integrity
+- **Direct write only for session-state.md updates** · those are append-only logs
+- **Novice education once per brand** · suppress on repeat calls
+- **Always show what was learned** · summary is mandatory, not optional
+- **If conflict detected** (two opposing facts/decisions), surface to user: "Decision X contradicts Y. Which version is correct?" · wait for clarification before writing
+- **Log runtime patterns observed during the session** · beyond business facts, capture *agent-side frictions* (recurring tool errors, schema enum rejections, hook refusals self-corrected, doctrine drift detected) as `category: "system_friction"` learnings when ≥2 occurrences in the session. Example: enum classifier `--source system` rejected 2× → log as `LRN-{n} category:system_friction fact:"agent attempted --source=system, classifier strict on agent/import/inference/operator/scrape, self-corrected to agent. If pattern persists across sessions, propose enum extension."`. These learnings feed system-wide doctrine maintenance, not brand-specific copy. Persisted at workspace-level if cross-brand pattern, brand-level if brand-specific.
+- **Append session journal entry to `operator/session-state.md`** when session produced significant artifacts (any `produced/*` file written, ≥2 learnings persisted, or operator confirmed strategic decision). Format: `## YYYY-MM-DD · {brand_slug or "cross-brand"}` heading + 3 sentences max · what was the session goal, what was produced, what's the next thread to pick up. Append-only, never edit prior entries. This is the *operator's navigation across sessions* · different from learnings (facts) and decisions (locked choices).

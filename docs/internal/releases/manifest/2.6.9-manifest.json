@@ -3,10 +3,10 @@
   "from_version": "2.6.8",
   "to_version": "2.6.9",
   "released_at": "2026-04-23",
-  "summary": "Narrative memory retrieval layer — SQLite FTS5 index over session-log, decisions, learnings, snapshots, session-state, events + session-search skill + context budget audit tool.",
+  "summary": "Narrative memory retrieval layer · SQLite FTS5 index over session-log, decisions, learnings, snapshots, session-state, events + session-search skill + context budget audit tool.",
   "breaking": false,
   "requires_confirmation": false,
-  "notes": "Safe overlay. The new memory.db lives under .phantom/ and is fully rebuildable from source files (idempotent). No existing data is migrated or touched. FTS5 requires the SQLite build shipped with Python stdlib on macOS / Debian-based Linux (standard). If FTS5 is unavailable, only the session-search skill fails — core workspace unaffected.",
+  "notes": "Safe overlay. The new memory.db lives under .phantom/ and is fully rebuildable from source files (idempotent). No existing data is migrated or touched. FTS5 requires the SQLite build shipped with Python stdlib on macOS / Debian-based Linux (standard). If FTS5 is unavailable, only the session-search skill fails · core workspace unaffected.",
   "changes": [
     {
       "type": "infra-added",

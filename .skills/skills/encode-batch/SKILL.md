@@ -80,7 +80,7 @@ Observation field semantics:
 
 ---
 
-## Step 1 — Load target schemas
+## Step 1 · Load target schemas
 
 For each `target_entities[].schema`, read the file. Build an in-memory map:
 
@@ -105,7 +105,7 @@ Read the `_field_types` block of the existing target file. Use it as the source 
 
 ---
 
-## Step 2 — Map semantic_kind → field_path
+## Step 2 · Map semantic_kind → field_path
 
 Apply the canonical mapping table. The table is the entire mechanical contract of this skill.
 
@@ -143,11 +143,11 @@ Apply the canonical mapping table. The table is the entire mechanical contract o
 
 **If `semantic_kind` is not in the table** → log to summary as `unmapped`, do NOT invent a field_path, do NOT call write-to-context. Producer can either re-classify and re-call, or accept the loss.
 
-**Override.** Caller may pass `field_path_override` per observation to bypass the table. Use it sparingly — overrides defeat the purpose of the mechanical mapping.
+**Override.** Caller may pass `field_path_override` per observation to bypass the table. Use it sparingly · overrides defeat the purpose of the mechanical mapping.
 
 ---
 
-## Step 3 — Skip already-filled scalars
+## Step 3 · Skip already-filled scalars
 
 Before each scalar write (not array append), read the current value at `field_path`. If non-null and `default_mode == "proposed"` → skip the write, log `skipped_already_set` in summary. Producers that explicitly want to overwrite must pass `default_mode: "direct"` or per-observation `force: true`.
 
@@ -155,7 +155,7 @@ Array appends always proceed (idempotency is the producer's responsibility, not 
 
 ---
 
-## Step 4 — Resolve confidence
+## Step 4 · Resolve confidence
 
 Map `confidence_signal` to numeric:
 
@@ -169,7 +169,7 @@ Caller may pass `confidence_override` per observation (numeric 0-1) to bypass.
 
 ---
 
-## Step 5 — Emit one write-to-context call per observation
+## Step 5 · Emit one write-to-context call per observation
 
 For each mapped observation:
 
@@ -187,7 +187,7 @@ Capture exit code per call. Aggregate into the summary.
 
 ---
 
-## Step 6 — Trigger snapshot rebuild + finalize-mutation-batch
+## Step 6 · Trigger snapshot rebuild + finalize-mutation-batch
 
 After all writes, run once:
 
@@ -200,7 +200,7 @@ Capture finalize-mutation-batch exit code. If 2 (blocking) → flag in summary.
 
 ---
 
-## Step 7 — Return summary to caller
+## Step 7 · Return summary to caller
 
 Single JSON object back to caller. NO operator-facing prose.
 
@@ -234,7 +234,7 @@ The caller (producer) reads the summary, decides whether to surface anything to 
 - **NOT operator-facing.** `operator_facing: false` enforced. Output is structured JSON to the caller, never prose.
 - **One write-to-context call per observation.** Never batch into a single multi-field write. The mutation gate audits one mutation at a time.
 - **Skip already-set scalars by default.** Producers that need overwrite must opt in via `default_mode: direct` or per-observation `force: true`.
-- **Read schemas + existing file before mapping.** Don't blindly trust the table — `_field_types` on the live file overrides schema hints.
+- **Read schemas + existing file before mapping.** Don't blindly trust the table · `_field_types` on the live file overrides schema hints.
 - **Always rebuild snapshot + run finalize-mutation-batch at the end.** Single invocation each, not per-mutation.
 - **Never expose `_field_path`, `_source`, `_confidence`, `mode` numbers up the chain.** The summary keeps those internal. The caller may reference counts ("27 mutations encoded") but never the internal stamping.
 - **Subagent_safe: true.** Always launch via Task tool with `model: haiku` from the caller. Running encode-batch inline in main defeats its purpose.
@@ -243,13 +243,13 @@ The caller (producer) reads the summary, decides whether to surface anything to 
 
 ## Cross-references
 
-- `.skills/skills/snapshot-brand/SKILL.md` — caller, Step 3 + Step 6 delegate here
-- `.skills/skills/ingest-resource/SKILL.md` — caller, mapping phase delegates here
-- `.skills/write-to-context.py` — single-mutation primitive used internally
-- `.skills/finalize-mutation-batch.py` — post-write structural check, run once at end
-- `.skills/build-brand-snapshot.py` — snapshot rebuild, run once at end
-- `docs/system/field-types.md` — `_field_types` doctrine
-- `docs/system/contextual-intelligence.md` — master doctrine, "no semantic interpretation in mechanical layer"
+- `.skills/skills/snapshot-brand/SKILL.md` · caller, Step 3 + Step 6 delegate here
+- `.skills/skills/ingest-resource/SKILL.md` · caller, mapping phase delegates here
+- `.skills/write-to-context.py` · single-mutation primitive used internally
+- `.skills/finalize-mutation-batch.py` · post-write structural check, run once at end
+- `.skills/build-brand-snapshot.py` · snapshot rebuild, run once at end
+- `docs/system/field-types.md` · `_field_types` doctrine
+- `docs/system/contextual-intelligence.md` · master doctrine, "no semantic interpretation in mechanical layer"
 
 ---
 

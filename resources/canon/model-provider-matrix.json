@@ -1,0 +1,57 @@
+{
+  "_schema_version": "model-provider-matrix/1.0",
+  "_purpose": "Single source of truth for what each logical model tier (and each external generation endpoint) concretely resolves to, plus its fallback chain. The durable substrate under model routing: on a model swap, edit THIS file, not the 85 skill frontmatters. Skills name a logical tier (recommended_model = opus|sonnet|haiku); this file says what that tier is today and what to fall back to.",
+  "_durability": "MODEL-INDEPENDENT structure, MODEL-DEPENDENT values. The aliases, the tiers, and the fallback discipline are stable across model generations. The `concrete` ids and the external `endpoint`s are the swappable layer. On any change to a value here, re-run evals/ (the regression detector) to confirm the swap did not drop quality. That is what makes a model swap safe instead of silent.",
+  "_no_runtime_check": "By deliberate decision (model-versioning-canon.md, v2.46): there is NO mandatory runtime availability check. It was dropped as too strict (latency, URL-down, false positives). This matrix is consulted at build/release (build-manifest validates aliases against it) and by the operator during the 3-6 month audit. The runtime simply routes the alias; if a tier is ever unavailable it degrades down its fallback chain, it never blocks.",
+
+  "allowed_aliases": ["opus", "sonnet", "haiku"],
+
+  "reasoning_tiers": {
+    "opus": {
+      "concrete": "claude-opus-4-8",
+      "provider": "anthropic",
+      "capability": "synthesis, reasoning-heavy, final strategic judgment",
+      "context": "1M",
+      "fallback": ["sonnet"],
+      "note": "Used by the 7 heaviest skills (build-agent, compose-creative, decompose-ad, evaluate-concept, frame-regime, recompose-creative, weave-hooks). Falls back to sonnet: a degraded synthesis is better than a blocked one."
+    },
+    "sonnet": {
+      "concrete": "claude-sonnet-4-6",
+      "provider": "anthropic",
+      "capability": "analytical, default tier for producers and orchestrators",
+      "fallback": ["opus", "haiku"],
+      "note": "The default (62 skills). Falls back up to opus if available, else down to haiku."
+    },
+    "haiku": {
+      "concrete": "claude-haiku-4-5-20251001",
+      "provider": "anthropic",
+      "capability": "mechanical, fast, high-volume sub-agent work",
+      "fallback": ["sonnet"],
+      "note": "Mechanical tier (16 skills). Falls back to sonnet."
+    }
+  },
+
+  "fallback_rule": "If a tier's concrete model is unavailable, route to the first available tier in its fallback chain, then that tier's chain, transitively. Degrade, never block. Any resulting quality regression is caught by evals/, not by a runtime gate.",
+
+  "external_generation": {
+    "image_edit": {
+      "provider": "fal.ai",
+      "endpoint": "fal-ai/nano-banana-2/edit",
+      "model_family": "gemini_3_pro_image",
+      "canon_date": "2025-11",
+      "replaced_legacy": "fal-ai/nano-banana-pro/edit",
+      "fallback_endpoint": "fal-ai/nano-banana-pro/edit",
+      "auto_upgrade": false,
+      "version_check_url": "https://fal.ai/models?keywords=banana",
+      "consumers": ["compose-creative", "recompose-creative", "craft-packshot", "decompose-ad", "adapt-from-competitor"],
+      "note": "Endpoint is also declared per-skill in frontmatter permissions.external_apis[] (model-versioning-canon.md). This matrix is the cross-skill SSOT for the audit; the frontmatter is the per-skill declaration. They must agree (build-time check candidate)."
+    }
+  },
+
+  "audit": {
+    "cadence": "3-6 months",
+    "method": "docs/system/model-versioning-canon.md",
+    "regression_detector": "evals/",
+    "on_swap": "Edit the concrete id or endpoint here, run python3.11 evals/eval-runner.py, confirm scores hold. If a score drops, the model-dependent prompting layer (exemplars, posture nudges) needs re-tuning for the new model, not the substrate."
+  }
+}

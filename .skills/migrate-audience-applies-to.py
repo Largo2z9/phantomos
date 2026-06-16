@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-migrate-audience-applies-to — one-shot migration v2.24.0.
+migrate-audience-applies-to · one-shot migration v2.24.0.
 
 Walks every brands/{slug}/audiences/{audience}/profile.json. If `meta.product_id`
 is present (non-null) AND `meta.applies_to_products` is missing or empty:

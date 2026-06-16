@@ -4,7 +4,7 @@
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
   "theme": "Cascade A + C synthesis-first across producer / orchestrator surfaces",
-  "summary": "First execution pass on the audit-v2.7.4-prompting roadmap. Bundles Cascade A (4 patches synthesis-first across producer surface) + Cascade C (1 patch pre-snapshot context capture). Five textual rewrites, zero structural code added. All pass the decisive test. Cascade A — snapshot-brand Step 7 form-fill recap becomes a 4-6 sentence analytical paragraph using schemas (problems_solved, audience.pain, market_context.sophistication, offer_groups[].offers[]) as analytical vocabulary, ends with single confirm question, no score, no field list, no missing-fields block. tour Milestone 7 url-path, setup-brand Step 4, onboard-brand Phase 2 cascade the same synthesis vocabulary across surfaces. Cascade C — tour Milestone 2 path-(a) collects use-case + stack in flowing prose before the URL, writes to operator/profile.json identity.profile + context.stack[]. Snapshot wow lands in a context-aware operator state.",
+  "summary": "First execution pass on the audit-v2.7.4-prompting roadmap. Bundles Cascade A (4 patches synthesis-first across producer surface) + Cascade C (1 patch pre-snapshot context capture). Five textual rewrites, zero structural code added. All pass the decisive test. Cascade A · snapshot-brand Step 7 form-fill recap becomes a 4-6 sentence analytical paragraph using schemas (problems_solved, audience.pain, market_context.sophistication, offer_groups[].offers[]) as analytical vocabulary, ends with single confirm question, no score, no field list, no missing-fields block. tour Milestone 7 url-path, setup-brand Step 4, onboard-brand Phase 2 cascade the same synthesis vocabulary across surfaces. Cascade C · tour Milestone 2 path-(a) collects use-case + stack in flowing prose before the URL, writes to operator/profile.json identity.profile + context.stack[]. Snapshot wow lands in a context-aware operator state.",
   "changes": [
     {"path": ".skills/skills/snapshot-brand/SKILL.md", "kind": "edit", "reason": "Step 7 rewritten as synthesis-first analytical paragraph. No score, no field list, no missing-fields block. Inferred attributes flagged inline."},
     {"path": ".claude/commands/tour.md", "kind": "edit", "reason": "Milestone 7 url-path cascades from snapshot Step 7. Milestone 2 path-(a) collects use-case + stack in flowing prose, writes to operator/profile.json."},
@@ -17,11 +17,11 @@
   "breaking_changes": false,
   "operator_impact": "Day-1 onboarding starts with two flowing context questions before scrape, no URL-first ambush. Snapshot returns as consultant's read on the brand (the stick-solaire pattern), not as field-list recap. Each downstream surface speaks the same synthesis vocabulary. Path leak / score / missing-fields enumeration removed from default operator surfaces.",
   "tested_on": [
-    "phantom-stress sync — ready for live stress test on a wellness/cosmetic pilot (deferred to v2.8.1)"
+    "phantom-stress sync · ready for live stress test on a wellness/cosmetic pilot (deferred to v2.8.1)"
   ],
   "caught_by": "audit-v2.7.4-prompting roadmap, Cascade A + C scope.",
   "known_gaps": [
-    "Cascade B (audit/curator surfaces) and Cascade D (legacy cleanup) not yet shipped — pending stress test of A on a wellness/cosmetic pilot fresh.",
-    "Live test pending — Cascade A behavior under load not yet confirmed."
+    "Cascade B (audit/curator surfaces) and Cascade D (legacy cleanup) not yet shipped · pending stress test of A on a wellness/cosmetic pilot fresh.",
+    "Live test pending · Cascade A behavior under load not yet confirmed."
   ]
 }

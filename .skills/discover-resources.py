@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-discover-resources — FTS5 search over indexed resources.
+discover-resources · FTS5 search over indexed resources.
 
 Skills call this primitive at runtime to find knowledge relevant to their
 current context. Returns ranked chunks by BM25 with boost for recency and
-matching resource_type. No tagging is required on resource files — indexing
+matching resource_type. No tagging is required on resource files · indexing
 is purely content-driven (see .skills/memory-index.py).
 
 The canonical execution flow for a skill is:
@@ -22,7 +22,7 @@ Usage:
   python3 .skills/discover-resources.py --query "..." --boost-recency
 
 Exit codes:
-  0  any result count (zero included — check `hits` in output)
+  0  any result count (zero included · check `hits` in output)
   1  arg / IO error, missing index
   2  FTS5 query syntax error
 """
@@ -109,7 +109,7 @@ def main():
     root = find_workspace_root(Path(args.cwd))
     db = root / ".phantom" / "memory.db"
     if not db.is_file():
-        die(f"index not found at {db} — run '.skills/memory-index.py' first")
+        die(f"index not found at {db} · run '.skills/memory-index.py' first")
 
     con = sqlite3.connect(db)
     con.row_factory = sqlite3.Row
@@ -186,10 +186,10 @@ def main():
 
     print(f"query: {args.query!r}   hits: {len(results)}")
     if not results:
-        print("  (no matching resources — try broader keywords or drop --source-types filter)")
+        print("  (no matching resources · try broader keywords or drop --source-types filter)")
         return
     for i, r in enumerate(results, 1):
-        print(f"\n{i}. [{r['resource_type']}] {r['ref']}   score={r['score']}   {r['date'] or '—'}")
+        print(f"\n{i}. [{r['resource_type']}] {r['ref']}   score={r['score']}   {r['date'] or '·'}")
         if r["title"]:
             print(f"   {r['title'][:100]}")
         print(f"   {r['snippet'][:220]}")

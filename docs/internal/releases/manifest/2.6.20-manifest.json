@@ -3,7 +3,7 @@
   "version": "2.6.20",
   "released_at": "2026-04-24",
   "compatible_from": "2.0.0",
-  "theme": "bugfix — offers schema drift + proposal wrapper leak",
+  "theme": "bugfix · offers schema drift + proposal wrapper leak",
   "summary": "snapshot-brand single-variant path wrote v1 flat offers[] (stamped _version 2.0). write-to-context wrapped _proposed/_source/_confidence at the root object when mode=proposed was used on a whole-file path. Both caught during fresh-instance test of v2.6.19.",
   "changes": [
     {
@@ -34,7 +34,7 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "preventive — existing drifted offers.json files need manual re-run of snapshot-brand to regenerate under v2 shape.",
+  "operator_impact": "preventive · existing drifted offers.json files need manual re-run of snapshot-brand to regenerate under v2 shape.",
   "tested_on": ["fresh instance /tmp/phantom-test-v2619 with write-to-context guard"],
   "caught_by": "onboarding test on a beauty pilot test (discovered masque-led-elite-x600/offers.json corruption)",
   "known_gaps": [

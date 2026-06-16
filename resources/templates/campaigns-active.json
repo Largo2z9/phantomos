@@ -1,12 +1,12 @@
 {
-  "$comment": "Active campaigns registry. Operational metadata — not a brand entity. Updated by the operator, read by agents needing current campaign context.",
+  "$comment": "Active campaigns registry. Operational metadata · not a brand entity. Updated by the operator, read by agents needing current campaign context.",
   "_version": "1.0",
   "_type": "template",
   "_notes": {
     "usage": "Store in resources/ for agency-level tracking, or in brands/{slug}/ for brand-specific campaigns.",
-    "product_ids": "Reference spec.json slugs — e.g. 'massage-insoles'",
-    "audience_ids": "Reference profile.json slugs — e.g. 'standing-workers'",
-    "creative_ids": "Optional — reference creative assets if tracked",
+    "product_ids": "Reference spec.json slugs · e.g. 'massage-insoles'",
+    "audience_ids": "Reference profile.json slugs · e.g. 'standing-workers'",
+    "creative_ids": "Optional · reference creative assets if tracked",
     "status": "active | paused | ended | draft"
   },
   "campaigns": [

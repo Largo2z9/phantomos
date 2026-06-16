@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-audit-context-budget — compute the total lines / estimated tokens of the
+audit-context-budget · compute the total lines / estimated tokens of the
 CLAUDE.md cascade and all lazy-loaded docs referenced from it. Pre-release
 gate helper. Reports a warning if totals exceed configured thresholds.
 
-Thresholds (soft — warn but don't fail):
+Thresholds (soft · warn but don't fail):
   root CLAUDE.md         ≤ 140 lines  (cross-context rules only)
   always-loaded cascade  ≤ 250 lines  (root + child CLAUDE.md in brand path)
   lazy-loaded doc        ≤ 200 lines  (contract-build, contract-daily, etc.)
@@ -76,7 +76,7 @@ def main():
     root_text = root_claude.read_text(encoding="utf-8")
     root_lines = root_text.count("\n") + 1
 
-    # Brand-level CLAUDE.md (only one loads per session — pick the _TEMPLATE as
+    # Brand-level CLAUDE.md (only one loads per session · pick the _TEMPLATE as
     # reference, operator-instance brands have one each same size).
     tmpl_claude = root / "brands" / "_TEMPLATE" / "CLAUDE.md"
     brand_lines = count_lines(tmpl_claude)
@@ -96,14 +96,14 @@ def main():
 
     findings = []
     if root_lines > THRESHOLDS["root"]:
-        findings.append(("WARN", f"CLAUDE.md {root_lines} > {THRESHOLDS['root']} lines — push single-pillar rules to child CLAUDE.md"))
+        findings.append(("WARN", f"CLAUDE.md {root_lines} > {THRESHOLDS['root']} lines · push single-pillar rules to child CLAUDE.md"))
     if always > THRESHOLDS["always_loaded"]:
-        findings.append(("WARN", f"always-loaded cascade {always} > {THRESHOLDS['always_loaded']} lines — shrink root or brand CLAUDE.md"))
+        findings.append(("WARN", f"always-loaded cascade {always} > {THRESHOLDS['always_loaded']} lines · shrink root or brand CLAUDE.md"))
     for d in lazy_stats:
         if d["lines"] > THRESHOLDS["lazy_doc"]:
-            findings.append(("WARN", f"{d['path']} {d['lines']} > {THRESHOLDS['lazy_doc']} lines — split"))
+            findings.append(("WARN", f"{d['path']} {d['lines']} > {THRESHOLDS['lazy_doc']} lines · split"))
     if full > THRESHOLDS["full_session"]:
-        findings.append(("WARN", f"worst-case session {full} > {THRESHOLDS['full_session']} lines — cascade too fat"))
+        findings.append(("WARN", f"worst-case session {full} > {THRESHOLDS['full_session']} lines · cascade too fat"))
 
     report = {
         "root": {"lines": root_lines, "tokens_est": tokens(root_lines),
@@ -135,7 +135,7 @@ def main():
             for s, m in findings:
                 print(f"  [{s}] {m}")
         else:
-            print("\nbudget OK — all thresholds respected.")
+            print("\nbudget OK · all thresholds respected.")
 
     if args.strict and findings:
         sys.exit(1)

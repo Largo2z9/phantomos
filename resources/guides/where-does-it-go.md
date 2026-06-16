@@ -57,15 +57,15 @@ Reusable by other brands?
 
 ## The three traps
 
-**Trap 1 — Dumping docs into resources/**
+**Trap 1 · Dumping docs into resources/**
 A 40-page brand guidelines PDF is not a resource. Extract the 3 key facts (tone adjectives, forbidden words, visual rules) into the right entity fields. Archive the PDF in `sources/`.
 
-**Trap 2 — Putting brand-specific rules in shared resources/**
+**Trap 2 · Putting brand-specific rules in shared resources/**
 "We never discount more than 20%" is a brand rule → `learnings.json`. A shared resource is something any operator could use for any brand.
 
-**Trap 3 — Creating a new entity type**
-There are 6 fixed entities. Campaigns, projects, briefs, reports — these are operational metadata → `resources/templates/` or `strategy.json`. If you're unsure, use `learnings.json` temporarily and promote later.
+**Trap 3 · Creating a new entity type**
+There are 6 fixed entities. Campaigns, projects, briefs, reports · these are operational metadata → `resources/templates/` or `strategy.json`. If you're unsure, use `learnings.json` temporarily and promote later.
 
 ---
 
-*When in doubt: ask the agent "where should I put [X] for [brand]?" — it knows this tree.*
+*When in doubt: ask the agent "where should I put [X] for [brand]?" · it knows this tree.*

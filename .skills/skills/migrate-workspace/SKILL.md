@@ -74,7 +74,7 @@ Chaque script de migration Python suit le contrat canon · 4 méthodes obligatoi
 
 ---
 
-## Step 1 — Detect Version Gap
+## Step 1 · Detect Version Gap
 
 1. Read `brands/{slug}/brand.json._version` (instance version)
 2. Read `brands/_TEMPLATE/brand.json._version` (target version)
@@ -85,7 +85,7 @@ Output: list of files with version gaps.
 
 ---
 
-## Step 2 — Generate Structural Diff
+## Step 2 · Generate Structural Diff
 
 For each file with a version gap:
 
@@ -94,7 +94,7 @@ For each file with a version gap:
 3. Compare structure (keys at all nesting levels):
    - **Added fields**: present in template, absent in instance
    - **Removed fields**: present in instance, absent in template (potential deprecation)
-   - **Renamed fields**: heuristic — same position + similar name (fuzzy match)
+   - **Renamed fields**: heuristic · same position + similar name (fuzzy match)
    - **Type changes**: field was string → now object, array → now nested, etc.
    - **_field_types changes**: new entries, removed entries, type reclassifications
 
@@ -104,7 +104,7 @@ Output: structured diff per file.
 
 ---
 
-## Step 3 — Propose Migration Plan
+## Step 3 · Propose Migration Plan
 
 For each diff item, classify and propose action:
 
@@ -121,7 +121,7 @@ For each diff item, classify and propose action:
 **Present plan to operator before executing.** Format:
 
 ```
-## Migration Plan — {brand} → v{target}
+## Migration Plan · {brand} → v{target}
 
 ### Safe (auto-apply)
 - brand.json: Add `social_media.tiktok` (empty)
@@ -129,11 +129,11 @@ For each diff item, classify and propose action:
 - spec.json: Update `_field_types` (3 new entries)
 
 ### Needs Review
-- brand.json: `tone` → `tone_of_voice` (rename — will copy value)
+- brand.json: `tone` → `tone_of_voice` (rename · will copy value)
 - profile.json: `triggers[]` restructured to `decision_process.triggers[]` (remap)
 
 ### Breaking Changes
-- [BREAKING] brand.json: `kpis` section removed in v2.0 — will move to `_deprecated_kpis`
+- [BREAKING] brand.json: `kpis` section removed in v2.0 · will move to `_deprecated_kpis`
 
 Apply safe changes now? (y/n)
 Apply reviewed changes after confirmation? (one by one)
@@ -141,7 +141,7 @@ Apply reviewed changes after confirmation? (one by one)
 
 ---
 
-## Step 4 — Execute Migration
+## Step 4 · Execute Migration
 
 After operator approval:
 
@@ -149,12 +149,12 @@ After operator approval:
 2. **Apply safe changes**: Add empty fields, merge _field_types
 3. **Apply reviewed changes**: One by one, with operator confirmation
 4. **Bump `_version`** in migrated files to match target
-5. **Log in CHANGELOG.md**: `[MIGRATION] {brand} migrated from v{old} to v{new} — {N} fields added, {N} renamed, {N} deprecated`
+5. **Log in CHANGELOG.md**: `[MIGRATION] {brand} migrated from v{old} to v{new} · {N} fields added, {N} renamed, {N} deprecated`
 6. **Update status.json**: clear version-mismatch flags
 
 ---
 
-## Step 5 — Post-Migration Validation
+## Step 5 · Post-Migration Validation
 
 1. Run validate-resources on the migrated brand
 2. Report any new flags introduced by migration
@@ -194,7 +194,7 @@ Operator says "migrate all brands" or "batch migration":
 - spec.json: +8 optional blocks (composition, posology, contraindications, origin, production_method, preparation, external_databases, target_suitability, durability)
 - spec.json: +`nutrition_facts.allergen_sources`, +`nutri_score_grade`, +`perishability.period_after_opening_months`, +`perishability.expiry_date_required`
 - spec.json: +6 dietary_tags, +"oats" in allergens
-- offers.json: +`contents.duration_type`, +`duration_servings`, +`cure_metadata`, +`incentives.duration_tiers`, +`loyalty`, +`offer_groups[].offers[].tags` (v2 schema — legacy v1.x was `offers[].tags`)
+- offers.json: +`contents.duration_type`, +`duration_servings`, +`cure_metadata`, +`incentives.duration_tiers`, +`loyalty`, +`offer_groups[].offers[].tags` (v2 schema · legacy v1.x was `offers[].tags`)
 
 **Migration steps:**
 1. Read `_version` from `brands/_TEMPLATE` (living source) per entity, then align every instance file to the same value. The field is `_version` on every file (not `_template_version`, inherited drift). Current values: spec.json=1.8, offers.json=2.0, brand.json=2.2, profile.json=1.2.

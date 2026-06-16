@@ -3,7 +3,7 @@
   "version": "2.10.0",
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
-  "theme": "Production layer #1 — produce-paid-angles + paid-angle-scoring framework + no-orphan-output doctrine",
+  "theme": "Production layer #1 · produce-paid-angles + paid-angle-scoring framework + no-orphan-output doctrine",
   "summary": "First production-layer skill ship. Consumes encoded brand intelligence (verbatims, pains, objections from mine-voc Layer B) and produces a ranked matrice of paid creative angles for an audience. Pattern: hidden cartesian product (audience × awareness × emotion × objection × placement) → 5-lens scoring per framework → cluster filter de-dupe → ranked top 5 (cap 7) → operator-facing markdown table with hook verbatim-anchored + emotion + objection + placement reco. Synthesis paragraph + reasoned next-step proposal close per no-orphan doctrine. Bundles the no-orphan-output rule into CLAUDE.md master doctrine: every significant output from a producer/curator/orchestrator skill MUST end with a contextual next-step proposal reasoned by the agent, never a flat menu.",
   "changes": [
     {"path": "resources/frameworks/paid-angle-scoring.md", "kind": "new", "reason": "Analytical canon. 5 lenses (verbatim density 35%, emotional resonance 20%, objection neutralization 20%, placement viability filter, awareness alignment 25%), aggregation formula, cluster filter rule, verbatim anchor selection priority (4-tier never-invent), 6 anti-patterns, schema integration, calibration-over-time policy. 147 lines."},
@@ -15,13 +15,13 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "Operator can ask 'trouve les meilleurs angles pour [audience]' on any brand with mine-voc data encoded. Returns ranked top 5 angles, hook verbatim-anchored from voc corpus, scoring rationale visible (without raw scores). No orphan close — every producer surface ends with a reasoned next move. 5 architectural decisions encoded (Largo S39 batch triage): hook granularity = headline-only v1, default count = 5, auto-trigger after mine-voc = OFF, cache = 24h TTL, sister content/email skill = NOT in v1.",
+  "operator_impact": "Operator can ask 'trouve les meilleurs angles pour [audience]' on any brand with mine-voc data encoded. Returns ranked top 5 angles, hook verbatim-anchored from voc corpus, scoring rationale visible (without raw scores). No orphan close · every producer surface ends with a reasoned next move. 5 architectural decisions encoded (Largo S39 batch triage): hook granularity = headline-only v1, default count = 5, auto-trigger after mine-voc = OFF, cache = 24h TTL, sister content/email skill = NOT in v1.",
   "tested_on": [
     "phantom-stress sync, an early-stage DTC pilot ready for live test (voc encoded from S37/S38: 12 expressions, 5 pains, 6 objections on femmes-30-55-minceur)"
   ],
   "caught_by": "Roadmap audit-v2.7.4-prompting + Cascade A v2.10 production-layer scope. Doctrine surfaced after operator flagged 'orphan close' anti-pattern in earlier producer outputs.",
   "known_gaps": [
-    "Live test deferred to next session — an early-stage DTC pilot workspace ready but not yet exercised.",
-    "Sister skills (content/email/landing) explicitly out of v1 — extend if 2+ requests, not by default."
+    "Live test deferred to next session · an early-stage DTC pilot workspace ready but not yet exercised.",
+    "Sister skills (content/email/landing) explicitly out of v1 · extend if 2+ requests, not by default."
   ]
 }

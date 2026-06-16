@@ -10,6 +10,9 @@
 # Runtime outputs
 _validation-report.json
 
+# Eval harness · assembled judge prompts are generated on demand, never versioned
+evals/_judge-queue/
+
 # Python bytecode (hooks et .skills/*.py · régénéré à l'exécution, jamais versionné)
 __pycache__/
 **/__pycache__/

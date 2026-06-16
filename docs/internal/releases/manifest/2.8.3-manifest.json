@@ -3,8 +3,8 @@
   "version": "2.8.3",
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
-  "theme": "Revert v2.8.2 bold anchors — back to pure prose 3 movements, with explicit ban on bold labels",
-  "summary": "Live test on an early-stage DTC pilot + Largo feedback: bold-section anchors ('**Le vrai pitch**', '**La cible logique**') feel template-flavored and visually heavy regardless of content quality. Pivot back to v2.8.1 pure-prose 3-movements format, with explicit ban added to prevent future drift. Doctrine clarification: structure carries itself through prose, not through scaffolding. Adaptive named anchors (v2.8.2) was an over-correction. Each paragraph names what it carries via its first sentence, not via a label above it. Decisive test before sending: 'if you see bold section labels or templated openers, you reverted to form-fill — rewrite as flowing prose'.",
+  "theme": "Revert v2.8.2 bold anchors · back to pure prose 3 movements, with explicit ban on bold labels",
+  "summary": "Live test on an early-stage DTC pilot + Largo feedback: bold-section anchors ('**Le vrai pitch**', '**La cible logique**') feel template-flavored and visually heavy regardless of content quality. Pivot back to v2.8.1 pure-prose 3-movements format, with explicit ban added to prevent future drift. Doctrine clarification: structure carries itself through prose, not through scaffolding. Adaptive named anchors (v2.8.2) was an over-correction. Each paragraph names what it carries via its first sentence, not via a label above it. Decisive test before sending: 'if you see bold section labels or templated openers, you reverted to form-fill · rewrite as flowing prose'.",
   "changes": [
     {"path": ".skills/skills/snapshot-brand/SKILL.md", "kind": "edit", "reason": "Step 7 hard rules: pure prose only, explicit ban on bold-section anchors, numbered headings, templated paragraph openers ('Field. content. Field. content.'). 3 movements with blank lines, NO titles. Decisive test added."},
     {"path": "CHANGELOG.md", "kind": "edit", "reason": "v2.8.3 entry."},
@@ -12,12 +12,12 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "Snapshot Step 7 returns to v2.8.1 reading experience — prose-first, three movements, no bold labels. Cleanest pattern observed to date.",
+  "operator_impact": "Snapshot Step 7 returns to v2.8.1 reading experience · prose-first, three movements, no bold labels. Cleanest pattern observed to date.",
   "tested_on": [
     "an early-stage DTC pilot live operator-taste pass after revert"
   ],
   "caught_by": "Largo direct feedback ('pas fan des anchors en gras') after v2.8.2 ship.",
   "known_gaps": [
-    "Escape-hatch design (deeper-skills invocation post-snapshot) discussed in this session but not in this patch — landed in v2.9.0 as deepen-brand-context + Step 7 trust-and-deepen close."
+    "Escape-hatch design (deeper-skills invocation post-snapshot) discussed in this session but not in this patch · landed in v2.9.0 as deepen-brand-context + Step 7 trust-and-deepen close."
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "artifact": "diagnostic",
+  "version": "1.0",
+  "definition": "The brand-level strategic read produced before deriving audiences: the dominant constraint and competitive position (the expert chain position -> negative -> audiences-of-the-mechanism -> economic priority -> verdict).",
+  "target": "Name THE dominant wall, then read position before audiences. The diagnostic identifies the single dominant constraint (the wall the brand is actually stuck behind), reads the competitive position before deriving any audience (never from the mirror of reviews alone), and carries confidence on every deduced claim. One wall, defended; not a flat inventory of everything that could matter.",
+  "criteria": [
+    {
+      "id": "dominant_wall_named",
+      "weight": 0.40,
+      "pass": "Names the one dominant constraint and says why it dominates the others. A single load-bearing diagnosis.",
+      "fail": "Lists five things that 'could be improved' with no hierarchy. No wall, just a checklist."
+    },
+    {
+      "id": "position_before_audiences",
+      "weight": 0.30,
+      "pass": "Reads competitive position and the negative space first, then derives audiences from the mechanism. The chain is visible.",
+      "fail": "Jumps straight to audience personas from the brand's own copy/reviews (survivor bias), skipping the position read."
+    },
+    {
+      "id": "confidence_chain",
+      "weight": 0.30,
+      "pass": "Every deduced claim carries its confidence (forte/moyenne/faible/TRÈS faible) and the strategy never rests on a TRÈS faible.",
+      "fail": "Hypotheses asserted as facts; projections stated without their conditioning assumption."
+    }
+  ],
+  "proxies": [
+    {"name": "has_confidence_chain", "direction": "sharp", "weight": 2, "threshold": 1},
+    {"name": "has_decision_verb", "direction": "sharp", "weight": 1, "threshold": 1},
+    {"name": "generic_filler", "direction": "mushy", "weight": 2, "threshold": 1},
+    {"name": "hedge_density", "direction": "mushy", "weight": 1, "threshold": 3.0}
+  ]
+}

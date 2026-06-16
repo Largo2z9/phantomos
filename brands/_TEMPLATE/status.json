@@ -1,5 +1,5 @@
 {
-  "$comment": "Workspace state — auto-maintained by validate-resources. Only setup-brand may initialize brand_slug and last_session. All other writes by validate only.",
+  "$comment": "Workspace state · auto-maintained by validate-resources. Only setup-brand may initialize brand_slug and last_session. All other writes by validate only.",
 
   "brand_slug": "",
   "last_session": null,

@@ -1,4 +1,4 @@
-# PhantomOS MCP Server — Query
+# PhantomOS MCP Server · Query
 
 Exposes `query-context` as an MCP tool for external agents and data pipelines.
 

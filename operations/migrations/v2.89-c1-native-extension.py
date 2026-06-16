@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-v2.89 C1 native extension migration (D#500) — idempotente, pattern v2.42-schema-alignment.py.
+v2.89 C1 native extension migration (D#500) · idempotente, pattern v2.42-schema-alignment.py.
 
 Migre les instances profile.json existantes vers profile/2.3 :
 1. RENAME market_position.awareness_level -> awareness_dominant
@@ -98,7 +98,7 @@ def main() -> None:
 
     profiles = sorted(root.glob("brands/*/audiences/**/profile.json"))
     if not profiles:
-        print(f"no profile.json under {root}/brands/ — nothing to do")
+        print(f"no profile.json under {root}/brands/ · nothing to do")
         return
 
     migrated = 0

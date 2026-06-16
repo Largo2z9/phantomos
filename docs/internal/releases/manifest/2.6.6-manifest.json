@@ -6,7 +6,7 @@
   "summary": "Workflow-integrity layer (stage-proposal + UserPromptSubmit resolver + workflow gates in write-to-context) and three write-to-context hardenings (filename whitelist, proposed-mode-dicts-only, operator-requires-1.0).",
   "breaking": true,
   "requires_confirmation": true,
-  "notes": "Breaking for workspaces where skills hand-build write-to-context args with loose shell escaping (corrupted paths now rejected), or where proposed mode was used on scalars/arrays (rejected — use direct mode, metadata is preserved in event log). Workflow gates only activate for writes to products/spec, products/offers, audiences/profile — other paths unaffected. After install, run validate-resources per brand and rebuild manifests.",
+  "notes": "Breaking for workspaces where skills hand-build write-to-context args with loose shell escaping (corrupted paths now rejected), or where proposed mode was used on scalars/arrays (rejected · use direct mode, metadata is preserved in event log). Workflow gates only activate for writes to products/spec, products/offers, audiences/profile · other paths unaffected. After install, run validate-resources per brand and rebuild manifests.",
   "changes": [
     {
       "type": "infra-added",
@@ -41,7 +41,7 @@
       "file": ".skills/skills/snapshot-brand/SKILL.md",
       "action": "overwrite",
       "safe": true,
-      "note": "Step 1 Hero and Step 5B Audience now document the stage-proposal.py call before asking the operator. New Hard Rule: Stage before asking — always. Gate-block behavior documented."
+      "note": "Step 1 Hero and Step 5B Audience now document the stage-proposal.py call before asking the operator. New Hard Rule: Stage before asking · always. Gate-block behavior documented."
     },
     {
       "type": "doc-change",
@@ -62,7 +62,7 @@
     "chmod +x .skills/stage-proposal.py .skills/write-to-context.py .claude/hooks/checkpoint-resolver.py",
     "mkdir -p .phantom",
     "python3 .skills/build-manifest.py",
-    "For each active brand: no .workflow.json creation needed — it's auto-created on first stage-proposal.py call.",
+    "For each active brand: no .workflow.json creation needed · it's auto-created on first stage-proposal.py call.",
     "Any custom skill that writes to products/*/spec.json, products/*/offers.json, or audiences/*/profile.json MUST stage a proposal first or the write will be blocked."
   ]
 }

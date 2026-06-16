@@ -3,8 +3,8 @@
   "version": "2.9.0",
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
-  "theme": "Intelligence layer — 3 deepening skills + orchestrator + cross-synthesis sub-skill",
-  "summary": "Operator escape-hatch from snapshot Step 7: trust the synthesis, jump to a deeper analytical layer. Three standalone producer skills + one orchestrator + one read-only sub-skill, all consuming three codified analytical frameworks. Delivered in single multi-phase build session via parallelized sub-agents (~50 min wall-clock). Phase A — codified frameworks (voc-coding, vom-mining, market-deepdive) consumed as analytical vocabulary, never as section headers (form-fill ban). Phase B — three skills: mine-voc (VoC mining, Step 0 first-party data ask, scrape, 4-lens coding, JSONL corpus + routed mutations), mine-vom (VoM mining, competitor integrity check, niche-locked source crawl, external_intelligence[] cap 5-7), study-niche-marketdeepdive (30-60 min strategic deep-dive, mandatory ticket, 12 steps, memo 4-6 pages with [MKT-NNN] citations). Phase C — deepen-brand-context orchestrator chains mine-voc → mine-vom → cross-deepening-signals (sub-skill that reads Layer B mutations from both runs and produces 3 mandatory cross-checks: audience candidate × market presence, vocabulary shift × current vernacular, white-space × channel signals). Phase D — snapshot-brand Step 7 close enriched with trust-and-deepen path (4-paths AskUserQuestion).",
+  "theme": "Intelligence layer · 3 deepening skills + orchestrator + cross-synthesis sub-skill",
+  "summary": "Operator escape-hatch from snapshot Step 7: trust the synthesis, jump to a deeper analytical layer. Three standalone producer skills + one orchestrator + one read-only sub-skill, all consuming three codified analytical frameworks. Delivered in single multi-phase build session via parallelized sub-agents (~50 min wall-clock). Phase A · codified frameworks (voc-coding, vom-mining, market-deepdive) consumed as analytical vocabulary, never as section headers (form-fill ban). Phase B · three skills: mine-voc (VoC mining, Step 0 first-party data ask, scrape, 4-lens coding, JSONL corpus + routed mutations), mine-vom (VoM mining, competitor integrity check, niche-locked source crawl, external_intelligence[] cap 5-7), study-niche-marketdeepdive (30-60 min strategic deep-dive, mandatory ticket, 12 steps, memo 4-6 pages with [MKT-NNN] citations). Phase C · deepen-brand-context orchestrator chains mine-voc → mine-vom → cross-deepening-signals (sub-skill that reads Layer B mutations from both runs and produces 3 mandatory cross-checks: audience candidate × market presence, vocabulary shift × current vernacular, white-space × channel signals). Phase D · snapshot-brand Step 7 close enriched with trust-and-deepen path (4-paths AskUserQuestion).",
   "changes": [
     {"path": "resources/frameworks/voc-coding.md", "kind": "new", "reason": "JTBD 3-dim, Schwartz 5 awareness stages, theme typology 7 types, pain category 6 granularities, 4-lens coding workflow, anti-patterns. 143 lines."},
     {"path": "resources/frameworks/vom-mining.md", "kind": "new", "reason": "Vernacular extraction, sophistication signal (Schwartz applied to niche), white-space identification, selective Porter (1-2 active forces). 150 lines."},
@@ -21,14 +21,14 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "After snapshot Step 7 synthesis, four paths instead of two. Trust path opens deeper analytical work. Three depths: VoC alone (~15 min), VoM alone (~25 min), full deepening chain with cross-synthesis (~45 min). Strategic memo on niche standalone on direct ask only. The cross-synthesis layer detects validations / contradictions / complementarities between customer voice and market voice — one strategic read instead of three reports.",
+  "operator_impact": "After snapshot Step 7 synthesis, four paths instead of two. Trust path opens deeper analytical work. Three depths: VoC alone (~15 min), VoM alone (~25 min), full deepening chain with cross-synthesis (~45 min). Strategic memo on niche standalone on direct ask only. The cross-synthesis layer detects validations / contradictions / complementarities between customer voice and market voice · one strategic read instead of three reports.",
   "tested_on": [
-    "Manifest validation (36 skills, 5 new entries parsed correctly at this point — trigger format issue surfaces in v2.9.1)",
-    "phantom-stress sync — live test deferred to v2.9.1+"
+    "Manifest validation (36 skills, 5 new entries parsed correctly at this point · trigger format issue surfaces in v2.9.1)",
+    "phantom-stress sync · live test deferred to v2.9.1+"
   ],
   "caught_by": "Operator request post-v2.8.3: design escape-hatch from snapshot trust path.",
   "known_gaps": [
-    "Live test deferred — skills shipped but not yet executed against a real brand workspace.",
-    "Trigger format regex mismatch surfaces in v2.9.1 — 4 of 5 skills had empty triggers in the manifest at v2.9.0 ship."
+    "Live test deferred · skills shipped but not yet executed against a real brand workspace.",
+    "Trigger format regex mismatch surfaces in v2.9.1 · 4 of 5 skills had empty triggers in the manifest at v2.9.0 ship."
   ]
 }

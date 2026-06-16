@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-stage-proposal — register a pending proposal tied to a workflow checkpoint.
+stage-proposal · register a pending proposal tied to a workflow checkpoint.
 
 Called by a skill when it wants to propose a value that requires operator
 confirmation before being persisted. Writes to brands/{slug}/.workflow.json
@@ -12,12 +12,12 @@ Usage:
         --brand {slug} \\
         --checkpoint confirmed_products \\
         --product-slug {product-slug} \\
-        --summary "Hero detected: {product name} — {url}" \\
+        --summary "Hero detected: {product name} · {url}" \\
         [--product-slug vitamines-hair-boost]
 
 Checkpoints known:
-    audience_q1q4_answered      — unlocks audiences/*/profile.json writes
-    confirmed_products          — per-product gate, pass --product-slug,
+    audience_q1q4_answered      · unlocks audiences/*/profile.json writes
+    confirmed_products          · per-product gate, pass --product-slug,
                                   unlocks products/{slug}/spec.json + offers.json
 
 Exit codes:
@@ -103,7 +103,7 @@ def main():
     if state.get("pending"):
         die(
             "a proposal is already pending. Resolve it before staging a new one "
-            f"(current: {state['pending'].get('checkpoint')} — "
+            f"(current: {state['pending'].get('checkpoint')} · "
             f"{state['pending'].get('summary')})"
         )
 

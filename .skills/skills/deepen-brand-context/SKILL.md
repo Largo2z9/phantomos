@@ -9,7 +9,7 @@ description: >
   Orchestrates deepening of brand context after snapshot. Chains mine-voc
   (Voice of Customer) → mine-vom (Voice of Market) → cross-deepening-signals
   (cross-skill synthesis). Market deep-dive (study-niche-marketdeepdive) is
-  NOT in the default chain due to cost asymmetry — operator-pulled standalone
+  NOT in the default chain due to cost asymmetry · operator-pulled standalone
   only. Output: a final synthesis paragraph naming the load-bearing cross-
   signals between customer voice and market voice, plus the structured
   outputs from each delegated skill.
@@ -32,7 +32,7 @@ disambiguates_against:
   mine-voc: "route directly to mine-voc when operator wants ONLY customer voice (faster, lighter)"
   mine-vom: "route directly to mine-vom when operator wants ONLY market voice (faster, lighter)"
   study-niche-marketdeepdive: "route to standalone study-niche-marketdeepdive when operator wants strategic memo on the niche, not customer + market voice. NOT chained here due to 30-60 min runtime."
-  onboard-brand: "route to onboard-brand for the full setup pipeline from scratch — deepen-brand-context assumes snapshot is done"
+  onboard-brand: "route to onboard-brand for the full setup pipeline from scratch · deepen-brand-context assumes snapshot is done"
 ---
 
 # deepen-brand-context
@@ -47,7 +47,7 @@ Framework: sequential chain with cross-synthesis at the end. mine-voc and mine-v
 
 Hard line per onboard-brand precedent: this skill does not re-implement what the subskills already do. It delegates, listens, synthesizes via cross-deepening-signals, finalizes.
 
-## Step 0 — Pre-flight
+## Step 0 · Pre-flight
 
 Verify brand state:
 
@@ -70,14 +70,14 @@ Announce the pipeline:
 > *"OK, deepening complet de {brand}. Je chain VoC (15 min) → VoM (25 min) → synthèse croisée (5 min). Total ~45 min. Je peux te briefer en cours, ou tu reviens à la fin et je te livre la synthèse intégrée. Tu choisis."*
 
 Then ask via AskUserQuestion with four paths:
-- "Je reste, briefe-moi en cours" — interactive mode, each subskill surfaces its own synthesis as it lands
-- "Je reviens à la fin" — silent mode, only the final cross-synthesis is delivered
-- "Lance VoC seulement (skip VoM)" — bypass orchestrator, route to mine-voc direct
-- "Lance VoM seulement (skip VoC)" — bypass orchestrator, route to mine-vom direct
+- "Je reste, briefe-moi en cours" · interactive mode, each subskill surfaces its own synthesis as it lands
+- "Je reviens à la fin" · silent mode, only the final cross-synthesis is delivered
+- "Lance VoC seulement (skip VoM)" · bypass orchestrator, route to mine-voc direct
+- "Lance VoM seulement (skip VoC)" · bypass orchestrator, route to mine-vom direct
 
 If operator picks a single skill → exit orchestrator, hand off to that skill standalone. The orchestrator only proceeds when operator has confirmed full chain (option 1 or 2).
 
-## Step 1 — Delegate mine-voc
+## Step 1 · Delegate mine-voc
 
 Spawn mine-voc as subagent via Task tool.
 
@@ -85,7 +85,7 @@ Inputs forwarded:
 - brand slug
 - run mode ("interactive" or "silent" per Step 0 choice)
 - optional `--focus={objections|jobs|vocabulary|risks}` if operator passed it
-- optional `--depth=deep` if operator passed it (recommend ticket — see Hard Rules)
+- optional `--depth=deep` if operator passed it (recommend ticket · see Hard Rules)
 
 Expected return:
 - Layer A archive of verbatims (sources/voc/{run-date}/*.jsonl)
@@ -98,7 +98,7 @@ Operator-facing line during the run, no tool mechanics:
 
 While mine-voc runs, orchestrator stays available to operator. Returns at natural break.
 
-## Step 2 — Delegate mine-vom
+## Step 2 · Delegate mine-vom
 
 Spawn mine-vom as subagent via Task tool.
 
@@ -117,9 +117,9 @@ Operator-facing line:
 
 > *"Je passe au market · concurrents, vocabulaire, white-spaces. ~25 min."*
 
-## Step 3 — Delegate cross-deepening-signals
+## Step 3 · Delegate cross-deepening-signals
 
-Spawn cross-deepening-signals as sub-skill via Task tool. Sub-skill is subagent_safe: true and operator_facing: false — only this orchestrator invokes it.
+Spawn cross-deepening-signals as sub-skill via Task tool. Sub-skill is subagent_safe: true and operator_facing: false · only this orchestrator invokes it.
 
 Inputs:
 - brand slug
@@ -133,16 +133,16 @@ Sub-skill detects three cross-checks (defined in cross-deepening-signals SKILL.m
 
 Returns: synthesis_text + structured check verdicts in JSON.
 
-## Step 4 — Final synthesis (operator-facing, MANDATORY format)
+## Step 4 · Final synthesis (operator-facing, MANDATORY format)
 
 Apply snapshot Step 7 voice canon strictly: prose-first, no bold-section anchors, no enumerated checks, no marketing language, no hype words. Three movements, 3-6 sentences each, 18 sentences max total. Operator reads in 90 seconds.
 
-The orchestrator delivers cross-deepening-signals output as the final synthesis. In "briefe en cours" mode the operator already saw the individual VoC + VoM syntheses, so this final read is purely cross-signal — never a concatenation.
+The orchestrator delivers cross-deepening-signals output as the final synthesis. In "briefe en cours" mode the operator already saw the individual VoC + VoM syntheses, so this final read is purely cross-signal · never a concatenation.
 
 Three movements:
-- **Movement 1** — the dominant cross-signal. Validation or contradiction between VoC and VoM. Example Respire: VoC reveals a "22-32 peau jeune réactive" candidate, VoM confirms the segment is actively discussed in clean-beauty Reddit and TikTok, verdict = validated audience, write to profile.json.
-- **Movement 2** — the second-order insight. Often a timing or positioning question. Example: VoM detects market vocabulary shifted from "clean" to "actifs prouvés", VoC shows brand customers still talk "clean" — repositioning has timing risk on the existing base.
-- **Movement 3** — the strategic priority for next 30 days based on cross-skill confluence. Example: VoM white-space on pregnancy/post-grossesse + VoC Reddit thread evidence of demand = priority lane, mine-vom flagged a top-3 strategic move.
+- **Movement 1** · the dominant cross-signal. Validation or contradiction between VoC and VoM. Example Respire: VoC reveals a "22-32 peau jeune réactive" candidate, VoM confirms the segment is actively discussed in clean-beauty Reddit and TikTok, verdict = validated audience, write to profile.json.
+- **Movement 2** · the second-order insight. Often a timing or positioning question. Example: VoM detects market vocabulary shifted from "clean" to "actifs prouvés", VoC shows brand customers still talk "clean" · repositioning has timing risk on the existing base.
+- **Movement 3** · the strategic priority for next 30 days based on cross-skill confluence. Example: VoM white-space on pregnancy/post-grossesse + VoC Reddit thread evidence of demand = priority lane, mine-vom flagged a top-3 strategic move.
 
 Close with:
 
@@ -151,7 +151,7 @@ Close with:
 If operator picks "validate" → route to setup-brand or update profile.json/brand.json with the cross-signal mutations marked status: validated.
 If operator picks "keep digging" → ask which axis, route to mine-voc/mine-vom with --focus, or to study-niche-marketdeepdive if the question is strategic memo territory.
 
-## Step 5 — Finalize
+## Step 5 · Finalize
 
 ```bash
 python3 .skills/finalize-mutation-batch.py --brand-slug {slug}
@@ -179,23 +179,23 @@ When `--skip=vom` or `--skip=voc` is passed, orchestrator runs the remaining sub
 
 ## Hard Rules
 
-- **Never re-implement subskill logic.** Orchestrator delegates. Per onboard-brand precedent — purity rule.
+- **Never re-implement subskill logic.** Orchestrator delegates. Per onboard-brand precedent · purity rule.
 - **Never expose Task tool mechanics.** Say "I'm digging customer reviews" not "I spawned a subagent".
 - **Always run cross-deepening-signals at end.** The value is in cross-skill synthesis, not in the individual outputs. Skipping it = wrapper, not orchestrator.
-- **study-niche-marketdeepdive is NEVER in this chain.** Cost asymmetry (30-60 min, strategic memo scope). Standalone only — operator pulls it explicitly when they want a niche-level read, not customer+market voice.
+- **study-niche-marketdeepdive is NEVER in this chain.** Cost asymmetry (30-60 min, strategic memo scope). Standalone only · operator pulls it explicitly when they want a niche-level read, not customer+market voice.
 - **Operator chooses brief mode at Step 0.** Never assume. The four-path AskUserQuestion is mandatory.
 - **finalize-mutation-batch at end of full chain.** Even if subskills finalized individually.
 - **No ticket required for default chain (~45 min).** Ticket recommended only if operator passes `--depth=deep` to either subskill.
-- **One brand at a time.** No parallel deepening on multiple brands — confuses Layer B mutation scoping.
+- **One brand at a time.** No parallel deepening on multiple brands · confuses Layer B mutation scoping.
 - **Snapshot must be complete.** Half-built brands route to setup-brand, not deepen.
 
 ## Cross-references
 
-- `.skills/skills/mine-voc/SKILL.md` — delegated subagent
-- `.skills/skills/mine-vom/SKILL.md` — delegated subagent
-- `.skills/skills/cross-deepening-signals/SKILL.md` — final synthesis sub-skill
-- `.skills/skills/study-niche-marketdeepdive/SKILL.md` — sibling, NOT chained
-- `.skills/skills/onboard-brand/SKILL.md` — orchestrator pattern reference (purity rule)
-- `.skills/skills/snapshot-brand/SKILL.md` — voice canon for Step 7 synthesis
-- `docs/system/contextual-intelligence.md` — master doctrine
-- `docs/system/voice.md` — voice canon
+- `.skills/skills/mine-voc/SKILL.md` · delegated subagent
+- `.skills/skills/mine-vom/SKILL.md` · delegated subagent
+- `.skills/skills/cross-deepening-signals/SKILL.md` · final synthesis sub-skill
+- `.skills/skills/study-niche-marketdeepdive/SKILL.md` · sibling, NOT chained
+- `.skills/skills/onboard-brand/SKILL.md` · orchestrator pattern reference (purity rule)
+- `.skills/skills/snapshot-brand/SKILL.md` · voice canon for Step 7 synthesis
+- `docs/system/contextual-intelligence.md` · master doctrine
+- `docs/system/voice.md` · voice canon

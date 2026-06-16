@@ -1,6 +1,6 @@
 # Hook Mechanics Registry
 
-> **TYPE:** Taxonomie — registre vivant (niveau HOOK)
+> **TYPE:** Taxonomie · registre vivant (niveau HOOK)
 > **C'EST LE `hook-mechanics-registry`** que référencent `decomposition.schema#script.hook.mechanic_id`, `genome.schema#hook.mechanic_id` et `#genome_tags.mechanic_id`. Avant le 2026-06-07, cet enum pointait vers un registre **orphelin jamais construit** ; ce dossier le matérialise (D#488).
 > **NIVEAU:** HOOK = l'accroche, les 3 premières secondes. **Territoire VIDÉO (temporel).** DISTINCT de `creative-mechanics-registry.md` (niveau AD = le CONCEPT, territoire image + vidéo).
 > **FORMAT:** 1 fichier `{slug}.json` par mécanique (schéma `library-pattern/1.0`) · provenance multi-source + squelette paramétrique + `vertical_scope` (curseur sectoriel) + `related_mechanic_ids` (pont vers l'enum).
@@ -17,7 +17,7 @@
 
 ## Couverture · `hook.mechanic_id` (free-string, registre SSOT) → fiche
 
-**Avec fiche `library-pattern` (promote-ready · ≥2 sources indépendantes) — 16 :**
+**Avec fiche `library-pattern` (promote-ready · ≥2 sources indépendantes) · 16 :**
 
 | `hook.mechanic_id` (registre) | fiche |
 |---|---|
@@ -38,9 +38,9 @@
 | `rhetorical-shock-question` | `symptom-shock-question.json` |
 | `visceral-specific-testimony` | `visceral-testimony.json` |
 
-(+ le concept structurel `timeline-result-ladder.json` vit dans `resources/concepts/` — c'est un arc, pas un hook.)
+(+ le concept structurel `timeline-result-ladder.json` vit dans `resources/concepts/` · c'est un arc, pas un hook.)
 
-**Sans fiche encore (`watch` · 1 source seule ou non curé) — 8 :**
+**Sans fiche encore (`watch` · 1 source seule ou non curé) · 8 :**
 `allegory-romance` · `authority-demolition` · `doctor-dialogue` · `false-solution-debunking` · `hidden-secret-framing` · `pov-illustrated-humor` · `taboo-signal` · `testimonial-paradox-numeric`
 → à curer quand une **2e source indépendante** les confirme (garde-fou `cross-brand-curation.md`).
 
@@ -48,7 +48,7 @@
 
 ## Note support (D#488)
 
-Le hook est un objet **vidéo**. Sur une image, le scroll-stop est porté par le **CONCEPT** (la composition) ou par le **titre/accroche-texte** — encodés dans `creative-mechanics-registry.md` + `decomposition.mecanique`, **pas ici**. Ne jamais forcer un hook sur un statique (mettre `other-uncategorized`).
+Le hook est un objet **vidéo**. Sur une image, le scroll-stop est porté par le **CONCEPT** (la composition) ou par le **titre/accroche-texte** · encodés dans `creative-mechanics-registry.md` + `decomposition.mecanique`, **pas ici**. Ne jamais forcer un hook sur un statique (mettre `other-uncategorized`).
 
 ## Curation
 

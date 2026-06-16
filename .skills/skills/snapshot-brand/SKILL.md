@@ -1,13 +1,15 @@
 ---
 name: snapshot-brand
 type: producer
-version: "1.8.0"
+version: "1.9.1"
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
 reasoning_pattern: null
 operator_facing: true
 patch_notes:
+  v1.9.1: "close refounding (expert-prompting) · Section 5 body cesse de re-coller la trichotomie + le long template FR (désormais dans l'exemplar) et INVOQUE la chaîne diagnostique sur le substrat encodé (position → négatif → audiences-du-mécanisme → priorité-éco → verdict) + pointe la posture close (investigation-posture + contextual-intelligence) + l'exemplar + AJOUTE l'out honnête, self-critique conservée, net plus court. Backward compat strict (routage Phase 2→3 + Hard rules AP-5 intacts)."
+  v1.9.0: "close reconciliation · Section 5 (+ Phase 2→3 routing gate, EN template, Step 7b intro, Hard rules AP-5) passe de la question macro rendue (bulletin météo · menu d'axes « lequel veux-tu creuser ? ») au verdict-de-move affirme/ouvre/gate, le menu d'axes devient affordance de redirect opérateur · self-critique relire-contre-affirme/ouvre/gate au close + citation exemplar resources/canon/exemplars/close.md · mapping Observé/Déduit/Inconnu/Leviers + confidence chain + AP-1/AP-2 préservés. Backward compat strict additif. Zéro em-dash."
   v1.8.0: "v2.93 · D#518 · scrape = allocation sous contrainte câblé dans la porte d'entrée (doctrine NEW docs/system/scrape-as-allocation.md). (1) Step 1.5 · l'ENJEU capté AVANT la recon (la décision qui paie, pas la couverture du site) · les pré-amorces DEVIENNENT le plan de fetch (chacune nomme le fetch ciblé qui la résoudrait), elles ne sont plus un appendice du rapport · le Spectre dirige le fetch, il ne le couronne pas. (2) Step 2 · NEW bloc 'Conditions d'arrêt du fetch' · 4 stops par rendement (confiance-cible · saturation · inconnu non-tranchable typé-avec-levier · budget épuisé) qui tempèrent le 'always crawl'. (3) Step 2 review-triangulation généralisée en posture 'scrapé ≠ fait' · reliability_tier plafonne la confiance d'entrée par nature de source, un nombre sans procédé de mesure n'entre jamais nu (garde-fou mécanique correspondant · naked_number_unsourced dans validate-all.py). (4) Step 7 Section 3 · persistance des inconnus IN SITU à chaque pas (au moment où ils surgissent), la Section agrège, elle n'invente pas. La dent use_cases de la v1.7.0 ('maintainer à venir') est désormais réelle · postcondition orchestrateur sur l'artefact + filet post-hoc validate-all, PAS un gate write-to-context (pré-validation interdite, Master rule). Backward compat strict additif. Zéro em-dash."
   v1.7.0: "v2.92 · D#517 · Step 5 DÉGRADÉ EN SONDE (le bug racine du pré-emptage des audiences corrigé). Au scan, Step 5 ne construit PLUS l'arbre validé (mère → sous-poches, découpe, gate audience_q1q4_answered, scaffolding des dossiers) · il rend une SONDE · Movement 1 (observations brutes neutres) + au plus une à deux mères-hypothèses CLAIM en prose (validation_status hypothesis), puis passe la main. Les Movements 2-3 (découpages, hiérarchie, scaffolding) sont REPORTÉS en phase 3 (map-audiences), STRICTEMENT APRÈS le pont mécanisme→usage (build-atlas Step 2.5) · les vraies audiences se dérivent des jobs (use_cases dont spéculatifs), pas du miroir du claim. Généralise le comportement du thin-page fallback à TOUT scan. Aligné aux 4 endroits où vivait 'construire l'arbre' (contrat doctrinal + règle dure + marqueurs Movement 2 et 3) anti-fix-à-moitié. Garde-fou mécanique correspondant (maintainer, à venir) · la dent use_cases[] côté write-to-context s'applique AUSSI à cette porte. Backward compat · la spec des movements reste comme référence du COMMENT, exécutée en phase 3. Zéro em-dash."
   v1.6.0: "v2.91 recon & cadrage du chantier · NEW Step 1.5 (entre Step 1 URL+hero et Step 2 scrape) · photo de devanture plafonnée 4 requêtes / 60s (nav + sitemap + products.json count, réutilise les lectures déjà mandatées · aucune PDP ouverte, aucun review tagué), classe l'archétype de cartographie via le classifieur Step 2bis appelé en avance de phase (mono-héros ≤~8 · catalogue resserré ~8-40 · gros catalogue >~40 · edge marketplace), dimensionne la stratégie de scan + ETA, rend un RAPPORT DE RECON (archétype, héros candidat, volume, plan, axes joignables, 2-4 pré-amorces inconnus-typés). Cadrage orchestré · piloté par un orchestrateur, la recon est rendue D'ABORD (stop après Step 1.5, return report), l'orchestrateur la déplie en clair + gate 'valide le chantier', puis re-spawn pour le deep scan dimensionné · standalone, la recon enchaîne directement sur le scan avec la stratégie dimensionnée. Résout la contradiction Step 2 onboard-brand (l'inférence visible = raisonnement chairman SUR le rapport, pas re-dérivation inline du scan). Opérationnalise open-map-reasoning D#508 + câblage 5-axes D#509 à la porte d'entrée. Backward compat strict additif · Steps 2-7 préservés, la recon ne fait que réordonner l'usage des fetch déjà présents et conditionner la profondeur du scan."
@@ -841,7 +843,7 @@ Operator answers binary ·
 
 ## Step 7b · Phase 2 Drilling autonome (v1.4.0 NEW · v2.68 progressive cartography)
 
-**Invoked if and only if Phase 1 gate passes.** Phase 2 of progressive cartography per `docs/system/progressive-cartography-doctrine.md` (Sections 3-4). Agent drill-downs autonomously across PDP details + reviews verbatims tagged + FAQ + cross-sells + trust badges + funnel signals (lead magnets + popups + scarcity) WITHOUT asking the operator any audience demographic question. Audience hypotheses are DEDUCED from verbatims clients (profession · pain points · objections traités copy site · use cases · hashtags) with explicit confidence chain. The agent presents its drill-down findings structured in 5 sections investigation-posture canon. The operator never answers Q1-Q4 ; the operator only arbitrates Section 5 close ouvert at the end.
+**Invoked if and only if Phase 1 gate passes.** Phase 2 of progressive cartography per `docs/system/progressive-cartography-doctrine.md` (Sections 3-4). Agent drill-downs autonomously across PDP details + reviews verbatims tagged + FAQ + cross-sells + trust badges + funnel signals (lead magnets + popups + scarcity) WITHOUT asking the operator any audience demographic question. Audience hypotheses are DEDUCED from verbatims clients (profession · pain points · objections traités copy site · use cases · hashtags) with explicit confidence chain. The agent presents its drill-down findings structured in 5 sections investigation-posture canon. The operator never answers Q1-Q4 ; Section 5 closes on an affirmed move (affirm the next move, open unknowns the agent carries itself, gate at most one blocking question), the operator only arbitrates if they choose to redirect.
 
 ### Drill-down autonome scope (Phase 2 input)
 
@@ -860,7 +862,7 @@ Agent autonomously drills across the following surfaces (no operator question ·
 
 ### Phase 2 output · 5 sections investigation-posture canon
 
-Before writing files, deliver the synthesis structured in 5 explicit sections per `docs/system/investigation-posture.md`. Cartographier avant affirmer · jamais affirmer une hypothèse comme un fait · jamais inventer des audiences/positionings présentés comme analytiques · ouvrir le drill-down macro, ne pas le fermer.
+Before writing files, deliver the synthesis structured in 5 explicit sections per `docs/system/investigation-posture.md`. Cartographier avant affirmer · jamais affirmer une hypothèse comme un fait · jamais inventer des audiences/positionings présentés comme analytiques · le close affirme le MOVE (le défendu), porte les inconnus lui-même, ne gate qu'un éventuel bloquant · jamais un bulletin météo qui rend une question.
 
 The 5 sections replace the prior 3-movements prose pattern (v1.0.1 ←) which mixed observed + deduced + projection as confident assertions. Reading the synthesis now lands like an analyst's note · faits sourcés, hypothèses avec confidence chain, inconnus listés, leviers proposés, opérateur arbitre.
 
@@ -974,24 +976,19 @@ Format example (FR · canonique v2.54) ·
 - Routing interne vers les skills se fait silencieusement à l'agent après le choix opérateur.
 - Durée estimée pour chaque action (donne à l'opérateur la matière pour arbitrer).
 
-### Section 5 · Close ouvert (UNE question macro)
+### Section 5 · Close (verdict de move · affirme, ouvre, gate)
 
-L'output se termine par UNE question macro sur la priorité de drill-down. Pas de "voici le plan", pas de "je passe au next step", l'opérateur arbitre.
+Le close ne se prescrit pas dans une forme, il se PRODUIT en faisant tourner la chaîne diagnostique sur le substrat encodé · position → négatif concurrentiel → audiences dérivées du mécanisme → priorité économique → verdict (`docs/doctrine/strategic-diagnostic-doctrine.md`, maillons a→e). C'est ce raisonnement sur le modèle de la marque qui sort le move, pas une consigne d'« interpréter ». Posture du close (faits → lecture experte → mouvement proactif, plancher anti-météo) · `docs/system/investigation-posture.md` + master `contextual-intelligence.md`. Few-shot sharp vs mushy, le noticing (ce que l'expert a vu de non-évident) et l'out honnête · `resources/canon/exemplars/close.md` (émuler, ne pas re-coller la forme ici).
 
-Format example (FR · canonique v2.54) ·
+**L'out honnête est un move, pas une dérobade.** Quand la data ne porte pas encore de verdict, nomme le SEUL inconnu bloquant + le chemin exact pour le lever ; inventer un verdict pour paraître décisif est l'échec, pas l'inverse.
 
-> *On a {N} axes d'investigation. Pour {contexte si connu · ex "ton pitch demain", "ton lancement jeudi", "ta prochaine décision"}, lequel veux-tu creuser en priorité ?*
->
-> *A · {nom axe} ({durée totale}, {pourquoi critique en 1 ligne})*
-> *B · {nom axe} ({durée}, {pourquoi})*
-> *C · {nom axe} ({durée}, {pourquoi})*
-> *D · {nom axe} ({durée}, {pourquoi})*
->
-> *Mon avis · {recommandation macro · ex "A + B en premier (45 min total, posent la fondation), C/D si temps avant le call"}.*
+La carte des axes de drill-down reste une affordance de REDIRECT (si l'opérateur veut piloter la priorité, on la lui pose), jamais le close par défaut.
 
-L'opérateur dit `A` ou `A+B` ou autre. L'agent enchaîne le drill-down sur l'axe choisi en respectant à nouveau les 5 sections (cycle itératif).
+**Self-critique avant de rendre ·** est-ce que ça tranche un move défendu, ou est-ce que ça décrit un état puis tend une question (le bulletin météo) ? Météo → réécris · affirme le move, porte les inconnus toi-même, ne garde qu'un éventuel gate bloquant.
 
-**Gate Phase 2 → Phase 3 (downstream audiences)** · l'output Phase 2 termine par UNE question macro de routing aussi · *"on attaque Phase 3 audiences ?"* (la phase suivante de progressive cartography enrichit le layer audience via drill autonome sur verbatims tagged · routage interne silencieux vers `map-audiences` ou `profile-audience` downstream). Si operator répond `oui` / `go` → agent invoque le skill audience downstream silencieusement. Si operator pivote sur un autre axe (ex audit perf, brief créa direct) → respecter le pivot, le routage Phase 3 attend.
+Si le close affirme un move et que l'opérateur veut piloter la priorité, l'agent déplie alors les axes de drill-down (l'ancienne carte macro, désormais une affordance de redirect) et enchaîne sur l'axe choisi en respectant à nouveau les 5 sections (cycle itératif).
+
+**Gate Phase 2 → Phase 3 (downstream audiences)** · le routage vers la phase audiences s'AFFIRME, il ne se demande pas en blanc · *"prochain move · on enrichit les audiences à partir des vrais clients (Trustpilot, widgets onsite, forums), ~30 min en arrière-plan · je lance, sauf si tu veux pivoter sur autre chose (audit perf, brief créa direct)."* (la phase suivante de progressive cartography enrichit le layer audience via drill autonome sur verbatims tagged · routage interne silencieux vers `map-audiences` ou `profile-audience` downstream). Si operator répond `oui` / `go` ou ne pivote pas → agent invoque le skill audience downstream silencieusement. Si operator pivote sur un autre axe → respecter le pivot, le routage Phase 3 attend.
 
 ## Phase Output · Decomposition Visibility (canon v2.78.2)
 
@@ -1118,19 +1115,19 @@ Si `brand_personality` + `tone_of_voice` tous deux null (brand fresh post-setup 
 
 (EN equivalent · adapt to operator language detected) ·
 
-> *We have {N} investigation axes. For {context if known}, which one do you want to drill in priority?*
+> *The dominant wall here is {wall}, not {false lead} · {Observé + Déduit anchor in 1 line, confidence carried}.*
 >
-> *A · {axis name} ({duration}, {why critical 1 line})*
-> *B · {axis name} ({duration}, {why})*
-> *C · {axis name} ({duration}, {why})*
-> *D · {axis name} ({duration}, {why})*
+> *The move · priority 1, we {defended action}, because {reason · the exact point where it breaks down}. In parallel I'll {feasible part of the open unknown}, I'll bring it back without you having to dig.*
 >
-> *My take · {macro recommendation}.*
+> *The one thing blocking me from {quantifying / calibrating} is {unknown that is both unknowable from data and blocking}. Give it to me and I'll calibrate, otherwise I move on {the move} and we'll quantify after.*
+>
+> *Redirect affordance (if you'd rather steer the priority yourself) · "I've got {N} axes ready ({names}), tell me which one."*
 
 **Hard rules Section 5** ·
-- UNE question macro · pas de menu de 6 options non priorisées.
-- Reco macro explicite (anti-pattern · 4 options equal-weight sans opinion).
-- Anti-pattern AP-5 doctrine · close affirmatif qui ferme la conversation (*"Je passe au tableau de projection chiffrée ?"*) → BANNI. Close ouvre toujours le drill-down macro.
+- Close = verdict de move (affirme défaut · ouvre porté soi-même · gate au plus 1 question bloquante). Le bulletin météo (décrire l'état, lister les inconnus, tendre un menu d'axes / « lequel veux-tu creuser ? ») est BANNI · une question qui n'est pas un gate est OUVERTE, pas posée.
+- On affirme le MOVE, jamais une hypothèse comme un fait · le move s'appuie sur le Déduit qui porte sa confidence (AP-1 / AP-2 tiennent).
+- Le menu d'axes priorisés reste disponible UNIQUEMENT comme affordance de redirect si l'opérateur choisit de piloter · jamais comme close par défaut.
+- Exemplar de référence (sharp vs mushy) · `resources/canon/exemplars/close.md`.
 
 **Visual assets soft mention (v2.50 · pull-not-push pattern) :**
 

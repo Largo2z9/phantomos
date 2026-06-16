@@ -6,8 +6,8 @@
     "2.2": "S55: brand_equity_level (low/medium/high) + creative_zone (min/max/dominant 0-10) added. Determine viable copy/visual cursor and concept optionality. Canon V3 §3, §4.3.",
     "2.1": "S30d-close: purchase_driver added (brand-level default, cascades to audiences). audience_trees[] added (optional marketplaces). Per D#243, D#244, D#246, D#250.",
     "1.5": "S26e: No structural change to brand.json. Version bump for alignment with spec.json v1.5 (perishability, licensing, dynamic pricing, product_condition). All index-level fields unchanged.",
-    "1.4": "S26d: products_index[].product_category added (physical|physical_electronic|digital|service). Discriminated union for product nature — enables index-level routing to correct spec blocks. Backward compatible: null = physical (default).",
-    "1.3": "S26c: products_index[].type added (functional|sensory|lifestyle) — mirrors spec.json identity.type for index-level filtering without opening each file.",
+    "1.4": "S26d: products_index[].product_category added (physical|physical_electronic|digital|service). Discriminated union for product nature · enables index-level routing to correct spec blocks. Backward compatible: null = physical (default).",
+    "1.3": "S26c: products_index[].type added (functional|sensory|lifestyle) · mirrors spec.json identity.type for index-level filtering without opening each file.",
     "1.2": "S26b: products_index[].enriched added (true = has spec+offers folder, false = listed from catalogue only). products_index[].price added for quick reference on non-enriched products.",
     "1.1": "S26: audiences_index[] added (mirrors products_index for audience pockets). market.external_intelligence[] was added earlier in S26."
   },
@@ -297,7 +297,7 @@
         }
       }
     ],
-    "_notes_external_intelligence": "VoM (Voice of Market) — category-level signals NOT from this brand's customers. When entries > 10, consider migrating to a separate market.json entity."
+    "_notes_external_intelligence": "VoM (Voice of Market) · category-level signals NOT from this brand's customers. When entries > 10, consider migrating to a separate market.json entity."
   },
   "products_index": [
     {

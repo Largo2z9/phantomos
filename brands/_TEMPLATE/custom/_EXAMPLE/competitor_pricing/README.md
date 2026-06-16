@@ -1,4 +1,4 @@
-# competitor_pricing — example custom entity
+# competitor_pricing · example custom entity
 
 Illustrative custom entity tracking competitor pricing over time. Copy this folder to start your own similar extension, or read through it to understand the canonical shape of a custom entity.
 
@@ -8,9 +8,9 @@ Track pricing observations for products sold by competitors. One file per (compe
 
 ## Files
 
-- **`schema.json`** — JSON Schema for instances of this entity. Declares canon `_version`, `_schema`, `_field_types` and validates required fields at write time.
-- **`nike-airmax-97.json`** — example instance, one (competitor, product) pair with three observations.
-- **`README.md`** — this file.
+- **`schema.json`** · JSON Schema for instances of this entity. Declares canon `_version`, `_schema`, `_field_types` and validates required fields at write time.
+- **`nike-airmax-97.json`** · example instance, one (competitor, product) pair with three observations.
+- **`README.md`** · this file.
 
 ## Cross-references to core entities
 

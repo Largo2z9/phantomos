@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate-all.py — Global workspace cleanliness check.
+validate-all.py · Global workspace cleanliness check.
 
 Scans every brand instance under workspace-template/brands/ (excluding _ARCHIVE)
 and runs a battery of checks:
@@ -55,7 +55,7 @@ SCHEMA_FILES = {
 }
 
 # Expected versions read dynamically from _TEMPLATE at load time.
-# Each entity evolves at its own pace — spec/offers bumped to 1.8,
+# Each entity evolves at its own pace · spec/offers bumped to 1.8,
 # brand still 1.5, profile still 1.2 (legitimate, not drift).
 EXPECTED_VERSIONS = {}
 
@@ -155,7 +155,7 @@ def load_schemas(root: Path):
 
 
 def load_expected_versions(root: Path):
-    """Read _version from _TEMPLATE files — source of truth for per-entity version."""
+    """Read _version from _TEMPLATE files · source of truth for per-entity version."""
     template_files = {
         "brand": root / "brands/_TEMPLATE/brand.json",
         "spec": root / "brands/_TEMPLATE/products/_example/spec.json",
@@ -226,7 +226,7 @@ def detect_offers_cycle(doc: dict) -> tuple[list[str] | None, list[str]]:
                 continue
             graph[oid] = offer.get("requires_offer_id")
 
-    # Dangling refs (pointing outside the known set — may be cross-product, flag as warning)
+    # Dangling refs (pointing outside the known set · may be cross-product, flag as warning)
     dangling = []
     for src, tgt in graph.items():
         if tgt and tgt not in graph:
@@ -384,7 +384,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
             })
             continue
 
-        # Saturation tag harvest — decomposition.json (reverse benchmark) carries the
+        # Saturation tag harvest · decomposition.json (reverse benchmark) carries the
         # A=B bridge enums style_id / mecanique_id / beat_type. classify_file returns
         # None for it, so collect here before the orphan branch.
         if jf.name == "decomposition.json" and "competitive-intel" in jf.parts:
@@ -424,7 +424,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
 
         if kind is None:
             # orphan non-core file (config, strategy, status, learnings, etc)
-            # skip silently — only flag if in products/ or audiences/ with wrong name
+            # skip silently · only flag if in products/ or audiences/ with wrong name
             if "products" in jf.parts or "audiences" in jf.parts:
                 # Canonical sub-collections (v2.63+ pain/objection collections, frictions,
                 # production namespaces) are first-class citizens, never orphans.
@@ -467,7 +467,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
                 "msg": f"... and {len(errs) - 5} more schema errors",
             })
 
-        # Version drift — per-entity, read from _TEMPLATE
+        # Version drift · per-entity, read from _TEMPLATE
         tv = data.get("_template_version") or data.get("_version")
         expected = expected_versions.get(kind)
         if tv and expected and str(tv) != expected:
@@ -480,7 +480,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
 
         # Cross-file coherence
         # Skeleton folders starting with '_' (e.g. _example) use a convention
-        # prefix and cannot match the slug pattern ^[a-z0-9-]+$ — skip slug check.
+        # prefix and cannot match the slug pattern ^[a-z0-9-]+$ · skip slug check.
         if kind == "spec":
             parent_slug = jf.parent.name
             is_skeleton = parent_slug.startswith("_")
@@ -592,7 +592,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
             else:
                 all_offers_in_doc = data.get("offers", []) or []
 
-            # duplicate offer_ids (post-merge shape doesn't matter — offer_id is never in shared)
+            # duplicate offer_ids (post-merge shape doesn't matter · offer_id is never in shared)
             for offer in all_offers_in_doc:
                 oid = offer.get("offer_id")
                 if oid:
@@ -622,7 +622,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
             pain_refs = set()
             benefit_refs = set()
             # Legacy instances may carry pre-v2.0 string entries here; the
-            # jsonschema pass already reports the type mismatch — never crash on it.
+            # jsonschema pass already reports the type mismatch · never crash on it.
             for p in data.get("pain_points", []) or []:
                 if isinstance(p, dict) and p.get("ref"):
                     pain_refs.add(p["ref"])
@@ -666,7 +666,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
             })
 
     # ============================================================
-    # SEMANTIC (DEEP) CHECKS — cross-references and orphans
+    # SEMANTIC (DEEP) CHECKS · cross-references and orphans
     # ============================================================
 
     # Skip semantic checks entirely for skeleton instances (_TEMPLATE).
@@ -774,7 +774,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
             issues.append({
                 "type": "product_index_enriched_mismatch",
                 "severity": SEVERITY["product_index_enriched_mismatch"],
-                "msg": f"products_index[{prod_slug}].enriched=false but folder exists — flip to true or delete folder",
+                "msg": f"products_index[{prod_slug}].enriched=false but folder exists · flip to true or delete folder",
             })
 
     # 7. audience.meta.product_id must reference a known product slug
@@ -803,7 +803,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
                 "msg": f"meta.parent_slug='{parent}' does not match any known audience",
             })
 
-    # 9. 'other' saturation — a high share of 'other' signals a MISSING family in
+    # 9. 'other' saturation · a high share of 'other' signals a MISSING family in
     # the backing registry, not an unclassifiable item. Generalised guardrail: same
     # threshold across every registry-backed axis. Replaces the single hardcoded
     # mode_of_action check. Each axis points at its own SSOT registry.
@@ -830,7 +830,7 @@ def check_instance(brand_dir: Path, schemas, expected_versions, report, op_ctx=N
                 issues.append({
                     "type": issue_type,
                     "severity": SEVERITY[issue_type],
-                    "msg": f"{axis_label}='{other_token}' on {n_other}/{len(samples)} (>30%) — a family is missing: promote it in {registry_path} instead of defaulting to '{other_token}'",
+                    "msg": f"{axis_label}='{other_token}' on {n_other}/{len(samples)} (>30%) · a family is missing: promote it in {registry_path} instead of defaulting to '{other_token}'",
                 })
 
     # 10. E8 (D#518) · Spectre trace · un angle qui DÉCLARE un lineage.use_case_ref
@@ -978,7 +978,7 @@ def main():
 
     # ---- Human output ----
     print("=" * 70)
-    print(f"WORKSPACE VALIDATION — {root.name}")
+    print(f"WORKSPACE VALIDATION · {root.name}")
     print(f"Expected versions (from _TEMPLATE): {expected_versions}")
     print("=" * 70)
     print()

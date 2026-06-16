@@ -27,7 +27,7 @@
       "file": ".skills/skills/onboard-brand/SKILL.md",
       "action": "overwrite",
       "safe": true,
-      "note": "Step 2 adds explicit rule: subagent delegated to snapshot-brand must stage-before-ask. If a gated write is blocked, surface the block to operator — do not retry autonomously."
+      "note": "Step 2 adds explicit rule: subagent delegated to snapshot-brand must stage-before-ask. If a gated write is blocked, surface the block to operator · do not retry autonomously."
     },
     {
       "type": "doc-change",

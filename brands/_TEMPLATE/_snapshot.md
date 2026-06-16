@@ -1,10 +1,10 @@
-# _TEMPLATE — snapshot
+# _TEMPLATE · snapshot
 
 ## Identity
-- Name: —
-- Tagline: —
-- Sector: —
-- Language: —
+- Name: ·
+- Tagline: ·
+- Sector: ·
+- Language: ·
 - Tone essentials: professional
 
 ## Products (0)
@@ -14,7 +14,7 @@
 ## Offers active: 0
 
 ## Strategy
-- Current focus: —
+- Current focus: ·
 
 ## Status
 - Wedge complete: False

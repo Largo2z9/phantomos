@@ -1,5 +1,5 @@
 {
-  "$comment": "Commercial offers for this product. v2.0 introduces offer_groups[] with shared{} inheritance. One entry per purchasable option. Facts only — what is available, at what price, under what conditions. Pre-cart scope only (post-cart = future funnel.json).",
+  "$comment": "Commercial offers for this product. v2.0 introduces offer_groups[] with shared{} inheritance. One entry per purchasable option. Facts only · what is available, at what price, under what conditions. Pre-cart scope only (post-cart = future funnel.json).",
   "_schema": "offer/2.2",
   "_version": "2.2",
   "_changelog": {
@@ -51,10 +51,10 @@
     {
       "group_id": "GRP-01",
       "name": "Default group",
-      "description": "One group per product as minimum. Split into multiple groups only when offers share distinct defaults (shipping, returns, warranty, payment_methods, active_window, product_refs). Group-of-1 is a valid pattern — use new_offer.py generator to avoid boilerplate.",
+      "description": "One group per product as minimum. Split into multiple groups only when offers share distinct defaults (shipping, returns, warranty, payment_methods, active_window, product_refs). Group-of-1 is a valid pattern · use new_offer.py generator to avoid boilerplate.",
       "active": true,
       "shared": {
-        "$comment": "Shared defaults for all offers in this group. MERGE RULES: (1) nested objects (pricing, subscription, contents, etc.) merge deep — offer wins on key collision. (2) arrays (payment_methods, tags, product_refs) replace entirely when set at offer level. (3) scalars and booleans override explicitly. VALIDATION TIMING: validator MUST resolve merge (shared → offer) BEFORE running JSON Schema validation.",
+        "$comment": "Shared defaults for all offers in this group. MERGE RULES: (1) nested objects (pricing, subscription, contents, etc.) merge deep · offer wins on key collision. (2) arrays (payment_methods, tags, product_refs) replace entirely when set at offer level. (3) scalars and booleans override explicitly. VALIDATION TIMING: validator MUST resolve merge (shared → offer) BEFORE running JSON Schema validation.",
         "pricing": {
           "model": "one_shot",
           "currency": "EUR"
@@ -83,7 +83,7 @@
           "_notes": {
             "type": "single | subscription | bundle | prepay | membership | gifting | seasonal | launch | digital | service",
             "type.bundle_hardware": "Hardware + consumable lock-in (Bruvi, Gozney, Keurig) = type 'bundle' + tags ['hardware'] + requires_offer_id pointing to the consumable offer.",
-            "type.personalized": "Quiz/AI-selected dynamic offers (Care/of, Prose, Function of Beauty) = keep the base type (subscription/one_time/bundle) and add a personalization{} block with {source, source_id, dynamic_pricing, dynamic_contents}. The offers.json only holds the pointer — rules engine lives elsewhere.",
+            "type.personalized": "Quiz/AI-selected dynamic offers (Care/of, Prose, Function of Beauty) = keep the base type (subscription/one_time/bundle) and add a personalization{} block with {source, source_id, dynamic_pricing, dynamic_contents}. The offers.json only holds the pointer · rules engine lives elsewhere.",
             "product_refs": "Array of {slug, quantity}. Required at offer level unless identical across group and set in shared. minItems: 1.",
             "pricing.model": "one_shot | subscription | tiered",
             "requires_offer_id": "For hardware+refill, membership+checkout, trial+converts. Points to another offer_id in this doc or a cross-product offer_id. Cycle detection runs in validate-all.py 9th semantic check.",

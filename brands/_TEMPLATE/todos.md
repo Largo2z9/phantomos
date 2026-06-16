@@ -1,4 +1,4 @@
-# Todos — {brand-name}
+# Todos · {brand-name}
 
 ## In Progress
 

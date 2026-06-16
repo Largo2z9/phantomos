@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-checkpoint-resolver — UserPromptSubmit hook.
+checkpoint-resolver · UserPromptSubmit hook.
 
 If the user's message resolves a staged workflow proposal (confirm/reject
 pattern match on any brand's .workflow.json#/pending), promote or clear the
@@ -8,7 +8,7 @@ pending entry, append to history, set the checkpoint flag accordingly.
 
 This is the ONLY path by which a workflow checkpoint becomes true. Agents
 cannot self-mark, because checkpoint state is written from a UserPromptSubmit
-hook whose input is the literal user text — not agent output.
+hook whose input is the literal user text · not agent output.
 """
 from __future__ import annotations
 
@@ -41,7 +41,7 @@ REJECT_PATTERNS = [
     r"\breject(e|ed)?\b", r"\bfaux\b", r"\bincorrect\b", r"\bmauvais\b", r"\bpas du tout\b",
     r"\bnan\b", r"\bstop\b", r"\bannule\b", r"\bpas ça\b",
 ]
-# Nuance connectors — indicate a partial accept with embedded corrections.
+# Nuance connectors · indicate a partial accept with embedded corrections.
 # When present, the response is a REFINE: agent must re-stage with corrections
 # integrated, then re-ask for clean confirmation.
 REFINE_PATTERNS = [
@@ -69,7 +69,7 @@ def classify(text: str) -> str | None:
     has_reject = any(re.search(p, lower) for p in REJECT_PATTERNS)
     has_refine = any(re.search(p, lower) for p in REFINE_PATTERNS)
 
-    # Overlap rule: refine trumps confirm (conservative — partial accept with
+    # Overlap rule: refine trumps confirm (conservative · partial accept with
     # embedded corrections must be re-staged, not silently locked in).
     if has_refine and has_confirm:
         return "refine"

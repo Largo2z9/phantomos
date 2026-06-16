@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-memory-index — rebuild the SQLite FTS5 retrieval index over the narrative layer.
+memory-index · rebuild the SQLite FTS5 retrieval index over the narrative layer.
 
-Scope — the NARRATIVE memory layer only. Indexes derived chunks from the
+Scope · the NARRATIVE memory layer only. Indexes derived chunks from the
 source files that already exist. Never writes back to any source. The index
 lives at `{workspace}/.phantom/memory.db` and is fully re-buildable from the
-source files at any time — if it gets corrupt, delete and rerun.
+source files at any time · if it gets corrupt, delete and rerun.
 
 Sources indexed (when present):
   session-log.md        → one chunk per '## Session S##' section
@@ -151,7 +151,7 @@ def index_decisions(con, path: Path):
         if title_clean.startswith("**") and title_clean.endswith("**"):
             title_clean = title_clean[2:-2].strip()
         # Skip header separator rows (all dashes/pipes).
-        if not title_clean or set(title_clean) <= set("-— "):
+        if not title_clean or set(title_clean) <= set("-· "):
             continue
         ref = f"D#{num}"
         content = f"{title_clean}\n\n{body.strip()}"
@@ -195,7 +195,7 @@ def index_snapshot(con, brand_slug: str, path: Path):
         return 0
     text = path.read_text(encoding="utf-8")
     insert_chunk(con, "snapshot", f"{brand_slug}:snapshot",
-                 f"Snapshot — {brand_slug}", text,
+                 f"Snapshot · {brand_slug}", text,
                  brand_slug=brand_slug, file_path=str(path))
     return 1
 
@@ -245,7 +245,7 @@ def index_events(con, path: Path):
     return count
 
 
-# Resource indexing — covers resources/{type}/*.md and *.json.
+# Resource indexing · covers resources/{type}/*.md and *.json.
 # Frontmatter YAML optional, parsed if present for title/description hints.
 # Chunks markdown by '## ' headings; files < 2KB or with no headings = 1 chunk.
 
@@ -254,7 +254,7 @@ HEADING_RE = re.compile(r"^##\s+(.+)$", re.MULTILINE)
 
 
 def _parse_frontmatter_min(text: str) -> tuple:
-    """Return (metadata_dict, body_text). Minimal YAML-ish parser — only
+    """Return (metadata_dict, body_text). Minimal YAML-ish parser · only
     top-level `name: value` and `name: [items]` patterns. Avoids adding a
     yaml dependency to the workspace."""
     m = FRONTMATTER_RE.match(text)
@@ -308,7 +308,7 @@ RESOURCE_TYPES = ("frameworks", "guides", "catalogues", "sops",
 def index_resources(con, root: Path):
     """Walk resources/{type}/ and index each file's chunks. resource_type is
     derived from the parent folder name. No tagging or metadata required on
-    the operator side — indexation is purely content-driven."""
+    the operator side · indexation is purely content-driven."""
     resources_dir = root / "resources"
     if not resources_dir.is_dir():
         return 0

@@ -3,7 +3,7 @@
   "version": "2.10.1",
   "released_at": "2026-04-26",
   "compatible_from": "2.0.0",
-  "theme": "Production layer #2 — produce-copy-brief producer skill (cascade #2)",
+  "theme": "Production layer #2 · produce-copy-brief producer skill (cascade #2)",
   "summary": "Second production-layer skill. Consumes encoded brand intelligence + optional chosen angle from a previous produce-paid-angles run, produces a copywriter brief (800-1200 words structured doc per audience × angle × channel). Verbatim-anchored throughout, operator-format-respected, per-channel adapted (Meta vs Email vs Landing vs TikTok). 8-step pipeline: resolve audience+angle+channel → read encoded data → verbatim density floor check → map sections per voc-coding lenses → hook variants generation (4-tier anchor priority) → brief composition → Layer A trace + Layer B artifact → finalize-mutation-batch. 4 focus modes (default / hooks / objections / ctas / fresh). Encodes the v2.10.0 lesson: brief artifact never pasted twice (write to file, surface synthesis only in chat).",
   "changes": [
     {"path": ".skills/skills/produce-copy-brief/SKILL.md", "kind": "new", "reason": "Producer Sonnet, subagent_safe. 8-step pipeline, 4 focus modes, 15 Hard Rules. Brief structure preference resolved from operator/profile.json#preferences.brief_format with brand override. Default channel inferred from operator stack + brand current_focus, fallback AskUserQuestion. 425 lines."},
@@ -13,13 +13,13 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "Natural chain from paid-angles cascade to copy-brief on the chosen angle. Brief format respects operator preference (or brand-specific override). Channel inferred from operator stack — never hardcoded Meta-as-default. Brief written to artifact file (not pasted in chat), synthesis surfaced inline, reasoned next-step close per no-orphan doctrine.",
+  "operator_impact": "Natural chain from paid-angles cascade to copy-brief on the chosen angle. Brief format respects operator preference (or brand-specific override). Channel inferred from operator stack · never hardcoded Meta-as-default. Brief written to artifact file (not pasted in chat), synthesis surfaced inline, reasoned next-step close per no-orphan doctrine.",
   "tested_on": [
-    "phantom-stress sync — an early-stage DTC pilot ready for live test (voc encoded + paid-angles v2.10.0 produced 'Miroir post-grossesse' angle ranked top, natural cascade target)"
+    "phantom-stress sync · an early-stage DTC pilot ready for live test (voc encoded + paid-angles v2.10.0 produced 'Miroir post-grossesse' angle ranked top, natural cascade target)"
   ],
   "caught_by": "Roadmap cascade #2 after produce-paid-angles. 5 architectural decisions encoded (Largo S39 batch triage): brief structure = profile preference + brand override, default channel = inferred not hardcoded, hook examples = 3 hook-only (body opening = copywriter's job), brief length 800-1200 / 1500 ceiling, multi-offer = active offer inline in CTAs (never enumerate).",
   "known_gaps": [
     "Live test deferred to next session.",
-    "Sister production skills (landing/email/post) not yet shipped — extend on demand only."
+    "Sister production skills (landing/email/post) not yet shipped · extend on demand only."
   ]
 }

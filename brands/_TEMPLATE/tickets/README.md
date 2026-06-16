@@ -34,7 +34,7 @@ Example: `2026-04-19-1430-klaviyo-audit.md`
 {What the operator asked for, reformulated in operator language}
 
 ## Plan
-1. {Step 1 — what it does, not which skill calls it}
+1. {Step 1 · what it does, not which skill calls it}
 2. {Step 2}
 3. ...
 
@@ -42,8 +42,8 @@ Example: `2026-04-19-1430-klaviyo-audit.md`
 {Where we are right now, 1-2 lines}
 
 ## Log
-- YYYY-MM-DD HH:MM — {event, 1 line}
-- YYYY-MM-DD HH:MM — {event}
+- YYYY-MM-DD HH:MM · {event, 1 line}
+- YYYY-MM-DD HH:MM · {event}
 
 ## Cost estimate
 - Tokens: ~{N}

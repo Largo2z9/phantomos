@@ -1,7 +1,7 @@
 ---
 name: produce-paid-angles
 type: producer
-version: "1.13.0"
+version: "1.15.0"
 isolation_scope: brand_only
 layer: territoire
 recommended_model: sonnet
@@ -79,6 +79,8 @@ pipeline:
   preconditions: brand exists with at least one audience profile.json containing pain_points, objections, voice.key_expressions. Ideally mine-voc has run on the audience.
   postconditions: ranked angles artifact in produced/paid-angles/, scoring trace in sources/produced-angles/, learnings appended if pattern detected, finalize-mutation-batch event emitted, recommended next-step persisted as an idempotent In Progress line in brands/{slug}/todos.md (canonical format, auto-ticked when the downstream skill runs).
 patch_notes:
+  v1.15.0: "2026-06-16 · close refondé sur l'expert-prompting · la trichotomie re-collée + le template multi-lignes (form-prose) sont remplacés par une INVOCATION de la chaîne diagnostique sur le substrat encodé (position→négatif→audience-du-mécanisme→priorité-éco→verdict · strategic-diagnostic-doctrine.md) sur le set ranked + confidence chain, un pointeur SSOT (investigation-posture.md + contextual-intelligence.md, plus de re-collage du contrat), l'out honnête ajouté, exemplar + self-critique conservés · net plus court. Mapping 5 couches + run cadré v1.12.0 préservés (additif)."
+  v1.14.0: "2026-06-16 · close reconcilié à la posture amendée (affirme/ouvre/gate). Step 9 close passe de 'toujours close ouvert drill-down macro · UNE question' à un verdict de move défendu par défaut · le drill-down macro reste comme affordance de redirection opérateur, pas comme question rendue · ajout self-critique + citation exemplars/close.md · l'Example output passe verdict-first · pointe le SSOT doctrine (investigation-posture.md) au lieu de re-coller la trichotomie. Mapping 5 couches + confidence chain préservés (additif)."
   v1.12.1: "2026-06-14 · persistance des livrables (BRIQUE 3 · additif strict). NEW Step 12ter · le next-step recommandé du close (Step 9) laisse une TRACE PERSISTANTE · write léger idempotent d'une ligne canonique `- [ ] Name | P | E | T` dans `brands/{slug}/todos.md → ## In Progress`, tické auto (`[x]`) quand le skill aval nommé produit son artifact. Le next-step in-line du close reste inchangé · il ne meurt plus dans le chat, il a un réceptacle persistant. Pattern déjà prouvé par register-and-flag (Step 6). Doctrine de report des étapes différées · `docs/system/onboarding-setup-flow.md` (référencée, pas redupliquée). Aucune logique retirée · Steps 0-12 + close + finalize préservés."
 disambiguates_against:
   produce-copy-brief: "route to produce-copy-brief when operator wants a full copywriter brief on ONE chosen angle (audience + angle + channel structured doc) · produce-paid-angles is the upstream ideation step"
@@ -467,21 +469,17 @@ Audience absente du listing ? `mine-audience` pour la cartographier d'abord, ou 
 - Operator-language labels (`identity.label`), jamais slugs purs ou JSON paths.
 - Couvre le pattern Notion zone 3→4 filter-by-persona observé workspace stride-up (Décision v2.56 routing systémique).
 
-### Close drill-down macro (v2.54 doctrine investigation-posture)
+### Close · verdict de move (affirme / ouvre / gate)
 
-Anti-pattern AP-5 BANNI · close affirmatif qui ferme la conversation (*"On y va ?"*, *"Tu veux que je sorte un brief copywriter ?"*). Toujours close ouvert drill-down macro · UNE question · opérateur arbitre.
+Le verdict de move n'est pas PRESCRIT par la forme · il est PRODUIT en raisonnant sur le substrat encodé. Fais tourner la chaîne diagnostique experte sur le set ranked + la confidence chain héritée · position → négatif → audience-du-mécanisme → priorité-éco → verdict (`docs/doctrine/strategic-diagnostic-doctrine.md`) · le move sort de cette lecture croisée, pas d'une checklist. Posture du close, ordre de priorité affirme/ouvre/gate · SSOT `docs/system/investigation-posture.md` + master `docs/system/contextual-intelligence.md` (ne pas re-coller le contrat ici). Le move s'appuie sur un déduit qui porte sa confidence, il ne l'invente jamais.
 
-Format close canonique v2.54 ·
+**L'out honnête** · si la data ne porte pas encore de move (ex deux lectures opposées également plausibles sur la source), ne fabrique pas un verdict pour faire décisif · nomme LA seule inconnue qui bloque et le chemin exact pour la lever (ex ~8-12 min d'écoute clients pour ancrer les angles formula-derived et re-ranker). « Je ne tranche pas sans X, voilà comment on a X » est un move, pas un cop-out.
 
-> Sur ces {N} angles, deux moves possibles selon ta confiance dans l'audience source ·
->
-> A · Test ces angles tels quels (claim_confidence agrégée actuelle · {moyenne | faible | TRÈS faible}) · brief créa, budget test calibré (~{X}€ par angle), 5-7 jours data minimum avant verdict. Pertinent si t'as une deadline qui te force à tester sur intuition.
-> B · Upgrade confidence audience source d'abord (~8-12 min écoute clients · récupère verbatims réels · re-rank les angles avec confidence agrégée upgraded à `moyenne` ou `forte`). Pertinent si pas de deadline serrée, posent la fondation et tu lances avec angles ancrés.
-> C · {3e option si pertinente · ex "Sortir un brief copywriter sur le seul angle confidence `forte` (#2 Ballonnement) et garder les autres en backup vague 2"}
->
-> Mon avis · {reco macro adaptive · si claim_confidence majoritairement `TRÈS faible` → B critique avant scale · si majoritairement `moyenne` ou `forte` → A valide direct sur premiers tests}.
+**Self-critique avant de rendre le close** · relis-le contre affirme/ouvre/gate · tranche-t-il un move défendu, ou décrit-et-rend-il une question ? Bulletin météo (état + menu d'axes · *"lequel veux-tu creuser ?"*) → réécris en verdict de move.
 
-L'opérateur arbitre · l'agent enchaîne le drill-down sur l'axe choisi (silencieusement vers mine-voc OR produce-copy-brief OR autre selon choix).
+**Exemplar** · `resources/canon/exemplars/close.md` avant de rendre · le noticing (ce que l'expert a vu de non-évident), l'out honnête, et la paire sharp vs mushy.
+
+Le drill-down macro reste une AFFORDANCE de redirection trailing (tester direct vs upgrader la source d'abord), jamais le défaut · le close tranche. L'agent enchaîne ensuite sur le move affirmé (silencieusement vers produce-copy-brief par défaut, ou mine-voc si la route upgrade est prise) · si l'opérateur redirige, il bascule, mais le close part affirmé.
 
 **Run cadré (v1.12.0 · frame.json présent)** · trois ajouts au rendu, rien d'autre ne change ·
 
@@ -891,12 +889,11 @@ Le move premier sur ton lancement c'est l'angle miroir en Reels · verbatim dens
 | 4 | Verdict balance | "Le moment où tu montes sur la balance et tu sais déjà" | Anticipation négative | "Ça marche pour les autres, pas pour moi" | Reels | moyenne (formula-derived) |
 | 5 | Confiance retrouvée | "Remettre la robe que tu as rangée il y a 2 ans" | Aspiration projetée | "Je vais reprendre dès que j'arrête" | TikTok | moyenne (formula-derived) |
 
-Sur ces 5 angles, deux moves possibles ·
+Le move · on part direct sur les 3 premiers angles (`forte`, calibrés sur verbatims) pour ton lancement jeudi · brief créa, budget test ~50-100€ par angle, 5-7 jours de data minimum avant verdict. Les angles 4-5 (`moyenne`, formula-derived) partent en variants secondaires sur le même test · tu auras la data réelle après 7 jours pour les killer ou les pousser, sans re-mining préalable.
 
-A · Test ces angles tels quels (les 3 premiers `forte`, les 2 derniers `moyenne` à tester sur budget calibré · ~50-100€ par angle, 5-7 jours data minimum avant verdict). Pertinent si t'as ton lancement jeudi.
-B · Upgrade les angles 4-5 d'abord · pousser mine-voc sur les pains "verdict balance" et "confiance retrouvée" (~10 min, capture verbatim direct s'il existe dans le corpus). Pertinent si tu veux 5 angles tous ancrés avant de scaler.
+Les angles 4-5 ne sont pas ancrés sur verbatim direct · je regarde en parallèle s'il existe une formulation cliente dans le corpus pour les solidifier, je te ramène ça sans que tu aies à creuser.
 
-Mon avis · A direct, tes 3 premiers angles sont solides et calibrés sur verbatims. Les 2 derniers serviront de variants secondaires, et tu auras les data réelles après 7 jours pour décider de les killer ou de les pousser. Pas besoin de re-mining avant.
+Tu peux aussi prendre l'autre route si tu veux 5 angles tous ancrés avant de scaler · pousser l'écoute clients sur les pains "verdict balance" et "confiance retrouvée" (~10 min) avant de lancer. Mais vu ta deadline jeudi, le move au-dessus tient.
 
 ---
 

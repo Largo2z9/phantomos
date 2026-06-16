@@ -49,6 +49,19 @@ Tous les 3-6 mois, run audit manuel ·
 4. Si nouvelle version release vendor-side → ticket migration (cycle release dédié, pas hot-patch)
 5. Documenter audit dans `docs/internal/audits/model-versioning-{YYYY-MM}.md`
 
+### Matrice cross-skill · le SSOT durable (NEW)
+
+Les endpoints externes vivent désormais en deux endroits cohérents · le frontmatter `permissions.external_apis[]` par skill (la déclaration locale) ET `resources/canon/model-provider-matrix.json` (le SSOT cross-skill pour l'audit). La matrice fait pareil pour les tiers Claude · elle mappe chaque alias logique (`opus` / `sonnet` / `haiku`) vers son modèle concret du jour, son provider, et sa chaîne de repli. Au swap d'un modèle, on édite UN fichier (la matrice), pas les 85 frontmatters.
+
+Deux propriétés ·
+
+- **Découplage durabilité.** La matrice sépare le substrat MODÈLE-INDÉPENDANT (les alias, les tiers, la discipline de repli) des valeurs MODÈLE-DÉPENDANTES (les ids concrets, les endpoints). Seules les valeurs bougent au swap.
+- **Détecteur de régression.** Après tout swap de valeur, relancer `evals/` (le harness qualité). Si un score chute, c'est la couche prompting model-dépendante (exemplars, nudges de posture) qu'il faut re-tuner, pas le substrat. C'est ce qui rend un swap sûr au lieu de silencieux.
+
+**Vérif au build, pas au runtime.** `build-manifest.py` valide que chaque `recommended_model` existe dans `allowed_aliases` de la matrice · `--strict` en fait une release gate (exit 1 sur tout alias inconnu). Étage cohérent avec l'audit manuel · zéro coût runtime, la décision v2.46 (pas de check runtime) reste intacte.
+
+**Pas de `model_fallback` par skill.** Le repli vit dans la matrice (par tier), dérivé pas dupliqué · un skill nomme son tier, la matrice porte la chaîne. On évite la copie cross-skill qui drifte.
+
 ### Audit log runtime (OPTIONNEL)
 
 Chaque skill output PEUT logger ·
@@ -83,6 +96,8 @@ Pattern equivalent autres vendors ·
 
 ## Cross-refs
 
+- `resources/canon/model-provider-matrix.json` (SSOT cross-skill · alias logique vers modèle concret + chaîne de repli + endpoints externes)
+- `evals/` (détecteur de régression au swap de modèle · le harness qualité)
 - `docs/system/skill-authoring-doctrine.md` (frontmatter permissions canon)
 - `docs/system/compositional-cartography.md` (production loop canon)
 - `docs/system/visual-identity-doctrine.md` v2.43 (chantier 1 fidélité)

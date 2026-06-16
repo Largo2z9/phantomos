@@ -2,6 +2,8 @@
 title: Investigation Posture · Cartographier avant affirmer
 type: doctrine
 patch_notes:
+  - date: 2026-06-15
+    change: "Reconciliation du close avec le master contextual-intelligence (conflit de doctrines leve). La Section 5 n'est plus 'une question macro rendue a l'operateur' mais un verdict de move defendu selon la trichotomie affirme / ouvre / gate. AP-5 reecrit · l'anti-pattern n'est plus 'close affirmatif' (affirmer le move est desormais voulu) mais 'close qui ne tranche pas le move' (proceed-question mecanique OU menu d'axes weather-report). La rigueur des Sections 1-4 reste entiere · ce qu'on affirme c'est le MOVE, jamais une hypothese comme un fait. Renvoie au master (close trichotomy). Re-test consumers · snapshot-brand, profile-audience, produce-paid-angles, brief-day, build-atlas-complete, onboard-brand. Mesure · evals/ rubric close."
   - date: 2026-06-14
     change: "Ajout d'un crochet de capture optionnel en fin de synthèse (§ Crochet de capture). Les items Inconnu / Leviers à haute valeur et les hypothèses Déduit confidence faible / TRÈS faible s'écrivent en write léger vers brands/{slug}/pending-validations.md (§ Enrichment pour le contexte business à surfacer, § Context gate pour les champs inférés à valider), sans dépendre d'un passage ultérieur de learn-from-session. Additif strict : la structure 5 sections et la posture restent inchangées, le crochet est une affordance de persistance native en plus du close ouvert. Aligne sur le pattern d'écriture déjà porté par snapshot-brand / setup-brand. Doctrine de report des étapes différées · docs/system/onboarding-setup-flow.md."
 ---
@@ -152,28 +154,33 @@ Axe D · Preuve sociale terrain (lève H2)
   → cross-référence taux conversion par page
 ```
 
-### Section 5 · Close ouvert (question macro)
+### Section 5 · Close · la lecture puis le mouvement
 
-L'output se termine par UNE question macro sur la priorité de drill-down. Pas de "voici le plan complet", l'opérateur arbitre.
+> Amendé 2026-06-15 · le close ne s'arrête pas aux faits et ne rend pas une question macro passive. Les Sections 1-4 portent déjà les faits (Observé) et l'interprétation (Déduit) · le close les LIT (la lecture experte · le mur dominant, le second ordre) puis AVANCE proactivement. La météo, c'est de montrer l'état sans cette lecture et sans mouvement, en rendant une question passive. Montrer les faits et lister les inconnues est bon · c'est l'absence de lecture plus le hand-off passif qui est le bug.
+
+L'output se termine par le mouvement, porté par la lecture · le ou les prochains pas que tu recommandes, pas un menu d'axes rendu. Proposer plusieurs directions est bon quand c'est TOI qui les portes (proactif, avec ton read et ta préférence), pas quand tu rends la décision. L'opérateur reste libre de rediriger (il arbitre au macro).
+
+- **Lis** ce que les Sections 1-4 désignent (le mur, le second ordre) · interprète, ne te contente pas de re-montrer les faits.
+- **Avance** · propose le move qui paie, défendu en une ligne · une reco forte, ou plusieurs directions portées avec ta préférence selon le contexte.
+- **Ouvre** les inconnues à haute valeur en les portant toi-même (dis comment tu les lèves, fais la part faisable en parallèle), jamais parquées sur le bureau de l'opérateur.
+- **Gate** au plus une question, seulement si elle est inconnaissable depuis la data ET bloquante pour le prochain pas qui paie.
+- **Out honnête** · si la data ne porte pas encore de move, dis-le et nomme le SEUL inconnu bloquant plus le chemin pour le lever (ex "tes retours clients bruts en 10 min"). C'est un move, pas une absence · inventer un verdict pour faire bonne figure est le ratage. La lecture experte se PRODUIT en raisonnant sur le substrat encodé (la chaîne `docs/doctrine/strategic-diagnostic-doctrine.md`), pas sur une injonction d'interpréter.
 
 Exemple cible ·
 
 ```
-On a 4 axes d'investigation. Pour ton pitch demain, lequel veux-tu creuser en priorité ?
+Pour ton pitch demain, le levier qui paie le plus c'est l'audience réelle · je lance le mine-voc maintenant (8-12 min), c'est ce qui solidifie ton slide audiences. Je calibre l'éco en parallèle, ça tient en un chiffre de ta part.
 
-A · Audience réelle (mine-voc · 8-12 min · le plus critique pour ton slide audiences)
-B · Structure économique (1 question · 30 sec · calibre tes projections ROAS)
-C · Structure paid compétitive (audit Meta Ads Library · 5-10 min · pour ton slide Meta)
-D · Preuve sociale terrain (mine-voc reviews · 8-12 min · pour le slide friction)
-
-Reco macro · A + B en premier (45 min total, pose la fondation), C/D si temps avant le call.
+La seule chose qui me bloque pour chiffrer le ROAS · ta gross margin. Donne-la moi, sinon j'avance sur l'audience et on calibre après.
 ```
 
-L'opérateur dit `A` ou `A+B` ou autre, l'agent enchaîne le drill-down sur l'axe choisi.
+Affirme le move (mine-voc audience), ouvre l'éco en le portant soi-même, gate une seule question vraiment bloquante (la marge). L'opérateur peut rediriger ("non, commence par le compétitif"), mais le défaut est un verdict, pas "lequel veux-tu ?".
+
+Avant de fermer, lis l'exemplar · `resources/canon/exemplars/close.md` (un close tranchant vs un close météo). Montrer le standard bat le re-dériver.
 
 ### Crochet de capture (optionnel · additif)
 
-> Affordance de persistance native, en plus du close ouvert. Le close ouvert reste la fin canon visible de la synthèse (la question macro). Le crochet est muet côté opérateur · il grave en arrière-plan ce qui mérite d'être repris plus tard, pour que l'investigation ne dépende pas d'un passage ultérieur de `learn-from-session`.
+> Affordance de persistance native, en plus du close. Le close (verdict de move) reste la fin canon visible de la synthèse. Le crochet est muet côté opérateur · il grave en arrière-plan ce qui mérite d'être repris plus tard, pour que l'investigation ne dépende pas d'un passage ultérieur de `learn-from-session`.
 
 Quand la synthèse pose des inconnues à haute valeur ou des hypothèses sur du sable, ces items s'écrivent en **write léger** vers `brands/{slug}/pending-validations.md` au fil de la synthèse, pas seulement en prose qui s'évapore à la fin du tour. C'est la même règle « inconnus, leviers et étapes différées sont des champs visibles, jamais des trous muets » que la doctrine de report des étapes différées (`docs/system/onboarding-setup-flow.md`, à laquelle on renvoie plutôt que de la rédupliquer).
 
@@ -233,19 +240,26 @@ Avant ·
 Après ·
 > *Projection ROAS break-even = 3.3 conditionnelle à gross margin = 30%. Sensibilité · si 25% → 4.0, si 45% → 2.2. Variable à confirmer auprès opérateur AVANT de baser une décision budget dessus.*
 
-### AP-5 · Close affirmatif qui ferme la conversation
+### AP-5 · Close qui s'arrête aux faits ou rend la décision
 
-Avant ·
+Deux échecs, même cause · l'agent ne LIT pas et n'AVANCE pas · il montre l'état puis rend la main.
+
+Avant (proceed-question mécanique) ·
 > *"Je passe au tableau de projection chiffrée maintenant ?"*
 
-Après ·
-> *On a 4 axes d'investigation. Lequel veux-tu creuser pour ton pitch · audience réelle (mine-voc 10 min), structure économique (1 question), compétitif paid (audit 10 min), preuve sociale terrain (mine-voc 10 min) ?*
+Avant (la météo · faits sans lecture, menu passif rendu) ·
+> *"On a 4 axes. Lequel veux-tu creuser · audience / éco / compétitif / preuve ?"*
+
+Après (lecture puis mouvement) ·
+> *"Le levier qui paie le plus pour ton pitch c'est l'audience réelle · je lance le mine-voc maintenant (10 min). Je creuse l'éco en parallèle. La seule chose dont j'ai besoin de toi · ta gross margin, sinon j'avance et on calibre après."*
+
+Le ratage n'est NI de montrer les faits (les Sections 1-2 le font, c'est bon) NI de proposer plusieurs directions · c'est de ne pas les LIRE (aucune interprétation experte) et de rendre la décision passivement (menu symétrique, proceed-question). Proposer plusieurs prochains pas est bon quand l'agent les porte avec sa préférence. Affirmer le MOVE n'est pas affirmer une hypothèse comme un fait · le move s'appuie sur le déduit qui porte sa confidence.
 
 ### AP-6 · Prose narrative continue sans structure
 
 Avant · 3 pages de prose continue mélangeant observé + déduit + projection + reco.
 
-Après · 5 sections explicites (Observé · Déduit · Inconnu · Leviers · Close ouvert). Chaque section a son rôle, l'opérateur navigue.
+Après · 5 sections explicites (Observé · Déduit · Inconnu · Leviers · Close verdict de move). Chaque section a son rôle, l'opérateur navigue.
 
 ### AP-7 · Improvisation prose vs skill execution (NEW v2.55)
 
@@ -306,7 +320,7 @@ Skills concernés v2.55+ (audit + propagation) ·
 
 ## Position dans le système opérationnel 5 couches
 
-Investigation posture (5 sections · Observé · Déduit · Inconnu · Leviers · Close ouvert) est règle canon couche 2 du système opérationnel (cf `operational-system-doctrine.md`). Elle s'applique à TOUT output stratégique (audience synthesis · paid angles · brief copy · audit perf · etc).
+Investigation posture (5 sections · Observé · Déduit · Inconnu · Leviers · Close verdict de move) est règle canon couche 2 du système opérationnel (cf `operational-system-doctrine.md`). Elle s'applique à TOUT output stratégique (audience synthesis · paid angles · brief copy · audit perf · etc).
 
 Sans cette règle · synthèses non-traçables freelancées. Avec elle · chaque assertion porte son étiquette d'origine et confidence chain.
 

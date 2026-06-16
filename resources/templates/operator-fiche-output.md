@@ -75,7 +75,7 @@ Exemple compose-creative ·
 Format             carrousel · 4:5 · français
 Accroche visuelle  {description scène en prose · 1-2 lignes}
 Accroche texte     "{verbatim hook · max 8 mots}"
-Corps              {description body · 1 ligne · ou "—" si pas de body}
+Corps              {description body · 1 ligne · ou "·" si pas de body}
 Bouton             "{verbatim CTA}"
 Branding           Logo en bas à droite · photo officielle du produit centrée
 Photo générée      ouvre dans Preview · open {path}

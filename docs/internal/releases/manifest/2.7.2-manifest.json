@@ -3,8 +3,8 @@
   "version": "2.7.2",
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
-  "theme": "Walk back validate-output-coherence LLM skill — replace with mechanical Python primitive",
-  "summary": "Stress test on a wellness/cosmetic pilot confirmed v2.7.1 P0 #1 was a half-fix. validate-output-coherence was prescribed as MANDATORY in snapshot-brand + setup-brand SKILL.md (Hard Rule + Step 7), but the sub-agent skipped it 100% of the time on the live run — 47 mutations written, 0 coherence_check events emitted. Soft enforcement does not survive load. Replaced with .skills/finalize-mutation-batch.py — a deterministic Python wrapper, no LLM negotiation, that reads _field_types canon, inspects every recent write event, runs structural checks, and emits the coherence_check event itself. Exit 2 on blocking issues = caller must revise. Bonus: catching the wrapper found 11 latent _TEMPLATE warnings (meta paths unmapped, offers.json missing _field_types) — fixed in v2.7.3.",
+  "theme": "Walk back validate-output-coherence LLM skill · replace with mechanical Python primitive",
+  "summary": "Stress test on a wellness/cosmetic pilot confirmed v2.7.1 P0 #1 was a half-fix. validate-output-coherence was prescribed as MANDATORY in snapshot-brand + setup-brand SKILL.md (Hard Rule + Step 7), but the sub-agent skipped it 100% of the time on the live run · 47 mutations written, 0 coherence_check events emitted. Soft enforcement does not survive load. Replaced with .skills/finalize-mutation-batch.py · a deterministic Python wrapper, no LLM negotiation, that reads _field_types canon, inspects every recent write event, runs structural checks, and emits the coherence_check event itself. Exit 2 on blocking issues = caller must revise. Bonus: catching the wrapper found 11 latent _TEMPLATE warnings (meta paths unmapped, offers.json missing _field_types) · fixed in v2.7.3.",
   "changes": [
     {"path": ".skills/finalize-mutation-batch.py", "kind": "new", "reason": "Mechanical coherence wrapper. Reads _field_types per touched file, inspects write-to-context events, runs unmapped-paths / manual-derived / tone_of_voice / missing _field_types checks, emits coherence_check event, exit 2 on blocking."},
     {"path": ".skills/skills/snapshot-brand/SKILL.md", "kind": "edit", "reason": "Step 7 instruction reduced to a single bash line invoking finalize-mutation-batch.py. Hard Rule rewritten around the Python primitive instead of the LLM sub-skill."},
@@ -14,13 +14,13 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "None visible. Coherence enforcement now actually fires after every mutation batch. Agent cannot skip — the wrapper either passes or returns exit 2.",
+  "operator_impact": "None visible. Coherence enforcement now actually fires after every mutation batch. Agent cannot skip · the wrapper either passes or returns exit 2.",
   "tested_on": [
-    "phantom-stress live a wellness/cosmetic pilot run (47 events) — wrapper caught 11 warnings + 2 latent _TEMPLATE bugs (meta/* unmapped, offers.json _field_types missing entirely)"
+    "phantom-stress live a wellness/cosmetic pilot run (47 events) · wrapper caught 11 warnings + 2 latent _TEMPLATE bugs (meta/* unmapped, offers.json _field_types missing entirely)"
   ],
   "caught_by": "S37 stress test on phantom-stress / a wellness/cosmetic pilot.",
   "known_gaps": [
     "Decision A1 (LLM-based coherence skill, locked earlier in v2.6.17) is effectively walked back. The LLM design was beautiful and unused. Decision formalized in v2.7.4 / D#356.",
-    "Wrapper reported 11 warnings on first run — 9 were genuine _TEMPLATE coverage gaps, addressed in v2.7.3."
+    "Wrapper reported 11 warnings on first run · 9 were genuine _TEMPLATE coverage gaps, addressed in v2.7.3."
   ]
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SessionStart hook — context budget warning.
+SessionStart hook · context budget warning.
 
 Runs `.skills/audit-context-budget.py --json` at every session start. If any
 threshold is breached (root CLAUDE.md > 140 lines, always-loaded > 250, lazy
@@ -8,10 +8,10 @@ doc > 200, worst-case session > 600), appends a warning to
 `.phantom/context-budget-warnings.log` and emits a single-line stderr warning
 the agent (and maintainer) can surface if asked.
 
-Rationale — operators accumulate brand context, learnings, decisions over
+Rationale · operators accumulate brand context, learnings, decisions over
 weeks. The cascade balloons silently; prefix cache degrades; latency and
 costs rise. Operator has no visibility. This hook surfaces the drift early
-without blocking the session (soft enforcement — a hard block would fail a
+without blocking the session (soft enforcement · a hard block would fail a
 legitimate session mid-action).
 
 Does nothing if the audit tool is missing (older workspaces).
@@ -83,11 +83,11 @@ def main():
     with (log_dir / "context-budget-warnings.log").open("a") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-    # Single-line stderr warning — visible in tool output, non-blocking.
+    # Single-line stderr warning · visible in tool output, non-blocking.
     lines = (report.get("always_loaded") or {}).get("lines") or 0
     worst = (report.get("worst_case_session") or {}).get("lines") or 0
     print(
-        f"[budget-warn] context cascade above threshold — always-loaded={lines} lines, "
+        f"[budget-warn] context cascade above threshold · always-loaded={lines} lines, "
         f"worst-case={worst}. Run `python3 .skills/audit-context-budget.py` for detail.",
         file=sys.stderr,
     )

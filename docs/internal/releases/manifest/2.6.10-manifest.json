@@ -6,7 +6,7 @@
   "summary": "10 non-critical skills switched from write_to_context() pseudo-code to canonical .skills/write-to-context.py channel.",
   "breaking": false,
   "requires_confirmation": false,
-  "notes": "Pure doc pass on SKILL.md files. No code change, no hook change. Safe overlay. Any agent that triggered these skills before v2.6.10 would have hit mutation-guard on the first protected write — now routes correctly.",
+  "notes": "Pure doc pass on SKILL.md files. No code change, no hook change. Safe overlay. Any agent that triggered these skills before v2.6.10 would have hit mutation-guard on the first protected write · now routes correctly.",
   "changes": [
     {
       "type": "skill-change",

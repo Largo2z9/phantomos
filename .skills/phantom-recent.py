@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-phantom-recent — read the last N mutations from context-engine-events.jsonl.
+phantom-recent · read the last N mutations from context-engine-events.jsonl.
 
 Reads `.phantom/context-engine-events.jsonl` (canonical event log written by
 write-to-context.py) and returns the last N events as a JSON array. Used by

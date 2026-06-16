@@ -4,13 +4,13 @@
  * PhantomOS Query MCP Server
  *
  * Exposes query-context as an MCP tool for external agents and pipelines.
- * Read-only — never modifies workspace files.
+ * Read-only · never modifies workspace files.
  *
  * Usage:
  *   node .skills/mcp/query-server.js
  *
  * Environment:
- *   WORKSPACE_ROOT — path to workspace root (default: process.cwd())
+ *   WORKSPACE_ROOT · path to workspace root (default: process.cwd())
  *
  * MCP config (.mcp.json):
  *   {

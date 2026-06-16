@@ -3,8 +3,8 @@
   "version": "2.7.0",
   "released_at": "2026-04-24",
   "compatible_from": "2.0.0",
-  "theme": "enforcement layer — soft rules graduate to hook guards",
-  "summary": "Three SKILL.md rules from v2.6.20-22 (status refresh, em-dash, coherence claims) become hook-enforced where Claude Code permits. PostToolUse flushes brand status mechanically after every write. Stop / SubagentStop audit the last assistant message for em-dashes and entity-field claims without a coherence check. Text output cannot be blocked pre-render, so the two tone/coherence hooks are audit-with-stderr-surface, not hard block — documented as known gap.",
+  "theme": "enforcement layer · soft rules graduate to hook guards",
+  "summary": "Three SKILL.md rules from v2.6.20-22 (status refresh, em-dash, coherence claims) become hook-enforced where Claude Code permits. PostToolUse flushes brand status mechanically after every write. Stop / SubagentStop audit the last assistant message for em-dashes and entity-field claims without a coherence check. Text output cannot be blocked pre-render, so the two tone/coherence hooks are audit-with-stderr-surface, not hard block · documented as known gap.",
   "changes": [
     {
       "path": ".skills/refresh-brand-status.py",
@@ -45,9 +45,9 @@
     "post-write-flush.py verified via simulated PostToolUse JSON (brand slug extracted, refresh invoked, status.json updated)",
     "turn-end-audit.py verified via fake transcript with 2 em-dashes + 1 unchecked entity claim (both logged + stderr summary emitted)"
   ],
-  "caught_by": "user request after v2.6.22 ship — 'règle le pb' on the three known-gaps listed across v2.6.20-22 manifests.",
+  "caught_by": "user request after v2.6.22 ship · 'règle le pb' on the three known-gaps listed across v2.6.20-22 manifests.",
   "known_gaps": [
-    "Em-dash and coherence audits cannot block offending output — Claude Code does not expose a pre-render hook on assistant text. Soft enforcement only; audit logs accumulate and stderr warnings surface on next tool call.",
+    "Em-dash and coherence audits cannot block offending output · Claude Code does not expose a pre-render hook on assistant text. Soft enforcement only; audit logs accumulate and stderr warnings surface on next tool call.",
     "Hard prevention of narrated fabrications would require either a Claude Code feature addition or restructuring workflows to route claims through tool calls (pre-hookable) rather than free text."
   ]
 }

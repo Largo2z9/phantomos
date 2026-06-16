@@ -44,11 +44,11 @@ See `docs/system/extending.md § Three scopes` for the extension layer architect
 
 ---
 
-## Invocation context — two modes of entry
+## Invocation context · two modes of entry
 
-**Mode intent-first** — operator apporte une **intention** sans donnée en main. *"Je voudrais tracker mes concurrents Meta dans le temps."* Le skill crée la structure (schema + dossier + README + stub skill optionnel), vide. L'opérateur peuple plus tard.
+**Mode intent-first** · operator apporte une **intention** sans donnée en main. *"Je voudrais tracker mes concurrents Meta dans le temps."* Le skill crée la structure (schema + dossier + README + stub skill optionnel), vide. L'opérateur peuple plus tard.
 
-**Mode data-first** — operator apporte une **donnée concrète** issue de son travail opérationnel (analyse, rapport, extraction structurée). *"Voici ma marge de contribution par channel sur Q1, range-la proprement."* Le skill parse la donnée, applique le gate 5-dimensions, et soit route vers l'existant (pas de scaffold), soit crée la structure ET peuple avec la donnée apportée en un seul flow.
+**Mode data-first** · operator apporte une **donnée concrète** issue de son travail opérationnel (analyse, rapport, extraction structurée). *"Voici ma marge de contribution par channel sur Q1, range-la proprement."* Le skill parse la donnée, applique le gate 5-dimensions, et soit route vers l'existant (pas de scaffold), soit crée la structure ET peuple avec la donnée apportée en un seul flow.
 
 Le gate `check-existing-coverage` en Phase 2 est le pivot. Dans les deux modes, la même logique :
 
@@ -69,7 +69,7 @@ Le gate `check-existing-coverage` en Phase 2 est le pivot. Dans les deux modes, 
 
 Execute the nine sub-skills in order. After each phase, surface a one-line status to the operator (unless the phase is silent by design). Halt at any phase if the operator refuses or if a validator returns a blocking error.
 
-### Phase 1 — `analyze-extension-intent`
+### Phase 1 · `analyze-extension-intent`
 
 Capture the operator's intent. Classify three dimensions :
 
@@ -85,7 +85,7 @@ Three focused questions maximum across all three dimensions.
 
 Output: structured intent object consumed by downstream phases. `scope` field locks the path routing for Phase 7 and the registration shape for Phase 9.
 
-### Phase 2 — `check-existing-coverage`
+### Phase 2 · `check-existing-coverage`
 
 Run the pre-build analysis gate. Walks dimensions in order, scope-aware :
 
@@ -103,36 +103,36 @@ Cross-scope match awareness : if operator wants `vendors` in operator scope and 
 
 Surface the verdict to the operator with the matched target (if any). Operator can override (force scaffold if they have a reason to duplicate) but the default is respect the gate.
 
-### Phase 2bis — `suggest-domain-canon` (conditional)
+### Phase 2bis · `suggest-domain-canon` (conditional)
 
-**Triggered when** the new extension targets a domain whose canonical methodology is **not yet encoded** in `resources/frameworks/` (e.g. operator asks for an extension on CRO, lifecycle email retention, B2B sales discovery, content SEO methodology — but no `cro-canon.md`, `retention-canon.md`, etc. exists).
+**Triggered when** the new extension targets a domain whose canonical methodology is **not yet encoded** in `resources/frameworks/` (e.g. operator asks for an extension on CRO, lifecycle email retention, B2B sales discovery, content SEO methodology · but no `cro-canon.md`, `retention-canon.md`, etc. exists).
 
-**Why this phase exists.** The operator typically does not know the senior references of their own domain — they have a business need, not a bibliography. The agent's role is to identify the 2-3 most recognized canonical references for the domain, propose them as a default suggestion, and encode the canon itself. The operator must never be asked to name the canon — only to validate the agent's recommendation.
+**Why this phase exists.** The operator typically does not know the senior references of their own domain · they have a business need, not a bibliography. The agent's role is to identify the 2-3 most recognized canonical references for the domain, propose them as a default suggestion, and encode the canon itself. The operator must never be asked to name the canon · only to validate the agent's recommendation.
 
 **Mechanism.**
 
 1. Identify the domain underlying the operator's request (CRO, retention, sales discovery, etc.).
-2. Pre-select the 2-3 canonical references most recognized in that domain (book + author + framework name + year if relevant). Restrict to *referenced senior practitioners with published work* — not generic blog posts. Cross-check via `mine-vom` patterns or hard-coded domain registry if available.
+2. Pre-select the 2-3 canonical references most recognized in that domain (book + author + framework name + year if relevant). Restrict to *referenced senior practitioners with published work* · not generic blog posts. Cross-check via `mine-vom` patterns or hard-coded domain registry if available.
 3. Surface to operator via **AskUserQuestion** with a default recommendation + 1 alternative + 1 escape hatch :
    - **Option A (default, agent recommendation)** : *"For [domain], the canonical references are [Author 1] + [Author 2] + [Author 3]. We encode all three as the foundation."*
    - **Option B (lighter scope)** : *"Just [Author 1] + [Author 2], skip the third."*
-   - **Option C (operator override)** : *"I have my own framework I want encoded instead."* — operator names their preferred reference.
+   - **Option C (operator override)** : *"I have my own framework I want encoded instead."* · operator names their preferred reference.
 4. On validation, the agent fetches the publicly accessible material (book summaries, articles, talks, transcripts) via `WebFetch`, extracts the operable principles, structures them in `resources/frameworks/{domain}-canon.md` with traceable IDs (`AUTHOR-001` to `AUTHOR-N`).
-5. Operator validates the encoded canon at the end (3-movement prose synthesis) — never asked to source it.
+5. Operator validates the encoded canon at the end (3-movement prose synthesis) · never asked to source it.
 
-**Halt condition.** If the domain has no recognized canon (emerging field, niche too young), surface honestly : *"This domain doesn't have an established methodology yet. We'll capture your own observations as we go via `learnings.json` and matricize once a pattern emerges."* — fall back to capture-then-matricize, do not invent a canon.
+**Halt condition.** If the domain has no recognized canon (emerging field, niche too young), surface honestly : *"This domain doesn't have an established methodology yet. We'll capture your own observations as we go via `learnings.json` and matricize once a pattern emerges."* · fall back to capture-then-matricize, do not invent a canon.
 
 **Output:** `resources/frameworks/{domain}-canon.md` populated and versioned. Operator-facing surface confirms : *"Canon encoded with [N principles from authors]. Skill scaffold continues."*
 
 This phase is **mandatory** when canon is absent and the extension implies methodology-driven reasoning. It is **skipped** when (a) the canon already exists in `resources/frameworks/`, or (b) the extension is purely structural (data-shape only, no methodology underneath).
 
-### Phase 3 — `propose-schema-draft`
+### Phase 3 · `propose-schema-draft`
 
-Generate a canon-compliant JSON Schema draft for the custom entity (or sidecar). Follows `_version`, `_schema`, `_field_types` conventions. Uses patterns from `resources/schemas/` as structural reference. Integrates the cross-references and reused banks identified in Phase 2 — and the canon encoded in Phase 2bis if applicable (axes drawn from canonical references, not invented).
+Generate a canon-compliant JSON Schema draft for the custom entity (or sidecar). Follows `_version`, `_schema`, `_field_types` conventions. Uses patterns from `resources/schemas/` as structural reference. Integrates the cross-references and reused banks identified in Phase 2 · and the canon encoded in Phase 2bis if applicable (axes drawn from canonical references, not invented).
 
 Operator sees the schema, approves or adjusts.
 
-### Phase 3bis — `produce-decomposition-ecr` (NEW v1.2.0)
+### Phase 3bis · `produce-decomposition-ecr` (NEW v1.2.0)
 
 Consume the ECR decomposition object produced by `analyze-extension-intent v2.0.0` (Phase 1) plus the schema draft from Phase 3. Render an operator-facing ECR decomposition artifact ·
 
@@ -147,25 +147,25 @@ Operator validates via AskUserQuestion · A) accept and continue Phase 4 · B) a
 
 **Cross-ref** · `docs/system/operational-system-doctrine.md` (doctrine mère ECR canonisée v2.71).
 
-### Phase 4 — `validate-naming`
+### Phase 4 · `validate-naming`
 
 Verify the proposed entity type name. Blocks collision with core entity names (see `validate-resources` check 17). Enforces kebab-case, MECE with existing extensions in `index.json`, no duplicate.
 
 If collision detected, propose alternative names and re-prompt.
 
-### Phase 5 — `check-cross-refs`
+### Phase 5 · `check-cross-refs`
 
 Walk every declared cross-reference in the schema. Verify target core entities exist in the current workspace. Flag references that cannot resolve. Prevents broken refs at creation rather than at runtime.
 
 Halts if any cross-ref is unresolved; operator must fix or drop the ref.
 
-### Phase 6 — `validate-schema-canon`
+### Phase 6 · `validate-schema-canon`
 
 Validate the draft schema against canon requirements (reuses logic of `validate-resources` check 16 applied pre-write). Checks `_version`, `_schema`, `_field_types` enum, required fields, no override of core fields for sidecars.
 
 Halts on any schema canon violation.
 
-### Phase 7 — `scaffold-entity-files`
+### Phase 7 · `scaffold-entity-files`
 
 Write the physical files to disk via `.skills/write-to-context.py`. Path routing depends on scope :
 
@@ -186,7 +186,7 @@ Write the physical files to disk via `.skills/write-to-context.py`. Path routing
 
 For sidecars, only the `.extensions.json` file is written (no README, no folder, sidecars are discovered by convention).
 
-### Phase 8 — `scaffold-skill-stub` (conditional)
+### Phase 8 · `scaffold-skill-stub` (conditional)
 
 If the intent includes a skill that populates the extension (common for scrapers, watchers, pipelines), generate a SKILL.md stub in `.skills/skills/custom/{skill_name}/`. The stub declares frontmatter (type, recommended_model, permissions referencing the new extension), a Tone section, and the pipeline skeleton. The operator fills in the execution logic afterward, or delegates to `build-agent` for the body.
 

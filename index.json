@@ -35,7 +35,7 @@
       "type": "framework",
       "path": "resources/frameworks/market-deepdive.md",
       "domain": "general",
-      "title": "Market Deep-Dive — Analytical Framework",
+      "title": "Market Deep-Dive · Analytical Framework",
       "created": "2026-04-25",
       "updated": "2026-04-25",
       "tags": [
@@ -94,7 +94,7 @@
       "type": "framework",
       "path": "resources/frameworks/vom-mining.md",
       "domain": "general",
-      "title": "VoM Mining — Analytical Framework",
+      "title": "VoM Mining · Analytical Framework",
       "created": "2026-04-25",
       "updated": "2026-04-25",
       "tags": [
@@ -108,7 +108,7 @@
       "type": "sop",
       "path": "resources/sops/audit-meta-global.md",
       "domain": "media",
-      "title": "SOP — Audit Meta Global (single brand)",
+      "title": "SOP · Audit Meta Global (single brand)",
       "created": "2026-04-23",
       "updated": "2026-05-05",
       "tags": [
@@ -306,7 +306,7 @@
       "type": "template",
       "path": "resources/templates/creative-formula.md",
       "domain": "creative",
-      "title": "Creative Formula V3 — Formule de décomposition créative",
+      "title": "Creative Formula V3 · Formule de décomposition créative",
       "created": "2026-03-18",
       "updated": "2026-05-13",
       "tags": [

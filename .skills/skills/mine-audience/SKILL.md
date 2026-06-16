@@ -20,8 +20,8 @@ pipeline:
   preconditions: "brand.json and spec.json must exist for the product being analyzed"
   postconditions: "run score-product-fit to evaluate fit between discovered audiences and product"
 disambiguates_against:
-  mine-voc: "route to mine-voc when the goal is the existing customer voice on THIS brand (Trustpilot, Judge.me, brand reviews) — mine-audience is upstream, exploring who the audiences are at the product/segment level"
-  mine-vom: "route to mine-vom when the goal is the broader market voice (competitors' customers, niche communities) — mine-audience focuses on segment discovery and audience proposals for a specific product"
+  mine-voc: "route to mine-voc when the goal is the existing customer voice on THIS brand (Trustpilot, Judge.me, brand reviews) · mine-audience is upstream, exploring who the audiences are at the product/segment level"
+  mine-vom: "route to mine-vom when the goal is the broader market voice (competitors' customers, niche communities) · mine-audience focuses on segment discovery and audience proposals for a specific product"
 ---
 
 ## Tone
@@ -30,11 +30,11 @@ Présente les audiences découvertes en langage humain : qui sont ces gens, ce q
 
 # Skill: mine-audience
 
-This agent scrapes voice-of-market sources (Reddit discussions, Trustpilot reviews, Meta Ads Library competitor analysis) for a product, identifies candidate audience segments, and proposes enrichments to profile.json fields. The agent works in proposal mode — all mutations are written as `_proposals` for human review.
+This agent scrapes voice-of-market sources (Reddit discussions, Trustpilot reviews, Meta Ads Library competitor analysis) for a product, identifies candidate audience segments, and proposes enrichments to profile.json fields. The agent works in proposal mode · all mutations are written as `_proposals` for human review.
 
 ---
 
-## Step 1 — Collect inputs and validate
+## Step 1 · Collect inputs and validate
 
 Read `brands/{brand}/brand.json` and `brands/{brand}/products/{product}/spec.json`. Extract:
 - `brand.name` and positioning
@@ -45,7 +45,7 @@ If either file is missing or incomplete → signal which file/fields are absent 
 
 ---
 
-## Step 2 — Scrape voice-of-market sources
+## Step 2 · Scrape voice-of-market sources
 
 Execute three parallel scrapes:
 
@@ -73,7 +73,7 @@ Aggregate all verbatims into a single pool. Total expected: 100–180 verbatims.
 
 ---
 
-## Step 3 — Cluster verbatims into audience intersections
+## Step 3 · Cluster verbatims into audience intersections
 
 Group verbatims by recurring themes across pain points, desires, and behaviors. Use clustering logic:
 
@@ -91,7 +91,7 @@ Generate 3–6 candidate audience clusters. For each cluster:
 
 ---
 
-## Step 4 — Synthesize proposals for profile.json
+## Step 4 · Synthesize proposals for profile.json
 
 For each candidate audience cluster, produce proposals targeting profile.json fields:
 
@@ -103,7 +103,7 @@ For each candidate audience cluster, produce proposals targeting profile.json fi
 - `emotions`: top emotions mentioned in verbatims (stress, confidence, frustration, relief)
 
 **For profile.voice:**
-- `vocabulary_to_use`: key words/phrases found in verbatims (not brand language — real user language)
+- `vocabulary_to_use`: key words/phrases found in verbatims (not brand language · real user language)
 - `vocabulary_to_avoid`: terms this audience rejects or finds off-putting
 - `key_expressions`: direct quotes from verbatims (with `origin: "voc"`)
 - `tone_register`: inferred from verbatim tone (e.g., "casual-authoritative", "humorous-practical")
@@ -120,7 +120,7 @@ For each candidate audience cluster, produce proposals targeting profile.json fi
 - Lower confidence (0.55–0.65): 1–2 verbatims, inferred from context
 - Never propose below 0.5 confidence
 
-Call ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)` for each proposal field with:
+Call ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)` for each proposal field with:
 - `field_path`: e.g., `profile/busy-nurses/psychology/core_desire`
 - `value`: synthesized text or list
 - `source`: `{"type": "verbatim", "platforms": ["reddit", "trustpilot"], "verbatim_count": 12}`
@@ -135,7 +135,7 @@ Markdown report saved in `brands/{brand}/reports/{timestamp}-mine-audience-{prod
 
 Structure:
 ```
-# Audience Mining Report — {brand} / {product}
+# Audience Mining Report · {brand} / {product}
 Generated: {ISO timestamp}
 Verbatims collected: {N}
 
@@ -170,14 +170,14 @@ Verbatims collected: {N}
 
 ## Hard Rules
 
-- **Jamais écrire directement dans profile.json.** Tous les enrichissements passent par ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)` en mode `proposed`.
+- **Jamais écrire directement dans profile.json.** Tous les enrichissements passent par ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)` en mode `proposed`.
 - **Never hallucinate verbatims.** If a source is unavailable, signal it explicitly. Do NOT generate fake quotes.
 - **Source every claim.** Each proposal must have a `source` dict with `type`, `platform`, and a reference URL or ID.
 - **Confidence ≤ 0.9 for agents.** Agent confidence must never reach 1.0. That's reserved for humans.
-- **Max iterations** — stop after processing 3 sources (Reddit, Trustpilot, Meta). If sources fail, report what was attempted and what succeeded.
-- **Anti-repetition** — never scrape the same subreddit/keyword twice in a single run. If a retry is needed, use a different search term.
-- **Graceful degradation** — if Trustpilot is down, proceed with Reddit + Meta Ads. Log what was skipped. NEVER fail silently.
-- **No cross-brand scope** — this agent mines one product per invocation. To mine multiple products, call the agent once per product.
+- **Max iterations** · stop after processing 3 sources (Reddit, Trustpilot, Meta). If sources fail, report what was attempted and what succeeded.
+- **Anti-repetition** · never scrape the same subreddit/keyword twice in a single run. If a retry is needed, use a different search term.
+- **Graceful degradation** · if Trustpilot is down, proceed with Reddit + Meta Ads. Log what was skipped. NEVER fail silently.
+- **No cross-brand scope** · this agent mines one product per invocation. To mine multiple products, call the agent once per product.
 
 ---
 
@@ -192,4 +192,4 @@ Verbatims collected: {N}
 
 ## Changelog
 
-- **1.0.0** (2026-04-13) — Initial spec. Collect → Analyze → Propose pattern. Proposal mode enforced.
+- **1.0.0** (2026-04-13) · Initial spec. Collect → Analyze → Propose pattern. Proposal mode enforced.

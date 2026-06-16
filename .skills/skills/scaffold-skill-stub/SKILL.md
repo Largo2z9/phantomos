@@ -8,7 +8,7 @@ reasoning_pattern: null
 description: >
   Sub-skill of scaffold-extension. Generates a SKILL.md stub in `.skills/skills/custom/{name}/`
   for a skill that populates or queries a newly scaffolded extension. Writes into the meta-OS
-  namespace — hence the builder typology. Conditional step: only invoked if the operator's
+  namespace · hence the builder typology. Conditional step: only invoked if the operator's
   intent includes a custom skill. The stub body is skeletal; the operator fills in execution
   logic afterward or delegates to build-agent for deeper buildout.
   Invoked by scaffold-extension Phase 8.
@@ -35,9 +35,9 @@ Generates the SKILL.md stub of a custom skill that will populate or query a new 
    - Populate via external pipeline (scraper, API pull) → `producer`
    - Transform core data into the extension (derived) → `producer`
    - Read the extension and return output → `navigator` (if operator-facing) or `curator` (if called by another skill)
-3. **Determine the model** — default `sonnet`. `haiku` for pure fetch/write skills with no generation. `opus` only with explicit justification.
-4. **Declare permissions** — reads include `brand` and any required cross-entities. Writes include the new extension's path. Mode typically `direct` for scraped factual data, `proposed` for derived data needing review.
-5. **Compose the stub** — frontmatter fully populated, Tone section with a one-line placeholder, and a body skeleton:
+3. **Determine the model** · default `sonnet`. `haiku` for pure fetch/write skills with no generation. `opus` only with explicit justification.
+4. **Declare permissions** · reads include `brand` and any required cross-entities. Writes include the new extension's path. Mode typically `direct` for scraped factual data, `proposed` for derived data needing review.
+5. **Compose the stub** · frontmatter fully populated, Tone section with a one-line placeholder, and a body skeleton:
    - `## Invocation context`
    - `## Method` (numbered steps, placeholder prose for the operator to fill)
    - `## Output` (expected shape)
@@ -45,7 +45,7 @@ Generates the SKILL.md stub of a custom skill that will populate or query a new 
 6. **Write the file** to `.skills/skills/custom/{skill_name}/SKILL.md` via `.skills/write-to-context.py`.
 7. **Add a line to `brands/{slug}/todos.md → ## In Progress`**:
 
-> *"[ ] Implement body of custom skill `{skill_name}` — stub created by scaffold-extension. Fill in Method steps. Test on one instance before scaling."*
+> *"[ ] Implement body of custom skill `{skill_name}` · stub created by scaffold-extension. Fill in Method steps. Test on one instance before scaling."*
 
 ## Output to orchestrator
 
@@ -61,6 +61,6 @@ Generates the SKILL.md stub of a custom skill that will populate or query a new 
 ## Hard rules
 
 - Builder typology: writes into `.skills/skills/custom/`. Never into core `.skills/skills/` (reserved for shipped skills).
-- The stub is intentionally incomplete — the Method body has placeholders. The operator fills in or delegates to `build-agent`.
+- The stub is intentionally incomplete · the Method body has placeholders. The operator fills in or delegates to `build-agent`.
 - Never auto-execute the generated skill in the same turn. Let the operator review and trigger when ready.
 - Reject if a skill with the same name already exists at `.skills/skills/custom/{name}/`.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-v2.42-schema-alignment.py — Patch 1A migration · alignement schema vs data live.
+v2.42-schema-alignment.py · Patch 1A migration · alignement schema vs data live.
 
 Closes drift identified in audit 10 scopes v2.41:
   - brand.json v2.1 → v2.2 (creative_zone + brand_equity_level + strategic_context placeholders)

@@ -3,7 +3,7 @@
   "from_version": "2.6.17",
   "to_version": "2.6.18",
   "released_at": "2026-04-23",
-  "summary": "Skill creation protocol + learn-from-session enrichment candidate detection + heavy-skill pre-cascade gate posture. Pure protocol/documentation pass — no code changes.",
+  "summary": "Skill creation protocol + learn-from-session enrichment candidate detection + heavy-skill pre-cascade gate posture. Pure protocol/documentation pass · no code changes.",
   "breaking": false,
   "requires_confirmation": false,
   "notes": "Protocol doc + SKILL.md enrichment + voice.md rule. Agent reads these on next session boot. Zero data/infra impact.",
@@ -27,7 +27,7 @@
       "file": "docs/system/voice.md",
       "action": "overwrite",
       "safe": true,
-      "note": "New section 'Heavy skill posture — always ask before cascade'. Hard rule : no cascade >3 subagents without gate, no execution >20k estimated tokens without gate. Canonical surface pattern."
+      "note": "New section 'Heavy skill posture · always ask before cascade'. Hard rule : no cascade >3 subagents without gate, no execution >20k estimated tokens without gate. Canonical surface pattern."
     },
     {
       "type": "doc-change",

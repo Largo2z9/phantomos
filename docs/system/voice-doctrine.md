@@ -100,7 +100,7 @@ Séparateurs canon · usage cohérent cross-artefacts ·
 | `\|` | tableaux markdown uniquement | en prose |
 | `→` | flèche de conséquence, dépendance, transition | comme séparateur générique |
 | `↔` | paires bidirectionnelles (ex · cartographier ↔ paramétrer) | flèche unidirectionnelle |
-| em-dash `—` | **interdit canon** (cf memory `no_em_dash`) | tout contexte |
+| em-dash `·` | **interdit canon** (cf memory `no_em_dash`) | tout contexte |
 
 ## Famille terminologique paramétrage (canon v2.84.0)
 

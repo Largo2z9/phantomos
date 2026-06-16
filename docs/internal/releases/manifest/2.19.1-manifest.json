@@ -17,8 +17,8 @@
       "category": "commands",
       "action": "extended",
       "files": [".claude/commands/phantom.md"],
-      "section": "Mode brand — Audience hierarchy",
-      "rationale": "v2.19.0 introduced mère/sous-audience hierarchy. /phantom mode brand previously rendered audiences as a single flat line. Now renders an indented tree (mère + sous) with translated validation labels (à valider / testée / validée / scalée / fatiguée) and a coarse mining state (vide / partiel / dense) — never exposing validation_status enum or numeric percentages. Operator can visualize the cartography at any moment via /phantom {brand_slug}."
+      "section": "Mode brand · Audience hierarchy",
+      "rationale": "v2.19.0 introduced mère/sous-audience hierarchy. /phantom mode brand previously rendered audiences as a single flat line. Now renders an indented tree (mère + sous) with translated validation labels (à valider / testée / validée / scalée / fatiguée) and a coarse mining state (vide / partiel / dense) · never exposing validation_status enum or numeric percentages. Operator can visualize the cartography at any moment via /phantom {brand_slug}."
     },
     {
       "category": "skills",

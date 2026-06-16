@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PostToolUse hook — flush brand status after any write-to-context call.
+PostToolUse hook · flush brand status after any write-to-context call.
 
 Wiring: matches `Bash` tool. If the executed command invokes
 `.skills/write-to-context.py --path brands/{slug}/...`, extract {slug} and

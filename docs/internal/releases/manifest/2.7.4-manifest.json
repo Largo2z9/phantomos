@@ -3,12 +3,12 @@
   "version": "2.7.4",
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
-  "theme": "Master doctrine — Contextual Intelligence locked",
+  "theme": "Master doctrine · Contextual Intelligence locked",
   "summary": "S37 confirmed the recurring pattern across v2.7.1-3: narrative MANDATORY rules in SKILL.md get skipped 100% under load, mechanical hooks/wrappers hold 100%. Architectural conclusion formalized as PhantomOS master doctrine. PhantomOS reasons over a business universe, does not fill forms. Two-tier rule: mechanical layer (mutations, schemas, paths, destructive ops) → strict enforcement, hooks, refusals; semantic layer (audience, tone, positioning, recommendations, narrative claims) → strict trust, model reasons, operator iterates. Decisive test for any new rule/hook/gate: prevents destructive persistent error, or pre-validates the model's reasoning? Latter → strip. 7 named anti-patterns banned (form-fill agent, path leak, confirmation theater, scope creep on confirm, schema-completeness fetishism, stack-trace-as-explanation, validation cascade).",
   "changes": [
     {"path": "docs/system/contextual-intelligence.md", "kind": "new", "reason": "Canonical doctrine doc. Thesis, two-tier rule, decisive test, 7 anti-patterns with examples."},
-    {"path": "CLAUDE.md", "kind": "edit", "reason": "New 'Master doctrine — Contextual intelligence' section at top, before FIRST ACTION. Two-tier rule + decisive test surfaced runtime."},
-    {"path": "docs/system/voice.md", "kind": "edit", "reason": "Core principles section opens with contextual-intelligence reference — every voice rule serves it."},
+    {"path": "CLAUDE.md", "kind": "edit", "reason": "New 'Master doctrine · Contextual intelligence' section at top, before FIRST ACTION. Two-tier rule + decisive test surfaced runtime."},
+    {"path": "docs/system/voice.md", "kind": "edit", "reason": "Core principles section opens with contextual-intelligence reference · every voice rule serves it."},
     {"path": "CHANGELOG.md", "kind": "edit", "reason": "v2.7.4 entry."},
     {"path": "_version.json", "kind": "edit", "reason": "Bump to 2.7.4."}
   ],
@@ -16,10 +16,10 @@
   "breaking_changes": false,
   "operator_impact": "None directly. All future architectural decisions must pass the decisive test before ship. Trust-first on semantics is now binding doctrine, not implicit preference.",
   "tested_on": [
-    "phantom-stress sync — doctrine readable from CLAUDE.md root at session start"
+    "phantom-stress sync · doctrine readable from CLAUDE.md root at session start"
   ],
-  "caught_by": "Cumulative pattern across v2.6.17 → v2.7.3 — soft prescriptions decay under load, mechanical primitives hold.",
+  "caught_by": "Cumulative pattern across v2.6.17 → v2.7.3 · soft prescriptions decay under load, mechanical primitives hold.",
   "known_gaps": [
-    "Doctrine compliance is itself enforced semantically (read at session start). No hook checks that new skills pass the decisive test — relies on operator gate during skill creation."
+    "Doctrine compliance is itself enforced semantically (read at session start). No hook checks that new skills pass the decisive test · relies on operator gate during skill creation."
   ]
 }

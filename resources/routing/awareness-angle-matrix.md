@@ -1,6 +1,6 @@
 # Awareness × Angle Matrix
 
-> **TYPE:** Routing — logique de décision
+> **TYPE:** Routing · logique de décision
 > **CONSOMMÉ PAR:** hooks-generator, script-writer, brief-generator, creative-strategist
 > **SOURCE KB:** `02-awareness-levels.md`, `02-angles-marketing.md`, `phase-5-combinatoire-creative.md`
 > **DÉPEND DE:** `registries/angle-registry.md`
@@ -124,10 +124,10 @@ Le niveau de sophistication du marché filtre les angles viables.
 
 | Sophistication | Angles favorisés | Angles défavorisés | Logique |
 |---|---|---|---|
-| **nascent** | transformation, simplicity, efficiency | counter-intuitive, scarcity, parasitic-positioning | Marché vierge — angles directs, promesse claire. Pas besoin de paradigm shift ni de référent. |
-| **growth** | transformation, innovation, community, expertise | price-value, urgency | Marché qui monte — différenciation par mechanism ou identité. |
-| **mature** | counter-intuitive, expertise, security, community, parasitic-positioning | simplicity (trop basique), transformation (vu) | Marché saturé — paradigm shift, autorité, ou positionnement vs leader. |
-| **saturated** | counter-intuitive, emotional-identity, scarcity, barrier-removal | efficiency, simplicity, price-value | Marché épuisé — angle radicalement différent ou levée du dernier frein. |
+| **nascent** | transformation, simplicity, efficiency | counter-intuitive, scarcity, parasitic-positioning | Marché vierge · angles directs, promesse claire. Pas besoin de paradigm shift ni de référent. |
+| **growth** | transformation, innovation, community, expertise | price-value, urgency | Marché qui monte · différenciation par mechanism ou identité. |
+| **mature** | counter-intuitive, expertise, security, community, parasitic-positioning | simplicity (trop basique), transformation (vu) | Marché saturé · paradigm shift, autorité, ou positionnement vs leader. |
+| **saturated** | counter-intuitive, emotional-identity, scarcity, barrier-removal | efficiency, simplicity, price-value | Marché épuisé · angle radicalement différent ou levée du dernier frein. |
 
 Source `product.market_context.sophistication`.
 
@@ -170,4 +170,4 @@ Pour modifier la matrice :
 
 ---
 
-*Dernière mise à jour : 2026-03-16 (Session 11 — +barrier-removal, +parasitic-positioning dans routing)*
+*Dernière mise à jour : 2026-03-16 (Session 11 · +barrier-removal, +parasitic-positioning dans routing)*

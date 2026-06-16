@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PostToolUse hook (matcher Task) — beat-emit · garantie de RESTITUTION (D#520).
+PostToolUse hook (matcher Task) · beat-emit · garantie de RESTITUTION (D#520).
 
 LE PROBLÈME · le run onday a produit un raisonnement dense (sources lues, rejets
 argumentés, confiance-avec-raison) puis l'a écrasé en une phrase météo. La cause ·

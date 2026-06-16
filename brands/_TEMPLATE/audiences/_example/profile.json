@@ -1,9 +1,9 @@
 {
-  "$comment": "Audience profile — deep psychographic + behavioral context. Factual description of who they are.",
+  "$comment": "Audience profile · deep psychographic + behavioral context. Factual description of who they are.",
   "_schema": "profile/2.0",
   "_version": "2.0",
   "_changelog": {
-    "1.2": "S26b: meta.product_fit removed (subjective — belongs in pilotage docs, not neutral receptacle). product_id = provenance only.",
+    "1.2": "S26b: meta.product_fit removed (subjective · belongs in pilotage docs, not neutral receptacle). product_id = provenance only.",
     "1.1": "S26 red-team patches: key_expressions[].sample_size added (frequency needs denominator). pain_points[].awareness_stage + benefits[].awareness_stage added. meta.scope/parent_slug/overlap_with added (audience hierarchy). meta.validation_status added (hypothesis→scaled lifecycle). Tag namespaces enforced (problem:/context:/profession:/awareness:/life_moment:/behavior:). Breaking: key_expressions was already object[] since S26-early."
   },
   "_field_types": {
@@ -66,7 +66,7 @@
       "status": "draft | partial | complete",
       "scope": "broad | segment | micro. Broad = persona large (ex: 'femmes actives'). Segment = poche définie (ex: 'infirmières debout'). Micro = hyper-niche (ex: 'infirmières urgentistes nuit'). Max 3 niveaux : broad → segment → micro. Pas de sous-micro.",
       "parent_slug": "Slug de la poche parente dont celle-ci est une déclinaison. Null si poche racine. Permet la navigation broad → narrow sans arborescence dossier.",
-      "overlap_with": "Array de slugs d'autres poches qui partagent des traits. Signal de chevauchement — le détail de l'overlap (quels champs se recoupent) sort dans le rapport de mining, pas ici.",
+      "overlap_with": "Array de slugs d'autres poches qui partagent des traits. Signal de chevauchement · le détail de l'overlap (quels champs se recoupent) sort dans le rapport de mining, pas ici.",
       "product_id": "DEPRECATED v2.24.0: use applies_to_products[] instead. Kept for backward compatibility, readers fall back if applies_to_products is empty.",
       "applies_to_products": "Slugs of products this audience applies to. Empty = brand-wide audience (no product binding). Single = mono-product. Multiple = cross-product. Drives /phantom navigation: /phantom {brand} products {p} filtre les audiences dont applies_to_products contient {p}.",
       "tags": "Queryable labels with MANDATORY namespaces. Format: '{namespace}:{value}'. Namespaces autorisés : problem: | context: | profession: | awareness: | life_moment: | behavior:. Vocabulaire libre à l'intérieur du namespace. Ex: ['problem:foot-pain', 'context:standing-job', 'profession:nurse', 'awareness:solution_aware'].",
@@ -210,7 +210,7 @@
       "_notes": {
         "ref": "→ product.problems_solved[].problem_id. Must exist in spec.json.",
         "formulation": "In THEIR vocabulary. Not the product-level formulation.",
-        "awareness_stage": "unaware | problem_aware | solution_aware | product_aware | most_aware. At which awareness level this pain point resonates most. Factual — based on where in the funnel this language appears (TOFU reviews vs post-purchase).",
+        "awareness_stage": "unaware | problem_aware | solution_aware | product_aware | most_aware. At which awareness level this pain point resonates most. Factual · based on where in the funnel this language appears (TOFU reviews vs post-purchase).",
         "_source_meta.origin": "voc | brand_declared | inferred. Tracks where this data point came from.",
         "_source_meta.platform": "trustpilot | amazon | reddit | support | survey | page_copy | interview | google_reviews | instagram_dm | tiktok | youtube | facebook",
         "_source_meta.sample_size": "How many data points support this pattern. Null if not counted."
@@ -246,7 +246,7 @@
       },
       "_notes": {
         "ref": "→ product.benefits[].benefit_id. Must exist in spec.json.",
-        "awareness_stage": "unaware | problem_aware | solution_aware | product_aware | most_aware. At which awareness level this benefit resonates most. Factual — based on where in the funnel this language appears.",
+        "awareness_stage": "unaware | problem_aware | solution_aware | product_aware | most_aware. At which awareness level this benefit resonates most. Factual · based on where in the funnel this language appears.",
         "_source_meta.origin": "voc | brand_declared | inferred"
       }
     }

@@ -1,0 +1,46 @@
+{
+  "artifact": "close",
+  "version": "1.0",
+  "definition": "The closing move of any strategic synthesis: the last thing the operator reads after a brand read, an audience map, an angle batch, a perf audit.",
+  "target": "Facts, then expert reading, then proactive motion. The close shows the factual state (good, especially after a scrape, and listing the unknowns is good), interprets it (the expert contextual reading: the dominant wall, the second-order consequence; skipping this layer is the weather report), then moves forward (proposes the next step(s) carried by the reading: one strong recommendation or several context-appropriate directions with a lean, never a passive symmetric menu). It keeps the observed/deduced rigor (no hypothesis stated as fact) and gates at most one question, only when unknowable from the data AND blocking the next paying step. The weather report (failure) = stop at the facts, no interpretation, then hand the operator a passive question. Showing facts is not the failure; the missing reading plus the passive hand-off is.",
+  "supersedes": "investigation-posture.md Section 5 (Close ouvert = une question macro où l'opérateur arbitre) and AP-5. The mapping (Observé/Déduit/Inconnu/Leviers) stays; the close stops being an outsourced question and becomes a defended verdict-on-move. The doctrine is amended to match this target in the same body of work.",
+  "criteria": [
+    {
+      "id": "expert_reading_present",
+      "weight": 0.30,
+      "pass": "Interprets the facts: names what they MEAN in context (the dominant wall, the second-order consequence, the contextual expert reading), not just what was found.",
+      "fail": "Shows the facts/state with no interpretation. The reader learns what is, never what it means. This is the weather report."
+    },
+    {
+      "id": "proactive_motion",
+      "weight": 0.25,
+      "pass": "Moves forward: proposes the next step(s) carried by the reading. One strong recommendation, or several context-appropriate directions with a clear lean. The agent leads.",
+      "fail": "Passive hand-off: a flat symmetric menu ('lequel veux-tu creuser ?'), or stops at the unknowns, or asks the operator to choose with no lean. No forward motion."
+    },
+    {
+      "id": "factual_grounding",
+      "weight": 0.15,
+      "pass": "The factual état des lieux is present and the reading rests on it (especially after a scrape). Grounded in what was actually found.",
+      "fail": "Opinion from thin air, or facts hidden. No factual basis the reader can check."
+    },
+    {
+      "id": "fact_hypothesis_separated",
+      "weight": 0.15,
+      "pass": "Hypotheses carry their confidence and are not asserted as facts; the reading is defended on the strongest available evidence while naming what is still unknown.",
+      "fail": "States a deduced hypothesis (audience, ROAS, driver) as established fact. Confident prose with no provenance."
+    },
+    {
+      "id": "at_most_one_gate",
+      "weight": 0.15,
+      "pass": "Zero or one question that genuinely blocks the next step (unknowable from data AND on the critical path). Everything else proceeds degraded-but-honest.",
+      "fail": "Two or more questions the operator must answer before anything moves. Setup-by-interrogation."
+    }
+  ],
+  "proxies": [
+    {"name": "has_decision_verb", "direction": "sharp", "weight": 2, "threshold": 1},
+    {"name": "menu_of_axes", "direction": "mushy", "weight": 2, "threshold": 3},
+    {"name": "question_to_operator_count", "direction": "mushy", "weight": 1.5, "threshold": 2},
+    {"name": "ends_with_operator_question", "direction": "mushy", "weight": 1, "threshold": 1},
+    {"name": "hedge_density", "direction": "mushy", "weight": 1, "threshold": 4.0}
+  ]
+}

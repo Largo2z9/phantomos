@@ -99,7 +99,7 @@ def classify_change(path, status):
             "note": "TODO: describe script change and any post_step needed",
         }
 
-    # Schema change — flagged for manual schema-bump entry
+    # Schema change · flagged for manual schema-bump entry
     if "schema.json" in rel or rel.startswith("resources/schemas/"):
         return {
             "type": "_TODO_schema-bump",
@@ -175,7 +175,7 @@ def main():
     changes = []
     seen = set()
 
-    # First pass — renames
+    # First pass · renames
     renames = detect_renames(diff_output)
     for r in renames:
         changes.append(r)
@@ -183,7 +183,7 @@ def main():
         seen.add(f".skills/skills/{r['from']}/SKILL.md")
         seen.add(f".skills/skills/{r['to']}/SKILL.md")
 
-    # Second pass — other changes
+    # Second pass · other changes
     for line in diff_output.splitlines():
         parts = line.split("\t")
         if not parts or parts[0].startswith("R"):

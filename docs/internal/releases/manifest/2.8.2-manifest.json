@@ -4,25 +4,25 @@
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
   "theme": "Adaptive named anchors in snapshot Step 7 + 10-scenario stress test (REVERTED in v2.8.3)",
-  "summary": "Attempt to scaffold the synthesis paragraph for fast scanning without re-importing form-fill: 2-4 adaptive named anchors per snapshot, agent chooses based on what is load-bearing for THIS product in THIS niche. Open list of canonical anchors provided ('Le vrai pitch', 'La cible logique', 'L'angle commercial', 'Ce que tu n'as peut-être pas vu', 'Le signal dissonant', 'L'opportunité non-exploitée', + free-form). Hard limits: 2-4 max, never empty, never template-flavored, never the same 4 anchors every brand. Stress test harness shipped: 10 scenarios across distinct verticals, scenarios.json + run.py (Anthropic SDK) + results.md author verdict. Findings: 9/10 syntheses produced real insights, anchor diversity strong, 100% doctrine compliance. WALKED BACK in v2.8.3 — live test on an early-stage DTC pilot + Largo feedback ('pas fan des anchors en gras') confirmed bold anchors feel template-flavored visually.",
+  "summary": "Attempt to scaffold the synthesis paragraph for fast scanning without re-importing form-fill: 2-4 adaptive named anchors per snapshot, agent chooses based on what is load-bearing for THIS product in THIS niche. Open list of canonical anchors provided ('Le vrai pitch', 'La cible logique', 'L'angle commercial', 'Ce que tu n'as peut-être pas vu', 'Le signal dissonant', 'L'opportunité non-exploitée', + free-form). Hard limits: 2-4 max, never empty, never template-flavored, never the same 4 anchors every brand. Stress test harness shipped: 10 scenarios across distinct verticals, scenarios.json + run.py (Anthropic SDK) + results.md author verdict. Findings: 9/10 syntheses produced real insights, anchor diversity strong, 100% doctrine compliance. WALKED BACK in v2.8.3 · live test on an early-stage DTC pilot + Largo feedback ('pas fan des anchors en gras') confirmed bold anchors feel template-flavored visually.",
   "changes": [
     {"path": ".skills/skills/snapshot-brand/SKILL.md", "kind": "edit", "reason": "Step 7 hard rules add adaptive named anchors (2-4 max, bold one-line title + 2-4 sentences dense prose, blank line between, open canonical list, decisive test against template-flavor)."},
     {"path": "research/synthesis-stress-test/scenarios.json", "kind": "new", "reason": "10 brand scenarios across distinct verticals + signal densities."},
     {"path": "research/synthesis-stress-test/run.py", "kind": "new", "reason": "Stress test harness using Anthropic SDK to run the snapshot Step 7 prompt against each scenario."},
-    {"path": "research/synthesis-stress-test/results.md", "kind": "new", "reason": "Author verdict on the 10 outputs — anchor diversity, doctrine compliance, convergence patterns."},
+    {"path": "research/synthesis-stress-test/results.md", "kind": "new", "reason": "Author verdict on the 10 outputs · anchor diversity, doctrine compliance, convergence patterns."},
     {"path": "CHANGELOG.md", "kind": "edit", "reason": "v2.8.2 entry."},
     {"path": "_version.json", "kind": "edit", "reason": "Bump to 2.8.2."}
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "Brief — bold anchors visible during the v2.8.2 window. Reverted within hours by v2.8.3 to pure prose 3 movements.",
+  "operator_impact": "Brief · bold anchors visible during the v2.8.2 window. Reverted within hours by v2.8.3 to pure prose 3 movements.",
   "tested_on": [
     "Opus 4.7 simulation on 10 scenarios via stress test harness (passed)",
-    "an early-stage DTC pilot live (failed operator taste test — bold anchors felt template-flavored)"
+    "an early-stage DTC pilot live (failed operator taste test · bold anchors felt template-flavored)"
   ],
-  "caught_by": "Largo flagged that pure-prose synthesis lacks scaffolding for fast scanning — adaptive named anchors proposed as compromise.",
+  "caught_by": "Largo flagged that pure-prose synthesis lacks scaffolding for fast scanning · adaptive named anchors proposed as compromise.",
   "known_gaps": [
-    "REVERTED in v2.8.3. Adaptive named anchors over-corrected — bold-section labels read as form-fill scaffolding even when content was non-templated. The prose-first doctrine of v2.8.1 was cleaner.",
-    "Stress test harness retained in research/ as a future evaluation primitive — useful even though this specific output reverted."
+    "REVERTED in v2.8.3. Adaptive named anchors over-corrected · bold-section labels read as form-fill scaffolding even when content was non-templated. The prose-first doctrine of v2.8.1 was cleaner.",
+    "Stress test harness retained in research/ as a future evaluation primitive · useful even though this specific output reverted."
   ]
 }

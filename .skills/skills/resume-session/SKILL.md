@@ -34,7 +34,7 @@ Posture adapted to the **register of the last session** (detected from session-s
 
 ---
 
-## Step 1 — Locate the thread (silent)
+## Step 1 · Locate the thread (silent)
 
 Find the active context in this priority order:
 
@@ -45,19 +45,19 @@ Find the active context in this priority order:
 
 Build a mental map: **last brand active, last skill executed, last decision made, next step that was queued but not executed**.
 
-## Step 2 — Classify the thread (silent)
+## Step 2 · Classify the thread (silent)
 
 Label the thread by one of:
 
-- **Mid-deliverable** — a skill was running or produced output, not validated / persisted yet
-- **Mid-setup** — setup-brand was in progress, Step N incomplete
-- **Mid-validation** — inferred fields posted, waiting for operator review
-- **Mid-learning** — batch learning flush was shown, not yet confirmed
-- **Idle** — session closed cleanly, no thread pending
+- **Mid-deliverable** · a skill was running or produced output, not validated / persisted yet
+- **Mid-setup** · setup-brand was in progress, Step N incomplete
+- **Mid-validation** · inferred fields posted, waiting for operator review
+- **Mid-learning** · batch learning flush was shown, not yet confirmed
+- **Idle** · session closed cleanly, no thread pending
 
 If **multiple threads open across brands**, pick the most recent. Surface others as "aside" mentions, not in the main recap.
 
-## Step 3 — Deliver the resume
+## Step 3 · Deliver the resume
 
 **Template** (adapt to detected register):
 
@@ -79,7 +79,7 @@ If **multiple threads open across brands**, pick the most recent. Surface others
 
 ---
 
-## Step 4 — What this skill NEVER does
+## Step 4 · What this skill NEVER does
 
 - **NEVER** re-ask for context that's in session-state or learnings. Reconstruct silently, surface only the decision point.
 - **NEVER** produce a full history log. 5-7 bullets, focus on the thread and the next action.

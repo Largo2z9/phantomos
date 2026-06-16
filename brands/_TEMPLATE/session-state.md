@@ -1,4 +1,4 @@
-# Session State — {brand-name}
+# Session State · {brand-name}
 
 > Rolling activity log. Auto-maintained by skills on every write operation.
 > Max 30 lines. Oldest entries drop when limit exceeded.
@@ -22,4 +22,4 @@
 Format: skill | step_current/step_total | what was done | what remains}
 
 Example:
-[snapshot-brand] 3/7 — spec.json generated ✅, offers.json generated ✅ | Remaining: Q1-Q4 audience + profile.json
+[snapshot-brand] 3/7 · spec.json generated ✅, offers.json generated ✅ | Remaining: Q1-Q4 audience + profile.json

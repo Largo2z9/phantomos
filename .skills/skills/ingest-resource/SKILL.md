@@ -9,7 +9,7 @@ reasoning_pattern: null
 description: >
   Ingests raw content (notes, articles, transcripts, existing files, copy-paste),
   classifies into typed JSON resources OR brand context, writes to the correct folder,
-  and updates the central index. Fully autonomous — no operator confirmation required.
+  and updates the central index. Fully autonomous · no operator confirmation required.
   FR: "ingest" "ingère ça" "ajoute cette ressource" "range ça" "transforme en ressource" "mets ça dans la KB" "digère ce doc" "ajoute ces données".
   EN: "ingest" "add resource" "store this" "add to KB" "digest this" "add this data".
 permissions:
@@ -33,7 +33,7 @@ No manual file creation. Every insertion is typed, validated, indexed.
 
 **Responsibility**: ingest = optimistic write (fast, classifies and writes).
 validate-resources = authoritative check (slow, reconciles everything).
-Do not duplicate checks — ingest does not do cross-ref validation or status.json update. That's validate's job.
+Do not duplicate checks · ingest does not do cross-ref validation or status.json update. That's validate's job.
 
 ---
 
@@ -41,7 +41,7 @@ Do not duplicate checks — ingest does not do cross-ref validation or status.js
 
 When snapshotting a Shopify store product, sources have different reliability levels. **Always prefer higher-ranked sources.**
 
-### Tier 1 — Rendered page (Chrome / headless browser)
+### Tier 1 · Rendered page (Chrome / headless browser)
 **= Source of truth.** It's what the customer sees.
 
 Extracts: full composition, claims, real pricing (with bundle apps), offer stack, social proof (product rating, review count), scientific studies, comparison tables, safety warnings, labels (made in France, sugar-free, etc.), visuals.
@@ -50,7 +50,7 @@ Extracts: full composition, claims, real pricing (with bundle apps), offer stack
 
 **How:** Claude in Chrome → `navigate` + `read_page` (depth 3, max_chars 50000). Enough to extract the whole page. `get_page_text` often too large (>50K chars).
 
-### Tier 2 — Shopify API (`/products.json`)
+### Tier 2 · Shopify API (`/products.json`)
 **= Reliable index, unreliable content.**
 
 Reliable: handles, names, variant count, SKUs, images, weights.
@@ -58,7 +58,7 @@ Unreliable: prices (bundle apps override on front), description (often truncated
 
 **Usage:** Catalogue index (products_index in brand.json with enriched:false). Mapping handles → workspace slugs. Never as source for spec.json or offers.json.
 
-### Tier 3 — Trustpilot / review platforms
+### Tier 3 · Trustpilot / review platforms
 **= Raw VoC, complementary.**
 
 Brand-level rating + reviews. Not product-level (unless the platform segments by product). Feeds verbatim_quotes and key_expressions.
@@ -77,7 +77,7 @@ Brand-level rating + reviews. Not product-level (unless the platform segments by
 
 ---
 
-## Step 1 — Receive & Classify
+## Step 1 · Receive & Classify
 
 Read the full content. First determine: **shared resource or brand context?**
 
@@ -128,14 +128,14 @@ If NOT brand-specific, classify by type:
 | Technical rules specific to a platform/tool | `convention` |
 | Reusable structure/format for producing an output | `template` |
 
-**Mixed content**: Split into separate files — one type per file.
+**Mixed content**: Split into separate files · one type per file.
 **Tiebreak rule**: If ambiguous between two types (e.g. framework/sop), count the structural elements of each type (numbered steps → sop, levels/dimensions → framework). The type with the most structural elements wins. Log both candidate types in CHANGELOG.
 
 **Decision**: Agent classifies autonomously. Log reasoning in CHANGELOG.md.
 
 ---
 
-## Step 2 — Check Existing (ENRICH > CREATE)
+## Step 2 · Check Existing (ENRICH > CREATE)
 
 Read `index.json`. For speed, filter via `stats.by_type` to only read resources of the same type.
 
@@ -153,15 +153,15 @@ For catalogues: check if same domain prefix exists in `id_prefixes`.
 
 ---
 
-## Step 3A — Write Shared Resource JSON
+## Step 3A · Write Shared Resource JSON
 
 1. **Load schema**: `resources/schemas/{type}.schema.json`
 2. **Build JSON** conforming to schema:
    - `meta.created` = today (new) or preserved (enrich)
    - `meta.updated` = today
    - For catalogues: generate IDs using prefix from `index.json.id_prefixes`
-   - For SOPs: enforce `steps.length <= 20` (split into sub-SOPs if over — set `meta.parent_sop` on children, `meta.sub_sops[]` on parent)
-   - For catalogues with `entries.length > 12`: add tag `[RAMIFY]` — validate will flag
+   - For SOPs: enforce `steps.length <= 20` (split into sub-SOPs if over · set `meta.parent_sop` on children, `meta.sub_sops[]` on parent)
+   - For catalogues with `entries.length > 12`: add tag `[RAMIFY]` · validate will flag
 3. **Write file** to `resources/{type}/{slug}.json`
 4. **Cross-references**: Populate `refs` fields. Update referenced files too.
 
@@ -176,7 +176,7 @@ For catalogues: check if same domain prefix exists in `id_prefixes`.
 
 ---
 
-## Step 3B — Write Brand Context
+## Step 3B · Write Brand Context
 
 1. **Identify brand slug** from content or ask once if ambiguous
 2. **Auto-create folders**: If the destination folder doesn't exist (product or audience not declared at setup), create it automatically:
@@ -184,9 +184,9 @@ For catalogues: check if same domain prefix exists in `id_prefixes`.
    - Audience: create `brands/{slug}/audiences/{audience_slug}/`, copy `_TEMPLATE/audiences/_example/profile.json`, update `meta.slug`
 3. **Read existing file** at destination (if exists)
 4. **Classify each field change**:
-   - **New data** — field was null, new value available
-   - **Update** — field had a value, the new one is different (mark ⚠)
-   - **Identical** — same value → ignore, don't show in recap
+   - **New data** · field was null, new value available
+   - **Update** · field had a value, the new one is different (mark ⚠)
+   - **Identical** · same value → ignore, don't show in recap
 5. **Always show a recap before writing**:
    ```
    Here's what I'll save for {brand}, {entity}:
@@ -216,13 +216,13 @@ python3 .skills/write-to-context.py \
 ```
 
 - `--mode proposed` ONLY for dict values (stamps `_proposed/_source/_confidence` in-place). Scalars and arrays use `--mode direct` (metadata preserved in event log).
-- Writes to gated paths (`products/{slug}/spec.json`, `products/{slug}/offers.json`, `audiences/{slug}/profile.json`) require a resolved checkpoint — see `.skills/stage-proposal.py` and snapshot-brand Step 1/5 for the stage-then-ask pattern. If ingest-resource wants to write to a gated path without going through a preceding snapshot-brand run, stage a proposal first.
+- Writes to gated paths (`products/{slug}/spec.json`, `products/{slug}/offers.json`, `audiences/{slug}/profile.json`) require a resolved checkpoint · see `.skills/stage-proposal.py` and snapshot-brand Step 1/5 for the stage-then-ask pattern. If ingest-resource wants to write to a gated path without going through a preceding snapshot-brand run, stage a proposal first.
 - Edit, Write, `python -c json.dump`, `echo >`, `sed -i`, `tee` are all blocked by mutation-guard. Surface the script's error to the operator if it blocks; never bypass.
 - encode-batch full contract: `.skills/skills/encode-batch/SKILL.md`.
 
 10. **Store raw source** in `brands/{slug}/sources/` if applicable
 
-**Multi-entity split**: If the source content contains information about multiple entities (brand + product + audience mixed in a single brief), split into separate writes — one per entity target. Log the split in CHANGELOG.
+**Multi-entity split**: If the source content contains information about multiple entities (brand + product + audience mixed in a single brief), split into separate writes · one per entity target. Log the split in CHANGELOG.
 
 Note: cross-ref validation (profile.pain_points[].ref → spec.problems_solved[]) and status.json completeness update are handled by validate-resources, not here.
 
@@ -241,7 +241,7 @@ Raw VoC (review dump, CSV export, comment capture) is stored in `brands/{slug}/s
 | Objections formulated by customers | `profile.json` | `objections[]` | `raw` (phrasing) + `structured` (type, frequency) |
 | Pain points formulated by customers | `profile.json` | `pain_points[].formulation` | `raw` |
 | Product issues (quality, shipping, support) | `learnings.json` | new entry with `type: "behavior"` | `raw` |
-| Category signals (not brand-specific) | `brand.json` | `market.external_intelligence[]` | `raw` — **that's VoM, not VoC** |
+| Category signals (not brand-specific) | `brand.json` | `market.external_intelligence[]` | `raw` · **that's VoM, not VoC** |
 
 **VoC / VoM separation rule:**
 - VoC = what **this brand's** customers say. Feeds spec + profile + learnings.
@@ -262,7 +262,7 @@ When re-mining the same source (e.g. Trustpilot at +6 months), the agent does NO
 
 1. **Identify the cycle**: increment `_source_meta.date_captured` on new entries. Old date stays on old entries.
 2. **Compare, don't replace**: read existing pain_points/objections/key_expressions BEFORE writing. If an existing pattern is confirmed by the new mining → update `sample_size` and `frequency` (values from new mining, not cumulative). If an existing pattern no longer appears → do not delete, add `_source_meta.status: "unconfirmed_latest"`.
-3. **Quality rotation**: if the new mining finds a more representative verbatim/expression than an existing one (higher frequency, sharper phrasing), it REPLACES the weaker entry. The cap of 10 stays — it's a dynamic ranking, not FIFO.
+3. **Quality rotation**: if the new mining finds a more representative verbatim/expression than an existing one (higher frequency, sharper phrasing), it REPLACES the weaker entry. The cap of 10 stays · it's a dynamic ranking, not FIFO.
 4. **sample_size = always the latest pass**, never cumulative. Cumulative is computable via `sources/` if needed.
 5. **Mining report**: each VoC pass produces a report in `sources/voc-{source}-{date}-report.md` documenting: number of reviews analyzed, patterns found, entries added/replaced/confirmed, co-occurrences detected, VoM signals redirected to external_intelligence.
 
@@ -280,7 +280,7 @@ When re-mining the same source (e.g. Trustpilot at +6 months), the agent does NO
 
 ---
 
-## Step 4 — Update Index & Log
+## Step 4 · Update Index & Log
 
 1. **Update `index.json`** (shared resources only):
    - Add/update entry in `resources[]` array
@@ -296,22 +296,22 @@ When re-mining the same source (e.g. Trustpilot at +6 months), the agent does NO
 
 3. **Append to `CHANGELOG.md`**:
 ```
-## {date} — Ingest
+## {date} · Ingest
 
 **Source**: {description of raw content}
 **Action**: {CREATED | ENRICHED} {resource | brand context}
 **Files**:
-- [{type}] {path} — {short description}
+- [{type}] {path} · {short description}
 **Decisions**: {classification reasoning, enrich vs create, tiebreak if applicable}
 ```
 
 ---
 
-## Step 5 — Summary Output (MANDATORY)
+## Step 5 · Summary Output (MANDATORY)
 
-After every ingest, display a structured summary to the user. This is the transparency layer — the user must see what was understood, what was inferred, and what's missing.
+After every ingest, display a structured summary to the user. This is the transparency layer · the user must see what was understood, what was inferred, and what's missing.
 
-### Format — Brand Context
+### Format · Brand Context
 
 ```
 Ingest done. {N} entity(ies) updated.
@@ -329,7 +329,7 @@ Next step: "{suggested ingest command for highest-impact missing field}"
 
 Rule: zero JSON path in the operator diff. Name entities in natural language (e.g. "your customer profile", "the Glow Boost product sheet"). Paths stay in CHANGELOG only.
 
-### Format — Shared Resource
+### Format · Shared Resource
 
 ```
 Resource ingested. {action: CREATED | ENRICHED}
@@ -385,15 +385,15 @@ Common patterns:
 
 ## Hard Rules
 
-- **Never create "Master" files** mixing types — always split
-- **Never invent IDs** that exist — check `index.json.id_prefixes`
-- **Never inline catalogue content** in routing or SOP — reference by ID
-- **Minimum 3 entries** for a catalogue — below threshold, add entries with tag `[DRAFT]` and still write the file (no staging area)
-- **Never modify schemas** — if content doesn't fit, type is wrong
-- **Never ask the operator** for classification — decide and log
+- **Never create "Master" files** mixing types · always split
+- **Never invent IDs** that exist · check `index.json.id_prefixes`
+- **Never inline catalogue content** in routing or SOP · reference by ID
+- **Minimum 3 entries** for a catalogue · below threshold, add entries with tag `[DRAFT]` and still write the file (no staging area)
+- **Never modify schemas** · if content doesn't fit, type is wrong
+- **Never ask the operator** for classification · decide and log
 - **Always validate JSON** against schema before writing
-- **Brand context is facts only** — no strategy, ops, or decisions in brand files
-- **Never update status.json or run cross-ref checks** — that's validate-resources
+- **Brand context is facts only** · no strategy, ops, or decisions in brand files
+- **Never update status.json or run cross-ref checks** · that's validate-resources
 
 ---
 
@@ -401,21 +401,21 @@ Common patterns:
 
 The `_TEMPLATE` is at v1.8. When ingesting a page/PDF/transcript that describes a product, if info exists on these dimensions, capture it in spec.json or offers.json:
 
-**spec.json — v1.8 fields:**
+**spec.json · v1.8 fields:**
 - Structured composition (`specs.composition[]` with ingredient/pct/origin/inci)
-- Posology (`specs.posology` — dosage, timing, duration)
-- Contraindications (`specs.contraindications` — conditions, meds, pregnancy, breastfeeding)
-- Origin (`specs.origin` — country, region, facility, local_supply_pct)
+- Posology (`specs.posology` · dosage, timing, duration)
+- Contraindications (`specs.contraindications` · conditions, meds, pregnancy, breastfeeding)
+- Origin (`specs.origin` · country, region, facility, local_supply_pct)
 - Production method (`specs.production_method`)
-- Preparation (`specs.preparation` — food)
-- External DB IDs (`specs.external_databases` — OFF, Yuka, INCI Beauty, CIQUAL, EAN/GTIN)
-- Target suitability (`specs.target_suitability` — skin_types, hair_types, body_areas)
-- Durability (`specs.durability` — warranty, repairability — apparel/hardware)
+- Preparation (`specs.preparation` · food)
+- External DB IDs (`specs.external_databases` · OFF, Yuka, INCI Beauty, CIQUAL, EAN/GTIN)
+- Target suitability (`specs.target_suitability` · skin_types, hair_types, body_areas)
+- Durability (`specs.durability` · warranty, repairability · apparel/hardware)
 - Nutri-Score (`nutrition_facts.nutri_score_grade` A-E)
 - Allergen sources mapping
 - Cosmetics PAO (`perishability.period_after_opening_months`)
 
-**offers.json — v1.8 fields:**
+**offers.json · v1.8 fields:**
 - Duration type (calendar/usage_days/servings) + duration_servings
 - Cure metadata (cure_name, is_premade, target_concern, phases)
 - Duration tiers (incentives per engagement 1/3/6/12)

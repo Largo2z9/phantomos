@@ -4,7 +4,7 @@
   "released_at": "2026-04-25",
   "compatible_from": "2.0.0",
   "theme": "Cascade A micro-patches from live test on a wellness/cosmetic pilot",
-  "summary": "Live test on a wellness/cosmetic pilot confirmed Cascade A v2.8.0 holds under load — synthesis-first paragraph delivered (stick-solaire pattern), schemas used as analytical vocabulary, zero form-fill recap, zero score, zero missing-fields leak, coherence_check event emitted. Three micro-frictions surfaced and patched. (1) snapshot-brand Step 7: add 'three movements + blank line between each' rule. Movement 1 = what it really is + who buys. Movement 2 = offer architecture. Movement 3 = 1-2 things noticed. Same density, breaks the wall-of-text effect for fast scanning. (2) tour Milestone 3 (blase): explicit rule to ask early, woven into the context-capture turn (Milestone 2 path-a). Never as post-script closing the wow turn. (3) tour Milestone 7 url-path: hard rule against cascading Milestones 5/6 (PhantomOS intro + skill concept) immediately after the wow synthesis — re-pitching what PhantomOS is right after the wow dilutes it.",
+  "summary": "Live test on a wellness/cosmetic pilot confirmed Cascade A v2.8.0 holds under load · synthesis-first paragraph delivered (stick-solaire pattern), schemas used as analytical vocabulary, zero form-fill recap, zero score, zero missing-fields leak, coherence_check event emitted. Three micro-frictions surfaced and patched. (1) snapshot-brand Step 7: add 'three movements + blank line between each' rule. Movement 1 = what it really is + who buys. Movement 2 = offer architecture. Movement 3 = 1-2 things noticed. Same density, breaks the wall-of-text effect for fast scanning. (2) tour Milestone 3 (blase): explicit rule to ask early, woven into the context-capture turn (Milestone 2 path-a). Never as post-script closing the wow turn. (3) tour Milestone 7 url-path: hard rule against cascading Milestones 5/6 (PhantomOS intro + skill concept) immediately after the wow synthesis · re-pitching what PhantomOS is right after the wow dilutes it.",
   "changes": [
     {"path": ".skills/skills/snapshot-brand/SKILL.md", "kind": "edit", "reason": "Step 7 add 'three movements + blank line' rule."},
     {"path": ".claude/commands/tour.md", "kind": "edit", "reason": "Milestone 3 ask-early rule. Milestone 7 ban on cascading Milestones 5/6 after wow."},
@@ -13,9 +13,9 @@
   ],
   "migrations_required": false,
   "breaking_changes": false,
-  "operator_impact": "Synthesis paragraph reads cleaner — three discrete movements visually scannable while staying prose-first. Blasé question lands at the right moment. Wow synthesis no longer gets diluted by reflexive PhantomOS re-pitch.",
+  "operator_impact": "Synthesis paragraph reads cleaner · three discrete movements visually scannable while staying prose-first. Blasé question lands at the right moment. Wow synthesis no longer gets diluted by reflexive PhantomOS re-pitch.",
   "tested_on": [
-    "phantom-stress live a wellness/cosmetic pilot run (S37) — three frictions observed + corrected"
+    "phantom-stress live a wellness/cosmetic pilot run (S37) · three frictions observed + corrected"
   ],
   "caught_by": "Largo live observation on a wellness/cosmetic pilot run.",
   "known_gaps": []

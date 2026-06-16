@@ -20,7 +20,7 @@ permissions:
   subagent_safe: true
 pipeline:
   preconditions: ingest-resource should have run at least once
-  postconditions: none — agents can query after validate
+  postconditions: none · agents can query after validate
 disambiguates_against:
   audit-meta-account: "route to audit-meta-account when operator says 'audit' + platform context (Meta Ads), that's a platform-specific audit, not a workspace integrity check"
 ---
@@ -33,7 +33,7 @@ disambiguates_against:
 
 ## Tone
 
-Résultats en langage courant. Pas de codes de check, pas de noms de fichiers. "Ta fiche produit est complète" — pas "spec.json passes check 11b." Gaps = opportunités, jamais des erreurs.
+Résultats en langage courant. Pas de codes de check, pas de noms de fichiers. "Ta fiche produit est complète" · pas "spec.json passes check 11b." Gaps = opportunités, jamais des erreurs.
 
 # Skill: Validate Resources
 
@@ -42,7 +42,7 @@ Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 
 ---
 
-## Checks — Shared Resources (run all)
+## Checks · Shared Resources (run all)
 
 ### 1. Index ↔ Filesystem Sync
 
@@ -93,12 +93,12 @@ Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 
 ---
 
-## Checks — Brand Context (per brand)
+## Checks · Brand Context (per brand)
 
 ### 8. Wedge Completeness
 
 - Check existence and non-empty status of wedge docs:
-  - `brand.json` — meta.name filled? market.competitors has at least 1 entry?
+  - `brand.json` · meta.name filled? market.competitors has at least 1 entry?
   - At least 1 `products/{slug}/spec.json` with meta.name filled
   - At least 1 `audiences/{slug}/profile.json` with meta.name filled
 - Extended checks (not blocking for wedge, but flagged):
@@ -111,7 +111,7 @@ Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 
 - For each context file, check % of required fields filled vs empty
 - Classify: `empty` (0%) | `draft` (<30%) | `partial` (30-80%) | `complete` (>80%)
-- `learnings.json`: `empty` if 0 entries, `active` if ≥1 entry (no partial — it's append-only)
+- `learnings.json`: `empty` if 0 entries, `active` if ≥1 entry (no partial · it's append-only)
 - `strategy.json`: `empty` if no goals, `draft` if goals only, `complete` if goals + monthly_targets + current_focus
 - **Update `status.json.completeness`**
 
@@ -127,7 +127,7 @@ Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 
 - `profile.pain_points[].ref` → must exist in `spec.problems_solved[].problem_id` (iterate array)
 - `profile.benefits[].ref` → must exist in `spec.benefits[].benefit_id` (iterate array)
-- `offers.offer_groups[].offers[].product_refs[].slug` → must exist in `brand.products_index[].slug` (v2 schema — offers are NESTED under `offer_groups[]`, each offer has `product_refs[]`; legacy `offers.meta.product_slug` is v1.x only)
+- `offers.offer_groups[].offers[].product_refs[].slug` → must exist in `brand.products_index[].slug` (v2 schema · offers are NESTED under `offer_groups[]`, each offer has `product_refs[]`; legacy `offers.meta.product_slug` is v1.x only)
 - `profile.meta.product_id` (if set) → must match a product slug in `products/`
 - **Spectre (D#502/D#503)** · `spectrum.cells[].use_case_ref` → must exist in `spec.use_cases[].use_case_id` · `spectrum.cells[].audience_ref` (if set) → must match a slug under `audiences/` · `spectrum.core_cell_ref` (if set) → must match a `cells[].cell_id` in the same file · `spec.use_cases[].mechanism_refs[]` → must exist in `spec.mechanisms[].mechanism_id` (le pont Mc → U → A vérifiable).
 - **Spectre trace angle→carte (D#518)** · `angle.lineage.use_case_ref` (si présent) → must exist in `spec.use_cases[].use_case_id` (et donc, transitivement, tracer à un `mechanism_refs[]` · un angle dont l'usage n'est porté par aucun mécanisme est une projection, pas un angle) · `angle.lineage.spectrum_cell_ref` (si présent) → must match a `cells[].cell_id` dans le `spectrum.json` de la même marque. Intégrité QUAND le ref est présent, jamais forcé (cf garde-fou mécanique correspondant dans `resources/scripts/validate-all.py` · `angle_spectrum_untraced` MED).
@@ -136,11 +136,11 @@ Covers both `resources/` (shared KB) and `brands/` (context DB + OS).
 - Flag: **broken cross-refs**
 - **Report only** (data loss risk)
 
-**Offer counting — always iterate `offer_groups[].offers[]`** (v2 schema). Example:
+**Offer counting · always iterate `offer_groups[].offers[]`** (v2 schema). Example:
 ```python
 count = sum(len(g.get("offers", [])) for g in offers_doc.get("offer_groups", []))
 ```
-Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x path and returns 0 on v2 files, producing the false "offers missing" flag. If a brand still has a v1.x flat-offers file, the count legitimately is 0 under v2 expectation; flag it as schema-migration-pending, not as missing data.
+Never count via flat `offers_doc.get("offers", [])` · that's the legacy v1.x path and returns 0 on v2 files, producing the false "offers missing" flag. If a brand still has a v1.x flat-offers file, the count legitimately is 0 under v2 expectation; flag it as schema-migration-pending, not as missing data.
 
 ### 11b. _field_types Consistency
 
@@ -184,10 +184,10 @@ Never count via flat `offers_doc.get("offers", [])` — that's the legacy v1.x p
 - Flag learnings avec `status: "active"` + `date` > 180 jours → flag `[REVIEW]` (potentiellement obsolète)
 - **Entrées actives > 200** → ajouter dans `todos.md → ## Flags` :
   ```
-  [STORAGE] learnings.json {brand} : {N} entrées actives — recommandé de passer les plus vieilles à status:"archived".
+  [STORAGE] learnings.json {brand} : {N} entrées actives · recommandé de passer les plus vieilles à status:"archived".
   Tri suggéré : garder toutes les entries < 180 jours + les entries avec tags platform/compliance quel que soit l'âge.
   ```
-  Ne jamais archiver automatiquement — décision opérateur uniquement.
+  Ne jamais archiver automatiquement · décision opérateur uniquement.
 - **Auto-fix** : marquer les contradictions. Écrire `promote-backlog.json` (créer le fichier s’il n’existe pas encore).
 
 ### 11c. Learnings Index Rebuild
@@ -337,7 +337,7 @@ Cross-ref · canon `docs/system/connectivity-layering.md`.
 - Scan all `CLAUDE.md` files: root + all `brands/{slug}/`
 - Flag: root CLAUDE.md > 150 lines → `[SPLIT-CANDIDATE]`
 - Flag: brand CLAUDE.md > 80 lines → `[SPLIT-CANDIDATE]`
-- **Report only** — suggest which sections to extract to docs/system/architecture.md or brand-specific docs
+- **Report only** · suggest which sections to extract to docs/system/architecture.md or brand-specific docs
 - Recommend target sections for extraction: verbose sections (Tiers, Session Relay, Communication Rules, Rules)
 
 ### 14. Update Status Timestamps
@@ -345,7 +345,7 @@ Cross-ref · canon `docs/system/connectivity-layering.md`.
 - Update `status.json.last_activity` to current ISO timestamp (since validate produces output impact)
 - No session-state.md activity log entry needed (validate is read-heavy, not write-heavy on brand content)
 
-### 15. Custom Entities — Filesystem Walk (V1.5)
+### 15. Custom Entities · Filesystem Walk (V1.5)
 
 Extends check 1 to the extension layer.
 
@@ -375,11 +375,11 @@ Blocks custom entity names that would collide with core.
 - Scan every `brands/*/custom/{type}/` folder name. Match against reserved list → `CRITICAL: reserved name collision on custom entity {type}`.
 - Also scan `index.json → extensions[].type` for the same check.
 
-### 18. Sidecar Coherence (V1.5 — flag only)
+### 18. Sidecar Coherence (V1.5 · flag only)
 
 Flags potential sidecar semantic divergence with the core entity.
 
-- For every sidecar, list field names that could be semantic neighbors to core fields (heuristic match on substring or lexical similarity — `currency`, `locale`, `timezone`, `unit`, `language`, etc.).
+- For every sidecar, list field names that could be semantic neighbors to core fields (heuristic match on substring or lexical similarity · `currency`, `locale`, `timezone`, `unit`, `language`, etc.).
 - Output as `INFO: sidecar field {x} may overlap with core field {y}, review manually`.
 - This check flags, does not block. Automated resolution of semantic divergence is pending V1.x.
 
@@ -522,7 +522,7 @@ Empêche les 3 pièges canon doctrine v2.39 · audience-fantôme (micro sans jus
 ## Output Format
 
 ```
-## Validation Report — {date}
+## Validation Report · {date}
 
 ### Verdict
 {Une ligne. Toujours en premier. En langage opérateur, jamais de jargon technique.}
@@ -553,11 +553,11 @@ Tout ce qui suit (Summary, Auto-Fixed, Manual Action Required...) est affiché a
 - [fix] {description}
 
 ### Points à corriger manuellement
-- [données manquantes] {description opérateur — ex: "un champ n'est pas catalogué dans la fiche produit {produit}"} — {action exacte}
-- [référence cassée] {description — ex: "le profil audience référence un problème qui n'existe pas dans la fiche produit"} — vérifier que {ID} est bien présent dans {entité concernée en français}
-- [données vieilles] {entité concernée en français — ex: "stratégie Glowco"} pas mise à jour depuis {date} — ingest des mises à jour si disponibles
-- [à décomposer] {ressource concernée en français} : {N} entrées, dépasse la limite recommandée — à découper en sous-listes si tu veux améliorer les performances
-- [fichier trop long] {fichier concerné en français} : {N} lignes — certaines sections peuvent être externalisées
+- [données manquantes] {description opérateur · ex: "un champ n'est pas catalogué dans la fiche produit {produit}"} · {action exacte}
+- [référence cassée] {description · ex: "le profil audience référence un problème qui n'existe pas dans la fiche produit"} · vérifier que {ID} est bien présent dans {entité concernée en français}
+- [données vieilles] {entité concernée en français · ex: "stratégie Glowco"} pas mise à jour depuis {date} · ingest des mises à jour si disponibles
+- [à décomposer] {ressource concernée en français} : {N} entrées, dépasse la limite recommandée · à découper en sous-listes si tu veux améliorer les performances
+- [fichier trop long] {fichier concerné en français} : {N} lignes · certaines sections peuvent être externalisées
 
 → **Règle absolue** : aucun path fichier, aucun code technique (`schema_11b`, `wedge_incomplete`, `_field_types`…). Toujours décrire le problème en termes métier + l'action concrète pour le régler.
 
@@ -584,7 +584,7 @@ Tier 1 checks (= wedge):
 Tier 2 checks (non-blocking, suggestions):
 - benefits[].chain or pain_points[].chain filled on any entity
 - brand.market.competitors has ≥1 entry
-- ≥1 offers.json exists with ≥1 entry in `offer_groups[].offers[]` (v2 schema — see § 11 counting rule)
+- ≥1 offers.json exists with ≥1 entry in `offer_groups[].offers[]` (v2 schema · see § 11 counting rule)
 - tone_of_voice has banned_words or frequent_words
 
 Tier 3 checks (non-blocking, contextual):
@@ -615,7 +615,7 @@ Append report to CHANGELOG.md.
 
 ## Post-Validate Usage Guide
 
-After reporting, if `wedge_complete = true` for at least one brand, append a **usage bridge** to the output. This is the single most important UX moment — the user just invested 15-30 min and needs to know what to do next.
+After reporting, if `wedge_complete = true` for at least one brand, append a **usage bridge** to the output. This is the single most important UX moment · the user just invested 15-30 min and needs to know what to do next.
 
 ### When wedge_complete = true:
 
@@ -630,7 +630,7 @@ Essaie maintenant :
 → "Prépare un brief créa pour une campagne Meta"
 
 Tes agents puisent automatiquement dans le contexte que tu viens de configurer.
-Pas besoin de re-expliquer ta marque — c'est déjà fait.
+Pas besoin de re-expliquer ta marque · c'est déjà fait.
 
 Pour enrichir plus tard : "Ingest [nouvelles infos] pour {brand_name}"
 Pour vérifier la santé : "Validate {brand_name}"
@@ -667,7 +667,7 @@ Operator says "validate {brand}" or "health check {brand}" → run checks 1-14 o
 Operator says "validate all", "validate everything", "health check global", or "workspace status" → run checks on ALL brands:
 
 1. List all brand slugs: scan `brands/*/brand.json` (skip `_TEMPLATE/`, `_EXAMPLE/`)
-2. Run checks 1-7 (shared resources) — once
+2. Run checks 1-7 (shared resources) · once
 3. Run checks 8-14 per brand, plus checks 15-18 on each brand's extensions
 4. Aggregate results into `workspace-status.json` (root level):
 
@@ -717,15 +717,15 @@ Health: degraded
 
 ## Hard Rules
 
-- **Never delete files** — only flag
+- **Never delete files** · only flag
 - **Auto-fix only safe ops**: index sync, inbound refs, stats, status.json, workspace-status.json, todos flags
 - **Schema violations and duplicates** = report only
-- **Run ALL checks every time** — no partial validation (mode incrémental = V2)
+- **Run ALL checks every time** · no partial validation (mode incrémental = V2)
 - **Validate = autorité unique** sur status.json, workspace-status.json, cross-refs, et stats. Aucun autre skill n'écrit dans ces fichiers.
 - **Brand status.json is the only file validate writes in brands/** (+ todos.md flags)
-- **workspace-status.json is the only cross-brand aggregation file** — lives at workspace root
-- **HR-19 frontmatter prerequisites schema validation** — voir check 19. Tout SKILL.md avec un field `prerequisites:` MUST passer la validation contre `resources/schemas/skill-prerequisites.schema.json` ET maintenir la cohérence avec son Step 0bis prose. Frontmatter ↔ Step 0bis drift = MAJOR finding (multi-source of truth interdit, red team v2.36 A3).
-- **HR-20 operator vocabulary jargon lint** — voir check 20. Scan SKILL.md prose operator-facing pour tokens jargon (atlas brand/vivant/canon, validations[], fiches, couches, archetype, L1/L2/L3 fallback, etc.). Match hors backticks code → MAJOR finding + suggested replacement via `docs/system/operator-vocabulary-translation.md`. Empêche jargon leak operator (red team v2.36 Friction 5).
+- **workspace-status.json is the only cross-brand aggregation file** · lives at workspace root
+- **HR-19 frontmatter prerequisites schema validation** · voir check 19. Tout SKILL.md avec un field `prerequisites:` MUST passer la validation contre `resources/schemas/skill-prerequisites.schema.json` ET maintenir la cohérence avec son Step 0bis prose. Frontmatter ↔ Step 0bis drift = MAJOR finding (multi-source of truth interdit, red team v2.36 A3).
+- **HR-20 operator vocabulary jargon lint** · voir check 20. Scan SKILL.md prose operator-facing pour tokens jargon (atlas brand/vivant/canon, validations[], fiches, couches, archetype, L1/L2/L3 fallback, etc.). Match hors backticks code → MAJOR finding + suggested replacement via `docs/system/operator-vocabulary-translation.md`. Empêche jargon leak operator (red team v2.36 Friction 5).
 
 ### HR-21 · Audience cartography hierarchy validation (v2.42+)
 
@@ -750,19 +750,19 @@ Le schéma v1.8 est backward-compatible. Les contraintes additionnelles à véri
 
 **spec.json v1.8 :**
 - `specs.composition[]` accepte string OR objet structuré (anyOf). Si objet, `ingredient` requis.
-- `specs.posology.recommended_daily_servings` — number si présent
-- `specs.contraindications.age_min/max` — integer ≥ 0 si présent
-- `nutrition_facts.nutri_score_grade` — enum ["A","B","C","D","E"] ou null
-- `nutrition_facts.allergens[]` — enum EU14 + "oats" (nouvelle valeur)
-- `dietary_tags[]` — enum étendue (caffeine_free, bio, raw, chicory_based, clean_beauty, cruelty_free en plus)
-- `perishability.period_after_opening_months` — number si cosmétique
+- `specs.posology.recommended_daily_servings` · number si présent
+- `specs.contraindications.age_min/max` · integer ≥ 0 si présent
+- `nutrition_facts.nutri_score_grade` · enum ["A","B","C","D","E"] ou null
+- `nutrition_facts.allergens[]` · enum EU14 + "oats" (nouvelle valeur)
+- `dietary_tags[]` · enum étendue (caffeine_free, bio, raw, chicory_based, clean_beauty, cruelty_free en plus)
+- `perishability.period_after_opening_months` · number si cosmétique
 
 **offers.json v1.8 :**
-- `contents.duration_type` — enum ["calendar","usage_days","servings"] si présent
-- `pricing.price_per_unit.unit` — enum-locked à 22 valeurs (gram, kg, ml, l, serving, dose, day, month, piece, meter, m2, load, wash, application, capsule, tablet, sachet, bottle, pack, count, portion, unit)
-- `incentives.duration_tiers[].duration_months` — integer > 0
-- `incentives.loyalty.tiers[]` — structure libre si présent
+- `contents.duration_type` · enum ["calendar","usage_days","servings"] si présent
+- `pricing.price_per_unit.unit` · enum-locked à 22 valeurs (gram, kg, ml, l, serving, dose, day, month, piece, meter, m2, load, wash, application, capsule, tablet, sachet, bottle, pack, count, portion, unit)
+- `incentives.duration_tiers[].duration_months` · integer > 0
+- `incentives.loyalty.tiers[]` · structure libre si présent
 
 **Règle :** Un instance en v1.7 doit aussi valider sous v1.8 (backward compat). Si échec → flagger comme régression.
 
-**Stamping:** read expected `_version` values from `brands/_TEMPLATE` (living source of truth) and verify each file in a fresh instance matches the corresponding entity. Current values (2026-04-23): `brand.json _version=2.2`, `products/{slug}/spec.json _version=1.8`, `products/{slug}/offers.json _version=2.0`, `audiences/{slug}/profile.json _version=1.2`. Never hardcode "1.8" as a universal version — each entity has its own schema line. The field is `_version`, not `_template_version` (legacy terminology drift).
+**Stamping:** read expected `_version` values from `brands/_TEMPLATE` (living source of truth) and verify each file in a fresh instance matches the corresponding entity. Current values (2026-04-23): `brand.json _version=2.2`, `products/{slug}/spec.json _version=1.8`, `products/{slug}/offers.json _version=2.0`, `audiences/{slug}/profile.json _version=1.2`. Never hardcode "1.8" as a universal version · each entity has its own schema line. The field is `_version`, not `_template_version` (legacy terminology drift).

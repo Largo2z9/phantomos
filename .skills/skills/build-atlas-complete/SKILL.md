@@ -1,7 +1,7 @@
 ---
 name: build-atlas-complete
 type: orchestrator
-version: "1.18.0"
+version: "1.20.0"
 recommended_model: sonnet
 reasoning_pattern: null
 mode: proposed
@@ -92,6 +92,10 @@ disambiguates_against:
   profile-audience: "route to profile-audience standalone when operator wants audiences only, not the full strategic atlas."
   score-matrix: "route to score-matrix standalone when atlas is already populated and operator wants only territory prioritization."
 patch_notes:
+  v1.20.0:
+    - "2026-06-16 · refonte du close sur le principe d'expert-prompting · la trichotomie re-collée (affirme/ouvre/gate en prose prescriptive + long exemple opérateur) est remplacée par une INVOCATION de la chaîne diagnostique sur le substrat encodé (le move se PRODUIT, il n'est pas dicté par une forme) + pointeur posture vers contextual-intelligence.md + investigation-posture.md (non re-collé) + l'OUT honnête ajouté (nommer la seule inconnue bloquante + son chemin EST un move) + exemplar `resources/canon/exemplars/close.md` conservé · self-critique conservée · body net plus court. Backward compat strict additif. Zéro em-dash."
+  v1.19.0:
+    - "2026-06-16 · réconciliation du close à la posture amendée (canon racine + contextual-intelligence.md + investigation-posture.md) · la 5e section passe de « UNE seule question macro » (close-menu) à verdict-de-move affirme/ouvre/gate (affirme par défaut, le drill-down macro reste une affordance de redirection trailing), self-critique affirme-vs-météo + exemplar `resources/canon/exemplars/close.md` ajoutés au Step 9 · l'articulation beat (« question macro UNIQUE ») reconciliée au verdict · mapping 5 sections + payload close.json (verdict déjà TRANCHÉ) préservés. Backward compat strict additif. Zéro em-dash."
   v1.18.0:
     - "2026-06-15 · D#520 · le beat de restitution câblé sur TOUTES les frontières de phase de l'orchestrateur (le scan l'avait déjà). Cause · une phase d'encodage lourde et invisible (audiences cartographiées, marché cartographié, angles produits, atlas clos) se faisait narrer en une phrase météo (« audiences cartographiées », « la carte est posée ») · le travail, les rejets argumentés et la confiance-avec-sa-cause s'évaporaient (même maladie que le scan, corrigée D#520). FIX, mécanique pas prose · (1) `--mode orchestrated` rendu EXPLICITE sur la commande scan existante (Step 2). (2) ÉMISSION du beat ajoutée à CHAQUE autre frontière où un sous-agent a déposé son registre frais · après que map-audiences a rendu l'arbre (`--phase audiences`, fin Phase 3, juste avant Gate Intermédiaire 2), après l'écriture de `spectrum.json` (`--phase spectrum`, Step 2.5 sous-bloc B · PAS émis si `spectre_mode=off`/carte non lancée), après produce-paid-angles (`--phase angles`, Step 6, juste avant Gate B). Chaque émission présente la sortie de `render-beat.py --mode orchestrated` TELLE QUELLE (décision-d'abord · verdict + second ordre, raisonnement, prudent-avec-cause, CTA `/phantom` teasé), jamais une re-narration · même filet anti-trou (fail-open → repli prose) que le scan. (3) CLOSE · build-atlas EST le producteur (pas de sous-agent au close · l'orchestrateur POSSÈDE le close, D#519) · au Step 9 il ÉCRIT lui-même `.phantom/beats/{slug}/close.json` (`phase=close` · verdict global tranché · `read` = lecture 5-axes · `analyzed` = top-3 axes prioritaires défendus · `blocked`/`confidence` = ce qui reste inconnu AVEC son levier · vue `/phantom {slug} atlas` · TERMINAL donc zéro forward-look, mais `tease` propose la prochaine ACTION opérateur · premier brief créa ou capture des chiffres éco / branchement compte) PUIS l'émet via `render-beat --phase close --mode orchestrated`. Doctrine SSOT · `docs/system/restitution-beat-doctrine.md` (contrat payload non dupliqué ici, pointé). `render-beat.py` supporte déjà les 5 phases + `--mode` + choisit la vue par phase · zéro changement code. Insertion chirurgicale · aucune logique de gate / délégation / purity altérée, Tone exception D#520 + hook beat-emit déjà câblés réutilisés. Backward compat strict additif. Zéro em-dash (séparateur middle dot)."
   v1.17.0:
@@ -871,12 +875,17 @@ Skills / actions / sources pour lever les inconnues. Examples:
 - "Refine angles si Gate B a laissé des hypothèses floues (skill `produce-paid-angles --focus={audience}`)."
 - **Offre de connexion des outils (v1.10.0 · HR-AXIS-6)** · les inconnus des axes économie, funnel et média se lèvent par le branchement · proposer explicitement à l'opérateur de connecter ses outils, en proposition groupée et en langage opérateur · commerce/CMS (levier `connect-source` · ouvre l'économie réelle + le bas du funnel) · plateformes paid Meta/Google (levier `connect-source` / `import-meta-results` puis `audit-meta-account` · ouvre structure de compte + ROAS réel) · analytique/email/productivité (levier `connect-source` ou `connect-mcp-server` · ouvre rétention + flows + contexte). Affordance qui s'ajoute aux Leviers, pas la question macro du Close ouvert. Report propre vers `pending-validations.md`, jamais imposé.
 
-### Close ouvert
-**UNE seule question macro**. L'opérateur arbitre la prochaine direction (production briefs+créas downstream ou enrichissement territoire substrat). Example canonical v1.3.0:
+### Close · le verdict de move
+Le close **AFFIRME** un move, il ne rend pas une question à arbitrer. Le move n'est PAS prescrit par une forme · il se PRODUIT en faisant tourner la chaîne diagnostique sur le substrat déjà encodé (position → espace blanc → audiences-du-mécanisme → priorité-éco → verdict · `docs/doctrine/strategic-diagnostic-doctrine.md`), comme au NIVEAU LIVE, mais sur l'atlas refermé. Le move tombe de ce que tu LIS dans le substrat, pas d'un gabarit. Posture du close (affirme par défaut · ouvre un inconnu réel · au plus un gate) · `docs/system/investigation-posture.md` + `docs/system/contextual-intelligence.md`, ne pas re-coller le contrat ici. Affirme ce qu'on FAIT, jamais une hypothèse comme un fait (le move s'appuie sur le Déduit qui porte sa confidence).
+**L'out honnête est un move, pas un cop-out.** Quand le substrat ne porte pas encore de move tranché, nomme la SEULE inconnue bloquante + le chemin exact pour la lever, et avance la part faisable en parallèle (« je ne tranche pas la cible sans ta marge réelle · donne-la moi, sinon j'avance sur la page et on chiffrera après »). Ça reste une lecture qui décide. Inventer un verdict pour faire décisif est l'échec, pas l'inverse.
 
-> *"Sur quel axe créatif tu veux qu'on matérialise d'abord briefs + créas via `creative-brief-composer` · T1 · T2 · T3 ? Ou tu veux d'abord enrichir le territoire (mine-voc supplémentaire · profile-audience drill · etc.) ?"*
+Le drill-down macro (« ou tu préfères enrichir le territoire d'abord ») reste une affordance de redirection offerte en une ligne trailing SI elle est réelle, jamais le défaut · le close tranche, il ne tend pas un menu d'axes. Le worked example (verdict tranché + out honnête vs météo molle) vit dans l'exemplar, pas re-collé ici.
 
-**NEVER** orphan close. **NEVER** flat menu. **NEVER** more than one question.
+**Auto-critique avant de surfacer le close (D#52x).** Relis ton close contre affirme/ouvre/gate · est-ce qu'il TRANCHE un move défendu, ou est-ce qu'il décrit l'état et rend une question (bulletin météo · « lequel veux-tu creuser ? », menu d'axes symétrique) ? Si c'est la météo, réécris-le en verdict avant de l'émettre.
+
+**Exemplar** · la paire tranché vs mou (le close qui affirme un move défendu vs celui qui décrit et rend un menu) · `resources/canon/exemplars/close.md` (lecture diagnostique · `resources/canon/exemplars/diagnostic.md`).
+
+**NEVER** orphan close. **NEVER** flat menu d'axes symétrique. **NEVER** une question qui n'est pas un gate (un inconnu se OUVRE, il ne s'arbitre pas sur le bureau de l'opérateur).
 
 ### Beat de restitution du close · build-atlas EST le producteur (D#520)
 
@@ -904,7 +913,7 @@ Champ vide = omis, jamais inventé. Ce qui reste inconnu (les axes éco/funnel/m
 
 **2. Émets-le** · `python3 .skills/render-beat.py --brand {slug} --phase close --mode orchestrated` et présente sa sortie TELLE QUELLE. Le renderer réorganise en décision-d'abord (verdict + lecture 5-axes, puis le raisonnement des axes prioritaires, puis ce qui reste prudent avec sa cause, puis « Lu · », puis le CTA `/phantom {slug} atlas` + le tease de la prochaine action). Le close étant terminal, le renderer n'appose AUCUN forward-look · le tease porte seul la suite (l'action opérateur). NE re-narre PAS · le beat est la restitution mécanique de l'Investigation Posture que tu viens de poser, il garantit que le verdict tranché et la confiance-avec-sa-cause ne s'effondrent pas en météo.
 
-**Articulation avec le Close ouvert (5 sections).** La synthèse Investigation Posture 5 sections (Observé / Déduit / Inconnu / Leviers / Close ouvert) reste le rendu opérateur-facing principal · le beat close est sa restitution décision-d'abord pour le record et la cohérence cross-phase (même grammaire que scan/audiences/spectrum/angles). La question macro UNIQUE du Close ouvert n'est pas un forward-look de pipeline · elle reste portée par la section Close ouvert, le `tease` du beat la double en CTA paste-ready vers l'action.
+**Articulation avec le Close ouvert (5 sections).** La synthèse Investigation Posture 5 sections (Observé / Déduit / Inconnu / Leviers / Close ouvert) reste le rendu opérateur-facing principal · le beat close est sa restitution décision-d'abord pour le record et la cohérence cross-phase (même grammaire que scan/audiences/spectrum/angles). Le verdict de move du close (affirme · ouvre · gate · cf section ci-dessus) n'est pas un forward-look de pipeline · il reste porté par la section close, le `tease` du beat le double en CTA paste-ready vers l'action.
 
 **Filet** · si `render-beat` rend du vide (payload pas écrit ou illisible), retombe sur la synthèse 5 sections en prose · ne laisse JAMAIS un trou à la place du close. L'attendu reste le beat, le repli n'est qu'un garde contre la perte sèche.
 

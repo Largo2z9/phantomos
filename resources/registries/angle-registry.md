@@ -1,6 +1,6 @@
 # Angle Registry
 
-> **TYPE:** Taxonomie — registre vivant
+> **TYPE:** Taxonomie · registre vivant
 > **CONSOMMÉ PAR:** hooks-generator, script-writer, brief-generator, lp-builder, creative-strategist
 > **SOURCE KB:** `01-marketing/.../02-angles-marketing.md`, `pipelines/copywriting/phase-5-combinatoire-creative.md`
 > **FORMAT:** 1 fiche par angle. Ajout/modification sans casser l'existant.
@@ -12,13 +12,13 @@
 Chaque angle suit cette structure :
 
 ```
-### [ID] — [Nom]
+### [ID] · [Nom]
 - **EPIC:** [dimension primaire] + [secondaire optionnelle]
 - **Promesse:** [message core en 1 phrase]
 - **Psycho cible:** [profil psychologique réceptif]
 - **Awareness:** primary [X, Y] | secondary [Z] | avoid [W]
 - **Lead types:** [types qui pair]
-- **Hook lever:** [fear / desire / rational — le(s) plus naturel(s)]
+- **Hook lever:** [fear / desire / rational · le(s) plus naturel(s)]
 - **Proof types:** [types qui renforcent cet angle]
 - **Quand utiliser:** [condition produit × marché × audience]
 - **Quand NE PAS utiliser:** [red flag]
@@ -29,7 +29,7 @@ Chaque angle suit cette structure :
 
 ## Fiches
 
-### efficiency — Efficacité / Performance
+### efficiency · Efficacité / Performance
 - **EPIC:** Practical + Critical
 - **Promesse:** "Fais plus en moins de temps"
 - **Psycho cible:** Results-oriented, busy, optimiseurs
@@ -43,7 +43,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### simplicity — Simplicité / Accessibilité
+### simplicity · Simplicité / Accessibilité
 - **EPIC:** Practical
 - **Promesse:** "Enfin simple et accessible"
 - **Psycho cible:** Frustrés par la complexité, overwhelmed, débutants
@@ -57,7 +57,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### price-value — Prix / Valeur
+### price-value · Prix / Valeur
 - **EPIC:** Critical
 - **Promesse:** "Le meilleur rapport qualité-prix"
 - **Psycho cible:** Price-sensitive, comparateurs, rationnels
@@ -71,7 +71,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### innovation — Innovation / Technologie
+### innovation · Innovation / Technologie
 - **EPIC:** Practical + Identity
 - **Promesse:** "La technologie la plus avancée"
 - **Psycho cible:** Early adopters, tech-savvy, nouveauté seekers
@@ -85,7 +85,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### expertise — Expertise / Autorité
+### expertise · Expertise / Autorité
 - **EPIC:** Identity + Critical
 - **Promesse:** "Créé par les meilleurs experts"
 - **Psycho cible:** Premium seekers, quality-focused, validation seekers
@@ -99,7 +99,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### transformation — Transformation / Résultat
+### transformation · Transformation / Résultat
 - **EPIC:** Emotional + Practical
 - **Promesse:** "Transforme ta vie"
 - **Psycho cible:** Change seekers, insatisfaits du statu quo, aspirationnels
@@ -113,7 +113,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### security — Sécurité / Confiance
+### security · Sécurité / Confiance
 - **EPIC:** Emotional (fear) + Critical
 - **Promesse:** "100% sûr et fiable"
 - **Psycho cible:** Risk-averse, anxieux, échaudés par expériences passées
@@ -127,7 +127,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### community — Communauté / Appartenance
+### community · Communauté / Appartenance
 - **EPIC:** Identity
 - **Promesse:** "Rejoins la communauté"
 - **Psycho cible:** Belonging seekers, identitaires, tribaux
@@ -141,7 +141,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### scarcity — Rareté / Exclusivité
+### scarcity · Rareté / Exclusivité
 - **EPIC:** Identity + Critical
 - **Promesse:** "Accès limité et exclusif"
 - **Psycho cible:** Exclusivity seekers, statut-conscious, FOMO-sensitive
@@ -155,7 +155,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### urgency — Urgence / Opportunité
+### urgency · Urgence / Opportunité
 - **EPIC:** Critical
 - **Promesse:** "Agis maintenant ou rate"
 - **Psycho cible:** Urgency-sensitive, procrastinateurs convaincus
@@ -169,7 +169,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### counter-intuitive — Contre-Intuitif / Révélation
+### counter-intuitive · Contre-Intuitif / Révélation
 - **EPIC:** Critical + Emotional
 - **Promesse:** "Ce qu'on ne te dit pas"
 - **Psycho cible:** Curieux, sceptiques, chercheurs de vérité
@@ -177,13 +177,13 @@ Chaque angle suit cette structure :
 - **Lead types:** Prediction, Secrets, Story
 - **Hook lever:** rational (curiosité), fear (menace cachée)
 - **Proof types:** transparency (science, données), authority (expert), result (evidence)
-- **Quand utiliser:** Insight réellement surprenant et prouvable. Marché saturé (sophistication élevée) — besoin de paradigm shift. Audience sceptique des solutions classiques.
+- **Quand utiliser:** Insight réellement surprenant et prouvable. Marché saturé (sophistication élevée) · besoin de paradigm shift. Audience sceptique des solutions classiques.
 - **Quand NE PAS utiliser:** Affirmation choc sans preuve. Audience Most Aware (ils connaissent déjà).
 - **Exemple hook:** "Les shampoings anti-chute AGGRAVENT ta chute de cheveux."
 
 ---
 
-### emotional-identity — Émotionnel / Identitaire
+### emotional-identity · Émotionnel / Identitaire
 - **EPIC:** Emotional + Identity
 - **Promesse:** "Deviens qui tu veux être"
 - **Psycho cible:** Identity seekers, aspirationnels, en quête de sens
@@ -197,7 +197,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### barrier-removal — Levée de Frein
+### barrier-removal · Levée de Frein
 - **EPIC:** Practical + Emotional
 - **Promesse:** "Sans l'obstacle qui t'empêchait d'agir"
 - **Psycho cible:** Convaincus mais bloqués par un frein (gêne, complexité, coût, jugement)
@@ -211,7 +211,7 @@ Chaque angle suit cette structure :
 
 ---
 
-### parasitic-positioning — Positionnement Parasitaire
+### parasitic-positioning · Positionnement Parasitaire
 - **EPIC:** Critical + Practical
 - **Promesse:** "La même chose que [référent connu], en mieux/moins cher/plus simple"
 - **Psycho cible:** Connaisseurs du référent, price-sensitive ou convenience-seekers
@@ -227,7 +227,7 @@ Chaque angle suit cette structure :
 
 ## Méta-règles
 
-- **1 angle dominant par pièce.** Règle du 70/30 — 70% angle principal, 30% secondaire max.
+- **1 angle dominant par pièce.** Règle du 70/30 · 70% angle principal, 30% secondaire max.
 - **70/30 cohérence brand.** Multi-angles OK si 70% éléments communs (promesse fondamentale, identité produit, valeurs brand).
 - **Angle ≠ Mechanism.** L'angle = perspective psychologique (POURQUOI). Le mechanism = explication technique (COMMENT). Ne pas mélanger dans le brief.
 - **Test d'arrêt de scroll.** Si le hook de l'angle ne fait pas "attends, c'est quoi ça ?" → retravailler.
@@ -247,18 +247,18 @@ Pour ajouter un angle :
 
 ---
 
-*Dernière mise à jour : 2026-03-16 (Session 10 — V3, 14 angles)*
+*Dernière mise à jour : 2026-03-16 (Session 10 · V3, 14 angles)*
 
 
 ---
 
-## Proposed — F5 Sandbox Batch 2026-04-10
+## Proposed · F5 Sandbox Batch 2026-04-10
 
 > Source : `research/f5-sandbox-promotion-batch.md` | Injected : 2026-04-13T20:29:22Z | Status : **_proposed** (review required)
 
 ---
 
-### prix-valeur — [PROPOSED] Cadre la creative autour de la perception value-for-money :
+### prix-valeur · [PROPOSED] Cadre la creative autour de la perception value-for-money :
 
 - **EPIC:** TBD
 - **Promesse:** Cadre la creative autour de la perception value-for-money : justifie le prix par un ratio vs concurrents, vs alternatives DIY, ou vs résultat atteint
@@ -276,6 +276,6 @@ Pour ajouter un angle :
 - **Sample count:** 7
 - **Confidence:** 0.95
 - **Source:** sandbox cross-batch, overnight R5
-- **Notes:** ABSENT du registry actuel malgré 7 occurrences cross-batch. Gap majeur — l'angle prix-valeur est l'un des plus présents mais jamais formalisé.
+- **Notes:** ABSENT du registry actuel malgré 7 occurrences cross-batch. Gap majeur · l'angle prix-valeur est l'un des plus présents mais jamais formalisé.
 - **Proposal ID:** prop_angle_01
 - **_proposed:** true

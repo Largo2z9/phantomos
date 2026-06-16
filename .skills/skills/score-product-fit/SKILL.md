@@ -22,7 +22,7 @@ pipeline:
 
 ## Tone
 
-Score + explication en langage courant. "Ce produit colle bien à cette audience parce que..." — pas un tableau de métriques abstraites.
+Score + explication en langage courant. "Ce produit colle bien à cette audience parce que..." · pas un tableau de métriques abstraites.
 
 # Skill: score-product-fit
 
@@ -37,7 +37,7 @@ The agent does NOT mutate the Context Engine directly. Proposals are optional if
 
 ---
 
-## Step 1 — Load and validate inputs
+## Step 1 · Load and validate inputs
 
 Read `brands/{brand}/products/{product}/spec.json` and `brands/{brand}/profiles/{audience}/profile.json`.
 
@@ -49,7 +49,7 @@ If critical fields are missing (e.g., no pain_points in profile), note it in the
 
 ---
 
-## Step 2 — Analyze need satisfaction
+## Step 2 · Analyze need satisfaction
 
 Compare product benefits against audience pain points and desires:
 
@@ -72,7 +72,7 @@ Produce a table:
 
 ---
 
-## Step 3 — Analyze language alignment
+## Step 3 · Analyze language alignment
 
 Compare product messaging against audience voice:
 
@@ -98,7 +98,7 @@ Compare product messaging against audience voice:
 
 ---
 
-## Step 4 — Analyze objection readiness
+## Step 4 · Analyze objection readiness
 
 Compare product attributes against audience objections:
 
@@ -116,7 +116,7 @@ For each top 3 objections in `profile.objections[]`:
 
 ---
 
-## Step 5 — Compute fit score and ranking
+## Step 5 · Compute fit score and ranking
 
 **Total fit score = need satisfaction + language alignment + objection readiness** (out of 10)
 
@@ -137,7 +137,7 @@ TOTAL FIT SCORE:     6.5  (medium fit, actionable)
 
 ---
 
-## Step 6 — Identify gaps and recommendations
+## Step 6 · Identify gaps and recommendations
 
 List top 3 gaps (highest impact):
 
@@ -150,7 +150,7 @@ For each gap, rate impact: High (blocks scaling) / Medium (slows conversion) / L
 
 ---
 
-## Step 7 — Propose optional mutations
+## Step 7 · Propose optional mutations
 
 **IF fit score ≥ 7 AND language alignment is strong:**
 - Propose to `profile.brand_alignment` → value: `{"product_fit_score": 7.5, "language_match": "strong", "last_reviewed": "2026-04-13"}`
@@ -160,7 +160,7 @@ For each gap, rate impact: High (blocks scaling) / Medium (slows conversion) / L
 - Propose to `profile.strategic_priority` → value: "high" or "medium"
 - Confidence: 0.7–0.8
 
-These proposals are OPTIONAL and only written if the signal is strong. If fit is uncertain (6–7 range), skip proposals — let the report stand on its own.
+These proposals are OPTIONAL and only written if the signal is strong. If fit is uncertain (6–7 range), skip proposals · let the report stand on its own.
 
 ---
 
@@ -224,7 +224,7 @@ Structure:
 
 ## Hard Rules
 
-- **Jamais écrire directement dans profile.json.** Les proposals passent par ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)` en mode `proposed`, ou ne sont pas écrites du tout (rapport seul).
+- **Jamais écrire directement dans profile.json.** Les proposals passent par ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)` en mode `proposed`, ou ne sont pas écrites du tout (rapport seul).
 - **Analysis before mutation.** Ce skill est un analyse engine. Les mutations Context Engine sont optionnelles et générées seulement si la confiance est forte (≥ 0.7).
 - **No assumptions on missing data.** If `pain_points[]` is empty, note `[profile incomplete]` in the report. Never assume pain points.
 - **Confidence ≤ 0.85 for scoring.** Even with strong signals, human review is mandatory for mutation decisions.
@@ -245,4 +245,4 @@ Structure:
 
 ## Changelog
 
-- **1.0.0** (2026-04-13) — Initial spec. Read → Analyze → Optional Propose pattern. Analysis first, mutation secondary.
+- **1.0.0** (2026-04-13) · Initial spec. Read → Analyze → Optional Propose pattern. Analysis first, mutation secondary.

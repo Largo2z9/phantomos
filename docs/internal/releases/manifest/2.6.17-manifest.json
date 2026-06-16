@@ -3,10 +3,10 @@
   "from_version": "2.6.16",
   "to_version": "2.6.17",
   "released_at": "2026-04-23",
-  "summary": "Resource discovery infrastructure — FTS5 index covers resources/, discover-resources primitive, validate-output-coherence sub-skill, SOP tier/resource_discovery pattern with reasoning layer (3 exemplar checkpoints in audit-meta-global).",
+  "summary": "Resource discovery infrastructure · FTS5 index covers resources/, discover-resources primitive, validate-output-coherence sub-skill, SOP tier/resource_discovery pattern with reasoning layer (3 exemplar checkpoints in audit-meta-global).",
   "breaking": false,
   "requires_confirmation": false,
-  "notes": "Safe additive overlay. Index extension non-breaking (new source_type=resource, existing types untouched). validate-output-coherence is a sub-skill with operator_facing=false — invisible unless invoked by an orchestrator. After install, rebuild the index once with .skills/memory-index.py to populate resource chunks.",
+  "notes": "Safe additive overlay. Index extension non-breaking (new source_type=resource, existing types untouched). validate-output-coherence is a sub-skill with operator_facing=false · invisible unless invoked by an orchestrator. After install, rebuild the index once with .skills/memory-index.py to populate resource chunks.",
   "changes": [
     {
       "type": "infra-change",
@@ -27,7 +27,7 @@
       "file": ".skills/skills/validate-output-coherence/SKILL.md",
       "action": "create",
       "safe": true,
-      "note": "Sub-skill (operator_facing: false, invocable_by: all). Four checks (schema / fact / tone / fabrication). Returns structured JSON {ok, warnings[], blocking_issues[]}. Read-only — does not rewrite output."
+      "note": "Sub-skill (operator_facing: false, invocable_by: all). Four checks (schema / fact / tone / fabrication). Returns structured JSON {ok, warnings[], blocking_issues[]}. Read-only · does not rewrite output."
     },
     {
       "type": "doc-added",
@@ -49,7 +49,7 @@
       "action": "overwrite",
       "post_step": "python3 .skills/build-manifest.py",
       "safe": true,
-      "note": "Regenerated — 31 skills (was 30). validate-output-coherence added."
+      "note": "Regenerated · 31 skills (was 30). validate-output-coherence added."
     },
     {
       "type": "doc-change",

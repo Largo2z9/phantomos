@@ -46,13 +46,13 @@ Two entry modes, detected from context:
 
 **Direct mode** (default). Operator has a clear intent (*"build an agent that monitors my competitors"*). Run the full flow below, one skill generated.
 
-**Guided-mission mode** (triggered by `/tour` path (d) or by `first_skill_offered = false` surface in an opportune session). Operator has not yet built a skill. Instead of taking a raw intent, propose a concrete mission from a short catalog (e.g. publish a first Meta ad, set up a recurring reporting, monitor competitors). Decompose the mission into a **skill graph** — sequential skills with shared primitives (auth, API conventions, validation). Build each skill in order, explaining the decomposition logic as you go. Goal: the operator ends the session with real skills and a learned method, not just one skill. On completion, write `first_skill_built = true` to `/operator/awareness.json`.
+**Guided-mission mode** (triggered by `/tour` path (d) or by `first_skill_offered = false` surface in an opportune session). Operator has not yet built a skill. Instead of taking a raw intent, propose a concrete mission from a short catalog (e.g. publish a first Meta ad, set up a recurring reporting, monitor competitors). Decompose the mission into a **skill graph** · sequential skills with shared primitives (auth, API conventions, validation). Build each skill in order, explaining the decomposition logic as you go. Goal: the operator ends the session with real skills and a learned method, not just one skill. On completion, write `first_skill_built = true` to `/operator/awareness.json`.
 
 The decomposition methodology for guided-mission mode is under active development. Until the method is formalized, the builder walks through each step explicitly with the operator and captures the decomposition pattern for later codification in `resources/sops/`.
 
 ## Delegation to `scaffold-extension`
 
-When the dissection in Step 2b concludes that the intent maps to a **simple extension** — one custom entity plus an optional populating skill, or a sidecar enrichment — `build-agent` delegates to `scaffold-extension` rather than handling the scaffold itself.
+When the dissection in Step 2b concludes that the intent maps to a **simple extension** · one custom entity plus an optional populating skill, or a sidecar enrichment · `build-agent` delegates to `scaffold-extension` rather than handling the scaffold itself.
 
 **Detection rule** applied silently in Step 2b:
 
@@ -65,22 +65,22 @@ This delegation keeps each orchestrator narrow and composable. `scaffold-extensi
 
 ---
 
-## Step 1 — Load references and map the ecosystem
+## Step 1 · Load references and map the ecosystem
 
 Before answering the operator, silently read in this order:
 
 **Mandatory references (load first):**
-- `.skills/agent-design-guide.md` — criteria to decide if an agent is justified, proven patterns, anti-patterns to avoid, contract with the Context Engine
-- `.skills/how-to-build-skills.md` — method to write quality SKILL.md, common patterns, delivery checklist
+- `.skills/agent-design-guide.md` · criteria to decide if an agent is justified, proven patterns, anti-patterns to avoid, contract with the Context Engine
+- `.skills/how-to-build-skills.md` · method to write quality SKILL.md, common patterns, delivery checklist
 
 **Available ecosystem:**
 
 **Context Engine available:**
-- `brands/*/brand.json` — which brands exist, which driver, which sector
-- `brands/*/products/*/spec.json` — which products are encoded
-- `brands/*/audiences/*/profile.json` — which audiences are active
-- `brands/*/strategy/strategy.json` — if present
-- `workspace-template/CLAUDE.md` — workspace rules and philosophy
+- `brands/*/brand.json` · which brands exist, which driver, which sector
+- `brands/*/products/*/spec.json` · which products are encoded
+- `brands/*/audiences/*/profile.json` · which audiences are active
+- `brands/*/strategy/strategy.json` · if present
+- `workspace-template/CLAUDE.md` · workspace rules and philosophy
 
 **Existing skills:**
 - List all files in `.skills/skills/*/SKILL.md`
@@ -99,7 +99,7 @@ This mapping is silent. Takes 30 seconds. Conditions everything that follows.
 
 ---
 
-## Step 2 — Extract real business intent
+## Step 2 · Extract real business intent
 
 Reply to the operator with **a single open question**:
 
@@ -121,11 +121,11 @@ Max 4 questions. Stop as soon as intent is clear. Never ask technical details, t
 
 ---
 
-## Step 2b — Complexity gate + silent dissection + operator cartography
+## Step 2b · Complexity gate + silent dissection + operator cartography
 
-**CRITICAL:** before any deeper work, **YOU MUST** run this step. But tune the depth to the task's complexity — over-engineering a simple skill is as bad as under-engineering a complex one.
+**CRITICAL:** before any deeper work, **YOU MUST** run this step. But tune the depth to the task's complexity · over-engineering a simple skill is as bad as under-engineering a complex one.
 
-### Test 0 — Complexity gate (silent, mandatory first)
+### Test 0 · Complexity gate (silent, mandatory first)
 
 Binary test : *"Would a senior expert in this domain apply a named framework or matrix to do this, or is it pure mechanical execution?"*
 
@@ -140,10 +140,10 @@ Examples :
 
 **YOU MUST** fill a draft `.skills/skills/{name}/spec.md` silently covering the 10 dimensions below. **NEVER** expose raw dimensions to the operator.
 
-1. **Real intent (expert relay)** — surface (what the operator said) vs deep (what business problem they actually solve). Push-back **YOU MUST** trigger if surface ≠ deep.
-2. **Usage context** — frequency, who invokes (operator direct / another skill / scheduler), output destination (operator / external human / another skill)
-3. **Data in / out** — entities read, fields consumed, destinations written, mode (proposed/direct/none)
-4. **Infrastructure dependencies** — APIs, tools, auth, rate limits (exist in `resources/conventions/` ? YES/MISSING)
+1. **Real intent (expert relay)** · surface (what the operator said) vs deep (what business problem they actually solve). Push-back **YOU MUST** trigger if surface ≠ deep.
+2. **Usage context** · frequency, who invokes (operator direct / another skill / scheduler), output destination (operator / external human / another skill)
+3. **Data in / out** · entities read, fields consumed, destinations written, mode (proposed/direct/none)
+4. **Infrastructure dependencies** · APIs, tools, auth, rate limits (exist in `resources/conventions/` ? YES/MISSING)
 5. **Expert methodology to codify** ← *this is the core*
     - Canonical expert persona (who incarnates this at senior level in the real world)
     - Named framework they apply (AIDA, RFM, DMARC, JTBD, STPD, hook quality spec, etc.)
@@ -151,19 +151,19 @@ Examples :
     - Structuring matrix (2D or 3D grid that encodes decisions)
     - Formulas / heuristics if numeric
     - **Already codified in `resources/frameworks|catalogues|quality-specs|sops|conventions/` ? YES/MISSING** → if MISSING, Gate doc blocks generation until built
-6. **Technical constraints** — model, subagent_safe, token budget, estimated latency
-7. **Failure modes** — what breaks, what fallback, what graceful degradation
-8. **Foreseeable evolution** — will it grow, split, become obsolete at 6 months ? V2 candidate patterns
-9. **Overlap with existing skills** — recovery with what's already there, ENRICH vs CREATE decision
-10. **Ecosystem impact** — touches template / brands / resources / operator profile
+6. **Technical constraints** · model, subagent_safe, token budget, estimated latency
+7. **Failure modes** · what breaks, what fallback, what graceful degradation
+8. **Foreseeable evolution** · will it grow, split, become obsolete at 6 months ? V2 candidate patterns
+9. **Overlap with existing skills** · recovery with what's already there, ENRICH vs CREATE decision
+10. **Ecosystem impact** · touches template / brands / resources / operator profile
 
 See `docs/system/patterns.md § Skill Philosophy` for the full doctrine.
 
 Before generating SKILL.md, consult `docs/system/cookbook.md` for concrete build patterns (what to load, order, null-field behavior, pseudocode templates) that apply to skills consuming PhantomOS context.
 
-### Operator cartography — visible synthesis (4-5 lines max)
+### Operator cartography · visible synthesis (4-5 lines max)
 
-Present the operator a **short cartography + one clear decision**. **YOU MUST** translate every technical term into operator-value language. **NEVER** expose PhantomOS internal vocabulary (`convention`, `framework`, `SOP`, `quality-spec`, `catalogue`, `entity`, `field`, `schema`) in this cartography — say what it *does for the operator*, not what it is internally.
+Present the operator a **short cartography + one clear decision**. **YOU MUST** translate every technical term into operator-value language. **NEVER** expose PhantomOS internal vocabulary (`convention`, `framework`, `SOP`, `quality-spec`, `catalogue`, `entity`, `field`, `schema`) in this cartography · say what it *does for the operator*, not what it is internally.
 
 **Template** (adapt to the detected conversation_register ; technical mode accepts denser tech shorthand) :
 
@@ -180,7 +180,7 @@ Present the operator a **short cartography + one clear decision**. **YOU MUST** 
 - *(c) Challenge la méthodo (tu veux une autre grille, un autre framework)*
 - *(d) Autre, dis-moi*
 
-**NEVER** ask more than one decision per turn. **NEVER** return to dimensions dissection in conversation — they stay in spec.md silently.
+**NEVER** ask more than one decision per turn. **NEVER** return to dimensions dissection in conversation · they stay in spec.md silently.
 
 ### Push-back obligation
 
@@ -188,11 +188,11 @@ If deep intent ≠ surface intent (ex: operator says *"automate my weekly report
 
 ### Persistence
 
-After operator validates → persist `.skills/skills/{name}/spec.md` with the 10 dimensions filled. Skill.md generation proceeds at Step 4+. If operator picks *"skip dissection, just generate"* (complex task) → spec.md flagged *"dissection skipped by operator — revisit on first refactor"*.
+After operator validates → persist `.skills/skills/{name}/spec.md` with the 10 dimensions filled. Skill.md generation proceeds at Step 4+. If operator picks *"skip dissection, just generate"* (complex task) → spec.md flagged *"dissection skipped by operator · revisit on first refactor"*.
 
 ---
 
-## Step 3 — Identify needed expertise
+## Step 3 · Identify needed expertise
 
 From the clarified intent, identify:
 
@@ -210,11 +210,11 @@ Wait for the choice. Record the decision.
 
 ---
 
-## Step 3b — Complexity heuristic (MANDATORY, 3 binary tests before Step 4)
+## Step 3b · Complexity heuristic (MANDATORY, 3 binary tests before Step 4)
 
 **CRITICAL:** before designing architecture, **YOU MUST** run 3 binary tests silently. Their answers determine whether we generate 1 skill, split into an orchestrator + sub-skills, or stop to build prerequisite documentation first.
 
-### Test A — Split into orchestrator?
+### Test A · Split into orchestrator?
 
 > *"Can the need be decomposed into 2+ sub-tasks with logically independent Steps (different triggers, different outputs, usable separately)?"*
 
@@ -227,7 +227,7 @@ Heuristic for "logically independent": if I could imagine the operator wanting o
 
 **Example (NO)**: *"build me an agent that generates 3 creative brief angles from my brand"* → reads brand + applies creative framework + outputs 3 angles → one pipeline only, **1 Producer**.
 
-### Test B — Prerequisite documentation needed?
+### Test B · Prerequisite documentation needed?
 
 > *"Does the skill consume an API, a framework, a platform convention, or a specialized methodology that has NO dedicated `resources/conventions/*.json`, `resources/frameworks/*.md`, or `resources/sops/*.md` file yet?"*
 
@@ -241,7 +241,7 @@ Heuristic for "logically independent": if I could imagine the operator wanting o
 
 **Example (NO)**: *"generate 3 creative brief angles"* → consumes brand context (already structured) + a creative framework that already exists in `resources/frameworks/` → **continue**.
 
-### Test C — Assign typology (required output)
+### Test C · Assign typology (required output)
 
 Apply the binary test of each typology (see `docs/system/patterns.md § Skill Taxonomy`) in this order, pick the FIRST match:
 
@@ -270,7 +270,7 @@ Wait for operator validation. Only then → Step 4 design.
 
 ---
 
-## Step 4 — Design the architecture
+## Step 4 · Design the architecture
 
 Decide if the request needs **1 agent or several**.
 
@@ -295,15 +295,15 @@ Present to the operator:
 ```
 Here's what I'll build:
 
-Agent 1 — {name}: {role in one sentence}
+Agent 1 · {name}: {role in one sentence}
   Reads: {sources}
   Produces: {output}
 
-Agent 2 — {name}: {role in one sentence}
+Agent 2 · {name}: {role in one sentence}
   Receives: {output from Agent 1}
   Produces: {final output}
 
-Orchestrator — {name}: launches Agent 1 → passes the result to Agent 2.
+Orchestrator · {name}: launches Agent 1 → passes the result to Agent 2.
 
 Good, or want to adjust something?
 ```
@@ -312,7 +312,7 @@ If 1 agent, present the same way, simpler version. Wait for validation before ge
 
 ---
 
-## Step 4b — Determine skill typology (MANDATORY before Step 5)
+## Step 4b · Determine skill typology (MANDATORY before Step 5)
 
 **CRITICAL:** for each agent to generate, **YOU MUST** assign exactly one `type:` from the 6 typologies before generating the SKILL.md. Reference: `docs/system/patterns.md § Skill Taxonomy`.
 
@@ -326,7 +326,7 @@ Use `AskUserQuestion` to propose the 6 options if the test is ambiguous.
 
 ---
 
-## Step 5 — Generate SKILL.md files
+## Step 5 · Generate SKILL.md files
 
 For each agent validated at Step 4 and typed at Step 4b, generate `.skills/skills/{agent-name}/SKILL.md`.
 
@@ -347,9 +347,9 @@ Each generated file must:
 - Explicit output format (markdown, JSON, or both)
 - Hard Rules: non-negotiable guardrails of the agent
 
-**If the agent uses ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)`:**
+**If the agent uses ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)`:**
 - Explicitly state mutated fields, confidence value, mode (proposal by default)
-- Never direct write to JSON, always via ``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)`
+- Never direct write to JSON, always via ``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)`
 
 **If the agent relies on existing knowledge (Step 3):**
 - Add at Step 1: "Read [file] to load business context."
@@ -361,7 +361,7 @@ Each generated file must:
 
 ---
 
-## Step 6 — Debrief the operator
+## Step 6 · Debrief the operator
 
 Once files are generated, display:
 
@@ -403,7 +403,7 @@ Conversation ends with Step 6 debrief, no extra markdown, no exhaustive recap.
 - **Never skip mapping** (Step 1). Even if the request seems simple, read first, reply after.
 - **Max 4 questions** to clarify intent. Beyond that, the agent makes a reasoned choice and explains.
 - **Always validate architecture** before generating (Step 4). Never generate without operator agreement.
-- **``.skills/write-to-context.py` (canonical channel — see capture-learning Step 4 for the exact Bash invocation)` mandatory** for any agent that mutates the Context Engine. Never direct write.
+- **``.skills/write-to-context.py` (canonical channel · see capture-learning Step 4 for the exact Bash invocation)` mandatory** for any agent that mutates the Context Engine. Never direct write.
 - **Proposal mode by default** for any generated agent. Confidence = 1.0 reserved for `human:*` agents only.
 - **Never create a skill that duplicates an existing skill.** If an existing skill covers 80%+ of the need, propose extending it rather than creating a new one.
 - **The orchestrator does nothing itself.** It sequences only. Zero business logic in the orchestrator.

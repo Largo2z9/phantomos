@@ -1,6 +1,6 @@
 # Hook Quality Spec
 
-> **TYPE:** Quality Spec — critères d'évaluation pour hooks
+> **TYPE:** Quality Spec · critères d'évaluation pour hooks
 > **CONSOMMÉ PAR:** hooks-generator (Step 5), script-writer (validation input), creative-strategist (audit)
 > **DÉPEND DE:** `registries/angle-registry.md`, `routing/awareness-angle-matrix.md`, `templates/hook-formulas.md`
 > **FORMAT:** Critères binaires (passe/échoue), scoring pondéré, seuils de passage.
@@ -43,7 +43,7 @@ Chaque hook DOIT contenir au moins 1 mot ou expression de :
 - `audience.voice.key_expressions`
 - `audience.psychology.life_moments` (pour confession/before-after)
 
-**Échec = rejet.** Pas de hook en langage marketing — en langage prospect.
+**Échec = rejet.** Pas de hook en langage marketing · en langage prospect.
 
 ### Test awareness compliance
 
@@ -53,7 +53,7 @@ Vérifications croisées avec les shared resources :
 |---|---|---|
 | L'angle est-il dans "avoid" pour cet awareness ? | `awareness-angle-matrix.md` | Rejet (sauf override opérateur explicite) |
 | La catégorie de hook est-elle hors range awareness ? | `hook-formulas.md` → awareness range | Rejet |
-| L'angle a-t-il ≥ 2 proof types disponibles dans la DB ? | `angle-registry.md` → proof types vs `product.proofs` | Warning (pas rejet — l'angle reste utilisable mais noter le manque dans la méta-analyse) |
+| L'angle a-t-il ≥ 2 proof types disponibles dans la DB ? | `angle-registry.md` → proof types vs `product.proofs` | Warning (pas rejet · l'angle reste utilisable mais noter le manque dans la méta-analyse) |
 
 ### Test claims
 

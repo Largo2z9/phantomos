@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-session-search — query the narrative memory index.
+session-search · query the narrative memory index.
 
 Reads `{workspace}/.phantom/memory.db` (built by memory-index.py). Runs an
 FTS5 MATCH over the title + content + source_ref of every indexed chunk.
@@ -14,7 +14,7 @@ Usage:
   python3 .skills/session-search.py --query "{topic}" --format json --limit 5
 
 Exit codes:
-  0  any results returned (even 0 hits — intentional; grep for `hits: 0` in output)
+  0  any results returned (even 0 hits · intentional; grep for `hits: 0` in output)
   1  arg / IO error, or index missing
   2  FTS5 syntax error in --query
 """
@@ -51,7 +51,7 @@ def find_workspace_root(start: Path) -> Path:
 
 
 def fts_escape(q: str) -> str:
-    """Quote the user query for FTS5 MATCH — protects against bare tokens that
+    """Quote the user query for FTS5 MATCH · protects against bare tokens that
     collide with FTS5 syntax (e.g. dots, dashes, colons in slugs)."""
     q = q.strip().replace('"', '""')
     if not q:
@@ -73,7 +73,7 @@ def main():
     root = find_workspace_root(Path(args.cwd))
     db = root / ".phantom" / "memory.db"
     if not db.exists():
-        die(f"index not found at {db} — run '.skills/memory-index.py' first")
+        die(f"index not found at {db} · run '.skills/memory-index.py' first")
 
     con = sqlite3.connect(db)
     con.row_factory = sqlite3.Row
@@ -128,7 +128,7 @@ def main():
         return
     for i, r in enumerate(results, 1):
         brand = f" [{r['brand']}]" if r["brand"] else ""
-        date = r["date"] or "—"
+        date = r["date"] or "·"
         print(f"\n{i}. {r['type']:>6} {r['ref']}{brand}   {date}")
         if r["title"]:
             print(f"   {r['title'][:100]}")

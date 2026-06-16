@@ -1,6 +1,6 @@
 {
   "_version": "1.0",
-  "_generated_at": "2026-06-15T12:16:40Z",
+  "_generated_at": "2026-06-16T06:34:09Z",
   "_count": 85,
   "skills": [
     {
@@ -790,7 +790,7 @@
         "mine-voc": "route directly to mine-voc when operator wants ONLY customer voice (faster, lighter)",
         "mine-vom": "route directly to mine-vom when operator wants ONLY market voice (faster, lighter)",
         "study-niche-marketdeepdive": "route to standalone study-niche-marketdeepdive when operator wants strategic memo on the niche, not customer + market voice. NOT chained here due to 30-60 min runtime.",
-        "onboard-brand": "route to onboard-brand for the full setup pipeline from scratch — deepen-brand-context assumes snapshot is done"
+        "onboard-brand": "route to onboard-brand for the full setup pipeline from scratch · deepen-brand-context assumes snapshot is done"
       },
       "isolation_scope": "brand_only",
       "layer": "territoire",
@@ -1323,8 +1323,8 @@
         ]
       },
       "disambiguates_against": {
-        "mine-voc": "route to mine-voc when the goal is the existing customer voice on THIS brand (Trustpilot, Judge.me, brand reviews) — mine-audience is upstream, exploring who the audiences are at the product/segment level",
-        "mine-vom": "route to mine-vom when the goal is the broader market voice (competitors' customers, niche communities) — mine-audience focuses on segment discovery and audience proposals for a specific product"
+        "mine-voc": "route to mine-voc when the goal is the existing customer voice on THIS brand (Trustpilot, Judge.me, brand reviews) · mine-audience is upstream, exploring who the audiences are at the product/segment level",
+        "mine-vom": "route to mine-vom when the goal is the broader market voice (competitors' customers, niche communities) · mine-audience focuses on segment discovery and audience proposals for a specific product"
       },
       "isolation_scope": "brand_only",
       "layer": "territoire",
@@ -1384,7 +1384,7 @@
       },
       "disambiguates_against": {
         "mine-voc": "route to mine-voc when operator wants brand-bound customer voice (their own customers' reviews), not market-level conversations",
-        "watch-competitors": "route to watch-competitors when operator wants recurring monitoring of competitors' paid creatives — that's continuous, mine-vom is one-shot qualitative",
+        "watch-competitors": "route to watch-competitors when operator wants recurring monitoring of competitors' paid creatives · that's continuous, mine-vom is one-shot qualitative",
         "mine-audience": "route to mine-audience when operator wants product-level audience discovery from website scraping, not market-level voice mining",
         "ingest-resource": "route to ingest-resource when operator drops a single market report/document"
       },

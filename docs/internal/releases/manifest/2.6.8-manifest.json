@@ -6,7 +6,7 @@
   "summary": "build-brand-snapshot.py defensive read. Tolerates legacy {_value, _proposed, _source, _confidence} wrappers left by pre-v2.6.6 writes.",
   "breaking": false,
   "requires_confirmation": false,
-  "notes": "Safe overlay. Pure read-path change. No data migration — existing wrapped values keep their shape until rewritten through write-to-context (post-v2.6.6 proposed mode only wraps dicts). Snapshot builder now handles both shapes.",
+  "notes": "Safe overlay. Pure read-path change. No data migration · existing wrapped values keep their shape until rewritten through write-to-context (post-v2.6.6 proposed mode only wraps dicts). Snapshot builder now handles both shapes.",
   "changes": [
     {
       "type": "infra-change",
@@ -31,6 +31,6 @@
     }
   ],
   "post_steps": [
-    "python3 .skills/build-brand-snapshot.py {slug} per brand — snapshots regenerate cleanly."
+    "python3 .skills/build-brand-snapshot.py {slug} per brand · snapshots regenerate cleanly."
   ]
 }

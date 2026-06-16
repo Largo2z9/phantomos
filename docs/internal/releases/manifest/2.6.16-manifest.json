@@ -3,7 +3,7 @@
   "from_version": "2.6.15",
   "to_version": "2.6.16",
   "released_at": "2026-04-23",
-  "summary": "Schema drift grep pass — 4 SKILL.md patched for v2 offers schema (offer_groups[].offers[]) and _version per-entity convention (replacing non-existent _template_version).",
+  "summary": "Schema drift grep pass · 4 SKILL.md patched for v2 offers schema (offer_groups[].offers[]) and _version per-entity convention (replacing non-existent _template_version).",
   "breaking": false,
   "requires_confirmation": false,
   "notes": "Pure prose corrections across 4 SKILL.md. No code, no data. Safe overlay.",

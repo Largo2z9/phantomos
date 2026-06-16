@@ -20,7 +20,7 @@ Specialized capabilities of the agent. Never read by the operator, triggered aut
 
 Grouped by typology. Each typology drives default model + `subagent_safe` + permissions baseline. This catalogue is generated from `_manifest.json` + frontmatter descriptions ; after any skill add/rename/edit, run `python3 .skills/build-manifest.py` and regenerate this section.
 
-### Producer (31) — generate fresh artifacts
+### Producer (31) · generate fresh artifacts
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -56,7 +56,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `weave-hooks` | Weave approved concepts into the genome-package (A7-A8) : bi-face scripts per support, serialized contract Workflow A → Workflow B | opus | no |
 | `weight-dimensions` | Compute per-brand weighting coefficients consumed by score-matrix | sonnet | no |
 
-### Curator (19) — read, classify, route, mutate context
+### Curator (19) · read, classify, route, mutate context
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -80,7 +80,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `validate-resources` | Audits workspace integrity: shared resources + brand context files | haiku | yes |
 | `validate-schema-canon` | Sub-skill of scaffold-extension | haiku | yes |
 
-### Capturer (4) — persist learnings
+### Capturer (4) · persist learnings
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `import-meta-results` | Brique 5 MINIMAL (réceptacle perf, D#482+) · pull Meta Insights par `lineage.ad_id` pour les creatives déployées (CRT-NN sous batc… | haiku | yes |
 | `learn-from-session` | Extracts and persists knowledge acquired during a session | sonnet | no |
 
-### Orchestrator (22) — chain multiple skills end-to-end
+### Orchestrator (22) · chain multiple skills end-to-end
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `sync-notion-atlas` | Bi-directional Notion bridge for the brand territory (push, pull, diff modes) | sonnet | no |
 | `update-workspace` | Applies one or more PhantomOS release updates to an installed workspace without losing operator data | sonnet | no |
 
-### Navigator (5) — orient the operator across sessions
+### Navigator (5) · orient the operator across sessions
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|
@@ -126,7 +126,7 @@ Grouped by typology. Each typology drives default model + `subagent_safe` + perm
 | `routine-perf` | Briefing perf paid quotidien (2-3x/jour) | sonnet | yes |
 | `session-search` | Search the narrative memory index (SQLite FTS5) for past sessions, decisions, learnings, snapshots, and events | haiku | yes |
 
-### Builder (4) — create new skills / agents
+### Builder (4) · create new skills / agents
 
 | Skill | Role | Model | Subagent |
 |---|---|---|---|

@@ -1,12 +1,13 @@
-.PHONY: help validate validate-strict validate-deep install-hook uninstall-hook
+.PHONY: help validate validate-strict validate-deep audit-substrate install-hook uninstall-hook
 
 # Default target
 help:
-	@echo "PhantomOS workspace — commandes disponibles :"
+	@echo "PhantomOS workspace · commandes disponibles :"
 	@echo ""
 	@echo "  make validate         Valide tout le workspace (schemas + semantic checks)"
 	@echo "  make validate-strict  Idem, exit 1 si HIGH ou CRITICAL (pour hooks/CI)"
 	@echo "  make validate-deep    Idem avec output JSON complet dans _validation-report.json"
+	@echo "  make audit-substrate  Audit fraicheur + coherence du substrat encode (advisory)"
 	@echo ""
 	@echo "  make install-hook     Installe le pre-commit hook local (.git/hooks/pre-commit)"
 	@echo "  make uninstall-hook   Désinstalle le pre-commit hook"
@@ -20,6 +21,9 @@ validate-strict:
 
 validate-deep:
 	@python3 resources/scripts/validate-all.py --deep --json _validation-report.json
+
+audit-substrate:
+	@python3 resources/scripts/audit-substrate.py --root .
 
 install-hook:
 	@GIT_ROOT=$$(git rev-parse --show-toplevel 2>/dev/null); \

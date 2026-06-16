@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-migrate-nomenclature-v2-29.py — snake_case strict ASCII enforcement on JSON field names.
+migrate-nomenclature-v2-29.py · snake_case strict ASCII enforcement on JSON field names.
 
 Scope:
   - resources/schemas/*.schema.json (canonical schemas)

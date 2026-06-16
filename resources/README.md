@@ -2,33 +2,33 @@
 
 Registries, matrices, specifications, formulas, and schemas shared across every brand in the workspace.
 
-## Status — starter examples, not maintained content
+## Status · starter examples, not maintained content
 
 **The seeded files under `registries/`, `quality-specs/`, `templates/`, `routing/`, and `guides/` are starter examples.** They demonstrate the format an operator can follow to structure their own resources. They are **not** canonical production content the template maintainer keeps polished. They ship in their original language (French in several cases) and are not translated on every template release.
 
 Each operator is expected to **replace, augment, or delete** these starter files to fit their own domain, methodology, and vocabulary. `ingest-resource` is the primary way to bring in your own; `learn-from-session → promote-learning` is how patterns you validate get added over time.
 
-The structural pieces — the folder layout, the JSON schemas under `resources/schemas/`, the conventions framework under `conventions/`, and `validate-resources` — are maintained and versioned. The example content is not.
+The structural pieces · the folder layout, the JSON schemas under `resources/schemas/`, the conventions framework under `conventions/`, and `validate-resources` · are maintained and versioned. The example content is not.
 
 ## Folders at a glance
 
 | Folder | Content | Populated at V1 |
 |---|---|---|
-| `catalogues/` | Taxonomies and ID-referenced entries (angles, formats, hooks) | no — seeded by `ingest-resource` |
-| `conventions/` | Per-platform operational rules (Meta Ads, Shopify, GA4, Klaviyo…) | yes — filled at `setup-brand` when a platform is connected |
-| `frameworks/` | Mental models (awareness levels, AIDA, psychology primitives) | no — seeded by `ingest-resource` |
+| `catalogues/` | Taxonomies and ID-referenced entries (angles, formats, hooks) | no · seeded by `ingest-resource` |
+| `conventions/` | Per-platform operational rules (Meta Ads, Shopify, GA4, Klaviyo…) | yes · filled at `setup-brand` when a platform is connected |
+| `frameworks/` | Mental models (awareness levels, AIDA, psychology primitives) | no · seeded by `ingest-resource` |
 | `guides/` | Contributor guides (*where-does-it-go* decision trees) | yes |
-| `quality-specs/` | Output evaluation criteria (binary tests, thresholds) | yes — `hook-quality-spec` |
-| `registries/` | Living taxonomies with stable identifiers (angles, mechanics, proof types) | yes — 3 registries |
-| `routing/` | Decision tables mapping context to recommendation | yes — awareness × angle matrix |
-| `schemas/` | JSON Schema definitions for every entity type | yes — brand, spec, offer, profile, strategy |
-| `scripts/` | Validation and maintenance scripts | yes — `validate-all`, `pre-commit` |
-| `sops/` | Step-by-step execution procedures | no — seeded by `ingest-resource` |
+| `quality-specs/` | Output evaluation criteria (binary tests, thresholds) | yes · `hook-quality-spec` |
+| `registries/` | Living taxonomies with stable identifiers (angles, mechanics, proof types) | yes · 3 registries |
+| `routing/` | Decision tables mapping context to recommendation | yes · awareness × angle matrix |
+| `schemas/` | JSON Schema definitions for every entity type | yes · brand, spec, offer, profile, strategy |
+| `scripts/` | Validation and maintenance scripts | yes · `validate-all`, `pre-commit` |
+| `sops/` | Step-by-step execution procedures | no · seeded by `ingest-resource` |
 | `templates/` | Reusable formats (creative-formula, hook-formulas) | yes |
 
 Folders marked *no* ship empty with a `.gitkeep`. They fill as the operator ingests resources via `ingest-resource` or as `learn-from-session` promotes patterns to the shared base.
 
-## Seeded files — V1 content
+## Seeded files · V1 content
 
 ### Registries
 
@@ -54,22 +54,22 @@ Folders marked *no* ship empty with a `.gitkeep`. They fill as the operator inge
 
 | File | Role | Consumed by |
 |---|---|---|
-| `templates/creative-formula.md` | Creative architecture V3 — core + strategic context + modifiers + text-to-visual slider (0-10) | every creative skill |
+| `templates/creative-formula.md` | Creative architecture V3 · core + strategic context + modifiers + text-to-visual slider (0-10) | every creative skill |
 | `templates/hook-formulas.md` | 15 hook categories (question, statement, before-after, confession, etc.) with patterns and awareness ranges | `hooks-generator`, `script-writer`, `creative-strategist` |
 
 ### Schemas
 
-Every Context DB entity has a schema in `schemas/` (`brand.schema.json`, `spec.schema.json`, `offer.schema.json`, `profile.schema.json`, `strategy.schema.json`). Never edited by skills — schemas are the contract, skills validate against it.
+Every Context DB entity has a schema in `schemas/` (`brand.schema.json`, `spec.schema.json`, `offer.schema.json`, `profile.schema.json`, `strategy.schema.json`). Never edited by skills · schemas are the contract, skills validate against it.
 
 ## Principles
 
-**Append-only.** Registries grow (new entries) but past entries are never retroactively modified — historical decisions stay traceable.
+**Append-only.** Registries grow (new entries) but past entries are never retroactively modified · historical decisions stay traceable.
 
 **Source of truth.** These files are *the* reference for every skill. An output that falls outside the scope of these registries is flagged by `validate-resources`.
 
 **MECE.** Categories do not overlap and collectively cover the full spectrum observed in retro-engineering (522 creatives, 10 batches, 9 brands).
 
-**Craft-agnostic.** Content is business-agnostic. An angle like *transformation* works for beauty, supplements, or tech — the underlying psychology is universal.
+**Craft-agnostic.** Content is business-agnostic. An angle like *transformation* works for beauty, supplements, or tech · the underlying psychology is universal.
 
 ## Common usage patterns
 

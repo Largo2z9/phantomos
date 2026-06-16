@@ -1,5 +1,5 @@
 {
-  "$comment": "Profil opérateur — contexte macro transversal aux brands. Rempli progressivement via learn-from-session quand l'opérateur laisse tomber une info. Jamais en questionnaire. Tous les champs sont null/[] par défaut.",
+  "$comment": "Profil opérateur · contexte macro transversal aux brands. Rempli progressivement via learn-from-session quand l'opérateur laisse tomber une info. Jamais en questionnaire. Tous les champs sont null/[] par défaut.",
   "_schema": "operator/profile",
   "_version": "1.1",
   "_field_types": {

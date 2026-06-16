@@ -17,7 +17,7 @@ Custom skills can read and write:
 - Sidecar schemas (`brands/{slug}/{core_entity}.extensions.json`)
 - Shared resources (`resources/` registries, routing tables, frameworks)
 
-**Not touched by template upgrades.** The template's next release replaces the `core/` skills but leaves `custom/` untouched. This is by design — operator-built capabilities belong to the operator.
+**Not touched by template upgrades.** The template's next release replaces the `core/` skills but leaves `custom/` untouched. This is by design · operator-built capabilities belong to the operator.
 
 **Promotion path.** A custom skill that proves its value across multiple brands is a candidate for promotion into a vertical pack or, exceptionally, into the core. The process is manual: the pattern is codified, tested across operators, and merged upstream.
 

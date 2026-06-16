@@ -1,0 +1,37 @@
+{
+  "artifact": "angle",
+  "version": "1.0",
+  "definition": "A paid angle as produced by produce-paid-angles: the strategic stance an ad takes, encoded as angle.json (schema angle/1.6, the four coordinates incl. the negative).",
+  "target": "An angle takes a falsifiable stance against a named negative. It names what it stands against (the negative coordinate: competitor, category belief, status quo, substitute, diy, do-nothing), makes a claim specific enough that it could be wrong, and could not be pasted onto any other brand. It traces to a spectrum cell, so it is encoded knowledge, not a fresh invention.",
+  "criteria": [
+    {
+      "id": "negative_named",
+      "weight": 0.30,
+      "pass": "Names the specific thing the angle pushes against (the 4th coordinate): a competitor, a category belief, the status quo, a substitute, DIY, or doing nothing.",
+      "fail": "All upside, no enemy. The angle floats with nothing to react against, so it persuades no one already content."
+    },
+    {
+      "id": "falsifiable",
+      "weight": 0.25,
+      "pass": "Makes a claim a skeptic could contest. There is a reader for whom this is the wrong angle.",
+      "fail": "A truism ('quality you can trust', 'feel your best') that no one disputes and no one is moved by."
+    },
+    {
+      "id": "anti_generic",
+      "weight": 0.25,
+      "pass": "Anchored to this product's mechanism and this audience's tension. Swap the brand name and it breaks.",
+      "fail": "Could be any brand in the category. Passes the 'rename test' unchanged."
+    },
+    {
+      "id": "traced_to_spectrum",
+      "weight": 0.20,
+      "pass": "References the spectrum cell / awareness-sophistication coordinate it derives from. Encoded, not freelanced.",
+      "fail": "No trace to the brand's strategic spectrum. Invented in isolation."
+    }
+  ],
+  "proxies": [
+    {"name": "has_negative_coordinate", "direction": "sharp", "weight": 2, "threshold": 1},
+    {"name": "generic_filler", "direction": "mushy", "weight": 2, "threshold": 1},
+    {"name": "hedge_density", "direction": "mushy", "weight": 1, "threshold": 5.0}
+  ]
+}

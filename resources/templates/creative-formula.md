@@ -1,10 +1,10 @@
-# Creative Formula V3 — Formule de décomposition créative
+# Creative Formula V3 · Formule de décomposition créative
 
-> **TYPE:** Template — structure maître
+> **TYPE:** Template · structure maître
 > **CONSOMMÉ PAR:** tous les agents creative (hooks-generator, script-writer, brief-generator, creative-strategist, pattern-extractor)
 > **SOURCE:** Retro-engineering de 522 créas statiques (10 batches, 9 brands, 6 niches)
 > **DÉPEND DE:** `registries/angle-registry.md`, `templates/hook-formulas.md`, `registries/creative-mechanics-registry.md`, `registries/proof-registry.md`
-> **FORMAT:** Architecture en couches + curseur modal. Ce doc est la SPEC — les registres détaillent chaque composant.
+> **FORMAT:** Architecture en couches + curseur modal. Ce doc est la SPEC · les registres détaillent chaque composant.
 
 ---
 
@@ -13,8 +13,8 @@
 La V2 `(mécanique · format · angle · pain_point · persona · ton) ^ stop_scroller(hook, visual)` a été stress-testée sur un échantillon de 522 créas statiques (10 batches, 9 brands, 6 niches). Trois classes de problème ont émergé :
 
 - **Claim niches** (supplements, tech, telehealth) : la formule fonctionne mais il manque des dimensions (proof, offer, occasion, destination, produit, mix)
-- **Visual niches** (fashion, lifestyle) : la formule collapse — hook, angle, pain point disparaissent quand le visual porte seul la persuasion
-- **Assets catalogue** (DPA/DABA) : la formule est inapplicable — ce ne sont pas des créas au sens persuasif
+- **Visual niches** (fashion, lifestyle) : la formule collapse · hook, angle, pain point disparaissent quand le visual porte seul la persuasion
+- **Assets catalogue** (DPA/DABA) : la formule est inapplicable · ce ne sont pas des créas au sens persuasif
 
 V3 résout ces 3 problèmes via :
 1. Un **curseur texte/visual** qui module les composants obligatoires
@@ -237,7 +237,7 @@ Ces quatre plans sont distincts. Une créa peut activer 1 à 4 plans simultaném
 
 ### 5.3 Proof types (14 identifiés, hiérarchisés)
 
-→ `registries/proof-registry.md` ✅ (14 fiches hiérarchisées — S11)
+→ `registries/proof-registry.md` ✅ (14 fiches hiérarchisées · S11)
 
 Du plus faible au plus fort :
 
@@ -313,7 +313,7 @@ Du plus faible au plus fort :
 
 ---
 
-## 6. Formule V3 — Notation complète
+## 6. Formule V3 · Notation complète
 
 ### Mode CONCEPT (curseur 5-10)
 
@@ -375,14 +375,14 @@ Les créas les plus persuasives empilent les layers :
 
 ## 8. Dimensions spéciales
 
-### 8.1 Persona — dual (buyer ≠ user)
+### 8.1 Persona · dual (buyer ≠ user)
 
 Quand applicable (enfant, pet, cadeau, B2B) :
 - **Buyer** : qui paye (parent, propriétaire, décideur)
 - **User** : qui utilise (enfant, animal, utilisateur)
 - La créa doit séduire le buyer. Le user apparaît dans le visual comme déclencheur émotionnel.
 
-### 8.2 Persona — condition-based vs démographique
+### 8.2 Persona · condition-based vs démographique
 
 | Type | Quand | Exemple |
 |---|---|---|
@@ -465,9 +465,9 @@ Pour enrichir la formule :
 
 ---
 
-## ANNEXE A — Observations échantillon (hypothèses, pas règles)
+## ANNEXE A · Observations échantillon (hypothèses, pas règles)
 
-> **⚠️ Cette annexe documente des patterns observés sur un échantillon limité (522 créas, 9 brands, 6 niches). Ce sont des HYPOTHÈSES à valider avec plus de data — pas des lois par niche. Les noms de brands sont des références internes aux batches du sandbox, pas des vérités universelles sur ces brands.**
+> **⚠️ Cette annexe documente des patterns observés sur un échantillon limité (522 créas, 9 brands, 6 niches). Ce sont des HYPOTHÈSES à valider avec plus de data · pas des lois par niche. Les noms de brands sont des références internes aux batches du sandbox, pas des vérités universelles sur ces brands.**
 
 ### A.1 Curseur observé par batch
 

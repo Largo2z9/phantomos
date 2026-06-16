@@ -4,7 +4,7 @@
   "released_at": "2026-05-03",
   "compatible_from": "2.0.0",
   "type": "canon_cleanup",
-  "summary": "Canon métier briques typées trimmed from 8 to 5. Tension, Alternative, Trigger dropped (zero schema instances, zero skill consumer, zero brand instance). Snake_case enum convention enforced across R&D schemas (kebab-case migration). 100% description coverage on profile.schema.json + spec.schema.json top-level fields. Title casing standardized (EN, Title Case) on R&D schemas. Cartograph gains --incomplete mode for partial brand discovery. One typo fix in _TEMPLATE audience example. Stress test panel scored 32.75/50 (NO-GO threshold 35/50); ship accepted with documented limitations (Tension is a runtime composition pattern, not a stored brique — pattern documentation deferred to a future skill production cycle).",
+  "summary": "Canon métier briques typées trimmed from 8 to 5. Tension, Alternative, Trigger dropped (zero schema instances, zero skill consumer, zero brand instance). Snake_case enum convention enforced across R&D schemas (kebab-case migration). 100% description coverage on profile.schema.json + spec.schema.json top-level fields. Title casing standardized (EN, Title Case) on R&D schemas. Cartograph gains --incomplete mode for partial brand discovery. One typo fix in _TEMPLATE audience example. Stress test panel scored 32.75/50 (NO-GO threshold 35/50); ship accepted with documented limitations (Tension is a runtime composition pattern, not a stored brique · pattern documentation deferred to a future skill production cycle).",
   "changes": [
     {
       "category": "canon",
@@ -72,7 +72,7 @@
       "category": "skills",
       "action": "polished",
       "files": [".skills/skills/snapshot-brand/SKILL.md"],
-      "rationale": "Renamed in-skill 'Layer 2 — product page HTML' → 'Product detail page scraping' to avoid collision with the doctrinal 'Layer 2 = APIs callable through skills' in root CLAUDE.md § Connected tools. Added large-catalogue (>200 SKUs) sampling rule: read pages 1, 2, recent-published instead of full enumeration; surface volume to operator + invite specific URL."
+      "rationale": "Renamed in-skill 'Layer 2 · product page HTML' → 'Product detail page scraping' to avoid collision with the doctrinal 'Layer 2 = APIs callable through skills' in root CLAUDE.md § Connected tools. Added large-catalogue (>200 SKUs) sampling rule: read pages 1, 2, recent-published instead of full enumeration; surface volume to operator + invite specific URL."
     },
     {
       "category": "data",
@@ -82,7 +82,7 @@
     }
   ],
   "breaking_changes": [
-    "Any R&D draft consumer (none currently — drafts were uninstantiated) referencing kebab-case enum values must migrate to snake_case.",
+    "Any R&D draft consumer (none currently · drafts were uninstantiated) referencing kebab-case enum values must migrate to snake_case.",
     "Canon entries Tension, Alternative, Trigger removed from docs/internal/canon.md. No template skill was consuming them; no migration path needed."
   ],
   "migrations": [],

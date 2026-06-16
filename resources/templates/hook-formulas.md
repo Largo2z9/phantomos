@@ -1,6 +1,6 @@
 # Hook Formulas
 
-> **TYPE:** Templates — structures output
+> **TYPE:** Templates · structures output
 > **CONSOMMÉ PAR:** hooks-generator (primary), script-writer, creative-strategist
 > **SOURCE KB:** `02-angles-marketing.md` (Hook Testing), `phase-6-output.md` (Hooks Library), `03-copywriting-structures.md`
 > **DÉPEND DE:** `registries/angle-registry.md` (pour les hook levers par angle)
@@ -13,20 +13,20 @@
 Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% du job de conversion.
 
 **3 composants d'un hook performant :**
-1. **Pattern Interrupt** — casse le scroll / la lecture passive
-2. **Open Loop** — ouvre une boucle mentale (curiosité non résolue)
-3. **Identification** — le prospect se reconnaît ("c'est de moi qu'on parle")
+1. **Pattern Interrupt** · casse le scroll / la lecture passive
+2. **Open Loop** · ouvre une boucle mentale (curiosité non résolue)
+3. **Identification** · le prospect se reconnaît ("c'est de moi qu'on parle")
 
 **3 leviers psychologiques (testables séparément) :**
-- **Fear** — perte, menace, conséquence négative
-- **Desire** — gain, transformation, aspiration
-- **Rational** — logique, preuve, curiosité intellectuelle
+- **Fear** · perte, menace, conséquence négative
+- **Desire** · gain, transformation, aspiration
+- **Rational** · logique, preuve, curiosité intellectuelle
 
 ---
 
 ## Catégories de hook
 
-### question — Question
+### question · Question
 
 **Mécanique :** Pose une question que le prospect se pose déjà (ou devrait se poser). Crée identification + open loop.
 
@@ -52,7 +52,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### statement — Statement choquant
+### statement · Statement choquant
 
 **Mécanique :** Affirmation contre-intuitive qui brise une croyance. Pattern interrupt maximal.
 
@@ -60,7 +60,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 ```
 "[Ce que tout le monde croit] [VERBE CHOC : aggrave / détruit / est un mensonge]"
 "[Solution perçue comme bonne] est [la vraie cause du problème]"
-"Arrête de [action courante] — ça [conséquence inattendue]"
+"Arrête de [action courante] · ça [conséquence inattendue]"
 ```
 
 **Lever dominant :** rational (curiosité) + fear (menace)
@@ -74,11 +74,11 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 **Exemples :**
 - "Les shampoings anti-chute AGGRAVENT ta chute de cheveux."
 - "Ce n'est pas le stress qui te fait perdre tes cheveux."
-- "Arrête les masques capillaires — ils ne traitent pas la cause."
+- "Arrête les masques capillaires · ils ne traitent pas la cause."
 
 ---
 
-### before-after — Before/After
+### before-after · Before/After
 
 **Mécanique :** Contraste temporel entre l'état de douleur (avant) et l'état transformé (après). Projection + social proof.
 
@@ -104,14 +104,14 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### statistic — Statistique
+### statistic · Statistique
 
 **Mécanique :** Chiffre précis (pas rond) qui surprend. Crédibilité + curiosité.
 
 **Formula :**
 ```
 "[Chiffre précis]% des [population cible] [fait surprenant]"
-"[Chiffre] [unité] — c'est [comparaison qui donne l'échelle]"
+"[Chiffre] [unité] · c'est [comparaison qui donne l'échelle]"
 "Sur [base], [chiffre] [résultat]"
 ```
 
@@ -124,13 +124,13 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 **Quand NE PAS utiliser :** Stat inventée ou arrondie ("plus de 90%"). Audience unaware (pas de contexte pour interpréter le chiffre).
 
 **Exemples :**
-- "78% des femmes post-partum perdent leurs cheveux — et le cachent."
+- "78% des femmes post-partum perdent leurs cheveux · et le cachent."
 - "92% de satisfaction. 10 000+ utilisatrices. 4.7/5."
 - "Repousse visible pour 78% des utilisatrices à 3 mois."
 
 ---
 
-### confession — Confession
+### confession · Confession
 
 **Mécanique :** Vulnérabilité authentique. Crée connexion émotionnelle + identification.
 
@@ -143,7 +143,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 **Lever dominant :** fear (honte, vulnérabilité) → desire (espoir)
 
-**Awareness range :** problem_aware (primary), unaware (secondary — via empathie)
+**Awareness range :** problem_aware (primary), unaware (secondary · via empathie)
 
 **Quand utiliser :** Produit qui touche à l'identité/confiance en soi. Audience avec forte charge émotionnelle (`audience.psychology.emotions` = honte, frustration, anxiété). Format UGC/témoignage.
 
@@ -152,18 +152,18 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 **Exemples :**
 - "Je pleure sous la douche en voyant ce qui reste dans mes mains."
 - "J'ai arrêté de me regarder dans le miroir le matin."
-- "Mon mari m'a dit que c'était dans ma tête — mais je VOIS la différence."
+- "Mon mari m'a dit que c'était dans ma tête · mais je VOIS la différence."
 
 ---
 
-### callout — Call-out
+### callout · Call-out
 
 **Mécanique :** Interpelle directement la cible. Identification immédiate.
 
 **Formula :**
 ```
 "Si tu [situation spécifique de la cible], [impératif]."
-"[Groupe identitaire] — [message direct]."
+"[Groupe identitaire] · [message direct]."
 "Toi qui [comportement/symptôme], [promesse]."
 ```
 
@@ -177,12 +177,12 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 **Exemples :**
 - "Si tu perds tes cheveux depuis ton accouchement, écoute ça."
-- "Femmes aux cheveux texturés — arrêtez de croire que c'est génétique."
-- "Toi qui as tout essayé contre la chute — sauf ça."
+- "Femmes aux cheveux texturés · arrêtez de croire que c'est génétique."
+- "Toi qui as tout essayé contre la chute · sauf ça."
 
 ---
 
-### revelation — Révélation
+### revelation · Révélation
 
 **Mécanique :** Info cachée ou méconnue. Open loop maximal.
 
@@ -190,7 +190,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 ```
 "Ce que [autorité/source crédible] ne te dit pas sur [sujet]."
 "Le secret derrière [résultat enviable]."
-"Il y a une raison pour laquelle [phénomène observable] — et c'est pas celle que tu crois."
+"Il y a une raison pour laquelle [phénomène observable] · et c'est pas celle que tu crois."
 ```
 
 **Lever dominant :** rational (curiosité), fear (menace cachée)
@@ -208,7 +208,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### analogie — Analogie
+### analogie · Analogie
 
 **Mécanique :** Fait externe surprenant (nature, science, culture pop) utilisé comme tremplin vers le produit. Pattern interrupt maximal via le décalage.
 
@@ -233,7 +233,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### triptyque — Triptyque rhétorique
+### triptyque · Triptyque rhétorique
 
 **Mécanique :** 3 affirmations en parallélisme syntaxique. Rythme + mémorabilité + escalade.
 
@@ -258,7 +258,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### storytelling — Storytelling / Mini-arc narratif
+### storytelling · Storytelling / Mini-arc narratif
 
 **Mécanique :** Micro-récit avec personnage + setup + twist. Ouvre une boucle narrative que le scroll ne peut pas fermer.
 
@@ -283,7 +283,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### faux-dilemme — Faux dilemme / False trade-off
+### faux-dilemme · Faux dilemme / False trade-off
 
 **Mécanique :** Pose un trade-off que le prospect accepte comme inévitable, puis le rejette. "Tu ne devrais pas choisir."
 
@@ -309,7 +309,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### escalade-numerique — Escalade numérique
+### escalade-numerique · Escalade numérique
 
 **Mécanique :** Accumulation de chiffres en séquence croissante ou impressionnante. Effet cascade.
 
@@ -335,7 +335,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### expectation-subversion — Subversion d'attente
+### expectation-subversion · Subversion d'attente
 
 **Mécanique :** Commence par NIER le bénéfice attendu, puis AMPLIFIE avec un bénéfice supérieur. "PAS X... mais Y (mieux)."
 
@@ -360,7 +360,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### direct-benefit — Bénéfice direct (ultra-bold)
+### direct-benefit · Bénéfice direct (ultra-bold)
 
 **Mécanique :** Le bénéfice EST le hook. 2-5 mots, zéro device rhétorique, zéro euphémisme. Le prospect sait EXACTEMENT ce qu'il obtient.
 
@@ -386,7 +386,7 @@ Un hook = les 3 premières secondes (vidéo) ou la première ligne (texte). 80% 
 
 ---
 
-### double-entendre — Double sens / Wordplay
+### double-entendre · Double sens / Wordplay
 
 **Mécanique :** Mot ou phrase avec 2 niveaux de lecture : sens littéral (bénéfice produit) + sens figuré (innuendo, humour, complicité). Le prospect "comprend" les 2.
 
@@ -434,7 +434,7 @@ Chaque hook a un **levier primaire** (dominant) et un **levier secondaire** opti
 
 ---
 
-## Awareness Match — test explicite
+## Awareness Match · test explicite
 
 Un hook **passe** le test Awareness Match si :
 - L'awareness level ciblé est dans le `awareness range` documenté de la catégorie de hook
@@ -487,4 +487,4 @@ Le niveau de persuasion est corrélé au curseur texte/visual de la niche (cf. `
 
 ---
 
-*Dernière mise à jour : 2026-03-16 (Session 10 — V3, 15 hook patterns)*
+*Dernière mise à jour : 2026-03-16 (Session 10 · V3, 15 hook patterns)*

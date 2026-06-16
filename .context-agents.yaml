@@ -1,4 +1,4 @@
-# .context-agents.yaml — Agent registry and permissions
+# .context-agents.yaml · Agent registry and permissions
 # Anchor: D#252 (agent-plug-guide-ux.md)
 #
 # Each agent declaration includes:
@@ -11,7 +11,7 @@
 
 agents:
   # ============================================================================
-  # RESEARCH AGENTS (Phase 1) — Voice of market mining & fit analysis
+  # RESEARCH AGENTS (Phase 1) · Voice of market mining & fit analysis
   # ============================================================================
 
   - id_pattern: "audience-miner@*"

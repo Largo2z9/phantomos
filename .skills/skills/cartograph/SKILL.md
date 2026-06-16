@@ -218,7 +218,7 @@ Synthèse READ-ONLY. Lecture du substrate encodé. Aucune mutation.
 - Output operator-facing : sections courtes, FR par défaut, langage opérateur sans acronyme doctrine (CI / SED / CMR / SAD / PTD bannis), pas de path leak sauf legitimate reference dans tags sourcing.
 - Pas de close orphan. Le bloc "3 décisions actionnables" sert de close contextuel.
 - Émojis : interdits sauf ✓/⚠ pour state si nécessaire.
-- Em-dashes : interdits (convention `—` → parenthèses, virgule, deux-points, middle dot `·`).
+- Em-dashes : interdits (convention `·` → parenthèses, virgule, deux-points, middle dot `·`).
 
 ## Cross-référence
 

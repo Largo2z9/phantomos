@@ -1,0 +1,49 @@
+{
+  "_schema": "release-manifest/1.0",
+  "version": "2.94.0",
+  "released_at": "2026-06-16",
+  "type": "MINOR",
+  "summary": "L'altitude experte · le systeme MESURE et tient la QUALITE du jugement, pas seulement l'integrite structurelle. L'instrument eval + la durabilite + le close reconcilie + les exemplars de noticing + l'audit substrat. Issu d'un audit prompting + recherche terrain sur les dernieres theses, valide par le champ. Voir CHANGELOG [2.94.0].",
+  "changelog_ref": "CHANGELOG.md#[2.94.0]",
+  "headline": [
+    "L'INSTRUMENT evals/ · le systeme mesure si un rendu TRANCHE ou fait la meteo (pas seulement si le JSON resout) · rubriques typees (close/angle/diagnostic) + proxies deterministes stdlib + juge asymetrique-et-boucle (PASS terse / FAIL diagnostics + mode d'echec + rewrite_hint + repaired_verdict) + taxonomie error-analysis-first + score d'alignement (la metrique de regression au swap de modele) + bandeau seed-only honnete + filet advisory sur les beats",
+    "LE CLOSE RECONCILIE · conflit de doctrines leve (investigation-posture close-question vs master affirme-le-move) · le close = faits PUIS lecture experte PUIS mouvement proactif · montrer les faits est BON, la meteo c'est de s'y arreter sans interpreter puis rendre une question passive · l'OUT honnete est un close legitime · la lecture se PRODUIT en raisonnant sur le substrat via la chaine de diagnostic · contrat racine + 2 doctrines + 6 skills producteurs (prose trimmee)",
+    "L'AUTO-CRITIQUE EN VOL (le missing middle) · passe nommee dans le master · le producteur relit son draft contre l'exemplar (EXTRINSEQUE, boucle de reecriture) avant de surfacer · attaque la meteo AU RUNTIME ou la barriere de release ne peut pas",
+    "EXEMPLARS DE NOTICING · resources/canon/exemplars/{close,angle,diagnostic}.md · sharp vs mushy + ce que l'expert a vu de non-evident + l'out honnete · montrer bat reciter",
+    "DURABILITE · resources/canon/model-provider-matrix.json (SSOT alias logique vers modele concret + chaine de repli · 1 fichier edite pas 85 au swap) + validation des alias au build · respecte la decision v2.46 no-runtime-check",
+    "AUDIT SUBSTRAT · resources/scripts/audit-substrate.py + Makefile · garde anti-context-rot (un substrat riche pourrit plus fort qu'un contexte mince) · flague le stale (ttl_days/velocity_tier canon static-slow-drift-weekly-live) et les refs spectrum dangling · advisory"
+  ],
+  "migrations": [],
+  "schema_changes": [],
+  "new_files": [
+    "evals/ (README, rubrics/{_rubric.schema,close,angle,diagnostic}.json, golden/{6}, proxies.py, eval-runner.py, judge.md, ratings.jsonl, failure-taxonomy.md)",
+    "resources/canon/exemplars/{README,close,angle,diagnostic}.md",
+    "resources/canon/model-provider-matrix.json",
+    "resources/scripts/audit-substrate.py"
+  ],
+  "changed_files": [
+    "CLAUDE.md (close posture racine)",
+    "docs/system/contextual-intelligence.md (close trichotomie faits/lecture/mouvement + scaffold-sur-substrat + out + passe d'auto-critique)",
+    "docs/system/investigation-posture.md (Section 5 close reconcilie + AP-5 reecrit + out)",
+    "docs/system/model-versioning-canon.md (pointe la matrice cross-skill)",
+    ".skills/skills/{snapshot-brand,profile-audience,produce-paid-angles,brief-day,build-atlas-complete,onboard-brand}/SKILL.md (close refoundé scaffold+out, prose trimmee)",
+    ".skills/build-manifest.py (validation des alias contre la matrice, --strict)",
+    "Makefile (cible audit-substrate)"
+  ],
+  "skills_count": 85,
+  "method": "4 workflows multi-agents · propagation du close (12 agents · draft + verif adverse) + refound sur principe (12 agents) + recherche terrain 7-angles sources primaires (8 agents) + revue adverse des 4 P0 (5 agents). La revue adverse a attrape un VRAI bug (audit-substrate lisait le mauvais vocab de fraicheur, devine sur un _EXAMPLE vide, extracted_at omis) · corrige et re-verifie · la passe adverse construite a attrape une erreur dans le travail qui la construisait.",
+  "gate": {
+    "validate_all_strict": "0 CRITICAL / 0 HIGH / 0 MED / 0 LOW",
+    "reachability": "CRITICAL 0 / HIGH 0 (7 WARN = dette advisory pre-existante)",
+    "eval": "6/6 goldens discrimines · alignment 1.0 (seed-only, bandeau honnete affiche)",
+    "audit_substrate_smoke": "fixture · stale via ttl_days et via velocity_tier=weekly(21j) + extracted_at detecte + ref spectrum dangling attrapee · frais et refs valides ignores · --strict exit 1 sur flagged",
+    "em_dash": 0,
+    "syntax": "eval-runner.py + proxies.py + audit-substrate.py parse OK"
+  },
+  "deferred": [
+    "Phase 2 · cabler les validateurs en SubagentStop scope + PreToolUse avant map-audiences",
+    "Phase 2/3 · degraissage (lint anti-changelog-dans-description, DRY un SSOT, chargement progressif) + couche commandes (manifest + standard d'authoring) + registre de format",
+    "Revue · dedup calibrate/alignment, golden hollow runner-asserte, clause extrinseque par producteur (la doctrine la porte deja, saliente)",
+    "error-analysis sur de vrais outputs · le slot ratings.jsonl attend ~20 notes Largo pour passer de la taxonomie imaginee a la decouverte"
+  ]
+}

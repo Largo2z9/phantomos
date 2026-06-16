@@ -64,7 +64,7 @@
       "FR canon · 'opérateur' utilisé · 'operator' sans accent absent · 'decomposition' sans accent absent",
       "Casse canon · NOYAU/CONTEXTE/MODIFIEURS pas utilisé · OTRB acronyme OK",
       "Conventions typographiques · `·` middle dot prose · `|` tables · `↔` paires bidirectionnelles canon (cartographier ↔ paramétrer)",
-      "Em-dash zéro · grep '—' retourne 0",
+      "Em-dash zéro · grep '·' retourne 0",
       "Famille paramétrage NEW canon utilisée · 'paramétrer' ajouté au pipeline métier · pair cartographier ↔ paramétrer documenté"
     ]
   },

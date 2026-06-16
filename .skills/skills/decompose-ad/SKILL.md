@@ -137,7 +137,7 @@ pipeline:
 
 > **v2.3.0 (Brique 4 étape D)** : repath REVERSE vers `competitive-intel/{batch}/{RCV-NN}/decomposition.json` (namespace RCV, schéma natif reverse), bras interne vers `creatives/{batch}/{CRT-NN}/` (namespace CRT, split comme compose-creative), mkdir-claim atomique par bras, snapshot enum projeté pour le pont A=B. Voir HR8 + HR-DA-CANON-1.
 
-Decomposeur, not generator. Lit une ad (visuel + copy verbatim), applique l'équation compositionnelle v3.1, persiste — selon le bras — soit un `decomposition.json` reverse natif (benchmark, namespace RCV) soit le split genome/creative/sidecar/brief (créa interne, namespace CRT), rend une fiche structurée à l'opérateur en langage clair. Le mécanisme reste invisible (pas de field paths, pas de scores numériques, pas de noms internes). L'opérateur voit une fiche quatre sections et un bloc tags retrieval.
+Decomposeur, not generator. Lit une ad (visuel + copy verbatim), applique l'équation compositionnelle v3.1, persiste · selon le bras · soit un `decomposition.json` reverse natif (benchmark, namespace RCV) soit le split genome/creative/sidecar/brief (créa interne, namespace CRT), rend une fiche structurée à l'opérateur en langage clair. Le mécanisme reste invisible (pas de field paths, pas de scores numériques, pas de noms internes). L'opérateur voit une fiche quatre sections et un bloc tags retrieval.
 
 ## Tone
 
@@ -149,7 +149,7 @@ Posture éducateur + collègue senior. Pas inspecteur, pas pixel-counter. La fic
 
 **Framework.** Équation compositionnelle v3.1 stress-tested S55 (23 ads cross-typologies). NOYAU = invariant créa (mecanique × format × stop_scroller × ton). CONTEXTE = couches stratégiques branchables (angle × pain_point × persona × proof). MODIFIEURS = override situationnels (occasion × situation × offer × destination × produit × mix_pillar × campaign × regulatory × seasonality_trigger). Source canon : `resources/templates/creative-formula.md`.
 
-**DEUX niveaux de mécanique (D#488) — NE PAS CONFONDRE.**
+**DEUX niveaux de mécanique (D#488) · NE PAS CONFONDRE.**
 1. **Mécanique AD-LEVEL = le CONCEPT de l'ad** (versus, trending-fake-natif, product_focus, avant/après, packshot…) → SSOT `resources/registries/creative-mechanics-registry.md` (free-string, jamais enum-locké, on n'y écrit jamais ; `other` + `mecanique_proposal` si rien ne fitte). Persisté dans **`decomposition.mecanique.mecanique_id`** (+ `axis` claim/visual + `typology_st` spatial/temporel + `confidence`). **C'est le tag ROI d'un STATIQUE** : image = spatial, le concept porte tout le message.
 2. **Mécanique HOOK-LEVEL = l'accroche** (les 3 premières secondes) → vocabulaire SÉPARÉ, le `hook-mechanics-registry` (= `resources/registries/hooks/`), persisté dans **`script.hook.mechanic_id`**. **Le hook n'a de sens qu'en VIDÉO (temporel)** ; sur un statique il est souvent absent → NE PAS le forcer (mettre `other-uncategorized` plutôt que tordre une promesse).
 
@@ -258,7 +258,7 @@ Couche interprétation. Chaque inférence est ancrée dans observables Section 1
 
 **Angle d'attaque.** Triplet `levier × positionnement-contre × promesse`. Levier = quel ressort psychologique mobilisé (peur, désir, statut, appartenance, contrôle). Positionnement = contre quoi l'ad se positionne (statu quo, concurrent type, croyance limitante). Promesse = transformation visée. Affichage opérateur : phrase compacte ("vanité féminine post-partum × contre solutions long-terme lentes × silhouette retrouvée en 30 jours").
 
-**Mécanique AD-LEVEL (le CONCEPT).** Référence `resources/registries/creative-mechanics-registry.md` (free-string `mecanique_id` ; `other` + `mecanique_proposal` si rien ne fitte). Persiste dans **`decomposition.mecanique`** : `mecanique_id` + `mecanique_name` + `axis` (claim/visual) + `typology_st` (spatial=image / temporel=vidéo) + `confidence`. **Tag PRINCIPAL d'un statique.** DISTINCT du hook (`script.hook.mechanic_id`, niveau accroche, surtout vidéo — voir SSOT mécaniques HR ci-dessus). Affichage opérateur : nom registry + 1 phrase. Pont A=B : `genome.json#genome_tags.mecanique_id` (concept) ET `#genome_tags.mechanic_id` (hook).
+**Mécanique AD-LEVEL (le CONCEPT).** Référence `resources/registries/creative-mechanics-registry.md` (free-string `mecanique_id` ; `other` + `mecanique_proposal` si rien ne fitte). Persiste dans **`decomposition.mecanique`** : `mecanique_id` + `mecanique_name` + `axis` (claim/visual) + `typology_st` (spatial=image / temporel=vidéo) + `confidence`. **Tag PRINCIPAL d'un statique.** DISTINCT du hook (`script.hook.mechanic_id`, niveau accroche, surtout vidéo · voir SSOT mécaniques HR ci-dessus). Affichage opérateur : nom registry + 1 phrase. Pont A=B : `genome.json#genome_tags.mecanique_id` (concept) ET `#genome_tags.mechanic_id` (hook).
 
 **Pivot du message.** L'atome compositionnel est le `frame` (le couple `copy_script` + `visual_script`, MECE, vérifiable A=B) ; le pivot, c'est le frame dont on ne peut rien retirer sans casser la créa. Test "delta perf si retiré" : si on enlève cet élément, la créa perd >50% de son hook. Souvent un mot clé, un visuel signature, une stat chiffrée, un avant/après. Affichage opérateur : citation entre guillemets + 1 phrase de justification.
 
@@ -295,9 +295,9 @@ QC post-gen : valider chaque `distinctive_features[]` présent dans le render. �
 
 ## HR5ter · Champs encodés sur persist (alignés sur le bras + schéma cible)
 
-Quand le skill persiste, écrire les champs selon le BRAS et le schéma cible — PAS un seul `creative.json` monolithique legacy.
+Quand le skill persiste, écrire les champs selon le BRAS et le schéma cible · PAS un seul `creative.json` monolithique legacy.
 
-**BRAS REVERSE (benchmark · `decomposition.json` · decomposition/1.0)** — le reverse natif porte ses propres champs (pas de mapping forcé vers creative.schema) :
+**BRAS REVERSE (benchmark · `decomposition.json` · decomposition/1.0)** · le reverse natif porte ses propres champs (pas de mapping forcé vers creative.schema) :
 
 - `identification` : `video_id` (= ad_id externe si connu, sinon filename), `brand_slug`, `support` (REQUIS · `video`/`static`/`carousel-card`/`carousel-set`/`gif-animated`), `source_platform`, `video_meta` (`aspect_ratio` requis ; `duration_s` omis si statique). **Statique** : omettre `audio`+`edit`, `body_arc[]` sans timestamps (ordre via `beat_id`).
 - `mecanique` (AD-LEVEL · le CONCEPT · D#488) : `mecanique_id` (→ `creative-mechanics-registry`, free-string), `axis` (claim/visual), `typology_st` (**spatial**=image / **temporel**=vidéo), `confidence`. **Tag ROI du statique.** `other` + `proposal_flag` si rien ne fitte.
@@ -309,7 +309,7 @@ Quand le skill persiste, écrire les champs selon le BRAS et le schéma cible �
 - `perf_signals_external` si TrendTrack/Meta Ad Library dispo (days_active, reach, spend ranges).
 - `analysis_meta` : `analysis_method`, `confidence_overall`, `frames_analyzed_*`.
 
-**BRAS INTERNE (créa nôtre · split genome/creative · genome/1.2 + creative/1.3)** — le NOYAU va dans `genome.json`, le lignage dans `creative.json` :
+**BRAS INTERNE (créa nôtre · split genome/creative · genome/1.2 + creative/1.3)** · le NOYAU va dans `genome.json`, le lignage dans `creative.json` :
 
 - `genome.json` (ADN) : `script_id` (GSC-NN), `support` (static/carousel/video), `route` (`route_a_full_ia` par défaut reverse-of-internal), `hook` (mechanic_id + hook_text), `frames[]` (role beat_type + copy_script + visual_script), `genome_tags` (support + mechanic_id + primary_style_id requis ; **mecanique_id** [le CONCEPT ad-level → `creative-mechanics-registry` · DISTINCT du mechanic_id HOOK · pont A=B sur l'axe concept · D#491] + **angle_id** [l'ANGLE ANG-NN · unité stratégique de 1ère classe · porte objection+OTRB+payoff · D#492] + audience_slug + beat_type_sequence + awareness_level recommandés). MÊMES enums beat_type/style_id/mechanic_id que `decomposition.schema` = pont A=B garanti.
 - `creative.json` (lignage) : `creative_id` (CRT-NN, réservé mkdir-claim), `mode`, `audience_slug`, `intent_mix` (object `{primary, secondary?, weights?}` ; skip `weights` si pure ; encoder explicitement si mix, somme à 1.0 ± 0.05 ; legacy `intent` mirror), `execution.overlay_density` (0.0-1.0) + `execution.brand_mark_present` (bool ; legacy `craft_mode` mirror dérivé), `context.pain_point` / `context.proof` (CONTEXTE), `lineage{}` (5 refs), `meta.validation_status` composite `{status, confidence, confidence_source}` (pour décompo d'une créa déjà testée, dériver confidence depuis test_results ; sinon `{status:"hypothesis", confidence:0.5, confidence_source:"default"}`), `performance`, `tags.source: "internal_production"`.
@@ -407,7 +407,7 @@ source             internal_production | external_benchmark | trendtrack_pull | 
 
 ## HR8bis · Snapshot enum projeté (mirror enums · pont A=B)
 
-Les tags qui servent le pont A=B — `beat_type`, `style_id`, `mechanic_id` — sont émis via un **SNAPSHOT enum versionné projeté** du registre, PAS lus en free-string brut ni hardcodés dans le skill.
+Les tags qui servent le pont A=B · `beat_type`, `style_id`, `mechanic_id` · sont émis via un **SNAPSHOT enum versionné projeté** du registre, PAS lus en free-string brut ni hardcodés dans le skill.
 
 1. **SSOT = registre free-string** `resources/registries/creative-mechanics-registry.md`. Évolutif. **NE JAMAIS** l'enum-locker, **NE JAMAIS** écrire dedans depuis ce skill.
 2. **Snapshot = projection figée** des enums au moment de la persist. Source canon de la projection : les enums natifs du reverse, identiques côté `decomposition.schema.json` ET `genome.schema.json` (beat_type 20 termes, style_id, mechanic_id 25 termes). C'est cette identité d'enum qui rend A=B opérant : la perf future se rattache au même espace.

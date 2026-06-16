@@ -14,7 +14,7 @@ Usage:
   python3 .skills/refresh-brand-status.py {slug}
 
 Exit 0 on success. Prints the updated status.json to stdout for inspection.
-No-op if brands/{slug}/ does not exist (exits 0 silently — brand may have been
+No-op if brands/{slug}/ does not exist (exits 0 silently · brand may have been
 deleted).
 
 Invoked by the .claude/hooks/post-write-flush.py PostToolUse hook after any

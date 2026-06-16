@@ -31,6 +31,6 @@
     }
   ],
   "post_steps": [
-    "Re-run validate-resources on brands that were flagged 'offers missing' pre-v2.6.15 — false positives should clear."
+    "Re-run validate-resources on brands that were flagged 'offers missing' pre-v2.6.15 · false positives should clear."
   ]
 }

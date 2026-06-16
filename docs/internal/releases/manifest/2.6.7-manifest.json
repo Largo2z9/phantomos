@@ -6,28 +6,28 @@
   "summary": "Orchestrator skills (setup-brand, onboard-brand, ingest-resource) rewired to the canonical write channel. Security scan added to write-to-context for prompt injection, credential exfil, ssh keys, invisible unicode, destructive shell patterns.",
   "breaking": false,
   "requires_confirmation": false,
-  "notes": "Safe overlay. No schema change, no path change. The security scan can refuse writes that previously passed — review `.phantom/context-engine-events.jsonl` for `op: refused` entries if a skill suddenly starts failing after install.",
+  "notes": "Safe overlay. No schema change, no path change. The security scan can refuse writes that previously passed · review `.phantom/context-engine-events.jsonl` for `op: refused` entries if a skill suddenly starts failing after install.",
   "changes": [
     {
       "type": "skill-change",
       "file": ".skills/skills/setup-brand/SKILL.md",
       "action": "overwrite",
       "safe": true,
-      "note": "Step 3 origin_story write — pseudo-code `write_to_context()` replaced with explicit Bash call to .skills/write-to-context.py with mutation-guard callout."
+      "note": "Step 3 origin_story write · pseudo-code `write_to_context()` replaced with explicit Bash call to .skills/write-to-context.py with mutation-guard callout."
     },
     {
       "type": "skill-change",
       "file": ".skills/skills/onboard-brand/SKILL.md",
       "action": "overwrite",
       "safe": true,
-      "note": "Step 3 delegate-to-ingest-resource — pseudo-code routed-write clarified to explicit python3 .skills/write-to-context.py invocation, with mode-proposed-dicts-only rule."
+      "note": "Step 3 delegate-to-ingest-resource · pseudo-code routed-write clarified to explicit python3 .skills/write-to-context.py invocation, with mode-proposed-dicts-only rule."
     },
     {
       "type": "skill-change",
       "file": ".skills/skills/ingest-resource/SKILL.md",
       "action": "overwrite",
       "safe": true,
-      "note": "Step 3B Write Brand Context — replaced loose `Write file to brand folder` bullet with full canonical-channel block (Bash template, mode rules, workflow-gate pointer to stage-proposal.py)."
+      "note": "Step 3B Write Brand Context · replaced loose `Write file to brand folder` bullet with full canonical-channel block (Bash template, mode rules, workflow-gate pointer to stage-proposal.py)."
     },
     {
       "type": "infra-change",
@@ -53,6 +53,6 @@
   ],
   "post_steps": [
     "python3 .skills/build-manifest.py",
-    "No action required per brand — security scan runs on every write going forward."
+    "No action required per brand · security scan runs on every write going forward."
   ]
 }

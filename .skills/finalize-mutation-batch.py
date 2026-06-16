@@ -4,7 +4,7 @@ Mechanical finalizer for skills that just wrote a batch of mutations.
 
 Replaces the soft-prescribed "Invoke validate-output-coherence" step that
 producer skills (snapshot-brand, setup-brand, ingest-resource) systematically
-skipped. This is a Python primitive, not an LLM call — deterministic,
+skipped. This is a Python primitive, not an LLM call · deterministic,
 forceable, testable.
 
 Does:
@@ -19,9 +19,9 @@ Does:
 5. Returns JSON to stdout (caller uses it for the operator summary).
 
 Exit codes:
-0 — checks ran (with or without warnings)
-1 — bad args, brand not found, or _field_types missing
-2 — blocking issue found (caller MUST revise before shipping)
+0 · checks ran (with or without warnings)
+1 · bad args, brand not found, or _field_types missing
+2 · blocking issue found (caller MUST revise before shipping)
 """
 from __future__ import annotations
 
@@ -219,7 +219,7 @@ def main() -> int:
             issues_warning.append({
                 "kind": "missing_field_types",
                 "file": file_rel,
-                "msg": "_field_types map missing or empty — cannot validate writes",
+                "msg": "_field_types map missing or empty · cannot validate writes",
             })
             continue
         files_checked.append(file_rel)
@@ -272,7 +272,7 @@ def main() -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
 
     if issues_blocking:
-        print(f"[finalize] {len(issues_blocking)} BLOCKING issue(s) — caller MUST revise before shipping",
+        print(f"[finalize] {len(issues_blocking)} BLOCKING issue(s) · caller MUST revise before shipping",
               file=sys.stderr)
         return 2
     return 0
